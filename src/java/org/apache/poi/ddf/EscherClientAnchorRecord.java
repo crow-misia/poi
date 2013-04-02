@@ -137,7 +137,7 @@ public class EscherClientAnchorRecord
      */
     public String toString()
     {
-        String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
 
         String extraData;
         ByteArrayOutputStream b = new ByteArrayOutputStream();
