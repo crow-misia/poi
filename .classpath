@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="src" path="src/ooxml/java"/>
+	<classpathentry kind="src" path="src/scratchpad/src"/>
+	<classpathentry kind="src" path="src/ooxml/testcases"/>
+	<classpathentry kind="src" path="src/testcases"/>
+	<classpathentry kind="src" path="src/scratchpad/testcases"/>
+	<classpathentry kind="src" path="src/resources/ooxml"/>
+	<classpathentry kind="src" path="src/resources/main"/>
+	<classpathentry kind="src" path="src/resources/scratchpad"/>
+	<classpathentry kind="src" path="src/examples/src"/>
+	<classpathentry kind="src" path="src/excelant/java"/>
+	<classpathentry kind="lib" path="ooxml-lib/dom4j-1.6.1.jar" sourcepath="C:/Users/crow/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
+	<classpathentry kind="lib" path="ooxml-lib/ooxml-schemas-1.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/ant-1.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.5.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="ooxml-lib/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="ooxml-lib/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
