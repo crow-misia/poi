@@ -57,13 +57,12 @@ public class ImageUtils {
             case Workbook.PICTURE_TYPE_JPEG:
             case Workbook.PICTURE_TYPE_PNG:
             case Workbook.PICTURE_TYPE_DIB:
-                try {
-                    //read the image using javax.imageio.*
-                    ImageInputStream iis = ImageIO.createImageInputStream( is );
-                    Iterator i = ImageIO.getImageReaders( iis );
-                    ImageReader r = (ImageReader) i.next();
+                //read the image using javax.imageio.*
+                try (final ImageInputStream iis = ImageIO.createImageInputStream( is )) {
+                    final Iterator<ImageReader> i = ImageIO.getImageReaders( iis );
+                    final ImageReader r = i.next();
                     r.setInput( iis );
-                    BufferedImage img = r.read(0);
+                    final BufferedImage img = r.read(0);
 
                     int[] dpi = getResolution(r);
 
@@ -76,7 +75,6 @@ public class ImageUtils {
                     size.height = img.getHeight()*PIXEL_DPI/dpi[1];
 
                     r.dispose();
-                    iis.close();
 
                 } catch (IOException e){
                     //silently return if ImageIO failed to read the image

@@ -193,14 +193,9 @@ public class AbstractExcelUtils
 
     public static HSSFWorkbook loadXls( File xlsFile ) throws IOException
     {
-        final FileInputStream inputStream = new FileInputStream( xlsFile );
-        try
+        try (final FileInputStream inputStream = new FileInputStream( xlsFile ))
         {
             return new HSSFWorkbook( inputStream );
-        }
-        finally
-        {
-            IOUtils.closeQuietly( inputStream );
         }
     }
 

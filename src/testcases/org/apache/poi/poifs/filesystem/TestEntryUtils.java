@@ -113,22 +113,24 @@ public class TestEntryUtils extends TestCase {
        ByteArrayOutputStream tmpO = new ByteArrayOutputStream();
        fs.writeFilesystem(tmpO);
        ByteArrayInputStream tmpI = new ByteArrayInputStream(tmpO.toByteArray());
-       NPOIFSFileSystem nfs = new NPOIFSFileSystem(tmpI);
+
+       try (final NPOIFSFileSystem nfs = new NPOIFSFileSystem(tmpI)) {
        
-       DirectoryEntry dN1 = (DirectoryEntry)nfs.getRoot().getEntry("DirA");
-       DirectoryEntry dN2 = (DirectoryEntry)nfs.getRoot().getEntry("DirB");
-       DocumentEntry eNA1 = (DocumentEntry)dN1.getEntry(entryA1.getName());
-       DocumentEntry eNA2 = (DocumentEntry)dN1.getEntry(entryA2.getName());
-       DocumentEntry eNB1 = (DocumentEntry)dN2.getEntry(entryB1.getName());
-       
-       assertEquals(false, EntryUtils.areDocumentsIdentical(eNA1, eNA2));
-       assertEquals(true, EntryUtils.areDocumentsIdentical(eNA1, eNB1));
-       
-       assertEquals(false, EntryUtils.areDocumentsIdentical(eNA1, entryA1b));
-       assertEquals(false, EntryUtils.areDocumentsIdentical(eNA1, entryA2));
-       
-       assertEquals(true, EntryUtils.areDocumentsIdentical(eNA1, entryA1));
-       assertEquals(true, EntryUtils.areDocumentsIdentical(eNA1, entryB1));
+           DirectoryEntry dN1 = (DirectoryEntry)nfs.getRoot().getEntry("DirA");
+           DirectoryEntry dN2 = (DirectoryEntry)nfs.getRoot().getEntry("DirB");
+           DocumentEntry eNA1 = (DocumentEntry)dN1.getEntry(entryA1.getName());
+           DocumentEntry eNA2 = (DocumentEntry)dN1.getEntry(entryA2.getName());
+           DocumentEntry eNB1 = (DocumentEntry)dN2.getEntry(entryB1.getName());
+           
+           assertEquals(false, EntryUtils.areDocumentsIdentical(eNA1, eNA2));
+           assertEquals(true, EntryUtils.areDocumentsIdentical(eNA1, eNB1));
+           
+           assertEquals(false, EntryUtils.areDocumentsIdentical(eNA1, entryA1b));
+           assertEquals(false, EntryUtils.areDocumentsIdentical(eNA1, entryA2));
+           
+           assertEquals(true, EntryUtils.areDocumentsIdentical(eNA1, entryA1));
+           assertEquals(true, EntryUtils.areDocumentsIdentical(eNA1, entryB1));
+       }
     }
 
     public void testAreDirectoriesIdentical() throws Exception {

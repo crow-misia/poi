@@ -21,7 +21,9 @@ package org.apache.poi;
  * that it's given a file that's older than currently supported.
  */
 public abstract class OldFileFormatException extends IllegalArgumentException {
-	public OldFileFormatException(String s) {
+    private static final long serialVersionUID = 1L;
+
+    public OldFileFormatException(String s) {
 		super(s);
 	}
 }
