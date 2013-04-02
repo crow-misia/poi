@@ -31,7 +31,7 @@ import java.util.*;
 
 public class POIFSViewEngine
 {
-    private static final String _EOL = System.getProperty("line.separator");
+    private static final String _EOL = System.lineSeparator();
 
     /**
      * Inspect an object that may be viewable, and drill down if told

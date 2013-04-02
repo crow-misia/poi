@@ -84,7 +84,7 @@ public class EscherChildAnchorRecord
      */
     public String toString()
     {
-        String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
 
         return getClass().getName() + ":" + nl +
                 "  RecordId: 0x" + HexDump.toHex(RECORD_ID) + nl +
