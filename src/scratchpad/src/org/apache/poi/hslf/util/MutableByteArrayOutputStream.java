@@ -34,7 +34,7 @@ public final class MutableByteArrayOutputStream extends ByteArrayOutputStream
 
 	/** Write some bytes to the array */
 	public void write(byte[] b) {}
-	public void write(int b) {}
+	public synchronized void write(int b) {}
 
 	/** Write some bytes to an earlier bit of the array */
 	public void overwrite(byte[] b, int startPos) {}
