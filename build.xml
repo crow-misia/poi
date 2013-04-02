@@ -35,7 +35,7 @@ under the License.
 
     LIBRARY         LOCATION
     =======         ========
-    junit(3.8+)     http://www.junit.org
+    junit(4.11+)     http://www.junit.org
 
     To build the documentation you will need to install forrest and set
     the FORREST_HOME environment variable.  Forrest 0.5.1 required.
@@ -55,7 +55,7 @@ under the License.
 
     <property environment="env"/>
     <!-- the repository to download jars from -->
-    <property name="repository.m2" value="http://repo1.maven.org"/>
+    <property name="repository.m2" value="http://repo1.maven.org/maven2"/>
 
     <property name="main.lib" location="lib"/>
     <property name="ooxml.lib" location="ooxml-lib"/>
@@ -129,27 +129,31 @@ under the License.
     <!-- jars in the /lib directory, see the fetch-jars target-->
     <property name="main.commons-logging.jar" location="${main.lib}/commons-logging-1.1.jar"/>
     <property name="main.commons-logging.url"
-              value="${repository.m2}/maven2/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
-    <property name="main.commons-codec.jar" location="${main.lib}/commons-codec-1.5.jar"/>
+              value="${repository.m2}/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
+    <property name="main.commons-codec.jar" location="${main.lib}/commons-codec-1.7.jar"/>
     <property name="main.commons-codec.url"
-              value="${repository.m2}/maven2/commons-codec/commons-codec/1.5/commons-codec-1.5.jar"/>
-    <property name="main.log4j.jar" location="${main.lib}/log4j-1.2.13.jar"/>
-    <property name="main.log4j.url" value="${repository.m2}/maven2/log4j/log4j/1.2.13/log4j-1.2.13.jar"/>
+              value="${repository.m2}/commons-codec/commons-codec/1.7/commons-codec-1.7.jar"/>
+    <property name="main.slf4j-api.jar" location="${main.lib}/slf4j-api-1.7.3.jar"/>
+    <property name="main.slf4j-api.url" value="${repository.m2}/org/slf4j/slf4j-api/1.7.3/slf4j-api-1.7.3.jar"/>
+    <property name="main.logback-core.jar" location="${main.lib}/logback-core-1.0.10.jar"/>
+    <property name="main.logback-core.url" value="${repository.m2}/ch/qos/logback/logback-core/1.0.10/logback-core-1.0.10.jar"/>
+    <property name="main.logback-classic.jar" location="${main.lib}/logback-classic-1.0.10.jar"/>
+    <property name="main.logback-classic.url" value="${repository.m2}/ch/qos/logback/logback-classic/1.0.10/logback-classic-1.0.10.jar"/>
     <property name="main.junit.jar" location="${main.lib}/junit-4.11.jar"/>
-    <property name="main.junit.url" value="${repository.m2}/maven2/junit/junit/4.11/junit-4.11.jar"/>
-    <property name="main.hamcrest.jar" location="${main.lib}/hamcrest-core-1.3.jar"/>
-    <property name="main.hamcrest.url" value="${repository.m2}/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
-    <property name="main.ant.jar" location="${main.lib}/ant-1.8.2.jar"/>
-    <property name="main.ant.url" value="${repository.m2}/maven2/org/apache/ant/ant/1.8.2/ant-1.8.2.jar"/>
+    <property name="main.junit.url" value="${repository.m2}/junit/junit/4.11/junit-4.11.jar"/>
+    <property name="main.hamcrest.jar" location="${main.lib}/hamcrest-all-1.3.jar"/>
+    <property name="main.hamcrest.url" value="${repository.m2}/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3.jar"/>
+    <property name="main.ant.jar" location="${main.lib}/ant-1.9.0.jar"/>
+    <property name="main.ant.url" value="${repository.m2}/org/apache/ant/ant/1.9.0/ant-1.9.0.jar"/>
 
     <!-- jars in the lib-ooxml directory, see the fetch-ooxml-jars target-->
     <property name="ooxml.dom4j.jar" location="${ooxml.lib}/dom4j-1.6.1.jar"/>
-    <property name="ooxml.dom4j.url" value="${repository.m2}/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
-    <property name="ooxml.xmlbeans.jar" location="${ooxml.lib}/xmlbeans-2.3.0.jar"/>
+    <property name="ooxml.dom4j.url" value="${repository.m2}/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+    <property name="ooxml.xmlbeans.jar" location="${ooxml.lib}/xmlbeans-2.5.0.jar"/>
     <property name="ooxml.xmlbeans.url"
-              value="${repository.m2}/maven2/org/apache/xmlbeans/xmlbeans/2.3.0/xmlbeans-2.3.0.jar"/>
+              value="${repository.m2}/org/apache/xmlbeans/xmlbeans/2.5.0/xmlbeans-2.5.0.jar"/>
     <property name="ooxml.jsr173.jar" location="${ooxml.lib}/stax-api-1.0.1.jar"/>
-    <property name="ooxml.jsr173.url" value="${repository.m2}/maven2/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
+    <property name="ooxml.jsr173.url" value="${repository.m2}/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
 
     <!-- See http://www.ecma-international.org/publications/standards/Ecma-376.htm -->
     <!-- "Copy these file(s), free of charge" -->
@@ -181,7 +185,9 @@ under the License.
     <path id="main.classpath">
         <pathelement location="${main.commons-logging.jar}"/>
         <pathelement location="${main.commons-codec.jar}"/>
-        <pathelement location="${main.log4j.jar}"/>
+        <pathelement location="${main.slf4j-api.jar}"/>
+        <pathelement location="${main.logback-core.jar}"/>
+        <pathelement location="${main.logback-classic.jar}"/>
         <pathelement location="${main.junit.jar}"/>
         <pathelement location="${main.hamcrest.jar}"/>
     </path>
@@ -312,7 +318,9 @@ under the License.
                 <and>
                     <available file="${main.commons-logging.jar}"/>
                     <available file="${main.commons-codec.jar}"/>
-                    <available file="${main.log4j.jar}"/>
+                    <available file="${main.slf4j-api.jar}"/>
+                    <available file="${main.logback-core.jar}"/>
+                    <available file="${main.logback-classic.jar}"/>
                     <available file="${main.junit.jar}"/>
                     <available file="${main.hamcrest.jar}"/>
                     <available file="${main.ant.jar}"/>
@@ -334,12 +342,24 @@ under the License.
             <param name="destfile" value="${main.commons-codec.jar}"/>
         </antcall>
         <antcall target="downloadfile">
-            <param name="sourcefile" value="${main.log4j.url}"/>
-            <param name="destfile" value="${main.log4j.jar}"/>
+            <param name="sourcefile" value="${main.slf4j-api.url}"/>
+            <param name="destfile" value="${main.slf4j-api.jar}"/>
+        </antcall>
+        <antcall target="downloadfile">
+            <param name="sourcefile" value="${main.logback-core.url}"/>
+            <param name="destfile" value="${main.logback-core.jar}"/>
+        </antcall>
+        <antcall target="downloadfile">
+            <param name="sourcefile" value="${main.logback-classic.url}"/>
+            <param name="destfile" value="${main.logback-classic.jar}"/>
         </antcall>
         <antcall target="downloadfile">
             <param name="sourcefile" value="${main.junit.url}"/>
             <param name="destfile" value="${main.junit.jar}"/>
+        </antcall>
+        <antcall target="downloadfile">
+            <param name="sourcefile" value="${main.hamcrest.url}"/>
+            <param name="destfile" value="${main.hamcrest.jar}"/>
         </antcall>
         <antcall target="downloadfile">
             <param name="sourcefile" value="${main.hamcrest.url}"/>
