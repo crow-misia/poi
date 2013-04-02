@@ -165,17 +165,17 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor {
           StylesTable styles = xssfReader.getStylesTable();
           XSSFReader.SheetIterator iter = (XSSFReader.SheetIterator) xssfReader.getSheetsData();
    
-          StringBuffer text = new StringBuffer();
+          StringBuilder text = new StringBuilder();
           SheetTextExtractor sheetExtractor = new SheetTextExtractor(text);
           
           while (iter.hasNext()) {
-              InputStream stream = iter.next();
-              if(includeSheetNames) {
-                 text.append(iter.getSheetName());
-                 text.append('\n');
+              try (final InputStream stream = iter.next()) {
+                  if(includeSheetNames) {
+                     text.append(iter.getSheetName());
+                     text.append('\n');
+                  }
+                  processSheet(sheetExtractor, styles, strings, stream);
               }
-              processSheet(sheetExtractor, styles, strings, stream);
-              stream.close();
           }
           
           return text.toString();
@@ -201,10 +201,10 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor {
 	}
 
    protected class SheetTextExtractor implements SheetContentsHandler {
-      private final StringBuffer output;
+      private final StringBuilder output;
       private boolean firstCellOfRow = true;
       
-      protected SheetTextExtractor(StringBuffer output) {
+      protected SheetTextExtractor(StringBuilder output) {
          this.output = output;
       }
       

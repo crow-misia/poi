@@ -25,6 +25,7 @@ public final class PngUtils {
      */
     private static final byte[] PNG_FILE_HEADER =
         new byte[] { (byte) 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
+    private static final int PNG_HEADER_LENGTH = PNG_FILE_HEADER.length;
 
     private PngUtils() {
         // no instances of this class
@@ -38,11 +39,12 @@ public final class PngUtils {
      * @return {@code true} if the offset matches.
      */
     public static boolean matchesPngHeader(byte[] data, int offset) {
-        if (data == null || data.length - offset < PNG_FILE_HEADER.length) {
+        final int num = PNG_FILE_HEADER.length;
+        if (data == null || data.length - offset < num) {
             return false;
         }
 
-        for (int i = 0; i < PNG_FILE_HEADER.length; i++) {
+        for (int i = 0; i < num; i++) {
             if (PNG_FILE_HEADER[i] != data[i + offset]) {
                 return false;
             }

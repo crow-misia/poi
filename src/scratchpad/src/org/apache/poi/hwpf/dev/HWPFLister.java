@@ -82,14 +82,9 @@ public final class HWPFLister
 {
     private static HWPFDocumentCore loadDoc( File docFile ) throws IOException
     {
-        final FileInputStream istream = new FileInputStream( docFile );
-        try
+        try (final FileInputStream istream = new FileInputStream( docFile ))
         {
             return loadDoc( istream );
-        }
-        finally
-        {
-            IOUtils.closeQuietly( istream );
         }
     }
 

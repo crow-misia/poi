@@ -67,9 +67,6 @@ import org.apache.poi.util.POILogger;
 public class NPOIFSFileSystem extends BlockStore
     implements POIFSViewable, Closeable
 {
-	private static final POILogger _logger =
-		POILogFactory.getLogger(NPOIFSFileSystem.class);
-
     /**
      * Convenience method for clients that want to avoid the auto-close behaviour of the constructor.
      */
@@ -742,12 +739,11 @@ public class NPOIFSFileSystem extends BlockStore
                 "two arguments required: input filename and output filename");
             System.exit(1);
         }
-        FileInputStream  istream = new FileInputStream(args[ 0 ]);
-        FileOutputStream ostream = new FileOutputStream(args[ 1 ]);
-
-        new NPOIFSFileSystem(istream).writeFilesystem(ostream);
-        istream.close();
-        ostream.close();
+        try (final FileInputStream  istream = new FileInputStream(args[ 0 ]);
+             final FileOutputStream ostream = new FileOutputStream(args[ 1 ]);
+             final NPOIFSFileSystem fs = new NPOIFSFileSystem(istream)) {
+            fs.writeFilesystem(ostream);
+        }
     }
 
     /**

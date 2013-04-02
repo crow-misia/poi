@@ -18,7 +18,9 @@ package org.apache.poi;
 
 public class EncryptedDocumentException extends IllegalStateException
 {
-	public EncryptedDocumentException(String s) {
+    private static final long serialVersionUID = 1L;
+
+    public EncryptedDocumentException(String s) {
 		super(s);
 	}
 }
