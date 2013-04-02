@@ -142,24 +142,4 @@ public final class IOUtils {
         sum.update(data, 0, data.length);
         return sum.getValue();
     }
-
-    /**
-     * Quietly (no exceptions) close Closable resource. In case of error it will
-     * be printed to {@link IOUtils} class logger.
-     * 
-     * @param closeable
-     *            resource to close
-     */
-    public static void closeQuietly( final Closeable closeable )
-    {
-        try
-        {
-            closeable.close();
-        }
-        catch ( Exception exc )
-        {
-            logger.log( POILogger.ERROR, "Unable to close resource: " + exc,
-                    exc );
-        }
-    }
 }

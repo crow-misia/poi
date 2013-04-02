@@ -123,13 +123,12 @@ public class BiffDrawingToXml {
             System.out.println("  -sheet-namek  <names>        output sheets with specified name");
             return;
         }
-        String input = getInputFileName(params);
-        FileInputStream inp = new FileInputStream(input);
-        String output = getOutputFileName(input);
-        FileOutputStream outputStream = new FileOutputStream(output);
-        writeToFile(outputStream, inp, isExcludeWorkbookRecords(params), params);
-        inp.close();
-        outputStream.close();
+        final String input = getInputFileName(params);
+        final String output = getOutputFileName(input);
+        try (final FileInputStream inp = new FileInputStream(input);
+             final FileOutputStream outputStream = new FileOutputStream(output)) {
+            writeToFile(outputStream, inp, isExcludeWorkbookRecords(params), params);
+        }
     }
 
     public static void writeToFile(FileOutputStream fos, InputStream xlsWorkbook, boolean excludeWorkbookRecords, String[] params) throws IOException {

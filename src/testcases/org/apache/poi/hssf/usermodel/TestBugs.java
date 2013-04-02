@@ -17,6 +17,19 @@
 
 package org.apache.poi.hssf.usermodel;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
 import junit.framework.AssertionFailedError;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -26,7 +39,12 @@ import org.apache.poi.hssf.OldExcelFormatException;
 import org.apache.poi.hssf.extractor.ExcelExtractor;
 import org.apache.poi.hssf.model.InternalSheet;
 import org.apache.poi.hssf.model.InternalWorkbook;
-import org.apache.poi.hssf.record.*;
+import org.apache.poi.hssf.record.CellValueRecordInterface;
+import org.apache.poi.hssf.record.EmbeddedObjectRefSubRecord;
+import org.apache.poi.hssf.record.NameRecord;
+import org.apache.poi.hssf.record.Record;
+import org.apache.poi.hssf.record.TabIdRecord;
+import org.apache.poi.hssf.record.UnknownRecord;
 import org.apache.poi.hssf.record.aggregates.FormulaRecordAggregate;
 import org.apache.poi.hssf.record.aggregates.PageSettingsBlock;
 import org.apache.poi.hssf.record.aggregates.RecordAggregate;
@@ -36,11 +54,15 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.formula.ptg.Area3DPtg;
 import org.apache.poi.ss.formula.ptg.DeletedArea3DPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.BaseTestBugzillaIssues;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Name;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.TempFile;
-
-import java.io.*;
-import java.util.*;
 
 /**
  * Testcases for bugs entered in bugzilla
@@ -2136,14 +2158,14 @@ if(1==2) {
      */
     public void test51461() throws Exception {
        byte[] data = HSSFITestDataProvider.instance.getTestDataFileContent("51461.xls");
-       
-       HSSFWorkbook wbPOIFS = new HSSFWorkbook(new POIFSFileSystem(
-             new ByteArrayInputStream(data)).getRoot(), false);
-       HSSFWorkbook wbNPOIFS = new HSSFWorkbook(new NPOIFSFileSystem(
-             new ByteArrayInputStream(data)).getRoot(), false);
-       
-       assertEquals(2, wbPOIFS.getNumberOfSheets());
-       assertEquals(2, wbNPOIFS.getNumberOfSheets());
+
+       final POIFSFileSystem poifs = new POIFSFileSystem(new ByteArrayInputStream(data));
+       try (final NPOIFSFileSystem npoifs = new NPOIFSFileSystem(new ByteArrayInputStream(data))) {
+           final HSSFWorkbook wbPOIFS = new HSSFWorkbook(poifs.getRoot(), false);
+           final HSSFWorkbook wbNPOIFS = new HSSFWorkbook(npoifs.getRoot(), false);
+           assertEquals(2, wbPOIFS.getNumberOfSheets());
+           assertEquals(2, wbNPOIFS.getNumberOfSheets());
+       }
     }
     
     /**
@@ -2152,28 +2174,29 @@ if(1==2) {
     public void test51535() throws Exception {
        byte[] data = HSSFITestDataProvider.instance.getTestDataFileContent("51535.xls");
        
-       HSSFWorkbook wbPOIFS = new HSSFWorkbook(new POIFSFileSystem(
-             new ByteArrayInputStream(data)).getRoot(), false);
-       HSSFWorkbook wbNPOIFS = new HSSFWorkbook(new NPOIFSFileSystem(
-             new ByteArrayInputStream(data)).getRoot(), false);
+       final POIFSFileSystem poifs = new POIFSFileSystem(new ByteArrayInputStream(data));
+       try (final NPOIFSFileSystem npoifs = new NPOIFSFileSystem(new ByteArrayInputStream(data))) {
+           final HSSFWorkbook wbPOIFS = new HSSFWorkbook(poifs.getRoot(), false);
+           final HSSFWorkbook wbNPOIFS = new HSSFWorkbook(npoifs.getRoot(), false);
        
-       for(HSSFWorkbook wb : new HSSFWorkbook[] {wbPOIFS, wbNPOIFS}) {
-          assertEquals(3, wb.getNumberOfSheets());
-          
-          // Check directly
-          HSSFSheet s = wb.getSheetAt(0);
-          assertEquals("Top Left Cell", s.getRow(0).getCell(0).getStringCellValue());
-          assertEquals("Top Right Cell", s.getRow(0).getCell(255).getStringCellValue());
-          assertEquals("Bottom Left Cell", s.getRow(65535).getCell(0).getStringCellValue());
-          assertEquals("Bottom Right Cell", s.getRow(65535).getCell(255).getStringCellValue());
-          
-          // Extract and check
-          ExcelExtractor ex = new ExcelExtractor(wb);
-          String text = ex.getText();
-          assertTrue(text.contains("Top Left Cell"));
-          assertTrue(text.contains("Top Right Cell"));
-          assertTrue(text.contains("Bottom Left Cell"));
-          assertTrue(text.contains("Bottom Right Cell"));
+           for(HSSFWorkbook wb : new HSSFWorkbook[] {wbPOIFS, wbNPOIFS}) {
+              assertEquals(3, wb.getNumberOfSheets());
+              
+              // Check directly
+              HSSFSheet s = wb.getSheetAt(0);
+              assertEquals("Top Left Cell", s.getRow(0).getCell(0).getStringCellValue());
+              assertEquals("Top Right Cell", s.getRow(0).getCell(255).getStringCellValue());
+              assertEquals("Bottom Left Cell", s.getRow(65535).getCell(0).getStringCellValue());
+              assertEquals("Bottom Right Cell", s.getRow(65535).getCell(255).getStringCellValue());
+              
+              // Extract and check
+              ExcelExtractor ex = new ExcelExtractor(wb);
+              String text = ex.getText();
+              assertTrue(text.contains("Top Left Cell"));
+              assertTrue(text.contains("Top Right Cell"));
+              assertTrue(text.contains("Bottom Left Cell"));
+              assertTrue(text.contains("Bottom Right Cell"));
+           }
        }
     }
 
