@@ -367,6 +367,10 @@ under the License.
             <param name="destfile" value="${main.hamcrest.jar}"/>
         </antcall>
         <antcall target="downloadfile">
+            <param name="sourcefile" value="${main.hamcrest.url}"/>
+            <param name="destfile" value="${main.hamcrest.jar}"/>
+        </antcall>
+        <antcall target="downloadfile">
             <param name="sourcefile" value="${main.ant.url}"/>
             <param name="destfile" value="${main.ant.jar}"/>
         </antcall>
