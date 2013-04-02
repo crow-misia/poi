@@ -42,9 +42,8 @@ public final class TestSSTDeserializer extends TestCase {
     }
     
     private static byte[] readSampleHexData(String sampleFileName, String sectionName, int recSid) {
-        InputStream is = HSSFTestDataSamples.openSampleFileStream(sampleFileName);
         byte[] data;
-        try {
+        try (final InputStream is = HSSFTestDataSamples.openSampleFileStream(sampleFileName)) {
 			data = HexRead.readData(is, sectionName);
         } catch (IOException e) {
             throw new RuntimeException(e);

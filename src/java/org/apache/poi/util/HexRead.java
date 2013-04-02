@@ -41,14 +41,9 @@ public class HexRead
     public static byte[] readData( String filename ) throws IOException
     {
         File file = new File( filename );
-        FileInputStream stream = new FileInputStream( file );
-        try
+        try (final FileInputStream stream = new FileInputStream( file ))
         {
             return readData( stream, -1 );
-        }
-        finally
-        {
-            stream.close();
         }
     }
 
@@ -63,45 +58,40 @@ public class HexRead
      */
     public static byte[] readData(InputStream stream, String section ) throws IOException {
 
-        try
+        final StringBuilder sectionText = new StringBuilder();
+        boolean inSection = false;
+        int c = stream.read();
+        while ( c != -1 )
         {
-            StringBuffer sectionText = new StringBuffer();
-            boolean inSection = false;
-            int c = stream.read();
-            while ( c != -1 )
+            switch ( c )
             {
-                switch ( c )
-                {
-                    case '[':
-                        inSection = true;
-                        break;
-                    case '\n':
-                    case '\r':
-                        inSection = false;
-                        sectionText = new StringBuffer();
-                        break;
-                    case ']':
-                        inSection = false;
-                        if ( sectionText.toString().equals( section ) ) return readData( stream, '[' );
-                        sectionText = new StringBuffer();
-                        break;
-                    default:
-                        if ( inSection ) sectionText.append( (char) c );
-                }
-                c = stream.read();
+                case '[':
+                    inSection = true;
+                    break;
+                case '\n':
+                case '\r':
+                    inSection = false;
+                    sectionText.setLength(0);
+                    break;
+                case ']':
+                    inSection = false;
+                    if ( sectionText.length() == section.length() && sectionText.indexOf(section) == 0 ) return readData( stream, '[' );
+                    sectionText.setLength(0);
+                    break;
+                default:
+                    if ( inSection ) sectionText.append( (char) c );
             }
+            c = stream.read();
         }
-        finally
-        {
-            stream.close();
-        }
+
         throw new IOException( "Section '" + section + "' not found" );
     }
     public static byte[] readData( String filename, String section ) throws IOException
     {
         File file = new File( filename );
-        FileInputStream stream = new FileInputStream( file );
-        return readData(stream, section);
+        try (FileInputStream stream = new FileInputStream( file )) {
+            return readData(stream, section);
+        }
     }
 
     static public byte[] readData( InputStream stream, int eofChar )
