@@ -131,7 +131,7 @@ public final class TestEscherOptRecord extends TestCase {
     }
 
     public void testToString() {
-        String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
         EscherOptRecord r = new EscherOptRecord();
         // don't try to shoot in foot, please -- vlsergey
         // r.setOptions((short)0x000F);
