@@ -613,12 +613,12 @@ public class TestBugs extends TestCase
      */
     public void test51671() throws Exception
     {
-        InputStream is = POIDataSamples.getDocumentInstance()
-                .openResourceAsStream( "empty.doc" );
-        NPOIFSFileSystem npoifsFileSystem = new NPOIFSFileSystem( is );
-        HWPFDocument hwpfDocument = new HWPFDocument(
-                npoifsFileSystem.getRoot() );
-        hwpfDocument.write( new ByteArrayOutputStream() );
+        try (final InputStream is = POIDataSamples.getDocumentInstance().openResourceAsStream( "empty.doc" );
+             final NPOIFSFileSystem npoifsFileSystem = new NPOIFSFileSystem( is )) {
+            HWPFDocument hwpfDocument = new HWPFDocument(
+                    npoifsFileSystem.getRoot() );
+            hwpfDocument.write( new ByteArrayOutputStream() );
+        }
     }
 
     /**

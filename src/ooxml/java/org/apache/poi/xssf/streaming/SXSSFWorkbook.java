@@ -275,48 +275,30 @@ public class SXSSFWorkbook implements Workbook
     }
     private void injectData(File zipfile, OutputStream out) throws IOException 
     {
-        ZipFile zip = new ZipFile(zipfile);
-        try
-        {
-            ZipOutputStream zos = new ZipOutputStream(out);
-            try
+        try (final ZipFile zip = new ZipFile(zipfile);
+             final ZipOutputStream zos = new ZipOutputStream(out)) {
+            @SuppressWarnings("unchecked")
+            Enumeration<ZipEntry> en = (Enumeration<ZipEntry>) zip.entries();
+            while (en.hasMoreElements()) 
             {
-                @SuppressWarnings("unchecked")
-                Enumeration<ZipEntry> en = (Enumeration<ZipEntry>) zip.entries();
-                while (en.hasMoreElements()) 
-                {
-                    ZipEntry ze = en.nextElement();
-                    zos.putNextEntry(new ZipEntry(ze.getName()));
-                    InputStream is = zip.getInputStream(ze);
+                ZipEntry ze = en.nextElement();
+                zos.putNextEntry(new ZipEntry(ze.getName()));
+                try (final InputStream is = zip.getInputStream(ze)) {
                     XSSFSheet xSheet=getSheetFromZipEntryName(ze.getName());
-                    if(xSheet!=null)
-                    {
-                        SXSSFSheet sxSheet=getSXSSFSheet(xSheet);
-                        InputStream xis = sxSheet.getWorksheetXMLInputStream();
-                        try
-                        {
-                            copyStreamAndInjectWorksheet(is,zos,xis);
-                        }
-                        finally
-                        {
-                            xis.close();
-                        }
-                    }
-                    else
+                    if(xSheet == null)
                     {
                         copyStream(is, zos);
                     }
-                    is.close();
+                    else
+                    {
+                        SXSSFSheet sxSheet=getSXSSFSheet(xSheet);
+                        try (final InputStream xis = sxSheet.getWorksheetXMLInputStream())
+                        {
+                            copyStreamAndInjectWorksheet(is,zos,xis);
+                        }
+                    }
                 }
             }
-            finally
-            {
-                zos.close();
-            }
-        }
-        finally
-        {
-            zip.close();
         }
     }
     private static void copyStream(InputStream in, OutputStream out) throws IOException {
