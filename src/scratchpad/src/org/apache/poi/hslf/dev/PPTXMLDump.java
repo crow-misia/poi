@@ -33,7 +33,7 @@ public final class PPTXMLDump {
     public static final int PICT_HEADER_SIZE = 25; //size of the picture header
     public final static String PPDOC_ENTRY = "PowerPoint Document";
     public final static String PICTURES_ENTRY = "Pictures";
-    public static String CR = System.getProperty("line.separator");
+    public static String CR = System.lineSeparator();
 
     protected Writer out;
     protected byte[] docstream;

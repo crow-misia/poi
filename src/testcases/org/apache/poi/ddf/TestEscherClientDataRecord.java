@@ -49,7 +49,7 @@ public class TestEscherClientDataRecord extends TestCase
     }
 
     public void testToString() {
-        String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
 
         String expected = "org.apache.poi.ddf.EscherClientDataRecord:" + nl +
                 "  RecordId: 0xF011" + nl +
