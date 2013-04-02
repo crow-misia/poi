@@ -582,18 +582,19 @@ public final class TestHSSFWorkbook extends BaseTestWorkbook {
      * @throws IOException
      */
     public void testWriteWorkbookFromNPOIFS() throws IOException {
-       InputStream is = HSSFTestDataSamples.openSampleFileStream("WithEmbeddedObjects.xls");
-       NPOIFSFileSystem fs = new NPOIFSFileSystem(is);
+       try (final InputStream is = HSSFTestDataSamples.openSampleFileStream("WithEmbeddedObjects.xls");
+            final NPOIFSFileSystem fs = new NPOIFSFileSystem(is)) {
        
-       // Start as NPOIFS
-       HSSFWorkbook wb = new HSSFWorkbook(fs.getRoot(), true);
-       assertEquals(3, wb.getNumberOfSheets());
-       assertEquals("Root xls", wb.getSheetAt(0).getRow(0).getCell(0).getStringCellValue());
-       
-       // Will switch to POIFS
-       wb = HSSFTestDataSamples.writeOutAndReadBack(wb);
-       assertEquals(3, wb.getNumberOfSheets());
-       assertEquals("Root xls", wb.getSheetAt(0).getRow(0).getCell(0).getStringCellValue());
+           // Start as NPOIFS
+           HSSFWorkbook wb = new HSSFWorkbook(fs.getRoot(), true);
+           assertEquals(3, wb.getNumberOfSheets());
+           assertEquals("Root xls", wb.getSheetAt(0).getRow(0).getCell(0).getStringCellValue());
+           
+           // Will switch to POIFS
+           wb = HSSFTestDataSamples.writeOutAndReadBack(wb);
+           assertEquals(3, wb.getNumberOfSheets());
+           assertEquals("Root xls", wb.getSheetAt(0).getRow(0).getCell(0).getStringCellValue());
+       }
     }
    
     public void testCellStylesLimit() {

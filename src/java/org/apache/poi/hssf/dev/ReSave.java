@@ -38,12 +38,13 @@ public class ReSave {
             if(arg.equals("-dg")) initDrawing = true;
             else {
                 System.out.print("reading " + arg + "...");
-                FileInputStream is = new FileInputStream(arg);
-                HSSFWorkbook wb = new HSSFWorkbook(is);
-                is.close();
+                HSSFWorkbook wb;
+                try (final FileInputStream is = new FileInputStream(arg)) {
+                    wb = new HSSFWorkbook(is);
+                }
                 System.out.println("done");
 
-                for(int i = 0; i < wb.getNumberOfSheets(); i++){
+                for(int i = 0, n = wb.getNumberOfSheets(); i < n; i++){
                     HSSFSheet sheet = wb.getSheetAt(i);
                     if(initDrawing) {
                         HSSFPatriarch dg = sheet.getDrawingPatriarch();
