@@ -109,7 +109,7 @@ public final class NDocumentInputStream extends DocumentInputStream {
 	}
 
    @Override
-	public void mark(int ignoredReadlimit) {
+	public synchronized void mark(int ignoredReadlimit) {
 		_marked_offset = _current_offset;
 		_marked_offset_count = Math.max(0, _current_block_count - 1);
 	}
@@ -157,7 +157,7 @@ public final class NDocumentInputStream extends DocumentInputStream {
 	 * method repositions the stream to its beginning.
 	 */
    @Override
-	public void reset() {
+	public synchronized void reset() {
 	   // Special case for reset to the start
 	   if(_marked_offset == 0 && _marked_offset_count == 0) {
 	      _current_block_count = _marked_offset_count;
