@@ -73,7 +73,7 @@ public final class TestEscherContainerRecord extends TestCase {
 		EscherContainerRecord r = new EscherContainerRecord();
 		r.setRecordId(EscherContainerRecord.SP_CONTAINER);
 		r.setOptions((short) 0x000F);
-		String nl = System.getProperty("line.separator");
+		final String nl = System.lineSeparator();
 		assertEquals("org.apache.poi.ddf.EscherContainerRecord (SpContainer):" + nl +
 				"  isContainer: true" + nl +
                 "  version: 0x000F" + nl +

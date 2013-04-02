@@ -98,7 +98,7 @@ public final class TestEscherBlipWMFRecord extends TestCase {
         EscherBlipWMFRecord r = new EscherBlipWMFRecord();
         r.fillFields( data, 0, new DefaultEscherRecordFactory() );
 
-        String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
 
         assertEquals( "org.apache.poi.ddf.EscherBlipWMFRecord:" + nl +
                 "  RecordId: 0xF018" + nl +

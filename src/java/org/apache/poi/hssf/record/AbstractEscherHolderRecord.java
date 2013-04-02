@@ -90,7 +90,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
     {
         StringBuffer buffer = new StringBuffer();
 
-        final String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
         buffer.append('[' + getRecordName() + ']' + nl);
         if (escherRecords.size() == 0)
             buffer.append("No Escher Records Decoded" + nl);
