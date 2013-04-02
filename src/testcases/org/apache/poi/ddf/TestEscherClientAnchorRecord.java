@@ -66,7 +66,7 @@ public class TestEscherClientAnchorRecord extends TestCase
     }
 
     public void testToString() {
-        String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
 
         String expected = "org.apache.poi.ddf.EscherClientAnchorRecord:" + nl +
                 "  RecordId: 0xF010" + nl +
