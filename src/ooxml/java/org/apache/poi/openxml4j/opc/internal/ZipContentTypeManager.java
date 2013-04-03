@@ -40,7 +40,7 @@ import org.dom4j.Document;
  * @see ContentTypeManager
  */
 public class ZipContentTypeManager extends ContentTypeManager {
-    private static POILogger logger = POILogFactory.getLogger(ZipContentTypeManager.class);
+    private static final POILogger logger = POILogFactory.getLogger(ZipContentTypeManager.class);
 
 	/**
 	 * Delegate constructor to the super constructor.

@@ -69,7 +69,7 @@ public class EscherGraphics
     private Color foreground;
     private Color background = Color.white;
     private Font font;
-    private static POILogger logger = POILogFactory.getLogger(EscherGraphics.class);
+    private static final POILogger logger = POILogFactory.getLogger(EscherGraphics.class);
 
     /**
      * Construct an escher graphics object.

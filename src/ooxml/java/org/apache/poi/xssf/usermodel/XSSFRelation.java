@@ -46,7 +46,7 @@ import org.apache.poi.xssf.model.ThemesTable;
  */
 public final class XSSFRelation extends POIXMLRelation {
 
-    private static POILogger log = POILogFactory.getLogger(XSSFRelation.class);
+    private static final POILogger log = POILogFactory.getLogger(XSSFRelation.class);
 
     /**
      * A map to lookup POIXMLRelation by its relation type

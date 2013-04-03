@@ -36,7 +36,7 @@ import org.apache.poi.util.*;
  * REFERENCE:  PG 951 Excel Binary File Format (.xls) Structure Specification v20091214 
  */
 public class UnicodeString implements Comparable<UnicodeString> { // TODO - make this final when the compatibility version is removed
-    private static POILogger _logger = POILogFactory.getLogger(UnicodeString.class);
+    private static final POILogger _logger = POILogFactory.getLogger(UnicodeString.class);
 
     private short             field_1_charCount;
     private byte              field_2_optionflags;

@@ -32,7 +32,7 @@ import org.apache.poi.util.POILogger;
  */
 class SSTDeserializer
 {
-	private static POILogger logger = POILogFactory.getLogger(SSTDeserializer.class);
+	private static final POILogger logger = POILogFactory.getLogger(SSTDeserializer.class);
     private IntMapper<UnicodeString> strings;
 
     public SSTDeserializer( IntMapper<UnicodeString> strings )

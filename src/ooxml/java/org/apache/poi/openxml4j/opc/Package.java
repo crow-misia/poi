@@ -43,7 +43,7 @@ public abstract class Package extends OPCPackage {
 	/**
 	 * Logger.
 	 */
-    private static POILogger logger = POILogFactory.getLogger(Package.class);
+    private static final POILogger logger = POILogFactory.getLogger(Package.class);
 
 
 	/**
