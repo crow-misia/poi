@@ -39,7 +39,7 @@ import org.apache.poi.ss.usermodel.ClientAnchor;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class HSSFPatriarch implements HSSFShapeContainer, Drawing {
-    private static POILogger log = POILogFactory.getLogger(HSSFPatriarch.class);
+    private static final POILogger log = POILogFactory.getLogger(HSSFPatriarch.class);
     private final List<HSSFShape> _shapes = new ArrayList<HSSFShape>();
 
     private final EscherSpgrRecord _spgrRecord;

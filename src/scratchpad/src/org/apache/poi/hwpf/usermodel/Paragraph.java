@@ -35,7 +35,7 @@ import org.apache.poi.util.POILogger;
 public class Paragraph extends Range implements Cloneable
 {
 
-    private static POILogger log = POILogFactory.getLogger( Paragraph.class );
+    private static final POILogger log = POILogFactory.getLogger( Paragraph.class );
 
   public final static short SPRM_JC = 0x2403;
   public final static short SPRM_FSIDEBYSIDE = 0x2404;

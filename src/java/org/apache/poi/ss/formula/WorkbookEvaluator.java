@@ -393,7 +393,7 @@ public final class WorkbookEvaluator {
 	private boolean dbgEvaluationOutputForNextEval = false;
 
 	// special logger for formula evaluation output (because of possibly very large output)
-	private final POILogger EVAL_LOG = POILogFactory.getLogger("POI.FormulaEval");
+	private static final POILogger EVAL_LOG = POILogFactory.getLogger("POI.FormulaEval");
 	// current indent level for evalution; negative value for no output
 	private int dbgEvaluationOutputIndent = -1;
 

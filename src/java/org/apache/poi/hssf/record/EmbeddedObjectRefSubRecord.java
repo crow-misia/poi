@@ -41,7 +41,7 @@ import org.apache.poi.util.StringUtil;
  * @author Daniel Noll
  */
 public final class EmbeddedObjectRefSubRecord extends SubRecord {
-	private static POILogger logger = POILogFactory.getLogger(EmbeddedObjectRefSubRecord.class);
+	private static final POILogger logger = POILogFactory.getLogger(EmbeddedObjectRefSubRecord.class);
 	public static final short sid = 0x0009;
 
 	private static final byte[] EMPTY_BYTE_ARRAY = { };

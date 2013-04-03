@@ -50,7 +50,7 @@ import org.apache.poi.util.POILogger;
  * data and so on.
  */
 public final class POIFSChunkParser {
-   private static POILogger logger = POILogFactory.getLogger(POIFSChunkParser.class);
+   private static final POILogger logger = POILogFactory.getLogger(POIFSChunkParser.class);
 
    public static ChunkGroup[] parse(POIFSFileSystem fs) throws IOException {
       return parse(fs.getRoot());

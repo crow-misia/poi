@@ -41,7 +41,7 @@ import org.apache.poi.util.POILogFactory;
 public final class PackageRelationshipCollection implements
 		Iterable<PackageRelationship> {
 
-    private static POILogger logger = POILogFactory.getLogger(PackageRelationshipCollection.class);
+    private static final POILogger logger = POILogFactory.getLogger(PackageRelationshipCollection.class);
 
 	/**
 	 * Package relationships ordered by ID.

@@ -42,7 +42,7 @@ public class POILogFactory
      * A common instance of NullLogger, as it does nothing
      *  we only need the one
      */
-    private static POILogger _nullLogger = new NullLogger();
+    private static final POILogger _nullLogger = new NullLogger();
     /**
      * The name of the class to use. Initialised the
      *  first time we need it

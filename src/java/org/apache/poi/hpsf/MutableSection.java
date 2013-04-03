@@ -323,7 +323,7 @@ public class MutableSection extends Section
             {
                 throw ex;
             }
-            catch (Exception ex)
+            catch (WritingNotSupportedException | IOException ex)
             {
                 throw new HPSFRuntimeException(ex);
             }

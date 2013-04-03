@@ -151,7 +151,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
      */
     private List<XSSFPictureData> pictures;
 
-    private static POILogger logger = POILogFactory.getLogger(XSSFWorkbook.class);
+    private static final POILogger logger = POILogFactory.getLogger(XSSFWorkbook.class);
 
     /**
      * cached instance of XSSFCreationHelper for this workbook

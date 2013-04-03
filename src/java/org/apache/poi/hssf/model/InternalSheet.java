@@ -69,7 +69,7 @@ public final class InternalSheet {
     public static final short   TopMargin = 2;
     public static final short   BottomMargin = 3;
 
-    private static POILogger            log              = POILogFactory.getLogger(InternalSheet.class);
+    private static final POILogger            log              = POILogFactory.getLogger(InternalSheet.class);
 
     private List<RecordBase>             _records;
     protected PrintGridlinesRecord       printGridlines    =     null;

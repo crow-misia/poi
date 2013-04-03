@@ -48,7 +48,7 @@ import org.apache.poi.util.POILogger;
  *
  */
 public class DateFormatConverter  {
-	private static POILogger logger = POILogFactory.getLogger(DateFormatConverter.class);
+	private static final POILogger logger = POILogFactory.getLogger(DateFormatConverter.class);
 	
 	public static class DateFormatTokenizer {
 		String format;

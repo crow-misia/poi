@@ -43,7 +43,7 @@ import org.apache.poi.util.POILogger;
  * @author Josh Micich
  */
 public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, EvaluationWorkbook, FormulaParsingWorkbook {
-	private static POILogger logger = POILogFactory.getLogger(HSSFEvaluationWorkbook.class);
+	private static final POILogger logger = POILogFactory.getLogger(HSSFEvaluationWorkbook.class);
 	private final HSSFWorkbook _uBook;
 	private final InternalWorkbook _iBook;
 
