@@ -52,7 +52,7 @@ import org.apache.poi.hwpf.sprm.ParagraphSprmCompressor;
  */
 public final class HWPFList
 {
-    private static POILogger log = POILogFactory.getLogger( HWPFList.class );
+    private static final POILogger log = POILogFactory.getLogger( HWPFList.class );
 
     private boolean _ignoreLogicalLeftIdentation = false;
     private LFO _lfo;

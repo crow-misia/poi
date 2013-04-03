@@ -54,7 +54,7 @@ import java.util.regex.Pattern;
  */
 @Beta
 public class XMLSlideShow  extends POIXMLDocument {
-    private static POILogger _logger = POILogFactory.getLogger(XMLSlideShow.class);
+    private static final POILogger _logger = POILogFactory.getLogger(XMLSlideShow.class);
 
     private CTPresentation _presentation;
     private List<XSLFSlide> _slides;

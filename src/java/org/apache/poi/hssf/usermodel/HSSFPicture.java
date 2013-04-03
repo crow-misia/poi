@@ -38,7 +38,7 @@ import org.apache.poi.hssf.model.InternalWorkbook;
  * @author Yegor Kozlov (yegor at apache.org)
  */
 public class HSSFPicture extends HSSFSimpleShape implements Picture {
-	private static POILogger logger = POILogFactory.getLogger(HSSFPicture.class);
+	private static final POILogger logger = POILogFactory.getLogger(HSSFPicture.class);
 	
     public static final int PICTURE_TYPE_EMF = HSSFWorkbook.PICTURE_TYPE_EMF;                // Windows Enhanced Metafile
     public static final int PICTURE_TYPE_WMF = HSSFWorkbook.PICTURE_TYPE_WMF;                // Windows Metafile

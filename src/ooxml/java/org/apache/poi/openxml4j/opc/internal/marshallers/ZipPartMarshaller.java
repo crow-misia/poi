@@ -49,7 +49,7 @@ import org.apache.poi.util.POILogFactory;
  * @author Julien Chable
  */
 public final class ZipPartMarshaller implements PartMarshaller {
-	private static POILogger logger = POILogFactory.getLogger(ZipPartMarshaller.class);
+	private static final POILogger logger = POILogFactory.getLogger(ZipPartMarshaller.class);
 
 	/**
 	 * Save the specified part.

@@ -65,7 +65,7 @@ import org.apache.poi.util.POILogFactory;
  * @author  Yegor Kozlov cell comments support
  */
 public class HSSFCell implements Cell {
-    private static POILogger log = POILogFactory.getLogger(HSSFCell.class);
+    private static final POILogger log = POILogFactory.getLogger(HSSFCell.class);
 
     private static final String FILE_FORMAT_NAME  = "BIFF8";
     /**

@@ -38,7 +38,7 @@ import org.apache.poi.util.POILogger;
  * TODO Deprecate the public Chunks in favour of Property Lookups
  */
 public final class Chunks implements ChunkGroupWithProperties {
-   private static POILogger logger = POILogFactory.getLogger(Chunks.class);
+   private static final POILogger logger = POILogFactory.getLogger(Chunks.class);
 
    /** 
     * Holds all the chunks that were found, indexed by their MAPIProperty.
