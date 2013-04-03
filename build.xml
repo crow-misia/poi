@@ -127,9 +127,6 @@ under the License.
     <property name="excelant.testokfile" location="build/excelant-testokfile.txt"/>
 
     <!-- jars in the /lib directory, see the fetch-jars target-->
-    <property name="main.commons-logging.jar" location="${main.lib}/commons-logging-1.1.jar"/>
-    <property name="main.commons-logging.url"
-              value="${repository.m2}/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
     <property name="main.commons-codec.jar" location="${main.lib}/commons-codec-1.7.jar"/>
     <property name="main.commons-codec.url"
               value="${repository.m2}/commons-codec/commons-codec/1.7/commons-codec-1.7.jar"/>
@@ -183,7 +180,6 @@ under the License.
     </propertyset>
 
     <path id="main.classpath">
-        <pathelement location="${main.commons-logging.jar}"/>
         <pathelement location="${main.commons-codec.jar}"/>
         <pathelement location="${main.slf4j-api.jar}"/>
         <pathelement location="${main.logback-core.jar}"/>
@@ -316,7 +312,6 @@ under the License.
         <condition property="jars.present">
             <or>
                 <and>
-                    <available file="${main.commons-logging.jar}"/>
                     <available file="${main.commons-codec.jar}"/>
                     <available file="${main.slf4j-api.jar}"/>
                     <available file="${main.logback-core.jar}"/>
@@ -333,10 +328,6 @@ under the License.
     <target name="fetch-jars" depends="check-jars" unless="jars.present"
             description="Fetches needed JAR files from the Internet">
         <mkdir dir="${main.lib}"/>
-        <antcall target="downloadfile">
-            <param name="sourcefile" value="${main.commons-logging.url}"/>
-            <param name="destfile" value="${main.commons-logging.jar}"/>
-        </antcall>
         <antcall target="downloadfile">
             <param name="sourcefile" value="${main.commons-codec.url}"/>
             <param name="destfile" value="${main.commons-codec.jar}"/>
@@ -1085,9 +1076,10 @@ under the License.
             <zipfileset dir="legal/" prefix="${zipdir}"/>
             <zipfileset dir="${main.lib}" prefix="${zipdir}/lib">
               <include name="commons-codec-*.jar"/>
-              <include name="commons-logging-*.jar"/>
               <include name="junit-*.jar"/>
-              <include name="log4j-*.jar"/>
+              <include name="slf4j-*.jar"/>
+              <include name="logback-core-*.jar"/>
+              <include name="logback-classic-*.jar"/>
             </zipfileset>
             <zipfileset dir="${ooxml.lib}" prefix="${zipdir}/ooxml-lib">
               <include name="dom4j-*.jar"/>
@@ -1114,9 +1106,7 @@ under the License.
             <tarfileset dir="legal/" prefix="${zipdir}"/>
             <zipfileset dir="${main.lib}" prefix="${zipdir}/lib">
               <include name="commons-codec-*.jar"/>
-              <include name="commons-logging-*.jar"/>
               <include name="junit-*.jar"/>
-              <include name="log4j-*.jar"/>
             </zipfileset>
             <tarfileset dir="${ooxml.lib}" prefix="${zipdir}/ooxml-lib">
               <include name="dom4j-*.jar"/>
