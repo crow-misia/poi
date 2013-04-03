@@ -29,7 +29,7 @@ import org.apache.poi.util.POILogger;
  * @author Josh Micich
  */
 public class ErrorConstant {
-	private static POILogger logger = POILogFactory.getLogger(ErrorConstant.class);
+	private static final POILogger logger = POILogFactory.getLogger(ErrorConstant.class);
 	// convenient access to name space
 	private static final ErrorConstants EC = null;
 

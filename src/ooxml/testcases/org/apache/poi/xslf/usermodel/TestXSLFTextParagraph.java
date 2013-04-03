@@ -30,7 +30,7 @@ import java.util.List;
  * @author Yegor Kozlov
  */
 public class TestXSLFTextParagraph extends TestCase {
-    private static POILogger _logger = POILogFactory.getLogger(XSLFTextParagraph.class);
+    private static final POILogger _logger = POILogFactory.getLogger(XSLFTextParagraph.class);
 
     public void testWrappingWidth() throws Exception {
         XMLSlideShow ppt = new XMLSlideShow();

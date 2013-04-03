@@ -44,7 +44,7 @@ import org.apache.poi.util.POILogger;
  * Collection of convenence chunks for standard parts of the MSG file attachment.
  */
 public class AttachmentChunks implements ChunkGroup {
-   private static POILogger logger = POILogFactory.getLogger(AttachmentChunks.class);
+   private static final POILogger logger = POILogFactory.getLogger(AttachmentChunks.class);
    public static final String PREFIX = "__attach_version1.0_#";
    
    public ByteChunk attachData;

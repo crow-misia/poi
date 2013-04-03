@@ -141,7 +141,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      */
     private MissingCellPolicy missingCellPolicy = HSSFRow.RETURN_NULL_AND_BLANK;
 
-    private static POILogger log = POILogFactory.getLogger(HSSFWorkbook.class);
+    private static final POILogger log = POILogFactory.getLogger(HSSFWorkbook.class);
 
     /**
      * The locator of user-defined functions.
