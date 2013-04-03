@@ -44,7 +44,7 @@ public final class EscherContainerRecord extends EscherRecord {
     public static final short SP_CONTAINER     = (short)0xF004;
     public static final short SOLVER_CONTAINER = (short)0xF005;
 
-    private static POILogger log = POILogFactory.getLogger(EscherContainerRecord.class);
+    private static final POILogger log = POILogFactory.getLogger(EscherContainerRecord.class);
 
     /**
      * in case if document contains any charts we have such document structure:

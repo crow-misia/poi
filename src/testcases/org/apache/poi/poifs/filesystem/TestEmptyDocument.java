@@ -33,7 +33,7 @@ import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
 public final class TestEmptyDocument extends TestCase {
-    private static POILogger _logger = POILogFactory.getLogger(TestEmptyDocument.class);
+    private static final POILogger _logger = POILogFactory.getLogger(TestEmptyDocument.class);
 
 	public void testSingleEmptyDocument() throws IOException {
 		POIFSFileSystem fs = new POIFSFileSystem();

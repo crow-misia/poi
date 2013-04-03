@@ -41,7 +41,7 @@ import org.apache.poi.hslf.exceptions.OldPowerPointFormatException;
 
 public class CurrentUserAtom
 {
-	private static POILogger logger = POILogFactory.getLogger(CurrentUserAtom.class);
+	private static final POILogger logger = POILogFactory.getLogger(CurrentUserAtom.class);
 
 	/** Standard Atom header */
 	public static final byte[] atomHeader = new byte[] { 0, 0, -10, 15 };

@@ -37,7 +37,7 @@ import org.apache.poi.util.POILogger;
  *  a message or similar
  */
 public class MessageSubmissionChunk extends Chunk {
-   private static POILogger logger = POILogFactory.getLogger(MessageSubmissionChunk.class);
+   private static final POILogger logger = POILogFactory.getLogger(MessageSubmissionChunk.class);
    private String rawId;
    private Calendar date;
 

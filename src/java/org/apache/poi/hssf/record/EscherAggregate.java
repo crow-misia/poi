@@ -80,7 +80,7 @@ import org.apache.poi.util.POILogger;
 
 public final class EscherAggregate extends AbstractEscherHolderRecord {
     public static final short sid = 9876; // not a real sid - dummy value
-    private static POILogger log = POILogFactory.getLogger(EscherAggregate.class);
+    private static final POILogger log = POILogFactory.getLogger(EscherAggregate.class);
 
     public static final short ST_MIN = (short) 0;
     public static final short ST_NOT_PRIMATIVE = ST_MIN;

@@ -51,7 +51,7 @@ public final class ChunkFactory {
 		"/org/apache/poi/hdgf/chunks_parse_cmds.tbl";
 
 	/** For logging problems we spot with the file */
-	private static POILogger logger = POILogFactory.getLogger(ChunkFactory.class);
+	private static final POILogger logger = POILogFactory.getLogger(ChunkFactory.class);
 
 	public ChunkFactory(int version) throws IOException {
 		this.version = version;

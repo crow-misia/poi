@@ -27,7 +27,7 @@ import org.apache.poi.util.POILogger;
  * Tests for {@link HSSFDataFormat}
  */
 public final class TestHSSFDataFormat extends BaseTestDataFormat {
-    private static POILogger _logger = POILogFactory.getLogger(TestHSSFDataFormat.class);
+    private static final POILogger _logger = POILogFactory.getLogger(TestHSSFDataFormat.class);
 
     public TestHSSFDataFormat() {
         super(HSSFITestDataProvider.instance);
