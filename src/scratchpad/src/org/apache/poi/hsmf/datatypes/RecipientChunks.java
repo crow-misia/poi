@@ -35,7 +35,7 @@ import org.apache.poi.util.POILogger;
  *  several of these.
  */
 public final class RecipientChunks implements ChunkGroupWithProperties {
-   private static POILogger logger = POILogFactory.getLogger(RecipientChunks.class);
+   private static final POILogger logger = POILogFactory.getLogger(RecipientChunks.class);
 
    public static final String PREFIX = "__recip_version1.0_#";
    

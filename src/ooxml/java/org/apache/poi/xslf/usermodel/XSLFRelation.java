@@ -28,7 +28,7 @@ import java.util.Map;
 @Beta
 public class XSLFRelation extends POIXMLRelation {
 
-   private static POILogger log = POILogFactory.getLogger(XSLFRelation.class);
+   private static final POILogger log = POILogFactory.getLogger(XSLFRelation.class);
 
    /**
     * A map to lookup POIXMLRelation by its relation type

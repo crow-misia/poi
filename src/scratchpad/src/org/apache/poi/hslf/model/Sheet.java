@@ -37,7 +37,7 @@ import java.awt.*;
  */
 
 public abstract class Sheet {
-	private static POILogger logger = POILogFactory.getLogger(Sheet.class);
+	private static final POILogger logger = POILogFactory.getLogger(Sheet.class);
 
     /**
      * The <code>SlideShow</code> we belong to

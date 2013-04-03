@@ -32,7 +32,7 @@ import org.apache.poi.util.POILogger;
  *  to a {@link HMEFMessage} or one of its {@link Attachment}s.
  */
 public final class MAPIDateAttribute extends MAPIAttribute {
-   private static POILogger logger = POILogFactory.getLogger(MAPIDateAttribute.class);
+   private static final POILogger logger = POILogFactory.getLogger(MAPIDateAttribute.class);
    private Date data;
    
    /**
