@@ -101,15 +101,15 @@ public final class CommonObjectDataSubRecord extends SubRecord {
         buffer.append("    .objectType           = ")
             .append("0x").append(HexDump.toHex(  getObjectType ()))
             .append(" (").append( getObjectType() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .objectId             = ")
             .append("0x").append(HexDump.toHex(  getObjectId ()))
             .append(" (").append( getObjectId() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .option               = ")
             .append("0x").append(HexDump.toHex(  getOption ()))
             .append(" (").append( getOption() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .locked                   = ").append(isLocked()).append('\n'); 
         buffer.append("         .printable                = ").append(isPrintable()).append('\n'); 
         buffer.append("         .autofill                 = ").append(isAutofill()).append('\n'); 
@@ -117,15 +117,15 @@ public final class CommonObjectDataSubRecord extends SubRecord {
         buffer.append("    .reserved1            = ")
             .append("0x").append(HexDump.toHex(  getReserved1 ()))
             .append(" (").append( getReserved1() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .reserved2            = ")
             .append("0x").append(HexDump.toHex(  getReserved2 ()))
             .append(" (").append( getReserved2() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .reserved3            = ")
             .append("0x").append(HexDump.toHex(  getReserved3 ()))
             .append(" (").append( getReserved3() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/ftCmo]\n");
         return buffer.toString();

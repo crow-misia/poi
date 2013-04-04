@@ -51,7 +51,7 @@ public final class UnitsRecord extends StandardRecord {
         buffer.append("    .units                = ")
             .append("0x").append(HexDump.toHex(  getUnits ()))
             .append(" (").append( getUnits() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/UNITS]\n");
         return buffer.toString();

@@ -93,7 +93,7 @@ public class EscherBitmapBlip extends EscherBlipRecord {
 
     public String toString()
     {
-        String nl = System.getProperty( "line.separator" );
+        String nl = System.lineSeparator();
 
         String extraData;
         ByteArrayOutputStream b = new ByteArrayOutputStream();

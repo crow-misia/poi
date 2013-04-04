@@ -56,7 +56,7 @@ public final class AreaRecord extends StandardRecord {
         buffer.append("    .formatFlags          = ")
             .append("0x").append(HexDump.toHex(  getFormatFlags ()))
             .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .stacked                  = ").append(isStacked()).append('\n'); 
         buffer.append("         .displayAsPercentage      = ").append(isDisplayAsPercentage()).append('\n'); 
         buffer.append("         .shadow                   = ").append(isShadow()).append('\n'); 

@@ -78,39 +78,39 @@ public final class AxisOptionsRecord extends StandardRecord {
         buffer.append("    .minimumCategory      = ")
             .append("0x").append(HexDump.toHex(  getMinimumCategory ()))
             .append(" (").append( getMinimumCategory() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .maximumCategory      = ")
             .append("0x").append(HexDump.toHex(  getMaximumCategory ()))
             .append(" (").append( getMaximumCategory() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .majorUnitValue       = ")
             .append("0x").append(HexDump.toHex(  getMajorUnitValue ()))
             .append(" (").append( getMajorUnitValue() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .majorUnit            = ")
             .append("0x").append(HexDump.toHex(  getMajorUnit ()))
             .append(" (").append( getMajorUnit() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .minorUnitValue       = ")
             .append("0x").append(HexDump.toHex(  getMinorUnitValue ()))
             .append(" (").append( getMinorUnitValue() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .minorUnit            = ")
             .append("0x").append(HexDump.toHex(  getMinorUnit ()))
             .append(" (").append( getMinorUnit() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .baseUnit             = ")
             .append("0x").append(HexDump.toHex(  getBaseUnit ()))
             .append(" (").append( getBaseUnit() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .crossingPoint        = ")
             .append("0x").append(HexDump.toHex(  getCrossingPoint ()))
             .append(" (").append( getCrossingPoint() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .options              = ")
             .append("0x").append(HexDump.toHex(  getOptions ()))
             .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .defaultMinimum           = ").append(isDefaultMinimum()).append('\n'); 
         buffer.append("         .defaultMaximum           = ").append(isDefaultMaximum()).append('\n'); 
         buffer.append("         .defaultMajor             = ").append(isDefaultMajor()).append('\n'); 
