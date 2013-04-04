@@ -17,8 +17,6 @@
 
 package org.apache.poi.hwpf.dev;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -67,7 +65,7 @@ import org.apache.poi.poifs.filesystem.DirectoryNode;
 import org.apache.poi.poifs.filesystem.Entry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.Beta;
-import org.apache.poi.util.IOUtils;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.LittleEndian;
 
 /**
@@ -297,11 +295,9 @@ public final class HWPFLister
     {
         try
         {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream( 4096 );
+            FastByteArrayOutputStream baos = new FastByteArrayOutputStream( 4096 );
             original.write( baos );
-            ByteArrayInputStream bais = new ByteArrayInputStream(
-                    baos.toByteArray() );
-            return loadDoc( bais );
+            return loadDoc( baos.toInputStream() );
         }
         catch ( IOException e )
         {

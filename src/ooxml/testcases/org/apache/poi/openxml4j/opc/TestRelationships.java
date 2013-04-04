@@ -17,15 +17,16 @@
 
 package org.apache.poi.openxml4j.opc;
 
-import java.io.*;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
 
 import org.apache.poi.openxml4j.OpenXML4JTestDataSamples;
-import org.apache.poi.util.POILogger;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.POILogger;
 
 
 public class TestRelationships extends TestCase {
@@ -183,10 +184,9 @@ public class TestRelationships extends TestCase {
 	    
 	    
 	    // Write out and re-load
-	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
 	    pkg.save(baos);
-	    ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-	    pkg = OPCPackage.open(bais);
+	    pkg = OPCPackage.open(baos.toInputStream());
 	    
 	    // Check again
 	    sheet = pkg.getPart(
@@ -208,7 +208,7 @@ public class TestRelationships extends TestCase {
     }
 
     public void testCreateRelationsFromScratch() throws Exception {
-    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    	FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
     	OPCPackage pkg = OPCPackage.create(baos);
     	
     	PackagePart partA =
@@ -235,8 +235,7 @@ public class TestRelationships extends TestCase {
     	
     	// Save, and re-load
     	pkg.close();
-    	ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-    	pkg = OPCPackage.open(bais);
+    	pkg = OPCPackage.open(baos.toInputStream());
     	
     	partA = pkg.getPart(PackagingURIHelper.createPartName("/partA"));
     	partB = pkg.getPart(PackagingURIHelper.createPartName("/partB"));
@@ -284,10 +283,9 @@ public class TestRelationships extends TestCase {
         pkg = OPCPackage.open(filepath);
         assert_50154(pkg);
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
         pkg.save(baos);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        pkg = OPCPackage.open(bais);
+        pkg = OPCPackage.open(baos.toInputStream());
 
         assert_50154(pkg);
     }
@@ -334,7 +332,7 @@ public class TestRelationships extends TestCase {
     }
 
    public void testSelfRelations_bug51187() throws Exception {
-    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    	FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
     	OPCPackage pkg = OPCPackage.create(baos);
 
     	PackagePart partA =
@@ -347,8 +345,7 @@ public class TestRelationships extends TestCase {
     	
     	// Save, and re-load
     	pkg.close();
-    	ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-    	pkg = OPCPackage.open(bais);
+    	pkg = OPCPackage.open(baos.toInputStream());
 
     	partA = pkg.getPart(PackagingURIHelper.createPartName("/partA"));
 
@@ -378,11 +375,11 @@ public class TestRelationships extends TestCase {
         assertEquals("mailto:nobody@nowhere.uk%C2%A0", targetUri.toASCIIString());
         assertEquals("nobody@nowhere.uk\u00A0", targetUri.getSchemeSpecificPart());
 
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         pkg.save(out);
         out.close();
 
-        pkg =  OPCPackage.open(new ByteArrayInputStream(out.toByteArray()));
+        pkg =  OPCPackage.open(out.toInputStream());
         sheetRels = pkg.getPartsByName(Pattern.compile("/xl/worksheets/sheet1.xml")).get(0).getRelationships();
         assertEquals(3, sheetRels.size());
         rId1 = sheetRels.getRelationshipByID("rId1");

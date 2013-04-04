@@ -17,8 +17,6 @@
 
 package org.apache.poi.xssf;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,6 +24,7 @@ import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -55,9 +54,9 @@ public class XSSFTestDataSamples {
     public static <R extends Workbook> R writeOutAndReadBack(R wb) {
     	Workbook result;
 		try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(8192);
+            FastByteArrayOutputStream baos = new FastByteArrayOutputStream(8192);
             wb.write(baos);
-            InputStream is = new ByteArrayInputStream(baos.toByteArray());
+            InputStream is = baos.toInputStream();
 	    	if (wb instanceof HSSFWorkbook) {
 	    		result = new HSSFWorkbook(is);
 	    	} else if (wb instanceof XSSFWorkbook) {

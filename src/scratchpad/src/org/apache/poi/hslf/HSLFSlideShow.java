@@ -48,6 +48,7 @@ import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -473,7 +474,7 @@ public final class HSLFSlideShow extends POIDocument {
         _docstream = baos.toByteArray();
 
         // Write the PPT stream into the POIFS layer
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(_docstream);
         outFS.createDocument(bais,"PowerPoint Document");
         writtenEntries.add("PowerPoint Document");
 
@@ -494,13 +495,11 @@ public final class HSLFSlideShow extends POIDocument {
            readPictures();
         }
         if (_pictures.size() > 0) {
-            ByteArrayOutputStream pict = new ByteArrayOutputStream();
+            final FastByteArrayOutputStream pict = new FastByteArrayOutputStream();
             for (PictureData p : _pictures) {
                 p.write(pict);
             }
-            outFS.createDocument(
-                new ByteArrayInputStream(pict.toByteArray()), "Pictures"
-            );
+            outFS.createDocument(pict.toInputStream(), "Pictures");
             writtenEntries.add("Pictures");
         }
 

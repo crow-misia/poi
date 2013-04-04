@@ -36,6 +36,7 @@ import java.util.Map;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
+
 import org.apache.poi.POIDataSamples;
 import org.apache.poi.hpsf.ClassID;
 import org.apache.poi.hpsf.HPSFRuntimeException;
@@ -61,6 +62,7 @@ import org.apache.poi.poifs.eventfilesystem.POIFSReaderEvent;
 import org.apache.poi.poifs.eventfilesystem.POIFSReaderListener;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.CodePageUtil;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.TempFile;
 
@@ -124,11 +126,10 @@ public class TestWrite extends TestCase
         /* Write it to a POIFS and the latter to disk: */
         try
         {
-            final ByteArrayOutputStream psStream = new ByteArrayOutputStream();
+            final FastByteArrayOutputStream psStream = new FastByteArrayOutputStream();
             ps.write(psStream);
             psStream.close();
-            final byte[] streamData = psStream.toByteArray();
-            poiFs.createDocument(new ByteArrayInputStream(streamData),
+            poiFs.createDocument(psStream.toInputStream(),
                                  SummaryInformation.DEFAULT_STREAM_NAME);
             poiFs.writeFilesystem(out);
             out.close();
@@ -168,11 +169,10 @@ public class TestWrite extends TestCase
         final MutableSection s = (MutableSection) ps.getSections().get(0);
         s.setFormatID(SectionIDMap.SUMMARY_INFORMATION_ID);
 
-        final ByteArrayOutputStream psStream = new ByteArrayOutputStream();
+        final FastByteArrayOutputStream psStream = new FastByteArrayOutputStream();
         ps.write(psStream);
         psStream.close();
-        final byte[] streamData = psStream.toByteArray();
-        poiFs.createDocument(new ByteArrayInputStream(streamData),
+        poiFs.createDocument(psStream.toInputStream(),
                              SummaryInformation.DEFAULT_STREAM_NAME);
         poiFs.writeFilesystem(out);
         out.close();
@@ -707,12 +707,11 @@ public class TestWrite extends TestCase
                     new ByteArrayInputStream(psf1[i].getBytes());
                 final PropertySet psIn = PropertySetFactory.create(in);
                 final MutablePropertySet psOut = new MutablePropertySet(psIn);
-                final ByteArrayOutputStream psStream =
-                    new ByteArrayOutputStream();
+                final FastByteArrayOutputStream psStream =
+                    new FastByteArrayOutputStream();
                 psOut.write(psStream);
                 psStream.close();
-                final byte[] streamData = psStream.toByteArray();
-                poiFs.createDocument(new ByteArrayInputStream(streamData),
+                poiFs.createDocument(psStream.toInputStream(),
                                      psf1[i].getName());
                 poiFs.writeFilesystem(out);
             }

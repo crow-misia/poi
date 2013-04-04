@@ -18,7 +18,6 @@
 package org.apache.poi.hpsf;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +29,7 @@ import java.util.ListIterator;
 
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.Entry;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.LittleEndianConsts;
 
@@ -267,11 +267,10 @@ public class MutablePropertySet extends PropertySet
     public InputStream toInputStream()
         throws IOException, WritingNotSupportedException
     {
-        final ByteArrayOutputStream psStream = new ByteArrayOutputStream();
-        write(psStream);
-        psStream.close();
-        final byte[] streamData = psStream.toByteArray();
-        return new ByteArrayInputStream(streamData);
+        try (final FastByteArrayOutputStream psStream = new FastByteArrayOutputStream()) {
+            write(psStream);
+            return psStream.toInputStream();
+        }
     }
 
     /**
