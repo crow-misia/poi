@@ -60,23 +60,23 @@ public final class AxisParentRecord extends StandardRecord {
         buffer.append("    .axisType             = ")
             .append("0x").append(HexDump.toHex(  getAxisType ()))
             .append(" (").append( getAxisType() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .x                    = ")
             .append("0x").append(HexDump.toHex(  getX ()))
             .append(" (").append( getX() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .y                    = ")
             .append("0x").append(HexDump.toHex(  getY ()))
             .append(" (").append( getY() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .width                = ")
             .append("0x").append(HexDump.toHex(  getWidth ()))
             .append(" (").append( getWidth() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .height               = ")
             .append("0x").append(HexDump.toHex(  getHeight ()))
             .append(" (").append( getHeight() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/AXISPARENT]\n");
         return buffer.toString();

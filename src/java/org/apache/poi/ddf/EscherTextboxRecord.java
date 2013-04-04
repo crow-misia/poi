@@ -114,7 +114,7 @@ public class EscherTextboxRecord extends EscherRecord
 
     public String toString()
     {
-        String nl = System.getProperty( "line.separator" );
+        String nl = System.lineSeparator();
 
         String theDumpHex = "";
         try

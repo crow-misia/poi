@@ -53,7 +53,7 @@ public final class DefaultDataLabelTextPropertiesRecord extends StandardRecord {
         buffer.append("    .categoryDataType     = ")
             .append("0x").append(HexDump.toHex(  getCategoryDataType ()))
             .append(" (").append( getCategoryDataType() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/DEFAULTTEXT]\n");
         return buffer.toString();

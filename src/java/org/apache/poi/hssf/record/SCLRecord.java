@@ -51,11 +51,11 @@ public final class SCLRecord extends StandardRecord {
         buffer.append("    .numerator            = ")
             .append("0x").append(HexDump.toHex(  getNumerator ()))
             .append(" (").append( getNumerator() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .denominator          = ")
             .append("0x").append(HexDump.toHex(  getDenominator ()))
             .append(" (").append( getDenominator() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/SCL]\n");
         return buffer.toString();

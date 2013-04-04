@@ -60,11 +60,11 @@ public final class FrameRecord extends StandardRecord {
         buffer.append("    .borderType           = ")
             .append("0x").append(HexDump.toHex(  getBorderType ()))
             .append(" (").append( getBorderType() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .options              = ")
             .append("0x").append(HexDump.toHex(  getOptions ()))
             .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .autoSize                 = ").append(isAutoSize()).append('\n'); 
         buffer.append("         .autoPosition             = ").append(isAutoPosition()).append('\n'); 
 

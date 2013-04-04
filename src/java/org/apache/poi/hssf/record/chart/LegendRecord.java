@@ -81,31 +81,31 @@ public final class LegendRecord extends StandardRecord {
         buffer.append("    .xAxisUpperLeft       = ")
             .append("0x").append(HexDump.toHex(  getXAxisUpperLeft ()))
             .append(" (").append( getXAxisUpperLeft() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .yAxisUpperLeft       = ")
             .append("0x").append(HexDump.toHex(  getYAxisUpperLeft ()))
             .append(" (").append( getYAxisUpperLeft() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .xSize                = ")
             .append("0x").append(HexDump.toHex(  getXSize ()))
             .append(" (").append( getXSize() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .ySize                = ")
             .append("0x").append(HexDump.toHex(  getYSize ()))
             .append(" (").append( getYSize() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .type                 = ")
             .append("0x").append(HexDump.toHex(  getType ()))
             .append(" (").append( getType() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .spacing              = ")
             .append("0x").append(HexDump.toHex(  getSpacing ()))
             .append(" (").append( getSpacing() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .options              = ")
             .append("0x").append(HexDump.toHex(  getOptions ()))
             .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .autoPosition             = ").append(isAutoPosition()).append('\n'); 
         buffer.append("         .autoSeries               = ").append(isAutoSeries()).append('\n'); 
         buffer.append("         .autoXPositioning         = ").append(isAutoXPositioning()).append('\n'); 

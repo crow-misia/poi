@@ -50,7 +50,7 @@ public final class SeriesIndexRecord extends StandardRecord {
         buffer.append("    .index                = ")
             .append("0x").append(HexDump.toHex(  getIndex ()))
             .append(" (").append( getIndex() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/SINDEX]\n");
         return buffer.toString();

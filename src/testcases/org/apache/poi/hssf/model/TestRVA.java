@@ -38,7 +38,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  */
 public final class TestRVA extends TestCase {
 
-	private static final String NEW_LINE = System.getProperty("line.separator");
+	private static final String NEW_LINE = System.lineSeparator();
 
 	public void testFormulas() {
 		HSSFWorkbook wb = HSSFTestDataSamples.openSampleWorkbook("testRVA.xls");

@@ -59,7 +59,7 @@ public final class TestEscherChildAnchorRecord extends TestCase {
     }
 
     public void testToString(){
-        String nl = System.getProperty( "line.separator" );
+        String nl = System.lineSeparator();
 
         String expected = "org.apache.poi.ddf.EscherChildAnchorRecord:" + nl +
                 "  RecordId: 0xF00F" + nl +
