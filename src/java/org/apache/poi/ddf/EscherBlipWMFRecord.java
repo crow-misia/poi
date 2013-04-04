@@ -18,16 +18,16 @@
 
 package org.apache.poi.ddf;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.InflaterInputStream;
+
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.RecordFormatException;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.IOException;
-import java.util.zip.InflaterInputStream;
-import java.util.zip.DeflaterOutputStream;
 
 /**
  * The blip record is used to hold details about large binary objects that occur in escher such
@@ -415,22 +415,19 @@ public class EscherBlipWMFRecord
      */
     public static byte[] decompress( byte[] data, int pos, int length )
     {
-        byte[] compressedData = new byte[length];
-        System.arraycopy( data, pos + 50, compressedData, 0, length );
-        InputStream           compressedInputStream = new ByteArrayInputStream( compressedData );
-        InflaterInputStream   inflaterInputStream   = new InflaterInputStream( compressedInputStream );
-        ByteArrayOutputStream out                   = new ByteArrayOutputStream();
-        int                   c;
-        try
-        {
+        try (final InputStream           compressedInputStream = new ByteArrayInputStream(data, pos + 50, length);
+             final InflaterInputStream   inflaterInputStream   = new InflaterInputStream(compressedInputStream);
+             final ByteArrayOutputStream out                   = new ByteArrayOutputStream()) {
+            int                   c;
             while ( ( c = inflaterInputStream.read() ) != -1 )
                 out.write( c );
+
+            return out.toByteArray();
         }
         catch ( IOException e )
         {
-            throw new RecordFormatException( e.toString() );
+            throw new RecordFormatException(e);
         }
-        return out.toByteArray();
     }
 
 }

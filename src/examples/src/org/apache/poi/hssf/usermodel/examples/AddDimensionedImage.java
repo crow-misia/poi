@@ -672,29 +672,15 @@ public class AddDimensionedImage {
      *                             interrupted.
      */
     private byte[] imageToBytes(String imageFilename) throws IOException {
-        File imageFile = null;
-        FileInputStream fis = null;
-        ByteArrayOutputStream bos = null;
+        File imageFile = new File(imageFilename);
+
         int read = 0;
-        try {
-            imageFile = new File(imageFilename);
-            fis = new FileInputStream(imageFile);
-            bos = new ByteArrayOutputStream();
+        try (final FileInputStream fis = new FileInputStream(imageFile);
+             final ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             while((read = fis.read()) != -1) {
                 bos.write(read);
             }
             return(bos.toByteArray());
-        }
-        finally {
-            if(fis != null) {
-                try {
-                    fis.close();
-                    fis = null;
-                }
-                catch(IOException ioEx) {
-                    // Nothing to do here
-                }
-            }
         }
     }
 

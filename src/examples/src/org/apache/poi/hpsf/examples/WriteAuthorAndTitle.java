@@ -17,8 +17,6 @@
 
 package org.apache.poi.hpsf.examples;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -47,6 +45,7 @@ import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.POIFSDocumentPath;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.FastByteArrayOutputStream;
 
 /**
  * <p>This class is a sample application which shows how to write or modify the
@@ -318,14 +317,13 @@ public class WriteAuthorAndTitle
                          final DocumentInputStream stream) throws IOException
         {
             final DirectoryEntry de = getPath(poiFs, path);
-            final ByteArrayOutputStream out = new ByteArrayOutputStream();
+            final FastByteArrayOutputStream out = new FastByteArrayOutputStream();
             int c;
             while ((c = stream.read()) != -1)
                 out.write(c);
             stream.close();
             out.close();
-            final InputStream in =
-                new ByteArrayInputStream(out.toByteArray());
+            final InputStream in = out.toInputStream();
             de.createDocument(name, in);
         }
 

@@ -16,13 +16,12 @@
 ==================================================================== */
 package org.apache.poi.xslf;
 
+import java.io.InputStream;
+
 import org.apache.poi.POIDataSamples;
 import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 
 /**
  * @author Yegor Kozlov
@@ -39,11 +38,9 @@ public class XSLFTestDataSamples {
     }
 
     public static XMLSlideShow writeOutAndReadBack(XMLSlideShow doc) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(4096);
+        try (final FastByteArrayOutputStream baos = new FastByteArrayOutputStream(4096)) {
             doc.write(baos);
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            return new XMLSlideShow(OPCPackage.open(bais));
+            return new XMLSlideShow(OPCPackage.open(baos.toInputStream()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
