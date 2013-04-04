@@ -59,7 +59,7 @@ public final class SeriesLabelsRecord extends StandardRecord {
         buffer.append("    .formatFlags          = ")
             .append("0x").append(HexDump.toHex(  getFormatFlags ()))
             .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .showActual               = ").append(isShowActual()).append('\n'); 
         buffer.append("         .showPercent              = ").append(isShowPercent()).append('\n'); 
         buffer.append("         .labelAsPercentage        = ").append(isLabelAsPercentage()).append('\n'); 

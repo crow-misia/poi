@@ -50,7 +50,7 @@ public final class AxisUsedRecord extends StandardRecord {
         buffer.append("    .numAxis              = ")
             .append("0x").append(HexDump.toHex(  getNumAxis ()))
             .append(" (").append( getNumAxis() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/AXISUSED]\n");
         return buffer.toString();

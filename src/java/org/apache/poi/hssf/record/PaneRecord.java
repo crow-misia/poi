@@ -64,23 +64,23 @@ public final class PaneRecord extends StandardRecord {
         buffer.append("    .x                    = ")
             .append("0x").append(HexDump.toHex(  getX ()))
             .append(" (").append( getX() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .y                    = ")
             .append("0x").append(HexDump.toHex(  getY ()))
             .append(" (").append( getY() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .topRow               = ")
             .append("0x").append(HexDump.toHex(  getTopRow ()))
             .append(" (").append( getTopRow() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .leftColumn           = ")
             .append("0x").append(HexDump.toHex(  getLeftColumn ()))
             .append(" (").append( getLeftColumn() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .activePane           = ")
             .append("0x").append(HexDump.toHex(  getActivePane ()))
             .append(" (").append( getActivePane() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/PANE]\n");
         return buffer.toString();

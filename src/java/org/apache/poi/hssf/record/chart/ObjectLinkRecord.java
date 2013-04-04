@@ -60,15 +60,15 @@ public final class ObjectLinkRecord extends StandardRecord {
         buffer.append("    .anchorId             = ")
             .append("0x").append(HexDump.toHex(  getAnchorId ()))
             .append(" (").append( getAnchorId() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .link1                = ")
             .append("0x").append(HexDump.toHex(  getLink1 ()))
             .append(" (").append( getLink1() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .link2                = ")
             .append("0x").append(HexDump.toHex(  getLink2 ()))
             .append(" (").append( getLink2() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/OBJECTLINK]\n");
         return buffer.toString();

@@ -61,19 +61,19 @@ public final class DataFormatRecord extends StandardRecord {
         buffer.append("    .pointNumber          = ")
             .append("0x").append(HexDump.toHex(  getPointNumber ()))
             .append(" (").append( getPointNumber() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .seriesIndex          = ")
             .append("0x").append(HexDump.toHex(  getSeriesIndex ()))
             .append(" (").append( getSeriesIndex() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .seriesNumber         = ")
             .append("0x").append(HexDump.toHex(  getSeriesNumber ()))
             .append(" (").append( getSeriesNumber() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .formatFlags          = ")
             .append("0x").append(HexDump.toHex(  getFormatFlags ()))
             .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .useExcel4Colors          = ").append(isUseExcel4Colors()).append('\n'); 
 
         buffer.append("[/DATAFORMAT]\n");
