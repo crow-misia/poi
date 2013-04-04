@@ -27,6 +27,7 @@ import junit.framework.TestCase;
 import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.FastByteArrayOutputStream;
 
 /**
  * Tests that POIDocument correctly loads and saves the common
@@ -138,9 +139,9 @@ public final class TestPOIDocumentMain extends TestCase {
 		assertNull(doc.getDocumentSummaryInformation());
 
 		// Write out and back in again, no change
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
 		doc.write(baos);
-		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+		ByteArrayInputStream bais = baos.toInputStream();
 		doc = new HSSFWorkbook(bais);
 		
 		assertNull(doc.getSummaryInformation());
@@ -152,9 +153,9 @@ public final class TestPOIDocumentMain extends TestCase {
 		doc.getDocumentSummaryInformation().setCompany("ASF");
 		
 		// Save and re-load
-		baos = new ByteArrayOutputStream();
+		baos = new FastByteArrayOutputStream();
 		doc.write(baos);
-		bais = new ByteArrayInputStream(baos.toByteArray());
+		bais = baos.toInputStream();
 		doc = new HSSFWorkbook(bais);
 		
 		// Check

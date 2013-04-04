@@ -18,7 +18,6 @@
 package org.apache.poi.util;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 
 import junit.framework.AssertionFailedError;
@@ -32,7 +31,7 @@ import junit.framework.TestCase;
 public final class TestLittleEndianStreams extends TestCase {
 
 	public void testRead() {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
 		LittleEndianOutput leo = new LittleEndianOutputStream(baos);
 		leo.writeInt(12345678);
 		leo.writeShort(12345);
@@ -42,7 +41,7 @@ public final class TestLittleEndianStreams extends TestCase {
 		leo.writeLong(1234567890123456789L);
 		leo.writeDouble(123.456);
 
-		LittleEndianInput lei = new LittleEndianInputStream(new ByteArrayInputStream(baos.toByteArray()));
+		LittleEndianInput lei = new LittleEndianInputStream(baos.toInputStream());
 
 		assertEquals(12345678, lei.readInt());
 		assertEquals(12345, lei.readShort());

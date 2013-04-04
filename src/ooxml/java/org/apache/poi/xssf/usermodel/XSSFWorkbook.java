@@ -17,13 +17,18 @@
 
 package org.apache.poi.xssf.usermodel;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
@@ -32,7 +37,6 @@ import org.apache.poi.POIXMLDocument;
 import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.POIXMLException;
 import org.apache.poi.POIXMLProperties;
-import org.apache.poi.ss.formula.SheetNameFormatter;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackagePart;
@@ -41,23 +45,47 @@ import org.apache.poi.openxml4j.opc.PackageRelationship;
 import org.apache.poi.openxml4j.opc.PackageRelationshipTypes;
 import org.apache.poi.openxml4j.opc.PackagingURIHelper;
 import org.apache.poi.openxml4j.opc.TargetMode;
+import org.apache.poi.ss.formula.SheetNameFormatter;
 import org.apache.poi.ss.formula.udf.IndexedUDFFinder;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.ss.util.WorkbookUtil;
-import org.apache.poi.util.*;
-import org.apache.poi.xssf.model.*;
+import org.apache.poi.util.FastByteArrayOutputStream;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.util.Internal;
+import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.POILogger;
+import org.apache.poi.util.PackageHelper;
+import org.apache.poi.xssf.model.CalculationChain;
+import org.apache.poi.xssf.model.MapInfo;
+import org.apache.poi.xssf.model.SharedStringsTable;
+import org.apache.poi.xssf.model.StylesTable;
+import org.apache.poi.xssf.model.ThemesTable;
 import org.apache.poi.xssf.usermodel.helpers.XSSFFormulaUtils;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
 import org.openxmlformats.schemas.officeDocument.x2006.relationships.STRelationshipId;
-import org.openxmlformats.schemas.spreadsheetml.x2006.main.*;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBookView;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBookViews;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCalcPr;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedNames;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDialogsheet;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTSheet;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTSheets;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorkbook;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorkbookPr;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorkbookProtection;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.STCalcMode;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.STSheetState;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.WorkbookDocument;
 
 /**
  * High level representation of a SpreadsheetML workbook.  This is the first object most users
@@ -427,9 +455,9 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
 
         XSSFSheet clonedSheet = createSheet(clonedName);
         try {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            FastByteArrayOutputStream out = new FastByteArrayOutputStream();
             srcSheet.write(out);
-            clonedSheet.read(new ByteArrayInputStream(out.toByteArray()));
+            clonedSheet.read(out.toInputStream());
         } catch (IOException e){
             throw new POIXMLException("Failed to clone sheet", e);
         }
