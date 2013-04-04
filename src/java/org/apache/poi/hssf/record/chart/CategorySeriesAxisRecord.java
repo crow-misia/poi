@@ -63,19 +63,19 @@ public final class CategorySeriesAxisRecord extends StandardRecord {
         buffer.append("    .crossingPoint        = ")
             .append("0x").append(HexDump.toHex(  getCrossingPoint ()))
             .append(" (").append( getCrossingPoint() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .labelFrequency       = ")
             .append("0x").append(HexDump.toHex(  getLabelFrequency ()))
             .append(" (").append( getLabelFrequency() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .tickMarkFrequency    = ")
             .append("0x").append(HexDump.toHex(  getTickMarkFrequency ()))
             .append(" (").append( getTickMarkFrequency() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .options              = ")
             .append("0x").append(HexDump.toHex(  getOptions ()))
             .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .valueAxisCrossing        = ").append(isValueAxisCrossing()).append('\n'); 
         buffer.append("         .crossesFarRight          = ").append(isCrossesFarRight()).append('\n'); 
         buffer.append("         .reversed                 = ").append(isReversed()).append('\n'); 

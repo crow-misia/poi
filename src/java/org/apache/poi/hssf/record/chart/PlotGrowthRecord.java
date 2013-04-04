@@ -53,11 +53,11 @@ public final class PlotGrowthRecord extends StandardRecord {
         buffer.append("    .horizontalScale      = ")
             .append("0x").append(HexDump.toHex(  getHorizontalScale ()))
             .append(" (").append( getHorizontalScale() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .verticalScale        = ")
             .append("0x").append(HexDump.toHex(  getVerticalScale ()))
             .append(" (").append( getVerticalScale() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/PLOTGROWTH]\n");
         return buffer.toString();

@@ -155,7 +155,7 @@ public final class SlideShowRecordDumper {
   }
 
   public String printEscherRecord( EscherRecord er ) {
-        String nl = System.getProperty( "line.separator" );
+        String nl = System.lineSeparator();
         StringBuffer buf = new StringBuffer();
 
 		if (er instanceof EscherContainerRecord) {
@@ -197,7 +197,7 @@ public final class SlideShowRecordDumper {
   public String printEscherContainerRecord( EscherContainerRecord ecr ) {
   		String indent = "";
 
-        String nl = System.getProperty( "line.separator" );
+        String nl = System.lineSeparator();
 
         StringBuffer children = new StringBuffer();
         int count = 0;

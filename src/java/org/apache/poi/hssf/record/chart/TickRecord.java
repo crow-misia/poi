@@ -82,35 +82,35 @@ public final class TickRecord extends StandardRecord {
         buffer.append("    .majorTickType        = ")
             .append("0x").append(HexDump.toHex(  getMajorTickType ()))
             .append(" (").append( getMajorTickType() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .minorTickType        = ")
             .append("0x").append(HexDump.toHex(  getMinorTickType ()))
             .append(" (").append( getMinorTickType() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .labelPosition        = ")
             .append("0x").append(HexDump.toHex(  getLabelPosition ()))
             .append(" (").append( getLabelPosition() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .background           = ")
             .append("0x").append(HexDump.toHex(  getBackground ()))
             .append(" (").append( getBackground() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .labelColorRgb        = ")
             .append("0x").append(HexDump.toHex(  getLabelColorRgb ()))
             .append(" (").append( getLabelColorRgb() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .zero1                = ")
             .append("0x").append(HexDump.toHex(  getZero1 ()))
             .append(" (").append( getZero1() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .zero2                = ")
             .append("0x").append(HexDump.toHex(  getZero2 ()))
             .append(" (").append( getZero2() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .options              = ")
             .append("0x").append(HexDump.toHex(  getOptions ()))
             .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .autoTextColor            = ").append(isAutoTextColor()).append('\n'); 
         buffer.append("         .autoTextBackground       = ").append(isAutoTextBackground()).append('\n'); 
             buffer.append("         .rotation                 = ").append(getRotation()).append('\n'); 
@@ -118,11 +118,11 @@ public final class TickRecord extends StandardRecord {
         buffer.append("    .tickColor            = ")
             .append("0x").append(HexDump.toHex(  getTickColor ()))
             .append(" (").append( getTickColor() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .zero3                = ")
             .append("0x").append(HexDump.toHex(  getZero3 ()))
             .append(" (").append( getZero3() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/TICK]\n");
         return buffer.toString();
