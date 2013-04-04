@@ -46,7 +46,7 @@ import org.apache.poi.util.LittleEndian;
  *@see        #main
  */
 public final class BiffViewer {
-	static final char[] NEW_LINE_CHARS = System.getProperty("line.separator").toCharArray();
+	static final char[] NEW_LINE_CHARS = System.lineSeparator().toCharArray();
 
     private BiffViewer() {
 		// no instances of this class

@@ -117,39 +117,39 @@ public final class TextRecord extends StandardRecord {
         buffer.append("    .horizontalAlignment  = ")
             .append("0x").append(HexDump.toHex(  getHorizontalAlignment ()))
             .append(" (").append( getHorizontalAlignment() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .verticalAlignment    = ")
             .append("0x").append(HexDump.toHex(  getVerticalAlignment ()))
             .append(" (").append( getVerticalAlignment() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .displayMode          = ")
             .append("0x").append(HexDump.toHex(  getDisplayMode ()))
             .append(" (").append( getDisplayMode() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .rgbColor             = ")
             .append("0x").append(HexDump.toHex(  getRgbColor ()))
             .append(" (").append( getRgbColor() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .x                    = ")
             .append("0x").append(HexDump.toHex(  getX ()))
             .append(" (").append( getX() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .y                    = ")
             .append("0x").append(HexDump.toHex(  getY ()))
             .append(" (").append( getY() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .width                = ")
             .append("0x").append(HexDump.toHex(  getWidth ()))
             .append(" (").append( getWidth() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .height               = ")
             .append("0x").append(HexDump.toHex(  getHeight ()))
             .append(" (").append( getHeight() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .options1             = ")
             .append("0x").append(HexDump.toHex(  getOptions1 ()))
             .append(" (").append( getOptions1() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .autoColor                = ").append(isAutoColor()).append('\n'); 
         buffer.append("         .showKey                  = ").append(isShowKey()).append('\n'); 
         buffer.append("         .showValue                = ").append(isShowValue()).append('\n'); 
@@ -166,16 +166,16 @@ public final class TextRecord extends StandardRecord {
         buffer.append("    .indexOfColorValue    = ")
             .append("0x").append(HexDump.toHex(  getIndexOfColorValue ()))
             .append(" (").append( getIndexOfColorValue() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .options2             = ")
             .append("0x").append(HexDump.toHex(  getOptions2 ()))
             .append(" (").append( getOptions2() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
             buffer.append("         .dataLabelPlacement       = ").append(getDataLabelPlacement()).append('\n'); 
         buffer.append("    .textRotation         = ")
             .append("0x").append(HexDump.toHex(  getTextRotation ()))
             .append(" (").append( getTextRotation() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/TEXT]\n");
         return buffer.toString();

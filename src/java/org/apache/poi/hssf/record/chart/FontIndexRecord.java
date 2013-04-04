@@ -50,7 +50,7 @@ public final class FontIndexRecord extends StandardRecord {
         buffer.append("    .fontIndex            = ")
             .append("0x").append(HexDump.toHex(  getFontIndex ()))
             .append(" (").append( getFontIndex() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/FONTX]\n");
         return buffer.toString();

@@ -168,7 +168,7 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
      */
     public String toString()
     {
-        String nl = System.getProperty( "line.separator" );
+        String nl = System.lineSeparator();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append( getClass().getName() );
