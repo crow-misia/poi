@@ -29,17 +29,17 @@ import java.io.ByteArrayOutputStream;
 public class CustomXMLMapping {
 
     public static void main(String[] args) throws Exception {
-        OPCPackage pkg = OPCPackage.open(args[0]);
-        XSSFWorkbook wb = new XSSFWorkbook(pkg);
+        try (final OPCPackage pkg = OPCPackage.open(args[0])) {
+            XSSFWorkbook wb = new XSSFWorkbook(pkg);
 
-        for (XSSFMap map : wb.getCustomXMLMappings()) {
-            XSSFExportToXml exporter = new XSSFExportToXml(map);
+            for (XSSFMap map : wb.getCustomXMLMappings()) {
+                XSSFExportToXml exporter = new XSSFExportToXml(map);
 
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            exporter.exportToXML(os, true);
-            String xml = os.toString("UTF-8");
-            System.out.println(xml);
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                exporter.exportToXML(os, true);
+                String xml = os.toString("UTF-8");
+                System.out.println(xml);
+            }
         }
-        pkg.close();
     }
 }

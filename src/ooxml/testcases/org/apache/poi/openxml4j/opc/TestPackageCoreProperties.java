@@ -17,8 +17,6 @@
 
 package org.apache.poi.openxml4j.opc;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParsePosition;
@@ -33,8 +31,9 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.apache.poi.openxml4j.opc.internal.PackagePropertiesPart;
 import org.apache.poi.openxml4j.util.Nullable;
-import org.apache.poi.util.POILogger;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.POILogger;
 
 public final class TestPackageCoreProperties extends TestCase {
     private static final POILogger logger = POILogFactory.getLogger(TestPackageCoreProperties.class);
@@ -188,11 +187,11 @@ public final class TestPackageCoreProperties extends TestCase {
         PackageProperties props1 = pkg1.getPackageProperties();
         assertEquals(null, props1.getTitleProperty().getValue());
         props1.setTitleProperty("Bug 51444 fixed");
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         pkg1.save(out);
         out.close();
 
-        OPCPackage pkg2 = OPCPackage.open(new ByteArrayInputStream(out.toByteArray()));
+        OPCPackage pkg2 = OPCPackage.open(out.toInputStream());
         PackageProperties props2 = pkg2.getPackageProperties();
         props2.setTitleProperty("Bug 51444 fixed");
     }

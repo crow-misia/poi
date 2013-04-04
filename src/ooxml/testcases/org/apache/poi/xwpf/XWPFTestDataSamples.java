@@ -16,12 +16,11 @@
 ==================================================================== */
 package org.apache.poi.xwpf;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.poi.POIDataSamples;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
@@ -36,10 +35,9 @@ public class XWPFTestDataSamples {
     }
 
     public static XWPFDocument writeOutAndReadBack(XWPFDocument doc) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream(4096);
+        FastByteArrayOutputStream baos = new FastByteArrayOutputStream(4096);
         doc.write(baos);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-        return new XWPFDocument(bais);
+        return new XWPFDocument(baos.toInputStream());
     }
 
     public static byte[] getImage(String filename) throws IOException {

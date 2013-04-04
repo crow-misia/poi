@@ -16,21 +16,25 @@
 ==================================================================== */
 package org.apache.poi.xssf.usermodel;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
 import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.apache.poi.POIDataSamples;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.xmlbeans.XmlObject;
-import schemasMicrosoftComVml.*;
+
+import schemasMicrosoftComOfficeExcel.CTClientData;
+import schemasMicrosoftComOfficeExcel.STObjectType;
 import schemasMicrosoftComOfficeOffice.CTShapeLayout;
 import schemasMicrosoftComOfficeOffice.STConnectType;
 import schemasMicrosoftComOfficeOffice.STInsetMode;
-import schemasMicrosoftComOfficeExcel.CTClientData;
-import schemasMicrosoftComOfficeExcel.STObjectType;
+import schemasMicrosoftComVml.CTShadow;
+import schemasMicrosoftComVml.CTShape;
+import schemasMicrosoftComVml.CTShapetype;
+import schemasMicrosoftComVml.STExt;
+import schemasMicrosoftComVml.STTrueFalse;
 
 /**
  * @author Yegor Kozlov
@@ -80,11 +84,11 @@ public class TestXSSFVMLDrawing extends TestCase {
         assertEquals(0, cldata.getColumnArray(0).intValue());
 
         //serialize and read again
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         vml.write(out);
 
         XSSFVMLDrawing vml2 = new XSSFVMLDrawing();
-        vml2.read(new ByteArrayInputStream(out.toByteArray()));
+        vml2.read(out.toInputStream());
         List<XmlObject> items2 = vml2.getItems();
         assertEquals(3, items2.size());
         assertTrue(items2.get(0) instanceof CTShapeLayout);

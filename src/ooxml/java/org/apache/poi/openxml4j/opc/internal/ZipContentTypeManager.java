@@ -17,8 +17,6 @@
 
 package org.apache.poi.openxml4j.opc.internal;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,6 +26,7 @@ import java.util.zip.ZipOutputStream;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.StreamHelper;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 import org.dom4j.Document;
@@ -69,9 +68,9 @@ public class ZipContentTypeManager extends ContentTypeManager {
 			// Referenced in ZIP
 			zos.putNextEntry(partEntry);
 			// Saving data in the ZIP file
-			ByteArrayOutputStream outTemp = new ByteArrayOutputStream();
+			FastByteArrayOutputStream outTemp = new FastByteArrayOutputStream();
 			StreamHelper.saveXmlInStream(content, out);
-			InputStream ins = new ByteArrayInputStream(outTemp.toByteArray());
+			InputStream ins = outTemp.toInputStream();
 			byte[] buff = new byte[ZipHelper.READ_WRITE_FILE_BUFFER_SIZE];
 			while (ins.available() > 0) {
 				int resultRead = ins.read(buff);
