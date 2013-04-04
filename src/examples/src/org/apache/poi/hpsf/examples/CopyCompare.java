@@ -17,8 +17,6 @@
 
 package org.apache.poi.hpsf.examples;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -48,6 +46,7 @@ import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.Entry;
 import org.apache.poi.poifs.filesystem.POIFSDocumentPath;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.TempFile;
 
 /**
@@ -437,14 +436,16 @@ public class CopyCompare
                          final DocumentInputStream stream) throws IOException
         {
             final DirectoryEntry de = getPath(poiFs, path);
-            final ByteArrayOutputStream out = new ByteArrayOutputStream();
-            int c;
-            while ((c = stream.read()) != -1)
-                out.write(c);
-            stream.close();
-            out.close();
-            final InputStream in =
-                new ByteArrayInputStream(out.toByteArray());
+            InputStream in;
+
+            try (final FastByteArrayOutputStream out = new FastByteArrayOutputStream()) {
+                int c;
+                while ((c = stream.read()) != -1)
+                    out.write(c);
+                in = out.toInputStream();
+            } finally {
+                stream.close();
+            }
             de.createDocument(name, in);
         }
 

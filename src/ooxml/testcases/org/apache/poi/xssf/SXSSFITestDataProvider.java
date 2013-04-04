@@ -19,18 +19,16 @@
 
 package org.apache.poi.xssf;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.apache.poi.POIDataSamples;
 import org.apache.poi.ss.ITestDataProvider;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 
 /**
  * @author Yegor Kozlov
@@ -57,10 +55,9 @@ public final class SXSSFITestDataProvider implements ITestDataProvider {
 
         Workbook result;
         try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(8192);
+            FastByteArrayOutputStream baos = new FastByteArrayOutputStream(8192);
             wb.write(baos);
-            InputStream is = new ByteArrayInputStream(baos.toByteArray());
-            result = new XSSFWorkbook(is);
+            result = new XSSFWorkbook(baos.toInputStream());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

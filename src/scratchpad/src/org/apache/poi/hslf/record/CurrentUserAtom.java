@@ -20,15 +20,22 @@
 
 package org.apache.poi.hslf.record;
 
-import java.io.*;
-import org.apache.poi.poifs.filesystem.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.apache.poi.hslf.exceptions.CorruptPowerPointFileException;
+import org.apache.poi.hslf.exceptions.EncryptedPowerPointFileException;
+import org.apache.poi.hslf.exceptions.OldPowerPointFormatException;
+import org.apache.poi.poifs.filesystem.DirectoryNode;
+import org.apache.poi.poifs.filesystem.DocumentEntry;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 import org.apache.poi.util.StringUtil;
-import org.apache.poi.hslf.exceptions.CorruptPowerPointFileException;
-import org.apache.poi.hslf.exceptions.EncryptedPowerPointFileException;
-import org.apache.poi.hslf.exceptions.OldPowerPointFormatException;
 
 
 /**
@@ -271,12 +278,10 @@ public class CurrentUserAtom
 	 */
 	public void writeToFS(POIFSFileSystem fs) throws IOException {
 		// Grab contents
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
 		writeOut(baos);
-		ByteArrayInputStream bais = 
-			new ByteArrayInputStream(baos.toByteArray());
 
 		// Write out
-		fs.createDocument(bais,"Current User");
+		fs.createDocument(baos.toInputStream(), "Current User");
 	}
 }

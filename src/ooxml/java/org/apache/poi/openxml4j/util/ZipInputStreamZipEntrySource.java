@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.apache.poi.util.FastByteArrayOutputStream;
+
 /**
  * Provides a way to get at all the ZipEntries
  *  from a ZipInputStream, as many times as required.
@@ -102,13 +104,13 @@ public class ZipInputStreamZipEntrySource implements ZipEntrySource {
 	 *  close this as soon as you can! 
 	 */
 	public static class FakeZipEntry extends ZipEntry {
-		private byte[] data;
+		private ByteArrayInputStream is;
 		
 		public FakeZipEntry(ZipEntry entry, ZipInputStream inp) throws IOException {
 			super(entry.getName());
 			
 			// Grab the de-compressed contents for later
-            ByteArrayOutputStream baos;
+			FastByteArrayOutputStream baos;
 
             long entrySize = entry.getSize();
 
@@ -117,9 +119,9 @@ public class ZipInputStreamZipEntrySource implements ZipEntrySource {
                     throw new IOException("ZIP entry size is too large");
                 }
 
-                baos = new ByteArrayOutputStream((int) entrySize);
+                baos = new FastByteArrayOutputStream((int) entrySize);
             } else {
-    			baos = new ByteArrayOutputStream();
+    			baos = new FastByteArrayOutputStream();
             }
 
 			byte[] buffer = new byte[4096];
@@ -128,11 +130,12 @@ public class ZipInputStreamZipEntrySource implements ZipEntrySource {
 				baos.write(buffer, 0, read);
 			}
 			
-			data = baos.toByteArray();
+			is = baos.toInputStream();
 		}
 		
 		public InputStream getInputStream() {
-			return new ByteArrayInputStream(data);
+		    is.reset();
+			return is;
 		}
 	}
 }

@@ -41,6 +41,7 @@ public final class AllPOIUtilTests {
         result.addTestSuite(TestShortList.class);
         result.addTestSuite(TestStringUtil.class);
         result.addTestSuite(TestTempFile.class);
+        result.addTestSuite(TestFastByteArrayOutputStream.class);
         return result;
     }
 }

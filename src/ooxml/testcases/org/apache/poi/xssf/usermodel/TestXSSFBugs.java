@@ -17,8 +17,6 @@
 
 package org.apache.poi.xssf.usermodel;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import org.apache.poi.POIXMLDocumentPart;
@@ -49,6 +47,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.xssf.XSSFITestDataProvider;
 import org.apache.poi.xssf.XSSFTestDataSamples;
 import org.apache.poi.xssf.model.CalculationChain;
@@ -551,18 +550,17 @@ public final class TestXSSFBugs extends BaseTestBugzillaIssues {
        assertEquals(3, wb.getNumberOfSheets());
        assertEquals(10, wb.getStylesSource().getNumCellStyles());
        
-       ByteArrayOutputStream b1 = new ByteArrayOutputStream();
-       ByteArrayOutputStream b2 = new ByteArrayOutputStream();
-       ByteArrayOutputStream b3 = new ByteArrayOutputStream();
+       FastByteArrayOutputStream b1 = new FastByteArrayOutputStream();
+       FastByteArrayOutputStream b2 = new FastByteArrayOutputStream();
+       FastByteArrayOutputStream b3 = new FastByteArrayOutputStream();
        wb.write(b1);
        wb.write(b2);
        wb.write(b3);
        
-       for(byte[] data : new byte[][] {
-             b1.toByteArray(), b2.toByteArray(), b3.toByteArray()
+       for(FastByteArrayOutputStream os : new FastByteArrayOutputStream[] {
+             b1, b2, b3
        }) {
-          ByteArrayInputStream bais = new ByteArrayInputStream(data);
-          wb = new XSSFWorkbook(bais);
+          wb = new XSSFWorkbook(os.toInputStream());
           assertEquals(3, wb.getNumberOfSheets());
           assertEquals(10, wb.getStylesSource().getNumCellStyles());
        }
