@@ -34,9 +34,8 @@ import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackageRelationship;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
-
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFootnotes;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.FootnotesDocument;
 
 /**
@@ -75,7 +74,7 @@ public class XWPFFootnotes extends POIXMLDocumentPart {
             notesDoc = FootnotesDocument.Factory.parse(is);
             ctFootnotes = notesDoc.getFootnotes();
         } catch (XmlException e) {
-            throw new POIXMLException();
+            throw new POIXMLException(e);
         }
 
         // Find our footnotes

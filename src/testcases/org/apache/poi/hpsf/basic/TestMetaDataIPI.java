@@ -18,7 +18,6 @@
 package org.apache.poi.hpsf.basic;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +36,7 @@ import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.FastByteArrayOutputStream;
 /**
  * Basing on: src/examples/src/org/apache/poi/hpsf/examples/ModifyDocumentSummaryInformation.java
  * This class tests reading and writing of meta data. No actual document is created. All information
@@ -45,7 +45,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
  */
 public final class TestMetaDataIPI extends TestCase{
 
-	private ByteArrayOutputStream bout; //our store
+	private FastByteArrayOutputStream bout; //our store
 	private POIFSFileSystem poifs;
 	private DirectoryEntry dir;
 	private DocumentSummaryInformation dsi;
@@ -58,7 +58,7 @@ public final class TestMetaDataIPI extends TestCase{
 	 * SummaryInformation to reasonable values
 	 */
 	public void setUp() {
-		bout = new ByteArrayOutputStream();
+		bout = new FastByteArrayOutputStream();
 		poifs = new POIFSFileSystem();
 		dir = poifs.getRoot();
 		dsi = null;
@@ -132,7 +132,7 @@ public final class TestMetaDataIPI extends TestCase{
 			fail();
 		}
 
-		InputStream is = new ByteArrayInputStream(bout.toByteArray());
+		InputStream is = bout.toInputStream();
 		assertNotNull(is);
 		POIFSFileSystem poifs = null;
 		try {

@@ -17,17 +17,17 @@
 
 package org.apache.poi.ddf;
 
-import org.apache.poi.util.HexDump;
-import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.POILogFactory;
-import org.apache.poi.util.POILogger;
-
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.InflaterInputStream;
+
+import org.apache.poi.util.HexDump;
+import org.apache.poi.util.LittleEndian;
+import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.POILogger;
 
 /**
  * @author Daniel Noll
@@ -148,10 +148,9 @@ public final class EscherMetafileBlip extends EscherBlipRecord {
      * @return the inflated picture data.
      */
     private static byte[] inflatePictureData(byte[] data) {
-        try {
-            InflaterInputStream in = new InflaterInputStream(
-                new ByteArrayInputStream( data ) );
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try (final ByteArrayInputStream bais = new ByteArrayInputStream(data);
+             final InflaterInputStream in = new InflaterInputStream(bais);
+             final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             byte[] buf = new byte[4096];
             int readBytes;
             while ((readBytes = in.read(buf)) > 0) {

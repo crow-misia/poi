@@ -409,8 +409,9 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
         // agg.escherRecords = new ArrayList();
         int pos = 0;
         while (pos < buffer.size()) {
-            EscherRecord r = recordFactory.createRecord(buffer.toByteArray(), pos);
-            int bytesRead = r.fillFields(buffer.toByteArray(), pos, recordFactory);
+            final byte[] data = buffer.toByteArray();
+            EscherRecord r = recordFactory.createRecord(data, pos);
+            int bytesRead = r.fillFields(data, pos, recordFactory);
             agg.addEscherRecord(r);
             pos += bytesRead;
         }

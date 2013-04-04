@@ -18,7 +18,6 @@
 package org.apache.poi.hpsf.basic;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
 import junit.framework.TestCase;
@@ -31,6 +30,7 @@ import org.apache.poi.hpsf.PropertySetFactory;
 import org.apache.poi.hpsf.SummaryInformation;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
@@ -66,10 +66,9 @@ public final class TestHPSFBugs extends TestCase {
       
       
       // Save and reload
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
       wb.write(baos);
-      ByteArrayInputStream bais = 
-         new ByteArrayInputStream(baos.toByteArray());
+      ByteArrayInputStream bais = baos.toInputStream();
       wb = new HSSFWorkbook(bais);
       
       
@@ -86,9 +85,9 @@ public final class TestHPSFBugs extends TestCase {
       // Set some more, save + reload
       wb.getSummaryInformation().setComments("Resaved");
       
-      baos = new ByteArrayOutputStream();
+      baos = new FastByteArrayOutputStream();
       wb.write(baos);
-      bais = new ByteArrayInputStream(baos.toByteArray());
+      bais = baos.toInputStream();
       wb = new HSSFWorkbook(bais);
       
       // Check again
