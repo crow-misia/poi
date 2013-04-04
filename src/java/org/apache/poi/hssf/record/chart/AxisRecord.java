@@ -61,23 +61,23 @@ public final class AxisRecord extends StandardRecord {
         buffer.append("    .axisType             = ")
             .append("0x").append(HexDump.toHex(  getAxisType ()))
             .append(" (").append( getAxisType() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .reserved1            = ")
             .append("0x").append(HexDump.toHex(  getReserved1 ()))
             .append(" (").append( getReserved1() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .reserved2            = ")
             .append("0x").append(HexDump.toHex(  getReserved2 ()))
             .append(" (").append( getReserved2() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .reserved3            = ")
             .append("0x").append(HexDump.toHex(  getReserved3 ()))
             .append(" (").append( getReserved3() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .reserved4            = ")
             .append("0x").append(HexDump.toHex(  getReserved4 ()))
             .append(" (").append( getReserved4() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/AXIS]\n");
         return buffer.toString();

@@ -50,7 +50,7 @@ public final class NumberFormatIndexRecord extends StandardRecord {
         buffer.append("    .formatIndex          = ")
             .append("0x").append(HexDump.toHex(  getFormatIndex ()))
             .append(" (").append( getFormatIndex() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/IFMT]\n");
         return buffer.toString();

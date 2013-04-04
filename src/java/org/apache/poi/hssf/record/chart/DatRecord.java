@@ -58,7 +58,7 @@ public final class DatRecord extends StandardRecord {
         buffer.append("    .options              = ")
             .append("0x").append(HexDump.toHex(  getOptions ()))
             .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .horizontalBorder         = ").append(isHorizontalBorder()).append('\n'); 
         buffer.append("         .verticalBorder           = ").append(isVerticalBorder()).append('\n'); 
         buffer.append("         .border                   = ").append(isBorder()).append('\n'); 

@@ -73,23 +73,23 @@ public final class ValueRangeRecord extends StandardRecord {
         buffer.append("[VALUERANGE]\n");
         buffer.append("    .minimumAxisValue     = ")
             .append(" (").append( getMinimumAxisValue() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .maximumAxisValue     = ")
             .append(" (").append( getMaximumAxisValue() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .majorIncrement       = ")
             .append(" (").append( getMajorIncrement() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .minorIncrement       = ")
             .append(" (").append( getMinorIncrement() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .categoryAxisCross    = ")
             .append(" (").append( getCategoryAxisCross() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .options              = ")
             .append("0x").append(HexDump.toHex(  getOptions ()))
             .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .automaticMinimum         = ").append(isAutomaticMinimum()).append('\n'); 
         buffer.append("         .automaticMaximum         = ").append(isAutomaticMaximum()).append('\n'); 
         buffer.append("         .automaticMajor           = ").append(isAutomaticMajor()).append('\n'); 

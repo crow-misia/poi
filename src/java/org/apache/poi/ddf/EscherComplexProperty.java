@@ -131,7 +131,7 @@ public class EscherComplexProperty extends EscherProperty {
                 + ", propName: " + EscherProperties.getPropertyName( getPropertyNumber() )
                 + ", complex: " + isComplex()
                 + ", blipId: " + isBlipId()
-                + ", data: " + System.getProperty("line.separator") + dataStr;
+                + ", data: " + System.lineSeparator() + dataStr;
     }
 
     public String toXml(String tab){

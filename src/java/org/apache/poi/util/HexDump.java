@@ -70,7 +70,7 @@ public class HexDump {
     {
         if (data.length == 0)
         {
-            stream.write( ("No Data" + System.getProperty( "line.separator")).getBytes() );
+            stream.write( ("No Data" + System.lineSeparator()).getBytes() );
             stream.flush();
             return;
         }

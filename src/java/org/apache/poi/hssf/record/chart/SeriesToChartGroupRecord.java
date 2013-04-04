@@ -52,7 +52,7 @@ public final class SeriesToChartGroupRecord extends StandardRecord {
         buffer.append("    .chartGroupIndex      = ")
             .append("0x").append(HexDump.toHex(  getChartGroupIndex ()))
             .append(" (").append( getChartGroupIndex() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
 
         buffer.append("[/SeriesToChartGroup]\n");
         return buffer.toString();

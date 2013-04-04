@@ -62,15 +62,15 @@ public final class BarRecord extends StandardRecord {
         buffer.append("    .barSpace             = ")
             .append("0x").append(HexDump.toHex(  getBarSpace ()))
             .append(" (").append( getBarSpace() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .categorySpace        = ")
             .append("0x").append(HexDump.toHex(  getCategorySpace ()))
             .append(" (").append( getCategorySpace() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("    .formatFlags          = ")
             .append("0x").append(HexDump.toHex(  getFormatFlags ()))
             .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.getProperty("line.separator")); 
+        buffer.append(System.lineSeparator()); 
         buffer.append("         .horizontal               = ").append(isHorizontal()).append('\n'); 
         buffer.append("         .stacked                  = ").append(isStacked()).append('\n'); 
         buffer.append("         .displayAsPercentage      = ").append(isDisplayAsPercentage()).append('\n'); 
