@@ -86,7 +86,6 @@ public class CellFormatTestBase extends TestCase {
     abstract static class CellValue {
         abstract Object getValue(Cell cell);
 
-        @SuppressWarnings({"UnusedDeclaration"})
         Color getColor(Cell cell) {
             return TEST_COLOR;
         }

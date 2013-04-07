@@ -25,7 +25,7 @@ import java.io.ByteArrayOutputStream;
 /**
  * @author Glen Stampoultzis
  */
-public class EscherBitmapBlip extends EscherBlipRecord {
+public final class EscherBitmapBlip extends EscherBlipRecord {
     public static final short RECORD_ID_JPEG = (short) 0xF018 + 5;
     public static final short RECORD_ID_PNG = (short) 0xF018 + 6;
     public static final short RECORD_ID_DIB = (short) 0xF018 + 7;

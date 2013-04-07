@@ -25,7 +25,7 @@ import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
 @Internal
-class ClipboardData
+final class ClipboardData
 {
     private static final POILogger logger = POILogFactory
             .getLogger( ClipboardData.class );
