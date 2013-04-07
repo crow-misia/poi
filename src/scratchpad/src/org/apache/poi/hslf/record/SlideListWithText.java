@@ -17,11 +17,12 @@
 
 package org.apache.poi.hslf.record;
 
-import org.apache.poi.util.LittleEndian;
-
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.poi.util.LittleEndian;
 
 /**
  * These are tricky beasts. They contain the text of potentially
@@ -82,7 +83,7 @@ public final class SlideListWithText extends RecordContainer {
 		// Group our children together into SlideAtomsSets
 		// That way, model layer code can just grab the sets to use,
 		//  without having to try to match the children together
-		Vector<SlideAtomsSet> sets = new Vector<SlideAtomsSet>();
+		List<SlideAtomsSet> sets = new ArrayList<>();
 		for(int i=0; i<_children.length; i++) {
 			if(_children[i] instanceof SlidePersistAtom) {
 				// Find where the next SlidePersistAtom is

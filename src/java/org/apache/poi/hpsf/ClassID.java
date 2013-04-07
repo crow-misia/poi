@@ -28,7 +28,7 @@ import org.apache.poi.util.HexDump;
  * @author Rainer Klute <a
  * href="mailto:klute@rainer-klute.de">&lt;klute@rainer-klute.de&gt;</a>
  */
-public class ClassID
+public final class ClassID
 {
 
     /**

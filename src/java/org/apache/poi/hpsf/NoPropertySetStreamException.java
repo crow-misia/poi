@@ -27,8 +27,9 @@ package org.apache.poi.hpsf;
  * @author Rainer Klute <a
  * href="mailto:klute@rainer-klute.de">&lt;klute@rainer-klute.de&gt;</a>
  */
-public class NoPropertySetStreamException extends HPSFException
+public final class NoPropertySetStreamException extends HPSFException
 {
+    private static final long serialVersionUID = 1L;
 
     /**
      * <p>Constructor</p>

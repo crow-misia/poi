@@ -20,8 +20,8 @@ package org.apache.poi.xssf.model;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.openxml4j.opc.PackagePart;
@@ -95,9 +95,9 @@ public class SingleXmlCells extends POIXMLDocumentPart {
 	 * @return all the SimpleXmlCell contained in this SingleXmlCells element
 	 */
 	public List<XSSFSingleXmlCell> getAllSimpleXmlCell(){
-		List<XSSFSingleXmlCell> list = new Vector<XSSFSingleXmlCell>();
+		final List<XSSFSingleXmlCell> list = new ArrayList<XSSFSingleXmlCell>();
 		
-		for(CTSingleXmlCell singleXmlCell: singleXMLCells.getSingleXmlCellList()){			
+		for(final CTSingleXmlCell singleXmlCell: singleXMLCells.getSingleXmlCellList()){			
 			list.add(new XSSFSingleXmlCell(singleXmlCell,this));
 		}		
 		return list;

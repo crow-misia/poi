@@ -20,24 +20,23 @@ import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 
 @Internal
-class Array
+final class Array
 {
-    static class ArrayDimension
+    static final class ArrayDimension
     {
         static final int SIZE = 8;
 
-        private int _indexOffset;
         private long _size;
 
         ArrayDimension( byte[] data, int offset )
         {
             _size = LittleEndian.getUInt( data, offset );
-            _indexOffset = LittleEndian.getInt( data, offset
-                    + LittleEndian.INT_SIZE );
+//            _indexOffset = LittleEndian.getInt( data, offset
+//                    + LittleEndian.INT_SIZE );
         }
     }
 
-    static class ArrayHeader
+    static final class ArrayHeader
     {
         private ArrayDimension[] _dimensions;
         private int _type;
@@ -87,7 +86,6 @@ class Array
     }
 
     private ArrayHeader _header;
-    private TypedPropertyValue[] _values;
 
     Array()
     {
@@ -112,7 +110,7 @@ class Array
                             + numberOfScalarsLong + " in memory" );
         int numberOfScalars = (int) numberOfScalarsLong;
 
-        _values = new TypedPropertyValue[numberOfScalars];
+//        _values = new TypedPropertyValue[numberOfScalars];
         final int type = _header._type;
         if ( type == Variant.VT_VARIANT )
         {
