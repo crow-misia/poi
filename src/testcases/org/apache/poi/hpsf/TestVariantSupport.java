@@ -18,11 +18,14 @@
  */
 package org.apache.poi.hpsf;
 
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import junit.framework.TestCase;
+
 import org.apache.poi.hpsf.wellknown.PropertyIDMap;
 import org.apache.poi.util.HexRead;
-
-import java.io.ByteArrayInputStream;
 
 /**
  * @author Yegor Kozlov
@@ -70,10 +73,10 @@ public class TestVariantSupport extends TestCase {
         
         assertTrue("PID_HEADINGPAIR: expected byte[] but was "+ hdrs.getClass(), hdrs instanceof byte[]);
         // parse the value
-        Vector v = new Vector((short)Variant.VT_VARIANT);
-        v.read((byte[])hdrs, 0);
+        List<byte[]> v = new ArrayList<>((short)Variant.VT_VARIANT);
+        v.add(0, (byte[])hdrs);
 
-        TypedPropertyValue[] items = v.getValues();
+        TypedPropertyValue[] items = v.toArray(new TypedPropertyValue[v.size()]);
         assertEquals(2, items.length);
 
         assertNotNull(items[0].getValue());

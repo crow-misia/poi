@@ -26,8 +26,9 @@ import org.apache.poi.util.HexDump;
  * @author Rainer Klute <a
  * href="mailto:klute@rainer-klute.de">&lt;klute@rainer-klute.de&gt;</a>
  */
-public class IllegalVariantTypeException extends VariantTypeException
+public final class IllegalVariantTypeException extends VariantTypeException
 {
+    private static final long serialVersionUID = 1L;
 
     /**
      * <p>Constructor</p>

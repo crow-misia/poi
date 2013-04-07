@@ -60,9 +60,7 @@ public final class DrawingGroupRecord extends AbstractEscherHolderRecord {
         }
         byte[] buffer = new byte[getRawDataSize()];
         int pos = 0;
-        for ( Iterator iterator = getEscherRecords().iterator(); iterator.hasNext(); )
-        {
-            EscherRecord r = (EscherRecord) iterator.next();
+        for (final EscherRecord r : getEscherRecords()) {
             pos += r.serialize(pos, buffer, new NullEscherSerializationListener() );
         }
 
@@ -85,14 +83,14 @@ public final class DrawingGroupRecord extends AbstractEscherHolderRecord {
     }
 
     private int getRawDataSize() {
-        List escherRecords = getEscherRecords();
+        List<?> escherRecords = getEscherRecords();
         byte[] rawData = getRawData();
         if (escherRecords.size() == 0 && rawData != null)
         {
             return rawData.length;
         }
         int size = 0;
-        for ( Iterator iterator = escherRecords.iterator(); iterator.hasNext(); )
+        for ( Iterator<?> iterator = escherRecords.iterator(); iterator.hasNext(); )
         {
             EscherRecord r = (EscherRecord) iterator.next();
             size += r.getRecordSize();

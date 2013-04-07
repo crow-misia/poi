@@ -19,9 +19,8 @@
 
 package org.apache.poi.poifs.property;
 
-import java.util.Iterator;
-
 import java.io.IOException;
+import java.util.Iterator;
 
 /**
  * Behavior for parent (directory) properties
@@ -40,7 +39,7 @@ public interface Parent
      * @return Iterator of children; may refer to an empty collection
      */
 
-    public Iterator getChildren();
+    public Iterator<Property> getChildren();
 
     /**
      * Add a new child to the collection of children

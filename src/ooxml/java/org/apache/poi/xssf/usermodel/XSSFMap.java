@@ -17,8 +17,8 @@
 
 package org.apache.poi.xssf.usermodel;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.util.Internal;
@@ -78,7 +78,7 @@ public class XSSFMap {
      * @return the list of Single Xml Cells that provide a map rule to this mapping.
      */
     public List<XSSFSingleXmlCell> getRelatedSingleXMLCell() {
-        List<XSSFSingleXmlCell> relatedSimpleXmlCells = new Vector<XSSFSingleXmlCell>();
+        final List<XSSFSingleXmlCell> relatedSimpleXmlCells = new ArrayList<XSSFSingleXmlCell>();
 
         int sheetNumber = mapInfo.getWorkbook().getNumberOfSheets();
         for (int i = 0; i < sheetNumber; i++) {
@@ -102,14 +102,14 @@ public class XSSFMap {
      */
     public List<XSSFTable> getRelatedTables() {
 
-        List<XSSFTable> tables = new Vector<XSSFTable>();
+        final List<XSSFTable> tables = new ArrayList<XSSFTable>();
         int sheetNumber = mapInfo.getWorkbook().getNumberOfSheets();
 
         for (int i = 0; i < sheetNumber; i++) {
-            XSSFSheet sheet = mapInfo.getWorkbook().getSheetAt(i);
-            for (POIXMLDocumentPart p : sheet.getRelations()) {
+            final XSSFSheet sheet = mapInfo.getWorkbook().getSheetAt(i);
+            for (final POIXMLDocumentPart p : sheet.getRelations()) {
                 if (p.getPackageRelationship().getRelationshipType().equals(XSSFRelation.TABLE.getRelation())) {
-                    XSSFTable table = (XSSFTable) p;
+                    final XSSFTable table = (XSSFTable) p;
                     if (table.mapsTo(ctMap.getID())) {
                         tables.add(table);
                     }

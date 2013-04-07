@@ -149,7 +149,7 @@ public abstract class SpecialPropertySet extends MutablePropertySet
     /**
      * @see PropertySet#getSections
      */
-    public List getSections()
+    public List<Section> getSections()
     {
         return delegate.getSections();
     }

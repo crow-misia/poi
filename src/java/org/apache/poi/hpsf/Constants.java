@@ -24,7 +24,7 @@ import org.apache.poi.util.CodePageUtil;
  * 
  * @deprecated Use {@link CodePageUtil} to lookup code pages 
  */
-public class Constants
+public final class Constants
 {
     /** <p>Codepage 037, a special case</p> */
     public static final int CP_037 = 37;
@@ -192,4 +192,8 @@ public class Constants
 
     /** <p>Codepage for Unicode</p> */
     public static final int CP_UNICODE = CP_UTF16;
+
+    private Constants() {
+        // nop.
+    }
 }

@@ -24,7 +24,7 @@ import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
 @Internal
-class TypedPropertyValue
+final class TypedPropertyValue
 {
     private static final POILogger logger = POILogFactory
             .getLogger( TypedPropertyValue.class );
