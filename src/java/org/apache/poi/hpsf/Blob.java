@@ -20,7 +20,7 @@ import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 
 @Internal
-class Blob
+final class Blob
 {
     private byte[] _value;
 

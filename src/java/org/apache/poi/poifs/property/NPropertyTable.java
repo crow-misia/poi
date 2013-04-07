@@ -120,8 +120,8 @@ public final class NPropertyTable extends PropertyTableBase {
      */
     public int countBlocks()
     {
-       int size = _properties.size() * POIFSConstants.PROPERTY_SIZE;
-       return (int)Math.ceil(size / _bigBigBlockSize.getBigBlockSize());
+       final int size = _properties.size() * POIFSConstants.PROPERTY_SIZE;
+       return (int)Math.ceil((double) size / _bigBigBlockSize.getBigBlockSize());
     }
  
     /**

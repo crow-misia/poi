@@ -27,6 +27,7 @@ package org.apache.poi.hpsf;
  */
 public class HPSFException extends Exception
 {
+    private static final long serialVersionUID = 1L;
 
     /**
      * <p>The underlying reason for this exception - may be

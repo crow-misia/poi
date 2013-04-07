@@ -23,11 +23,11 @@ import java.util.List;
  * POILogger which logs into an ArrayList, so that 
  *  tests can see what got logged
  */
-public class DummyPOILogger extends POILogger {
-	public List logged = new ArrayList(); 
+public final class DummyPOILogger extends POILogger {
+	public final List<String> logged = new ArrayList<>(); 
 
 	public void reset() {
-		logged = new ArrayList();
+		logged.clear();
 	}
 	
 	public boolean check(int level) {

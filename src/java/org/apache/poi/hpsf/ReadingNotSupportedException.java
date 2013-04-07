@@ -27,9 +27,10 @@ package org.apache.poi.hpsf;
  * @author Rainer Klute <a
  * href="mailto:klute@rainer-klute.de">&lt;klute@rainer-klute.de&gt;</a>
  */
-public class ReadingNotSupportedException
+public final class ReadingNotSupportedException
     extends UnsupportedVariantTypeException
 {
+    private static final long serialVersionUID = 1L;
 
     /**
      * <p>Constructor</p>

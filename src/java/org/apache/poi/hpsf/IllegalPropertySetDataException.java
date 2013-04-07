@@ -27,8 +27,9 @@ package org.apache.poi.hpsf;
  *
  * @author Drew Varner(Drew.Varner atDomain sc.edu)
  */
-public class IllegalPropertySetDataException extends HPSFRuntimeException
+public final class IllegalPropertySetDataException extends HPSFRuntimeException
 {
+    private static final long serialVersionUID = 1L;
 
     /**
      * <p>Constructor</p>

@@ -19,12 +19,12 @@ package org.apache.poi.xssf.extractor;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -41,11 +41,11 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.xssf.usermodel.XSSFTable;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFMap;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFTable;
 import org.apache.poi.xssf.usermodel.helpers.XSSFSingleXmlCell;
 import org.apache.poi.xssf.usermodel.helpers.XSSFXmlColumnPr;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.STXmlDataType;
@@ -139,15 +139,15 @@ public class XSSFExportToXml implements Comparator<String>{
         doc.appendChild(root);
 
 
-        List<String> xpaths = new Vector<String>();
-        Map<String,XSSFSingleXmlCell> singleXmlCellsMappings = new HashMap<String,XSSFSingleXmlCell>();
-        Map<String,XSSFTable> tableMappings = new HashMap<String,XSSFTable>();
+        final List<String> xpaths = new ArrayList<String>();
+        final Map<String,XSSFSingleXmlCell> singleXmlCellsMappings = new HashMap<String,XSSFSingleXmlCell>();
+        final Map<String,XSSFTable> tableMappings = new HashMap<String,XSSFTable>();
 
-        for(XSSFSingleXmlCell simpleXmlCell : singleXMLCells) {
+        for(final XSSFSingleXmlCell simpleXmlCell : singleXMLCells) {
             xpaths.add(simpleXmlCell.getXpath());
             singleXmlCellsMappings.put(simpleXmlCell.getXpath(), simpleXmlCell);
         }
-        for(XSSFTable table : tables) {
+        for(final XSSFTable table : tables) {
             String commonXPath = table.getCommonXpath();
             xpaths.add(commonXPath);
             tableMappings.put(commonXPath, table);
