@@ -17,11 +17,20 @@
 
 package org.apache.poi.hslf.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Vector;
+import java.util.List;
 
 import org.apache.poi.hslf.model.textproperties.TextPropCollection;
-import org.apache.poi.hslf.record.*;
+import org.apache.poi.hslf.record.Record;
+import org.apache.poi.hslf.record.RecordContainer;
+import org.apache.poi.hslf.record.StyleTextProp9Atom;
+import org.apache.poi.hslf.record.StyleTextPropAtom;
+import org.apache.poi.hslf.record.TextBytesAtom;
+import org.apache.poi.hslf.record.TextCharsAtom;
+import org.apache.poi.hslf.record.TextHeaderAtom;
+import org.apache.poi.hslf.record.TextRulerAtom;
+import org.apache.poi.hslf.record.TextSpecInfoAtom;
 import org.apache.poi.hslf.usermodel.RichTextRun;
 import org.apache.poi.hslf.usermodel.SlideShow;
 import org.apache.poi.util.StringUtil;
@@ -115,7 +124,7 @@ public final class TextRun
         } else {
             // Build up Rich Text Runs, one for each
             //  character/paragraph style pair
-            Vector rtrs = new Vector();
+            List<RichTextRun> rtrs = new ArrayList<>();
 
             int pos = 0;
 
@@ -249,8 +258,7 @@ public final class TextRun
             }
 
             // Build the array
-            _rtRuns = new RichTextRun[rtrs.size()];
-            rtrs.copyInto(_rtRuns);
+            _rtRuns = rtrs.toArray(new RichTextRun[rtrs.size()]);
         }
 
     }

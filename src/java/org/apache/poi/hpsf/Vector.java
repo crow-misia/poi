@@ -25,7 +25,7 @@ import org.apache.poi.util.LittleEndian;
  * @author Sergey Vladimirov (vlsergey {at} gmail {dot} com)
  */
 @Internal
-class Vector
+final class Vector
 {
     private final short _type;
 

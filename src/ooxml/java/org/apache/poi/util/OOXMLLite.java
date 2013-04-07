@@ -17,14 +17,22 @@
 
 package org.apache.poi.util;
 
-import junit.framework.TestSuite;
-import junit.textui.TestRunner;
-
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.lang.reflect.Field;
+
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
 
 /**
  * Build a 'lite' version of the ooxml-schemas.jar
@@ -46,17 +54,17 @@ public final class OOXMLLite {
     /**
      * Destination directory to copy filtered classes
      */
-    private File _destDest;
+    private final File _destDest;
 
     /**
      * Directory with the compiled ooxml tests
      */
-    private File _testDir;
+    private final File _testDir;
 
     /**
      * Reference to the ooxml-schemas.jar
      */
-    private File _ooxmlJar;
+    private final File _ooxmlJar;
 
 
     OOXMLLite(String dest, String test, String ooxmlJar) {
@@ -115,7 +123,7 @@ public final class OOXMLLite {
                 /**
                  * Copy classes and interfaces declared as members of this class
                  */
-                for(Class fc : cls.getDeclaredClasses()){
+                for(final Class<?> fc : cls.getDeclaredClasses()){
                     className = fc.getName();
                     classRef = className.replace('.', '/') + ".class";
                     destFile = new File(_destDest, classRef);
@@ -166,7 +174,7 @@ public final class OOXMLLite {
     private static Map<String, Class<?>> getLoadedClasses(String ptrn) {
         ClassLoader appLoader = ClassLoader.getSystemClassLoader();
         try {
-            Vector<Class<?>> classes = (Vector<Class<?>>) _classes.get(appLoader);
+            List<Class<?>> classes = (List<Class<?>>) _classes.get(appLoader);
             Map<String, Class<?>> map = new HashMap<String, Class<?>>();
             for (Class<?> cls : classes) {
                 String jar = cls.getProtectionDomain().getCodeSource().getLocation().toString();

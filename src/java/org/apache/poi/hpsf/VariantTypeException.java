@@ -26,6 +26,7 @@ package org.apache.poi.hpsf;
  */
 public abstract class VariantTypeException extends HPSFException
 {
+    private static final long serialVersionUID = 1L;
 
     private Object value;
 

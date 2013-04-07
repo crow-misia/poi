@@ -28,8 +28,9 @@ package org.apache.poi.hpsf;
  * @author Rainer Klute <a
  * href="mailto:klute@rainer-klute.de">&lt;klute@rainer-klute.de&gt;</a>
  */
-public class UnexpectedPropertySetTypeException extends HPSFException
+public final class UnexpectedPropertySetTypeException extends HPSFException
 {
+    private static final long serialVersionUID = 1L;
 
     /**
      * <p>Creates an {@link UnexpectedPropertySetTypeException}.</p>

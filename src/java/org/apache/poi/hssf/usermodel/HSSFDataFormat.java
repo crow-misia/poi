@@ -66,7 +66,6 @@ public final class HSSFDataFormat implements DataFormat {
 	HSSFDataFormat(InternalWorkbook workbook) {
 		_workbook = workbook;
 
-		@SuppressWarnings("unchecked")
 		Iterator<FormatRecord> i = workbook.getFormats().iterator();
 		while (i.hasNext()) {
 			FormatRecord r = i.next();

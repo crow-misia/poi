@@ -32,14 +32,14 @@ import org.apache.poi.util.LittleEndian;
  * @see EscherRecordFactory
  */
 public class DefaultEscherRecordFactory implements EscherRecordFactory {
-    private static Class<?>[] escherRecordClasses = { EscherBSERecord.class,
+    private static final Class<?>[] escherRecordClasses = { EscherBSERecord.class,
             EscherOptRecord.class, EscherTertiaryOptRecord.class,
             EscherClientAnchorRecord.class, EscherDgRecord.class,
             EscherSpgrRecord.class, EscherSpRecord.class,
             EscherClientDataRecord.class, EscherDggRecord.class,
             EscherSplitMenuColorsRecord.class, EscherChildAnchorRecord.class,
             EscherTextboxRecord.class };
-    private static Map<Short, Constructor<? extends EscherRecord>> recordsMap = recordsToMap( escherRecordClasses );
+    private static final Map<Short, Constructor<? extends EscherRecord>> recordsMap = recordsToMap( escherRecordClasses );
 
     /**
      * Creates an instance of the escher record factory
@@ -57,8 +57,8 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
      * @return The generated escher record
      */
     public EscherRecord createRecord(byte[] data, int offset) {
-        short options = LittleEndian.getShort( data, offset );
-        short recordId = LittleEndian.getShort( data, offset + 2 );
+        final short options = LittleEndian.getShort( data, offset );
+        final short recordId = LittleEndian.getShort( data, offset + 2 );
         // int remainingBytes = LittleEndian.getInt( data, offset + 4 );
 
         // Options of 0x000F means container record
@@ -66,7 +66,7 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
         //  host application, not of other Escher records, so treat them
         //  differently
         if (isContainer(options, recordId)) {
-            EscherContainerRecord r = new EscherContainerRecord();
+            final EscherContainerRecord r = new EscherContainerRecord();
             r.setRecordId( recordId );
             r.setOptions( options );
             return r;
@@ -74,7 +74,7 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
 
         if (recordId >= EscherBlipRecord.RECORD_ID_START
                 && recordId <= EscherBlipRecord.RECORD_ID_END) {
-            EscherBlipRecord r;
+            final EscherBlipRecord r;
             if (recordId == EscherBitmapBlip.RECORD_ID_DIB ||
                     recordId == EscherBitmapBlip.RECORD_ID_JPEG ||
                     recordId == EscherBitmapBlip.RECORD_ID_PNG)
@@ -94,11 +94,11 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
             return r;
         }
 
-        Constructor<? extends EscherRecord> recordConstructor = recordsMap.get(Short.valueOf(recordId));
-        EscherRecord escherRecord = null;
+        final Constructor<? extends EscherRecord> recordConstructor = recordsMap.get(Short.valueOf(recordId));
         if (recordConstructor == null) {
             return new UnknownEscherRecord();
         }
+        final EscherRecord escherRecord;
         try {
             escherRecord = recordConstructor.newInstance(new Object[] {});
         } catch (Exception e) {
@@ -123,8 +123,8 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
 
         for (int i = 0; i < recClasses.length; i++) {
             @SuppressWarnings("unchecked")
-            Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) recClasses[i];
-            short sid;
+            final Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) recClasses[i];
+            final short sid;
             try {
                 sid = recCls.getField("RECORD_ID").getShort(null);
             } catch (IllegalArgumentException e) {
@@ -134,7 +134,7 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
             } catch (NoSuchFieldException e) {
                 throw new RuntimeException(e);
             }
-            Constructor<? extends EscherRecord> constructor;
+            final Constructor<? extends EscherRecord> constructor;
             try {
                 constructor = recCls.getConstructor( EMPTY_CLASS_ARRAY );
             } catch (NoSuchMethodException e) {
@@ -146,15 +146,13 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
     }
 
     public static boolean isContainer(short options, short recordId){
-        if(recordId >= EscherContainerRecord.DGG_CONTAINER &&  recordId
-                <= EscherContainerRecord.SOLVER_CONTAINER){
+        if(recordId >= EscherContainerRecord.DGG_CONTAINER &&
+           recordId <= EscherContainerRecord.SOLVER_CONTAINER){
             return true;
-        } else {
-            if (recordId == EscherTextboxRecord.RECORD_ID) {
-                return false;
-            } else {
-                return ( options & (short) 0x000F ) == (short) 0x000F;
-            }
         }
+        if (recordId == EscherTextboxRecord.RECORD_ID) {
+        	return false;
+        }
+        return ( options & (short) 0x000F ) == (short) 0x000F;
     }
 }
