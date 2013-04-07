@@ -26,7 +26,7 @@ import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
 @Internal
-class CodePageString
+final class CodePageString
 {
 
     private final static POILogger logger = POILogFactory

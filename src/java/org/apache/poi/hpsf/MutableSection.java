@@ -513,7 +513,7 @@ public class MutableSection extends Section
             {
                 /* Write the dictionary item in Unicode. */
                 int sLength = value.length() + 1;
-                if (sLength % 2 == 1)
+                if ((sLength & 1) == 1)
                     sLength++;
                 length += TypeWriter.writeUIntToStream(out, key.longValue());
                 length += TypeWriter.writeUIntToStream(out, sLength);

@@ -32,6 +32,7 @@ import org.apache.poi.util.HexDump;
 public abstract class UnsupportedVariantTypeException
 extends VariantTypeException
 {
+    private static final long serialVersionUID = 1L;
 
     /**
      * <p>Constructor.</p>

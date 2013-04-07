@@ -17,21 +17,15 @@
 package org.apache.poi.hpsf;
 
 import org.apache.poi.util.Internal;
-import org.apache.poi.util.LittleEndian;
 
 @Internal
-class Decimal
+final class Decimal
 {
     static final int SIZE = 16;
 
-    private short field_1_wReserved;
-    private byte field_2_scale;
-    private byte field_3_sign;
-    private int field_4_hi32;
-    private long field_5_lo64;
-
     Decimal( final byte[] data, final int startOffset )
     {
+/**
         int offset = startOffset;
 
         field_1_wReserved = LittleEndian.getShort( data, offset );
@@ -48,5 +42,6 @@ class Decimal
 
         field_5_lo64 = LittleEndian.getLong( data, offset );
         offset += LittleEndian.LONG_SIZE;
+*/
     }
 }

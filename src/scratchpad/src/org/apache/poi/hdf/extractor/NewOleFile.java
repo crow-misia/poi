@@ -17,8 +17,13 @@
 
 package org.apache.poi.hdf.extractor;
 
-import java.io.*;
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Comment me
@@ -38,8 +43,8 @@ public final class NewOleFile extends RandomAccessFile
     private int[] _bbd_list;
     protected int[] _big_block_depot;
     protected int[] _small_block_depot;
-    Hashtable _propertySetsHT = new Hashtable();
-    Vector _propertySetsV = new Vector();
+    Map<String, PropertySet> _propertySetsHT = new HashMap<String, PropertySet>();
+    List<PropertySet> _propertySetsV = new ArrayList<PropertySet>();
 
     public NewOleFile(String fileName, String mode) throws FileNotFoundException
     {
