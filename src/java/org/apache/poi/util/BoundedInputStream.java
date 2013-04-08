@@ -33,7 +33,7 @@ import java.io.InputStream;
  * @version $Id$
  * @since Commons IO 2.0
  */
-public class BoundedInputStream extends InputStream {
+public final class BoundedInputStream extends InputStream {
 
     /** the wrapped input stream */
     private final InputStream in;

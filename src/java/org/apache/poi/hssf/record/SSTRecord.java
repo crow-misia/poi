@@ -23,7 +23,7 @@ import org.apache.poi.hssf.record.common.UnicodeString;
 import org.apache.poi.hssf.record.cont.ContinuableRecord;
 import org.apache.poi.hssf.record.cont.ContinuableRecordOutput;
 import org.apache.poi.util.IntMapper;
-import org.apache.poi.util.LittleEndianConsts;
+import org.apache.poi.util.LittleEndian;
 
 /**
  * Title:        Static String Table Record (0x00FC)<p/>
@@ -47,10 +47,10 @@ public final class SSTRecord extends ContinuableRecord {
 
     // TODO - move these constants to test class (the only consumer)
     /** standard record overhead: two shorts (record id plus data space size)*/
-    static final int STD_RECORD_OVERHEAD = 2 * LittleEndianConsts.SHORT_SIZE;
+    static final int STD_RECORD_OVERHEAD = 2 * LittleEndian.SHORT_SIZE;
 
     /** SST overhead: the standard record overhead, plus the number of strings and the number of unique strings -- two ints */
-    static final int SST_RECORD_OVERHEAD = STD_RECORD_OVERHEAD + 2 * LittleEndianConsts.INT_SIZE;
+    static final int SST_RECORD_OVERHEAD = STD_RECORD_OVERHEAD + 2 * LittleEndian.INT_SIZE;
 
     /** how much data can we stuff into an SST record? That would be _max minus the standard SST record overhead */
     static final int MAX_DATA_SPACE = RecordInputStream.MAX_RECORD_DATA_SIZE - 8;

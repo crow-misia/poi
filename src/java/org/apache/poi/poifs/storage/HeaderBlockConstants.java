@@ -18,7 +18,7 @@
 package org.apache.poi.poifs.storage;
 
 import org.apache.poi.poifs.common.POIFSConstants;
-import org.apache.poi.util.LittleEndianConsts;
+import org.apache.poi.util.LittleEndian;
 
 /**
  * Constants used in reading/writing the Header block
@@ -31,7 +31,7 @@ public interface HeaderBlockConstants
     public static final int  _bat_array_offset        = 0x4c;
     public static final int  _max_bats_in_header      =
         (POIFSConstants.SMALLER_BIG_BLOCK_SIZE - _bat_array_offset)
-        / LittleEndianConsts.INT_SIZE; // If 4k blocks, rest is blank
+        / LittleEndian.INT_SIZE; // If 4k blocks, rest is blank
 
     // Note - in Microsoft terms:
     //  BAT ~= FAT

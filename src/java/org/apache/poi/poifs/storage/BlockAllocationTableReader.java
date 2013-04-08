@@ -139,7 +139,7 @@ public final class BlockAllocationTableReader {
                     blocks[ block_index++ ] =
                         ( RawDataBlock ) raw_block_list
                             .remove(LittleEndian.getInt(data, offset));
-                    offset                  += LittleEndianConsts.INT_SIZE;
+                    offset                  += LittleEndian.INT_SIZE;
                 }
                 chain_index = LittleEndian.getInt(data, chain_index_offset);
                 if (chain_index == POIFSConstants.END_OF_CHAIN)
@@ -304,7 +304,7 @@ public final class BlockAllocationTableReader {
                     raw_blocks.zap(_entries.size());
                 }
                 _entries.add(entry);
-                offset += LittleEndianConsts.INT_SIZE;
+                offset += LittleEndian.INT_SIZE;
             }
 
             // discard block

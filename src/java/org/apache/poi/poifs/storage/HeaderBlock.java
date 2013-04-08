@@ -30,18 +30,13 @@ import org.apache.poi.util.HexDump;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.IntegerField;
 import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.LittleEndianConsts;
 import org.apache.poi.util.LongField;
-import org.apache.poi.util.POILogFactory;
-import org.apache.poi.util.POILogger;
 import org.apache.poi.util.ShortField;
 
 /**
  * The block containing the archive header
  */
 public final class HeaderBlock implements HeaderBlockConstants {
-   private static final POILogger _logger =
-      POILogFactory.getLogger(HeaderBlock.class);
    
 	/**
 	 * What big block size the file uses. Most files
@@ -303,7 +298,7 @@ public final class HeaderBlock implements HeaderBlockConstants {
 		int offset = _bat_array_offset;
 		for (int j = 0; j < n; j++) {
 			result[ j ] = LittleEndian.getInt(_data, offset);
-			offset     += LittleEndianConsts.INT_SIZE;
+			offset     += LittleEndian.INT_SIZE;
 		}
 		return result;
 	}
@@ -318,11 +313,11 @@ public final class HeaderBlock implements HeaderBlockConstants {
       int offset = _bat_array_offset;
 	   for(int i=0; i<count; i++) {
 	      LittleEndian.putInt(_data, offset, bat_array[i]);
-         offset += LittleEndianConsts.INT_SIZE;
+         offset += LittleEndian.INT_SIZE;
 	   }
 	   for(int i=0; i<blank; i++) {
          LittleEndian.putInt(_data, offset, POIFSConstants.UNUSED_BLOCK);
-         offset += LittleEndianConsts.INT_SIZE;
+         offset += LittleEndian.INT_SIZE;
 	   }
 	}
 

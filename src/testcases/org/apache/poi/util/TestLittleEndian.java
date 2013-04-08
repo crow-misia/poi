@@ -252,7 +252,7 @@ public final class TestLittleEndian extends TestCase {
             count++;
         }
         assertEquals(count,
-                     _good_array.length / LittleEndianConsts.SHORT_SIZE);
+                     _good_array.length / LittleEndian.SHORT_SIZE);
         stream = new ByteArrayInputStream(_bad_array);
         try {
             LittleEndian.readShort(stream);
@@ -275,7 +275,7 @@ public final class TestLittleEndian extends TestCase {
             assertEquals(value, expected_value);
             count++;
         }
-        assertEquals(count, _good_array.length / LittleEndianConsts.INT_SIZE);
+        assertEquals(count, _good_array.length / LittleEndian.INT_SIZE);
         stream = new ByteArrayInputStream(_bad_array);
         try {
             LittleEndian.readInt(stream);
@@ -300,7 +300,7 @@ public final class TestLittleEndian extends TestCase {
             count++;
         }
         assertEquals(count,
-                     _good_array.length / LittleEndianConsts.LONG_SIZE);
+                     _good_array.length / LittleEndian.LONG_SIZE);
         stream = new ByteArrayInputStream(_bad_array);
         try {
             LittleEndian.readLong(stream);

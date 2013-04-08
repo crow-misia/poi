@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.apache.poi.poifs.common.POIFSConstants;
 import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.LittleEndianConsts;
 
 /**
  * Class LocalRawDataBlockList
@@ -60,12 +59,12 @@ public final class LocalRawDataBlockList extends RawDataBlockList {
         for (int k = start; k <= end; k++)
         {
             LittleEndian.putInt(data, offset, k);
-            offset += LittleEndianConsts.INT_SIZE;
+            offset += LittleEndian.INT_SIZE;
         }
         while (offset != 508)
         {
             LittleEndian.putInt(data, offset, -1);
-            offset += LittleEndianConsts.INT_SIZE;
+            offset += LittleEndian.INT_SIZE;
         }
         LittleEndian.putInt(data, offset, chain);
         add(new RawDataBlock(new ByteArrayInputStream(data)));
@@ -98,7 +97,7 @@ public final class LocalRawDataBlockList extends RawDataBlockList {
             {
                 LittleEndian.putInt(data, offset, index + 1);
             }
-            offset += LittleEndianConsts.INT_SIZE;
+            offset += LittleEndian.INT_SIZE;
         }
         add(new RawDataBlock(new ByteArrayInputStream(data)));
     }
