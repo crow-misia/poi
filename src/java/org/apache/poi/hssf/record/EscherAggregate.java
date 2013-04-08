@@ -19,7 +19,13 @@ package org.apache.poi.hssf.record;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ddf.DefaultEscherRecordFactory;
 import org.apache.poi.ddf.EscherClientDataRecord;
@@ -31,6 +37,7 @@ import org.apache.poi.ddf.EscherSerializationListener;
 import org.apache.poi.ddf.EscherSpRecord;
 import org.apache.poi.ddf.EscherSpgrRecord;
 import org.apache.poi.ddf.EscherTextboxRecord;
+import org.apache.poi.util.IntArrayList;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
@@ -463,8 +470,8 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
         byte[] buffer = new byte[size];
 
         // Serialize escher records into one big data structure and keep note of ending offsets.
-        final List <Integer>spEndingOffsets = new ArrayList<Integer>();
-        final List <EscherRecord> shapes = new ArrayList<EscherRecord>();
+        final IntArrayList spEndingOffsets = new IntArrayList();
+        final List<EscherRecord> shapes = new ArrayList<EscherRecord>();
         int pos = 0;
         for (Object record : records) {
             EscherRecord e = (EscherRecord) record;
@@ -480,46 +487,45 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
                 }
             });
         }
-        shapes.add(0, null);
-        spEndingOffsets.add(0, 0);
 
         // Split escher records into separate MSODRAWING and OBJ, TXO records.  (We don't break on
         // the first one because it's the patriach).
         pos = offset;
         int writtenEscherBytes = 0;
         int i;
-        for (i = 1; i < shapes.size(); i++) {
-            int endOffset = spEndingOffsets.get(i) - 1;
-            int startOffset;
-            if (i == 1)
-                startOffset = 0;
-            else
-                startOffset = spEndingOffsets.get(i - 1);
+        int endOffset = 0;
+        final int num = shapes.size();
+        for (i = 0; i < num; i++) {
+            final int startOffset = endOffset;
+            endOffset = spEndingOffsets.get(i);
 
-            byte[] drawingData = new byte[endOffset - startOffset + 1];
-            System.arraycopy(buffer, startOffset, drawingData, 0, drawingData.length);
+            final int dataLen = endOffset - startOffset;
+            final byte[] drawingData = new byte[dataLen];
+            System.arraycopy(buffer, startOffset, drawingData, 0, dataLen);
             pos += writeDataIntoDrawingRecord(drawingData, writtenEscherBytes, pos, data, i);
 
-            writtenEscherBytes += drawingData.length;
+            writtenEscherBytes += dataLen;
 
             // Write the matching OBJ record
             Record obj = shapeToObj.get(shapes.get(i));
             pos += obj.serialize(pos, data);
-
-            if (i == shapes.size() - 1 && endOffset < buffer.length - 1) {
-                drawingData = new byte[buffer.length - endOffset - 1];
-                System.arraycopy(buffer, endOffset + 1, drawingData, 0, drawingData.length);
-                pos += writeDataIntoDrawingRecord(drawingData, writtenEscherBytes, pos, data, i);
-            }
         }
-        if ((pos - offset) < buffer.length - 1) {
-            byte[] drawingData = new byte[buffer.length - (pos - offset)];
-            System.arraycopy(buffer, (pos - offset), drawingData, 0, drawingData.length);
+
+        if (num > 0 && endOffset < buffer.length) {
+            final int dataLen = buffer.length - endOffset;
+            final byte[] drawingData = new byte[dataLen];
+            System.arraycopy(buffer, endOffset, drawingData, 0, dataLen);
             pos += writeDataIntoDrawingRecord(drawingData, writtenEscherBytes, pos, data, i);
         }
 
-        for (i = 0; i < tailRec.size(); i++) {
-            Record rec = (Record) tailRec.values().toArray()[i];
+        if ((pos - offset) < buffer.length - 1) {
+            final int dataLen = buffer.length - (pos - offset);
+            final byte[] drawingData = new byte[dataLen];
+            System.arraycopy(buffer, (pos - offset), drawingData, 0, dataLen);
+            pos += writeDataIntoDrawingRecord(drawingData, writtenEscherBytes, pos, data, i);
+        }
+
+        for (final NoteRecord rec : tailRec.values()) {
             pos += rec.serialize(pos, data);
         }
         int bytesWritten = pos - offset;
@@ -540,7 +546,7 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
     private int writeDataIntoDrawingRecord(byte[] drawingData, int writtenEscherBytes, int pos, byte[] data, int i) {
         int temp = 0;
         //First record in drawing layer MUST be DrawingRecord
-        if (writtenEscherBytes + drawingData.length > RecordInputStream.MAX_RECORD_DATA_SIZE && i != 1) {
+        if (writtenEscherBytes + drawingData.length > RecordInputStream.MAX_RECORD_DATA_SIZE && i != 0) {
             for (int j = 0; j < drawingData.length; j += RecordInputStream.MAX_RECORD_DATA_SIZE) {
                 byte[] buf = new byte[Math.min(RecordInputStream.MAX_RECORD_DATA_SIZE, drawingData.length - j)];
                 System.arraycopy(drawingData, j, buf, 0, Math.min(RecordInputStream.MAX_RECORD_DATA_SIZE, drawingData.length - j));
@@ -591,9 +597,9 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
         List<EscherRecord> records = getEscherRecords();
         int rawEscherSize = getEscherRecordSize(records);
         byte[] buffer = new byte[rawEscherSize];
-        final List<Integer> spEndingOffsets = new ArrayList<Integer>();
+        final IntArrayList spEndingOffsets = new IntArrayList();
         int pos = 0;
-        for (EscherRecord e : records) {
+        for (final EscherRecord e : records) {
             pos += e.serialize(pos, buffer, new EscherSerializationListener() {
                 public void beforeRecordSerialize(int offset, short recordId, EscherRecord record) {
                 }
@@ -605,20 +611,25 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
                 }
             });
         }
-        spEndingOffsets.add(0, 0);
 
-        for (int i = 1; i < spEndingOffsets.size(); i++) {
-            if (i == spEndingOffsets.size() - 1 && spEndingOffsets.get(i) < pos) {
-                continueRecordsHeadersSize += 4;
-            }
-            if (spEndingOffsets.get(i) - spEndingOffsets.get(i - 1) <= RecordInputStream.MAX_RECORD_DATA_SIZE) {
+        final int size = spEndingOffsets.size();
+        int offset = 0;
+        for (int i = 0; i < size; i++) {
+            final int prevOffset = offset;
+            offset = spEndingOffsets.get(i);
+            final int diff = offset - prevOffset;
+
+            if (diff <= RecordInputStream.MAX_RECORD_DATA_SIZE) {
                 continue;
             }
-            continueRecordsHeadersSize += ((spEndingOffsets.get(i) - spEndingOffsets.get(i - 1)) / RecordInputStream.MAX_RECORD_DATA_SIZE) * 4;
+            continueRecordsHeadersSize += (diff / RecordInputStream.MAX_RECORD_DATA_SIZE) * 4;
+        }
+        if (size > 0 && offset < pos) {
+            continueRecordsHeadersSize += 4;
         }
 
         int drawingRecordSize = rawEscherSize + (shapeToObj.size()) * 4;
-        if (rawEscherSize != 0 && spEndingOffsets.size() == 1/**EMPTY**/) {
+        if (rawEscherSize != 0 && size == 0/**EMPTY**/) {
             continueRecordsHeadersSize += 4;
         }
         int objRecordSize = 0;

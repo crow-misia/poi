@@ -18,7 +18,8 @@ package org.apache.poi.xssf.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+
+import org.apache.poi.util.IntArrayList;
 
 /**
  * This is a seriously sick fix for the fact that some .xlsx
@@ -145,7 +146,7 @@ public class EvilUnclosedBRFixingInputStream extends InputStream {
       }
       
       // Find places to fix
-      ArrayList<Integer> fixAt = new ArrayList<Integer>();
+      final IntArrayList fixAt = new IntArrayList();
       for(int i=offset; i<=offset+read-detect.length; i++) {
          boolean going = true;
          for(int j=0; j<detect.length && going; j++) {
@@ -169,7 +170,7 @@ public class EvilUnclosedBRFixingInputStream extends InputStream {
       if(overshoot > 0) {
          // Make sure we don't loose part of a <br>!
          int fixes = 0;
-         for(int at : fixAt) {
+         for (final int at : fixAt.toArray()) {
             if(at > offset+read-detect.length-overshoot-fixes) {
                overshoot = needed - at - 1 - fixes;
                break;
