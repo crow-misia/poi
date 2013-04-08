@@ -11,6 +11,7 @@
 	<classpathentry kind="src" path="src/resources/scratchpad"/>
 	<classpathentry kind="src" path="src/examples/src"/>
 	<classpathentry kind="src" path="src/excelant/java"/>
+	<classpathentry kind="src" path="src/extension/java"/>
 	<classpathentry kind="lib" path="ooxml-lib/dom4j-1.6.1.jar" sourcepath="C:/Users/crow/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
 	<classpathentry kind="lib" path="ooxml-lib/ooxml-schemas-1.1.jar"/>
 	<classpathentry kind="lib" path="ooxml-lib/xmlbeans-2.5.0.jar"/>
