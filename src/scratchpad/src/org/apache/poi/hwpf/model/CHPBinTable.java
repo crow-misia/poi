@@ -36,6 +36,8 @@ import org.apache.poi.hwpf.sprm.SprmBuffer;
 import org.apache.poi.hwpf.sprm.SprmIterator;
 import org.apache.poi.hwpf.sprm.SprmOperation;
 import org.apache.poi.poifs.common.POIFSConstants;
+import org.apache.poi.util.IntArrayList;
+import org.apache.poi.util.IntArrayList.Iteratable;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
@@ -53,7 +55,7 @@ public class CHPBinTable
             .getLogger( CHPBinTable.class );
 
   /** List of character properties.*/
-  protected ArrayList<CHPX> _textRuns = new ArrayList<CHPX>();
+  protected List<CHPX> _textRuns = new ArrayList<>();
 
   public CHPBinTable()
   {
@@ -180,7 +182,7 @@ public class CHPBinTable
             start = System.currentTimeMillis();
         }
 
-        List<CHPX> oldChpxSortedByStartPos = new ArrayList<CHPX>( _textRuns );
+        final List<CHPX> oldChpxSortedByStartPos = new ArrayList<>( _textRuns );
         Collections.sort( oldChpxSortedByStartPos,
                 PropertyNode.StartComparator.instance );
 
@@ -210,7 +212,7 @@ public class CHPBinTable
                 Long.valueOf( System.currentTimeMillis() - start ), " ms" );
         start = System.currentTimeMillis();
 
-        List<Integer> textRunsBoundariesList;
+        final IntArrayList textRunsBoundariesList;
         {
             Set<Integer> textRunsBoundariesSet = new HashSet<Integer>();
             for ( CHPX chpx : _textRuns )
@@ -219,87 +221,87 @@ public class CHPBinTable
                 textRunsBoundariesSet.add( Integer.valueOf( chpx.getEnd() ) );
             }
             textRunsBoundariesSet.remove( Integer.valueOf( 0 ) );
-            textRunsBoundariesList = new ArrayList<Integer>(
+            textRunsBoundariesList = new IntArrayList(
                     textRunsBoundariesSet );
-            Collections.sort( textRunsBoundariesList );
+            textRunsBoundariesList.sort();
         }
 
         logger.log( POILogger.DEBUG, "Texts CHPX boundaries collected in ",
                 Long.valueOf( System.currentTimeMillis() - start ), " ms" );
         start = System.currentTimeMillis();
 
-        List<CHPX> newChpxs = new LinkedList<CHPX>();
-        int lastTextRunStart = 0;
-        for ( Integer objBoundary : textRunsBoundariesList )
-        {
-            final int boundary = objBoundary.intValue();
+        final List<CHPX> newChpxs = new LinkedList<>();
+        textRunsBoundariesList.iterate(new Iteratable() {
+            int lastTextRunStart = 0;
 
-            final int startInclusive = lastTextRunStart;
-            final int endExclusive = boundary;
-            lastTextRunStart = endExclusive;
+            @Override
+            public void run(int boundary) {
 
-            int startPosition = binarySearch( oldChpxSortedByStartPos, boundary );
-            startPosition = Math.abs( startPosition );
-            while ( startPosition >= oldChpxSortedByStartPos.size() )
-                startPosition--;
-            while ( startPosition > 0
-                    && oldChpxSortedByStartPos.get( startPosition ).getStart() >= boundary )
-                startPosition--;
-
-            List<CHPX> chpxs = new LinkedList<CHPX>();
-            for ( int c = startPosition; c < oldChpxSortedByStartPos.size(); c++ )
-            {
-                CHPX chpx = oldChpxSortedByStartPos.get( c );
-
-                if ( boundary < chpx.getStart() )
-                    break;
-
-                int left = Math.max( startInclusive, chpx.getStart() );
-                int right = Math.min( endExclusive, chpx.getEnd() );
-
-                if ( left < right )
+                final int startInclusive = lastTextRunStart;
+                final int endExclusive = boundary;
+                lastTextRunStart = endExclusive;
+    
+                int startPosition = binarySearch( oldChpxSortedByStartPos, boundary );
+                startPosition = Math.abs( startPosition );
+                while ( startPosition >= oldChpxSortedByStartPos.size() )
+                    startPosition--;
+                while ( startPosition > 0
+                        && oldChpxSortedByStartPos.get( startPosition ).getStart() >= boundary )
+                    startPosition--;
+    
+                List<CHPX> chpxs = new LinkedList<CHPX>();
+                for ( int c = startPosition; c < oldChpxSortedByStartPos.size(); c++ )
                 {
-                    chpxs.add( chpx );
+                    CHPX chpx = oldChpxSortedByStartPos.get( c );
+    
+                    if ( boundary < chpx.getStart() )
+                        break;
+    
+                    int left = Math.max( startInclusive, chpx.getStart() );
+                    int right = Math.min( endExclusive, chpx.getEnd() );
+    
+                    if ( left < right )
+                    {
+                        chpxs.add( chpx );
+                    }
                 }
-            }
-
-            if ( chpxs.size() == 0 )
-            {
-                logger.log( POILogger.WARN, "Text piece [",
-                        Integer.valueOf( startInclusive ), "; ",
-                        Integer.valueOf( endExclusive ),
-                        ") has no CHPX. Creating new one." );
-                // create it manually
-                CHPX chpx = new CHPX( startInclusive, endExclusive,
-                        new SprmBuffer( 0 ) );
-                newChpxs.add( chpx );
-                continue;
-            }
-
-            if ( chpxs.size() == 1 )
-            {
-                // can we reuse existing?
-                CHPX existing = chpxs.get( 0 );
-                if ( existing.getStart() == startInclusive
-                        && existing.getEnd() == endExclusive )
+    
+                if ( chpxs.size() == 0 )
                 {
-                    newChpxs.add( existing );
-                    continue;
+                    logger.log( POILogger.WARN, "Text piece [",
+                            Integer.valueOf( startInclusive ), "; ",
+                            Integer.valueOf( endExclusive ),
+                            ") has no CHPX. Creating new one." );
+                    // create it manually
+                    CHPX chpx = new CHPX( startInclusive, endExclusive,
+                            new SprmBuffer( 0 ) );
+                    newChpxs.add( chpx );
+                    return;
                 }
+    
+                if ( chpxs.size() == 1 )
+                {
+                    // can we reuse existing?
+                    CHPX existing = chpxs.get( 0 );
+                    if ( existing.getStart() == startInclusive
+                            && existing.getEnd() == endExclusive )
+                    {
+                        newChpxs.add( existing );
+                        return;
+                    }
+                }
+    
+                Collections.sort( chpxs, chpxFileOrderComparator );
+    
+                SprmBuffer sprmBuffer = new SprmBuffer( 0 );
+                for (final CHPX chpx : chpxs )
+                {
+                    sprmBuffer.append( chpx.getGrpprl(), 0 );
+                }
+                CHPX newChpx = new CHPX( startInclusive, endExclusive, sprmBuffer );
+                newChpxs.add( newChpx );
             }
-
-            Collections.sort( chpxs, chpxFileOrderComparator );
-
-            SprmBuffer sprmBuffer = new SprmBuffer( 0 );
-            for ( CHPX chpx : chpxs )
-            {
-                sprmBuffer.append( chpx.getGrpprl(), 0 );
-            }
-            CHPX newChpx = new CHPX( startInclusive, endExclusive, sprmBuffer );
-            newChpxs.add( newChpx );
-
-            continue;
-        }
+        });
         this._textRuns = new ArrayList<CHPX>( newChpxs );
 
         logger.log( POILogger.DEBUG, "CHPX rebuilded in ",
@@ -498,7 +500,7 @@ public class CHPBinTable
         int endingFc = translator.getByteIndex( _textRuns.get(
                 _textRuns.size() - 1 ).getEnd() );
 
-    ArrayList<CHPX> overflow = _textRuns;
+    List<CHPX> overflow = _textRuns;
     do
     {
       CHPX startingProp = overflow.get(0);
