@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 
 import org.apache.poi.poifs.common.POIFSConstants;
 import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.LittleEndianConsts;
 
 /**
  * Class to test HeaderBlockWriter functionality
@@ -251,19 +250,19 @@ public final class TestHeaderBlockWriting extends TestCase {
 		for (; k < 127; k++) {
 			assertEquals("XBAT entry " + k, correct, LittleEndian.getInt(copy, offset));
 			correct++;
-			offset += LittleEndianConsts.INT_SIZE;
+			offset += LittleEndian.INT_SIZE;
 		}
 		assertEquals("XBAT Chain", 0x01234567 + 257, LittleEndian.getInt(copy, offset));
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 		k++;
 		for (; k < 148; k++) {
 			assertEquals("XBAT entry " + k, correct, LittleEndian.getInt(copy, offset));
 			correct++;
-			offset += LittleEndianConsts.INT_SIZE;
+			offset += LittleEndian.INT_SIZE;
 		}
 		for (; k < 255; k++) {
 			assertEquals("XBAT entry " + k, -1, LittleEndian.getInt(copy, offset));
-			offset += LittleEndianConsts.INT_SIZE;
+			offset += LittleEndian.INT_SIZE;
 		}
 		assertEquals("XBAT End of chain", -2, LittleEndian.getInt(copy, offset));
 	}

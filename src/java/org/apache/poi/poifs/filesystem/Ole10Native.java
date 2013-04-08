@@ -22,7 +22,6 @@ import java.io.IOException;
 
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.LittleEndianConsts;
 import org.apache.poi.util.StringUtil;
 
 /**
@@ -115,7 +114,7 @@ public class Ole10Native {
     }
 
     totalSize = LittleEndian.getInt(data, ofs);
-    ofs += LittleEndianConsts.INT_SIZE;
+    ofs += LittleEndian.INT_SIZE;
 
     if (plain) {
       dataBuffer = new byte[totalSize-4];
@@ -129,7 +128,7 @@ public class Ole10Native {
       command = label;
     } else {
       flags1 = LittleEndian.getShort(data, ofs);
-      ofs += LittleEndianConsts.SHORT_SIZE;
+      ofs += LittleEndian.SHORT_SIZE;
       int len = getStringLength(data, ofs);
       label = StringUtil.getFromCompressedUnicode(data, ofs, len - 1);
       ofs += len;
@@ -137,7 +136,7 @@ public class Ole10Native {
       fileName = StringUtil.getFromCompressedUnicode(data, ofs, len - 1);
       ofs += len;
       flags2 = LittleEndian.getShort(data, ofs);
-      ofs += LittleEndianConsts.SHORT_SIZE;
+      ofs += LittleEndian.SHORT_SIZE;
       len = LittleEndian.getUByte(data, ofs);
       unknown1 = new byte[len];
       ofs += len;
@@ -148,9 +147,9 @@ public class Ole10Native {
       command = StringUtil.getFromCompressedUnicode(data, ofs, len - 1);
       ofs += len;
 
-      if (totalSize + LittleEndianConsts.INT_SIZE - ofs > LittleEndianConsts.INT_SIZE) {
+      if (totalSize + LittleEndian.INT_SIZE - ofs > LittleEndian.INT_SIZE) {
         dataSize = LittleEndian.getInt(data, ofs);
-        ofs += LittleEndianConsts.INT_SIZE;
+        ofs += LittleEndian.INT_SIZE;
 
         if (dataSize > totalSize || dataSize<0) {
           throw new Ole10NativeException("Invalid Ole10Native");
@@ -162,7 +161,7 @@ public class Ole10Native {
 
         if (unknown1.length > 0) {
           flags3 = LittleEndian.getShort(data, ofs);
-          ofs += LittleEndianConsts.SHORT_SIZE;
+          ofs += LittleEndian.SHORT_SIZE;
         } else {
           flags3 = 0;
         }

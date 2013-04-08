@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 
 import org.apache.poi.poifs.common.POIFSConstants;
 import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.LittleEndianConsts;
 
 /**
  * Class to test BlockAllocationTableWriter functionality
@@ -116,7 +115,7 @@ public final class TestBlockAllocationTableWriter extends TestCase {
             for (int j = 0; j < limit; j++)
             {
                 LittleEndian.putInt(expected, offset, block_index++);
-                offset += LittleEndianConsts.INT_SIZE;
+                offset += LittleEndian.INT_SIZE;
             }
             LittleEndian.putInt(expected, offset,
                                 POIFSConstants.END_OF_CHAIN);
@@ -126,7 +125,7 @@ public final class TestBlockAllocationTableWriter extends TestCase {
 
         // add BAT block indices
         LittleEndian.putInt(expected, offset, block_index++);
-        offset += LittleEndianConsts.INT_SIZE;
+        offset += LittleEndian.INT_SIZE;
         LittleEndian.putInt(expected, offset, POIFSConstants.END_OF_CHAIN);
         for (int k = 0; k < expected.length; k++)
         {

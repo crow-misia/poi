@@ -29,7 +29,6 @@ import org.apache.poi.poifs.common.POIFSBigBlockSize;
 import org.apache.poi.poifs.common.POIFSConstants;
 import org.apache.poi.util.HexRead;
 import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.LittleEndianConsts;
 
 /**
  * Class to test BlockAllocationTableReader functionality
@@ -307,49 +306,49 @@ public final class TestBlockAllocationTableReader extends TestCase {
 		int offset = 0;
 
 		LittleEndian.putInt(data, offset, -3); // for the BAT block itself
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 
 		// document 1: is at end of file already; start block = -2
 		// document 2: has only one block; start block = 1
 		LittleEndian.putInt(data, offset, -2);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 
 		// document 3: has a loop in it; start block = 2
 		LittleEndian.putInt(data, offset, 2);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 
 		// document 4: peeks into document 2's data; start block = 3
 		LittleEndian.putInt(data, offset, 4);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 		LittleEndian.putInt(data, offset, 1);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 
 		// document 5: includes an unused block; start block = 5
 		LittleEndian.putInt(data, offset, 6);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 		LittleEndian.putInt(data, offset, -1);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 
 		// document 6: includes a BAT block; start block = 7
 		LittleEndian.putInt(data, offset, 8);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 		LittleEndian.putInt(data, offset, 0);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 
 		// document 7: includes an XBAT block; start block = 9
 		LittleEndian.putInt(data, offset, 10);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 		LittleEndian.putInt(data, offset, -4);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 
 		// document 8: goes off into space; start block = 11;
 		LittleEndian.putInt(data, offset, 1000);
-		offset += LittleEndianConsts.INT_SIZE;
+		offset += LittleEndian.INT_SIZE;
 
 		// document 9: no screw ups; start block = 12;
 		int index = 13;
 
-		for (; offset < 508; offset += LittleEndianConsts.INT_SIZE) {
+		for (; offset < 508; offset += LittleEndian.INT_SIZE) {
 			LittleEndian.putInt(data, offset, index++);
 		}
 		LittleEndian.putInt(data, offset, -2);
