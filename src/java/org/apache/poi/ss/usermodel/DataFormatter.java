@@ -30,16 +30,15 @@ import java.text.FieldPosition;
 import java.text.Format;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.poi.util.IntArrayList;
 
 /**
  * DataFormatter contains methods for formatting the value stored in an
@@ -452,7 +451,7 @@ public class DataFormatter {
         StringBuilder sb = new StringBuilder();
         char[] chars = formatStr.toCharArray();
         boolean mIsMonth = true;
-        List<Integer> ms = new ArrayList<Integer>();
+        final IntArrayList ms = new IntArrayList();
         boolean isElapsed = false;
         for(final char c : chars) {
             if (c == '[' && !isElapsed) {
@@ -500,7 +499,7 @@ public class DataFormatter {
                 sb.append('s');
                 // if 'M' precedes 's' it should be minutes ('m')
                 for (int i = 0; i < ms.size(); i++) {
-                    int index = ms.get(i).intValue();
+                    int index = ms.get(i);
                     if (sb.charAt(index) == 'M') {
                         sb.replace(index, index+1, "m");
                     }

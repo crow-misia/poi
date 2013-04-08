@@ -18,7 +18,6 @@
 package org.apache.poi.util;
 
 import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,9 +27,6 @@ import java.util.zip.CRC32;
 import java.util.zip.Checksum;
 
 public final class IOUtils {
-
-    private static final POILogger logger = POILogFactory
-            .getLogger( IOUtils.class );
 
 	private IOUtils() {
 		// no instances of this class

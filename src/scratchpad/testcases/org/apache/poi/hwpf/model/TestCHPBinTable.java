@@ -19,6 +19,7 @@ package org.apache.poi.hwpf.model;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -59,8 +60,8 @@ public final class TestCHPBinTable
 
     CHPBinTable newBinTable = new CHPBinTable(newMainStream, newTableStream, 0, newTableStream.length, fakeTPT);
 
-    ArrayList oldTextRuns = _cHPBinTable._textRuns;
-    ArrayList newTextRuns = newBinTable._textRuns;
+    List<CHPX> oldTextRuns = _cHPBinTable._textRuns;
+    List<CHPX> newTextRuns = newBinTable._textRuns;
 
     assertEquals(oldTextRuns.size(), newTextRuns.size());
 

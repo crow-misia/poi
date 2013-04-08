@@ -19,8 +19,6 @@
 package org.apache.poi.hpsf;
 
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -73,10 +71,10 @@ public class TestVariantSupport extends TestCase {
         
         assertTrue("PID_HEADINGPAIR: expected byte[] but was "+ hdrs.getClass(), hdrs instanceof byte[]);
         // parse the value
-        List<byte[]> v = new ArrayList<>((short)Variant.VT_VARIANT);
-        v.add(0, (byte[])hdrs);
+        Vector v = new Vector((short)Variant.VT_VARIANT);
+        v.read((byte[])hdrs, 0);
 
-        TypedPropertyValue[] items = v.toArray(new TypedPropertyValue[v.size()]);
+        TypedPropertyValue[] items = v.getValues();
         assertEquals(2, items.length);
 
         assertNotNull(items[0].getValue());
