@@ -34,7 +34,7 @@ import org.apache.poi.hssf.record.RecordInputStream;
  *@author     Sergei Kozello (sergeikozello at mail.ru)
  *@author     Toshiaki Kamoshida (kamoshida.toshiaki at future dot co dot jp)
  */
-public class StringUtil {
+public final class StringUtil {
 	private static final String ENCODING_ISO_8859_1 = "ISO-8859-1";
 
 	private StringUtil() {

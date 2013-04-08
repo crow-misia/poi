@@ -34,7 +34,7 @@ import java.util.*;
  * @author Jason Height
  */
 
-public class IntMapper<T>
+public final class IntMapper<T>
 {
   private List<T> elements;
   private Map<T,Integer> valueKeyMap;

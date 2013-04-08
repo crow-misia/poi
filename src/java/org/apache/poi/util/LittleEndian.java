@@ -30,8 +30,14 @@ import java.io.Serializable;
  * @author Marc Johnson (mjohnson at apache dot org)
  * @author Andrew Oliver (acoliver at apache dot org)
  */
-public class LittleEndian implements LittleEndianConsts
+public final class LittleEndian
 {
+    // sizes of various numbers in this environment
+    public static final int BYTE_SIZE   = 1;
+    public static final int SHORT_SIZE  = 2;
+    public static final int INT_SIZE    = 4;
+    public static final int LONG_SIZE   = 8;
+    public static final int DOUBLE_SIZE = 8;
 
     /**
      * Exception to handle buffer underruns

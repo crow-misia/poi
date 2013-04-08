@@ -19,17 +19,18 @@
 
 package org.apache.poi.poifs.property;
 
-import java.io.*;
-
-import java.util.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 
 import org.apache.poi.hpsf.ClassID;
-
 import org.apache.poi.poifs.common.POIFSConstants;
 import org.apache.poi.poifs.dev.POIFSViewable;
 import org.apache.poi.util.ByteField;
 import org.apache.poi.util.IntegerField;
-import org.apache.poi.util.LittleEndianConsts;
+import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.ShortField;
 
 /**
@@ -43,7 +44,7 @@ public abstract class Property implements Child, POIFSViewable {
     static final private byte   _default_fill             = ( byte ) 0x00;
     static final private int    _name_size_offset         = 0x40;
     static final private int    _max_name_length          =
-        (_name_size_offset / LittleEndianConsts.SHORT_SIZE) - 1;
+        (_name_size_offset / LittleEndian.SHORT_SIZE) - 1;
     static final protected int  _NO_INDEX                 = -1;
 
     // useful offsets
@@ -147,7 +148,7 @@ public abstract class Property implements Child, POIFSViewable {
         _start_block       = new IntegerField(_start_block_offset, _raw_data);
         _size              = new IntegerField(_size_offset, _raw_data);
         _index             = index;
-        int name_length = (_name_size.get() / LittleEndianConsts.SHORT_SIZE)
+        int name_length = (_name_size.get() / LittleEndian.SHORT_SIZE)
                           - 1;
 
         if (name_length < 1)
@@ -163,7 +164,7 @@ public abstract class Property implements Child, POIFSViewable {
             {
                 char_array[ j ] = ( char ) new ShortField(name_offset,
                                                           _raw_data).get();
-                name_offset     += LittleEndianConsts.SHORT_SIZE;
+                name_offset     += LittleEndian.SHORT_SIZE;
             }
             _name = new String(char_array, 0, name_length);
         }
@@ -281,18 +282,18 @@ public abstract class Property implements Child, POIFSViewable {
         for (; j < limit; j++)
         {
             new ShortField(offset, ( short ) char_array[ j ], _raw_data);
-            offset += LittleEndianConsts.SHORT_SIZE;
+            offset += LittleEndian.SHORT_SIZE;
         }
         for (; j < _max_name_length + 1; j++)
         {
             new ShortField(offset, ( short ) 0, _raw_data);
-            offset += LittleEndianConsts.SHORT_SIZE;
+            offset += LittleEndian.SHORT_SIZE;
         }
 
         // double the count, and include the null at the end
         _name_size
             .set(( short ) ((limit + 1)
-                            * LittleEndianConsts.SHORT_SIZE), _raw_data);
+                            * LittleEndian.SHORT_SIZE), _raw_data);
     }
 
     /**

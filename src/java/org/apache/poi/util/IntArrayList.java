@@ -65,16 +65,6 @@ public final class IntArrayList
         pos = newPos;
     }
 
-    public void addAll(final int... v) {
-        final int l = v.length;
-        final int newPos = pos + l;
-        verifyBufferSize(newPos);
-
-        System.arraycopy(v, 0, this.values, pos, l);
-
-        pos = newPos;
-    }
-
     public void addAll(final IntArrayList list) {
         final int l = list.pos;
         final int newPos = pos + l;

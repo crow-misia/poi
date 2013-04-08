@@ -34,10 +34,10 @@ import java.io.IOException;
  * @author Jens Gerhard
  * @author aviks - documentation cleanups. 
  */
-public class BlockingInputStream
+public final class BlockingInputStream
       extends InputStream
 {
-      protected InputStream is;
+      private final InputStream is;
 
       public BlockingInputStream(InputStream is)
       {
@@ -86,12 +86,14 @@ public class BlockingInputStream
           
           int i = 0;
           int b = 4611;
-          while ( i < bf.length )
+          
+          final int size = bf.length;
+          while ( i < size)
           {
-              b = is.read();
+              b = is.read(bf, i, size - i);
               if ( b == -1 )
                   break;
-              bf[i++] = (byte) b;
+              i+= b;
           }
           if ( i == 0 && b == -1 )
               return -1;

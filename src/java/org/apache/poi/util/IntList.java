@@ -17,6 +17,8 @@
 
 package org.apache.poi.util;
 
+import java.util.Arrays;
+
 /**
  * A List of int's; as full an implementation of the java.util.List
  * interface as possible, with an eye toward minimal creation of
@@ -89,15 +91,9 @@ public class IntList
         _array = new int[ initialCapacity ];
         if (fillval != 0) {
             fillval = fillvalue;
-            fillArray(fillval, _array, 0);
+            Arrays.fill(_array, 0, _array.length, fillval);
         }
         _limit = 0;
-    }
-
-    private void fillArray(int val, int[] array, int index) {
-      for (int k = index; k < array.length; k++) {
-        array[k] = val;
-      }
     }
 
     /**
@@ -611,10 +607,7 @@ public class IntList
 
     public int [] toArray()
     {
-        int[] rval = new int[ _limit ];
-
-        System.arraycopy(_array, 0, rval, 0, _limit);
-        return rval;
+        return Arrays.copyOfRange(_array, 0, _limit);
     }
 
     /**
@@ -647,12 +640,12 @@ public class IntList
 
     private void growArray(final int new_size)
     {
-        int   size      = (new_size == _array.length) ? new_size + 1
+        final int size  = (new_size == _array.length) ? new_size + 1
                                                       : new_size;
-        int[] new_array = new int[ size ];
+        final int[] new_array = new int[ size ];
 
         if (fillval != 0) {
-          fillArray(fillval, new_array, _array.length);
+            Arrays.fill(new_array, _array.length, new_array.length, fillval);
         }
 
         System.arraycopy(_array, 0, new_array, 0, _limit);

@@ -19,7 +19,7 @@
 
 package org.apache.poi.poifs.common;
 
-import org.apache.poi.util.LittleEndianConsts;
+import org.apache.poi.util.LittleEndian;
 
 /**
  * <p>A class describing attributes of the Big Block Size</p>
@@ -53,12 +53,12 @@ public final class POIFSBigBlockSize
    }
    
    public int getBATEntriesPerBlock() {
-      return bigBlockSize / LittleEndianConsts.INT_SIZE;
+      return bigBlockSize / LittleEndian.INT_SIZE;
    }
    public int getXBATEntriesPerBlock() {
       return getBATEntriesPerBlock() - 1;
    }
    public int getNextXBATChainOffset() {
-      return getXBATEntriesPerBlock() * LittleEndianConsts.INT_SIZE;
+      return getXBATEntriesPerBlock() * LittleEndian.INT_SIZE;
    }
 }
