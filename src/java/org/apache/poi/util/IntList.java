@@ -607,10 +607,7 @@ public class IntList
 
     public int [] toArray()
     {
-        int[] rval = new int[ _limit ];
-
-        System.arraycopy(_array, 0, rval, 0, _limit);
-        return rval;
+        return Arrays.copyOfRange(_array, 0, _limit);
     }
 
     /**
@@ -643,9 +640,9 @@ public class IntList
 
     private void growArray(final int new_size)
     {
-        int   size      = (new_size == _array.length) ? new_size + 1
+        final int size  = (new_size == _array.length) ? new_size + 1
                                                       : new_size;
-        int[] new_array = new int[ size ];
+        final int[] new_array = new int[ size ];
 
         if (fillval != 0) {
           Arrays.fill(new_array, _limit, size, fillval);

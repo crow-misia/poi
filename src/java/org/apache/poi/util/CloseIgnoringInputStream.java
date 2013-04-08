@@ -29,13 +29,12 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
  * Useful with {@link POIFSFileSystem}, where you want
  *  to control the close yourself.
  */
-public class CloseIgnoringInputStream extends FilterInputStream {
+public final class CloseIgnoringInputStream extends FilterInputStream {
    public CloseIgnoringInputStream(InputStream in) {
       super(in);
    }
 
    public void close() {
       // Does nothing and ignores you
-      return;
    }
 }

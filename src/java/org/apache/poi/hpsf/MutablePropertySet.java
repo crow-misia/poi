@@ -30,7 +30,6 @@ import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.Entry;
 import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.LittleEndianConsts;
 
 /**
  * <p>Adds writing support to the {@link PropertySet} class.</p>
@@ -104,9 +103,9 @@ public class MutablePropertySet extends PropertySet
     private final int OFFSET_HEADER =
         BYTE_ORDER_ASSERTION.length + /* Byte order    */
         FORMAT_ASSERTION.length +     /* Format        */
-        LittleEndianConsts.INT_SIZE + /* OS version    */
+        LittleEndian.INT_SIZE + /* OS version    */
         ClassID.LENGTH +              /* Class ID      */
-        LittleEndianConsts.INT_SIZE;  /* Section count */
+        LittleEndian.INT_SIZE;  /* Section count */
 
 
 
