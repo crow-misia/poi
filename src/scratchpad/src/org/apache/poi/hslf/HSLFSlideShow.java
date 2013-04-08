@@ -29,6 +29,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.POIDocument;
 import org.apache.poi.hslf.exceptions.CorruptPowerPointFileException;
@@ -49,6 +50,7 @@ import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.FastByteArrayOutputStream;
+import org.apache.poi.util.IntArrayList;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -266,8 +268,8 @@ public final class HSLFSlideShow extends POIDocument {
 	}
 
     private Record[] read(byte[] docstream, int usrOffset){
-        ArrayList<Integer> lst = new ArrayList<Integer>();
-        HashMap<Integer,Integer> offset2id = new HashMap<Integer,Integer>();
+        final IntArrayList lst = new IntArrayList();
+        Map<Integer, Integer> offset2id = new HashMap<Integer,Integer>();
         while (usrOffset != 0){
             UserEditAtom usr = (UserEditAtom) Record.buildRecordAtOffset(docstream, usrOffset);
             lst.add(Integer.valueOf(usrOffset));
@@ -286,12 +288,12 @@ public final class HSLFSlideShow extends POIDocument {
         }
         //sort found records by offset.
         //(it is not necessary but SlideShow.findMostRecentCoreRecords() expects them sorted)
-        Integer a[] = lst.toArray(new Integer[lst.size()]);
+        int a[] = lst.toArray();
         Arrays.sort(a);
         Record[] rec = new Record[lst.size()];
         for (int i = 0; i < a.length; i++) {
-            Integer offset = a[i];
-            rec[i] = Record.buildRecordAtOffset(docstream, offset.intValue());
+            final int offset = a[i];
+            rec[i] = Record.buildRecordAtOffset(docstream, offset);
             if(rec[i] instanceof PersistRecord) {
                 PersistRecord psr = (PersistRecord)rec[i];
                 Integer id = offset2id.get(offset);

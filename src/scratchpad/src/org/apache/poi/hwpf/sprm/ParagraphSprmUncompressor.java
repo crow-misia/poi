@@ -17,10 +17,8 @@
 
 package org.apache.poi.hwpf.sprm;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.hwpf.model.TabDescriptor;
@@ -31,6 +29,7 @@ import org.apache.poi.hwpf.usermodel.LineSpacingDescriptor;
 import org.apache.poi.hwpf.usermodel.ParagraphProperties;
 import org.apache.poi.hwpf.usermodel.ShadingDescriptor;
 import org.apache.poi.hwpf.usermodel.ShadingDescriptor80;
+import org.apache.poi.util.IntArrayList;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
@@ -464,8 +463,8 @@ public final class ParagraphSprmUncompressor
     tabPositions = new int[tabMap.size()];
     tabDescriptors = new TabDescriptor[tabPositions.length];
     
-    List<Integer> list = new ArrayList<Integer>(tabMap.keySet());
-    Collections.sort(list);
+    IntArrayList list = new IntArrayList(tabMap.keySet());
+    list.sort();
 
     for (int x = 0; x < tabPositions.length; x++)
     {
