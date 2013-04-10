@@ -19,6 +19,27 @@
 
 package org.apache.poi.xslf.usermodel;
 
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+import java.awt.Paint;
+import java.awt.Shape;
+import java.awt.Stroke;
+import java.awt.TexturePaint;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackageRelationship;
 import org.apache.poi.util.Internal;
@@ -46,25 +67,6 @@ import org.openxmlformats.schemas.drawingml.x2006.main.CTShapeStyle;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTSolidColorFillProperties;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTStyleMatrixReference;
 import org.openxmlformats.schemas.drawingml.x2006.main.STPathShadeType;
-
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.awt.Stroke;
-import java.awt.TexturePaint;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
 
 /**
  * Encapsulates logic to translate DrawingML objects to Java2D
@@ -172,10 +174,9 @@ class RenderableShape {
             CTGradientFillProperties gradFill, Rectangle2D anchor,
             XSLFTheme theme, CTSchemeColor phClr) {
         double angle = gradFill.getLin().getAng() / 60000;
-        @SuppressWarnings("deprecation")
-        CTGradientStop[] gs = gradFill.getGsLst().getGsArray();
+        final List<CTGradientStop> gs = gradFill.getGsLst().getGsList();
 
-        Arrays.sort(gs, new Comparator<CTGradientStop>() {
+        Collections.sort(gs, new Comparator<CTGradientStop>() {
             public int compare(CTGradientStop o1, CTGradientStop o2) {
                 Integer pos1 = o1.getPos();
                 Integer pos2 = o2.getPos();
@@ -183,8 +184,9 @@ class RenderableShape {
             }
         });
 
-        Color[] colors = new Color[gs.length];
-        float[] fractions = new float[gs.length];
+        final int num = gs.size();
+        Color[] colors = new Color[num];
+        float[] fractions = new float[num];
 
         AffineTransform at = AffineTransform.getRotateInstance(
                 Math.toRadians(angle),
@@ -202,10 +204,11 @@ class RenderableShape {
         snapToAnchor(p1, anchor);
         snapToAnchor(p2, anchor);
 
-        for (int i = 0; i < gs.length; i++) {
-            CTGradientStop stop = gs[i];
+        int i = 0;
+        for (final CTGradientStop stop : gs) {
             colors[i] = new XSLFColor(stop, theme, phClr).getColor();
             fractions[i] = stop.getPos() / 100000.f;
+            i++;
         }
 
         AffineTransform grAt  = new AffineTransform();
@@ -248,36 +251,33 @@ class RenderableShape {
     private static Paint toRadialGradientPaint(
             CTGradientFillProperties gradFill, Rectangle2D anchor,
             XSLFTheme theme, CTSchemeColor phClr) {
-
-        @SuppressWarnings("deprecation")
-        CTGradientStop[] gs = gradFill.getGsLst().getGsArray();
-        Arrays.sort(gs, new Comparator<CTGradientStop>() {
+        final List<CTGradientStop> gs = gradFill.getGsLst().getGsList();
+        Collections.sort(gs, new Comparator<CTGradientStop>() {
             public int compare(CTGradientStop o1, CTGradientStop o2) {
                 Integer pos1 = o1.getPos();
                 Integer pos2 = o2.getPos();
                 return pos1.compareTo(pos2);
             }
         });
-        gs[1].setPos(50000);
+        gs.get(1).setPos(50000);
 
         CTGradientFillProperties g = CTGradientFillProperties.Factory.newInstance();
         g.set(gradFill);
-        g.getGsLst().setGsArray(new CTGradientStop[]{gs[0], gs[1]});
+        g.getGsLst().setGsArray(new CTGradientStop[]{gs.get(0), gs.get(1)});
         return createRadialGradientPaint(g, anchor, theme, phClr);
     }
 
     private static Paint createRadialGradientPaint(
             CTGradientFillProperties gradFill, Rectangle2D anchor,
             XSLFTheme theme, CTSchemeColor phClr) {
-        @SuppressWarnings("deprecation")
-        CTGradientStop[] gs = gradFill.getGsLst().getGsArray();
+        final List<CTGradientStop> gs = gradFill.getGsLst().getGsList();
 
         Point2D pCenter = new Point2D.Double(anchor.getX() + anchor.getWidth()/2,
                 anchor.getY() + anchor.getHeight()/2);
 
         float radius = (float)Math.max(anchor.getWidth(), anchor.getHeight());
 
-        Arrays.sort(gs, new Comparator<CTGradientStop>() {
+        Collections.sort(gs, new Comparator<CTGradientStop>() {
             public int compare(CTGradientStop o1, CTGradientStop o2) {
                 Integer pos1 = o1.getPos();
                 Integer pos2 = o2.getPos();
@@ -285,14 +285,16 @@ class RenderableShape {
             }
         });
 
-        Color[] colors = new Color[gs.length];
-        float[] fractions = new float[gs.length];
+        final int num = gs.size();
+        Color[] colors = new Color[num];
+        float[] fractions = new float[num];
 
 
-        for (int i = 0; i < gs.length; i++) {
-            CTGradientStop stop = gs[i];
+        int i = 0;
+        for (final CTGradientStop stop : gs) {
             colors[i] = new XSLFColor(stop, theme, phClr).getColor();
             fractions[i] = stop.getPos() / 100000.f;
+            i++;
         }
 
         // Trick to return GradientPaint on JDK 1.5 and RadialGradientPaint on JDK 1.6+
