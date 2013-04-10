@@ -17,7 +17,6 @@
 
 package org.apache.poi.xssf.usermodel.helpers;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,9 +47,10 @@ public class ColumnHelper {
     public void cleanColumns() {
         this.newCols = CTCols.Factory.newInstance();
         final List<CTCols> colsArray = worksheet.getColsList();
-        int i = 0;
-        for (CTCols cols : colsArray) {
-            final List<CTCol> colArray = cols.getColList();
+        final int n = colsArray.size();
+        int i;
+        for (i = 0; i < n; i++) {
+            final List<CTCol> colArray = colsArray.get(i).getColList();
             for (CTCol col : colArray) {
                 newCols = addCleanColIntoCols(newCols, col);
             }

@@ -273,16 +273,16 @@ public class XMLSlideShow  extends POIXMLDocument {
         _slides.add(newIndex, _slides.remove(oldIndex));
 
         // fix ordering in the low-level xml
-        List<CTSlideIdListEntry> slideIds = _presentation.getSldIdLst().getSldIdList();
-        CTSlideIdListEntry oldEntry = slideIds.get(oldIndex);
-        slideIds.add(newIndex, oldEntry);
-        slideIds.remove(oldEntry);
+        final CTSlideIdList slideIds = _presentation.getSldIdLst();
+        CTSlideIdListEntry oldEntry = slideIds.getSldIdArray(oldIndex);
+        slideIds.insertNewSldId(newIndex).set(oldEntry);
+        slideIds.removeSldId(oldIndex);
     }
 
     public XSLFSlide removeSlide(int index){
         XSLFSlide slide = _slides.remove(index);
         removeRelation(slide);
-         _presentation.getSldIdLst().getSldIdList().remove(index);
+         _presentation.getSldIdLst().removeSldId(index);
         return slide;
     }
     
