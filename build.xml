@@ -445,9 +445,7 @@ under the License.
           -->
         <xmlbean
                 schema="${ooxml.xsds.tmp.dir}"
-                srconly="true"
                 srcgendir="${ooxml.xsds.src.dir}"
-                classgendir="${ooxml.xsds.src.dir}"
                 optimize="yes"
                 destfile="${ooxml.xsds.jar}"
                 javasource="1.7"
@@ -460,35 +458,6 @@ under the License.
                 >
             <classpath refid="ooxml.classpath"/>
         </xmlbean>
-
-        <java classname="org.apache.poi.util.OOXMLShrink" fork="yes">
-            <classpath refid="extension.classpath"/>
-            <syspropertyset refid="junit.properties"/>
-            <jvmarg value="${poi.test.locale}"/>
-            <arg line="${ooxml.xsds.src.dir}"/>
-        </java>
-
-        <delete dir="${ooxml.lite.output.dir}" />
-        <mkdir dir="${ooxml.lite.output.dir}" />
-
-        <javac target="${jdk.version.class}"
-               source="${jdk.version.source}"
-               destdir="${ooxml.lite.output.dir}"
-               srcdir="${ooxml.xsds.src.dir}"
-               debug="${compile.debug}"
-               encoding="${java.source.encoding}"
-               fork="yes"
-               memoryMaximumSize="${ooxml.memory}"
-               includeantruntime="false">
-            <classpath refid="ooxml.classpath"/>
-        </javac>
-        <copy todir="${ooxml.lite.output.dir}/schemaorg_apache_xmlbeans/system">
-            <fileset dir="${ooxml.xsds.src.dir}/schemaorg_apache_xmlbeans/system" />
-        </copy>
-        <jar
-                basedir="${ooxml.lite.output.dir}"
-                destfile="${ooxml.xsds.jar}"
-                />
 
         <!-- Now make a jar of the schema sources -->
         <jar
