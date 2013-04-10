@@ -200,22 +200,23 @@ public final class XSSFRowShifter {
 
 
         XSSFEvaluationWorkbook fpb = XSSFEvaluationWorkbook.create(wb);
-        List<CTConditionalFormatting> cfList = sheet.getCTWorksheet().getConditionalFormattingList();
-        for(int j = 0; j< cfList.size(); j++){
+        final CTWorksheet ctsheet = sheet.getCTWorksheet();
+        List<CTConditionalFormatting> cfList = ctsheet.getConditionalFormattingList();
+        final int n = cfList.size();
+        for(int j = 0; j< n; j++){
             CTConditionalFormatting cf = cfList.get(j);
 
             ArrayList<CellRangeAddress> cellRanges = new ArrayList<CellRangeAddress>();
             for (Object stRef : cf.getSqref()) {
                 String[] regions = stRef.toString().split(" ");
-                for (int i = 0; i < regions.length; i++) {
-                    cellRanges.add(CellRangeAddress.valueOf(regions[i]));
+                for (final String region : regions) {
+                    cellRanges.add(CellRangeAddress.valueOf(region));
                 }
             }
 
             boolean changed = false;
-            List<CellRangeAddress> temp = new ArrayList<CellRangeAddress>();
-            for (int i = 0; i < cellRanges.size(); i++) {
-                CellRangeAddress craOld = cellRanges.get(i);
+            List<CellRangeAddress> temp = new ArrayList<CellRangeAddress>(cellRanges.size());
+            for (final CellRangeAddress craOld : cellRanges) {
                 CellRangeAddress craNew = shiftRange(shifter, craOld, sheetIndex);
                 if (craNew == null) {
                     changed = true;
@@ -230,7 +231,7 @@ public final class XSSFRowShifter {
             if (changed) {
                 int nRanges = temp.size();
                 if (nRanges == 0) {
-                    cfList.remove(j);
+                    ctsheet.removeConditionalFormatting(j);
                     continue;
                 }
                 List<String> refs = new ArrayList<String>();
@@ -240,12 +241,13 @@ public final class XSSFRowShifter {
 
             for(CTCfRule cfRule : cf.getCfRuleList()){
                 List<String> formulas = cfRule.getFormulaList();
-                for (int i = 0; i < formulas.size(); i++) {
+                final int m = formulas.size();
+                for (int i = 0; i < m; i++) {
                     String formula = formulas.get(i);
                     Ptg[] ptgs = FormulaParser.parse(formula, fpb, FormulaType.CELL, sheetIndex);
                     if (shifter.adjustFormula(ptgs, sheetIndex)) {
                         String shiftedFmla = FormulaRenderer.toFormulaString(fpb, ptgs);
-                        formulas.set(i, shiftedFmla);
+                        cfRule.setFormulaArray(i, shiftedFmla);
                     }
                 }
             }
