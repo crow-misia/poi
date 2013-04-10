@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.POIXMLDocumentPart;
@@ -112,12 +113,12 @@ public class CommentsTable extends POIXMLDocumentPart {
         return ct == null ? null : new XSSFComment(this, ct, null);
     }
 
-    @SuppressWarnings("deprecation") //YK: getXYZArray() array accessors are deprecated in xmlbeans with JDK 1.5 support
     public CTComment getCTComment(String cellRef) {
         // Create the cache if needed
         if(commentRefs == null) {
-           commentRefs = new HashMap<String, CTComment>();
-           for (CTComment comment : comments.getCommentList().getCommentArray()) {
+           final List<CTComment> c = comments.getCommentList().getCommentList();
+           commentRefs = new HashMap<String, CTComment>(c.size());
+           for (CTComment comment : c) {
               commentRefs.put(comment.getRef(), comment);
            }
         }

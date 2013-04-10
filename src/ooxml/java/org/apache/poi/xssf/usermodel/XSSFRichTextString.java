@@ -291,13 +291,12 @@ public class XSSFRichTextString implements RichTextString {
     /**
      * Returns the plain string representation.
      */
-    @SuppressWarnings("deprecation") //YK: getXYZArray() array accessors are deprecated in xmlbeans with JDK 1.5 support
     public String getString() {
         if(st.sizeOfRArray() == 0) {
             return utfDecode(st.getT());
         }
-        StringBuffer buf = new StringBuffer();
-        for(CTRElt r : st.getRArray()){
+        final StringBuilder buf = new StringBuilder();
+        for(CTRElt r : st.getRList()){
             buf.append(r.getT());
         }
         return utfDecode(buf.toString());
@@ -389,11 +388,10 @@ public class XSSFRichTextString implements RichTextString {
         return st;
     }
 
-    @SuppressWarnings("deprecation") //YK: getXYZArray() array accessors are deprecated in xmlbeans with JDK 1.5 support
     protected void setStylesTableReference(StylesTable tbl){
         styles = tbl;
         if(st.sizeOfRArray() > 0) {
-            for (CTRElt r : st.getRArray()) {
+            for (final CTRElt r : st.getRList()) {
                 CTRPrElt pr = r.getRPr();
                 if(pr != null && pr.sizeOfRFontArray() > 0){
                     String fontName = pr.getRFontArray(0).getVal();
@@ -526,11 +524,10 @@ public class XSSFRichTextString implements RichTextString {
             while(sub.size() > 1) sub.remove(sub.lastKey());
         }
 
-    @SuppressWarnings("deprecation")
     TreeMap<Integer, CTRPrElt> getFormatMap(CTRst entry){
         int length = 0;
         TreeMap<Integer, CTRPrElt> formats = new TreeMap<Integer, CTRPrElt>();
-        for (CTRElt r : entry.getRArray()) {
+        for (final CTRElt r : entry.getRList()) {
             String txt = r.getT();
             CTRPrElt fmt = r.getRPr();
 

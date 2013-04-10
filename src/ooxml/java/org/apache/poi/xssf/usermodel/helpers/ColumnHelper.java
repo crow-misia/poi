@@ -18,6 +18,8 @@
 package org.apache.poi.xssf.usermodel.helpers;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.util.CTColComparator;
@@ -43,16 +45,13 @@ public class ColumnHelper {
         cleanColumns();
     }
 
-    @SuppressWarnings("deprecation") //YK: getXYZArray() array accessors are deprecated in xmlbeans with JDK 1.5 support
     public void cleanColumns() {
         this.newCols = CTCols.Factory.newInstance();
-        CTCols[] colsArray = worksheet.getColsArray();
+        final List<CTCols> colsArray = worksheet.getColsList();
         int i = 0;
-        for (i = 0; i < colsArray.length; i++) {
-            CTCols cols = colsArray[i];
-            CTCol[] colArray = cols.getColArray();
-            for (int y = 0; y < colArray.length; y++) {
-                CTCol col = colArray[y];
+        for (CTCols cols : colsArray) {
+            final List<CTCol> colArray = cols.getColList();
+            for (CTCol col : colArray) {
                 newCols = addCleanColIntoCols(newCols, col);
             }
         }
@@ -63,11 +62,10 @@ public class ColumnHelper {
         worksheet.setColsArray(0, newCols);
     }
 
-    @SuppressWarnings("deprecation") //YK: getXYZArray() array accessors are deprecated in xmlbeans with JDK 1.5 support
     public static void sortColumns(CTCols newCols) {
-        CTCol[] colArray = newCols.getColArray();
-        Arrays.sort(colArray, new CTColComparator());
-        newCols.setColArray(colArray);
+        final List<CTCol> colArray = newCols.getColList();
+        Collections.sort(colArray, new CTColComparator());
+        newCols.setColArray(colArray.toArray(new CTCol[colArray.size()]));
     }
 
     public CTCol cloneCol(CTCols cols, CTCol col) {

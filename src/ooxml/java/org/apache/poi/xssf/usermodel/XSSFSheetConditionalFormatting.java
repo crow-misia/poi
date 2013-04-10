@@ -220,7 +220,7 @@ public class XSSFSheetConditionalFormatting implements SheetConditionalFormattin
     */
     public void removeConditionalFormatting(int index) {
         checkIndex(index);
-        _sheet.getCTWorksheet().getConditionalFormattingList().remove(index);
+        _sheet.getCTWorksheet().removeConditionalFormatting(index);
     }
 
     private void checkIndex(int index) {

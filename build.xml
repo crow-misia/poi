@@ -150,9 +150,9 @@ under the License.
     <!-- jars in the lib-ooxml directory, see the fetch-ooxml-jars target-->
     <property name="ooxml.dom4j.jar" location="${ooxml.lib}/dom4j-1.6.1.jar"/>
     <property name="ooxml.dom4j.url" value="${repository.m2}/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
-    <property name="ooxml.xmlbeans.jar" location="${ooxml.lib}/xmlbeans-2.5.0.jar"/>
+    <property name="ooxml.xmlbeans.jar" location="${ooxml.lib}/xmlbeans-2.6.0.jar"/>
     <property name="ooxml.xmlbeans.url"
-              value="${repository.m2}/org/apache/xmlbeans/xmlbeans/2.5.0/xmlbeans-2.5.0.jar"/>
+              value="${repository.m2}/org/apache/xmlbeans/xmlbeans/2.6.0/xmlbeans-2.6.0.jar"/>
 
     <!-- See http://www.ecma-international.org/publications/standards/Ecma-376.htm -->
     <!-- "Copy these file(s), free of charge" -->
@@ -455,9 +455,12 @@ under the License.
                 classgendir="${ooxml.xsds.src.dir}"
                 optimize="yes"
                 destfile="${ooxml.xsds.jar}"
-                javasource="1.5"
+                javasource="1.7"
                 failonerror="true"
                 fork="true"
+                noupa=""
+                nodep="true"
+                rolist="true"
                 memoryMaximumSize="${ooxml.memory}"
                 >
             <classpath refid="ooxml.classpath"/>

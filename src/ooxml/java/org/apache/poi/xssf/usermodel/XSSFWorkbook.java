@@ -278,7 +278,6 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
     }
 
     @Override
-    @SuppressWarnings("deprecation") //  getXYZArray() array accessors are deprecated
     protected void onDocumentRead() throws IOException {
         try {
             WorkbookDocument doc = WorkbookDocument.Factory.parse(getPackagePart().getInputStream());
@@ -304,7 +303,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
 
             // Load individual sheets. The order of sheets is defined by the order of CTSheet elements in the workbook
             sheets = new ArrayList<XSSFSheet>(shIdMap.size());
-            for (CTSheet ctSheet : this.workbook.getSheets().getSheetArray()) {
+            for (CTSheet ctSheet : this.workbook.getSheets().getSheetList()) {
                 XSSFSheet sh = shIdMap.get(ctSheet.getId());
                 if(sh == null) {
                     logger.log(POILogger.WARN, "Sheet with name " + ctSheet.getName() + " and r:id " + ctSheet.getId()+ " was defined, but didn't exist in package, skipping");
@@ -316,11 +315,14 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
             }
 
             // Process the named ranges
-            namedRanges = new ArrayList<XSSFName>();
             if(workbook.isSetDefinedNames()) {
-                for(CTDefinedName ctName : workbook.getDefinedNames().getDefinedNameArray()) {
+                final List<CTDefinedName> l = workbook.getDefinedNames().getDefinedNameList();
+                namedRanges = new ArrayList<XSSFName>(l.size());
+                for(CTDefinedName ctName : l) {
                     namedRanges.add(new XSSFName(ctName, this));
                 }
+            } else {
+                namedRanges = new ArrayList<XSSFName>();
             }
 
         } catch (XmlException e) {
@@ -1048,12 +1050,11 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
      * which is currently displayed when the workbook is viewed in Excel.
      * 'Selected' sheet(s) is a distinct concept.
      */
-    @SuppressWarnings("deprecation") //YK: getXYZArray() array accessors are deprecated in xmlbeans with JDK 1.5 support
     public void setActiveSheet(int index) {
 
         validateSheetIndex(index);
 
-        for (CTBookView arrayBook : workbook.getBookViews().getWorkbookViewArray()) {
+        for (CTBookView arrayBook : workbook.getBookViews().getWorkbookViewList()) {
             arrayBook.setActiveTab(index);
         }
     }
@@ -1377,22 +1378,24 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
      * @param excludeSheetIdx the sheet to exclude from the check or -1 to include all sheets in the check.
      * @return true if the sheet contains the name, false otherwise.
      */
-    @SuppressWarnings("deprecation") //  getXYZArray() array accessors are deprecated
     private boolean containsSheet(String name, int excludeSheetIdx) {
-        CTSheet[] ctSheetArray = workbook.getSheets().getSheetArray();
+        final List<CTSheet> ctSheetArray = workbook.getSheets().getSheetList();
 
         if (name.length() > MAX_SENSITIVE_SHEET_NAME_LEN) {
             name = name.substring(0, MAX_SENSITIVE_SHEET_NAME_LEN);
         }
 
-        for (int i = 0; i < ctSheetArray.length; i++) {
-            String ctName = ctSheetArray[i].getName();
+        int i = 0;
+        for (final CTSheet s : ctSheetArray) {
+            String ctName = s.getName();
             if (ctName.length() > MAX_SENSITIVE_SHEET_NAME_LEN) {
                 ctName = ctName.substring(0, MAX_SENSITIVE_SHEET_NAME_LEN);
             }
 
             if (excludeSheetIdx != i && name.equalsIgnoreCase(ctName))
                 return true;
+            
+            i++;
         }
         return false;
     }
