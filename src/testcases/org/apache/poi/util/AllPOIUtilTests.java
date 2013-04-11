@@ -40,7 +40,6 @@ public final class AllPOIUtilTests {
         result.addTestSuite(TestPOILogFactory.class);
         result.addTestSuite(TestPOILogger.class);
         result.addTestSuite(TestShortField.class);
-        result.addTestSuite(TestShortList.class);
         result.addTestSuite(TestStringUtil.class);
         result.addTestSuite(TestTempFile.class);
         result.addTestSuite(TestFastByteArrayOutputStream.class);
