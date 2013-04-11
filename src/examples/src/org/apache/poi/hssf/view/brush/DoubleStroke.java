@@ -29,7 +29,7 @@ public class DoubleStroke implements Brush {
     BasicStroke stroke1, stroke2; // the two strokes to use
 
     /**
-     * Creates a new double-stroke brush.  This surrounds a cell with a two
+     * Creates a Double.valueOf-stroke brush.  This surrounds a cell with a two
      * lines separated by white space between.
      *
      * @param width1 The width of the blank space in the middle

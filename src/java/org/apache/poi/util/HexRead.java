@@ -17,9 +17,13 @@
 
 package org.apache.poi.util;
 
-import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.poi.util.list.ByteArrayList;
 
 /**
  * Utilities to read hex from files.
@@ -99,7 +103,7 @@ public class HexRead
     {
         int characterCount = 0;
         byte b = (byte) 0;
-        List bytes = new ArrayList();
+        final ByteArrayList bytes = new ByteArrayList();
         boolean done = false;
         while ( !done )
         {
@@ -118,7 +122,7 @@ public class HexRead
                     characterCount++;
                     if ( characterCount == 2 )
                     {
-                        bytes.add( Byte.valueOf( b ) );
+                        bytes.add( b );
                         characterCount = 0;
                         b = (byte) 0;
                     }
@@ -141,7 +145,7 @@ public class HexRead
                     characterCount++;
                     if ( characterCount == 2 )
                     {
-                        bytes.add( Byte.valueOf( b ) );
+                        bytes.add( b );
                         characterCount = 0;
                         b = (byte) 0;
                     }
@@ -153,13 +157,7 @@ public class HexRead
                     break;
             }
         }
-        Byte[] polished = (Byte[]) bytes.toArray( new Byte[0] );
-        byte[] rval = new byte[polished.length];
-        for ( int j = 0; j < polished.length; j++ )
-        {
-            rval[j] = polished[j].byteValue();
-        }
-        return rval;
+        return bytes.toArray();
     }
 
     static public byte[] readFromString(String data) {

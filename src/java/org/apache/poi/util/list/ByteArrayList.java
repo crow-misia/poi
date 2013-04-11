@@ -21,47 +21,47 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * Long Primitive ArrayList
+ * Byte Primitive ArrayList
  *
  * @author Zenichi Amano
  */
-public final class LongArrayList
+public final class ByteArrayList
 {
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    private long[] values;
+    private byte[] values;
 
     private int pos;
 
-    public LongArrayList() {
+    public ByteArrayList() {
         this(DEFAULT_INITIAL_CAPACITY);
     }
 
-    public LongArrayList(final int capacity) {
+    public ByteArrayList(final int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException("Illegal Capacity: " + capacity);
         }
-        this.values = new long[capacity];
+        this.values = new byte[capacity];
         this.pos = 0;
     }
 
-    public LongArrayList(final LongArrayList list) {
+    public ByteArrayList(final ByteArrayList list) {
         this.values = list.values.clone();
         this.pos = list.pos;
     }
 
-    public LongArrayList(final Collection<Long> c) {
+    public ByteArrayList(final Collection<Byte> c) {
         final int l = c.size();
-        this.values = new long[l];
+        this.values = new byte[l];
         this.pos = l;
         
         int i = 0;
-        for (final Long v : c) {
-            this.values[i++] = v.longValue();
+        for (final Byte v : c) {
+            this.values[i++] = v.byteValue();
         }
     }
 
-    public void add(final long v) {
+    public void add(final byte v) {
         final int newPos = pos + 1;
         verifyBufferSize(newPos);
 
@@ -70,7 +70,7 @@ public final class LongArrayList
         pos = newPos;
     }
 
-    public void addAll(final LongArrayList list) {
+    public void addAll(final ByteArrayList list) {
         final int l = list.pos;
         final int newPos = pos + l;
         verifyBufferSize(newPos);
@@ -80,14 +80,14 @@ public final class LongArrayList
         pos = newPos;
     }
 
-    public long get(final int i) {
+    public byte get(final int i) {
         if (i < 0 || i >= pos) {
             throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + pos);
         }
         return this.values[i];
     }
 
-    public void set(final int i, final long v) {
+    public void set(final int i, final byte v) {
         if (i < 0 || i >= pos) {
             throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + pos);
         }
@@ -106,7 +106,7 @@ public final class LongArrayList
         this.pos = 0;
     }
 
-    public long[] toArray() {
+    public byte[] toArray() {
         return Arrays.copyOfRange(this.values, 0, pos);
     }
 
@@ -121,15 +121,15 @@ public final class LongArrayList
     }
 
     public void iterate(final Iteratable i) {
-        for (final long v : this.values) {
+        for (final byte v : this.values) {
             i.run(v);
         }
     }
 
     @Override
     public boolean equals(final Object o) {
-        if (o instanceof LongArrayList) {
-            return Arrays.equals(this.values, ((LongArrayList) o).values);
+        if (o instanceof ByteArrayList) {
+            return Arrays.equals(this.values, ((ByteArrayList) o).values);
         }
         return false;
     }
@@ -140,6 +140,6 @@ public final class LongArrayList
     }
 
     public interface Iteratable {
-        void run(final long v);
+        void run(final byte v);
     }
 }

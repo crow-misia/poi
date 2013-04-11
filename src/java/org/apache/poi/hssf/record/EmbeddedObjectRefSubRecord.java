@@ -58,7 +58,7 @@ public final class EmbeddedObjectRefSubRecord extends SubRecord {
 	 * This is in a similar position to he pre-streamId padding
 	 * It is unknown if the value is important (it seems to mirror a value a few bytes earlier)
 	 *  */
-	private Byte  field_4_unknownByte;
+	private byte field_4_unknownByte;
 	private Integer field_5_stream_id;	 // ID of the OLE stream containing the actual data.
 	private byte[] field_6_unknown;
 
@@ -68,6 +68,7 @@ public final class EmbeddedObjectRefSubRecord extends SubRecord {
 		field_2_unknownFormulaData = new byte[] { 0x02, 0x6C, 0x6A, 0x16, 0x01, }; // just some sample data.  These values vary a lot
 		field_6_unknown = EMPTY_BYTE_ARRAY;
 		field_4_ole_classname = null;
+		field_4_unknownByte = 0x00;
 	}
 
 	public short getSid() {
@@ -134,7 +135,7 @@ public final class EmbeddedObjectRefSubRecord extends SubRecord {
 			int b = in.readByte();
 			remaining -= LittleEndian.BYTE_SIZE;
 			if (field_2_refPtg != null && field_4_ole_classname == null) {
-				field_4_unknownByte = Byte.valueOf((byte)b);
+				field_4_unknownByte = (byte)b;
 			}
 		}
 		int nUnexpectedPadding = remaining - dataLenAfterFormula;
@@ -270,7 +271,7 @@ public final class EmbeddedObjectRefSubRecord extends SubRecord {
 		// pad to next 2-byte boundary (requires 0 or 1 bytes)
 		switch(idOffset - (pos - 6)) { // 6 for 3 shorts: sid, dataSize, idOffset
 			case 1:
-				out.writeByte(field_4_unknownByte == null ? 0x00 : field_4_unknownByte.intValue());
+				out.writeByte(field_4_unknownByte);
 				pos ++;
 			case 0:
 				break;
@@ -322,9 +323,7 @@ public final class EmbeddedObjectRefSubRecord extends SubRecord {
 			sb.append("    .unicodeFlag   = ").append(field_3_unicode_flag).append("\n");
 			sb.append("    .oleClassname  = ").append(field_4_ole_classname).append("\n");
 		}
-		if (field_4_unknownByte != null) {
-			sb.append("    .f4unknown   = ").append(HexDump.byteToHex(field_4_unknownByte.intValue())).append("\n");
-		}
+		sb.append("    .f4unknown   = ").append(HexDump.byteToHex(field_4_unknownByte)).append("\n");
 		if (field_5_stream_id != null) {
 			sb.append("    .streamId      = ").append(HexDump.intToHex(field_5_stream_id.intValue())).append("\n");
 		}

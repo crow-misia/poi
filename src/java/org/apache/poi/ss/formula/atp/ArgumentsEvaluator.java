@@ -17,9 +17,7 @@
 
 package org.apache.poi.ss.formula.atp;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import org.apache.poi.ss.formula.eval.AreaEvalBase;
 import org.apache.poi.ss.formula.eval.EvaluationException;
