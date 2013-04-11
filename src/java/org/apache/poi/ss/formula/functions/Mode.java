@@ -17,10 +17,10 @@
 
 package org.apache.poi.ss.formula.functions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.poi.ss.formula.TwoDEval;
 import org.apache.poi.ss.formula.eval.BlankEval;
 import org.apache.poi.ss.formula.eval.BoolEval;
 import org.apache.poi.ss.formula.eval.ErrorEval;
@@ -29,7 +29,7 @@ import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.RefEval;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.ss.formula.TwoDEval;
+import org.apache.poi.util.list.DoubleArrayList;
 
 /**
  * @author Amol S. Deshmukh &lt; amolweb at ya hoo dot com &gt;
@@ -76,23 +76,19 @@ public final class Mode implements Function {
 	public ValueEval evaluate(ValueEval[] args, int srcCellRow, int srcCellCol) {
 		double result;
 		try {
-			List<Double> temp = new ArrayList<Double>();
-			for (final ValueEval v : args) {
-				collectValues(v, temp);
+			final DoubleArrayList temp = new DoubleArrayList();
+			for (final ValueEval a : args) {
+				collectValues(a, temp);
 			}
-			final int n = temp.size();
-			double[] values = new double[n];
-			for (int i = 0; i < n; i++) {
-				values[i] = temp.get(i).doubleValue();
-			}
-			result = evaluate(values);
+
+			result = evaluate(temp.toArray());
 		} catch (EvaluationException e) {
 			return e.getErrorEval();
 		}
 		return new NumberEval(result);
 	}
 
-	private static void collectValues(ValueEval arg, List<Double> temp) throws EvaluationException {
+	private static void collectValues(ValueEval arg, DoubleArrayList temp) throws EvaluationException {
 		if (arg instanceof TwoDEval) {
 			TwoDEval ae = (TwoDEval) arg;
 			int width = ae.getWidth();
@@ -114,7 +110,7 @@ public final class Mode implements Function {
 
 	}
 
-	private static void collectValue(ValueEval arg, List<Double> temp, boolean mustBeNumber)
+	private static void collectValue(ValueEval arg, DoubleArrayList temp, boolean mustBeNumber)
 			throws EvaluationException {
 		if (arg instanceof ErrorEval) {
 			throw new EvaluationException((ErrorEval) arg);
@@ -126,7 +122,7 @@ public final class Mode implements Function {
 			return;
 		}
 		if (arg instanceof NumberEval) {
-			temp.add(Double.valueOf(((NumberEval) arg).getNumberValue()));
+			temp.add(((NumberEval) arg).getNumberValue());
 			return;
 		}
 		throw new RuntimeException("Unexpected value type (" + arg.getClass().getName() + ")");

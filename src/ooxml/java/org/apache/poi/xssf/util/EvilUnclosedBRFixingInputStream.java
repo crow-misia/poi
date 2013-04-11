@@ -19,7 +19,7 @@ package org.apache.poi.xssf.util;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.poi.util.IntArrayList;
+import org.apache.poi.util.list.IntArrayList;
 
 /**
  * This is a seriously sick fix for the fact that some .xlsx

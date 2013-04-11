@@ -24,6 +24,7 @@ import java.util.*;
 import org.apache.poi.poifs.common.POIFSBigBlockSize;
 import org.apache.poi.poifs.common.POIFSConstants;
 import org.apache.poi.util.*;
+import org.apache.poi.util.list.IntArrayList;
 
 /**
  * This class manages and creates the Block Allocation Table, which is
