@@ -21,8 +21,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -81,7 +82,7 @@ public class VariantSupport extends Variant
      * <p>Keeps a list of the variant types an "unsupported" message has already
      * been issued for.</p>
      */
-    protected static List<Long> unsupportedMessage;
+    protected static final Set<Long> unsupportedMessage = new HashSet<>();
 
     /**
      * <p>Writes a warning to <code>System.err</code> that a variant type is
@@ -95,13 +96,10 @@ public class VariantSupport extends Variant
     {
         if (isLogUnsupportedTypes())
         {
-            if (unsupportedMessage == null)
-                unsupportedMessage = new LinkedList<Long>();
-            Long vt = Long.valueOf(ex.getVariantType());
-            if (!unsupportedMessage.contains(vt))
+            final Long vt = Long.valueOf(ex.getVariantType());
+            if (unsupportedMessage.add(vt))
             {
-            	logger.log( POILogger.ERROR, ex.getMessage());
-                unsupportedMessage.add(vt);
+                logger.log( POILogger.ERROR, ex.getMessage());
             }
         }
     }

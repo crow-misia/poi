@@ -50,10 +50,10 @@ import org.apache.poi.poifs.filesystem.DocumentInputStream;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.FastByteArrayOutputStream;
-import org.apache.poi.util.IntArrayList;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.list.IntArrayList;
 
 /**
  * This class contains the main functionality for the Powerpoint file

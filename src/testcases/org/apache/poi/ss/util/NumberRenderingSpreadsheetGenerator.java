@@ -37,6 +37,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.util.NumberToTextConversionExamples.ExampleConversion;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
+import org.apache.poi.util.list.LongArrayList;
 
 /**
  * Creates a spreadsheet that demonstrates Excel's rendering of various IEEE double values.
@@ -49,7 +50,7 @@ public class NumberRenderingSpreadsheetGenerator {
 
 		private final HSSFSheet _sheet;
 		private int _rowIndex;
-		private final List<Long> _replacementNaNs;
+		private final LongArrayList _replacementNaNs;
 
 		public SheetWriter(HSSFWorkbook wb) {
 			HSSFSheet sheet = wb.createSheet("Sheet1");
@@ -57,23 +58,18 @@ public class NumberRenderingSpreadsheetGenerator {
 			writeHeaderRow(wb, sheet);
 			_sheet = sheet;
 			_rowIndex = 1;
-			_replacementNaNs = new ArrayList<Long>();
+			_replacementNaNs = new LongArrayList();
 		}
 
 		public void addTestRow(long rawBits, String expectedExcelRendering) {
 			writeDataRow(_sheet, _rowIndex++, rawBits, expectedExcelRendering);
 			if(Double.isNaN(Double.longBitsToDouble(rawBits))) {
-				_replacementNaNs.add(Long.valueOf(rawBits));
+				_replacementNaNs.add(rawBits);
 			}
 		}
 
 		public long[] getReplacementNaNs() {
-			int nRepls = _replacementNaNs.size();
-			long[] result = new long[nRepls];
-			for (int i = 0; i < nRepls; i++) {
-				result[i] = _replacementNaNs.get(i).longValue();
-			}
-			return result;
+			return _replacementNaNs.toArray();
 		}
 
 	}

@@ -27,6 +27,7 @@ import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.util.list.DoubleArrayList;
 
 /**
  * Evaluator for formula arguments.
@@ -82,18 +83,14 @@ final class ArgumentsEvaluator {
         if (arg instanceof StringEval) {
             return new double[]{ evaluateDateArg(arg, srcCellRow, srcCellCol) };
         } else if (arg instanceof AreaEvalBase) {
-            List<Double> valuesList = new ArrayList<Double>();
+            final DoubleArrayList valuesList = new DoubleArrayList();
             AreaEvalBase area = (AreaEvalBase) arg;
-            for (int i = area.getFirstRow(); i <= area.getLastRow(); i++) {
-                for (int j = area.getFirstColumn(); j <= area.getLastColumn(); j++) {
+            for (int i = area.getFirstRow(), ie = area.getLastRow(); i <= ie; i++) {
+                for (int j = area.getFirstColumn(), je = area.getLastColumn(); j <= je; j++) {
                     valuesList.add(evaluateDateArg(area.getValue(i, j), i, j));
                 }
             }
-            double[] values = new double[valuesList.size()];
-            for (int i = 0; i < valuesList.size(); i++) {
-                values[i] = valuesList.get(i).doubleValue();
-            }
-            return values;
+            return valuesList.toArray();
         }
         return new double[]{ OperandResolver.coerceValueToDouble(arg) };
     }
