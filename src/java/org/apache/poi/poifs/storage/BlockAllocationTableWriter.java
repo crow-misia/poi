@@ -24,7 +24,7 @@ import java.nio.ByteBuffer;
 import org.apache.poi.poifs.common.POIFSBigBlockSize;
 import org.apache.poi.poifs.common.POIFSConstants;
 import org.apache.poi.poifs.filesystem.BATManaged;
-import org.apache.poi.util.IntList;
+import org.apache.poi.util.IntArrayList;
 
 /**
  * This class manages and creates the Block Allocation Table, which is
@@ -42,9 +42,9 @@ import org.apache.poi.util.IntList;
  * @author Marc Johnson (mjohnson at apache dot org)
  */
 public final class BlockAllocationTableWriter implements BlockWritable, BATManaged {
-    private IntList    _entries;
-    private BATBlock[] _blocks;
-    private int        _start_block;
+    private IntArrayList _entries;
+    private BATBlock[]   _blocks;
+    private int          _start_block;
     private POIFSBigBlockSize _bigBlockSize;
 
     /**
@@ -54,7 +54,7 @@ public final class BlockAllocationTableWriter implements BlockWritable, BATManag
     {
        _bigBlockSize = bigBlockSize; 
         _start_block  = POIFSConstants.END_OF_CHAIN;
-        _entries      = new IntList();
+        _entries      = new IntArrayList();
         _blocks       = new BATBlock[ 0 ];
     }
 

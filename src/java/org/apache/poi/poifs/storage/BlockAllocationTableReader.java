@@ -55,7 +55,7 @@ public final class BlockAllocationTableReader {
      * to say, POI probably cannot handle files anywhere near that size.
      */
     private static final int MAX_BLOCK_COUNT = 65535;
-    private final IntList _entries;
+    private final IntArrayList _entries;
     private POIFSBigBlockSize bigBlockSize;
 
     /**
@@ -174,7 +174,7 @@ public final class BlockAllocationTableReader {
 
     BlockAllocationTableReader(POIFSBigBlockSize bigBlockSize) {
         this.bigBlockSize = bigBlockSize;
-        _entries = new IntList();
+        _entries = new IntArrayList();
     }
     
     public static void sanityCheckBlockCount(int block_count) throws IOException {
