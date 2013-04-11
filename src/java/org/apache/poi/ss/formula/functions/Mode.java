@@ -18,7 +18,6 @@
 package org.apache.poi.ss.formula.functions;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.apache.poi.ss.formula.TwoDEval;
 import org.apache.poi.ss.formula.eval.BlankEval;

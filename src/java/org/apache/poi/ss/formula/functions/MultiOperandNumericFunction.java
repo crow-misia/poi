@@ -17,6 +17,7 @@
 
 package org.apache.poi.ss.formula.functions;
 
+import org.apache.poi.ss.formula.TwoDEval;
 import org.apache.poi.ss.formula.eval.BlankEval;
 import org.apache.poi.ss.formula.eval.BoolEval;
 import org.apache.poi.ss.formula.eval.ErrorEval;
@@ -26,7 +27,7 @@ import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.RefEval;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.ss.formula.TwoDEval;
+import org.apache.poi.util.list.DoubleArrayList;
 
 /**
  * @author Amol S. Deshmukh &lt; amolweb at ya hoo dot com &gt;
@@ -45,40 +46,6 @@ public abstract class MultiOperandNumericFunction implements Function {
     }
 
 	static final double[] EMPTY_DOUBLE_ARRAY = { };
-
-	private static class DoubleList {
-		private double[] _array;
-		private int _count;
-
-		public DoubleList() {
-			_array = new double[8];
-			_count = 0;
-		}
-
-		public double[] toArray() {
-			if(_count < 1) {
-				return EMPTY_DOUBLE_ARRAY;
-			}
-			double[] result = new double[_count];
-			System.arraycopy(_array, 0, result, 0, _count);
-			return result;
-		}
-
-		private void ensureCapacity(int reqSize) {
-			if(reqSize > _array.length) {
-				int newSize = reqSize * 3 / 2; // grow with 50% extra
-				double[] newArr = new double[newSize];
-				System.arraycopy(_array, 0, newArr, 0, _count);
-				_array = newArr;
-			}
-		}
-
-		public void add(double value) {
-			ensureCapacity(_count + 1);
-			_array[_count] = value;
-			_count++;
-		}
-	}
 
 	private static final int DEFAULT_MAX_NUM_OPERANDS = 30;
 
@@ -121,7 +88,7 @@ public abstract class MultiOperandNumericFunction implements Function {
 		if (operands.length > getMaxNumOperands()) {
 			throw EvaluationException.invalidValue();
 		}
-		DoubleList retval = new DoubleList();
+		DoubleArrayList retval = new DoubleArrayList();
 
 		for (int i=0, iSize=operands.length; i<iSize; i++) {
 			collectValues(operands[i], retval);
@@ -139,7 +106,7 @@ public abstract class MultiOperandNumericFunction implements Function {
 	/**
 	 * Collects values from a single argument
 	 */
-	private void collectValues(ValueEval operand, DoubleList temp) throws EvaluationException {
+	private void collectValues(ValueEval operand, DoubleArrayList temp) throws EvaluationException {
 
 		if (operand instanceof TwoDEval) {
 			TwoDEval ae = (TwoDEval) operand;
@@ -161,7 +128,7 @@ public abstract class MultiOperandNumericFunction implements Function {
 		}
 		collectValue(operand, false, temp);
 	}
-	private void collectValue(ValueEval ve, boolean isViaReference, DoubleList temp)  throws EvaluationException {
+	private void collectValue(ValueEval ve, boolean isViaReference, DoubleArrayList temp)  throws EvaluationException {
 		if (ve == null) {
 			throw new IllegalArgumentException("ve must not be null");
 		}

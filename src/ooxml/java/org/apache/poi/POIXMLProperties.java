@@ -334,7 +334,7 @@ public class POIXMLProperties {
 		}
 
 		/**
-		 * Add a new double property
+		 * Add a Double.valueOf property
 		 *
 		 * @throws IllegalArgumentException if a property with this name already exists
 		 */
