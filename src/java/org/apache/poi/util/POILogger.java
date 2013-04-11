@@ -604,7 +604,7 @@ public abstract class POILogger {
 
         if (object instanceof byte [])
         {
-            byte[] array = ( byte [] ) object;
+            final byte[] arrays = ( byte [] ) object;
 
             for (final byte b : array)
             {
