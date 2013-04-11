@@ -32,7 +32,7 @@ public final class AllPOIUtilTests {
         result.addTestSuite(TestByteField.class);
         result.addTestSuite(TestHexDump.class);
         result.addTestSuite(TestIntegerField.class);
-        result.addTestSuite(TestIntList.class);
+        result.addTestSuite(TestIntArrayList.class);
         result.addTestSuite(TestLittleEndian.class);
         result.addTestSuite(TestLongField.class);
         result.addTestSuite(TestPOILogFactory.class);

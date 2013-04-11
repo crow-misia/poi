@@ -45,6 +45,11 @@ public final class IntArrayList
         this.pos = 0;
     }
 
+    public IntArrayList(final IntArrayList list) {
+        this.values = list.values.clone();
+        this.pos = list.pos;
+    }
+
     public IntArrayList(final Collection<Integer> c) {
         final int l = c.size();
         this.values = new int[l];
@@ -82,8 +87,19 @@ public final class IntArrayList
         return this.values[i];
     }
 
+    public void set(final int i, final int v) {
+        if (i < 0 || i >= pos) {
+            throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + pos);
+        }
+        this.values[i] = v;
+    }
+
     public int size() {
         return this.pos;
+    }
+
+    public boolean isEmpty() {
+        return this.pos == 0;
     }
 
     public void clear() {
@@ -110,7 +126,20 @@ public final class IntArrayList
         }
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (o instanceof IntArrayList) {
+            return Arrays.equals(this.values, ((IntArrayList) o).values);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(this.values);
+    }
+
     public interface Iteratable {
-        void run(final int i);
+        void run(final int v);
     }
 }

@@ -17,7 +17,7 @@
 
 package org.apache.poi.hssf.record;
 
-import org.apache.poi.util.IntList;
+import org.apache.poi.util.IntArrayList;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**
@@ -34,7 +34,7 @@ public class IndexRecord extends StandardRecord {
     private int                field_2_first_row;       // first row on the sheet
     private int                field_3_last_row_add1;   // last row
     private int                field_4_zero;            // supposed to be zero
-    private IntList            field_5_dbcells;         // array of offsets to DBCELL records
+    private IntArrayList       field_5_dbcells;         // array of offsets to DBCELL records
 
     public IndexRecord()
     {
@@ -51,7 +51,7 @@ public class IndexRecord extends StandardRecord {
         field_4_zero      = in.readInt();
         
         int nCells = in.remaining() / 4;
-        field_5_dbcells = new IntList(nCells);
+        field_5_dbcells = new IntArrayList(nCells);
         for(int i=0; i<nCells; i++) {
             field_5_dbcells.add(in.readInt());
         }
@@ -71,7 +71,7 @@ public class IndexRecord extends StandardRecord {
     {
         if (field_5_dbcells == null)
         {
-            field_5_dbcells = new IntList();
+            field_5_dbcells = new IntArrayList();
         }
         field_5_dbcells.add(cell);
     }
@@ -154,8 +154,7 @@ public class IndexRecord extends StandardRecord {
       rec.field_2_first_row = field_2_first_row;
       rec.field_3_last_row_add1 = field_3_last_row_add1;
       rec.field_4_zero = field_4_zero;
-      rec.field_5_dbcells = new IntList();
-      rec.field_5_dbcells.addAll(field_5_dbcells);
+      rec.field_5_dbcells = new IntArrayList(field_5_dbcells);
       return rec;
     }
 }
