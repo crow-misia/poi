@@ -15,7 +15,7 @@
    limitations under the License.
 ==================================================================== */
 
-package org.apache.poi.util;
+package org.apache.poi.util.list;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,43 +25,42 @@ import java.util.Collection;
  *
  * @author Zenichi Amano
  */
-public final class IntArrayList
+public final class LongArrayList
 {
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    private int[] values;
+    private long[] values;
 
     private int pos;
 
-    public IntArrayList() {
+    public LongArrayList() {
         this(DEFAULT_INITIAL_CAPACITY);
     }
 
-    public IntArrayList(final int capacity) {
+    public LongArrayList(final int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException("Illegal Capacity: " + capacity);
         }
-        this.values = new int[capacity];
+        this.values = new long[capacity];
         this.pos = 0;
     }
 
-    public IntArrayList(final IntArrayList list) {
+    public LongArrayList(final LongArrayList list) {
         this.values = list.values.clone();
         this.pos = list.pos;
     }
 
-    public IntArrayList(final Collection<Integer> c) {
+    public LongArrayList(final Collection<Long> c) {
         final int l = c.size();
-        this.values = new int[l];
+        this.values = new long[l];
         this.pos = l;
         
         int i = 0;
-        for (final Integer v : c) {
-            this.values[i++] = v.intValue();
-        }
+        for (final Long v : c) {
+            this.values[i++] = v.longValue();        }
     }
 
-    public void add(final int v) {
+    public void add(final long v) {
         final int newPos = pos + 1;
         verifyBufferSize(newPos);
 
@@ -70,7 +69,7 @@ public final class IntArrayList
         pos = newPos;
     }
 
-    public void addAll(final IntArrayList list) {
+    public void addAll(final LongArrayList list) {
         final int l = list.pos;
         final int newPos = pos + l;
         verifyBufferSize(newPos);
@@ -80,7 +79,7 @@ public final class IntArrayList
         pos = newPos;
     }
 
-    public int get(final int i) {
+    public long get(final int i) {
         if (i < 0 || i >= pos) {
             throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + pos);
         }
@@ -106,7 +105,7 @@ public final class IntArrayList
         this.pos = 0;
     }
 
-    public int[] toArray() {
+    public long[] toArray() {
         return Arrays.copyOfRange(this.values, 0, pos);
     }
 
@@ -121,15 +120,15 @@ public final class IntArrayList
     }
 
     public void iterate(final Iteratable i) {
-        for (final int v : this.values) {
+        for (final long v : this.values) {
             i.run(v);
         }
     }
 
     @Override
     public boolean equals(final Object o) {
-        if (o instanceof IntArrayList) {
-            return Arrays.equals(this.values, ((IntArrayList) o).values);
+        if (o instanceof LongArrayList) {
+            return Arrays.equals(this.values, ((LongArrayList) o).values);
         }
         return false;
     }
@@ -140,6 +139,6 @@ public final class IntArrayList
     }
 
     public interface Iteratable {
-        void run(final int v);
+        void run(final long v);
     }
 }

@@ -17,8 +17,8 @@
 
 package org.apache.poi.hssf.record;
 
-import org.apache.poi.util.IntArrayList;
 import org.apache.poi.util.LittleEndianOutput;
+import org.apache.poi.util.list.IntArrayList;
 
 /**
  * Title:        Index Record (0x020B)<p/>
