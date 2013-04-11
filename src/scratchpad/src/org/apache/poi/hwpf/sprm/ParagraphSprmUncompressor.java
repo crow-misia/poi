@@ -29,11 +29,11 @@ import org.apache.poi.hwpf.usermodel.LineSpacingDescriptor;
 import org.apache.poi.hwpf.usermodel.ParagraphProperties;
 import org.apache.poi.hwpf.usermodel.ShadingDescriptor;
 import org.apache.poi.hwpf.usermodel.ShadingDescriptor80;
-import org.apache.poi.util.IntArrayList;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.list.IntArrayList;
 
 @Internal
 public final class ParagraphSprmUncompressor

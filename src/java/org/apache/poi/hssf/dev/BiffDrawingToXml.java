@@ -33,8 +33,8 @@ import org.apache.poi.hssf.record.EscherAggregate;
 import org.apache.poi.hssf.usermodel.HSSFPatriarch;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.util.IntArrayList;
-import org.apache.poi.util.IntArrayList.Iteratable;
+import org.apache.poi.util.list.IntArrayList;
+import org.apache.poi.util.list.IntArrayList.Iteratable;
 
 /**
  * Utility for representing drawings contained in a binary Excel file as a XML tree

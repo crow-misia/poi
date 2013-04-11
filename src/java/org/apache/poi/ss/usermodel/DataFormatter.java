@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.poi.util.IntArrayList;
+import org.apache.poi.util.list.IntArrayList;
 
 /**
  * DataFormatter contains methods for formatting the value stored in an

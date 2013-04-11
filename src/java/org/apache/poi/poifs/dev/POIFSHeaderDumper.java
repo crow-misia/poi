@@ -32,8 +32,8 @@ import org.apache.poi.poifs.storage.ListManagedBlock;
 import org.apache.poi.poifs.storage.RawDataBlockList;
 import org.apache.poi.poifs.storage.SmallBlockTableReader;
 import org.apache.poi.util.HexDump;
-import org.apache.poi.util.IntArrayList;
-import org.apache.poi.util.IntArrayList.Iteratable;
+import org.apache.poi.util.list.IntArrayList;
+import org.apache.poi.util.list.IntArrayList.Iteratable;
 
 /**
  * A very low level debugging tool, for printing out core 

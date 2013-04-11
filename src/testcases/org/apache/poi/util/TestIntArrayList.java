@@ -17,6 +17,8 @@
 
 package org.apache.poi.util;
 
+import org.apache.poi.util.list.IntArrayList;
+
 import junit.framework.TestCase;
 
 /**
