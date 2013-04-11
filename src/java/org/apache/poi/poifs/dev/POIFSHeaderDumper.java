@@ -32,7 +32,8 @@ import org.apache.poi.poifs.storage.ListManagedBlock;
 import org.apache.poi.poifs.storage.RawDataBlockList;
 import org.apache.poi.poifs.storage.SmallBlockTableReader;
 import org.apache.poi.util.HexDump;
-import org.apache.poi.util.IntList;
+import org.apache.poi.util.IntArrayList;
+import org.apache.poi.util.IntArrayList.Iteratable;
 
 /**
  * A very low level debugging tool, for printing out core 
@@ -129,23 +130,26 @@ public class POIFSHeaderDumper {
       System.out.println("Sectors, as referenced from the FAT:");
       Field entriesF = batReader.getClass().getDeclaredField("_entries");
       entriesF.setAccessible(true);
-      IntList entries = (IntList)entriesF.get(batReader);
-      
-      for(int i=0; i<entries.size(); i++) {
-         int bn = entries.get(i);
-         String bnS = Integer.toString(bn);
-         if(bn == POIFSConstants.END_OF_CHAIN) {
-            bnS = "End Of Chain";
-         } else if(bn == POIFSConstants.DIFAT_SECTOR_BLOCK) {
-            bnS = "DI Fat Block";
-         } else if(bn == POIFSConstants.FAT_SECTOR_BLOCK) {
-            bnS = "Normal Fat Block";
-         } else if(bn == POIFSConstants.UNUSED_BLOCK) {
-            bnS = "Block Not Used (Free)";
+      final IntArrayList entries = (IntArrayList)entriesF.get(batReader);
+
+      entries.iterate(new Iteratable() {
+         private int i = 0;
+         @Override
+         public void run(final int bn) {
+            String bnS = Integer.toString(bn);
+            if(bn == POIFSConstants.END_OF_CHAIN) {
+               bnS = "End Of Chain";
+            } else if(bn == POIFSConstants.DIFAT_SECTOR_BLOCK) {
+               bnS = "DI Fat Block";
+            } else if(bn == POIFSConstants.FAT_SECTOR_BLOCK) {
+               bnS = "Normal Fat Block";
+            } else if(bn == POIFSConstants.UNUSED_BLOCK) {
+               bnS = "Block Not Used (Free)";
+            }
+
+            System.out.println("  Block  # " + (i++) + " -> " + bnS);
          }
-         
-         System.out.println("  Block  # " + i + " -> " + bnS);
-      }
+      });
       
       System.out.println("");
    }
