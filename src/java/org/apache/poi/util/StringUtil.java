@@ -18,10 +18,12 @@
 package org.apache.poi.util;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
 import java.util.Iterator;
 
+import org.apache.commons.codec.Charsets;
 import org.apache.poi.hssf.record.RecordInputStream;
 /**
  *  Title: String Utility Description: Collection of string handling utilities<p/>
@@ -35,8 +37,6 @@ import org.apache.poi.hssf.record.RecordInputStream;
  *@author     Toshiaki Kamoshida (kamoshida.toshiaki at future dot co dot jp)
  */
 public final class StringUtil {
-	private static final String ENCODING_ISO_8859_1 = "ISO-8859-1";
-
 	private StringUtil() {
 		// no instances of this class
 	}
@@ -109,12 +109,9 @@ public final class StringUtil {
 		final byte[] string,
 		final int offset,
 		final int len) {
-		try {
-			int len_to_use = Math.min(len, string.length - offset);
-			return new String(string, offset, len_to_use, ENCODING_ISO_8859_1);
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
+
+		final int len_to_use = Math.min(len, string.length - offset);
+		return new String(string, offset, len_to_use, Charsets.ISO_8859_1);
 	}
 	public static String readCompressedUnicode(LittleEndianInput in, int nChars) {
 		char[] buf = new char[nChars];
@@ -225,22 +222,11 @@ public final class StringUtil {
 	 *      when written
 	 */
 	public static void putCompressedUnicode(String input, byte[] output, int offset) {
-		byte[] bytes;
-		try {
-			bytes = input.getBytes(ENCODING_ISO_8859_1);
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
+		final byte[] bytes = input.getBytes(Charsets.ISO_8859_1);
 		System.arraycopy(bytes, 0, output, offset, bytes.length);
 	}
 	public static void putCompressedUnicode(String input, LittleEndianOutput out) {
-		byte[] bytes;
-		try {
-			bytes = input.getBytes(ENCODING_ISO_8859_1);
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
-		out.write(bytes);
+		out.write(input.getBytes(Charsets.ISO_8859_1));
 	}
 
 	/**
@@ -253,22 +239,11 @@ public final class StringUtil {
 	 * @param  offset  the offset to start writing into the byte array
 	 */
 	public static void putUnicodeLE(String input, byte[] output, int offset) {
-		byte[] bytes;
-		try {
-			bytes = input.getBytes("UTF-16LE");
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
+		final byte[] bytes = input.getBytes(Charsets.UTF_16LE);
 		System.arraycopy(bytes, 0, output, offset, bytes.length);
 	}
 	public static void putUnicodeLE(String input, LittleEndianOutput out) {
-		byte[] bytes;
-		try {
-			bytes = input.getBytes("UTF-16LE");
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
-		out.write(bytes);
+		out.write(input.getBytes(Charsets.UTF_16LE));
 	}
 
 	public static String readUnicodeLE(LittleEndianInput in, int nChars) {
@@ -289,14 +264,15 @@ public final class StringUtil {
 	 */
 	public static String format(String message, Object[] params) {
 		int currentParamNumber = 0;
-		StringBuffer formattedMessage = new StringBuffer();
-		for (int i = 0; i < message.length(); i++) {
+		final int l = message.length();
+		final StringBuffer formattedMessage = new StringBuffer(l);
+		for (int i = 0; i < l; i++) {
 			if (message.charAt(i) == '%') {
 				if (currentParamNumber >= params.length) {
 					formattedMessage.append("?missing data?");
 				} else if (
 					(params[currentParamNumber] instanceof Number)
-						&& (i + 1 < message.length())) {
+						&& (i + 1 < l)) {
 					i
 						+= matchOptionalFormatting(
 							(Number) params[currentParamNumber++],
@@ -308,7 +284,7 @@ public final class StringUtil {
 				}
 			} else {
 				if ((message.charAt(i) == '\\')
-					&& (i + 1 < message.length())
+					&& (i + 1 < l)
 					&& (message.charAt(i + 1) == '%')) {
 					formattedMessage.append('%');
 					i++;
@@ -325,27 +301,26 @@ public final class StringUtil {
 		Number number,
 		String formatting,
 		StringBuffer outputTo) {
-		NumberFormat numberFormat = NumberFormat.getInstance();
-		if ((0 < formatting.length())
+		
+		final int l = formatting.length();
+		final NumberFormat numberFormat = NumberFormat.getInstance();
+		if ((0 < l)
 			&& Character.isDigit(formatting.charAt(0))) {
-			numberFormat.setMinimumIntegerDigits(
-				Integer.parseInt(formatting.charAt(0) + ""));
-			if ((2 < formatting.length())
+			numberFormat.setMinimumIntegerDigits(formatting.charAt(0) - '0');
+			if ((2 < l)
 				&& (formatting.charAt(1) == '.')
 				&& Character.isDigit(formatting.charAt(2))) {
-				numberFormat.setMaximumFractionDigits(
-					Integer.parseInt(formatting.charAt(2) + ""));
+				numberFormat.setMaximumFractionDigits(formatting.charAt(2) - '0');
 				numberFormat.format(number, outputTo, new FieldPosition(0));
 				return 3;
 			}
 			numberFormat.format(number, outputTo, new FieldPosition(0));
 			return 1;
 		} else if (
-			(0 < formatting.length()) && (formatting.charAt(0) == '.')) {
-			if ((1 < formatting.length())
+			(0 < l) && (formatting.charAt(0) == '.')) {
+			if ((1 < l)
 				&& Character.isDigit(formatting.charAt(1))) {
-				numberFormat.setMaximumFractionDigits(
-					Integer.parseInt(formatting.charAt(1) + ""));
+				numberFormat.setMaximumFractionDigits(formatting.charAt(1) - '0');
 				numberFormat.format(number, outputTo, new FieldPosition(0));
 				return 2;
 			}
@@ -357,8 +332,8 @@ public final class StringUtil {
 	/**
 	 * @return the encoding we want to use, currently hardcoded to ISO-8859-1
 	 */
-	public static String getPreferredEncoding() {
-		return ENCODING_ISO_8859_1;
+	public static Charset getPreferredEncoding() {
+		return Charsets.ISO_8859_1;
 	}
 
 	/**
@@ -370,7 +345,8 @@ public final class StringUtil {
 	public static boolean hasMultibyte(String value) {
 		if (value == null)
 			return false;
-		for (int i = 0; i < value.length(); i++) {
+		final int n = value.length();
+		for (int i = 0; i < n; i++) {
 			char c = value.charAt(i);
 			if (c > 0xFF) {
 				return true;
@@ -386,12 +362,7 @@ public final class StringUtil {
 	 * @return true if string needs Unicode to be represented.
 	 */
 	public static boolean isUnicodeString(final String value) {
-		try {
-			return !value.equals(new String(value.getBytes(ENCODING_ISO_8859_1),
-					ENCODING_ISO_8859_1));
-		} catch (UnsupportedEncodingException e) {
-			return true;
-		}
+		return !value.equals(new String(value.getBytes(Charsets.ISO_8859_1), Charsets.ISO_8859_1));
 	}
 
 	public static boolean isEmpty(final String s) {
