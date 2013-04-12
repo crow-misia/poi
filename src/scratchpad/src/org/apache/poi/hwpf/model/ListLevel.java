@@ -19,6 +19,7 @@ package org.apache.poi.hwpf.model;
 
 import java.util.Arrays;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -75,8 +76,8 @@ public final class ListLevel
     {
         _lvlf = new LVLF();
         setStartAt( 1 );
-        _grpprlPapx = new byte[0];
-        _grpprlChpx = new byte[0];
+        _grpprlPapx = ArrayUtil.EMPTY_BYTE_ARRAY;
+        _grpprlChpx = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         if ( numbered )
         {

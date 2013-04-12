@@ -38,6 +38,7 @@ import org.apache.poi.hslf.model.Notes;
 import org.apache.poi.hslf.model.Slide;
 import org.apache.poi.hslf.record.*;
 import org.apache.poi.hslf.record.SlideListWithText.SlideAtomsSet;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
@@ -831,7 +832,7 @@ public final class SlideShow {
 
 		bse.setRef(0);
 		bse.setOffset(offset);
-		bse.setRemainingData(new byte[0]);
+		bse.setRemainingData(ArrayUtil.EMPTY_BYTE_ARRAY);
 
 		bstore.addChildRecord(bse);
 		int count = bstore.getChildRecords().size();

@@ -28,8 +28,6 @@ import org.apache.poi.util.StringUtil;
 public final class NoteRecord extends StandardRecord {
 	public final static short sid = 0x001C;
 
-	public static final NoteRecord[] EMPTY_ARRAY = { };
-
 	/**
 	 * Flag indicating that the comment is hidden (default)
 	 */
@@ -39,6 +37,8 @@ public final class NoteRecord extends StandardRecord {
 	 * Flag indicating that the comment is visible
 	 */
 	public final static short NOTE_VISIBLE = 0x2;
+
+	public static final NoteRecord[] EMPTY_ARRAY = new NoteRecord[0];
 
 	private static final Byte DEFAULT_PADDING = Byte.valueOf((byte)0);
 

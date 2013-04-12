@@ -20,6 +20,7 @@ package org.apache.poi.hslf.record;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogger;
 
@@ -52,7 +53,7 @@ public final class TextRulerAtom extends RecordAtom {
      */
     public TextRulerAtom() {
         _header = new byte[8];
-        _data = new byte[0];
+        _data = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         LittleEndian.putShort(_header, 2, (short)getRecordType());
         LittleEndian.putInt(_header, 4, _data.length);

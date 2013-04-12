@@ -23,6 +23,7 @@ import org.apache.poi.hssf.record.PasswordRev4Record;
 //import org.apache.poi.hssf.record.Feat11Record;
 //import org.apache.poi.hssf.record.Feat12Record;
 import org.apache.poi.hssf.record.RecordInputStream;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndianOutput;
 import org.apache.poi.util.StringUtil;
 
@@ -51,7 +52,7 @@ public final class FeatProtection implements SharedFeature {
 	private byte[] securityDescriptor;
 	
 	public FeatProtection() {
-		securityDescriptor = new byte[0];
+		securityDescriptor = ArrayUtil.EMPTY_BYTE_ARRAY;
 	}
 
 	public FeatProtection(RecordInputStream in) {

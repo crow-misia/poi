@@ -17,6 +17,8 @@
 
 package org.apache.poi.hdgf.pointers;
 
+import org.apache.poi.util.ArrayUtil;
+
 import junit.framework.TestCase;
 
 /**
@@ -43,7 +45,7 @@ public final class TestPointerFactory extends TestCase {
 	public void testCreateV4() {
 		PointerFactory pf = new PointerFactory(4);
 		try {
-			pf.createPointer(new byte[]{}, 0);
+			pf.createPointer(ArrayUtil.EMPTY_BYTE_ARRAY, 0);
 			fail();
 		} catch(IllegalArgumentException e) {
 			// As expected
@@ -53,7 +55,7 @@ public final class TestPointerFactory extends TestCase {
 	public void testCreateV5() {
 		PointerFactory pf = new PointerFactory(5);
 		try {
-			pf.createPointer(new byte[]{}, 0);
+			pf.createPointer(ArrayUtil.EMPTY_BYTE_ARRAY, 0);
 			fail();
 		} catch(RuntimeException e) {
 			// Still to do

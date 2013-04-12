@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import org.apache.poi.hwpf.model.io.HWPFOutputStream;
 import org.apache.poi.hwpf.model.types.DOPAbstractType;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 
@@ -55,7 +56,7 @@ public final class DocumentProperties extends DOPAbstractType
         }
         else
         {
-            _preserved = new byte[0];
+            _preserved = ArrayUtil.EMPTY_BYTE_ARRAY;
         }
     }
 

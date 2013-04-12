@@ -21,6 +21,7 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**
@@ -100,7 +101,7 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
         }
         final EscherRecord escherRecord;
         try {
-            escherRecord = recordConstructor.newInstance(new Object[] {});
+            escherRecord = recordConstructor.newInstance(ArrayUtil.EMPTY_OBJECT_ARRAY);
         } catch (Exception e) {
             return new UnknownEscherRecord();
         }

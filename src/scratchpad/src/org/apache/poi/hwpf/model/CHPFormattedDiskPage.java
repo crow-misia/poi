@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.poi.hwpf.sprm.SprmBuffer;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 
@@ -130,7 +131,7 @@ public final class CHPFormattedDiskPage extends FormattedDiskPage
         //optimization if offset == 0 use "Normal" style
         if(chpxOffset == 0)
         {
-            return new byte[0];
+            return ArrayUtil.EMPTY_BYTE_ARRAY;
         }
 
         int size = LittleEndian.getUnsignedByte(_fkp, _offset + chpxOffset);

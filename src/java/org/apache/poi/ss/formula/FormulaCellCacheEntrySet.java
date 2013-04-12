@@ -27,19 +27,17 @@ package org.apache.poi.ss.formula;
  * @author Josh Micich
  */
 final class FormulaCellCacheEntrySet {
-	private static final FormulaCellCacheEntry[] EMPTY_ARRAY = { };
-
 	private int _size;
 	private FormulaCellCacheEntry[] _arr;
 
 	public FormulaCellCacheEntrySet() {
-		_arr = EMPTY_ARRAY;
+		_arr = FormulaCellCacheEntry.EMPTY_ARRAY;
 	}
 
 	public FormulaCellCacheEntry[] toArray() {
 		int nItems = _size;
 		if (nItems < 1) {
-			return EMPTY_ARRAY;
+			return FormulaCellCacheEntry.EMPTY_ARRAY;
 		}
 		FormulaCellCacheEntry[] result = new FormulaCellCacheEntry[nItems];
 		int j=0;

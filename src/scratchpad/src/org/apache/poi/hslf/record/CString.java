@@ -20,6 +20,7 @@ package org.apache.poi.hslf.record;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.StringUtil;
 
@@ -93,7 +94,7 @@ public final class CString extends RecordAtom {
 		// 0 length header
 		_header = new byte[] {  0, 0, 0xBA-256, 0x0f, 0, 0, 0, 0 };
 		// Empty text
-		_text = new byte[0];
+		_text = ArrayUtil.EMPTY_BYTE_ARRAY;
 	}
 
 	/**

@@ -47,6 +47,7 @@ import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.formula.IEvaluationListener.ICacheEntry;
 import org.apache.poi.ss.formula.PlainCellCache.Loc;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.util.ArrayUtil;
 
 /**
  * Tests {@link org.apache.poi.ss.formula.EvaluationCache}.  Makes sure that where possible (previously calculated) cached
@@ -425,7 +426,7 @@ public class TestEvaluationCache extends TestCase {
 
 		// things should be back to normal now
 		ms.setCellValue("D1", 11);
-		confirmLog(ms, new String[] {  });
+		confirmLog(ms, ArrayUtil.EMPTY_STRING_ARRAY);
 		confirmEvaluate(ms, "B2", 91);
 		confirmLog(ms, new String[] {
 			"hit B2 91",
@@ -453,7 +454,7 @@ public class TestEvaluationCache extends TestCase {
 
 		// Make redundant update, and check re-evaluation
 		ms.setCellValue("B1", 12); // value didn't change
-		confirmLog(ms, new String[] {});
+		confirmLog(ms, ArrayUtil.EMPTY_STRING_ARRAY);
 		confirmEvaluate(ms, "A1", 25);
 		confirmLog(ms, new String[] {
 			"hit A1 25",

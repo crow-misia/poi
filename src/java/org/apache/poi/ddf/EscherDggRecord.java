@@ -39,6 +39,8 @@ public final class EscherDggRecord extends EscherRecord {
 
     public static class FileIdCluster
     {
+        public static FileIdCluster[] EMPTY_ARRAY = new FileIdCluster[0];
+ 
         public FileIdCluster( int drawingGroupId, int numShapeIdsUsed )
         {
             this.field_1_drawingGroupId = drawingGroupId;

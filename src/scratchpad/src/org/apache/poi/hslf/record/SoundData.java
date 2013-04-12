@@ -20,6 +20,7 @@ package org.apache.poi.hslf.record;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**
@@ -44,7 +45,7 @@ public final class SoundData extends RecordAtom {
      */
     protected SoundData() {
         _header = new byte[8];
-        _data = new byte[0];
+        _data = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         LittleEndian.putShort(_header, 2, (short)getRecordType());
         LittleEndian.putInt(_header, 4, _data.length);

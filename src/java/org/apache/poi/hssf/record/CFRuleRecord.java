@@ -25,6 +25,7 @@ import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.formula.Formula;
 import org.apache.poi.ss.formula.FormulaType;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.BitField;
 import org.apache.poi.util.BitFieldFactory;
 import org.apache.poi.util.LittleEndianOutput;
@@ -120,8 +121,8 @@ public final class CFRuleRecord extends StandardRecord {
 		_fontFormatting=null;
 		_borderFormatting=null;
 		_patternFormatting=null;
-		field_17_formula1=Formula.create(Ptg.EMPTY_PTG_ARRAY);
-		field_18_formula2=Formula.create(Ptg.EMPTY_PTG_ARRAY);
+		field_17_formula1=Formula.create(Ptg.EMPTY_ARRAY);
+		field_18_formula2=Formula.create(Ptg.EMPTY_ARRAY);
 	}
 
 	private CFRuleRecord(byte conditionType, byte comparisonOperation, Ptg[] formula1, Ptg[] formula2) {

@@ -24,6 +24,7 @@ import org.apache.poi.ss.formula.ptg.MemAreaPtg;
 import org.apache.poi.ss.formula.ptg.MemFuncPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.function.FunctionMetadataRegistry;
+import org.apache.poi.util.ArrayUtil;
 /**
  * Represents a syntactic element from a formula by encapsulating the corresponding <tt>Ptg</tt>
  * token.  Each <tt>ParseNode</tt> may have child <tt>ParseNode</tt>s in the case when the wrapped
@@ -32,8 +33,8 @@ import org.apache.poi.ss.formula.function.FunctionMetadataRegistry;
  * @author Josh Micich
  */
 final class ParseNode {
+	public static final ParseNode[] EMPTY_ARRAY = new ParseNode[0];
 
-	public static final ParseNode[] EMPTY_ARRAY = { };
 	private final Ptg _token;
 	private final ParseNode[] _children;
 	private boolean _isIf;
