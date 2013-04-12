@@ -17,6 +17,7 @@
 
 package org.apache.poi.ddf;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 
@@ -94,7 +95,7 @@ public class EscherClientAnchorRecord
     {
         listener.beforeRecordSerialize( offset, getRecordId(), this );
 
-        if (remainingData == null) remainingData = new byte[0];
+        if (remainingData == null) remainingData = ArrayUtil.EMPTY_BYTE_ARRAY;
         LittleEndian.putShort( data, offset, getOptions() );
         LittleEndian.putShort( data, offset + 2, getRecordId() );
         int remainingBytes = remainingData.length + (shortRecord ? 8 : 18);

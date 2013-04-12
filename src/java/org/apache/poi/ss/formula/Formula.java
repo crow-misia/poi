@@ -23,6 +23,7 @@ import org.apache.poi.ss.formula.ptg.ExpPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.ptg.TblPtg;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.LittleEndianByteArrayInputStream;
 import org.apache.poi.util.LittleEndianInput;
@@ -35,7 +36,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public class Formula {
 
-	private static final Formula EMPTY = new Formula(new byte[0], 0);
+	private static final Formula EMPTY = new Formula(ArrayUtil.EMPTY_BYTE_ARRAY, 0);
 
 	/** immutable */
 	private final byte[] _byteEncoding;

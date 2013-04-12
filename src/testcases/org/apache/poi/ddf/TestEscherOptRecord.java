@@ -18,6 +18,8 @@
 package org.apache.poi.ddf;
 
 import junit.framework.TestCase;
+
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexRead;
 import org.apache.poi.util.HexDump;
 
@@ -308,7 +310,7 @@ public final class TestEscherOptRecord extends TestCase {
      */
     public void testEmptyArrayProperty() {
         EscherOptRecord r = new EscherOptRecord();
-        EscherArrayProperty p = new EscherArrayProperty((short)(EscherProperties.FILL__SHADECOLORS + 0x8000), new byte[0] );
+        EscherArrayProperty p = new EscherArrayProperty((short)(EscherProperties.FILL__SHADECOLORS + 0x8000), ArrayUtil.EMPTY_BYTE_ARRAY );
         assertEquals(0, p.getNumberOfElementsInArray());
         r.addEscherProperty(p);
 

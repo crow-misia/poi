@@ -94,7 +94,7 @@ public final class NameRecord extends ContinuableRecord {
 
 	/** Creates new NameRecord */
 	public NameRecord() {
-		field_13_name_definition = Formula.create(Ptg.EMPTY_PTG_ARRAY);
+		field_13_name_definition = Formula.create(Ptg.EMPTY_ARRAY);
 
 		field_12_name_text = "";
 		field_14_custom_menu_text = "";

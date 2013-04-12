@@ -20,6 +20,7 @@ package org.apache.poi.hssf.model;
 import junit.framework.TestCase;
 import org.apache.poi.ddf.EscherDggRecord;
 import org.apache.poi.ddf.EscherDgRecord;
+import org.apache.poi.util.ArrayUtil;
 
 public final class TestDrawingManager extends TestCase {
     public void testFindFreeSPIDBlock() {
@@ -60,7 +61,7 @@ public final class TestDrawingManager extends TestCase {
     public void testCreateDgRecord() {
         EscherDggRecord dgg = new EscherDggRecord();
         dgg.setDrawingsSaved( 0 );
-        dgg.setFileIdClusters( new EscherDggRecord.FileIdCluster[]{} );
+        dgg.setFileIdClusters( EscherDggRecord.FileIdCluster.EMPTY_ARRAY );
         DrawingManager dm = new DrawingManager( dgg );
 
         EscherDgRecord dgRecord = dm.createDgRecord();
@@ -75,7 +76,7 @@ public final class TestDrawingManager extends TestCase {
     public void testAllocateShapeId() {
         EscherDggRecord dgg = new EscherDggRecord();
         dgg.setDrawingsSaved( 0 );
-        dgg.setFileIdClusters( new EscherDggRecord.FileIdCluster[]{} );
+        dgg.setFileIdClusters( EscherDggRecord.FileIdCluster.EMPTY_ARRAY );
         DrawingManager dm = new DrawingManager( dgg );
 
         EscherDgRecord dg = dm.createDgRecord();

@@ -23,8 +23,24 @@ package org.apache.poi.util;
  *
  * @author Glen Stampoultzis
  */
-public class ArrayUtil
+public final class ArrayUtil
 {
+    public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+    public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+    public static final byte[][] EMPTY_BYTE_ARRAY_ARRAY = new byte[0][];
+
+    public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+
+    public static final int[] EMPTY_INT_ARRAY = new int[0];
+
+    public static final short[] EMPTY_SHORT_ARRAY = new short[0];
+
+    private ArrayUtil() {
+        // nop.
+    }
+
     /**
      * This is really a debugging version of <code>System.arraycopy()</code>.
      * Use it to provide better exception messages when copying arrays around.

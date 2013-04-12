@@ -19,6 +19,7 @@ package org.apache.poi.hssf.record.chart;
 
 import org.apache.poi.hssf.record.RecordInputStream;
 import org.apache.poi.hssf.record.StandardRecord;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndianOutput;
 
@@ -45,7 +46,7 @@ public final class ChartEndBlockRecord extends StandardRecord {
 
 		// Often, but not always has 6 unused bytes at the end
 		if(in.available() == 0) {
-			unused = new byte[0];
+			unused = ArrayUtil.EMPTY_BYTE_ARRAY;
 		} else {
 			unused = new byte[6];
 			in.readFully(unused);

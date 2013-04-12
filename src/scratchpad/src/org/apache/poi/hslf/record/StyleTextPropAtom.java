@@ -27,6 +27,7 @@ import org.apache.poi.hslf.model.textproperties.CharFlagsTextProp;
 import org.apache.poi.hslf.model.textproperties.ParagraphFlagsTextProp;
 import org.apache.poi.hslf.model.textproperties.TextProp;
 import org.apache.poi.hslf.model.textproperties.TextPropCollection;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogger;
@@ -191,7 +192,7 @@ public final class StyleTextPropAtom extends RecordAtom
         //  decode them (via a call to setParentTextSize(int)
         rawContents = new byte[len-8];
         System.arraycopy(source,start+8,rawContents,0,rawContents.length);
-        reserved = new byte[0];
+        reserved = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         // Set empty linked lists, ready for when they call setParentTextSize
         paragraphStyles = new LinkedList<TextPropCollection>();
@@ -204,8 +205,8 @@ public final class StyleTextPropAtom extends RecordAtom
      */
     public StyleTextPropAtom(int parentTextSize) {
         _header = new byte[8];
-        rawContents = new byte[0];
-        reserved = new byte[0];
+        rawContents = ArrayUtil.EMPTY_BYTE_ARRAY;
+        reserved = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         // Set our type
         LittleEndian.putInt(_header,2,(short)_type);
@@ -387,7 +388,7 @@ public final class StyleTextPropAtom extends RecordAtom
 
     public void setRawContents(byte[] bytes) {
         rawContents = bytes;
-        reserved = new byte[0];
+        reserved = ArrayUtil.EMPTY_BYTE_ARRAY;
         initialised = false;
     }
 

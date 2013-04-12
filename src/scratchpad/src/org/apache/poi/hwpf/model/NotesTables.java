@@ -19,6 +19,7 @@ package org.apache.poi.hwpf.model;
 import java.io.IOException;
 
 import org.apache.poi.hwpf.model.io.HWPFOutputStream;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 
 /**
@@ -40,7 +41,7 @@ public class NotesTables
     {
         this.noteType = noteType;
         textPositions
-                .addProperty( new GenericPropertyNode( 0, 1, new byte[0] ) );
+                .addProperty( new GenericPropertyNode( 0, 1, ArrayUtil.EMPTY_BYTE_ARRAY ) );
     }
 
     public NotesTables( final NoteType noteType, byte[] tableStream,

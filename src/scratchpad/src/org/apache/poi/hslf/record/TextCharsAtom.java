@@ -17,6 +17,7 @@
 
 package org.apache.poi.hslf.record;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.StringUtil;
@@ -77,7 +78,7 @@ public final class TextCharsAtom extends RecordAtom
 		// 0 length header
 		_header = new byte[] {  0, 0, 0xA0-256, 0x0f, 0, 0, 0, 0 };
 		// Empty text
-		_text = new byte[0];
+		_text = ArrayUtil.EMPTY_BYTE_ARRAY;
 	}
 
 	/**

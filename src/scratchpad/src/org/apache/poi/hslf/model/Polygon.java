@@ -18,6 +18,7 @@
 package org.apache.poi.hslf.model;
 
 import org.apache.poi.ddf.*;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 import java.awt.geom.Point2D;
@@ -82,7 +83,7 @@ public final class Polygon extends AutoShape {
 
         int numpoints = xPoints.length;
 
-        EscherArrayProperty verticesProp = new EscherArrayProperty(EscherProperties.GEOMETRY__VERTICES, false, new byte[0] );
+        EscherArrayProperty verticesProp = new EscherArrayProperty(EscherProperties.GEOMETRY__VERTICES, false, ArrayUtil.EMPTY_BYTE_ARRAY );
         verticesProp.setNumberOfElementsInArray(numpoints+1);
         verticesProp.setNumberOfElementsInMemory(numpoints+1);
         verticesProp.setSizeOfElements(0xFFF0);

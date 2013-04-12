@@ -19,6 +19,7 @@ package org.apache.poi.hwpf.model.types;
 
 
 import org.apache.poi.hdf.model.hdftypes.HDFType;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.BitField;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
@@ -181,10 +182,10 @@ public abstract class DOPAbstractType implements HDFType {
 
     protected DOPAbstractType()
     {
-        this.field_35_doptypography = new byte[0];
-        this.field_36_dogrid = new byte[0];
-        this.field_39_asumyi = new byte[0];
-        this.field_44_Spare = new byte[0];
+        this.field_35_doptypography = ArrayUtil.EMPTY_BYTE_ARRAY;
+        this.field_36_dogrid = ArrayUtil.EMPTY_BYTE_ARRAY;
+        this.field_39_asumyi = ArrayUtil.EMPTY_BYTE_ARRAY;
+        this.field_44_Spare = ArrayUtil.EMPTY_BYTE_ARRAY;
     }
 
     protected void fillFields( byte[] data, int offset )

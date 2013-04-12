@@ -25,6 +25,7 @@ import java.util.HashSet;
 import org.apache.poi.EncryptedDocumentException;
 
 import org.apache.poi.hwpf.model.io.HWPFOutputStream;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
@@ -106,7 +107,7 @@ public final class FileInformationBlock implements Cloneable
 
             _cswNew = 0;
             _nFibNew = -1;
-            _fibRgCswNew = new byte[0];
+            _fibRgCswNew = ArrayUtil.EMPTY_BYTE_ARRAY;
 
             return;
         }
@@ -140,7 +141,7 @@ public final class FileInformationBlock implements Cloneable
         else
         {
             _nFibNew = -1;
-            _fibRgCswNew = new byte[0];
+            _fibRgCswNew = ArrayUtil.EMPTY_BYTE_ARRAY;
         }
 
         assertCbRgFcLcb();

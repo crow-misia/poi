@@ -34,6 +34,7 @@ import org.apache.poi.ddf.EscherProperty;
 import org.apache.poi.ddf.EscherRecord;
 import org.apache.poi.hwpf.model.PICF;
 import org.apache.poi.hwpf.model.PICFAndOfficeArtData;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.PngUtils;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -448,7 +449,7 @@ public final class Picture
     public byte[] getRawContent()
     {
         if (_blipRecords == null || _blipRecords.size() != 1) {
-           return new byte[0];
+           return ArrayUtil.EMPTY_BYTE_ARRAY;
         }
 
         EscherRecord escherRecord = _blipRecords.get( 0 );
@@ -462,7 +463,7 @@ public final class Picture
             return ( (EscherBSERecord) escherRecord ).getBlipRecord()
                     .getPicturedata();
         }
-        return new byte[0];
+        return ArrayUtil.EMPTY_BYTE_ARRAY;
     }
 
     /**

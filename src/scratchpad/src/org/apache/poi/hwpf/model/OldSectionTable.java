@@ -19,6 +19,7 @@ package org.apache.poi.hwpf.model;
 
 import java.util.Collections;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 
@@ -63,7 +64,7 @@ public final class OldSectionTable extends SectionTable
       // check for the optimization
       if (fileOffset == 0xffffffff)
       {
-        sepx = new SEPX(sed, startAt, endAt, new byte[0]);
+        sepx = new SEPX(sed, startAt, endAt, ArrayUtil.EMPTY_BYTE_ARRAY);
       }
       else
       {

@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.poi.hwpf.model.io.HWPFOutputStream;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 
@@ -190,7 +191,7 @@ public final class PAPFormattedDiskPage extends FormattedDiskPage {
         int grpprlOffset = 0;
         int bxOffset = 0;
         int fcOffset = 0;
-        byte[] lastGrpprl = new byte[0];
+        byte[] lastGrpprl = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         // total size is currently the size of one FC
         int totalSize = FC_SIZE;
@@ -257,7 +258,7 @@ public final class PAPFormattedDiskPage extends FormattedDiskPage {
         grpprlOffset = 511;
 
         PAPX papx = null;
-        lastGrpprl = new byte[0];
+        lastGrpprl = ArrayUtil.EMPTY_BYTE_ARRAY;
         for ( int x = 0; x < index; x++ )
         {
             papx = _papxList.get( x );

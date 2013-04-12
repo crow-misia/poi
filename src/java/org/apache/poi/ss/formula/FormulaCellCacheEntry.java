@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.formula.FormulaUsedBlankCellSet.BookSheetKey;
+import org.apache.poi.util.ArrayUtil;
 
 
 /**
@@ -31,6 +32,7 @@ import org.apache.poi.ss.formula.FormulaUsedBlankCellSet.BookSheetKey;
  * @author Josh Micich
  */
 final class FormulaCellCacheEntry extends CellCacheEntry {
+	public static final FormulaCellCacheEntry[] EMPTY_ARRAY = new FormulaCellCacheEntry[0];
 	
 	/**
 	 * Cells 'used' in the current evaluation of the formula corresponding to this cache entry

@@ -16,6 +16,8 @@
 ==================================================================== */
 package org.apache.poi.hwpf.usermodel;
 
+import org.apache.poi.util.ArrayUtil;
+
 /**
  * Picture types supported by MS Word format
  * 
@@ -31,7 +33,7 @@ public enum PictureType
 
     JPEG( "image/jpeg", "jpg", new byte[][] { { (byte) 0xFF, (byte) 0xD8 } } ),
 
-    PICT( "image/pict", ".pict", new byte[0][] ),
+    PICT( "image/pict", ".pict", ArrayUtil.EMPTY_BYTE_ARRAY_ARRAY ),
 
     PNG( "image/png", "png", new byte[][] { { (byte) 0x89, 0x50, 0x4E, 0x47,
             0x0D, 0x0A, 0x1A, 0x0A } } ),
@@ -39,7 +41,7 @@ public enum PictureType
     TIFF( "image/tiff", "tiff", new byte[][] { { 0x49, 0x49, 0x2A, 0x00 },
             { 0x4D, 0x4D, 0x00, 0x2A } } ),
 
-    UNKNOWN( "image/unknown", "", new byte[][] {} ),
+    UNKNOWN( "image/unknown", "", ArrayUtil.EMPTY_BYTE_ARRAY_ARRAY ),
 
     WMF( "image/x-wmf", "wmf", new byte[][] {
             { (byte) 0xD7, (byte) 0xCD, (byte) 0xC6, (byte) 0x9A, 0x00, 0x00 },

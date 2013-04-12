@@ -23,6 +23,7 @@ import java.io.InputStream;
 import org.apache.poi.hssf.dev.BiffViewer;
 import org.apache.poi.hssf.record.crypto.Biff8DecryptingStream;
 import org.apache.poi.hssf.record.crypto.Biff8EncryptionKey;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianInputStream;
@@ -42,7 +43,6 @@ public final class RecordInputStream implements LittleEndianInput {
 	 * finished, the next sid has been properly read, but the data size field has not been read yet.
 	 */
 	private static final int DATA_LEN_NEEDS_TO_BE_READ = -1;
-	private static final byte[] EMPTY_BYTE_ARRAY = { };
 
 	/**
 	 * For use in {@link BiffViewer} which may construct {@link Record}s that don't completely
@@ -373,7 +373,7 @@ public final class RecordInputStream implements LittleEndianInput {
 	public byte[] readRemainder() {
 		int size = remaining();
 		if (size ==0) {
-			return EMPTY_BYTE_ARRAY;
+			return ArrayUtil.EMPTY_BYTE_ARRAY;
 		}
 		byte[] result = new byte[size];
 		readFully(result);

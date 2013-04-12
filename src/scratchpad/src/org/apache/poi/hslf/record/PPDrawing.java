@@ -39,6 +39,7 @@ import org.apache.poi.ddf.EscherSpgrRecord;
 import org.apache.poi.ddf.EscherTextboxRecord;
 import org.apache.poi.ddf.UnknownEscherRecord;
 import org.apache.poi.hslf.model.ShapeTypes;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogger;
 
@@ -164,7 +165,7 @@ public final class PPDrawing extends RecordAtom {
 		LittleEndian.putUShort(_header, 2, RecordTypes.PPDrawing.typeID);
 		LittleEndian.putInt(_header, 4, 0);
 
-		textboxWrappers = new EscherTextboxWrapper[]{};
+		textboxWrappers = EscherTextboxWrapper.EMPTY_ARRAY;
 		create();
 	}
 

@@ -22,6 +22,7 @@ import java.util.zip.InflaterInputStream;
 import java.util.zip.DeflaterOutputStream;
 import java.util.Hashtable;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.BoundedInputStream;
 import org.apache.poi.util.LittleEndian;
 
@@ -49,7 +50,7 @@ public class ExOleObjStg extends RecordAtom implements PositionDependentRecord, 
      */
     public ExOleObjStg() {
         _header = new byte[8];
-        _data = new byte[0];
+        _data = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         LittleEndian.putShort(_header, 0, (short)0x10);
         LittleEndian.putShort(_header, 2, (short)getRecordType());

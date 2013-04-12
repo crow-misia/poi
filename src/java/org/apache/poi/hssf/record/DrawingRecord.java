@@ -17,6 +17,7 @@
 
 package org.apache.poi.hssf.record;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndianOutput;
 /**
  * DrawingRecord (0x00EC)<p/>
@@ -24,13 +25,11 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class DrawingRecord extends StandardRecord {
     public static final short sid = 0x00EC;
 
-    private static final byte[] EMPTY_BYTE_ARRAY = {};
-
     private byte[] recordData;
     private byte[] contd;
 
     public DrawingRecord() {
-        recordData = EMPTY_BYTE_ARRAY;
+        recordData = ArrayUtil.EMPTY_BYTE_ARRAY;
     }
 
     public DrawingRecord(RecordInputStream in) {

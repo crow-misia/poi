@@ -29,6 +29,7 @@ import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackagePartName;
 import org.apache.poi.openxml4j.opc.internal.marshallers.ZipPartMarshaller;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.IOUtils;
 
 /**
@@ -92,7 +93,7 @@ public final class MemoryPackagePart extends PackagePart {
 		// not
 		// initialize, so we do it now.
 		if (data == null) {
-			data = new byte[0];
+			data = ArrayUtil.EMPTY_BYTE_ARRAY;
 		}
 		return new ByteArrayInputStream(data);
 	}

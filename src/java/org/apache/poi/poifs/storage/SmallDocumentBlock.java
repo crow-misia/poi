@@ -33,6 +33,8 @@ import org.apache.poi.poifs.common.POIFSBigBlockSize;
  * @author  Marc Johnson (mjohnson at apache dot org)
  */
 public final class SmallDocumentBlock implements BlockWritable, ListManagedBlock {
+    public static final SmallDocumentBlock[] EMPTY_ARRAY = new SmallDocumentBlock[0];
+
     private static final int BLOCK_SHIFT = 6;
 
     private byte[]            _data;

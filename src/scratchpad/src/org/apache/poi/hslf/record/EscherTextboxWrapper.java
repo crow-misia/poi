@@ -33,6 +33,8 @@ import java.io.ByteArrayOutputStream;
  * @author Nick Burch
  */
 public final class EscherTextboxWrapper extends RecordContainer {
+	public static final EscherTextboxWrapper[] EMPTY_ARRAY = new EscherTextboxWrapper[0];
+
 	private EscherTextboxRecord _escherRecord;
 	private long _type;
 	private int shapeId;

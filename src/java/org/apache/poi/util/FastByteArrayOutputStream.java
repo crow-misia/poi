@@ -87,6 +87,10 @@ public final class FastByteArrayOutputStream extends OutputStream {
         return new ByteArrayInputStream(buf, 0, pos);
     }
 
+    public void arraycopy(final int pos, final byte[] dest, final int destPos, final int length) {
+        System.arraycopy(buf, pos, dest, destPos, length);
+    }
+
     private void verifyBufferSize(final int sz) {
         if (sz > buf.length) {
             buf = Arrays.copyOf(buf, Math.max(sz, 2 * buf.length));

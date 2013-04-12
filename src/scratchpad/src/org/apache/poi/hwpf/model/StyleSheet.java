@@ -24,6 +24,7 @@ import org.apache.poi.hwpf.sprm.CharacterSprmUncompressor;
 import org.apache.poi.hwpf.sprm.ParagraphSprmUncompressor;
 import org.apache.poi.hwpf.usermodel.CharacterProperties;
 import org.apache.poi.hwpf.usermodel.ParagraphProperties;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 
@@ -52,7 +53,7 @@ public final class StyleSheet implements HDFType {
     @Deprecated
     private final static CharacterProperties NIL_CHP = new CharacterProperties();
 
-  private final static byte[] NIL_CHPX = new byte[] {};
+  private final static byte[] NIL_CHPX = ArrayUtil.EMPTY_BYTE_ARRAY;
   private final static byte[] NIL_PAPX = new byte[] {0, 0};
 
     /**
