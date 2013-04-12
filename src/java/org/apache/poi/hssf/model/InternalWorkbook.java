@@ -93,6 +93,7 @@ import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.ptg.Ref3DPtg;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.BuiltinFormats;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -2175,7 +2176,7 @@ public final class InternalWorkbook {
             dgg.setShapeIdMax(1024);
             dgg.setNumShapesSaved(0);
             dgg.setDrawingsSaved(0);
-            dgg.setFileIdClusters(new EscherDggRecord.FileIdCluster[] {} );
+            dgg.setFileIdClusters(EscherDggRecord.FileIdCluster.EMPTY_ARRAY);
             drawingManager = new DrawingManager2(dgg);
             EscherContainerRecord bstoreContainer = null;
             if (escherBSERecords.size() > 0)

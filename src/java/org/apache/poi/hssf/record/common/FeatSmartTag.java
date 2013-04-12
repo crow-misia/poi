@@ -21,6 +21,7 @@ import org.apache.poi.hssf.record.FeatRecord;
 //import org.apache.poi.hssf.record.Feat11Record;
 //import org.apache.poi.hssf.record.Feat12Record;
 import org.apache.poi.hssf.record.RecordInputStream;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**
@@ -38,7 +39,7 @@ public final class FeatSmartTag implements SharedFeature {
 	private byte[] data;
 	
 	public FeatSmartTag() {
-		data = new byte[0];
+		data = ArrayUtil.EMPTY_BYTE_ARRAY;
 	}
 
 	public FeatSmartTag(RecordInputStream in) {

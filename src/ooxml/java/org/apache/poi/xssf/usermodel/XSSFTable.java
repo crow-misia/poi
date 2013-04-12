@@ -28,6 +28,7 @@ import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackageRelationship;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.xssf.usermodel.helpers.XSSFXmlColumnPr;
 import org.apache.xmlbeans.XmlException;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTable;
@@ -132,7 +133,7 @@ public class XSSFTable extends POIXMLDocumentPart {
 		
 		if(commonXPath == null){
 		
-		String[] commonTokens ={};
+		String[] commonTokens = ArrayUtil.EMPTY_STRING_ARRAY;
 		
 		for(CTTableColumn column :ctTable.getTableColumns().getTableColumnList()){
 			if(column.getXmlColumnPr()!=null){
@@ -147,7 +148,7 @@ public class XSSFTable extends POIXMLDocumentPart {
 						if(!commonTokens[i].equals(tokens[i])){
 						 List<String> subCommonTokens = Arrays.asList(commonTokens).subList(0, i);
 						 
-						 String[] container = {};
+						 String[] container = ArrayUtil.EMPTY_STRING_ARRAY;
 						 
 						 commonTokens = subCommonTokens.toArray(container);
 						 break;

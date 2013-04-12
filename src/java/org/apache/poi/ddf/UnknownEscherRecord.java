@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 
@@ -32,10 +33,8 @@ import org.apache.poi.util.LittleEndian;
  * @author Zhang Zhang (zhangzzh at gmail.com)
  */
 public final class UnknownEscherRecord extends EscherRecord {
-    private static final byte[] NO_BYTES = new byte[0];
-
     /** The data for this record not including the the 8 byte header */
-    private byte[] thedata = NO_BYTES;
+    private byte[] thedata = ArrayUtil.EMPTY_BYTE_ARRAY;
     private List<EscherRecord> _childRecords;
 
     public UnknownEscherRecord() {
@@ -57,7 +56,7 @@ public final class UnknownEscherRecord extends EscherRecord {
 
         if (isContainerRecord()) {
             int bytesWritten = 0;
-            thedata = new byte[0];
+            thedata = ArrayUtil.EMPTY_BYTE_ARRAY;
             offset += 8;
             bytesWritten += 8;
             while ( bytesRemaining > 0 )

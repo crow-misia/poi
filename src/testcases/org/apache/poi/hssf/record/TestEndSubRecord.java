@@ -18,6 +18,8 @@
 package org.apache.poi.hssf.record;
 
 
+import org.apache.poi.util.ArrayUtil;
+
 import junit.framework.TestCase;
 
 /**
@@ -28,7 +30,7 @@ import junit.framework.TestCase;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class TestEndSubRecord extends TestCase {
-    private static final byte[] data =  { };
+    private static final byte[] data = ArrayUtil.EMPTY_BYTE_ARRAY;
 
     public void testLoad() {
         EndSubRecord record = new EndSubRecord(TestcaseRecordInputStream.create(0x00, data), 0);

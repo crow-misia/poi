@@ -17,6 +17,7 @@
 
 package org.apache.poi.hssf.record;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianOutput;
@@ -30,12 +31,10 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class GroupMarkerSubRecord extends SubRecord {
     public final static short sid = 0x0006;
 
-    private static final byte[] EMPTY_BYTE_ARRAY = { };
-
     private byte[] reserved;    // would really love to know what goes in here.
 
     public GroupMarkerSubRecord() {
-        reserved = EMPTY_BYTE_ARRAY;
+        reserved = ArrayUtil.EMPTY_BYTE_ARRAY;
     }
 
     public GroupMarkerSubRecord(LittleEndianInput in, int size) {

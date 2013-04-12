@@ -17,6 +17,7 @@
 
 package org.apache.poi.hssf.record;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**
@@ -29,12 +30,11 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public final class TabIdRecord extends StandardRecord {
     public final static short sid = 0x013D;
-    private static final short[] EMPTY_SHORT_ARRAY = { };
 
     public short[] _tabids;
 
     public TabIdRecord() {
-        _tabids = EMPTY_SHORT_ARRAY;
+        _tabids = ArrayUtil.EMPTY_SHORT_ARRAY;
     }
 
     public TabIdRecord(RecordInputStream in) {

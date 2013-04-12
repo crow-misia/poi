@@ -27,6 +27,7 @@ import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.ptg.StringPtg;
 import org.apache.poi.ss.formula.FormulaType;
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
+import org.apache.poi.util.ArrayUtil;
 
 /**
  * 
@@ -384,7 +385,7 @@ public class DVConstraint implements DataValidationConstraint {
 		Ptg[] formula2;
 		if (isListValidationType()) {
 			formula1 = createListFormula(sheet);
-			formula2 = Ptg.EMPTY_PTG_ARRAY;
+			formula2 = Ptg.EMPTY_ARRAY;
 		} else {
 			formula1 = convertDoubleFormula(_formula1, _value1, sheet);
 			formula2 = convertDoubleFormula(_formula2, _value2, sheet);
@@ -420,7 +421,7 @@ public class DVConstraint implements DataValidationConstraint {
 	private static Ptg[] convertDoubleFormula(String formula, Double value, HSSFSheet sheet) {
 		if (formula == null) {
 			if (value == null) {
-				return Ptg.EMPTY_PTG_ARRAY;
+				return Ptg.EMPTY_ARRAY;
 			}
 			return new Ptg[] { new NumberPtg(value.doubleValue()), };
 		}

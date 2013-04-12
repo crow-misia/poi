@@ -68,6 +68,7 @@ import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.Entry;
 import org.apache.poi.poifs.filesystem.EntryUtils;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 
 
@@ -254,7 +255,7 @@ public final class HWPFDocument extends HWPFDocumentCore
     }
     catch(java.io.FileNotFoundException e)
     {
-        _dataStream = new byte[0];
+        _dataStream = ArrayUtil.EMPTY_BYTE_ARRAY;
     }
 
     // Get the cp of the start of text in the main stream

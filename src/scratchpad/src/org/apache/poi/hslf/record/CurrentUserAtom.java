@@ -31,6 +31,7 @@ import org.apache.poi.hslf.exceptions.OldPowerPointFormatException;
 import org.apache.poi.poifs.filesystem.DirectoryNode;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
@@ -98,7 +99,7 @@ public class CurrentUserAtom
 	 * Create a new Current User Atom
 	 */
 	public CurrentUserAtom() {
-		_contents = new byte[0];
+		_contents = ArrayUtil.EMPTY_BYTE_ARRAY;
 
 		// Initialise to empty
 		docFinalVersion = 0x03f4;

@@ -30,6 +30,7 @@ import org.apache.poi.ss.formula.ptg.RefPtg;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**
@@ -47,7 +48,7 @@ public final class TestCFRuleRecord extends TestCase {
         assertEquals(CFRuleRecord.CONDITION_TYPE_FORMULA, rule1.getConditionType());
         assertEquals(ComparisonOperator.NO_COMPARISON, rule1.getComparisonOperation());
         assertNotNull(rule1.getParsedExpression1());
-        assertSame(Ptg.EMPTY_PTG_ARRAY, rule1.getParsedExpression2());
+        assertSame(Ptg.EMPTY_ARRAY, rule1.getParsedExpression2());
 
         CFRuleRecord rule2 = CFRuleRecord.create(sheet, ComparisonOperator.BETWEEN, "2", "5");
         assertEquals(CFRuleRecord.CONDITION_TYPE_CELL_VALUE_IS, rule2.getConditionType());
@@ -58,8 +59,8 @@ public final class TestCFRuleRecord extends TestCase {
         CFRuleRecord rule3 = CFRuleRecord.create(sheet, ComparisonOperator.EQUAL, null, null);
         assertEquals(CFRuleRecord.CONDITION_TYPE_CELL_VALUE_IS, rule3.getConditionType());
         assertEquals(ComparisonOperator.EQUAL, rule3.getComparisonOperation());
-        assertSame(Ptg.EMPTY_PTG_ARRAY, rule3.getParsedExpression2());
-        assertSame(Ptg.EMPTY_PTG_ARRAY, rule3.getParsedExpression2());
+        assertSame(Ptg.EMPTY_ARRAY, rule3.getParsedExpression2());
+        assertSame(Ptg.EMPTY_ARRAY, rule3.getParsedExpression2());
     }
 
     public void testCreateCFRuleRecord() {

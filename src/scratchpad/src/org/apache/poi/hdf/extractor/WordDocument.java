@@ -26,6 +26,7 @@ import java.io.*;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**
@@ -387,7 +388,7 @@ public final class WordDocument {
               if(chpxOffset == 0)
 
               {
-                _characterTable.add(new ChpxNode(fcStart, fcEnd, new byte[0]));
+                _characterTable.add(new ChpxNode(fcStart, fcEnd, ArrayUtil.EMPTY_BYTE_ARRAY));
                 continue;
               }
 

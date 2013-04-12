@@ -24,6 +24,7 @@ import org.apache.poi.ss.formula.ptg.AreaPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.ptg.Ref3DPtg;
 import org.apache.poi.ss.formula.ptg.RefPtg;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.LittleEndianInput;
@@ -43,8 +44,6 @@ import org.apache.poi.util.StringUtil;
 public final class EmbeddedObjectRefSubRecord extends SubRecord {
 	private static final POILogger logger = POILogFactory.getLogger(EmbeddedObjectRefSubRecord.class);
 	public static final short sid = 0x0009;
-
-	private static final byte[] EMPTY_BYTE_ARRAY = { };
 
 	private int field_1_unknown_int;
 	/** either an area or a cell ref */
@@ -66,7 +65,7 @@ public final class EmbeddedObjectRefSubRecord extends SubRecord {
 	// currently for testing only - needs review
 	EmbeddedObjectRefSubRecord() {
 		field_2_unknownFormulaData = new byte[] { 0x02, 0x6C, 0x6A, 0x16, 0x01, }; // just some sample data.  These values vary a lot
-		field_6_unknown = EMPTY_BYTE_ARRAY;
+		field_6_unknown = ArrayUtil.EMPTY_BYTE_ARRAY;
 		field_4_ole_classname = null;
 		field_4_unknownByte = 0x00;
 	}
@@ -173,7 +172,7 @@ public final class EmbeddedObjectRefSubRecord extends SubRecord {
 			throw new IllegalArgumentException("Negative size (" + size + ")");
 		}
 		if (size == 0) {
-			return EMPTY_BYTE_ARRAY;
+			return ArrayUtil.EMPTY_BYTE_ARRAY;
 		}
 		byte[] result = new byte[size];
 		in.readFully(result);

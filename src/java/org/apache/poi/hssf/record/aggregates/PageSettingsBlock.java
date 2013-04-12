@@ -23,9 +23,28 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.hssf.model.RecordStream;
 import org.apache.poi.hssf.model.InternalSheet;
-import org.apache.poi.hssf.record.*;
+import org.apache.poi.hssf.model.RecordStream;
+import org.apache.poi.hssf.record.BottomMarginRecord;
+import org.apache.poi.hssf.record.ContinueRecord;
+import org.apache.poi.hssf.record.FooterRecord;
+import org.apache.poi.hssf.record.HCenterRecord;
+import org.apache.poi.hssf.record.HeaderFooterRecord;
+import org.apache.poi.hssf.record.HeaderRecord;
+import org.apache.poi.hssf.record.HorizontalPageBreakRecord;
+import org.apache.poi.hssf.record.LeftMarginRecord;
+import org.apache.poi.hssf.record.Margin;
+import org.apache.poi.hssf.record.PageBreakRecord;
+import org.apache.poi.hssf.record.PrintSetupRecord;
+import org.apache.poi.hssf.record.Record;
+import org.apache.poi.hssf.record.RecordBase;
+import org.apache.poi.hssf.record.RecordFormatException;
+import org.apache.poi.hssf.record.RightMarginRecord;
+import org.apache.poi.hssf.record.TopMarginRecord;
+import org.apache.poi.hssf.record.UnknownRecord;
+import org.apache.poi.hssf.record.UserSViewBegin;
+import org.apache.poi.hssf.record.VCenterRecord;
+import org.apache.poi.hssf.record.VerticalPageBreakRecord;
 import org.apache.poi.util.HexDump;
 
 /**
@@ -41,7 +60,6 @@ public final class PageSettingsBlock extends RecordAggregate {
      * PLS is potentially a <i>continued</i> record, but is currently uninterpreted by POI
      */
     private static final class PLSAggregate extends RecordAggregate {
-        private static final ContinueRecord[] EMPTY_CONTINUE_RECORD_ARRAY = { };
         private final Record _pls;
         /**
          * holds any continue records found after the PLS record.<br/>
@@ -49,7 +67,7 @@ public final class PageSettingsBlock extends RecordAggregate {
          * Currently, PLS is an {@link UnknownRecord} and does not automatically
          * include any trailing {@link ContinueRecord}s.
          */
-        private ContinueRecord[] _plsContinues;
+        private final ContinueRecord[] _plsContinues;
 
         public PLSAggregate(RecordStream rs) {
             _pls = rs.getNext();
@@ -61,15 +79,15 @@ public final class PageSettingsBlock extends RecordAggregate {
                 _plsContinues = new ContinueRecord[temp.size()];
                 temp.toArray(_plsContinues);
             } else {
-                _plsContinues = EMPTY_CONTINUE_RECORD_ARRAY;
+                _plsContinues = ContinueRecord.EMPTY_ARRAY;
             }
         }
 
         @Override
         public void visitContainedRecords(RecordVisitor rv) {
             rv.visitRecord(_pls);
-            for (int i = 0; i < _plsContinues.length; i++) {
-                rv.visitRecord(_plsContinues[i]);
+            for (final ContinueRecord r : _plsContinues) {
+                rv.visitRecord(r);
             }
         }
     }

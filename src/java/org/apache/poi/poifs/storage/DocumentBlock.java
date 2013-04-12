@@ -24,6 +24,7 @@ import java.util.Arrays;
 
 import org.apache.poi.poifs.common.POIFSBigBlockSize;
 import org.apache.poi.poifs.common.POIFSConstants;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.IOUtils;
 
 /**
@@ -32,6 +33,8 @@ import org.apache.poi.util.IOUtils;
  * @author Marc Johnson (mjohnson at apache dot org)
  */
 public final class DocumentBlock extends BigBlock {
+    public static final DocumentBlock[] EMPTY_ARRAY = new DocumentBlock[0];
+
     private static final byte _default_value = ( byte ) 0xFF;
     private byte[]            _data;
     private int               _bytes_read;
@@ -128,34 +131,36 @@ public final class DocumentBlock extends BigBlock {
      */
 
     public static DocumentBlock [] convert(final POIFSBigBlockSize bigBlockSize,
-                                           final byte [] array,
+                                           final FastByteArrayOutputStream baos,
                                            final int size)
     {
-        DocumentBlock[] rval   =
-            new DocumentBlock[ (size + bigBlockSize.getBigBlockSize() - 1) / bigBlockSize.getBigBlockSize() ];
-        int             offset = 0;
+        final int bbs = bigBlockSize.getBigBlockSize();
+        final int n = (size + bbs - 1) / bbs;
+        final DocumentBlock[] rval = new DocumentBlock[ n ];
+        final int limit = baos.size();
 
-        for (int k = 0; k < rval.length; k++)
+        int offset = 0;
+
+        for (int k = 0; k < n; k++)
         {
-            rval[ k ] = new DocumentBlock(bigBlockSize);
-            if (offset < array.length)
-            {
-                int length = Math.min(bigBlockSize.getBigBlockSize(),
-                                      array.length - offset);
+            final DocumentBlock b = new DocumentBlock(bigBlockSize);
+            rval[ k ] = b;
 
-                System.arraycopy(array, offset, rval[ k ]._data, 0, length);
-                if (length != bigBlockSize.getBigBlockSize())
+            if (offset < limit)
+            {
+                int length = Math.min(bbs, limit - offset);
+
+                baos.arraycopy(offset, b._data, 0, length);
+                if (length != bbs)
                 {
-                    Arrays.fill(rval[ k ]._data, length,
-                          bigBlockSize.getBigBlockSize(),
-                                _default_value);
+                    Arrays.fill(b._data, length, bbs, _default_value);
                 }
             }
             else
             {
-                Arrays.fill(rval[ k ]._data, _default_value);
+                Arrays.fill(b._data, _default_value);
             }
-            offset += bigBlockSize.getBigBlockSize();
+            offset += bbs;
         }
         return rval;
     }

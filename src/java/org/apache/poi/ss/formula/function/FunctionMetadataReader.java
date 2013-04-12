@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.poi.ss.formula.ptg.Ptg;
+import org.apache.poi.util.ArrayUtil;
 
 /**
  * Converts the text meta-data file into a <tt>FunctionMetadataRegistry</tt>
@@ -43,7 +44,6 @@ final class FunctionMetadataReader {
 
 	private static final Pattern TAB_DELIM_PATTERN = Pattern.compile("\t");
 	private static final Pattern SPACE_DELIM_PATTERN = Pattern.compile(" ");
-	private static final byte[] EMPTY_BYTE_ARRAY = { };
 
 	private static final String[] DIGIT_ENDING_FUNCTION_NAMES = {
 		// Digits at the end of a function might be due to a left-over footnote marker.
@@ -120,11 +120,11 @@ final class FunctionMetadataReader {
 
 	private static byte[] parseOperandTypeCodes(String codes) {
 		if(codes.length() < 1) {
-			return EMPTY_BYTE_ARRAY; // happens for GETPIVOTDATA
+			return ArrayUtil.EMPTY_BYTE_ARRAY; // happens for GETPIVOTDATA
 		}
 		if(isDash(codes)) {
 			// '-' means empty:
-			return EMPTY_BYTE_ARRAY;
+			return ArrayUtil.EMPTY_BYTE_ARRAY;
 		}
 		String[] array = SPACE_DELIM_PATTERN.split(codes);
 		int nItems = array.length;

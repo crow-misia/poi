@@ -24,6 +24,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.xwpf.XWPFTestDataSamples;
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBr;
@@ -372,7 +373,7 @@ public class TestXWPFRun extends TestCase {
        assertEquals(0, doc.getAllPictures().size());
        assertEquals(0, r.getEmbeddedPictures().size());
        
-       r.addPicture(new ByteArrayInputStream(new byte[0]), Document.PICTURE_TYPE_JPEG, "test.jpg", 21, 32);
+       r.addPicture(new ByteArrayInputStream(ArrayUtil.EMPTY_BYTE_ARRAY), Document.PICTURE_TYPE_JPEG, "test.jpg", 21, 32);
        
        assertEquals(1, doc.getAllPictures().size());
        assertEquals(1, r.getEmbeddedPictures().size());

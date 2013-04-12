@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apache.poi.hwpf.model.io.HWPFFileSystem;
 import org.apache.poi.hwpf.model.io.HWPFOutputStream;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
@@ -73,7 +74,7 @@ public class SectionTable
       // check for the optimization
       if (fileOffset == 0xffffffff)
       {
-        _sections.add(new SEPX(sed, startAt, endAt, new byte[0]));
+        _sections.add(new SEPX(sed, startAt, endAt, ArrayUtil.EMPTY_BYTE_ARRAY));
       }
       else
       {

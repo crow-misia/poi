@@ -21,6 +21,7 @@ import junit.framework.TestCase;
 import org.apache.poi.ddf.EscherClientDataRecord;
 import org.apache.poi.ddf.EscherContainerRecord;
 import org.apache.poi.ddf.EscherSpRecord;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
 
@@ -105,9 +106,9 @@ public final class TestEscherAggregate extends TestCase {
         spContainer3.setOptions( (short) 0x000F );
         spContainer3.setRecordId( EscherContainerRecord.SP_CONTAINER );
         d2.setRecordId( EscherClientDataRecord.RECORD_ID );
-        d2.setRemainingData( new byte[0] );
+        d2.setRemainingData( ArrayUtil.EMPTY_BYTE_ARRAY );
         d3.setRecordId( EscherClientDataRecord.RECORD_ID );
-        d3.setRemainingData( new byte[0] );
+        d3.setRemainingData( ArrayUtil.EMPTY_BYTE_ARRAY );
         container1.addChildRecord( spContainer1 );
         container1.addChildRecord( spContainer2 );
         container1.addChildRecord( spContainer3 );

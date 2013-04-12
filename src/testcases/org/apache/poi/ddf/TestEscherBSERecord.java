@@ -18,6 +18,8 @@
 package org.apache.poi.ddf;
 
 import junit.framework.TestCase;
+
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
 
@@ -69,7 +71,7 @@ public final class TestEscherBSERecord extends TestCase {
         r.setName( (byte) 5 );
         r.setUnused2( (byte) 6 );
         r.setUnused3( (byte) 7 );
-        r.setRemainingData( new byte[0] );
+        r.setRemainingData( ArrayUtil.EMPTY_BYTE_ARRAY );
         return r;
 
     }

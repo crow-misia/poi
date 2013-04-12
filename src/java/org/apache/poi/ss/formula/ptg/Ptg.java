@@ -20,6 +20,7 @@ package org.apache.poi.ss.formula.ptg;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndianByteArrayOutputStream;
 import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianOutput;
@@ -41,8 +42,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public abstract class Ptg {
-	public static final Ptg[] EMPTY_PTG_ARRAY = { };
-
+	public static final Ptg[] EMPTY_ARRAY = new Ptg[0];
 
 	/**
 	 * Reads <tt>size</tt> bytes of the input stream, to create an array of <tt>Ptg</tt>s.
@@ -161,7 +161,7 @@ public abstract class Ptg {
 
 	private static Ptg[] toPtgArray(List<Ptg> l) {
 		if (l.isEmpty()) {
-			return EMPTY_PTG_ARRAY;
+			return EMPTY_ARRAY;
 		}
 		Ptg[] result = new Ptg[l.size()];
 		l.toArray(result);

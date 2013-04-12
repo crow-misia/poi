@@ -16,6 +16,7 @@
 ==================================================================== */
 package org.apache.poi.hpsf;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
@@ -37,7 +38,7 @@ class UnicodeString
 
         if ( length == 0 )
         {
-            _value = new byte[0];
+            _value = ArrayUtil.EMPTY_BYTE_ARRAY;
             return;
         }
 

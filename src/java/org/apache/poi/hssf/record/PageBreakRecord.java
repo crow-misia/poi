@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**
@@ -37,8 +38,6 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Danny Mui (dmui at apache dot org)
  */
 public abstract class PageBreakRecord extends StandardRecord {
-    private static final int[] EMPTY_INT_ARRAY = { };
-
     private List<Break> _breaks;
     private Map<Integer, Break> _breakMap;
 
@@ -197,7 +196,7 @@ public abstract class PageBreakRecord extends StandardRecord {
     public final int[] getBreaks() {
         int count = getNumBreaks();
         if (count < 1) {
-            return EMPTY_INT_ARRAY;
+            return ArrayUtil.EMPTY_INT_ARRAY;
         }
         int[] result = new int[count];
         for (int i=0; i<count; i++) {

@@ -22,10 +22,17 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.hssf.record.cont.ContinuableRecordInput;
 import org.apache.poi.hssf.record.RecordInputStream;
+import org.apache.poi.hssf.record.cont.ContinuableRecordInput;
 import org.apache.poi.hssf.record.cont.ContinuableRecordOutput;
-import org.apache.poi.util.*;
+import org.apache.poi.util.ArrayUtil;
+import org.apache.poi.util.BitField;
+import org.apache.poi.util.BitFieldFactory;
+import org.apache.poi.util.LittleEndianInput;
+import org.apache.poi.util.LittleEndianOutput;
+import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Title: Unicode String<p/>
@@ -118,8 +125,8 @@ public class UnicodeString implements Comparable<UnicodeString> { // TODO - make
        private void populateEmpty() {
           reserved = 1;
           phoneticText = "";
-          phRuns = new PhRun[0];
-          extraData = new byte[0];
+          phRuns = PhRun.EMPTY_ARRAY;
+          extraData = ArrayUtil.EMPTY_BYTE_ARRAY;
        }
        
        protected ExtRst() {
@@ -294,6 +301,8 @@ public class UnicodeString implements Comparable<UnicodeString> { // TODO - make
        }
     }
     public static class PhRun {
+       public static final PhRun[] EMPTY_ARRAY = new PhRun[0];
+
        private int phoneticTextFirstCharacterOffset;
        private int realTextFirstCharacterOffset;
        private int realTextLength;

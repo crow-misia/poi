@@ -29,6 +29,8 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSWriterEvent;
 import org.apache.poi.poifs.filesystem.POIFSWriterListener;
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
+import org.apache.poi.util.ArrayUtil;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
@@ -38,11 +40,11 @@ public final class TestEmptyDocument extends TestCase {
 	public void testSingleEmptyDocument() throws IOException {
 		POIFSFileSystem fs = new POIFSFileSystem();
 		DirectoryEntry dir = fs.getRoot();
-		dir.createDocument("Foo", new ByteArrayInputStream(new byte[] {}));
+		dir.createDocument("Foo", new ByteArrayInputStream(ArrayUtil.EMPTY_BYTE_ARRAY));
 
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		FastByteArrayOutputStream out = new FastByteArrayOutputStream();
 		fs.writeFilesystem(out);
-		new POIFSFileSystem(new ByteArrayInputStream(out.toByteArray()));
+		new POIFSFileSystem(out.toInputStream());
 	}
 
 	public void testSingleEmptyDocumentEvent() throws IOException {
@@ -54,20 +56,20 @@ public final class TestEmptyDocument extends TestCase {
 			}
 		});
 
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		FastByteArrayOutputStream out = new FastByteArrayOutputStream();
 		fs.writeFilesystem(out);
-		new POIFSFileSystem(new ByteArrayInputStream(out.toByteArray()));
+		new POIFSFileSystem(out.toInputStream());
 	}
 
 	public void testEmptyDocumentWithFriend() throws IOException {
 		POIFSFileSystem fs = new POIFSFileSystem();
 		DirectoryEntry dir = fs.getRoot();
 		dir.createDocument("Bar", new ByteArrayInputStream(new byte[] { 0 }));
-		dir.createDocument("Foo", new ByteArrayInputStream(new byte[] {}));
+		dir.createDocument("Foo", new ByteArrayInputStream(ArrayUtil.EMPTY_BYTE_ARRAY));
 
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		FastByteArrayOutputStream out = new FastByteArrayOutputStream();
 		fs.writeFilesystem(out);
-		new POIFSFileSystem(new ByteArrayInputStream(out.toByteArray()));
+		new POIFSFileSystem(out.toInputStream());
 	}
 
 	public void testEmptyDocumentEventWithFriend() throws IOException {
@@ -87,23 +89,22 @@ public final class TestEmptyDocument extends TestCase {
 			}
 		});
 
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		FastByteArrayOutputStream out = new FastByteArrayOutputStream();
 		fs.writeFilesystem(out);
-		new POIFSFileSystem(new ByteArrayInputStream(out.toByteArray()));
+		new POIFSFileSystem(out.toInputStream());
 	}
 
 	public void testEmptyDocumentBug11744() throws Exception {
 		byte[] testData = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 		POIFSFileSystem fs = new POIFSFileSystem();
-		fs.createDocument(new ByteArrayInputStream(new byte[0]), "Empty");
+		fs.createDocument(new ByteArrayInputStream(ArrayUtil.EMPTY_BYTE_ARRAY), "Empty");
 		fs.createDocument(new ByteArrayInputStream(testData), "NotEmpty");
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		FastByteArrayOutputStream out = new FastByteArrayOutputStream();
 		fs.writeFilesystem(out);
-		out.toByteArray();
 
 		// This line caused the error.
-		fs = new POIFSFileSystem(new ByteArrayInputStream(out.toByteArray()));
+		fs = new POIFSFileSystem(out.toInputStream());
 
 		DocumentEntry entry = (DocumentEntry) fs.getRoot().getEntry("Empty");
 		assertEquals("Expected zero size", 0, entry.getSize());
