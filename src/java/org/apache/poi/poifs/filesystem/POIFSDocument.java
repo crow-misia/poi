@@ -503,7 +503,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 		BigBlockStore(POIFSBigBlockSize bigBlockSize, POIFSDocumentPath path, 
 		              String name, int size, POIFSWriterListener writer) {
 		   _bigBlockSize = bigBlockSize;
-			bigBlocks = new DocumentBlock[0];
+			bigBlocks = DocumentBlock.EMPTY_ARRAY;
 			_path = path;
 			_name = name;
 			_size = size;
@@ -522,8 +522,8 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 		 */
 		DocumentBlock[] getBlocks() {
 			if (isValid() && _writer != null) {
-				FastByteArrayOutputStream stream = new FastByteArrayOutputStream(_size);
-				DocumentOutputStream dstream = new DocumentOutputStream(stream, _size);
+				final FastByteArrayOutputStream stream = new FastByteArrayOutputStream(_size);
+				final DocumentOutputStream dstream = new DocumentOutputStream(stream, _size);
 
 				_writer.processPOIFSWriterEvent(new POIFSWriterEvent(dstream, _path, _name, _size));
 				bigBlocks = DocumentBlock.convert(_bigBlockSize, stream, _size);
@@ -545,8 +545,8 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 					dstream.writeFiller(countBlocks() * _bigBlockSize.getBigBlockSize(),
 							DocumentBlock.getFillByte());
 				} else {
-					for (int k = 0; k < bigBlocks.length; k++) {
-						bigBlocks[k].writeBlocks(stream);
+					for (final DocumentBlock b : bigBlocks) {
+						b.writeBlocks(stream);
 					}
 				}
 			}

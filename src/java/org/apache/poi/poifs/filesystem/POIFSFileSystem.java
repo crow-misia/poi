@@ -75,7 +75,7 @@ public class POIFSFileSystem
     }
 
     private PropertyTable _property_table;
-    private List          _documents;
+    private List<POIFSDocument>          _documents;
     private DirectoryNode _root;
 
     /**
@@ -92,7 +92,7 @@ public class POIFSFileSystem
     {
         HeaderBlock header_block = new HeaderBlock(bigBlockSize);
         _property_table = new PropertyTable(header_block);
-        _documents      = new ArrayList();
+        _documents      = new ArrayList<POIFSDocument>();
         _root           = null;
     }
 
@@ -310,7 +310,7 @@ public class POIFSFileSystem
 
         // create a list of BATManaged objects: the documents plus the
         // property table and the small block table
-        List bm_objects = new ArrayList();
+        final List<BlockWritable> bm_objects = new ArrayList<BlockWritable>(_documents.size() + 3);
 
         bm_objects.addAll(_documents);
         bm_objects.add(_property_table);
@@ -319,7 +319,7 @@ public class POIFSFileSystem
 
         // walk the list, allocating space for each and assigning each
         // a starting block number
-        Iterator iter = bm_objects.iterator();
+        Iterator<BlockWritable> iter = bm_objects.iterator();
 
         while (iter.hasNext())
         {
@@ -363,7 +363,8 @@ public class POIFSFileSystem
         // property table, the small block store, the small block
         // allocation table, the block allocation table, and the
         // extended block allocation table blocks)
-        List writers = new ArrayList();
+        final int n = _documents.size() + 5;
+        final List<BlockWritable> writers = new ArrayList<>(n);
 
         writers.add(header_block_writer);
         writers.addAll(_documents);
@@ -371,9 +372,9 @@ public class POIFSFileSystem
         writers.add(sbtw);
         writers.add(sbtw.getSBAT());
         writers.add(bat);
-        for (int j = 0; j < xbat_blocks.length; j++)
+        for (final BlockWritable b : xbat_blocks)
         {
-            writers.add(xbat_blocks[ j ]);
+            writers.add(b);
         }
 
         // now, write everything out
@@ -485,7 +486,7 @@ public class POIFSFileSystem
 
     private void processProperties(final BlockList small_blocks,
                                    final BlockList big_blocks,
-                                   final Iterator properties,
+                                   final Iterator<?> properties,
                                    final DirectoryNode dir,
                                    final int headerPropertiesStartAt)
         throws IOException
@@ -561,7 +562,7 @@ public class POIFSFileSystem
      * back end store
      */
 
-    public Iterator getViewableIterator()
+    public Iterator<?> getViewableIterator()
     {
         if (!preferArray())
         {
