@@ -17,6 +17,7 @@
 
 package org.apache.poi.hslf.record;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.StringUtil;
@@ -81,7 +82,7 @@ public final class TextBytesAtom extends RecordAtom
 		LittleEndian.putUShort(_header, 2, (int)_type);
 		LittleEndian.putInt(_header, 4, 0);
 
-		_text = new byte[]{};
+		_text = ArrayUtil.EMPTY_BYTE_ARRAY;
 	}
 
 	/**

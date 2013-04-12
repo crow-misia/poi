@@ -45,8 +45,6 @@ public abstract class MultiOperandNumericFunction implements Function {
         _isBlankCounted = isBlankCounted;
     }
 
-	static final double[] EMPTY_DOUBLE_ARRAY = { };
-
 	private static final int DEFAULT_MAX_NUM_OPERANDS = 30;
 
 	public final ValueEval evaluate(ValueEval[] args, int srcCellRow, int srcCellCol) {

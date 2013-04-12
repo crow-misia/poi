@@ -17,6 +17,7 @@
 
 package org.apache.poi.ddf;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 
@@ -91,11 +92,11 @@ public final class EscherBSERecord extends EscherRecord {
         listener.beforeRecordSerialize( offset, getRecordId(), this );
 
         if (_remainingData == null)
-            _remainingData = new byte[0];
+            _remainingData = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         LittleEndian.putShort( data, offset, getOptions() );
         LittleEndian.putShort( data, offset + 2, getRecordId() );
-        if (_remainingData == null) _remainingData = new byte[0];
+        if (_remainingData == null) _remainingData = ArrayUtil.EMPTY_BYTE_ARRAY;
         int blipSize = field_12_blipRecord == null ? 0 : field_12_blipRecord.getRecordSize();
         int remainingBytes = _remainingData.length + 36 + blipSize;
         LittleEndian.putInt( data, offset + 4, remainingBytes );
@@ -118,7 +119,7 @@ public final class EscherBSERecord extends EscherRecord {
             bytesWritten = field_12_blipRecord.serialize( offset + 44, data, new NullEscherSerializationListener() );
         }
         if (_remainingData == null)
-            _remainingData = new byte[0];
+            _remainingData = ArrayUtil.EMPTY_BYTE_ARRAY;
         System.arraycopy( _remainingData, 0, data, offset + 44 + bytesWritten, _remainingData.length );
         int pos = offset + 8 + 36 + _remainingData.length + bytesWritten;
 

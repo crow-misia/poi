@@ -29,6 +29,8 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Csaba Nagy (ncsaba at yahoo dot com)
  */
 public final class ContinueRecord extends StandardRecord {
+    public static final ContinueRecord[] EMPTY_ARRAY = new ContinueRecord[0];
+
     public final static short sid = 0x003C;
     private byte[] _data;
 

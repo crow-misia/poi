@@ -28,6 +28,7 @@ import org.apache.poi.hdf.model.hdftypes.*;
 import org.apache.poi.hdf.model.util.ParsingState;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**
@@ -338,7 +339,7 @@ public final class HDFObjectFactory {
                 if(chpxOffset == 0)
 
                 {
-                    _characterRuns.add(new ChpxNode(fcStart, fcEnd, new byte[0]));
+                    _characterRuns.add(new ChpxNode(fcStart, fcEnd, ArrayUtil.EMPTY_BYTE_ARRAY));
                     continue;
                 }
 

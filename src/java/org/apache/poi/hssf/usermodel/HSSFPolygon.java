@@ -19,6 +19,7 @@ package org.apache.poi.hssf.usermodel;
 
 import org.apache.poi.ddf.*;
 import org.apache.poi.hssf.record.*;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -125,7 +126,7 @@ public class HSSFPolygon  extends HSSFSimpleShape {
     public int[] getXPoints() {
         EscherArrayProperty verticesProp = getOptRecord().lookup(EscherProperties.GEOMETRY__VERTICES);
         if (null == verticesProp){
-            return new int[]{};
+            return ArrayUtil.EMPTY_INT_ARRAY;
         }
         int []array = new int[verticesProp.getNumberOfElementsInArray()-1];
         for (int i=0; i< verticesProp.getNumberOfElementsInArray()-1; i++){
@@ -142,7 +143,7 @@ public class HSSFPolygon  extends HSSFSimpleShape {
     public int[] getYPoints() {
         EscherArrayProperty verticesProp = getOptRecord().lookup(EscherProperties.GEOMETRY__VERTICES);
         if (null == verticesProp){
-            return new int[]{};
+            return ArrayUtil.EMPTY_INT_ARRAY;
         }
         int []array = new int[verticesProp.getNumberOfElementsInArray()-1];
         for (int i=0; i< verticesProp.getNumberOfElementsInArray()-1; i++){
@@ -165,7 +166,7 @@ public class HSSFPolygon  extends HSSFSimpleShape {
         if (xPoints.length == 0){
         	logger.log( POILogger.ERROR, "HSSFPolygon must have at least one point");
         }
-        EscherArrayProperty verticesProp = new EscherArrayProperty(EscherProperties.GEOMETRY__VERTICES, false, new byte[0] );
+        EscherArrayProperty verticesProp = new EscherArrayProperty(EscherProperties.GEOMETRY__VERTICES, false, ArrayUtil.EMPTY_BYTE_ARRAY );
         verticesProp.setNumberOfElementsInArray(xPoints.length+1);
         verticesProp.setNumberOfElementsInMemory(xPoints.length+1);
         verticesProp.setSizeOfElements(0xFFF0);

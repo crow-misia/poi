@@ -25,6 +25,7 @@ import junit.framework.TestCase;
 import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.FontUnderline;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.xssf.XSSFTestDataSamples;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTTextCharacterProperties;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTTextParagraph;
@@ -229,7 +230,7 @@ public class TestXSSFDrawing extends TestCase {
         XSSFClientAnchor anchor2 = new XSSFClientAnchor(0, 0, 0, 0, 2, 2, 3, 5);
         XSSFShape shape2 = drawing.createTextbox(anchor2);
 
-        int pictureIndex= wb.addPicture(new byte[]{}, XSSFWorkbook.PICTURE_TYPE_PNG);
+        int pictureIndex= wb.addPicture(ArrayUtil.EMPTY_BYTE_ARRAY, XSSFWorkbook.PICTURE_TYPE_PNG);
         XSSFClientAnchor anchor3 = new XSSFClientAnchor(0, 0, 0, 0, 2, 2, 3, 6);
         XSSFShape shape3 = drawing.createPicture(anchor3, pictureIndex);
 

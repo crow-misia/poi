@@ -25,6 +25,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.util.ArrayUtil;
+
 import junit.framework.TestCase;
 
 /**
@@ -45,9 +47,9 @@ public final class TestFilteringDirectoryNode extends TestCase {
        dirA = fs.createDirectory("DirA");
        dirB = fs.createDirectory("DirB");
        dirAA = dirA.createDirectory("DirAA");
-       eRoot = fs.getRoot().createDocument("Root", new ByteArrayInputStream(new byte[] {}));
-       eA  = dirA.createDocument("NA", new ByteArrayInputStream(new byte[] {}));
-       eAA = dirAA.createDocument("NAA", new ByteArrayInputStream(new byte[] {}));
+       eRoot = fs.getRoot().createDocument("Root", new ByteArrayInputStream(ArrayUtil.EMPTY_BYTE_ARRAY));
+       eA  = dirA.createDocument("NA", new ByteArrayInputStream(ArrayUtil.EMPTY_BYTE_ARRAY));
+       eAA = dirAA.createDocument("NAA", new ByteArrayInputStream(ArrayUtil.EMPTY_BYTE_ARRAY));
     }
     
     public void testNoFiltering() throws Exception {

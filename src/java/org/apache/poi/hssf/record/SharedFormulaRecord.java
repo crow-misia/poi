@@ -22,6 +22,7 @@ import org.apache.poi.hssf.util.CellRangeAddress8Bit;
 import org.apache.poi.ss.formula.Formula;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.SharedFormula;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndianOutput;
 
@@ -48,7 +49,7 @@ public final class SharedFormulaRecord extends SharedValueRecordBase {
     }
     private SharedFormulaRecord(CellRangeAddress8Bit range) {
         super(range);
-        field_7_parsed_expr = Formula.create(Ptg.EMPTY_PTG_ARRAY);
+        field_7_parsed_expr = Formula.create(Ptg.EMPTY_ARRAY);
     }
 
     /**

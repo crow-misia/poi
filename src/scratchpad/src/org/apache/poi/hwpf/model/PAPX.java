@@ -22,6 +22,7 @@ import org.apache.poi.hwpf.sprm.ParagraphSprmUncompressor;
 import org.apache.poi.hwpf.sprm.SprmBuffer;
 import org.apache.poi.hwpf.sprm.SprmOperation;
 import org.apache.poi.hwpf.usermodel.ParagraphProperties;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 
@@ -113,7 +114,7 @@ public final class PAPX extends BytePropertyNode<PAPX> {
   public byte[] getGrpprl()
   {
       if (_buf == null)
-          return new byte[0];
+          return ArrayUtil.EMPTY_BYTE_ARRAY;
 
     return ((SprmBuffer)_buf).toByteArray();
   }

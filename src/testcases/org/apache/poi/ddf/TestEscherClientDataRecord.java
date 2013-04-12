@@ -18,6 +18,8 @@
 package org.apache.poi.ddf;
 
 import junit.framework.TestCase;
+
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
 
@@ -65,7 +67,7 @@ public class TestEscherClientDataRecord extends TestCase
         EscherClientDataRecord r = new EscherClientDataRecord();
         r.setOptions( (short) 0x0002 );
         r.setRecordId( EscherClientDataRecord.RECORD_ID );
-        r.setRemainingData( new byte[] {} );
+        r.setRemainingData(ArrayUtil.EMPTY_BYTE_ARRAY);
         return r;
     }
 }

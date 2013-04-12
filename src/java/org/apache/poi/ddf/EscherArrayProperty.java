@@ -17,6 +17,7 @@
 
 package org.apache.poi.ddf;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.HexDump;
 
@@ -162,7 +163,7 @@ public final class EscherArrayProperty extends EscherComplexProperty {
      */
     public int setArrayData(byte[] data, int offset) {
         if (emptyComplexPart){
-            _complexData = new byte[0];
+            _complexData = ArrayUtil.EMPTY_BYTE_ARRAY;
         } else {
             short numElements = LittleEndian.getShort(data, offset);
             LittleEndian.getShort(data, offset + 2); // numReserved

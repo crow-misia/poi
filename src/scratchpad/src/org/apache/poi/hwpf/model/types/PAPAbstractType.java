@@ -24,6 +24,7 @@ import org.apache.poi.hwpf.usermodel.DateAndTime;
 import org.apache.poi.hwpf.usermodel.DropCapSpecifier;
 import org.apache.poi.hwpf.usermodel.LineSpacingDescriptor;
 import org.apache.poi.hwpf.usermodel.ShadingDescriptor;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.BitField;
 import org.apache.poi.util.Internal;
 
@@ -155,13 +156,13 @@ public abstract class PAPAbstractType
         this.field_64_brcBetween = new BorderCode();
         this.field_65_brcBar = new BorderCode();
         this.field_66_shd = new ShadingDescriptor();
-        this.field_67_anld = new byte[0];
-        this.field_68_phe = new byte[0];
+        this.field_67_anld = ArrayUtil.EMPTY_BYTE_ARRAY;
+        this.field_68_phe = ArrayUtil.EMPTY_BYTE_ARRAY;
         this.field_71_dttmPropRMark = new DateAndTime();
         this.field_73_rgdxaTab = new int[0];
         this.field_74_rgtbd = new TabDescriptor[0];
-        this.field_75_numrm = new byte[0];
-        this.field_76_ptap = new byte[0];
+        this.field_75_numrm = ArrayUtil.EMPTY_BYTE_ARRAY;
+        this.field_76_ptap = ArrayUtil.EMPTY_BYTE_ARRAY;
     }
 
 
