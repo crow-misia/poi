@@ -33,38 +33,38 @@ public class FontMetricsDumper
 
         Font[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
         for (final Font f : allFonts) {
-            String fontName = f.getFontName();
+            final String fontName = f.getFontName();
 
             Font font = new Font(fontName, Font.BOLD, 10);
             FontMetrics fontMetrics = Toolkit.getDefaultToolkit().getFontMetrics(font);
             int fontHeight = fontMetrics.getHeight();
 
             props.setProperty("font." + fontName + ".height", fontHeight+"");
-            StringBuffer characters = new StringBuffer();
+            StringBuilder characters = new StringBuilder(26 * 3 + 26 * 3 + 10 * 3);
             for (char c = 'a'; c <= 'z'; c++)
             {
-                characters.append( c + ", " );
+                characters.append( c ).append( ", " );
             }
             for (char c = 'A'; c <= 'Z'; c++)
             {
-                characters.append( c + ", " );
+                characters.append( c ).append( ", " );
             }
             for (char c = '0'; c <= '9'; c++)
             {
-                characters.append( c + ", " );
+                characters.append( c ).append( ", " );
             }
-            StringBuffer widths = new StringBuffer();
+            StringBuilder widths = new StringBuilder(26 * 5 + 26 * 5 + 10 * 5);
             for (char c = 'a'; c <= 'z'; c++)
             {
-                widths.append( fontMetrics.getWidths()[c] + ", " );
+                widths.append( fontMetrics.getWidths()[c] ).append( ", " );
             }
             for (char c = 'A'; c <= 'Z'; c++)
             {
-                widths.append( fontMetrics.getWidths()[c] + ", " );
+                widths.append( fontMetrics.getWidths()[c] ).append( ", " );
             }
             for (char c = '0'; c <= '9'; c++)
             {
-                widths.append( fontMetrics.getWidths()[c] + ", " );
+                widths.append( fontMetrics.getWidths()[c] ).append( ", " );
             }
             props.setProperty("font." + fontName + ".characters", characters.toString());
             props.setProperty("font." + fontName + ".widths", widths.toString());

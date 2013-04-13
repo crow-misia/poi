@@ -122,22 +122,18 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
         Map<Short, Constructor<? extends EscherRecord>> result = new HashMap<Short, Constructor<? extends EscherRecord>>();
         final Class<?>[] EMPTY_CLASS_ARRAY = new Class[0];
 
-        try {
-            for (final Class<?> tmpCls : recClasses) {
-                @SuppressWarnings("unchecked")
-                final Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) tmpCls;
-                final short sid = recCls.getField("RECORD_ID").getShort(null);
-                final Constructor<? extends EscherRecord> constructor = recCls.getConstructor( EMPTY_CLASS_ARRAY );
-                result.put(Short.valueOf(sid), constructor);
+        for (final Class<?> cls : recClasses) {
+            @SuppressWarnings("unchecked")
+            final Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) cls;
+            final short sid;
+            final Constructor<? extends EscherRecord> constructor;
+            try {
+                sid = recCls.getField("RECORD_ID").getShort(null);
+                constructor = recCls.getConstructor( EMPTY_CLASS_ARRAY );
+            } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | NoSuchMethodException e) {
+                throw new RuntimeException(e);
             }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
+            result.put(Short.valueOf(sid), constructor);
         }
         return result;
     }

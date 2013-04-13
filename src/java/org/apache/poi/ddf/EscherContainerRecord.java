@@ -76,7 +76,8 @@ public final class EscherContainerRecord extends EscherRecord {
         int bytesRemaining = readHeader(data, pOffset);
         int bytesWritten = 8;
         int offset = pOffset + 8;
-        while (bytesRemaining > 0 && offset < data.length) {
+        final int len = data.length;
+        while (bytesRemaining > 0 && offset < len) {
             EscherRecord child = recordFactory.createRecord(data, offset);
             int childBytesWritten = child.fillFields(data, offset, recordFactory);
             bytesWritten += childBytesWritten;

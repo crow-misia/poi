@@ -247,7 +247,7 @@ public final class LittleEndian
     public static short[] getShortArray( byte[] data, int offset, int size )
     {
         final int n = size / SHORT_SIZE;
-        short[] result = new short[n];
+        final short[] result = new short[n];
         for ( int i = 0; i < n; i++ )
         {
             result[i] = getShort( data, offset + i * SHORT_SIZE );
