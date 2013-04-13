@@ -70,15 +70,17 @@ public final class EscherDggRecord extends EscherRecord {
         int bytesRemaining = readHeader( data, offset );
         int pos            = offset + 8;
         int size           = 0;
+        final int len = (bytesRemaining-size) / 8;
         field_1_shapeIdMax     =  LittleEndian.getInt( data, pos + size );size+=4;
         LittleEndian.getInt( data, pos + size );size+=4; // field_2_numIdClusters
         field_3_numShapesSaved =  LittleEndian.getInt( data, pos + size );size+=4;
         field_4_drawingsSaved  =  LittleEndian.getInt( data, pos + size );size+=4;
-        field_5_fileIdClusters = new FileIdCluster[(bytesRemaining-size) / 8];  // Can't rely on field_2_numIdClusters
-        for (int i = 0; i < field_5_fileIdClusters.length; i++)
+        field_5_fileIdClusters = new FileIdCluster[len];  // Can't rely on field_2_numIdClusters
+        for (int i = 0; i < len; i++)
         {
-            field_5_fileIdClusters[i] = new FileIdCluster(LittleEndian.getInt( data, pos + size ), LittleEndian.getInt( data, pos + size + 4 ));
-            maxDgId = Math.max(maxDgId, field_5_fileIdClusters[i].getDrawingGroupId());
+            final FileIdCluster c = new FileIdCluster(LittleEndian.getInt( data, pos + size ), LittleEndian.getInt( data, pos + size + 4 ));
+            maxDgId = Math.max(maxDgId, c.getDrawingGroupId());
+            field_5_fileIdClusters[i] = c;
             size += 8;
         }
         bytesRemaining         -= size;
@@ -100,9 +102,9 @@ public final class EscherDggRecord extends EscherRecord {
         LittleEndian.putInt( data, pos, getNumIdClusters() );          pos += 4;
         LittleEndian.putInt( data, pos, field_3_numShapesSaved );      pos += 4;
         LittleEndian.putInt( data, pos, field_4_drawingsSaved );       pos += 4;
-        for (int i = 0; i < field_5_fileIdClusters.length; i++) {
-            LittleEndian.putInt( data, pos, field_5_fileIdClusters[i].field_1_drawingGroupId );   pos += 4;
-            LittleEndian.putInt( data, pos, field_5_fileIdClusters[i].field_2_numShapeIdsUsed );  pos += 4;
+        for (final FileIdCluster c : field_5_fileIdClusters) {
+            LittleEndian.putInt( data, pos, c.field_1_drawingGroupId );   pos += 4;
+            LittleEndian.putInt( data, pos, c.field_2_numShapeIdsUsed );  pos += 4;
         }
 
         listener.afterRecordSerialize( pos, getRecordId(), getRecordSize(), this );

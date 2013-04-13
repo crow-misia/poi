@@ -393,8 +393,8 @@ public class EscherBlipWMFRecord
         DeflaterOutputStream  deflaterOutputStream = new DeflaterOutputStream( out );
         try
         {
-            for ( int i = 0; i < data.length; i++ )
-                deflaterOutputStream.write( data[i] );
+            deflaterOutputStream.write( data );
+            deflaterOutputStream.finish();
         }
         catch ( IOException e )
         {

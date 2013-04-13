@@ -122,23 +122,15 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
         Map<Short, Constructor<? extends EscherRecord>> result = new HashMap<Short, Constructor<? extends EscherRecord>>();
         final Class<?>[] EMPTY_CLASS_ARRAY = new Class[0];
 
-        for (int i = 0; i < recClasses.length; i++) {
+        for (final Class<?> cls : recClasses) {
             @SuppressWarnings("unchecked")
-            final Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) recClasses[i];
+            final Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) cls;
             final short sid;
-            try {
-                sid = recCls.getField("RECORD_ID").getShort(null);
-            } catch (IllegalArgumentException e) {
-                throw new RuntimeException(e);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            } catch (NoSuchFieldException e) {
-                throw new RuntimeException(e);
-            }
             final Constructor<? extends EscherRecord> constructor;
             try {
+                sid = recCls.getField("RECORD_ID").getShort(null);
                 constructor = recCls.getConstructor( EMPTY_CLASS_ARRAY );
-            } catch (NoSuchMethodException e) {
+            } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
             result.put(Short.valueOf(sid), constructor);

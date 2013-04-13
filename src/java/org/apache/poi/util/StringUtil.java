@@ -17,7 +17,6 @@
 
 package org.apache.poi.util;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
@@ -25,6 +24,7 @@ import java.util.Iterator;
 
 import org.apache.commons.codec.Charsets;
 import org.apache.poi.hssf.record.RecordInputStream;
+
 /**
  *  Title: String Utility Description: Collection of string handling utilities<p/>
  *
@@ -73,11 +73,7 @@ public final class StringUtil {
 			throw new IllegalArgumentException("Illegal length " + len);
 		}
 
-		try {
-			return new String(string, offset, len * 2, "UTF-16LE");
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
+		return new String(string, offset, len * 2, Charsets.UTF_16LE);
 	}
 
 	/**
@@ -115,10 +111,10 @@ public final class StringUtil {
 	}
 	public static String readCompressedUnicode(LittleEndianInput in, int nChars) {
 		char[] buf = new char[nChars];
-		for (int i = 0; i < buf.length; i++) {
+		for (int i = 0; i < nChars; i++) {
 			buf[i] = (char) in.readUByte();
 		}
-		return new String(buf);
+		return String.valueOf(buf);
 	}
 	/**
 	 * InputStream <tt>in</tt> is expected to contain:
@@ -383,7 +379,7 @@ public final class StringUtil {
          if(strings != null) {
             this.strings = strings;
          } else {
-            this.strings = new String[0];
+            this.strings = ArrayUtil.EMPTY_STRING_ARRAY;
          }
       }
 

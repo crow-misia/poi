@@ -17,15 +17,17 @@
 
 package org.apache.poi.ddf;
 
-import org.apache.poi.util.HexDump;
-import org.apache.poi.util.HexRead;
-import org.apache.poi.util.LittleEndian;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.InflaterInputStream;
+
+import org.apache.poi.util.HexDump;
+import org.apache.poi.util.HexRead;
+import org.apache.poi.util.LittleEndian;
 
 /**
  * Used to dump the contents of escher records to a PrintStream.
@@ -33,6 +35,283 @@ import java.util.zip.InflaterInputStream;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class EscherDump {
+    private static final Map<Integer, String> PROP_NAMES = new HashMap<>();
+    static {
+        PROP_NAMES.put(4, "transform.rotation");
+        PROP_NAMES.put(119, "protection.lockrotation");
+        PROP_NAMES.put(120, "protection.lockaspectratio");
+        PROP_NAMES.put(121, "protection.lockposition");
+        PROP_NAMES.put(122, "protection.lockagainstselect");
+        PROP_NAMES.put(123, "protection.lockcropping");
+        PROP_NAMES.put(124, "protection.lockvertices");
+        PROP_NAMES.put(125, "protection.locktext");
+        PROP_NAMES.put(126, "protection.lockadjusthandles");
+        PROP_NAMES.put(127, "protection.lockagainstgrouping");
+        PROP_NAMES.put(128, "text.textid");
+        PROP_NAMES.put(129, "text.textleft");
+        PROP_NAMES.put(130, "text.texttop");
+        PROP_NAMES.put(131, "text.textright");
+        PROP_NAMES.put(132, "text.textbottom");
+        PROP_NAMES.put(133, "text.wraptext");
+        PROP_NAMES.put(134, "text.scaletext");
+        PROP_NAMES.put(135, "text.anchortext");
+        PROP_NAMES.put(136, "text.textflow");
+        PROP_NAMES.put(137, "text.fontrotation");
+        PROP_NAMES.put(138, "text.idofnextshape");
+        PROP_NAMES.put(139, "text.bidir");
+        PROP_NAMES.put(187, "text.singleclickselects");
+        PROP_NAMES.put(188, "text.usehostmargins");
+        PROP_NAMES.put(189, "text.rotatetextwithshape");
+        PROP_NAMES.put(190, "text.sizeshapetofittext");
+        PROP_NAMES.put(191, "text.sizetexttofitshape");
+        PROP_NAMES.put(192, "geotext.unicode");
+        PROP_NAMES.put(193, "geotext.rtftext");
+        PROP_NAMES.put(194, "geotext.alignmentoncurve");
+        PROP_NAMES.put(195, "geotext.defaultpointsize");
+        PROP_NAMES.put(196, "geotext.textspacing");
+        PROP_NAMES.put(197, "geotext.fontfamilyname");
+        PROP_NAMES.put(240, "geotext.reverseroworder");
+        PROP_NAMES.put(241, "geotext.hastexteffect");
+        PROP_NAMES.put(242, "geotext.rotatecharacters");
+        PROP_NAMES.put(243, "geotext.kerncharacters");
+        PROP_NAMES.put(244, "geotext.tightortrack");
+        PROP_NAMES.put(245, "geotext.stretchtofitshape");
+        PROP_NAMES.put(246, "geotext.charboundingbox");
+        PROP_NAMES.put(247, "geotext.scaletextonpath");
+        PROP_NAMES.put(248, "geotext.stretchcharheight");
+        PROP_NAMES.put(249, "geotext.nomeasurealongpath");
+        PROP_NAMES.put(250, "geotext.boldfont");
+        PROP_NAMES.put(251, "geotext.italicfont");
+        PROP_NAMES.put(252, "geotext.underlinefont");
+        PROP_NAMES.put(253, "geotext.shadowfont");
+        PROP_NAMES.put(254, "geotext.smallcapsfont");
+        PROP_NAMES.put(255, "geotext.strikethroughfont");
+        PROP_NAMES.put(256, "blip.cropfromtop");
+        PROP_NAMES.put(257, "blip.cropfrombottom");
+        PROP_NAMES.put(258, "blip.cropfromleft");
+        PROP_NAMES.put(259, "blip.cropfromright");
+        PROP_NAMES.put(260, "blip.bliptodisplay");
+        PROP_NAMES.put(261, "blip.blipfilename");
+        PROP_NAMES.put(262, "blip.blipflags");
+        PROP_NAMES.put(263, "blip.transparentcolor");
+        PROP_NAMES.put(264, "blip.contrastsetting");
+        PROP_NAMES.put(265, "blip.brightnesssetting");
+        PROP_NAMES.put(266, "blip.gamma");
+        PROP_NAMES.put(267, "blip.pictureid");
+        PROP_NAMES.put(268, "blip.doublemod");
+        PROP_NAMES.put(269, "blip.picturefillmod");
+        PROP_NAMES.put(270, "blip.pictureline");
+        PROP_NAMES.put(271, "blip.printblip");
+        PROP_NAMES.put(272, "blip.printblipfilename");
+        PROP_NAMES.put(273, "blip.printflags");
+        PROP_NAMES.put(316, "blip.nohittestpicture");
+        PROP_NAMES.put(317, "blip.picturegray");
+        PROP_NAMES.put(318, "blip.picturebilevel");
+        PROP_NAMES.put(319, "blip.pictureactive");
+        PROP_NAMES.put(320, "geometry.left");
+        PROP_NAMES.put(321, "geometry.top");
+        PROP_NAMES.put(322, "geometry.right");
+        PROP_NAMES.put(323, "geometry.bottom");
+        PROP_NAMES.put(324, "geometry.shapepath");
+        PROP_NAMES.put(325, "geometry.vertices");
+        PROP_NAMES.put(326, "geometry.segmentinfo");
+        PROP_NAMES.put(327, "geometry.adjustvalue");
+        PROP_NAMES.put(328, "geometry.adjust2value");
+        PROP_NAMES.put(329, "geometry.adjust3value");
+        PROP_NAMES.put(330, "geometry.adjust4value");
+        PROP_NAMES.put(331, "geometry.adjust5value");
+        PROP_NAMES.put(332, "geometry.adjust6value");
+        PROP_NAMES.put(333, "geometry.adjust7value");
+        PROP_NAMES.put(334, "geometry.adjust8value");
+        PROP_NAMES.put(335, "geometry.adjust9value");
+        PROP_NAMES.put(336, "geometry.adjust10value");
+        PROP_NAMES.put(378, "geometry.shadowOK");
+        PROP_NAMES.put(379, "geometry.3dok");
+        PROP_NAMES.put(380, "geometry.lineok");
+        PROP_NAMES.put(381, "geometry.geotextok");
+        PROP_NAMES.put(382, "geometry.fillshadeshapeok");
+        PROP_NAMES.put(383, "geometry.fillok");
+        PROP_NAMES.put(384, "fill.filltype");
+        PROP_NAMES.put(385, "fill.fillcolor");
+        PROP_NAMES.put(386, "fill.fillopacity");
+        PROP_NAMES.put(387, "fill.fillbackcolor");
+        PROP_NAMES.put(388, "fill.backopacity");
+        PROP_NAMES.put(389, "fill.crmod");
+        PROP_NAMES.put(390, "fill.patterntexture");
+        PROP_NAMES.put(391, "fill.blipfilename");
+        PROP_NAMES.put(392, "fill.blipflags");
+        PROP_NAMES.put(393, "fill.width");
+        PROP_NAMES.put(394, "fill.height");
+        PROP_NAMES.put(395, "fill.angle");
+        PROP_NAMES.put(396, "fill.focus");
+        PROP_NAMES.put(397, "fill.toleft");
+        PROP_NAMES.put(398, "fill.totop");
+        PROP_NAMES.put(399, "fill.toright");
+        PROP_NAMES.put(400, "fill.tobottom");
+        PROP_NAMES.put(401, "fill.rectleft");
+        PROP_NAMES.put(402, "fill.recttop");
+        PROP_NAMES.put(403, "fill.rectright");
+        PROP_NAMES.put(404, "fill.rectbottom");
+        PROP_NAMES.put(405, "fill.dztype");
+        PROP_NAMES.put(406, "fill.shadepreset");
+        PROP_NAMES.put(407, "fill.shadecolors");
+        PROP_NAMES.put(408, "fill.originx");
+        PROP_NAMES.put(409, "fill.originy");
+        PROP_NAMES.put(410, "fill.shapeoriginx");
+        PROP_NAMES.put(411, "fill.shapeoriginy");
+        PROP_NAMES.put(412, "fill.shadetype");
+        PROP_NAMES.put(443, "fill.filled");
+        PROP_NAMES.put(444, "fill.hittestfill");
+        PROP_NAMES.put(445, "fill.shape");
+        PROP_NAMES.put(446, "fill.userect");
+        PROP_NAMES.put(447, "fill.nofillhittest");
+        PROP_NAMES.put(448, "linestyle.color");
+        PROP_NAMES.put(449, "linestyle.opacity");
+        PROP_NAMES.put(450, "linestyle.backcolor");
+        PROP_NAMES.put(451, "linestyle.crmod");
+        PROP_NAMES.put(452, "linestyle.linetype");
+        PROP_NAMES.put(453, "linestyle.fillblip");
+        PROP_NAMES.put(454, "linestyle.fillblipname");
+        PROP_NAMES.put(455, "linestyle.fillblipflags");
+        PROP_NAMES.put(456, "linestyle.fillwidth");
+        PROP_NAMES.put(457, "linestyle.fillheight");
+        PROP_NAMES.put(458, "linestyle.filldztype");
+        PROP_NAMES.put(459, "linestyle.linewidth");
+        PROP_NAMES.put(460, "linestyle.linemiterlimit");
+        PROP_NAMES.put(461, "linestyle.linestyle");
+        PROP_NAMES.put(462, "linestyle.linedashing");
+        PROP_NAMES.put(463, "linestyle.linedashstyle");
+        PROP_NAMES.put(464, "linestyle.linestartarrowhead");
+        PROP_NAMES.put(465, "linestyle.lineendarrowhead");
+        PROP_NAMES.put(466, "linestyle.linestartarrowwidth");
+        PROP_NAMES.put(467, "linestyle.lineestartarrowlength");
+        PROP_NAMES.put(468, "linestyle.lineendarrowwidth");
+        PROP_NAMES.put(469, "linestyle.lineendarrowlength");
+        PROP_NAMES.put(470, "linestyle.linejoinstyle");
+        PROP_NAMES.put(471, "linestyle.lineendcapstyle");
+        PROP_NAMES.put(507, "linestyle.arrowheadsok");
+        PROP_NAMES.put(508, "linestyle.anyline");
+        PROP_NAMES.put(509, "linestyle.hitlinetest");
+        PROP_NAMES.put(510, "linestyle.linefillshape");
+        PROP_NAMES.put(511, "linestyle.nolinedrawdash");
+        PROP_NAMES.put(512, "shadowstyle.type");
+        PROP_NAMES.put(513, "shadowstyle.color");
+        PROP_NAMES.put(514, "shadowstyle.highlight");
+        PROP_NAMES.put(515, "shadowstyle.crmod");
+        PROP_NAMES.put(516, "shadowstyle.opacity");
+        PROP_NAMES.put(517, "shadowstyle.offsetx");
+        PROP_NAMES.put(518, "shadowstyle.offsety");
+        PROP_NAMES.put(519, "shadowstyle.secondoffsetx");
+        PROP_NAMES.put(520, "shadowstyle.secondoffsety");
+        PROP_NAMES.put(521, "shadowstyle.scalextox");
+        PROP_NAMES.put(522, "shadowstyle.scaleytox");
+        PROP_NAMES.put(523, "shadowstyle.scalextoy");
+        PROP_NAMES.put(524, "shadowstyle.scaleytoy");
+        PROP_NAMES.put(525, "shadowstyle.perspectivex");
+        PROP_NAMES.put(526, "shadowstyle.perspectivey");
+        PROP_NAMES.put(527, "shadowstyle.weight");
+        PROP_NAMES.put(528, "shadowstyle.originx");
+        PROP_NAMES.put(529, "shadowstyle.originy");
+        PROP_NAMES.put(574, "shadowstyle.shadow");
+        PROP_NAMES.put(575, "shadowstyle.shadowobsured");
+        PROP_NAMES.put(576, "perspective.type");
+        PROP_NAMES.put(577, "perspective.offsetx");
+        PROP_NAMES.put(578, "perspective.offsety");
+        PROP_NAMES.put(579, "perspective.scalextox");
+        PROP_NAMES.put(580, "perspective.scaleytox");
+        PROP_NAMES.put(581, "perspective.scalextoy");
+        PROP_NAMES.put(582, "perspective.scaleytox");
+        PROP_NAMES.put(583, "perspective.perspectivex");
+        PROP_NAMES.put(584, "perspective.perspectivey");
+        PROP_NAMES.put(585, "perspective.weight");
+        PROP_NAMES.put(586, "perspective.originx");
+        PROP_NAMES.put(587, "perspective.originy");
+        PROP_NAMES.put(639, "perspective.perspectiveon");
+        PROP_NAMES.put(640, "3d.specularamount");
+        PROP_NAMES.put(661, "3d.diffuseamount");
+        PROP_NAMES.put(662, "3d.shininess");
+        PROP_NAMES.put(663, "3d.edgethickness");
+        PROP_NAMES.put(664, "3d.extrudeforward");
+        PROP_NAMES.put(665, "3d.extrudebackward");
+        PROP_NAMES.put(666, "3d.extrudeplane");
+        PROP_NAMES.put(667, "3d.extrusioncolor");
+        PROP_NAMES.put(648, "3d.crmod");
+        PROP_NAMES.put(700, "3d.3deffect");
+        PROP_NAMES.put(701, "3d.metallic");
+        PROP_NAMES.put(702, "3d.useextrusioncolor");
+        PROP_NAMES.put(703, "3d.lightface");
+        PROP_NAMES.put(704, "3dstyle.yrotationangle");
+        PROP_NAMES.put(705, "3dstyle.xrotationangle");
+        PROP_NAMES.put(706, "3dstyle.rotationaxisx");
+        PROP_NAMES.put(707, "3dstyle.rotationaxisy");
+        PROP_NAMES.put(708, "3dstyle.rotationaxisz");
+        PROP_NAMES.put(709, "3dstyle.rotationangle");
+        PROP_NAMES.put(710, "3dstyle.rotationcenterx");
+        PROP_NAMES.put(711, "3dstyle.rotationcentery");
+        PROP_NAMES.put(712, "3dstyle.rotationcenterz");
+        PROP_NAMES.put(713, "3dstyle.rendermode");
+        PROP_NAMES.put(714, "3dstyle.tolerance");
+        PROP_NAMES.put(715, "3dstyle.xviewpoint");
+        PROP_NAMES.put(716, "3dstyle.yviewpoint");
+        PROP_NAMES.put(717, "3dstyle.zviewpoint");
+        PROP_NAMES.put(718, "3dstyle.originx");
+        PROP_NAMES.put(719, "3dstyle.originy");
+        PROP_NAMES.put(720, "3dstyle.skewangle");
+        PROP_NAMES.put(721, "3dstyle.skewamount");
+        PROP_NAMES.put(722, "3dstyle.ambientintensity");
+        PROP_NAMES.put(723, "3dstyle.keyx");
+        PROP_NAMES.put(724, "3dstyle.keyy");
+        PROP_NAMES.put(725, "3dstyle.keyz");
+        PROP_NAMES.put(726, "3dstyle.keyintensity");
+        PROP_NAMES.put(727, "3dstyle.fillx");
+        PROP_NAMES.put(728, "3dstyle.filly");
+        PROP_NAMES.put(729, "3dstyle.fillz");
+        PROP_NAMES.put(730, "3dstyle.fillintensity");
+        PROP_NAMES.put(763, "3dstyle.constrainrotation");
+        PROP_NAMES.put(764, "3dstyle.rotationcenterauto");
+        PROP_NAMES.put(765, "3dstyle.parallel");
+        PROP_NAMES.put(766, "3dstyle.keyharsh");
+        PROP_NAMES.put(767, "3dstyle.fillharsh");
+        PROP_NAMES.put(769, "shape.master");
+        PROP_NAMES.put(771, "shape.connectorstyle");
+        PROP_NAMES.put(772, "shape.blackandwhitesettings");
+        PROP_NAMES.put(773, "shape.wmodepurebw");
+        PROP_NAMES.put(774, "shape.wmodebw");
+        PROP_NAMES.put(826, "shape.oleicon");
+        PROP_NAMES.put(827, "shape.preferrelativeresize");
+        PROP_NAMES.put(828, "shape.lockshapetype");
+        PROP_NAMES.put(830, "shape.deleteattachedobject");
+        PROP_NAMES.put(831, "shape.backgroundshape");
+        PROP_NAMES.put(832, "callout.callouttype");
+        PROP_NAMES.put(833, "callout.xycalloutgap");
+        PROP_NAMES.put(834, "callout.calloutangle");
+        PROP_NAMES.put(835, "callout.calloutdroptype");
+        PROP_NAMES.put(836, "callout.calloutdropspecified");
+        PROP_NAMES.put(837, "callout.calloutlengthspecified");
+        PROP_NAMES.put(889, "callout.iscallout");
+        PROP_NAMES.put(890, "callout.calloutaccentbar");
+        PROP_NAMES.put(891, "callout.callouttextborder");
+        PROP_NAMES.put(892, "callout.calloutminusx");
+        PROP_NAMES.put(893, "callout.calloutminusy");
+        PROP_NAMES.put(894, "callout.dropauto");
+        PROP_NAMES.put(895, "callout.lengthspecified");
+        PROP_NAMES.put(896, "groupshape.shapename");
+        PROP_NAMES.put(897, "groupshape.description");
+        PROP_NAMES.put(898, "groupshape.hyperlink");
+        PROP_NAMES.put(899, "groupshape.wrappolygonvertices");
+        PROP_NAMES.put(900, "groupshape.wrapdistleft");
+        PROP_NAMES.put(901, "groupshape.wrapdisttop");
+        PROP_NAMES.put(902, "groupshape.wrapdistright");
+        PROP_NAMES.put(903, "groupshape.wrapdistbottom");
+        PROP_NAMES.put(904, "groupshape.regroupid");
+        PROP_NAMES.put(953, "groupshape.editedwrap");
+        PROP_NAMES.put(954, "groupshape.behinddocument");
+        PROP_NAMES.put(955, "groupshape.ondblclicknotify");
+        PROP_NAMES.put(956, "groupshape.isbutton");
+        PROP_NAMES.put(957, "groupshape.1dadjustment");
+        PROP_NAMES.put(958, "groupshape.hidden");
+        PROP_NAMES.put(959, "groupshape.print");
+    };
 
     public EscherDump() {
         //
@@ -431,299 +710,11 @@ public final class EscherDump {
      * @return  A descriptive name.
      */
     private String propName(short propertyId) {
-        final class PropName {
-            final int _id;
-            final String _name;
-            public PropName(int id, String name) {
-                _id = id;
-                _name = name;
-            }
+        final String n = PROP_NAMES.get(Integer.valueOf(propertyId));
+        if (n == null) {
+            return "unknown property";
         }
-
-        final PropName[] props = new PropName[] {
-            new PropName(4, "transform.rotation"),
-            new PropName(119, "protection.lockrotation"),
-            new PropName(120, "protection.lockaspectratio"),
-            new PropName(121, "protection.lockposition"),
-            new PropName(122, "protection.lockagainstselect"),
-            new PropName(123, "protection.lockcropping"),
-            new PropName(124, "protection.lockvertices"),
-            new PropName(125, "protection.locktext"),
-            new PropName(126, "protection.lockadjusthandles"),
-            new PropName(127, "protection.lockagainstgrouping"),
-            new PropName(128, "text.textid"),
-            new PropName(129, "text.textleft"),
-            new PropName(130, "text.texttop"),
-            new PropName(131, "text.textright"),
-            new PropName(132, "text.textbottom"),
-            new PropName(133, "text.wraptext"),
-            new PropName(134, "text.scaletext"),
-            new PropName(135, "text.anchortext"),
-            new PropName(136, "text.textflow"),
-            new PropName(137, "text.fontrotation"),
-            new PropName(138, "text.idofnextshape"),
-            new PropName(139, "text.bidir"),
-            new PropName(187, "text.singleclickselects"),
-            new PropName(188, "text.usehostmargins"),
-            new PropName(189, "text.rotatetextwithshape"),
-            new PropName(190, "text.sizeshapetofittext"),
-            new PropName(191, "text.sizetexttofitshape"),
-            new PropName(192, "geotext.unicode"),
-            new PropName(193, "geotext.rtftext"),
-            new PropName(194, "geotext.alignmentoncurve"),
-            new PropName(195, "geotext.defaultpointsize"),
-            new PropName(196, "geotext.textspacing"),
-            new PropName(197, "geotext.fontfamilyname"),
-            new PropName(240, "geotext.reverseroworder"),
-            new PropName(241, "geotext.hastexteffect"),
-            new PropName(242, "geotext.rotatecharacters"),
-            new PropName(243, "geotext.kerncharacters"),
-            new PropName(244, "geotext.tightortrack"),
-            new PropName(245, "geotext.stretchtofitshape"),
-            new PropName(246, "geotext.charboundingbox"),
-            new PropName(247, "geotext.scaletextonpath"),
-            new PropName(248, "geotext.stretchcharheight"),
-            new PropName(249, "geotext.nomeasurealongpath"),
-            new PropName(250, "geotext.boldfont"),
-            new PropName(251, "geotext.italicfont"),
-            new PropName(252, "geotext.underlinefont"),
-            new PropName(253, "geotext.shadowfont"),
-            new PropName(254, "geotext.smallcapsfont"),
-            new PropName(255, "geotext.strikethroughfont"),
-            new PropName(256, "blip.cropfromtop"),
-            new PropName(257, "blip.cropfrombottom"),
-            new PropName(258, "blip.cropfromleft"),
-            new PropName(259, "blip.cropfromright"),
-            new PropName(260, "blip.bliptodisplay"),
-            new PropName(261, "blip.blipfilename"),
-            new PropName(262, "blip.blipflags"),
-            new PropName(263, "blip.transparentcolor"),
-            new PropName(264, "blip.contrastsetting"),
-            new PropName(265, "blip.brightnesssetting"),
-            new PropName(266, "blip.gamma"),
-            new PropName(267, "blip.pictureid"),
-            new PropName(268, "blip.doublemod"),
-            new PropName(269, "blip.picturefillmod"),
-            new PropName(270, "blip.pictureline"),
-            new PropName(271, "blip.printblip"),
-            new PropName(272, "blip.printblipfilename"),
-            new PropName(273, "blip.printflags"),
-            new PropName(316, "blip.nohittestpicture"),
-            new PropName(317, "blip.picturegray"),
-            new PropName(318, "blip.picturebilevel"),
-            new PropName(319, "blip.pictureactive"),
-            new PropName(320, "geometry.left"),
-            new PropName(321, "geometry.top"),
-            new PropName(322, "geometry.right"),
-            new PropName(323, "geometry.bottom"),
-            new PropName(324, "geometry.shapepath"),
-            new PropName(325, "geometry.vertices"),
-            new PropName(326, "geometry.segmentinfo"),
-            new PropName(327, "geometry.adjustvalue"),
-            new PropName(328, "geometry.adjust2value"),
-            new PropName(329, "geometry.adjust3value"),
-            new PropName(330, "geometry.adjust4value"),
-            new PropName(331, "geometry.adjust5value"),
-            new PropName(332, "geometry.adjust6value"),
-            new PropName(333, "geometry.adjust7value"),
-            new PropName(334, "geometry.adjust8value"),
-            new PropName(335, "geometry.adjust9value"),
-            new PropName(336, "geometry.adjust10value"),
-            new PropName(378, "geometry.shadowOK"),
-            new PropName(379, "geometry.3dok"),
-            new PropName(380, "geometry.lineok"),
-            new PropName(381, "geometry.geotextok"),
-            new PropName(382, "geometry.fillshadeshapeok"),
-            new PropName(383, "geometry.fillok"),
-            new PropName(384, "fill.filltype"),
-            new PropName(385, "fill.fillcolor"),
-            new PropName(386, "fill.fillopacity"),
-            new PropName(387, "fill.fillbackcolor"),
-            new PropName(388, "fill.backopacity"),
-            new PropName(389, "fill.crmod"),
-            new PropName(390, "fill.patterntexture"),
-            new PropName(391, "fill.blipfilename"),
-            new PropName(392, "fill.blipflags"),
-            new PropName(393, "fill.width"),
-            new PropName(394, "fill.height"),
-            new PropName(395, "fill.angle"),
-            new PropName(396, "fill.focus"),
-            new PropName(397, "fill.toleft"),
-            new PropName(398, "fill.totop"),
-            new PropName(399, "fill.toright"),
-            new PropName(400, "fill.tobottom"),
-            new PropName(401, "fill.rectleft"),
-            new PropName(402, "fill.recttop"),
-            new PropName(403, "fill.rectright"),
-            new PropName(404, "fill.rectbottom"),
-            new PropName(405, "fill.dztype"),
-            new PropName(406, "fill.shadepreset"),
-            new PropName(407, "fill.shadecolors"),
-            new PropName(408, "fill.originx"),
-            new PropName(409, "fill.originy"),
-            new PropName(410, "fill.shapeoriginx"),
-            new PropName(411, "fill.shapeoriginy"),
-            new PropName(412, "fill.shadetype"),
-            new PropName(443, "fill.filled"),
-            new PropName(444, "fill.hittestfill"),
-            new PropName(445, "fill.shape"),
-            new PropName(446, "fill.userect"),
-            new PropName(447, "fill.nofillhittest"),
-            new PropName(448, "linestyle.color"),
-            new PropName(449, "linestyle.opacity"),
-            new PropName(450, "linestyle.backcolor"),
-            new PropName(451, "linestyle.crmod"),
-            new PropName(452, "linestyle.linetype"),
-            new PropName(453, "linestyle.fillblip"),
-            new PropName(454, "linestyle.fillblipname"),
-            new PropName(455, "linestyle.fillblipflags"),
-            new PropName(456, "linestyle.fillwidth"),
-            new PropName(457, "linestyle.fillheight"),
-            new PropName(458, "linestyle.filldztype"),
-            new PropName(459, "linestyle.linewidth"),
-            new PropName(460, "linestyle.linemiterlimit"),
-            new PropName(461, "linestyle.linestyle"),
-            new PropName(462, "linestyle.linedashing"),
-            new PropName(463, "linestyle.linedashstyle"),
-            new PropName(464, "linestyle.linestartarrowhead"),
-            new PropName(465, "linestyle.lineendarrowhead"),
-            new PropName(466, "linestyle.linestartarrowwidth"),
-            new PropName(467, "linestyle.lineestartarrowlength"),
-            new PropName(468, "linestyle.lineendarrowwidth"),
-            new PropName(469, "linestyle.lineendarrowlength"),
-            new PropName(470, "linestyle.linejoinstyle"),
-            new PropName(471, "linestyle.lineendcapstyle"),
-            new PropName(507, "linestyle.arrowheadsok"),
-            new PropName(508, "linestyle.anyline"),
-            new PropName(509, "linestyle.hitlinetest"),
-            new PropName(510, "linestyle.linefillshape"),
-            new PropName(511, "linestyle.nolinedrawdash"),
-            new PropName(512, "shadowstyle.type"),
-            new PropName(513, "shadowstyle.color"),
-            new PropName(514, "shadowstyle.highlight"),
-            new PropName(515, "shadowstyle.crmod"),
-            new PropName(516, "shadowstyle.opacity"),
-            new PropName(517, "shadowstyle.offsetx"),
-            new PropName(518, "shadowstyle.offsety"),
-            new PropName(519, "shadowstyle.secondoffsetx"),
-            new PropName(520, "shadowstyle.secondoffsety"),
-            new PropName(521, "shadowstyle.scalextox"),
-            new PropName(522, "shadowstyle.scaleytox"),
-            new PropName(523, "shadowstyle.scalextoy"),
-            new PropName(524, "shadowstyle.scaleytoy"),
-            new PropName(525, "shadowstyle.perspectivex"),
-            new PropName(526, "shadowstyle.perspectivey"),
-            new PropName(527, "shadowstyle.weight"),
-            new PropName(528, "shadowstyle.originx"),
-            new PropName(529, "shadowstyle.originy"),
-            new PropName(574, "shadowstyle.shadow"),
-            new PropName(575, "shadowstyle.shadowobsured"),
-            new PropName(576, "perspective.type"),
-            new PropName(577, "perspective.offsetx"),
-            new PropName(578, "perspective.offsety"),
-            new PropName(579, "perspective.scalextox"),
-            new PropName(580, "perspective.scaleytox"),
-            new PropName(581, "perspective.scalextoy"),
-            new PropName(582, "perspective.scaleytox"),
-            new PropName(583, "perspective.perspectivex"),
-            new PropName(584, "perspective.perspectivey"),
-            new PropName(585, "perspective.weight"),
-            new PropName(586, "perspective.originx"),
-            new PropName(587, "perspective.originy"),
-            new PropName(639, "perspective.perspectiveon"),
-            new PropName(640, "3d.specularamount"),
-            new PropName(661, "3d.diffuseamount"),
-            new PropName(662, "3d.shininess"),
-            new PropName(663, "3d.edgethickness"),
-            new PropName(664, "3d.extrudeforward"),
-            new PropName(665, "3d.extrudebackward"),
-            new PropName(666, "3d.extrudeplane"),
-            new PropName(667, "3d.extrusioncolor"),
-            new PropName(648, "3d.crmod"),
-            new PropName(700, "3d.3deffect"),
-            new PropName(701, "3d.metallic"),
-            new PropName(702, "3d.useextrusioncolor"),
-            new PropName(703, "3d.lightface"),
-            new PropName(704, "3dstyle.yrotationangle"),
-            new PropName(705, "3dstyle.xrotationangle"),
-            new PropName(706, "3dstyle.rotationaxisx"),
-            new PropName(707, "3dstyle.rotationaxisy"),
-            new PropName(708, "3dstyle.rotationaxisz"),
-            new PropName(709, "3dstyle.rotationangle"),
-            new PropName(710, "3dstyle.rotationcenterx"),
-            new PropName(711, "3dstyle.rotationcentery"),
-            new PropName(712, "3dstyle.rotationcenterz"),
-            new PropName(713, "3dstyle.rendermode"),
-            new PropName(714, "3dstyle.tolerance"),
-            new PropName(715, "3dstyle.xviewpoint"),
-            new PropName(716, "3dstyle.yviewpoint"),
-            new PropName(717, "3dstyle.zviewpoint"),
-            new PropName(718, "3dstyle.originx"),
-            new PropName(719, "3dstyle.originy"),
-            new PropName(720, "3dstyle.skewangle"),
-            new PropName(721, "3dstyle.skewamount"),
-            new PropName(722, "3dstyle.ambientintensity"),
-            new PropName(723, "3dstyle.keyx"),
-            new PropName(724, "3dstyle.keyy"),
-            new PropName(725, "3dstyle.keyz"),
-            new PropName(726, "3dstyle.keyintensity"),
-            new PropName(727, "3dstyle.fillx"),
-            new PropName(728, "3dstyle.filly"),
-            new PropName(729, "3dstyle.fillz"),
-            new PropName(730, "3dstyle.fillintensity"),
-            new PropName(763, "3dstyle.constrainrotation"),
-            new PropName(764, "3dstyle.rotationcenterauto"),
-            new PropName(765, "3dstyle.parallel"),
-            new PropName(766, "3dstyle.keyharsh"),
-            new PropName(767, "3dstyle.fillharsh"),
-            new PropName(769, "shape.master"),
-            new PropName(771, "shape.connectorstyle"),
-            new PropName(772, "shape.blackandwhitesettings"),
-            new PropName(773, "shape.wmodepurebw"),
-            new PropName(774, "shape.wmodebw"),
-            new PropName(826, "shape.oleicon"),
-            new PropName(827, "shape.preferrelativeresize"),
-            new PropName(828, "shape.lockshapetype"),
-            new PropName(830, "shape.deleteattachedobject"),
-            new PropName(831, "shape.backgroundshape"),
-            new PropName(832, "callout.callouttype"),
-            new PropName(833, "callout.xycalloutgap"),
-            new PropName(834, "callout.calloutangle"),
-            new PropName(835, "callout.calloutdroptype"),
-            new PropName(836, "callout.calloutdropspecified"),
-            new PropName(837, "callout.calloutlengthspecified"),
-            new PropName(889, "callout.iscallout"),
-            new PropName(890, "callout.calloutaccentbar"),
-            new PropName(891, "callout.callouttextborder"),
-            new PropName(892, "callout.calloutminusx"),
-            new PropName(893, "callout.calloutminusy"),
-            new PropName(894, "callout.dropauto"),
-            new PropName(895, "callout.lengthspecified"),
-            new PropName(896, "groupshape.shapename"),
-            new PropName(897, "groupshape.description"),
-            new PropName(898, "groupshape.hyperlink"),
-            new PropName(899, "groupshape.wrappolygonvertices"),
-            new PropName(900, "groupshape.wrapdistleft"),
-            new PropName(901, "groupshape.wrapdisttop"),
-            new PropName(902, "groupshape.wrapdistright"),
-            new PropName(903, "groupshape.wrapdistbottom"),
-            new PropName(904, "groupshape.regroupid"),
-            new PropName(953, "groupshape.editedwrap"),
-            new PropName(954, "groupshape.behinddocument"),
-            new PropName(955, "groupshape.ondblclicknotify"),
-            new PropName(956, "groupshape.isbutton"),
-            new PropName(957, "groupshape.1dadjustment"),
-            new PropName(958, "groupshape.hidden"),
-            new PropName(959, "groupshape.print"),
-        };
-
-        for (int i = 0; i < props.length; i++) {
-            if (props[i]._id == propertyId) {
-                return props[i]._name;
-            }
-        }
-
-        return "unknown property";
+        return n;
     }
 
     /**

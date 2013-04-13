@@ -101,11 +101,13 @@ public class SheetBuilder {
         Row currentRow = null;
         Cell currentCell = null;
 
-        for (int rowIndex = 0; rowIndex < cells.length; ++rowIndex) {
+        final int n = cells.length;
+        for (int rowIndex = 0; rowIndex < n; ++rowIndex) {
             Object[] rowArray = cells[rowIndex];
             currentRow = sheet.createRow(rowIndex);
 
-            for (int cellIndex = 0; cellIndex < rowArray.length; ++cellIndex) {
+            final int m = rowArray.length;
+            for (int cellIndex = 0; cellIndex < m; ++cellIndex) {
                 Object cellValue = rowArray[cellIndex];
                 if (cellValue != null || shouldCreateEmptyCells) {
                     currentCell = currentRow.createCell(cellIndex);
