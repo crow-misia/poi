@@ -92,9 +92,8 @@ public class ReadCustomPropertySets
             out("   No. of sections: " + sectionCount);
 
             /* Print the list of sections: */
-            List<Section> sections = ps.getSections();
             int nr = 0;
-            for (final Section sec : sections)
+            for (final Section sec : ps.getSections())
             {
                 /* Print a single section: */
                 out("   Section " + nr++ + ":");
@@ -107,7 +106,7 @@ public class ReadCustomPropertySets
                 out("      No. of properties: " + propertyCount);
 
                 /* Print the properties: */
-                Property[] properties = sec.getProperties();
+                final Property[] properties = sec.getProperties();
                 for (final Property p : properties)
                 {
                     /* Print a single property: */
