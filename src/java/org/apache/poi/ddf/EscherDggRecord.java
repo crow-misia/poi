@@ -69,24 +69,23 @@ public final class EscherDggRecord extends EscherRecord {
     public int fillFields(byte[] data, int offset, EscherRecordFactory recordFactory) {
         int bytesRemaining = readHeader( data, offset );
         int pos            = offset + 8;
-        int size           = 0;
-        final int len = (bytesRemaining-size) / 8;
-        field_1_shapeIdMax     =  LittleEndian.getInt( data, pos + size );size+=4;
-        LittleEndian.getInt( data, pos + size );size+=4; // field_2_numIdClusters
-        field_3_numShapesSaved =  LittleEndian.getInt( data, pos + size );size+=4;
-        field_4_drawingsSaved  =  LittleEndian.getInt( data, pos + size );size+=4;
+        field_1_shapeIdMax     =  LittleEndian.getInt( data, pos ); pos += 4;
+        LittleEndian.getInt( data, pos ); pos += 4; // field_2_numIdClusters
+        field_3_numShapesSaved =  LittleEndian.getInt( data, pos ); pos += 4;
+        field_4_drawingsSaved  =  LittleEndian.getInt( data, pos ); pos += 4;
+        final int len = (bytesRemaining - (pos - offset - 8)) / 8;
         field_5_fileIdClusters = new FileIdCluster[len];  // Can't rely on field_2_numIdClusters
         for (int i = 0; i < len; i++)
         {
-            final FileIdCluster c = new FileIdCluster(LittleEndian.getInt( data, pos + size ), LittleEndian.getInt( data, pos + size + 4 ));
+            final FileIdCluster c = new FileIdCluster(LittleEndian.getInt( data, pos ), LittleEndian.getInt( data, pos + 4 ));
             maxDgId = Math.max(maxDgId, c.getDrawingGroupId());
             field_5_fileIdClusters[i] = c;
-            size += 8;
+            pos += 8;
         }
-        bytesRemaining         -= size;
+        bytesRemaining         -= pos - offset - 8;
         if (bytesRemaining != 0)
             throw new RecordFormatException("Expecting no remaining data but got " + bytesRemaining + " byte(s).");
-        return 8 + size + bytesRemaining;
+        return pos - offset + bytesRemaining;
     }
 
     public int serialize(int offset, byte[] data, EscherSerializationListener listener) {

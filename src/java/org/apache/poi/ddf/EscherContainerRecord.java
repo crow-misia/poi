@@ -84,7 +84,7 @@ public final class EscherContainerRecord extends EscherRecord {
             offset += childBytesWritten;
             bytesRemaining -= childBytesWritten;
             addChildRecord(child);
-            if (offset >= data.length && bytesRemaining > 0) {
+            if (offset >= len && bytesRemaining > 0) {
                 _remainingLength = bytesRemaining;
                 log.log(POILogger.WARN, "Not enough Escher data: " + bytesRemaining + " bytes remaining but no space left");
             }
