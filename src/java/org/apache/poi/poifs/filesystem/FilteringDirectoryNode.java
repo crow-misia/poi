@@ -64,8 +64,8 @@ public class FilteringDirectoryNode implements DirectoryEntry
       this.directory = directory;
       
       // Process the excludes
-      this.excludes = new HashSet<String>();
-      this.childExcludes = new HashMap<String, List<String>>();
+      this.excludes = new HashSet<>();
+      this.childExcludes = new HashMap<>();
       for (String excl : excludes) {
          int splitAt = excl.indexOf('/');
          if (splitAt == -1) {

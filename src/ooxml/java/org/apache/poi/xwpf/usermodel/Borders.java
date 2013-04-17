@@ -609,7 +609,7 @@ public enum Borders {
         return value;
     }
 
-    private static Map<Integer, Borders> imap = new HashMap<Integer, Borders>();
+    private static Map<Integer, Borders> imap = new HashMap<>();
     static {
         for (Borders p : values()) {
             imap.put(Integer.valueOf(p.getValue()), p);

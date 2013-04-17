@@ -81,7 +81,7 @@ public class XWPFParagraph implements IBodyElement {
         }
 
         // Build up the character runs
-        runs = new ArrayList<XWPFRun>();
+        runs = new ArrayList<>();
         buildRunsInOrderFromXml(paragraph);
 
         // Look for bits associated with the runs

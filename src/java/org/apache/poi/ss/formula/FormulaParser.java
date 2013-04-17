@@ -1027,7 +1027,7 @@ public final class FormulaParser {
 	/** get arguments to a function */
 	private ParseNode[] Arguments() {
 		//average 2 args per function
-		List<ParseNode> temp = new ArrayList<ParseNode>(2);
+		List<ParseNode> temp = new ArrayList<>(2);
 		SkipWhite();
 		if(look == ')') {
 			return ParseNode.EMPTY_ARRAY;
@@ -1156,7 +1156,7 @@ public final class FormulaParser {
 	}
 
 	private ParseNode parseArray() {
-		List<Object[]> rowsData = new ArrayList<Object[]>();
+		List<Object[]> rowsData = new ArrayList<>();
 		while(true) {
 			Object[] singleRowData = parseArrayRow();
 			rowsData.add(singleRowData);
@@ -1187,7 +1187,7 @@ public final class FormulaParser {
 	}
 
 	private Object[] parseArrayRow() {
-		List<Object> temp = new ArrayList<Object>();
+		List<Object> temp = new ArrayList<>();
 		while (true) {
 			temp.add(parseArrayItem());
 			SkipWhite();

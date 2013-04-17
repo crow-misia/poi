@@ -105,7 +105,7 @@ public class TestNetworkdaysFunction extends TestCase {
 
         public MockAreaEval(String... holidays) {
             this(0, 0, 0, holidays.length - 1);
-            this.holidays = new ArrayList<ValueEval>();
+            this.holidays = new ArrayList<>();
             for (String holiday : holidays) {
                 this.holidays.add(new StringEval(holiday));
             }

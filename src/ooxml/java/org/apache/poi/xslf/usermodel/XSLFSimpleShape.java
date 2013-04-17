@@ -933,7 +933,7 @@ public abstract class XSLFSimpleShape extends XSLFShape {
     }
 
     private List<Outline> getDecorationOutlines(Graphics2D graphics){
-        List<Outline> lst = new ArrayList<Outline>();
+        List<Outline> lst = new ArrayList<>();
 
         Outline head = getHeadDecoration(graphics);
         if(head != null) lst.add(head);

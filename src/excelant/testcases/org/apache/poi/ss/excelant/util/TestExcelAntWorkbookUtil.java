@@ -17,10 +17,13 @@
 package org.apache.poi.ss.excelant.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.apache.poi.ss.examples.formula.CalculateMortgageFunction;
+import org.apache.poi.ss.excelant.util.ExcelAntEvaluationResult;
+import org.apache.poi.ss.excelant.util.ExcelAntWorkbookUtilTestHelper;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -115,7 +118,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 		fixture = new ExcelAntWorkbookUtilTestHelper( 
                 mortgageCalculatorFileName ) ;
 		
-		ArrayList<String> sheets = fixture.getSheets() ;
+		List<String> sheets = fixture.getSheets() ;
 		
 		assertNotNull( sheets ) ;
 		assertEquals( sheets.size(), 3 ) ; 

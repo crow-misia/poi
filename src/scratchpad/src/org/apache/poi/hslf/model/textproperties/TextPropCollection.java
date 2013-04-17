@@ -137,7 +137,7 @@ public class TextPropCollection {
 	public TextPropCollection(int charactersCovered, short reservedField) {
 		this.charactersCovered = charactersCovered;
 		this.reservedField = reservedField;
-		textPropList = new LinkedList<TextProp>();
+		textPropList = new LinkedList<>();
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class TextPropCollection {
 	public TextPropCollection(int textSize) {
 		charactersCovered = textSize;
 		reservedField = -1;
-		textPropList = new LinkedList<TextProp>();
+		textPropList = new LinkedList<>();
 	}
 	
 	/**

@@ -33,8 +33,8 @@ public final class ShapesTable {
                 PlexOfCps binTable = new PlexOfCps(tblStream,
                      fib.getFcPlcspaMom(), fib.getLcbPlcspaMom(), 26);
 
-                _shapes = new ArrayList<Shape>();
-                _shapesVisibili = new ArrayList<Shape>();
+                _shapes = new ArrayList<>();
+                _shapesVisibili = new ArrayList<>();
 
 
                 for(int i = 0; i < binTable.length(); i++) {

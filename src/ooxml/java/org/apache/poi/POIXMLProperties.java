@@ -143,7 +143,7 @@ public class POIXMLProperties {
 		if(extPart != null){
 			XmlOptions xmlOptions = new XmlOptions(POIXMLDocumentPart.DEFAULT_XML_OPTIONS);
 
-			Map<String, String> map = new HashMap<String, String>();
+			Map<String, String> map = new HashMap<>();
 			map.put("http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes", "vt");
 			xmlOptions.setSaveSuggestedPrefixes(map);
 
@@ -154,7 +154,7 @@ public class POIXMLProperties {
 		if(custPart != null){
 			XmlOptions xmlOptions = new XmlOptions(POIXMLDocumentPart.DEFAULT_XML_OPTIONS);
 
-			Map<String, String> map = new HashMap<String, String>();
+			Map<String, String> map = new HashMap<>();
 			map.put("http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes", "vt");
 			xmlOptions.setSaveSuggestedPrefixes(map);
 

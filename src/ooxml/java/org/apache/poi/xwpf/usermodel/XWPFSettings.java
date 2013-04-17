@@ -178,7 +178,7 @@ public class XWPFSettings extends POIXMLDocumentPart {
 
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSaveSyntheticDocumentElement(new QName(CTSettings.type.getName().getNamespaceURI(), "settings"));
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("http://schemas.openxmlformats.org/wordprocessingml/2006/main", "w");
         xmlOptions.setSaveSuggestedPrefixes(map);
 

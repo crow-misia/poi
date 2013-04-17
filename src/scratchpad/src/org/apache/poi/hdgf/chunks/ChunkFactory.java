@@ -42,7 +42,7 @@ public final class ChunkFactory {
 	 * Key is a Chunk's type, value is an array of its CommandDefinitions
 	 */
 	private Hashtable<Integer, CommandDefinition[]> chunkCommandDefinitions = 
-	      new Hashtable<Integer, CommandDefinition[]>();
+	      new Hashtable<>();
 	/**
 	 * What the name is of the chunk table definitions file?
 	 * This file comes from the scratchpad resources directory.
@@ -82,7 +82,7 @@ public final class ChunkFactory {
 				throw new IllegalStateException("Expecting start xxx, found " + line);
 			}
 			int chunkType = Integer.parseInt(line.substring(6));
-			ArrayList<CommandDefinition> defsL = new ArrayList<CommandDefinition>();
+			ArrayList<CommandDefinition> defsL = new ArrayList<>();
 
 			// Data entries
 			while( ! (line = inp.readLine()).startsWith("end") ) {

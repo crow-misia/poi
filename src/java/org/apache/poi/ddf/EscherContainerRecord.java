@@ -70,7 +70,7 @@ public final class EscherContainerRecord extends EscherRecord {
      */
     private int _remainingLength;
 
-    private final List<EscherRecord> _childRecords = new ArrayList<EscherRecord>();
+    private final List<EscherRecord> _childRecords = new ArrayList<>();
 
     public int fillFields(byte[] data, int pOffset, EscherRecordFactory recordFactory) {
         int bytesRemaining = readHeader(data, pOffset);
@@ -149,7 +149,7 @@ public final class EscherContainerRecord extends EscherRecord {
      * @return a copy of the list of all the child records of the container.
      */
     public List<EscherRecord> getChildRecords() {
-        return new ArrayList<EscherRecord>(_childRecords);
+        return new ArrayList<>(_childRecords);
     }
 
     public Iterator<EscherRecord> getChildIterator() {
@@ -200,7 +200,7 @@ public final class EscherContainerRecord extends EscherRecord {
      *   2 or 3)
      */
     public List<EscherContainerRecord> getChildContainers() {
-        List<EscherContainerRecord> containers = new ArrayList<EscherContainerRecord>();
+        List<EscherContainerRecord> containers = new ArrayList<>();
         Iterator<EscherRecord> iterator = _childRecords.iterator();
         while (iterator.hasNext()) {
             EscherRecord r = iterator.next();

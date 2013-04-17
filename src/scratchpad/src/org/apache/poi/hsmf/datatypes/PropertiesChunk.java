@@ -51,8 +51,7 @@ public abstract class PropertiesChunk extends Chunk {
    /**
     * Holds properties, indexed by type. Properties can be multi-valued
     */
-   private Map<MAPIProperty, List<PropertyValue>> properties = 
-         new HashMap<MAPIProperty, List<PropertyValue>>();
+   private Map<MAPIProperty, List<PropertyValue>> properties = new HashMap<>();
 
    /**
     * The ChunkGroup that these properties apply to. Used when
@@ -106,7 +105,7 @@ public abstract class PropertiesChunk extends Chunk {
    protected void matchVariableSizedPropertiesToChunks() {
       // Index the Parent Group chunks for easy lookup
       // TODO Is this the right way?
-      Map<Integer,Chunk> chunks = new HashMap<Integer, Chunk>();
+      Map<Integer,Chunk> chunks = new HashMap<>();
       for (Chunk chunk : parentGroup.getChunks()) {
          chunks.put(chunk.chunkId, chunk);
       }

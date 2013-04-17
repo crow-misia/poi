@@ -19,7 +19,7 @@
 
 package org.apache.poi.hwpf;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.hwpf.model.FieldsDocumentPart;
 import org.apache.poi.hwpf.model.FieldsTables;
@@ -84,14 +84,14 @@ public class TestFieldsTables extends HWPFTestCase
         {
             FieldsDocumentPart part = FieldsDocumentPart.values()[i];
 
-            ArrayList<PlexOfField> fieldsPlexes = fieldsTables
+            List<PlexOfField> fieldsPlexes = fieldsTables
                     .getFieldsPLCF( part );
             String result = dumpPlexes( fieldsPlexes );
             assertEquals( EXPECTED[i], result );
         }
     }
 
-    private String dumpPlexes( ArrayList<PlexOfField> fieldsPlexes )
+    private String dumpPlexes( List<PlexOfField> fieldsPlexes )
     {
         StringBuilder dump = new StringBuilder();
         for ( int i = 0; i < fieldsPlexes.size(); i++ )

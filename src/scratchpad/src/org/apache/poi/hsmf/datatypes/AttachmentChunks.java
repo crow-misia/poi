@@ -67,7 +67,7 @@ public class AttachmentChunks implements ChunkGroup {
    private String poifsName;
 
    /** Holds all the chunks that were found. */
-   private List<Chunk> allChunks = new ArrayList<Chunk>();
+   private List<Chunk> allChunks = new ArrayList<>();
 
    
    public AttachmentChunks(String poifsName) {

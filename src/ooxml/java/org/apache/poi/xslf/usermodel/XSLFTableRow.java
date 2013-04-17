@@ -41,7 +41,7 @@ public class XSLFTableRow implements Iterable<XSLFTableCell> {
     /*package*/ XSLFTableRow(CTTableRow row, XSLFTable table){
         _row = row;
         _table = table;
-        _cells = new ArrayList<XSLFTableCell>(_row.sizeOfTcArray());
+        _cells = new ArrayList<>(_row.sizeOfTcArray());
         for(CTTableCell cell : _row.getTcList()) {
             _cells.add(new XSLFTableCell(cell, table.getSheet()));
         }

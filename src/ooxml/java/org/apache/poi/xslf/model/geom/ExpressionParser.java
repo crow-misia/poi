@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  * @author Yegor Kozlov
  */
 public class ExpressionParser {
-    static final HashMap<String, Class> impls = new HashMap<String, Class>();
+    static final HashMap<String, Class> impls = new HashMap<>();
     static {
         impls.put("\\*/ +([\\-\\w]+) +([\\-\\w]+) +([\\-\\w]+)", MultiplyDivideExpression.class);
         impls.put("\\+- +([\\-\\w]+) +([\\-\\w]+) +([\\-\\w]+)( 0)?", AddSubtractExpression.class);

@@ -589,7 +589,7 @@ public abstract class POILogger {
      */
     private Object [] flattenArrays(Object [] objects)
     {
-        List<Object> results = new ArrayList<Object>();
+        List<Object> results = new ArrayList<>();
 
         for (final Object obj : objects)
         {
@@ -600,7 +600,7 @@ public abstract class POILogger {
 
     private List<Object> objectToObjectArray(Object object)
     {
-        List<Object> results = new ArrayList<Object>();
+        List<Object> results = new ArrayList<>();
 
         if (object instanceof byte [])
         {

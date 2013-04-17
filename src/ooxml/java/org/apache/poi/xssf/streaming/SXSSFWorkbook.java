@@ -62,8 +62,8 @@ public class SXSSFWorkbook implements Workbook
 
     XSSFWorkbook _wb;
 
-    HashMap<SXSSFSheet,XSSFSheet> _sxFromXHash=new HashMap<SXSSFSheet,XSSFSheet>();
-    HashMap<XSSFSheet,SXSSFSheet> _xFromSxHash=new HashMap<XSSFSheet,SXSSFSheet>();
+    HashMap<SXSSFSheet,XSSFSheet> _sxFromXHash=new HashMap<>();
+    HashMap<XSSFSheet,SXSSFSheet> _xFromSxHash=new HashMap<>();
 
     private int _randomAccessWindowSize = DEFAULT_WINDOW_SIZE;
 

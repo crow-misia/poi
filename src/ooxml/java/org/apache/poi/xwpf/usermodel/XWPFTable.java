@@ -71,7 +71,7 @@ public class XWPFTable implements IBodyElement {
 
     static {
         // populate enum maps
-        xwpfBorderTypeMap = new EnumMap<XWPFBorderType, STBorder.Enum>(XWPFBorderType.class);
+        xwpfBorderTypeMap = new EnumMap<>(XWPFBorderType.class);
         xwpfBorderTypeMap.put(XWPFBorderType.NIL, STBorder.Enum.forInt(STBorder.INT_NIL));
         xwpfBorderTypeMap.put(XWPFBorderType.NONE, STBorder.Enum.forInt(STBorder.INT_NONE));
         xwpfBorderTypeMap.put(XWPFBorderType.SINGLE, STBorder.Enum.forInt(STBorder.INT_SINGLE));
@@ -81,7 +81,7 @@ public class XWPFTable implements IBodyElement {
         xwpfBorderTypeMap.put(XWPFBorderType.DASHED, STBorder.Enum.forInt(STBorder.INT_DASHED));
         xwpfBorderTypeMap.put(XWPFBorderType.DOT_DASH, STBorder.Enum.forInt(STBorder.INT_DOT_DASH));
 
-        stBorderTypeMap = new HashMap<Integer, XWPFBorderType>();
+        stBorderTypeMap = new HashMap<>();
         stBorderTypeMap.put(STBorder.INT_NIL, XWPFBorderType.NIL);
         stBorderTypeMap.put(STBorder.INT_NONE, XWPFBorderType.NONE);
         stBorderTypeMap.put(STBorder.INT_SINGLE, XWPFBorderType.SINGLE);
@@ -109,7 +109,7 @@ public class XWPFTable implements IBodyElement {
         this.part = part;
         this.ctTbl = table;
 
-        tableRows = new ArrayList<XWPFTableRow>();
+        tableRows = new ArrayList<>();
 
         // is an empty table: I add one row and one column as default
         if (table.sizeOfTrArray() == 0)

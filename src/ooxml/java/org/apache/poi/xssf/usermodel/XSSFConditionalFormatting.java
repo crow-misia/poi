@@ -51,7 +51,7 @@ public class XSSFConditionalFormatting implements ConditionalFormatting {
       * @return array of <tt>CellRangeAddress</tt>s. Never <code>null</code>
       */
      public CellRangeAddress[] getFormattingRanges(){
-         ArrayList<CellRangeAddress> lst = new ArrayList<CellRangeAddress>();
+         ArrayList<CellRangeAddress> lst = new ArrayList<>();
          for (Object stRef : _cf.getSqref()) {
              String[] regions = stRef.toString().split(" ");
              for (int i = 0; i < regions.length; i++) {

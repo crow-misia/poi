@@ -51,12 +51,12 @@ public abstract class AbstractEscherHolderRecord extends Record {
 
     public AbstractEscherHolderRecord()
     {
-        escherRecords = new ArrayList<EscherRecord>();
+        escherRecords = new ArrayList<>();
     }
 
     public AbstractEscherHolderRecord(RecordInputStream in)
     {
-        escherRecords = new ArrayList<EscherRecord>();
+        escherRecords = new ArrayList<>();
         if (! DESERIALISE )
         {
             rawDataContainer.concatenate(in.readRemainder());

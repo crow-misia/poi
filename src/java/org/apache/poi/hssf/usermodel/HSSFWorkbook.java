@@ -163,8 +163,8 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
 	private HSSFWorkbook(InternalWorkbook book) {
 		super((DirectoryNode)null);
 		workbook = book;
-		_sheets = new ArrayList<HSSFSheet>(INITIAL_CAPACITY);
-		names = new ArrayList<HSSFName>(INITIAL_CAPACITY);
+		_sheets = new ArrayList<>(INITIAL_CAPACITY);
+		names = new ArrayList<>(INITIAL_CAPACITY);
 	}
 
     public HSSFWorkbook(POIFSFileSystem fs) throws IOException {
@@ -273,8 +273,8 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
            this.directory = null;
         }
 
-        _sheets = new ArrayList<HSSFSheet>(INITIAL_CAPACITY);
-        names  = new ArrayList<HSSFName>(INITIAL_CAPACITY);
+        _sheets = new ArrayList<>(INITIAL_CAPACITY);
+        names  = new ArrayList<>(INITIAL_CAPACITY);
 
         // Grab the data from the workbook stream, however
         //  it happens to be spelled.
@@ -1172,7 +1172,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
 
         // For tracking what we've written out, used if we're
         //  going to be preserving nodes
-        List<String> excepts = new ArrayList<String>(1);
+        List<String> excepts = new ArrayList<>(1);
 
         // Write out the Workbook stream
         fs.createDocument(new ByteArrayInputStream(bytes), "Workbook");
@@ -1629,7 +1629,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     public List<HSSFPictureData> getAllPictures()
     {
         // The drawing group record always exists at the top level, so we won't need to do this recursively.
-        List<HSSFPictureData> pictures = new ArrayList<HSSFPictureData>();
+        List<HSSFPictureData> pictures = new ArrayList<>();
         Iterator<Record> recordIter = workbook.getRecords().iterator();
         while (recordIter.hasNext())
         {
@@ -1703,7 +1703,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      */
     public List<HSSFObjectData> getAllEmbeddedObjects()
     {
-        List<HSSFObjectData> objects = new ArrayList<HSSFObjectData>();
+        List<HSSFObjectData> objects = new ArrayList<>();
         for (int i = 0; i < getNumberOfSheets(); i++)
         {
             getAllEmbeddedObjects(getSheetAt(i), objects);

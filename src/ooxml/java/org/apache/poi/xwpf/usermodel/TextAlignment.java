@@ -62,7 +62,7 @@ public enum TextAlignment {
        return value;
     }
 
-    private static Map<Integer, TextAlignment> imap = new HashMap<Integer, TextAlignment>();
+    private static Map<Integer, TextAlignment> imap = new HashMap<>();
     static{
        for (TextAlignment p : values()) {
           imap.put(Integer.valueOf(p.getValue()), p);

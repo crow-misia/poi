@@ -108,7 +108,7 @@ public final class TestBugs extends TestCase {
         SlideShow ppt = new SlideShow(hslf);
 
         //map slide number and starting phrase of its notes
-        Map<Integer, String> notesMap = new HashMap<Integer, String>();
+        Map<Integer, String> notesMap = new HashMap<>();
         notesMap.put(Integer.valueOf(4), "For  decades before calculators");
         notesMap.put(Integer.valueOf(5), "Several commercial applications");
         notesMap.put(Integer.valueOf(6), "There are three variations of LNS that are discussed here");
@@ -282,7 +282,7 @@ public final class TestBugs extends TestCase {
         TextRun[] runs = slide[0].getTextRuns();
         assertEquals(4, runs.length);
 
-        Set<String> txt = new HashSet<String>();
+        Set<String> txt = new HashSet<>();
         txt.add("\u201CHAPPY BIRTHDAY SCOTT\u201D");
         txt.add("Have a HAPPY DAY");
         txt.add("PS Nobody is allowed to hassle Scott TODAY\u2026");
@@ -307,7 +307,7 @@ public final class TestBugs extends TestCase {
         Slide slide = ppt.getSlides()[0];
         TextRun[] tr1 = slide.getTextRuns();
 
-        List<TextRun> lst = new ArrayList<TextRun>();
+        List<TextRun> lst = new ArrayList<>();
         Shape[] shape = slide.getShapes();
         for (int i = 0; i < shape.length; i++) {
             if( shape[i] instanceof TextShape){

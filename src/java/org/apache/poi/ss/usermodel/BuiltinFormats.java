@@ -100,7 +100,7 @@ public final class BuiltinFormats {
 17 Date MMM-YY 49 Text @
 * */
 	static {
-		List<String> m = new ArrayList<String>();
+		List<String> m = new ArrayList<>();
 		putFormat(m, 0, "General");
 		putFormat(m, 1, "0");
 		putFormat(m, 2, "0.00");
@@ -160,7 +160,7 @@ public final class BuiltinFormats {
 	 * @deprecated (May 2009) use {@link #getAll()}
 	 */
 	public static Map<Integer, String> getBuiltinFormats() {
-		Map<Integer, String> result = new LinkedHashMap<Integer, String>();
+		Map<Integer, String> result = new LinkedHashMap<>();
 		for (int i=0; i<_formats.length; i++) {
 			result.put(Integer.valueOf(i), _formats[i]);
 		}

@@ -18,6 +18,7 @@
 package org.apache.poi.ss.excelant.util;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -30,12 +31,12 @@ import java.util.HashMap;
  */
 public class ExcelAntWorkbookUtilFactory {
     
-    private static HashMap<String, ExcelAntWorkbookUtil> workbookUtilMap ;
+    private static Map<String, ExcelAntWorkbookUtil> workbookUtilMap ;
     
     private static ExcelAntWorkbookUtilFactory factory ;
     
     private ExcelAntWorkbookUtilFactory() {
-        workbookUtilMap = new HashMap<String, ExcelAntWorkbookUtil>() ; 
+        workbookUtilMap = new HashMap<>() ; 
     }
     
     /**

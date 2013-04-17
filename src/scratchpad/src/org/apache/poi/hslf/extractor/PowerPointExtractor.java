@@ -187,7 +187,7 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
 	}
 
 	public List<OLEShape> getOLEShapes() {
-		List<OLEShape> list = new ArrayList<OLEShape>();
+		List<OLEShape> list = new ArrayList<>();
 
 		for (int i = 0; i < _slides.length; i++) {
 			Slide slide = _slides[i];
@@ -274,7 +274,7 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
 			// Not currently using _notes, as that can have the notes of
 			// master sheets in. Grab Slide list, then work from there,
 			// but ensure no duplicates
-			HashSet<Integer> seenNotes = new HashSet<Integer>();
+			HashSet<Integer> seenNotes = new HashSet<>();
 			HeadersFooters hf = _show.getNotesHeadersFooters();
 
 			for (int i = 0; i < _slides.length; i++) {

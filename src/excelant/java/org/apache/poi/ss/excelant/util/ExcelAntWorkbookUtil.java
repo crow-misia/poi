@@ -17,26 +17,34 @@
 
 package org.apache.poi.ss.excelant.util;
 
-import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.formula.functions.FreeRefFunction;
-import org.apache.poi.ss.formula.udf.AggregatingUDFFinder;
-import org.apache.poi.ss.formula.udf.DefaultUDFFinder;
-import org.apache.poi.ss.formula.udf.UDFFinder;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellReference;
-import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.taskdefs.Typedef;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+
+import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.formula.functions.FreeRefFunction;
+import org.apache.poi.ss.formula.udf.AggregatingUDFFinder;
+import org.apache.poi.ss.formula.udf.DefaultUDFFinder;
+import org.apache.poi.ss.formula.udf.UDFFinder;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellValue;
+import org.apache.poi.ss.usermodel.ErrorConstants;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.taskdefs.Typedef;
 
 /**
  * A general utility class that abstracts the POI details of loading the
@@ -63,7 +71,7 @@ public class ExcelAntWorkbookUtil extends Typedef {
      */
     protected ExcelAntWorkbookUtil(String fName) {
         excelFileName = fName;
-        xlsMacroList = new HashMap<String, FreeRefFunction>() ;
+        xlsMacroList = new HashMap<>() ;
         loadWorkbook();
         
     }
@@ -75,7 +83,7 @@ public class ExcelAntWorkbookUtil extends Typedef {
      */
     protected ExcelAntWorkbookUtil(Workbook wb) {
         workbook = wb;
-        xlsMacroList = new HashMap<String, FreeRefFunction>() ;
+        xlsMacroList = new HashMap<>() ;
     }
 
     /**
@@ -120,7 +128,7 @@ public class ExcelAntWorkbookUtil extends Typedef {
      * @param name
      * @param func
      */
-    protected void addFunction(String name, FreeRefFunction func) {
+    public void addFunction(String name, FreeRefFunction func) {
         xlsMacroList.put(name, func);
     }
 
@@ -204,8 +212,8 @@ public class ExcelAntWorkbookUtil extends Typedef {
      * 
      * @return
      */
-    public ArrayList<String> getSheets() {
-    	ArrayList<String> sheets = new ArrayList<String>() ;
+    public List<String> getSheets() {
+    	List<String> sheets = new ArrayList<>() ;
     	
     	int sheetCount = workbook.getNumberOfSheets() ;
     	

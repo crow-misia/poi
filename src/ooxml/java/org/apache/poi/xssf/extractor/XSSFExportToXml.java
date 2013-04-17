@@ -140,9 +140,9 @@ public class XSSFExportToXml implements Comparator<String>{
         doc.appendChild(root);
 
 
-        final List<String> xpaths = new ArrayList<String>();
-        final Map<String,XSSFSingleXmlCell> singleXmlCellsMappings = new HashMap<String,XSSFSingleXmlCell>();
-        final Map<String,XSSFTable> tableMappings = new HashMap<String,XSSFTable>();
+        final List<String> xpaths = new ArrayList<>();
+        final Map<String,XSSFSingleXmlCell> singleXmlCellsMappings = new HashMap<>();
+        final Map<String,XSSFTable> tableMappings = new HashMap<>();
 
         for(final XSSFSingleXmlCell simpleXmlCell : singleXMLCells) {
             xpaths.add(simpleXmlCell.getXpath());

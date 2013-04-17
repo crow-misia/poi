@@ -83,7 +83,7 @@ public final class NPropertyTable extends PropertyTableBase {
     private static List<Property> buildProperties(final Iterator<ByteBuffer> dataSource,
           final POIFSBigBlockSize bigBlockSize) throws IOException
     {
-       List<Property> properties = new ArrayList<Property>();
+       List<Property> properties = new ArrayList<>();
        while(dataSource.hasNext()) {
           ByteBuffer bb = dataSource.next();
           

@@ -46,7 +46,7 @@ public class ZipInputStreamZipEntrySource implements ZipEntrySource {
 	 *  work with the entries at-will.
 	 */
 	public ZipInputStreamZipEntrySource(ZipInputStream inp) throws IOException {
-		zipEntries = new ArrayList<FakeZipEntry>();
+		zipEntries = new ArrayList<>();
 		
 		boolean going = true;
 		while(going) {

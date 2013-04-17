@@ -45,10 +45,10 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc;
  * Parent of XWPF headers and footers
  */
 public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBody {
-    List<XWPFParagraph> paragraphs = new ArrayList<XWPFParagraph>(1);
-    List<XWPFTable> tables= new ArrayList<XWPFTable>(1);
-    List<XWPFPictureData> pictures = new ArrayList<XWPFPictureData>();
-    List<IBodyElement> bodyElements = new ArrayList<IBodyElement>(1);
+    List<XWPFParagraph> paragraphs = new ArrayList<>(1);
+    List<XWPFTable> tables= new ArrayList<>(1);
+    List<XWPFPictureData> pictures = new ArrayList<>();
+    List<IBodyElement> bodyElements = new ArrayList<>(1);
 
     CTHdrFtr headerFooter;
     XWPFDocument document;
@@ -445,9 +445,9 @@ public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBo
     }
 
     public void readHdrFtr(){
-        bodyElements = new ArrayList<IBodyElement>();
-        paragraphs = new ArrayList<XWPFParagraph>();
-        tables= new ArrayList<XWPFTable>();
+        bodyElements = new ArrayList<>();
+        paragraphs = new ArrayList<>();
+        tables= new ArrayList<>();
         // parse the document with cursor and add
         // the XmlObject to its lists
         XmlCursor cursor = headerFooter.newCursor();

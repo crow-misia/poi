@@ -59,7 +59,7 @@ public enum LineSpacingRule {
        return value;
     }
 
-    private static Map<Integer, LineSpacingRule> imap = new HashMap<Integer, LineSpacingRule>();
+    private static Map<Integer, LineSpacingRule> imap = new HashMap<>();
     static {
        for (LineSpacingRule p : values()) {
           imap.put(Integer.valueOf(p.getValue()), p);

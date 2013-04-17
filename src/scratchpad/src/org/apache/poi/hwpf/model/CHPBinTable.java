@@ -190,7 +190,7 @@ public class CHPBinTable
                 Long.valueOf( System.currentTimeMillis() - start ), " ms" );
         start = System.currentTimeMillis();
 
-        final Map<CHPX, Integer> chpxToFileOrder = new IdentityHashMap<CHPX, Integer>();
+        final Map<CHPX, Integer> chpxToFileOrder = new IdentityHashMap<>();
         {
             int counter = 0;
             for ( CHPX chpx : _textRuns )
@@ -214,7 +214,7 @@ public class CHPBinTable
 
         final IntArrayList textRunsBoundariesList;
         {
-            Set<Integer> textRunsBoundariesSet = new HashSet<Integer>();
+            Set<Integer> textRunsBoundariesSet = new HashSet<>();
             for ( CHPX chpx : _textRuns )
             {
                 textRunsBoundariesSet.add( Integer.valueOf( chpx.getStart() ) );
@@ -249,7 +249,7 @@ public class CHPBinTable
                         && oldChpxSortedByStartPos.get( startPosition ).getStart() >= boundary )
                     startPosition--;
     
-                List<CHPX> chpxs = new LinkedList<CHPX>();
+                List<CHPX> chpxs = new LinkedList<>();
                 for ( int c = startPosition; c < oldChpxSortedByStartPos.size(); c++ )
                 {
                     CHPX chpx = oldChpxSortedByStartPos.get( c );
@@ -302,7 +302,7 @@ public class CHPBinTable
                 newChpxs.add( newChpx );
             }
         });
-        this._textRuns = new ArrayList<CHPX>( newChpxs );
+        this._textRuns = new ArrayList<>( newChpxs );
 
         logger.log( POILogger.DEBUG, "CHPX rebuilded in ",
                 Long.valueOf( System.currentTimeMillis() - start ), " ms (",

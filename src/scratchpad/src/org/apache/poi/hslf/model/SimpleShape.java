@@ -256,7 +256,7 @@ public abstract class SimpleShape extends Shape {
 
         //if it is a groupped shape see if we need to transform the coordinates
         if (_parent != null){
-            List<Shape> lst = new ArrayList<Shape>();
+            List<Shape> lst = new ArrayList<>();
             lst.add(_parent);
             Shape top = _parent;
             while(top.getParent() != null) {

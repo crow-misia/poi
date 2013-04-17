@@ -37,8 +37,11 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.STShd;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STVerticalJc;
 
 /**
- * Represents a Cell within a {@link XWPFTable}. The
- *  Cell is the thing that holds the actual content (paragraphs etc)
+ * XWPFTableCell class.
+ *
+ * @author Gregg Morris (gregg dot morris at gmail dot com) - added XWPFVertAlign enum,
+ *         setColor(),
+ *         setVerticalAlignment()
  */
 public class XWPFTableCell implements IBody {
     private final CTTc ctTc;
@@ -55,13 +58,13 @@ public class XWPFTableCell implements IBody {
 
     static {
         // populate enum maps
-        alignMap = new EnumMap<XWPFVertAlign, STVerticalJc.Enum>(XWPFVertAlign.class);
+        alignMap = new EnumMap<>(XWPFVertAlign.class);
         alignMap.put(XWPFVertAlign.TOP, STVerticalJc.Enum.forInt(STVerticalJc.INT_TOP));
         alignMap.put(XWPFVertAlign.CENTER, STVerticalJc.Enum.forInt(STVerticalJc.INT_CENTER));
         alignMap.put(XWPFVertAlign.BOTH, STVerticalJc.Enum.forInt(STVerticalJc.INT_BOTH));
         alignMap.put(XWPFVertAlign.BOTTOM, STVerticalJc.Enum.forInt(STVerticalJc.INT_BOTTOM));
 
-        stVertAlignTypeMap = new HashMap<Integer, XWPFVertAlign>();
+        stVertAlignTypeMap = new HashMap<>();
         stVertAlignTypeMap.put(STVerticalJc.INT_TOP, XWPFVertAlign.TOP);
         stVertAlignTypeMap.put(STVerticalJc.INT_CENTER, XWPFVertAlign.CENTER);
         stVertAlignTypeMap.put(STVerticalJc.INT_BOTH, XWPFVertAlign.BOTH);
@@ -79,9 +82,9 @@ public class XWPFTableCell implements IBody {
         // NB: If a table cell does not include at least one block-level element, then this document shall be considered corrupt.
         if(cell.getPList().size()<1)
             cell.addNewP();
-        bodyElements = new ArrayList<IBodyElement>();
-        paragraphs = new ArrayList<XWPFParagraph>();
-        tables = new ArrayList<XWPFTable>();
+        bodyElements = new ArrayList<>();
+        paragraphs = new ArrayList<>();
+        tables = new ArrayList<>();
 
         XmlCursor cursor = ctTc.newCursor();
         cursor.selectPath("./*");

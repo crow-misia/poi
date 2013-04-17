@@ -74,7 +74,7 @@ public class MutableSection extends Section
         dirty = true;
         formatID = null;
         offset = -1;
-        preprops = new LinkedList<Property>();
+        preprops = new LinkedList<>();
     }
 
 
@@ -145,9 +145,9 @@ public class MutableSection extends Section
     public void setProperties(final Property[] properties)
     {
         this.properties = properties;
-        preprops = new LinkedList<Property>();
-        for (int i = 0; i < properties.length; i++)
-            preprops.add(properties[i]);
+        preprops = new LinkedList<>();
+        for (final Property p : properties)
+            preprops.add(p);
         dirty = true;
     }
 
