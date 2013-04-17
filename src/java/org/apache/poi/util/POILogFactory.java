@@ -36,7 +36,7 @@ public class POILogFactory
     /**
      * Map of POILogger instances, with classes as keys
      */
-    private static Map<String,POILogger> _loggers = new HashMap<String,POILogger>();;
+    private static final Map<String,POILogger> _loggers = new HashMap<String,POILogger>();
 
     /**
      * A common instance of NullLogger, as it does nothing
@@ -64,7 +64,7 @@ public class POILogFactory
      * @return a POILogger for the specified class
      */
 
-    public static POILogger getLogger(final Class theclass)
+    public static POILogger getLogger(final Class<?> theclass)
     {
         return getLogger(theclass.getName());
     }
