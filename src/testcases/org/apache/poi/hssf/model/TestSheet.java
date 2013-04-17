@@ -58,7 +58,7 @@ public final class TestSheet extends TestCase {
 
 	public void testCreateSheet() {
 		// Check we're adding row and cell aggregates
-		List<Record> records = new ArrayList<Record>();
+		List<Record> records = new ArrayList<>();
 		records.add(BOFRecord.createSheetBOF());
 		records.add( new DimensionsRecord() );
 		records.add(createWindow2Record());
@@ -172,7 +172,7 @@ public final class TestSheet extends TestCase {
 	 *
 	 */
 	public void testMovingMergedRegion() {
-		List<Record> records = new ArrayList<Record>();
+		List<Record> records = new ArrayList<>();
 
 		CellRangeAddress[] cras = {
 			new CellRangeAddress(0, 1, 0, 2),
@@ -208,7 +208,7 @@ public final class TestSheet extends TestCase {
 	 *
 	 */
 	public void testRowAggregation() {
-		List<Record> records = new ArrayList<Record>();
+		List<Record> records = new ArrayList<>();
 
 		records.add(InternalSheet.createBOF());
 		records.add(new DimensionsRecord());
@@ -440,7 +440,7 @@ public final class TestSheet extends TestCase {
 	 */
 	public void testUncalcSize_bug45066() {
 
-		List<Record> records = new ArrayList<Record>();
+		List<Record> records = new ArrayList<>();
 		records.add(BOFRecord.createSheetBOF());
 		records.add(new UncalcedRecord());
 		records.add(new DimensionsRecord());
@@ -591,7 +591,7 @@ public final class TestSheet extends TestCase {
 		nr.setColumn((short) colIx);
 		nr.setValue(3.0);
 
-		List<Record> inRecs = new ArrayList<Record>();
+		List<Record> inRecs = new ArrayList<>();
 		inRecs.add(BOFRecord.createSheetBOF());
 		inRecs.add(new RowRecord(rowIx));
 		inRecs.add(nr);
@@ -724,7 +724,7 @@ public final class TestSheet extends TestCase {
         r2.setStr(new HSSFRichTextString("Aggregated"));
         NoteRecord n2 = new NoteRecord();
 
-        List<Record> recordStream = new ArrayList<Record>();
+        List<Record> recordStream = new ArrayList<>();
         recordStream.add(InternalSheet.createBOF());
         recordStream.add( d1 );
         recordStream.add( r1 );
@@ -734,7 +734,7 @@ public final class TestSheet extends TestCase {
         confirmAggregatedRecords(recordStream);
 
 
-        recordStream = new ArrayList<Record>();
+        recordStream = new ArrayList<>();
         recordStream.add(InternalSheet.createBOF());
         recordStream.add( d1 );
         recordStream.add( r1 );
@@ -745,7 +745,7 @@ public final class TestSheet extends TestCase {
 
         confirmAggregatedRecords(recordStream);
 
-        recordStream = new ArrayList<Record>();
+        recordStream = new ArrayList<>();
         recordStream.add(InternalSheet.createBOF());
         recordStream.add( d1 );
         recordStream.add( r1 );

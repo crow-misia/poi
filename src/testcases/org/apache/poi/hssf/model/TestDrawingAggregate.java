@@ -98,7 +98,7 @@ public class TestDrawingAggregate extends TestCase {
                 }
             }
             if(info != null){
-                info.aggRecords = new ArrayList<RecordBase>(
+                info.aggRecords = new ArrayList<>(
                         records.subList(info.startRecordIndex, info.endRecordIndex + 1));
             }
             return info;
@@ -130,7 +130,7 @@ public class TestDrawingAggregate extends TestCase {
      */
     private static void assertWriteAndReadBack(HSSFWorkbook wb){
         // map aggregate info by sheet index
-        Map<Integer, DrawingAggregateInfo> aggs = new HashMap<Integer, DrawingAggregateInfo>();
+        Map<Integer, DrawingAggregateInfo> aggs = new HashMap<>();
         for(int i = 0; i < wb.getNumberOfSheets(); i++){
             HSSFSheet sheet = wb.getSheetAt(i);
             DrawingAggregateInfo info = DrawingAggregateInfo.get(sheet);
@@ -214,7 +214,7 @@ public class TestDrawingAggregate extends TestCase {
                 " 00 0F 00 66 00 00 00 11 F0 00 00 00 00 ";
         byte[] buffer = HexRead.readFromString(hex);
 
-        List<EscherRecord> records = new ArrayList<EscherRecord>();
+        List<EscherRecord> records = new ArrayList<>();
         EscherRecordFactory recordFactory = new DefaultEscherRecordFactory();
         int pos = 0;
         while (pos < buffer.length) {

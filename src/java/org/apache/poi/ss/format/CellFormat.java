@@ -114,7 +114,7 @@ public class CellFormat {
 
     /** Maps a format string to its parsed version for efficiencies sake. */
     private static final Map<String, CellFormat> formatCache =
-            new WeakHashMap<String, CellFormat>();
+            new WeakHashMap<>();
 
     /**
      * Returns a {@link CellFormat} that applies the given format.  Two calls
@@ -144,7 +144,7 @@ public class CellFormat {
     private CellFormat(String format) {
         this.format = format;
         Matcher m = ONE_PART.matcher(format);
-        List<CellFormatPart> parts = new ArrayList<CellFormatPart>();
+        List<CellFormatPart> parts = new ArrayList<>();
 
         while (m.find()) {
             try {

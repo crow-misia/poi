@@ -38,7 +38,7 @@ public final class UnknownEscherRecord extends EscherRecord {
     private List<EscherRecord> _childRecords;
 
     public UnknownEscherRecord() {
-        _childRecords = new ArrayList<EscherRecord>();
+        _childRecords = new ArrayList<>();
     }
 
     public int fillFields(byte[] data, int offset, EscherRecordFactory recordFactory) {

@@ -366,7 +366,7 @@ public final class ValueRecordsAggregate implements Iterable<CellValueRecordInte
 	 */
 	@Deprecated
 	public CellValueRecordInterface[] getValueRecords() {
-		List<CellValueRecordInterface> temp = new ArrayList<CellValueRecordInterface>();
+		List<CellValueRecordInterface> temp = new ArrayList<>();
 
 		for (int rowIx = 0; rowIx < records.length; rowIx++) {
 			CellValueRecordInterface[] rowCells = records[rowIx];

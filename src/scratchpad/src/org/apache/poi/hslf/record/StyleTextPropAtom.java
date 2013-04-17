@@ -195,8 +195,8 @@ public final class StyleTextPropAtom extends RecordAtom
         reserved = ArrayUtil.EMPTY_BYTE_ARRAY;
 
         // Set empty linked lists, ready for when they call setParentTextSize
-        paragraphStyles = new LinkedList<TextPropCollection>();
-        charStyles = new LinkedList<TextPropCollection>();
+        paragraphStyles = new LinkedList<>();
+        charStyles = new LinkedList<>();
     }
 
 
@@ -214,8 +214,8 @@ public final class StyleTextPropAtom extends RecordAtom
         LittleEndian.putInt(_header,4,10);
 
         // Set empty paragraph and character styles
-        paragraphStyles = new LinkedList<TextPropCollection>();
-        charStyles = new LinkedList<TextPropCollection>();
+        paragraphStyles = new LinkedList<>();
+        charStyles = new LinkedList<>();
 
         TextPropCollection defaultParagraphTextProps =
                 new TextPropCollection(parentTextSize, (short)0);

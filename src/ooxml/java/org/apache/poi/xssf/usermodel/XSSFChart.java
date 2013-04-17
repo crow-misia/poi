@@ -83,7 +83,7 @@ public final class XSSFChart extends POIXMLDocumentPart implements Chart, ChartA
 	 */
 	protected XSSFChart() {
 		super();
-		axis = new ArrayList<XSSFChartAxis>();
+		axis = new ArrayList<>();
 		createChart();
 	}
 
@@ -161,7 +161,7 @@ public final class XSSFChart extends POIXMLDocumentPart implements Chart, ChartA
 		      xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
 		 */
 		xmlOptions.setSaveSyntheticDocumentElement(new QName(CTChartSpace.type.getName().getNamespaceURI(), "chartSpace", "c"));
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		map.put(XSSFDrawing.NAMESPACE_A, "a");
 		map.put(XSSFDrawing.NAMESPACE_C, "c");
 		map.put(STRelationshipId.type.getName().getNamespaceURI(), "r");

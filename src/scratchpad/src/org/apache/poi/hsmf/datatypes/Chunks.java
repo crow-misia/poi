@@ -45,7 +45,7 @@ public final class Chunks implements ChunkGroupWithProperties {
     * Normally a property will have zero chunks (fixed sized) or one chunk 
     *  (variable size), but in some cases (eg Unknown) you may get more.
     */
-   private Map<MAPIProperty,List<Chunk>> allChunks = new HashMap<MAPIProperty,List<Chunk>>();
+   private Map<MAPIProperty,List<Chunk>> allChunks = new HashMap<>();
    
    /** Type of message that the MSG represents (ie. IPM.Note) */
    public StringChunk messageClass;
@@ -94,7 +94,7 @@ public final class Chunks implements ChunkGroupWithProperties {
       return allChunks;
    }
    public Chunk[] getChunks() {
-      ArrayList<Chunk> chunks = new ArrayList<Chunk>(allChunks.size());
+      ArrayList<Chunk> chunks = new ArrayList<>(allChunks.size());
       for (List<Chunk> c : allChunks.values()) {
          chunks.addAll(c);
       }

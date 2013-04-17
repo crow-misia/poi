@@ -350,10 +350,10 @@ public final class TestPackage extends TestCase {
 		TreeMap<PackagePartName, String> expectedValues;
 		TreeMap<PackagePartName, String> values;
 
-		values = new TreeMap<PackagePartName, String>();
+		values = new TreeMap<>();
 
 		// Expected values
-		expectedValues = new TreeMap<PackagePartName, String>();
+		expectedValues = new TreeMap<>();
 		expectedValues.put(PackagingURIHelper.createPartName("/_rels/.rels"),
 				"application/vnd.openxmlformats-package.relationships+xml");
 
@@ -407,10 +407,10 @@ public final class TestPackage extends TestCase {
 		TreeMap<PackagePartName, String> expectedValues;
 		TreeMap<PackagePartName, String> values;
 
-		values = new TreeMap<PackagePartName, String>();
+		values = new TreeMap<>();
 
 		// Expected values
-		expectedValues = new TreeMap<PackagePartName, String>();
+		expectedValues = new TreeMap<>();
 		expectedValues.put(PackagingURIHelper.createPartName("/_rels/.rels"),
 				"application/vnd.openxmlformats-package.relationships+xml");
 
@@ -511,7 +511,7 @@ public final class TestPackage extends TestCase {
 
         OPCPackage pkg = OPCPackage.open(filepath, PackageAccess.READ_WRITE);
         List<PackagePart> rs =  pkg.getPartsByName(Pattern.compile("/word/.*?\\.xml"));
-        HashMap<String, PackagePart>  selected = new HashMap<String, PackagePart>();
+        HashMap<String, PackagePart>  selected = new HashMap<>();
 
         for(PackagePart p : rs)
             selected.put(p.getPartName().getName(), p);

@@ -64,7 +64,7 @@ public class XSSFRow implements Row, Comparable<XSSFRow> {
     protected XSSFRow(CTRow row, XSSFSheet sheet) {
         _row = row;
         _sheet = sheet;
-        _cells = new TreeMap<Integer, XSSFCell>();
+        _cells = new TreeMap<>();
         for (final CTCell c : row.getCList()) {
             XSSFCell cell = new XSSFCell(this, c);
             _cells.put(cell.getColumnIndex(), cell);

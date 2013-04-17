@@ -177,7 +177,7 @@ public class XSSFTable extends POIXMLDocumentPart {
 	public List<XSSFXmlColumnPr> getXmlColumnPrs() {
 		
 		if(xmlColumnPr==null){
-			xmlColumnPr = new ArrayList<XSSFXmlColumnPr>();
+			xmlColumnPr = new ArrayList<>();
 			for(CTTableColumn column:ctTable.getTableColumns().getTableColumnList()){
 				if(column.getXmlColumnPr()!=null){
 					XSSFXmlColumnPr columnPr = new XSSFXmlColumnPr(this,column,column.getXmlColumnPr());

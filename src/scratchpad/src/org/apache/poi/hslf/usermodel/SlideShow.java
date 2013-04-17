@@ -132,7 +132,7 @@ public final class SlideShow {
 	 */
 	private void findMostRecentCoreRecords() {
 		// To start with, find the most recent in the byte offset domain
-		Hashtable<Integer,Integer> mostRecentByBytes = new Hashtable<Integer,Integer>();
+		Hashtable<Integer,Integer> mostRecentByBytes = new Hashtable<>();
 		for (int i = 0; i < _records.length; i++) {
 			if (_records[i] instanceof PersistPtrHolder) {
 				PersistPtrHolder pph = (PersistPtrHolder) _records[i];
@@ -162,7 +162,7 @@ public final class SlideShow {
 
 		// We'll also want to be able to turn the slide IDs into a position
 		// in this array
-		_sheetIdToCoreRecordsLookup = new Hashtable<Integer,Integer>();
+		_sheetIdToCoreRecordsLookup = new Hashtable<>();
 		int[] allIDs = new int[_mostRecentCoreRecords.length];
 		Enumeration<Integer> ids = mostRecentByBytes.keys();
 		for (int i = 0; i < allIDs.length; i++) {
@@ -290,8 +290,8 @@ public final class SlideShow {
 		if (masterSLWT != null) {
 			masterSets = masterSLWT.getSlideAtomsSets();
 
-			ArrayList<SlideMaster> mmr = new ArrayList<SlideMaster>();
-			ArrayList<TitleMaster> tmr = new ArrayList<TitleMaster>();
+			ArrayList<SlideMaster> mmr = new ArrayList<>();
+			ArrayList<TitleMaster> tmr = new ArrayList<>();
 
 			for (int i = 0; i < masterSets.length; i++) {
 				Record r = getCoreRecordForSAS(masterSets[i]);
@@ -323,7 +323,7 @@ public final class SlideShow {
 		// notesSLWT
 		org.apache.poi.hslf.record.Notes[] notesRecords;
 		SlideAtomsSet[] notesSets = new SlideAtomsSet[0];
-		Hashtable<Integer,Integer> slideIdToNotes = new Hashtable<Integer,Integer>();
+		Hashtable<Integer,Integer> slideIdToNotes = new Hashtable<>();
 		if (notesSLWT == null) {
 			// None
 			notesRecords = new org.apache.poi.hslf.record.Notes[0];
@@ -331,7 +331,7 @@ public final class SlideShow {
 			// Match up the records and the SlideAtomSets
 			notesSets = notesSLWT.getSlideAtomsSets();
 			ArrayList<org.apache.poi.hslf.record.Notes> notesRecordsL = 
-			   new ArrayList<org.apache.poi.hslf.record.Notes>();
+			   new ArrayList<>();
 			for (int i = 0; i < notesSets.length; i++) {
 				// Get the right core record
 				Record r = getCoreRecordForSAS(notesSets[i]);
@@ -561,7 +561,7 @@ public final class SlideShow {
 		sas[oldSlideNumber - 1] = sas[newSlideNumber - 1];
 		sas[newSlideNumber - 1] = tmp;
 
-		ArrayList<Record> lst = new ArrayList<Record>();
+		ArrayList<Record> lst = new ArrayList<>();
 		for (int i = 0; i < sas.length; i++) {
 			lst.add(sas[i].getSlidePersistAtom());
 			Record[] r = sas[i].getSlideRecords();
@@ -596,11 +596,11 @@ public final class SlideShow {
 		SlideAtomsSet[] sas = slwt.getSlideAtomsSets();
 
 		Slide removedSlide = null;
-		ArrayList<Record> records = new ArrayList<Record>();
-		ArrayList<SlideAtomsSet> sa = new ArrayList<SlideAtomsSet>();
-		ArrayList<Slide> sl = new ArrayList<Slide>();
+		ArrayList<Record> records = new ArrayList<>();
+		ArrayList<SlideAtomsSet> sa = new ArrayList<>();
+		ArrayList<Slide> sl = new ArrayList<>();
 
-		ArrayList<Notes> nt = new ArrayList<Notes>();
+		ArrayList<Notes> nt = new ArrayList<>();
 		for (Notes notes : getNotes())
 			nt.add(notes);
 
@@ -630,8 +630,8 @@ public final class SlideShow {
 			int notesId = removedSlide.getSlideRecord().getSlideAtom().getNotesID();
 			if (notesId != 0) {
 				SlideListWithText nslwt = _documentRecord.getNotesSlideListWithText();
-				records = new ArrayList<Record>();
-				ArrayList<SlideAtomsSet> na = new ArrayList<SlideAtomsSet>();
+				records = new ArrayList<>();
+				ArrayList<SlideAtomsSet> na = new ArrayList<>();
 				for (SlideAtomsSet ns : nslwt.getSlideAtomsSets()) {
 					if (ns.getSlidePersistAtom().getSlideIdentifier() != notesId) {
 						na.add(ns);

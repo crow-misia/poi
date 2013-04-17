@@ -71,7 +71,7 @@ public class HSSFColor implements Color {
 
     private static Hashtable<Integer,HSSFColor> createColorsByIndexMap() {
         HSSFColor[] colors = getAllColors();
-        Hashtable<Integer,HSSFColor> result = new Hashtable<Integer,HSSFColor>(colors.length * 3 / 2);
+        Hashtable<Integer,HSSFColor> result = new Hashtable<>(colors.length * 3 / 2);
 
         for (final HSSFColor color : colors) {
             Integer index1 = Integer.valueOf(color.getIndex());
@@ -157,7 +157,7 @@ public class HSSFColor implements Color {
 
     private static Hashtable<String,HSSFColor> createColorsByHexStringMap() {
         HSSFColor[] colors = getAllColors();
-        Hashtable<String,HSSFColor> result = new Hashtable<String,HSSFColor>(colors.length * 3 / 2);
+        Hashtable<String,HSSFColor> result = new Hashtable<>(colors.length * 3 / 2);
 
         for (final HSSFColor color : colors) {
             String hexString = color.getHexString();

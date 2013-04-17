@@ -438,7 +438,7 @@ public final class ParagraphSprmUncompressor
     int[] tabPositions = pap.getRgdxaTab();
     TabDescriptor[] tabDescriptors = pap.getRgtbd();
 
-    Map<Integer, TabDescriptor> tabMap = new HashMap<Integer, TabDescriptor>();
+    Map<Integer, TabDescriptor> tabMap = new HashMap<>();
     for (int x = 0; x < tabPositions.length; x++)
     {
       tabMap.put(Integer.valueOf(tabPositions[x]), tabDescriptors[x]);

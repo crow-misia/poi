@@ -37,7 +37,7 @@ public final class PackagePartCollection extends
 	 * Arraylist use to store this collection part names as string for rule
 	 * M1.11 optimized checking.
 	 */
-	private ArrayList<String> registerPartNameStr = new ArrayList<String>();
+	private ArrayList<String> registerPartNameStr = new ArrayList<>();
 
 	@Override
 	public Object clone() {

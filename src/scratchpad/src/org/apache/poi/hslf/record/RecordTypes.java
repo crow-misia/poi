@@ -238,8 +238,8 @@ public final class RecordTypes {
 	}
 
     static {
-		typeToName = new HashMap<Integer,String>();
-		typeToClass = new HashMap<Integer,Class<? extends Record>>();
+		typeToName = new HashMap<>();
+		typeToClass = new HashMap<>();
         try {
             Field[] f = RecordTypes.class.getFields();
             for (int i = 0; i < f.length; i++){

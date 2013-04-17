@@ -92,17 +92,17 @@ public class XWPFDocument extends POIXMLDocument implements Document, IBody {
      * Keeps track on all id-values used in this document and included parts, like headers, footers, etc.
      */
     private IdentifierManager drawingIdManager = new IdentifierManager(1L,4294967295L);
-    protected List<XWPFFooter> footers = new ArrayList<XWPFFooter>();
-    protected List<XWPFHeader> headers = new ArrayList<XWPFHeader>();
-    protected List<XWPFComment> comments = new ArrayList<XWPFComment>();
-    protected List<XWPFHyperlink> hyperlinks = new ArrayList<XWPFHyperlink>();
-    protected List<XWPFParagraph> paragraphs = new ArrayList<XWPFParagraph>();
-    protected List<XWPFTable> tables = new ArrayList<XWPFTable>();
-    protected List<XWPFSDT> contentControls = new ArrayList<XWPFSDT>();
-    protected List<IBodyElement> bodyElements = new ArrayList<IBodyElement>();
-    protected List<XWPFPictureData> pictures = new ArrayList<XWPFPictureData>();
-    protected Map<Long, List<XWPFPictureData>> packagePictures = new HashMap<Long, List<XWPFPictureData>>();
-    protected Map<Integer, XWPFFootnote> endnotes = new HashMap<Integer, XWPFFootnote>();
+    protected List<XWPFFooter> footers = new ArrayList<>();
+    protected List<XWPFHeader> headers = new ArrayList<>();
+    protected List<XWPFComment> comments = new ArrayList<>();
+    protected List<XWPFHyperlink> hyperlinks = new ArrayList<>();
+    protected List<XWPFParagraph> paragraphs = new ArrayList<>();
+    protected List<XWPFTable> tables = new ArrayList<>();
+    protected List<XWPFSDT> contentControls = new ArrayList<>();
+    protected List<IBodyElement> bodyElements = new ArrayList<>();
+    protected List<XWPFPictureData> pictures = new ArrayList<>();
+    protected Map<Long, List<XWPFPictureData>> packagePictures = new HashMap<>();
+    protected Map<Integer, XWPFFootnote> endnotes = new HashMap<>();
     protected XWPFNumbering numbering;
     protected XWPFStyles styles;
     protected XWPFFootnotes footnotes;
@@ -450,7 +450,7 @@ public class XWPFDocument extends POIXMLDocument implements Document, IBody {
      */
     @Override
     public List<PackagePart> getAllEmbedds() throws OpenXML4JException {
-        List<PackagePart> embedds = new LinkedList<PackagePart>();
+        List<PackagePart> embedds = new LinkedList<>();
 
         // Get the embeddings for the workbook
         PackagePart part = getPackagePart();
@@ -694,7 +694,7 @@ public class XWPFDocument extends POIXMLDocument implements Document, IBody {
     protected void commit() throws IOException {
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSaveSyntheticDocumentElement(new QName(CTDocument1.type.getName().getNamespaceURI(), "document"));
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/math", "m");
         map.put("urn:schemas-microsoft-com:office:office", "o");
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "r");
@@ -1095,7 +1095,7 @@ public class XWPFDocument extends POIXMLDocument implements Document, IBody {
      * @return all Pictures in this package
      */
     public List<XWPFPictureData> getAllPackagePictures() {
-        List<XWPFPictureData> result = new ArrayList<XWPFPictureData>();
+        List<XWPFPictureData> result = new ArrayList<>();
         Collection<List<XWPFPictureData>> values = packagePictures.values();
         for (List<XWPFPictureData> list : values) {
             result.addAll(list);
@@ -1106,7 +1106,7 @@ public class XWPFDocument extends POIXMLDocument implements Document, IBody {
     void registerPackagePictureData(XWPFPictureData picData) {
         List<XWPFPictureData> list = packagePictures.get(picData.getChecksum());
         if (list == null) {
-            list = new ArrayList<XWPFPictureData>(1);
+            list = new ArrayList<>(1);
             packagePictures.put(picData.getChecksum(), list);
         }
         if (!list.contains(picData))

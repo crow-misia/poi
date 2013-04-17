@@ -37,7 +37,7 @@ public final class EscherPropertyFactory {
      * @return                  The new properties
      */
     public List<EscherProperty> createProperties(byte[] data, int offset, short numProperties) {
-        List<EscherProperty> results = new ArrayList<EscherProperty>();
+        List<EscherProperty> results = new ArrayList<>(numProperties);
 
         int pos = offset;
 
@@ -75,8 +75,7 @@ public final class EscherPropertyFactory {
         }
 
         // Get complex data
-        for (Iterator<EscherProperty> iterator = results.iterator(); iterator.hasNext();) {
-            EscherProperty p = iterator.next();
+        for (final EscherProperty p : results) {
             if (p instanceof EscherComplexProperty) {
                 if (p instanceof EscherArrayProperty) {
                     pos += ((EscherArrayProperty)p).setArrayData(data, pos);

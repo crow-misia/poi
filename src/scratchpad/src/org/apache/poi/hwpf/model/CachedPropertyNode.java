@@ -35,7 +35,7 @@ public final class CachedPropertyNode
 
   protected void fillCache(Object ref)
   {
-    _propCache = new SoftReference<Object>(ref);
+    _propCache = new SoftReference<>(ref);
   }
 
   protected Object getCacheContents()

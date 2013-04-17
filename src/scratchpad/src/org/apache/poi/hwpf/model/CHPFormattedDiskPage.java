@@ -47,7 +47,7 @@ public final class CHPFormattedDiskPage extends FormattedDiskPage
 {
     private static final int FC_SIZE = 4;
 
-    private ArrayList<CHPX> _chpxList = new ArrayList<CHPX>();
+    private ArrayList<CHPX> _chpxList = new ArrayList<>();
     private ArrayList<CHPX> _overFlow;
 
 
@@ -113,7 +113,7 @@ public final class CHPFormattedDiskPage extends FormattedDiskPage
       _chpxList.addAll(filler);
     }
 
-    public ArrayList<CHPX> getOverflow()
+    public List<CHPX> getOverflow()
     {
       return _overFlow;
     }
@@ -190,7 +190,7 @@ public final class CHPFormattedDiskPage extends FormattedDiskPage
         // see if we couldn't fit some
         if ( index != size )
         {
-            _overFlow = new ArrayList<CHPX>();
+            _overFlow = new ArrayList<>();
             _overFlow.addAll( _chpxList.subList( index, size ) );
         }
 

@@ -126,7 +126,7 @@ public final class TableRow extends Range
         final short expectedCellsCount = _tprops.getItcMac();
 
         int lastCellStart = 0;
-        List<TableCell> cells = new ArrayList<TableCell>(
+        List<TableCell> cells = new ArrayList<>(
                 expectedCellsCount + 1 );
         for ( int p = 0; p < numParagraphs(); p++ )
         {

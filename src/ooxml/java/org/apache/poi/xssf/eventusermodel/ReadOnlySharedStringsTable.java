@@ -29,7 +29,6 @@ import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackageRelationship;
 import org.apache.poi.xssf.usermodel.XSSFRelation;
-import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRst;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -103,7 +102,7 @@ public class ReadOnlySharedStringsTable extends DefaultHandler {
      */
     public ReadOnlySharedStringsTable(OPCPackage pkg)
             throws IOException, SAXException {
-        ArrayList<PackagePart> parts =
+        List<PackagePart> parts =
                 pkg.getPartsByContentType(XSSFRelation.SHARED_STRINGS.getContentType());
 
         // Some workbooks have no shared strings table.
@@ -195,7 +194,7 @@ public class ReadOnlySharedStringsTable extends DefaultHandler {
             String uniqueCount = attributes.getValue("uniqueCount");
             if(uniqueCount != null) this.uniqueCount = Integer.parseInt(uniqueCount);
 
-            this.strings = new ArrayList<String>(this.uniqueCount);
+            this.strings = new ArrayList<>(this.uniqueCount);
 
             characters = new StringBuilder();
         } else if ("si".equals(name)) {

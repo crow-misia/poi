@@ -117,8 +117,8 @@ public enum FormulaError {
         return repr;
     }
 
-    private static Map<String, FormulaError> smap = new HashMap<String, FormulaError>();
-    private static Map<Byte, FormulaError> imap = new HashMap<Byte, FormulaError>();
+    private static Map<String, FormulaError> smap = new HashMap<>();
+    private static Map<Byte, FormulaError> imap = new HashMap<>();
     static{
         for (FormulaError error : values()) {
             imap.put(error.getCode(), error);

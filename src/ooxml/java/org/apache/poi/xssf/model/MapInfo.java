@@ -71,7 +71,7 @@ public class MapInfo extends POIXMLDocumentPart {
 			MapInfoDocument doc = MapInfoDocument.Factory.parse(is);
 			mapInfo = doc.getMapInfo();
 
-            maps= new HashMap<Integer, XSSFMap>();
+            maps= new HashMap<>();
             for(CTMap map :mapInfo.getMapList()){
                 maps.put((int)map.getID(), new XSSFMap(map,this));
             }

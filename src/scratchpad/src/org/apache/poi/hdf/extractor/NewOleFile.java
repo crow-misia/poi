@@ -43,8 +43,8 @@ public final class NewOleFile extends RandomAccessFile
     private int[] _bbd_list;
     protected int[] _big_block_depot;
     protected int[] _small_block_depot;
-    Map<String, PropertySet> _propertySetsHT = new HashMap<String, PropertySet>();
-    List<PropertySet> _propertySetsV = new ArrayList<PropertySet>();
+    Map<String, PropertySet> _propertySetsHT = new HashMap<>();
+    List<PropertySet> _propertySetsV = new ArrayList<>();
 
     public NewOleFile(String fileName, String mode) throws FileNotFoundException
     {

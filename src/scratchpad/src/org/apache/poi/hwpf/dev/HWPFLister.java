@@ -318,7 +318,7 @@ public final class HWPFLister
 
     private void buildParagraphs()
     {
-        paragraphs = new LinkedHashMap<Integer, String>();
+        paragraphs = new LinkedHashMap<>();
 
         StringBuilder part = new StringBuilder();
         String text = _doc.getDocumentText();
@@ -531,7 +531,7 @@ public final class HWPFLister
                     .getFileInformationBlock().getFcPlcfbtePapx(), doc
                     .getFileInformationBlock().getLcbPlcfbtePapx(), 4 );
 
-            List<PAPX> papxs = new ArrayList<PAPX>();
+            List<PAPX> papxs = new ArrayList<>();
 
             int length = binTable.length();
             for ( int x = 0; x < length; x++ )

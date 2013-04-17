@@ -40,7 +40,7 @@ public class TestXWPFStyles extends TestCase {
 	
 	public void testGetUsedStyles() throws IOException{
 		XWPFDocument sampleDoc = XWPFTestDataSamples.openSampleDocument("Styles.docx");
-		List<XWPFStyle> testUsedStyleList = new ArrayList<XWPFStyle>();
+		List<XWPFStyle> testUsedStyleList = new ArrayList<>();
 		XWPFStyles styles = sampleDoc.getStyles();
 		XWPFStyle style = styles.getStyle("berschrift1");
 		testUsedStyleList.add(style);

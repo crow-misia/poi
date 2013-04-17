@@ -111,9 +111,9 @@ public class XMLSlideShow  extends POIXMLDocument {
             PresentationDocument doc =
                     PresentationDocument.Factory.parse(getCorePart().getInputStream());
             _presentation = doc.getPresentation();
-            Map<String, XSLFSlide> shIdMap = new HashMap<String, XSLFSlide>();
+            Map<String, XSLFSlide> shIdMap = new HashMap<>();
 
-            _masters = new HashMap<String, XSLFSlideMaster>();
+            _masters = new HashMap<>();
             for (POIXMLDocumentPart p : getRelations()) {
                 if (p instanceof XSLFSlide) {
                     shIdMap.put(p.getPackageRelationship().getId(), (XSLFSlide) p);
@@ -129,7 +129,7 @@ public class XMLSlideShow  extends POIXMLDocument {
                 }
             }
 
-            _slides = new ArrayList<XSLFSlide>();
+            _slides = new ArrayList<>();
             if (_presentation.isSetSldIdLst()) {
                 List<CTSlideIdListEntry> slideIds = _presentation.getSldIdLst().getSldIdList();
                 for (CTSlideIdListEntry slId : slideIds) {
@@ -150,7 +150,7 @@ public class XMLSlideShow  extends POIXMLDocument {
     @Override
     protected void commit() throws IOException {
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put(STRelationshipId.type.getName().getNamespaceURI(), "r");
         xmlOptions.setSaveSuggestedPrefixes(map);
 
@@ -177,7 +177,7 @@ public class XMLSlideShow  extends POIXMLDocument {
     public List<XSLFPictureData> getAllPictures() {
         if(_pictures == null){
             List<PackagePart> mediaParts = getPackage().getPartsByName(Pattern.compile("/ppt/media/.*?"));
-            _pictures = new ArrayList<XSLFPictureData>(mediaParts.size());
+            _pictures = new ArrayList<>(mediaParts.size());
             for(PackagePart part : mediaParts){
                 _pictures.add(new XSLFPictureData(part, null));    
             }

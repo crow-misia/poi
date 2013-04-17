@@ -58,7 +58,7 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
 
     XSLFTextParagraph(CTTextParagraph p, XSLFTextShape shape){
         _p = p;
-        _runs = new ArrayList<XSLFTextRun>();
+        _runs = new ArrayList<>();
         _shape = shape;
 
         for(XmlObject ch : _p.selectPath("*")){
@@ -879,7 +879,7 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
      * each representing a line of text that fits in the wrapping width
      */
     List<TextFragment> breakText(Graphics2D graphics){
-        _lines = new ArrayList<TextFragment>();
+        _lines = new ArrayList<>();
 
         // does this paragraph contain text?
         boolean emptyParagraph = _runs.size() == 0;

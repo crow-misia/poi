@@ -63,12 +63,12 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
     /**
      * <p>Maps property IDs to property names.</p>
      */
-    private Map<Long,String> dictionaryIDToName = new HashMap<Long,String>();
+    private Map<Long,String> dictionaryIDToName = new HashMap<>();
 
     /**
      * <p>Maps property names to property IDs.</p>
      */
-    private Map<String,Long> dictionaryNameToID = new HashMap<String,Long>();
+    private Map<String,Long> dictionaryNameToID = new HashMap<>();
 
     /**
      * <p>Tells whether this object is pure or not.</p>

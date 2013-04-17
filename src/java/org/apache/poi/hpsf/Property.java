@@ -211,7 +211,7 @@ public class Property
         final long nrEntries = LittleEndian.getUInt(src, o);
         o += LittleEndian.INT_SIZE;
 
-        final Map<Object, Object> m = new LinkedHashMap<Object, Object>(
+        final Map<Object, Object> m = new LinkedHashMap<>(
                 (int) nrEntries, (float) 1.0 );
 
         try

@@ -68,7 +68,7 @@ public class AbstractWordUtils
      */
     static int[] buildTableCellEdgesArray( Table table )
     {
-        Set<Integer> edges = new TreeSet<Integer>();
+        Set<Integer> edges = new TreeSet<>();
 
         for ( int r = 0; r < table.numRows(); r++ )
         {
@@ -229,7 +229,7 @@ public class AbstractWordUtils
     public static class NumberingState
     {
 
-        private final Map<String, Integer> levels = new HashMap<String, Integer>();
+        private final Map<String, Integer> levels = new HashMap<>();
 
     }
 

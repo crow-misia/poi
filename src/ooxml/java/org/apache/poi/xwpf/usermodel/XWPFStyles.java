@@ -49,7 +49,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTDocDefaults;
  */
 public class XWPFStyles extends POIXMLDocumentPart{
     
-    private List<XWPFStyle> listStyle = new ArrayList<XWPFStyle>();
+    private List<XWPFStyle> listStyle = new ArrayList<>();
     private CTStyles ctStyles;
     XWPFLatentStyles latentStyles;
 
@@ -99,7 +99,7 @@ public class XWPFStyles extends POIXMLDocumentPart{
       
       XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
       xmlOptions.setSaveSyntheticDocumentElement(new QName(CTStyles.type.getName().getNamespaceURI(), "styles"));
-      Map<String,String> map = new HashMap<String,String>();
+      Map<String,String> map = new HashMap<>();
       map.put("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "r");
       map.put("http://schemas.openxmlformats.org/wordprocessingml/2006/main", "w");
       xmlOptions.setSaveSuggestedPrefixes(map);
@@ -160,7 +160,7 @@ public class XWPFStyles extends POIXMLDocumentPart{
 	 * @return a list of all styles which were used by this method 
 	 */
 	public List<XWPFStyle> getUsedStyleList(XWPFStyle style){
-		List<XWPFStyle> usedStyleList = new ArrayList<XWPFStyle>();
+		List<XWPFStyle> usedStyleList = new ArrayList<>();
 		usedStyleList.add(style);
 		return getUsedStyleList(style, usedStyleList);
 	}

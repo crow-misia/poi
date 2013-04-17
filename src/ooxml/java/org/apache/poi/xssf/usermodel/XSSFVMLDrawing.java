@@ -74,8 +74,8 @@ public final class XSSFVMLDrawing extends POIXMLDocumentPart {
      */
     private static final Pattern ptrn_shapeId = Pattern.compile("_x0000_s(\\d+)");
 
-    private List<QName> _qnames = new ArrayList<QName>();
-    private List<XmlObject> _items = new ArrayList<XmlObject>();
+    private List<QName> _qnames = new ArrayList<>();
+    private List<XmlObject> _items = new ArrayList<>();
     private String _shapeTypeId;
     private int _shapeId = 1024;
 
@@ -108,8 +108,8 @@ public final class XSSFVMLDrawing extends POIXMLDocumentPart {
               new EvilUnclosedBRFixingInputStream(is)
         );
 
-        _qnames = new ArrayList<QName>();
-        _items = new ArrayList<XmlObject>();
+        _qnames = new ArrayList<>();
+        _items = new ArrayList<>();
         for(XmlObject obj : root.selectPath("$this/xml/*")) {
             Node nd = obj.getDomNode();
             QName qname = new QName(nd.getNamespaceURI(), nd.getLocalName());
@@ -163,7 +163,7 @@ public final class XSSFVMLDrawing extends POIXMLDocumentPart {
 
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSavePrettyPrint();
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         map.put("urn:schemas-microsoft-com:vml", "v");
         map.put("urn:schemas-microsoft-com:office:office", "o");
         map.put("urn:schemas-microsoft-com:office:excel", "x");

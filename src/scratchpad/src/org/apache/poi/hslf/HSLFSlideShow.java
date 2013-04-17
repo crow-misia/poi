@@ -269,7 +269,7 @@ public final class HSLFSlideShow extends POIDocument {
 
     private Record[] read(byte[] docstream, int usrOffset){
         final IntArrayList lst = new IntArrayList();
-        Map<Integer, Integer> offset2id = new HashMap<Integer,Integer>();
+        Map<Integer, Integer> offset2id = new HashMap<>();
         while (usrOffset != 0){
             UserEditAtom usr = (UserEditAtom) Record.buildRecordAtOffset(docstream, usrOffset);
             lst.add(Integer.valueOf(usrOffset));
@@ -328,7 +328,7 @@ public final class HSLFSlideShow extends POIDocument {
 	 * This is lazily called as and when we want to touch pictures.
 	 */
 	private void readPictures() throws IOException {
-        _pictures = new ArrayList<PictureData>();
+        _pictures = new ArrayList<>();
 
 		byte[] pictstream;
 
@@ -424,7 +424,7 @@ public final class HSLFSlideShow extends POIDocument {
         POIFSFileSystem outFS = new POIFSFileSystem();
 
         // The list of entries we've written out
-        List<String> writtenEntries = new ArrayList<String>(1);
+        List<String> writtenEntries = new ArrayList<>(1);
 
         // Write out the Property Streams
         writeProperties(outFS, writtenEntries);
@@ -433,7 +433,7 @@ public final class HSLFSlideShow extends POIDocument {
         // For position dependent records, hold where they were and now are
         // As we go along, update, and hand over, to any Position Dependent
         //  records we happen across
-        Hashtable<Integer,Integer> oldToNewPositions = new Hashtable<Integer,Integer>();
+        Hashtable<Integer,Integer> oldToNewPositions = new Hashtable<>();
 
         // First pass - figure out where all the position dependent
         //   records are going to end up, in the new scheme
@@ -612,7 +612,7 @@ public final class HSLFSlideShow extends POIDocument {
      */
     public ObjectData[] getEmbeddedObjects() {
         if (_objects == null) {
-            List<ObjectData> objects = new ArrayList<ObjectData>();
+            List<ObjectData> objects = new ArrayList<>();
             for (int i = 0; i < _records.length; i++) {
                 if (_records[i] instanceof ExOleObjStg) {
                     objects.add(new ObjectData((ExOleObjStg) _records[i]));

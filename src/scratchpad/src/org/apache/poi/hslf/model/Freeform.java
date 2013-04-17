@@ -94,8 +94,8 @@ public final class Freeform extends AutoShape {
         Rectangle2D bounds = path.getBounds2D();
         PathIterator it = path.getPathIterator(new AffineTransform());
 
-        List<byte[]> segInfo = new ArrayList<byte[]>();
-        List<Point2D.Double> pntInfo = new ArrayList<Point2D.Double>();
+        List<byte[]> segInfo = new ArrayList<>();
+        List<Point2D.Double> pntInfo = new ArrayList<>();
         boolean isClosed = false;
         while (!it.isDone()) {
             double[] vals = new double[6];

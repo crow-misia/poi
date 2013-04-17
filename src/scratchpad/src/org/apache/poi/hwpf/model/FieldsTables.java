@@ -22,6 +22,7 @@ package org.apache.poi.hwpf.model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.hwpf.model.io.HWPFOutputStream;
@@ -79,9 +80,9 @@ public class FieldsTables
     private static ArrayList<PlexOfField> toArrayList( PlexOfCps plexOfCps )
     {
         if ( plexOfCps == null )
-            return new ArrayList<PlexOfField>();
+            return new ArrayList<>();
 
-        ArrayList<PlexOfField> fields = new ArrayList<PlexOfField>(
+        ArrayList<PlexOfField> fields = new ArrayList<>(
                 plexOfCps.length() );
         for ( int i = 0; i < plexOfCps.length(); i++ )
         {
@@ -97,7 +98,7 @@ public class FieldsTables
 
     public FieldsTables( byte[] tableStream, FileInformationBlock fib )
     {
-        _tables = new HashMap<FieldsDocumentPart, PlexOfCps>(
+        _tables = new HashMap<>(
                 FieldsDocumentPart.values().length );
 
         for ( FieldsDocumentPart part : FieldsDocumentPart.values() )
@@ -107,13 +108,13 @@ public class FieldsTables
         }
     }
 
-    public ArrayList<PlexOfField> getFieldsPLCF( FieldsDocumentPart part )
+    public List<PlexOfField> getFieldsPLCF( FieldsDocumentPart part )
     {
         return toArrayList( _tables.get( part ) );
     }
 
     @Deprecated
-    public ArrayList<PlexOfField> getFieldsPLCF( int partIndex )
+    public List<PlexOfField> getFieldsPLCF( int partIndex )
     {
         return getFieldsPLCF( FieldsDocumentPart.values()[partIndex] );
     }

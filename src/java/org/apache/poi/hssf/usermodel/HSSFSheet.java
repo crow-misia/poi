@@ -101,7 +101,7 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
      */
     protected HSSFSheet(HSSFWorkbook workbook) {
         _sheet = InternalSheet.createSheet();
-        _rows = new TreeMap<Integer, HSSFRow>();
+        _rows = new TreeMap<>();
         this._workbook = workbook;
         this._book = workbook.getWorkbook();
     }
@@ -116,7 +116,7 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
      */
     protected HSSFSheet(HSSFWorkbook workbook, InternalSheet sheet) {
         this._sheet = sheet;
-        _rows = new TreeMap<Integer, HSSFRow>();
+        _rows = new TreeMap<>();
         this._workbook = workbook;
         this._book = workbook.getWorkbook();
         setPropertiesFromSheet(sheet);
@@ -1266,7 +1266,7 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
      * @param isRow
      */
     protected void shiftMerged(int startRow, int endRow, int n, boolean isRow) {
-        List<CellRangeAddress> shiftedRegions = new ArrayList<CellRangeAddress>();
+        List<CellRangeAddress> shiftedRegions = new ArrayList<>();
         //move merged regions completely if they fall within the new region boundaries when they are shifted
         for (int i = 0; i < getNumMergedRegions(); i++) {
             CellRangeAddress merged = getMergedRegion(i);
@@ -1995,7 +1995,7 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
         int lastColumn = range.getLastColumn();
         int height = lastRow - firstRow + 1;
         int width = lastColumn - firstColumn + 1;
-        List<HSSFCell> temp = new ArrayList<HSSFCell>(height * width);
+        List<HSSFCell> temp = new ArrayList<>(height * width);
         for (int rowIn = firstRow; rowIn <= lastRow; rowIn++) {
             for (int colIn = firstColumn; colIn <= lastColumn; colIn++) {
                 HSSFRow row = getRow(rowIn);
@@ -2187,7 +2187,7 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
                     NameRecord.BUILTIN_PRINT_TITLE, sheetIndex);
         }
 
-        List<Ptg> ptgList = new ArrayList<Ptg>();
+        List<Ptg> ptgList = new ArrayList<>();
         if (setBoth) {
             final int exprsSize = 2 * 11 + 1; // 2 * Area3DPtg.SIZE + UnionPtg.SIZE
             ptgList.add(new MemFuncPtg(exprsSize));

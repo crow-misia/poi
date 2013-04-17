@@ -100,7 +100,7 @@ public class FieldsImpl implements Fields
 
     public FieldsImpl( FieldsTables fieldsTables )
     {
-        _fieldsByOffset = new HashMap<FieldsDocumentPart, Map<Integer, FieldImpl>>(
+        _fieldsByOffset = new HashMap<>(
                 FieldsDocumentPart.values().length );
 
         for ( FieldsDocumentPart part : FieldsDocumentPart.values() )
@@ -133,14 +133,14 @@ public class FieldsImpl implements Fields
             List<PlexOfField> plexOfFields )
     {
         if ( plexOfFields == null || plexOfFields.isEmpty() )
-            return new HashMap<Integer, FieldImpl>();
+            return new HashMap<>();
 
         Collections.sort( plexOfFields, comparator );
-        List<FieldImpl> fields = new ArrayList<FieldImpl>(
+        List<FieldImpl> fields = new ArrayList<>(
                 plexOfFields.size() / 3 + 1 );
         parseFieldStructureImpl( plexOfFields, 0, plexOfFields.size(), fields );
 
-        HashMap<Integer, FieldImpl> result = new HashMap<Integer, FieldImpl>(
+        HashMap<Integer, FieldImpl> result = new HashMap<>(
                 fields.size() );
         for ( FieldImpl field : fields )
         {

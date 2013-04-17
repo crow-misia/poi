@@ -18,9 +18,9 @@ package org.apache.poi.xssf.eventusermodel;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.POIXMLException;
@@ -74,7 +74,7 @@ public class XSSFReader {
      *  shared strings.
      */
     public SharedStringsTable getSharedStringsTable() throws IOException, InvalidFormatException {
-        ArrayList<PackagePart> parts = pkg.getPartsByContentType( XSSFRelation.SHARED_STRINGS.getContentType());
+        List<PackagePart> parts = pkg.getPartsByContentType( XSSFRelation.SHARED_STRINGS.getContentType());
         return parts.size() == 0 ? null : new SharedStringsTable(parts.get(0), null);
     }
 
@@ -83,7 +83,7 @@ public class XSSFReader {
      *  returns a handy object for working with cell styles
      */
     public StylesTable getStylesTable() throws IOException, InvalidFormatException {
-        ArrayList<PackagePart> parts = pkg.getPartsByContentType( XSSFRelation.STYLES.getContentType());
+        List<PackagePart> parts = pkg.getPartsByContentType( XSSFRelation.STYLES.getContentType());
         if(parts.size() == 0) return null;
         
         // Create the Styles Table, and associate the Themes if present
@@ -194,7 +194,7 @@ public class XSSFReader {
              */
             try {
                 //step 1. Map sheet's relationship Id and the corresponding PackagePart
-                sheetMap = new HashMap<String, PackagePart>();
+                sheetMap = new HashMap<>();
                 for(PackageRelationship rel : wb.getRelationships()){
                     if(rel.getRelationshipType().equals(XSSFRelation.WORKSHEET.getRelation()) ||
                        rel.getRelationshipType().equals(XSSFRelation.CHARTSHEET.getRelation())){
