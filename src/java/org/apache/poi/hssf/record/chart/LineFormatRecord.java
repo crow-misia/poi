@@ -73,7 +73,7 @@ public final class LineFormatRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[LINEFORMAT]\n");
         buffer.append("    .lineColor            = ")

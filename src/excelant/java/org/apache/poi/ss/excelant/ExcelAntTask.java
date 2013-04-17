@@ -84,7 +84,7 @@ public class ExcelAntTask extends Task {
 		int totalCount = 0 ;
 		int successCount = 0 ;
 		
-		StringBuffer versionBffr = new StringBuffer() ;
+		StringBuilder versionBffr = new StringBuilder() ;
 		versionBffr.append(  "ExcelAnt version " ) ;
 		versionBffr.append( VERSION ) ;
 		versionBffr.append( " Copyright 2011" ) ;

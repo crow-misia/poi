@@ -113,7 +113,7 @@ public final class CFHeaderRecord extends StandardRecord {
 
 	public String toString()
 	{
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("[CFHEADER]\n");
 		buffer.append("	.id		= ").append(Integer.toHexString(sid)).append("\n");

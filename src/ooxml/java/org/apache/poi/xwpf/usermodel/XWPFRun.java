@@ -114,7 +114,7 @@ public class XWPFRun {
         }
 
         // Look for any text in any of our pictures or drawings
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
         List<XmlObject> pictTextObjs = new ArrayList<XmlObject>();
         pictTextObjs.addAll(r.getPictList());
         pictTextObjs.addAll(drawingList);
@@ -777,7 +777,7 @@ public class XWPFRun {
      *  carriage returns in place of their xml equivalents.
      */
     public String toString() {
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
 
         // Grab the text and tabs of the text run
         // Do so in a way that preserves the ordering

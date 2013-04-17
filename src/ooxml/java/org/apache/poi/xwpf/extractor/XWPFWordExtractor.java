@@ -80,7 +80,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
 	}
 	
 	public String getText() {
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 		XWPFHeaderFooterPolicy hfPolicy = document.getHeaderFooterPolicy();
 
 		// Start out with all headers
@@ -146,7 +146,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
 		return text.toString();
 	}
 
-	private void extractFooters(StringBuffer text, XWPFHeaderFooterPolicy hfPolicy) {
+	private void extractFooters(StringBuilder text, XWPFHeaderFooterPolicy hfPolicy) {
 		if(hfPolicy.getFirstPageFooter() != null) {
 			text.append( hfPolicy.getFirstPageFooter().getText() );
 		}
@@ -158,7 +158,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
 		}
 	}
 
-	private void extractHeaders(StringBuffer text, XWPFHeaderFooterPolicy hfPolicy) {
+	private void extractHeaders(StringBuilder text, XWPFHeaderFooterPolicy hfPolicy) {
 		if(hfPolicy.getFirstPageHeader() != null) {
 			text.append( hfPolicy.getFirstPageHeader().getText() );
 		}

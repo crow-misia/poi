@@ -68,7 +68,7 @@ public class XWPFParagraph implements IBodyElement {
     protected XWPFDocument document;
     protected List<XWPFRun> runs;
 
-    private StringBuffer footnoteText = new StringBuffer();
+    private StringBuilder footnoteText = new StringBuilder();
 
     public XWPFParagraph(CTP prgrph, IBody part) {
         this.paragraph = prgrph;
@@ -184,7 +184,7 @@ public class XWPFParagraph implements IBodyElement {
      * in it.
      */
     public String getText() {
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         for(XWPFRun run : runs) {
             out.append(run.toString());
         }
@@ -286,22 +286,22 @@ public class XWPFParagraph implements IBodyElement {
      * paragraph
      */
     public String getParagraphText() {
-        StringBuffer out = new StringBuffer();
-        for(XWPFRun run : runs) {
-            out.append(run.toString());
-        }
-        return out.toString();
+       StringBuilder out = new StringBuilder();
+       for(XWPFRun run : runs) {
+          out.append(run.toString());
+       }
+       return out.toString();
     }
 
     /**
      * Returns any text from any suitable pictures in the paragraph
      */
     public String getPictureText() {
-        StringBuffer out = new StringBuffer();
-        for(XWPFRun run : runs) {
-            out.append(run.getPictureText());
-        }
-        return out.toString();
+       StringBuilder out = new StringBuilder();
+       for(XWPFRun run : runs) {
+          out.append(run.getPictureText());
+       }
+       return out.toString();
     }
 
     /**
@@ -387,7 +387,7 @@ public class XWPFParagraph implements IBodyElement {
         CTPPr pr = getCTPPr();
         return (pr == null || !pr.isSetTextAlignment()) ? TextAlignment.AUTO
                 : TextAlignment.valueOf(pr.getTextAlignment().getVal()
-                        .intValue());
+                .intValue());
     }
 
     /**
@@ -413,9 +413,9 @@ public class XWPFParagraph implements IBodyElement {
         CTPPr pr = getCTPPr();
         CTTextAlignment textAlignment = pr.isSetTextAlignment() ? pr
                 .getTextAlignment() : pr.addNewTextAlignment();
-                STTextAlignment.Enum en = STTextAlignment.Enum
-                        .forInt(valign.getValue());
-                textAlignment.setVal(en);
+        STTextAlignment.Enum en = STTextAlignment.Enum
+                .forInt(valign.getValue());
+        textAlignment.setVal(en);
     }
 
     /**
@@ -1255,7 +1255,7 @@ public class XWPFParagraph implements IBodyElement {
         int runEnd = segment.getEndRun();
         int textEnd = segment.getEndText();
         int charEnd    = segment.getEndChar();
-        StringBuffer out = new StringBuffer();
+    StringBuilder out = new StringBuilder();
         for(int i=runBegin; i<=runEnd;i++){
             int startText=0, endText = paragraph.getRArray(i).getTList().size()-1;
             if(i==runBegin)
@@ -1348,4 +1348,5 @@ public class XWPFParagraph implements IBodyElement {
         }
         return null;
     }
-}
+
+}//end class

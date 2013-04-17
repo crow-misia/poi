@@ -74,7 +74,7 @@ public final class FormatRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[FORMAT]\n");
         buffer.append("    .indexcode       = ").append(HexDump.shortToHex(getIndexCode())).append("\n");

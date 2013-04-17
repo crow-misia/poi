@@ -146,7 +146,7 @@ public class CopyCompare
 
         final DirectoryEntry oRoot = opfs.getRoot();
         final DirectoryEntry cRoot = cpfs.getRoot();
-        final StringBuffer messages = new StringBuffer();
+        final StringBuilder messages = new StringBuilder();
         if (equal(oRoot, cRoot, messages))
             System.out.println("Equal");
         else
@@ -176,15 +176,15 @@ public class CopyCompare
      */
     private static boolean equal(final DirectoryEntry d1,
                                  final DirectoryEntry d2,
-                                 final StringBuffer msg)
+                                 final StringBuilder msg)
     throws NoPropertySetStreamException, MarkUnsupportedException,
            UnsupportedEncodingException, IOException
     {
         boolean equal = true;
         /* Iterate over d1 and compare each entry with its counterpart in d2. */
-        for (final Iterator i = d1.getEntries(); equal && i.hasNext();)
+        for (final Iterator<Entry> i = d1.getEntries(); equal && i.hasNext();)
         {
-            final Entry e1 = (Entry) i.next();
+            final Entry e1 = i.next();
             final String n1 = e1.getName();
             Entry e2 = null;
             try
@@ -213,9 +213,9 @@ public class CopyCompare
 
         /* Iterate over d2 just to make sure that there are no entries in d2
          * that are not in d1. */
-        for (final Iterator i = d2.getEntries(); equal && i.hasNext();)
+        for (final Iterator<Entry> i = d2.getEntries(); equal && i.hasNext();)
         {
-            final Entry e2 = (Entry) i.next();
+            final Entry e2 = i.next();
             final String n2 = e2.getName();
             Entry e1 = null;
             try
@@ -255,7 +255,7 @@ public class CopyCompare
      * @exception IOException if any I/O exception occurs.
      */
     private static boolean equal(final DocumentEntry d1, final DocumentEntry d2,
-                                 final StringBuffer msg)
+                                 final StringBuilder msg)
     throws NoPropertySetStreamException, MarkUnsupportedException,
            UnsupportedEncodingException, IOException
     {

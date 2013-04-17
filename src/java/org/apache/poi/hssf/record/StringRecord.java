@@ -85,7 +85,7 @@ public final class StringRecord extends ContinuableRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[STRING]\n");
         buffer.append("    .string            = ")

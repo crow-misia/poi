@@ -240,14 +240,14 @@ public class InCellLists {
      *             will be written.
      */
     public void listInCell(HSSFWorkbook workbook, ArrayList<String> listItems, HSSFCell cell) {
-        StringBuffer buffer = new StringBuffer();
+    	StringBuilder buffer = new StringBuilder();
         HSSFCellStyle wrapStyle = workbook.createCellStyle();
         wrapStyle.setWrapText(true);
         for(String listItem : listItems) {
             buffer.append(listItem);
             buffer.append("\n");
         }
-        // The StringBuffer's contents are the source for the contents
+        // The StringBuilder's contents are the source for the contents
         // of the cell.
         cell.setCellValue(new HSSFRichTextString(buffer.toString().trim()));
         cell.setCellStyle(wrapStyle);
@@ -273,7 +273,7 @@ public class InCellLists {
                                    HSSFCell cell,
                                    int startingValue,
                                    int increment) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         int itemNumber = startingValue;
         // Note that again, an HSSFCellStye object is required and that
         // it's wrap text property should be set to 'true'
@@ -287,7 +287,7 @@ public class InCellLists {
             buffer.append("\n");
             itemNumber += increment;
         }
-        // The StringBuffer's contents are the source for the contents
+        // The StringBuilder's contents are the source for the contents
         // of the cell.
         cell.setCellValue(new HSSFRichTextString(buffer.toString().trim()));
         cell.setCellStyle(wrapStyle);
@@ -307,7 +307,7 @@ public class InCellLists {
     public void bulletedListInCell(HSSFWorkbook workbook,
                                    ArrayList<String> listItems,
                                    HSSFCell cell) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         // Note that again, an HSSFCellStye object is required and that
         // it's wrap text property should be set to 'true'
         HSSFCellStyle wrapStyle = workbook.createCellStyle();
@@ -319,7 +319,7 @@ public class InCellLists {
             buffer.append(listItem);
             buffer.append("\n");
         }
-        // The StringBuffer's contents are the source for the contents
+        // The StringBuilder's contents are the source for the contents
         // of the cell.
         cell.setCellValue(new HSSFRichTextString(buffer.toString().trim()));
         cell.setCellStyle(wrapStyle);
@@ -343,7 +343,7 @@ public class InCellLists {
     public void multiLevelListInCell(HSSFWorkbook workbook,
                                      ArrayList<MultiLevelListItem> multiLevelListItems,
                                      HSSFCell cell) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         ArrayList<String> lowerLevelItems = null;
         // Note that again, an HSSFCellStye object is required and that
         // it's wrap text property should be set to 'true'
@@ -366,7 +366,7 @@ public class InCellLists {
                 }
             }
         }
-        // The StringBuffer's contents are the source for the contents
+        // The StringBuilder's contents are the source for the contents
         // of the cell.
         cell.setCellValue(new HSSFRichTextString(buffer.toString().trim()));
         cell.setCellStyle(wrapStyle);
@@ -405,7 +405,7 @@ public class InCellLists {
                                              int highLevelIncrement,
                                              int lowLevelStartingValue,
                                              int lowLevelIncrement) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         int highLevelItemNumber = highLevelStartingValue;
         int lowLevelItemNumber = 0;
         ArrayList<String> lowerLevelItems = null;
@@ -439,7 +439,7 @@ public class InCellLists {
             }
             highLevelItemNumber += highLevelIncrement;
         }
-        // The StringBuffer's contents are the source for the contents
+        // The StringBuilder's contents are the source for the contents
         // of the cell.
         cell.setCellValue(new HSSFRichTextString(buffer.toString().trim()));
         cell.setCellStyle(wrapStyle);
@@ -463,7 +463,7 @@ public class InCellLists {
     public void multiLevelBulletedListInCell(HSSFWorkbook workbook,
                                              ArrayList<MultiLevelListItem> multiLevelListItems,
                                              HSSFCell cell) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         ArrayList<String> lowerLevelItems = null;
         // Note that again, an HSSFCellStye object is required and that
         // it's wrap text property should be set to 'true'
@@ -490,7 +490,7 @@ public class InCellLists {
                 }
             }
         }
-        // The StringBuffer's contents are the source for the contents
+        // The StringBuilder's contents are the source for the contents
         // of the cell.
         cell.setCellValue(new HSSFRichTextString(buffer.toString().trim()));
         cell.setCellStyle(wrapStyle);

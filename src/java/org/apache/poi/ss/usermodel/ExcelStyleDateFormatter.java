@@ -16,9 +16,13 @@
 ==================================================================== */
 package org.apache.poi.ss.usermodel;
 
-import java.util.*;
 import java.math.RoundingMode;
-import java.text.*;
+import java.text.DateFormatSymbols;
+import java.text.DecimalFormat;
+import java.text.FieldPosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * A wrapper around a {@link SimpleDateFormat} instance,
@@ -101,10 +105,10 @@ public class ExcelStyleDateFormatter extends SimpleDateFormat {
     }
 
     @Override
-    public StringBuffer format(Date date, StringBuffer paramStringBuffer,
+    public StringBuffer format(Date date, StringBuffer paramStringBuilder,
                                FieldPosition paramFieldPosition) {
         // Do the normal format
-        String s = super.format(date, paramStringBuffer, paramFieldPosition).toString();
+        String s = super.format(date, paramStringBuilder, paramFieldPosition).toString();
 
         // Now handle our special cases
         if (s.indexOf(MMMMM_START_SYMBOL) != -1) {

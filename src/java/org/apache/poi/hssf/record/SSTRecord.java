@@ -140,7 +140,7 @@ public final class SSTRecord extends ContinuableRecord {
      * @return string representation
      */
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append( "[SST]\n" );
         buffer.append( "    .numstrings     = " )

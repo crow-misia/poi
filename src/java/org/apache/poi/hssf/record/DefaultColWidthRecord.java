@@ -69,7 +69,7 @@ public final class DefaultColWidthRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[DEFAULTCOLWIDTH]\n");
         buffer.append("    .colwidth      = ")

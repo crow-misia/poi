@@ -475,7 +475,7 @@ public class XSSFRichTextString implements RichTextString {
     static String utfDecode(String value){
         if(value == null) return null;
         
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         Matcher m = utfPtrn.matcher(value);
         int idx = 0;
         while(m.find()) {

@@ -58,7 +58,7 @@ public final class FtCblsSubRecord extends SubRecord {
      */
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[FtCbls ]").append("\n");
         buffer.append("  size     = ").append(getDataSize()).append("\n");

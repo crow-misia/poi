@@ -19,7 +19,10 @@
 
 package org.apache.poi.hssf.view;
 
-import java.text.*;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.ParsePosition;
 
 /**
  * This class is used to format cells into their fractional format.
@@ -161,7 +164,7 @@ public class SVFractionalFormat extends Format {
         Whole = -Whole;
       }
     }
-    return new StringBuffer().append(Whole).append(" ").append(Num).append("/").append(Den).toString();
+    return new StringBuilder().append(Whole).append(" ").append(Num).append("/").append(Den).toString();
   }
 
   /** This method formats the double in the units specified.
@@ -173,7 +176,7 @@ public class SVFractionalFormat extends Format {
     f -= Whole;
     long Num = Math.round(f * units);
 
-    return new StringBuffer().append(Whole).append(" ").append(Num).append("/").append(units).toString();
+    return new StringBuilder().append(Whole).append(" ").append(Num).append("/").append(units).toString();
   }
 
   public final String format(double val) {

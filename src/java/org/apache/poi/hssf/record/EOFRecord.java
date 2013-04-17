@@ -48,7 +48,7 @@ public final class EOFRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[EOF]\n");
         buffer.append("[/EOF]\n");

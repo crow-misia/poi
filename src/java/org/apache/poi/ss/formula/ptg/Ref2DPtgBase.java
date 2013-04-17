@@ -59,7 +59,7 @@ abstract class Ref2DPtgBase extends RefPtgBase {
 	}
 
 	public final String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getName());
 		sb.append(" [");
 		sb.append(formatReferenceAsString());

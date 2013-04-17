@@ -80,7 +80,7 @@ public final class TestCruddyExtractor extends TestCase {
 		String foundText = te.getTextAsString();
 
 		// Turn the string array into a single string
-		StringBuffer expectTextSB = new StringBuffer();
+		StringBuilder expectTextSB = new StringBuilder();
 		for(int i=0; i<allTheText.length; i++) {
 			expectTextSB.append(allTheText[i]);
 			expectTextSB.append('\n');

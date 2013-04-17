@@ -138,7 +138,7 @@ public final class ObjRecord extends Record {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("[OBJ]\n");
 		for (int i = 0; i < subrecords.size(); i++) {

@@ -80,7 +80,7 @@ public final class GridsetRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[GRIDSET]\n");
         buffer.append("    .gridset        = ").append(getGridset())

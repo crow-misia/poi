@@ -70,7 +70,7 @@ public final class AutoFilterInfoRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[AUTOFILTERINFO]\n");
         buffer.append("    .numEntries          = ")

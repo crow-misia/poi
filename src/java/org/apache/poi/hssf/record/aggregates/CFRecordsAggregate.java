@@ -153,7 +153,7 @@ public final class CFRecordsAggregate extends RecordAggregate {
 	 */
 	public String toString()
 	{
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("[CF]\n");
 		if( header != null )

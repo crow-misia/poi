@@ -251,7 +251,7 @@ public final class AnimationInfoAtom extends RecordAtom {
     }
 
     public String toString(){
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.append("AnimationInfoAtom\n");
         buf.append("\tDimColor: " + getDimColor() + "\n");
         int mask = getMask();

@@ -18,23 +18,24 @@
 package org.apache.poi.ss.examples;
 
 
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Row;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 /**
  * Demonstrates <em>one</em> way to convert an Excel spreadsheet into a CSV
@@ -132,7 +133,7 @@ import java.util.ArrayList;
 public class ToCSV {
 
     private Workbook workbook = null;
-    private ArrayList<ArrayList> csvData = null;
+    private List<List<String>> csvData = null;
     private int maxRowWidth = 0;
     private int formattingConvention = 0;
     private DataFormatter formatter = null;
@@ -406,7 +407,7 @@ public class ToCSV {
         Sheet sheet = null;
         Row row = null;
         int lastRowNum = 0;
-        this.csvData = new ArrayList<ArrayList>();
+        this.csvData = new ArrayList<>();
 
         System.out.println("Converting files contents to CSV format.");
 
@@ -450,8 +451,8 @@ public class ToCSV {
                                      throws FileNotFoundException, IOException {
         FileWriter fw = null;
         BufferedWriter bw = null;
-        ArrayList<String> line = null;
-        StringBuffer buffer = null;
+        List<String> line = null;
+        StringBuilder buffer = new StringBuilder();
         String csvLineElement = null;
         try {
 
@@ -465,20 +466,20 @@ public class ToCSV {
             // all of the data recovered from the Excel workbooks' sheets, rows
             // and cells.
             for(int i = 0; i < this.csvData.size(); i++) {
-                buffer = new StringBuffer();
+                buffer.setLength(0);
 
                 // Get an element from the ArrayList that contains the data for
                 // the workbook. This element will itself be an ArrayList
                 // containing Strings and each String will hold the data recovered
                 // from a single cell. The for() loop is used to recover elements
                 // from this 'row' ArrayList one at a time and to write the Strings
-                // away to a StringBuffer thus assembling a single line for inclusion
+                // away to a StringBuilder thus assembling a single line for inclusion
                 // in the CSV file. If a row was empty or if it was short, then
                 // the ArrayList that contains it's data will also be shorter than
                 // some of the others. Therefore, it is necessary to check within
                 // the for loop to ensure that the ArrayList contains data to be
                 // processed. If it does, then an element will be recovered and
-                // appended to the StringBuffer.
+                // appended to the StringBuilder.
                 line = this.csvData.get(i);
                 for(int j = 0; j < this.maxRowWidth; j++) {
                     if(line.size() > j) {
@@ -600,7 +601,7 @@ public class ToCSV {
      *         speech mark characters correctly escaped.
      */
     private String escapeEmbeddedCharacters(String field) {
-        StringBuffer buffer = null;
+        StringBuilder buffer = null;
 
         // If the fields contents should be formatted to confrom with Excel's
         // convention....
@@ -612,7 +613,7 @@ public class ToCSV {
             // set of speech marks. Thus, "Yes" he said would become
             // """Yes"" he said"
             if(field.contains("\"")) {
-                buffer = new StringBuffer(field.replaceAll("\"", "\\\"\\\""));
+                buffer = new StringBuilder(field.replaceAll("\"", "\\\"\\\""));
                 buffer.insert(0, "\"");
                 buffer.append("\"");
             }
@@ -620,7 +621,7 @@ public class ToCSV {
                 // If the field contains either embedded separator or EOL
                 // characters, then escape the whole field by surrounding it
                 // with speech marks.
-                buffer = new StringBuffer(field);
+                buffer = new StringBuilder(field);
                 if((buffer.indexOf(this.separator)) > -1 ||
                          (buffer.indexOf("\n")) > -1) {
                     buffer.insert(0, "\"");

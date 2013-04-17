@@ -302,7 +302,7 @@ public final class TestHSSFCell extends BaseTestCell {
 		int maxlen = SpreadsheetVersion.EXCEL97.getMaxTextLength();
 		assertEquals(32767, maxlen);
 
-		StringBuffer b = new StringBuffer() ;
+		StringBuilder b = new StringBuilder() ;
 
 		// 32767 is okay
 		for( int i = 0 ; i < maxlen ; i++ )

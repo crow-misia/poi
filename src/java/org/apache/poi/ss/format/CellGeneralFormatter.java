@@ -36,7 +36,7 @@ public class CellGeneralFormatter extends CellFormatter {
      * @param toAppendTo The buffer to append to.
      * @param value      The value to format.
      */
-    public void formatValue(StringBuffer toAppendTo, Object value) {
+    public void formatValue(StringBuilder toAppendTo, Object value) {
         if (value instanceof Number) {
             double val = ((Number) value).doubleValue();
             if (val == 0) {
@@ -79,8 +79,8 @@ public class CellGeneralFormatter extends CellFormatter {
         }
     }
 
-    /** Equivalent to {@link #formatValue(StringBuffer,Object)}. {@inheritDoc}. */
-    public void simpleValue(StringBuffer toAppendTo, Object value) {
+    /** Equivalent to {@link #formatValue(StringBuilder,Object)}. {@inheritDoc}. */
+    public void simpleValue(StringBuilder toAppendTo, Object value) {
         formatValue(toAppendTo, value);
     }
 }

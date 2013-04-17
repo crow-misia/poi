@@ -81,7 +81,7 @@ public final class FunctionMetadata {
 		return FUNCTION_MAX_PARAMS == _maxParams;
 	}
 	public String toString() {
-		StringBuffer sb = new StringBuffer(64);
+		StringBuilder sb = new StringBuilder(64);
 		sb.append(getClass().getName()).append(" [");
 		sb.append(_index).append(" ").append(_name);
 		sb.append("]");

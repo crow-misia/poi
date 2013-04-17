@@ -109,7 +109,7 @@ public final class ExtSSTRecord extends ContinuableRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[EXTSST]\n");
         buffer.append("    .dsst           = ")

@@ -157,7 +157,7 @@ public final class ContentType {
 
 	@Override
 	public final String toString() {
-		StringBuffer retVal = new StringBuffer();
+		StringBuilder retVal = new StringBuilder();
 		retVal.append(this.getType());
 		retVal.append("/");
 		retVal.append(this.getSubType());

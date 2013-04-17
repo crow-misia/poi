@@ -595,7 +595,7 @@ public class MAPIMessage extends POIDocument {
 
 
    private String toSemicolonList(String[] l) {
-      StringBuffer list = new StringBuffer();
+      StringBuilder list = new StringBuilder();
       boolean first = true;
 
       for(String s : l) {

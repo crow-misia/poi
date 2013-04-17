@@ -196,7 +196,7 @@ public final class HeadersFootersAtom extends RecordAtom {
     }
 
     public String toString(){
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.append("HeadersFootersAtom\n");
         buf.append("\tFormatId: " + getFormatId() + "\n");
         buf.append("\tMask    : " + getMask() + "\n");

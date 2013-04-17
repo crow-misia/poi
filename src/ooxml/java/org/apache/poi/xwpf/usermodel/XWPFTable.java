@@ -39,12 +39,24 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.STBorder;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
 
 /**
- * <p>Sketch of XWPFTable class. Only table's text is being hold.</p>
- * <p>Specifies the contents of a table present in the document. A table is a set
- * of paragraphs (and other block-level content) arranged in rows and columns.</p>
+ * Sketch of XWPFTable class. Only table's text is being hold.
+ * <p/>
+ * Specifies the contents of a table present in the document. A table is a set
+ * of paragraphs (and other block-level content) arranged in rows and columns.
+ *
+ * @author Yury Batrakov (batrakov at gmail.com)
+ * @author Gregg Morris (gregg dot morris at gmail dot com) - added 
+ *         setStyleID()
+ *         getRowBandSize(), setRowBandSize()
+ *         getColBandSize(), setColBandSize()
+ *         getInsideHBorderType(), getInsideHBorderSize(), getInsideHBorderSpace(), getInsideHBorderColor()
+ *         getInsideVBorderType(), getInsideVBorderSize(), getInsideVBorderSpace(), getInsideVBorderColor()
+ *         setInsideHBorder(), setInsideVBorder()
+ *         getCellMarginTop(), getCellMarginLeft(), getCellMarginBottom(), getCellMarginRight()
+ *         setCellMargins()
  */
 public class XWPFTable implements IBodyElement {
-    protected StringBuffer text = new StringBuffer();
+    protected StringBuilder text = new StringBuilder();
     private CTTbl ctTbl;
     protected List<XWPFTableRow> tableRows;
     protected List<String> styleIDs;
@@ -104,7 +116,7 @@ public class XWPFTable implements IBodyElement {
             createEmptyTable(table);
 
         for (CTRow row : table.getTrList()) {
-            StringBuffer rowText = new StringBuffer();
+            StringBuilder rowText = new StringBuilder();
             XWPFTableRow tabRow = new XWPFTableRow(row, this);
             tableRows.add(tabRow);
             for (CTTc cell : row.getTcList()) {

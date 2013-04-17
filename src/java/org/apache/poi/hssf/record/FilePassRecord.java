@@ -132,7 +132,7 @@ public final class FilePassRecord extends StandardRecord {
 	}
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("[FILEPASS]\n");
 		buffer.append("    .type = ").append(HexDump.shortToHex(_encryptionType)).append("\n");

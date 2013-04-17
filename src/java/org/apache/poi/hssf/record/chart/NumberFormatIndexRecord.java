@@ -44,7 +44,7 @@ public final class NumberFormatIndexRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[IFMT]\n");
         buffer.append("    .formatIndex          = ")

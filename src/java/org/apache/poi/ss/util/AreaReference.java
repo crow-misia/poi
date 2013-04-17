@@ -282,7 +282,7 @@ public class AreaReference {
                 CellReference.convertNumToColString(_lastCell.getCol());
         }
         
-        StringBuffer sb = new StringBuffer(32);
+        StringBuilder sb = new StringBuilder(32);
         sb.append(_firstCell.formatAsString());
         if(!_isSingleCell) {
             sb.append(CELL_DELIMITER);
@@ -297,7 +297,7 @@ public class AreaReference {
     }
 
     public String toString() {
-        StringBuffer sb = new StringBuffer(64);
+        StringBuilder sb = new StringBuilder(64);
         sb.append(getClass().getName()).append(" [");
         sb.append(formatAsString());
         sb.append("]");
