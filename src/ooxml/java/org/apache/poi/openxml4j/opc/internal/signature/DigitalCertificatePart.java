@@ -35,7 +35,7 @@ import org.apache.poi.openxml4j.opc.internal.ContentType;
 public final class DigitalCertificatePart extends PackagePart  {
 
 	public DigitalCertificatePart() throws InvalidFormatException{
-		super(null, null, new ContentType(""));
+		super(null, null, ContentType.getInstance(""));
 		// Review constructor
 	}
 

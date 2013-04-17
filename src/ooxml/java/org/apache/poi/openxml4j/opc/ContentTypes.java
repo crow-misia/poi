@@ -17,6 +17,9 @@
 
 package org.apache.poi.openxml4j.opc;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.internal.ContentType;
+
 /**
  * Open Packaging Convention content types (see Annex F : Standard Namespaces
  * and Content Types).
@@ -34,6 +37,7 @@ public final class ContentTypes {
 	 * Core Properties part.
 	 */
 	public static final String CORE_PROPERTIES_PART = "application/vnd.openxmlformats-package.core-properties+xml";
+	public static final ContentType CORE_PROPERTIES_PART_CT = getContentType(CORE_PROPERTIES_PART);
 
 	/**
 	 * Digital Signature Certificate part.
@@ -58,7 +62,7 @@ public final class ContentTypes {
 	/**
 	 * Custom XML part.
 	 */
-	public static final String CUSTOM_XML_PART = "application/vnd.openxmlformats-officedocument.customXmlProperties+xml";
+	public static final ContentType CUSTOM_XML_PART = getContentType("application/vnd.openxmlformats-officedocument.customXmlProperties+xml");
 
 	/**
 	 * Plain old xml. Note - OOXML uses application/xml, and not text/xml!
@@ -126,5 +130,13 @@ public final class ContentTypes {
 			return XML;
 		else
 			return null;
+	}
+
+	private static ContentType getContentType(final String contentType) {
+		try {
+			return ContentType.getInstance(contentType);
+		} catch (final InvalidFormatException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

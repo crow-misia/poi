@@ -125,7 +125,7 @@ public abstract class PackagePart implements RelationshipSource {
 	 */
 	public PackagePart(OPCPackage pack, PackagePartName partName,
 			String contentType) throws InvalidFormatException {
-		this(pack, partName, new ContentType(contentType));
+		this(pack, partName, ContentType.getInstance(contentType));
 	}
 
 	/**
@@ -593,7 +593,7 @@ public abstract class PackagePart implements RelationshipSource {
 	public void setContentType(String contentType)
 			throws InvalidFormatException {
 		if (_container == null)
-			this._contentType = new ContentType(contentType);
+			this._contentType = ContentType.getInstance(contentType);
 		else
 			throw new InvalidOperationException(
 					"You can't change the content type of a part.");
