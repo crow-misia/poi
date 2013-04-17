@@ -23,10 +23,9 @@
  */
 package org.apache.poi.hssf.usermodel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.poi.hssf.model.InternalWorkbook;
 import org.apache.poi.hssf.record.FormatRecord;
@@ -51,7 +50,7 @@ import org.apache.poi.ss.usermodel.DataFormat;
 public final class HSSFDataFormat implements DataFormat {
 	private static final String[] _builtinFormats = BuiltinFormats.getAll();
 
-	private final Vector<String> _formats = new Vector<>();
+	private final ArrayList<String> _formats = new ArrayList<>(_builtinFormats.length);
 	private final InternalWorkbook _workbook;
 	private boolean _movedBuiltins = false;  // Flag to see if need to
 	// check the built in list
@@ -66,9 +65,7 @@ public final class HSSFDataFormat implements DataFormat {
 	HSSFDataFormat(InternalWorkbook workbook) {
 		_workbook = workbook;
 
-		Iterator<FormatRecord> i = workbook.getFormats().iterator();
-		while (i.hasNext()) {
-			FormatRecord r = i.next();
+		for (final FormatRecord r : workbook.getFormats()) {
 			ensureFormatsSize(r.getIndexCode());
 			_formats.set(r.getIndexCode(), r.getFormatString());
 		}
@@ -106,7 +103,8 @@ public final class HSSFDataFormat implements DataFormat {
 
 		// Merge in the built in formats if we haven't already
 		if (!_movedBuiltins) {
-			for (int i=0; i<_builtinFormats.length; i++) {
+			final int n = _builtinFormats.length;
+			for (int i=0; i<n; i++) {
 			   ensureFormatsSize(i);
 				if (_formats.get(i) == null) {
 				   _formats.set(i, _builtinFormats[i]);
@@ -118,7 +116,8 @@ public final class HSSFDataFormat implements DataFormat {
 		}
 		
 		// See if we can find it
-		for(int i=0; i<_formats.size(); i++) {
+		final int s = _formats.size();
+		for(int i=0; i<s; i++) {
 		   if(format.equals(_formats.get(i))) {
 		      return (short)i;
 		   }
@@ -184,7 +183,11 @@ public final class HSSFDataFormat implements DataFormat {
 	 */
 	private void ensureFormatsSize(int index) {
 	   if(_formats.size() <= index) {
-	      _formats.setSize(index+1);
+	      final int n = index + 10;
+	      _formats.ensureCapacity(n);
+	      for (int i = _formats.size(); i < n; i++) {
+	          _formats.add(null);
+	      }
 	   }
 	}
 }
