@@ -164,7 +164,7 @@ public class EventBasedExcelExtractor extends POIOLE2TextExtractor {
 		private SSTRecord sstRecord;
 
 		private final List<String> sheetNames;
-		final StringBuffer _text = new StringBuffer();
+		final StringBuilder _text = new StringBuilder();
 		private int sheetNum = -1;
 		private int rowNum;
 

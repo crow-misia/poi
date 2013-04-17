@@ -297,7 +297,7 @@ public abstract class BaseTestBugzillaIssues extends TestCase {
     }
 
     private static String createFunction(String name, int maxArgs){
-        StringBuffer fmla = new StringBuffer();
+        StringBuilder fmla = new StringBuilder();
         fmla.append(name);
         fmla.append("(");
         for(int i=0; i < maxArgs; i++){

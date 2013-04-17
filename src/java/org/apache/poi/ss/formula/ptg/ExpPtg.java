@@ -65,7 +65,7 @@ public final class ExpPtg extends ControlPtg {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer("[Array Formula or Shared Formula]\n");
+        StringBuilder buffer = new StringBuilder("[Array Formula or Shared Formula]\n");
         buffer.append("row = ").append(getRow()).append("\n");
         buffer.append("col = ").append(getColumn()).append("\n");
         return buffer.toString();

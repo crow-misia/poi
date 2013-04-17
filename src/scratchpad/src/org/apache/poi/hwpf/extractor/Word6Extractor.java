@@ -125,7 +125,7 @@ public final class Word6Extractor extends POIOLE2TextExtractor {
         catch ( Exception exc )
         {
             // fall-back
-            StringBuffer text = new StringBuffer();
+            StringBuilder text = new StringBuilder();
 
             for ( String t : getParagraphText() )
             {

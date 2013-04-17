@@ -667,7 +667,7 @@ public class UnicodeString implements Comparable<UnicodeString> { // TODO - make
      */
     public String getDebugInfo()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[UNICODESTRING]\n");
         buffer.append("    .charcount       = ")

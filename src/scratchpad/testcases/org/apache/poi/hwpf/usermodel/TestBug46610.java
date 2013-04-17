@@ -42,7 +42,7 @@ public final class TestBug46610 extends TestCase {
 
 	private static String runExtract(String sampleName) {
 		HWPFDocument doc = HWPFTestDataSamples.openSampleFile(sampleName);
-		StringBuffer out = new StringBuffer();
+		StringBuilder out = new StringBuilder();
 
 		Range globalRange = doc.getRange();
 		for (int i = 0; i < globalRange.numParagraphs(); i++) {

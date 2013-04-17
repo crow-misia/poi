@@ -107,13 +107,13 @@ public class PropertySetDescriptorRenderer extends DocumentDescriptorRenderer
      * <p>Returns a string representation of a list of {@link
      * Section}s.</p>
      */
-    protected String sectionsToString(final List sections)
+    protected String sectionsToString(final List<Section> sections)
     {
-        final StringBuffer b = new StringBuffer();
+        final StringBuilder b = new StringBuilder();
         int count = 1;
-        for (Iterator i = sections.iterator(); i.hasNext();)
+        for (Iterator<Section> i = sections.iterator(); i.hasNext();)
         {
-            Section s = (Section) i.next();
+            Section s = i.next();
             String d = toString(s, "Section " + count++);
             b.append(d);
         }
@@ -130,7 +130,7 @@ public class PropertySetDescriptorRenderer extends DocumentDescriptorRenderer
      */
     protected String toString(final Section s, final String name)
     {
-        final StringBuffer b = new StringBuffer();
+        final StringBuilder b = new StringBuilder();
         b.append("\n" + name + " Format ID: ");
         b.append(Codec.hexEncode(s.getFormatID()));
         b.append("\n" + name + " Offset: " + s.getOffset());
@@ -138,9 +138,8 @@ public class PropertySetDescriptorRenderer extends DocumentDescriptorRenderer
         b.append("\n" + name + " Property count: " + s.getPropertyCount());
 
         final Property[] properties = s.getProperties();
-        for (int i = 0; i < properties.length; i++)
+        for (final Property p : properties)
         {
-            final Property p = properties[i];
             final long id = p.getID();
             final long type = p.getType();
             final Object value = p.getValue();

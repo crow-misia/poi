@@ -54,7 +54,7 @@ final class LazyRefEval extends RefEvalBase {
 
 	public String toString() {
 		CellReference cr = new CellReference(getRow(), getColumn());
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getName()).append("[");
 		sb.append(_evaluator.getSheetName());
 		sb.append('!');

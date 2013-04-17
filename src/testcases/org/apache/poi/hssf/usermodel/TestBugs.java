@@ -319,7 +319,7 @@ public final class TestBugs extends BaseTestBugzillaIssues {
     private static String unicodeString(HSSFCell cell) {
         String ss = cell.getRichStringCellValue().getString();
         char s[] = ss.toCharArray();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int x=0;x<s.length;x++) {
             sb.append("\\u").append(Integer.toHexString(s[x]));
         }

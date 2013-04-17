@@ -32,7 +32,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTText;
  */
 @Deprecated
 public class XWPFHyperlinkDecorator extends XWPFParagraphDecorator {
-	private StringBuffer hyperlinkText;
+	private StringBuilder hyperlinkText;
 	
 	/**
 	 * @param nextDecorator The next decorator to use
@@ -49,7 +49,7 @@ public class XWPFHyperlinkDecorator extends XWPFParagraphDecorator {
 	public XWPFHyperlinkDecorator(XWPFParagraph prgrph, XWPFParagraphDecorator nextDecorator, boolean outputHyperlinkUrls) {
 		super(prgrph, nextDecorator);
 		
-		hyperlinkText = new StringBuffer();
+		hyperlinkText = new StringBuilder();
 		
 		// loop over hyperlink anchors
 		for(CTHyperlink link : paragraph.getCTP().getHyperlinkList()){

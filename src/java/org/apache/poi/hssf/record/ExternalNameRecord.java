@@ -199,7 +199,7 @@ public final class ExternalNameRecord extends StandardRecord {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[EXTERNALNAME]\n");
         sb.append("    .options      = ").append(field_1_option_flag).append("\n");
 		sb.append("    .ix      = ").append(field_2_ixals).append("\n");

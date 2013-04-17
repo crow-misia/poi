@@ -107,7 +107,7 @@ public class IndexRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[INDEX]\n");
         buffer.append("    .firstrow       = ")

@@ -118,7 +118,7 @@ public class XSLFPowerPointExtractor extends POIXMLTextExtractor {
     * @param masterText Should we retrieve text from master slides?
     */
    public String getText(boolean slideText, boolean notesText, boolean masterText) {
-      StringBuffer text = new StringBuffer();
+      StringBuilder text = new StringBuilder();
 
       XSLFSlide[] slides = slideshow.getSlides();
       XSLFCommentAuthors commentAuthors = slideshow.getCommentAuthors();
@@ -177,7 +177,7 @@ public class XSLFPowerPointExtractor extends POIXMLTextExtractor {
       return text.toString();
    }
 	
-	private void extractText(XSLFCommonSlideData data, boolean skipPlaceholders, StringBuffer text) {
+	private void extractText(XSLFCommonSlideData data, boolean skipPlaceholders, StringBuilder text) {
 	   for(DrawingTextBody textBody : data.getDrawingText()) {
 	      if(skipPlaceholders && textBody instanceof DrawingTextPlaceholder) {
 	         DrawingTextPlaceholder ph = (DrawingTextPlaceholder)textBody;

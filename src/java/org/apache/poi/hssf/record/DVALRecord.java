@@ -130,7 +130,7 @@ public final class DVALRecord extends StandardRecord {
 
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("[DVAL]\n");
 		buffer.append("    .options      = ").append(getOptions()).append('\n');

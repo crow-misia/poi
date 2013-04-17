@@ -205,7 +205,7 @@ public final class DVRecord extends StandardRecord {
 
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[DV]\n");
 		sb.append(" options=").append(Integer.toHexString(_option_flags));
 		sb.append(" title-prompt=").append(formatTextTitle(_promptTitle));
@@ -239,7 +239,7 @@ public final class DVRecord extends StandardRecord {
 		return str;
 	}
 
-	private static void appendFormula(StringBuffer sb, String label, Formula f) {
+	private static void appendFormula(StringBuilder sb, String label, Formula f) {
 		sb.append(label);
 		
 		if (f == null) {

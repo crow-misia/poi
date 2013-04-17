@@ -71,7 +71,7 @@ public final class ChartStartBlockRecord extends StandardRecord {
 
 	public String toString() {
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("[STARTBLOCK]\n");
 		buffer.append("    .rt              =").append(HexDump.shortToHex(rt)).append('\n');

@@ -35,7 +35,7 @@ public final class NameXEval implements ValueEval {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer(64);
+		StringBuilder sb = new StringBuilder(64);
 		sb.append(getClass().getName()).append(" [");
 		sb.append(_ptg.getSheetRefIndex()).append(", ").append(_ptg.getNameIndex());
 		sb.append("]");

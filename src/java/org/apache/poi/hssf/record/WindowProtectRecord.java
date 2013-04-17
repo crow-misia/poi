@@ -66,7 +66,7 @@ public final class WindowProtectRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[WINDOWPROTECT]\n");
         buffer.append("    .options = ").append(HexDump.shortToHex(_options)).append("\n");

@@ -285,7 +285,7 @@ public class ExcelExtractor extends POIOLE2TextExtractor implements org.apache.p
 	 * Retrieves the text contents of the file
 	 */
 	public String getText() {
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 
 		// We don't care about the difference between
 		//  null (missing) and blank cells
@@ -414,7 +414,7 @@ public class ExcelExtractor extends POIOLE2TextExtractor implements org.apache.p
 	}
 
 	public static String _extractHeaderFooter(HeaderFooter hf) {
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 
 		if(hf.getLeft() != null) {
 			text.append(hf.getLeft());

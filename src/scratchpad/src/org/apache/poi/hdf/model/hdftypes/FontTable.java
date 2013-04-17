@@ -39,7 +39,7 @@ public final class FontTable implements HDFType
       byte ffnLength = fontTable[currentIndex];
 
       int nameOffset = currentIndex + 40;
-      StringBuffer nameBuf = new StringBuffer();
+      StringBuilder nameBuf = new StringBuilder();
       //char ch = Utils.getUnicodeCharacter(fontTable, nameOffset);
       char ch = (char)LittleEndian.getShort(fontTable, nameOffset);
       while(ch != '\0')

@@ -68,7 +68,7 @@ public class CellNumberFormatter extends CellFormatter {
     // different from the 'General' format for numbers ("#" for integer
     // values and "#.#########" for floating-point values).
     static final CellFormatter SIMPLE_NUMBER = new CellFormatter("General") {
-        public void formatValue(StringBuffer toAppendTo, Object value) {
+        public void formatValue(StringBuilder toAppendTo, Object value) {
             if (value == null)
                 return;
             if (value instanceof Number) {
@@ -82,7 +82,7 @@ public class CellNumberFormatter extends CellFormatter {
             }
         }
 
-        public void simpleValue(StringBuffer toAppendTo, Object value) {
+        public void simpleValue(StringBuilder toAppendTo, Object value) {
             formatValue(toAppendTo, value);
         }
     };
@@ -317,7 +317,7 @@ public class CellNumberFormatter extends CellFormatter {
         integerSpecials = specials.subList(0, integerEnd());
 
         if (exponent == null) {
-            StringBuffer fmtBuf = new StringBuffer("%");
+            StringBuilder fmtBuf = new StringBuilder("%");
 
             int integerPartWidth = calculateIntegerPartWidth();
             int totalWidth = integerPartWidth + fractionPartWidth;
@@ -327,7 +327,7 @@ public class CellNumberFormatter extends CellFormatter {
             fmtBuf.append("f");
             printfFmt = fmtBuf.toString();
         } else {
-            StringBuffer fmtBuf = new StringBuffer();
+            StringBuilder fmtBuf = new StringBuilder();
             boolean first = true;
             List<Special> specialList = integerSpecials;
             if (integerSpecials.size() == 1) {
@@ -364,7 +364,7 @@ public class CellNumberFormatter extends CellFormatter {
         desc = descBuf.toString();
     }
 
-    private static void placeZeros(StringBuffer sb, List<Special> specials) {
+    private static void placeZeros(StringBuilder sb, List<Special> specials) {
         for (Special s : specials) {
             if (isDigitFmt(s))
                 sb.append('0');
@@ -557,7 +557,7 @@ public class CellNumberFormatter extends CellFormatter {
     }
 
     /** {@inheritDoc} */
-    public void formatValue(StringBuffer toAppendTo, Object valueObject) {
+    public void formatValue(StringBuilder toAppendTo, Object valueObject) {
         double value = ((Number) valueObject).doubleValue();
         value *= scale;
 
@@ -586,14 +586,14 @@ public class CellNumberFormatter extends CellFormatter {
         }
 
         Set<StringMod> mods = new TreeSet<StringMod>();
-        StringBuffer output = new StringBuffer(desc);
+        StringBuilder output = new StringBuilder(desc);
 
         if (exponent != null) {
             writeScientific(value, output, mods);
         } else if (improperFraction) {
             writeFraction(value, null, fractional, output, mods);
         } else {
-            StringBuffer result = new StringBuffer();
+        	StringBuffer result = new StringBuffer();
             Formatter f = new Formatter(result);
             f.format(LOCALE, printfFmt, value);
 
@@ -688,7 +688,7 @@ public class CellNumberFormatter extends CellFormatter {
         toAppendTo.append(output);
     }
 
-    private void writeScientific(double value, StringBuffer output,
+    private void writeScientific(double value, StringBuilder output,
             Set<StringMod> mods) {
 
         StringBuffer result = new StringBuffer();
@@ -764,7 +764,7 @@ public class CellNumberFormatter extends CellFormatter {
     }
 
     private void writeFraction(double value, StringBuffer result,
-            double fractional, StringBuffer output, Set<StringMod> mods) {
+            double fractional, StringBuilder output, Set<StringMod> mods) {
 
         // Figure out if we are to suppress either the integer or fractional part.
         // With # the suppressed part is removed; with ? it is replaced with spaces.
@@ -861,7 +861,7 @@ public class CellNumberFormatter extends CellFormatter {
         return true;
     }
 
-    private void writeSingleInteger(String fmt, int num, StringBuffer output,
+    private void writeSingleInteger(String fmt, int num, StringBuilder output,
             List<Special> numSpecials, Set<StringMod> mods) {
 
         StringBuffer sb = new StringBuffer();
@@ -870,7 +870,7 @@ public class CellNumberFormatter extends CellFormatter {
         writeInteger(sb, output, numSpecials, mods, false);
     }
 
-    private void writeInteger(StringBuffer result, StringBuffer output,
+    private void writeInteger(StringBuffer result, StringBuilder output,
             List<Special> numSpecials, Set<StringMod> mods,
             boolean showCommas) {
 
@@ -916,11 +916,11 @@ public class CellNumberFormatter extends CellFormatter {
             digit++;
             --pos;
         }
-        StringBuffer extraLeadingDigits = new StringBuffer();
+        StringBuilder extraLeadingDigits = new StringBuilder();
         if (pos >= 0) {
             // We ran out of places to put digits before we ran out of digits; put this aside so we can add it later
             ++pos;  // pos was decremented at the end of the loop above when the iterator was at its end
-            extraLeadingDigits = new StringBuffer(result.substring(0, pos));
+            extraLeadingDigits = new StringBuilder(result.substring(0, pos));
             if (showCommas) {
                 while (pos > 0) {
                     if (digit > 0 && digit % 3 == 0)
@@ -934,7 +934,7 @@ public class CellNumberFormatter extends CellFormatter {
         }
     }
 
-    private void writeFractional(StringBuffer result, StringBuffer output) {
+    private void writeFractional(StringBuffer result, StringBuilder output) {
         int digit;
         int strip;
         ListIterator<Special> it;
@@ -967,7 +967,7 @@ public class CellNumberFormatter extends CellFormatter {
      * For a number, this is <tt>"#"</tt> for integer values, and <tt>"#.#"</tt>
      * for floating-point values.
      */
-    public void simpleValue(StringBuffer toAppendTo, Object value) {
+    public void simpleValue(StringBuilder toAppendTo, Object value) {
         SIMPLE_NUMBER.formatValue(toAppendTo, value);
     }
 

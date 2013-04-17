@@ -91,7 +91,7 @@ public abstract class POILogger {
     {
         if (check(level))
         {
-            log(level, new StringBuffer(32).append(obj1).append(obj2));
+            log(level, new StringBuilder(32).append(obj1).append(obj2));
         }
     }
 
@@ -111,7 +111,7 @@ public abstract class POILogger {
         if (check(level))
         {
             log(level,
-                    new StringBuffer(48).append(obj1).append(obj2)
+                    new StringBuilder(48).append(obj1).append(obj2)
                         .append(obj3));
         }
     }
@@ -133,7 +133,7 @@ public abstract class POILogger {
         if (check(level))
         {
             log(level,
-                    new StringBuffer(64).append(obj1).append(obj2)
+                    new StringBuilder(64).append(obj1).append(obj2)
                         .append(obj3).append(obj4));
         }
     }
@@ -156,7 +156,7 @@ public abstract class POILogger {
         if (check(level))
         {
             log(level,
-                    new StringBuffer(80).append(obj1).append(obj2)
+                    new StringBuilder(80).append(obj1).append(obj2)
                         .append(obj3).append(obj4).append(obj5));
         }
     }
@@ -181,7 +181,7 @@ public abstract class POILogger {
         if (check(level))
         {
             log(level ,
-                    new StringBuffer(96).append(obj1).append(obj2)
+                    new StringBuilder(96).append(obj1).append(obj2)
                         .append(obj3).append(obj4).append(obj5).append(obj6));
         }
     }
@@ -207,7 +207,7 @@ public abstract class POILogger {
         if (check(level))
         {
             log(level,
-                    new StringBuffer(112).append(obj1).append(obj2)
+                    new StringBuilder(112).append(obj1).append(obj2)
                         .append(obj3).append(obj4).append(obj5).append(obj6)
                         .append(obj7));
         }
@@ -235,7 +235,7 @@ public abstract class POILogger {
         if (check(level))
         {
             log(level,
-                    new StringBuffer(128).append(obj1).append(obj2)
+                    new StringBuilder(128).append(obj1).append(obj2)
                         .append(obj3).append(obj4).append(obj5).append(obj6)
                         .append(obj7).append(obj8));
         }
@@ -267,7 +267,7 @@ public abstract class POILogger {
 
         if (check(level))
         {
-            log(level, new StringBuffer(32).append(obj1).append(obj2),
+            log(level, new StringBuilder(32).append(obj1).append(obj2),
                     exception);
         }
     }
@@ -288,7 +288,7 @@ public abstract class POILogger {
 
         if (check(level))
         {
-            log(level, new StringBuffer(48).append(obj1).append(obj2)
+            log(level, new StringBuilder(48).append(obj1).append(obj2)
                 .append(obj3), exception);
         }
     }
@@ -311,7 +311,7 @@ public abstract class POILogger {
 
         if (check(level))
         {
-            log(level, new StringBuffer(64).append(obj1).append(obj2)
+            log(level, new StringBuilder(64).append(obj1).append(obj2)
                 .append(obj3).append(obj4), exception);
         }
     }
@@ -335,7 +335,7 @@ public abstract class POILogger {
 
         if (check(level))
         {
-            log(level, new StringBuffer(80).append(obj1).append(obj2)
+            log(level, new StringBuilder(80).append(obj1).append(obj2)
                 .append(obj3).append(obj4).append(obj5), exception);
         }
     }
@@ -360,7 +360,7 @@ public abstract class POILogger {
 
         if (check(level))
         {
-            log(level , new StringBuffer(96).append(obj1)
+            log(level , new StringBuilder(96).append(obj1)
                 .append(obj2).append(obj3).append(obj4).append(obj5)
                 .append(obj6), exception);
         }
@@ -388,7 +388,7 @@ public abstract class POILogger {
 
         if (check(level))
         {
-            log(level, new StringBuffer(112).append(obj1).append(obj2)
+            log(level, new StringBuilder(112).append(obj1).append(obj2)
                 .append(obj3).append(obj4).append(obj5).append(obj6)
                 .append(obj7), exception);
         }
@@ -417,7 +417,7 @@ public abstract class POILogger {
 
         if (check(level))
         {
-            log(level, new StringBuffer(128).append(obj1).append(obj2)
+            log(level, new StringBuilder(128).append(obj1).append(obj2)
                 .append(obj3).append(obj4).append(obj5).append(obj6)
                 .append(obj7).append(obj8), exception);
         }

@@ -71,7 +71,7 @@ public final class FormulaParser {
 			return _isQuoted;
 		}
 		public String toString() {
-			StringBuffer sb = new StringBuffer(64);
+			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName());
 			sb.append(" [");
 			if (_isQuoted) {
@@ -99,7 +99,7 @@ public final class FormulaParser {
 			return _sheetIdentifier;
 		}
 		public String toString() {
-			StringBuffer sb = new StringBuffer(64);
+			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName());
 			sb.append(" [");
 			if (_bookName != null) {
@@ -256,7 +256,7 @@ public final class FormulaParser {
 
 	/** Get a Number */
 	private String GetNum() {
-		StringBuffer value = new StringBuffer();
+		StringBuilder value = new StringBuilder();
 
 		while (IsDigit(this.look)){
 			value.append(this.look);
@@ -809,7 +809,7 @@ public final class FormulaParser {
 		}
 
 		if (look == '\'') {
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 
 			Match('\'');
 			boolean done = look == '\'';
@@ -1366,7 +1366,7 @@ public final class FormulaParser {
 	 * return Int or Number Ptg based on size of input
 	 */
 	private static Ptg getNumberPtgFromString(String number1, String number2, String exponent) {
-		StringBuffer number = new StringBuffer();
+		StringBuilder number = new StringBuilder();
 
 		if (number2 == null) {
 			number.append(number1);
@@ -1408,7 +1408,7 @@ public final class FormulaParser {
 	private String parseStringLiteral() {
 		Match('"');
 
-		StringBuffer token = new StringBuffer();
+		StringBuilder token = new StringBuilder();
 		while (true) {
 			if (look == '"') {
 				GetChar();

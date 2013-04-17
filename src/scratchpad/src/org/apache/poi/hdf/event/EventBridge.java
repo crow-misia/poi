@@ -286,7 +286,7 @@ public final class EventBridge implements HDFLowLevelParsingListener
   {
     int size = list.size();
 
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
 
     for (int x = 0; x < size; x++)
     {
@@ -340,7 +340,7 @@ public final class EventBridge implements HDFLowLevelParsingListener
 
   private String getBulletText(LVL lvl, ParagraphProperties pap)
   {
-    StringBuffer bulletBuffer = new StringBuffer();
+    StringBuilder bulletBuffer = new StringBuilder();
     for(int x = 0; x < lvl._xst.length; x++)
     {
       if(lvl._xst[x] < 9)

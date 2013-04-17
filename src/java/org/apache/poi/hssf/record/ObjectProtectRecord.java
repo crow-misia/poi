@@ -75,7 +75,7 @@ public final class ObjectProtectRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[SCENARIOPROTECT]\n");
 	    buffer.append("    .protect         = ").append(getProtect())

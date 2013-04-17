@@ -78,7 +78,7 @@ public final class CodepageRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[CODEPAGE]\n");
         buffer.append("    .codepage        = ")

@@ -62,7 +62,7 @@ public final class Area3DPtg extends AreaPtgBase implements WorkbookDependentFor
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getName());
 		sb.append(" [");
 		sb.append("sheetIx=").append(getExternSheetIndex());
