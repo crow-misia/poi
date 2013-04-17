@@ -39,7 +39,6 @@ import org.apache.poi.ddf.EscherSpgrRecord;
 import org.apache.poi.ddf.EscherTextboxRecord;
 import org.apache.poi.ddf.UnknownEscherRecord;
 import org.apache.poi.hslf.model.ShapeTypes;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogger;
 
@@ -97,7 +96,7 @@ public final class PPDrawing extends RecordAtom {
 
 		// Build up a tree of Escher records contained within
 		final DefaultEscherRecordFactory erf = new DefaultEscherRecordFactory();
-		final List<EscherRecord> escherChildren = new Vector<>();
+		final List<EscherRecord> escherChildren = new ArrayList<>();
 		findEscherChildren(erf, contents, 8, len-8, escherChildren);
 		this.childRecords = (EscherRecord[]) escherChildren.toArray(new EscherRecord[escherChildren.size()]);
 
