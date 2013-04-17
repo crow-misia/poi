@@ -58,10 +58,10 @@ public class ExcelAntTest extends Task{
 
 	
 	public ExcelAntTest() {
-		setters = new LinkedList<ExcelAntSet>() ;
-		evaluators = new LinkedList<ExcelAntEvaluateCell>() ;
-		failureMessages = new LinkedList<String>() ;
-		testTasks = new LinkedList<Task>() ;
+		setters = new LinkedList<>() ;
+		evaluators = new LinkedList<>() ;
+		failureMessages = new LinkedList<>() ;
+		testTasks = new LinkedList<>() ;
 	}
 	
 	public void setPrecision( double precision ) {

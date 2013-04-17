@@ -44,8 +44,8 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.NumberingDocument;
  *
  */
 public class XWPFNumbering extends POIXMLDocumentPart {
-    protected List<XWPFAbstractNum> abstractNums = new ArrayList<XWPFAbstractNum>();
-    protected List<XWPFNum> nums = new ArrayList<XWPFNum>();
+    protected List<XWPFAbstractNum> abstractNums = new ArrayList<>();
+    protected List<XWPFNum> nums = new ArrayList<>();
 
     private CTNumbering ctNumbering;
 	boolean isNew;
@@ -62,8 +62,8 @@ public class XWPFNumbering extends POIXMLDocumentPart {
 	 * create a new XWPFNumbering object for use in a new document
 	 */
 	public XWPFNumbering(){
-		abstractNums = new ArrayList<XWPFAbstractNum>();
-		nums = new ArrayList<XWPFNum>();
+		abstractNums = new ArrayList<>();
+		nums = new ArrayList<>();
 		isNew = true;
 	}
 
@@ -98,7 +98,7 @@ public class XWPFNumbering extends POIXMLDocumentPart {
     protected void commit() throws IOException {
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSaveSyntheticDocumentElement(new QName(CTNumbering.type.getName().getNamespaceURI(), "numbering"));
-        Map<String,String> map = new HashMap<String,String>();
+        Map<String,String> map = new HashMap<>();
         map.put("http://schemas.openxmlformats.org/markup-compatibility/2006", "ve");
         map.put("urn:schemas-microsoft-com:office:office", "o");
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "r");

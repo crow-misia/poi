@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndian;
  */
 public abstract class AbstractEscherOptRecord extends EscherRecord
 {
-    protected List<EscherProperty> properties = new ArrayList<EscherProperty>();
+    protected List<EscherProperty> properties = new ArrayList<>();
 
     /**
      * Add a property to this record.

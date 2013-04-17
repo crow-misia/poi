@@ -34,7 +34,7 @@ final class CellEvaluationFrame {
 
 	public CellEvaluationFrame(FormulaCellCacheEntry cce) {
 		_cce = cce;
-		_sensitiveInputCells = new HashSet<CellCacheEntry>();
+		_sensitiveInputCells = new HashSet<>();
 	}
 	public CellCacheEntry getCCE() {
 		return _cce;

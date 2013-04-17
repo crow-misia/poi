@@ -216,7 +216,7 @@ public final class CellUtil {
 	 * @see #setFormatProperties(org.apache.poi.ss.usermodel.CellStyle, org.apache.poi.ss.usermodel.Workbook, java.util.Map)
 	 */
 	private static Map<String, Object> getFormatProperties(CellStyle style) {
-		Map<String, Object> properties = new HashMap<String, Object>();
+		Map<String, Object> properties = new HashMap<>();
 		putShort(properties, ALIGNMENT, style.getAlignment());
 		putShort(properties, BORDER_BOTTOM, style.getBorderBottom());
 		putShort(properties, BORDER_LEFT, style.getBorderLeft());

@@ -47,7 +47,7 @@ final class ForkedEvaluationSheet implements EvaluationSheet {
 
 	public ForkedEvaluationSheet(EvaluationSheet masterSheet) {
 		_masterSheet = masterSheet;
-		_sharedCellsByRowCol = new HashMap<RowColKey, ForkedEvaluationCell>();
+		_sharedCellsByRowCol = new HashMap<>();
 	}
 
 	public EvaluationCell getCell(int rowIndex, int columnIndex) {

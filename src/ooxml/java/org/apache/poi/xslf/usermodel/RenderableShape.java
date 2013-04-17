@@ -552,7 +552,7 @@ class RenderableShape {
 
     private Collection<Outline> computeOutlines(Graphics2D graphics) {
 
-        Collection<Outline> lst = new ArrayList<Outline>();
+        Collection<Outline> lst = new ArrayList<>();
         CustomGeometry geom = _shape.getGeometry();
         if(geom == null) {
             return lst;

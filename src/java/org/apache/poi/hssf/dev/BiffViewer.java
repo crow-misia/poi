@@ -61,7 +61,7 @@ public final class BiffViewer {
 	 */
 	public static Record[] createRecords(InputStream is, PrintStream ps, BiffRecordListener recListener, boolean dumpInterpretedRecords)
 			throws RecordFormatException {
-		List<Record> temp = new ArrayList<Record>();
+		List<Record> temp = new ArrayList<>();
 
 		RecordInputStream recStream = new RecordInputStream(is);
 		while (true) {
@@ -432,7 +432,7 @@ public final class BiffViewer {
 			_hexDumpWriter = hexDumpWriter;
 			_zeroAlignEachRecord = zeroAlignEachRecord;
 			_noHeader = noHeader;
-			_headers = new ArrayList<String>();
+			_headers = new ArrayList<>();
 		}
 
 		public void processRecord(int globalOffset, int recordCounter, int sid, int dataSize,

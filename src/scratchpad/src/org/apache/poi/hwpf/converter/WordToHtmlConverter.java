@@ -163,7 +163,7 @@ public class WordToHtmlConverter extends AbstractWordConverter
         return wordToHtmlConverter.getDocument();
     }
 
-    private final Stack<BlockProperies> blocksProperies = new Stack<BlockProperies>();
+    private final Stack<BlockProperies> blocksProperies = new Stack<>();
 
     private final HtmlDocumentFacade htmlDocumentFacade;
 

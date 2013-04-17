@@ -55,7 +55,7 @@ public class SXSSFSheet implements Sheet, Cloneable
 {
     SXSSFWorkbook _workbook;
     XSSFSheet _sh;
-    TreeMap<Integer,SXSSFRow> _rows=new TreeMap<Integer,SXSSFRow>();
+    TreeMap<Integer,SXSSFRow> _rows=new TreeMap<>();
     SheetDataWriter _writer;
     int _randomAccessWindowSize = SXSSFWorkbook.DEFAULT_WINDOW_SIZE;
     int outlineLevelRow = 0;

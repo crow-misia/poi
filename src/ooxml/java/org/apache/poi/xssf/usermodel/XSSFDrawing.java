@@ -116,7 +116,7 @@ public final class XSSFDrawing extends POIXMLDocumentPart implements Drawing {
         xmlOptions.setSaveSyntheticDocumentElement(
                 new QName(CTDrawing.type.getName().getNamespaceURI(), "wsDr", "xdr")
         );
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put(NAMESPACE_A, "a");
         map.put(STRelationshipId.type.getName().getNamespaceURI(), "r");
         xmlOptions.setSaveSuggestedPrefixes(map);
@@ -328,7 +328,7 @@ public final class XSSFDrawing extends POIXMLDocumentPart implements Drawing {
      * Returns all charts in this drawing.
      */
     public List<XSSFChart> getCharts() {
-       List<XSSFChart> charts = new ArrayList<XSSFChart>();
+       List<XSSFChart> charts = new ArrayList<>();
        for(POIXMLDocumentPart part : getRelations()) {
           if(part instanceof XSSFChart) {
              charts.add((XSSFChart)part);
@@ -365,7 +365,7 @@ public final class XSSFDrawing extends POIXMLDocumentPart implements Drawing {
     }
 
     public List<XSSFShape> getShapes(){
-        List<XSSFShape> lst = new ArrayList<XSSFShape>();
+        List<XSSFShape> lst = new ArrayList<>();
         for(XmlObject obj : drawing.selectPath("./*/*")) {
             XSSFShape shape = null;
             if(obj instanceof CTPicture) shape = new XSSFPicture(this, (CTPicture)obj) ;

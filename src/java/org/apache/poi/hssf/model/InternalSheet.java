@@ -131,7 +131,7 @@ public final class InternalSheet {
         _mergedCellsTable = new MergedCellsTable();
         RowRecordsAggregate rra = null;
 
-        List<RecordBase> records = new ArrayList<RecordBase>(128);
+        List<RecordBase> records = new ArrayList<>(128);
         _records = records; // needed here due to calls to findFirstRecordLocBySid before we're done
         int dimsloc = -1;
 
@@ -344,7 +344,7 @@ public final class InternalSheet {
      * belongs to a sheet.
      */
     public InternalSheet cloneSheet() {
-        List<Record> clonedRecords = new ArrayList<Record>(_records.size());
+        List<Record> clonedRecords = new ArrayList<>(_records.size());
         for (int i = 0; i < _records.size(); i++) {
             RecordBase rb = _records.get(i);
             if (rb instanceof RecordAggregate) {
@@ -375,7 +375,7 @@ public final class InternalSheet {
     }
     private InternalSheet() {
         _mergedCellsTable = new MergedCellsTable();
-        List<RecordBase> records = new ArrayList<RecordBase>(32);
+        List<RecordBase> records = new ArrayList<>(32);
 
         if (log.check( POILogger.DEBUG ))
             log.log(POILogger.DEBUG, "Sheet createsheet from scratch called");
@@ -1595,7 +1595,7 @@ public final class InternalSheet {
      * @return never <code>null</code>, typically empty array
      */
     public NoteRecord[] getNoteRecords() {
-        List<NoteRecord> temp = new ArrayList<NoteRecord>();
+        List<NoteRecord> temp = new ArrayList<>();
         for(int i=_records.size()-1; i>=0; i--) {
             RecordBase rec = _records.get(i);
             if (rec instanceof NoteRecord) {

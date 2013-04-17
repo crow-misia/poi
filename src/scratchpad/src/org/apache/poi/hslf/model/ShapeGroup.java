@@ -71,7 +71,7 @@ public class ShapeGroup extends Shape{
         if (iter.hasNext()) {
         	iter.next();
         }
-        List<Shape> shapeList = new ArrayList<Shape>();
+        List<Shape> shapeList = new ArrayList<>();
         while (iter.hasNext()) {
         	EscherRecord r = iter.next();
         	if(r instanceof EscherContainerRecord) {

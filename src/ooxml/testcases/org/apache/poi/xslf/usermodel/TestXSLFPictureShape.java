@@ -99,7 +99,7 @@ public class TestXSLFPictureShape extends TestCase {
 
         ppt = XSLFTestDataSamples.writeOutAndReadBack(ppt);
         // pictures keyed by file name
-        Map<String, XSLFPictureData> pics = new HashMap<String, XSLFPictureData>();
+        Map<String, XSLFPictureData> pics = new HashMap<>();
         for(XSLFPictureData p : ppt.getAllPictures()){
             pics.put(p.getFileName(), p);
         }

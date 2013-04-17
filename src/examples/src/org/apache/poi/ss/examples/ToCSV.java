@@ -524,7 +524,7 @@ public class ToCSV {
     private void rowToCSV(Row row) {
         Cell cell = null;
         int lastCellNum = 0;
-        ArrayList<String> csvLine = new ArrayList<String>();
+        List<String> csvLine = new ArrayList<>();
 
         // Check to ensure that a row was recovered from the sheet as it is
         // possible that one or more rows between other populated rows could be

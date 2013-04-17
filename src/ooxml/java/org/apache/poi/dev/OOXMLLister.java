@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackageAccess;
@@ -69,7 +69,7 @@ public class OOXMLLister {
 	 *  parts of the OOXML file container.
 	 */
 	public void displayParts() throws Exception {
-		ArrayList<PackagePart> parts = container.getParts();
+		List<PackagePart> parts = container.getParts();
 		for (PackagePart part : parts) {
 			disp.println(part.getPartName());
 			disp.println("\t" + part.getContentType());

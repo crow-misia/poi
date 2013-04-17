@@ -44,7 +44,7 @@ public class XSSFScatterChartData implements ScatterChartData {
     private List<Serie> series;
 
     public XSSFScatterChartData() {
-        series = new ArrayList<Serie>();
+        series = new ArrayList<>();
     }
 
     /**

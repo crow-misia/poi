@@ -91,7 +91,7 @@ public class XSSFChartSheet extends XSSFSheet  {
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSaveSyntheticDocumentElement(
                 new QName(CTChartsheet.type.getName().getNamespaceURI(), "chartsheet"));
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put(STRelationshipId.type.getName().getNamespaceURI(), "r");
         xmlOptions.setSaveSuggestedPrefixes(map);
 

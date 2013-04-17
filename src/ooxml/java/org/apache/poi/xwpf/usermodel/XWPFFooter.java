@@ -78,7 +78,7 @@ public class XWPFFooter extends XWPFHeaderFooter {
     protected void commit() throws IOException {
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSaveSyntheticDocumentElement(new QName(CTNumbering.type.getName().getNamespaceURI(), "ftr"));
-        Map<String,String> map = new HashMap<String, String>();
+        Map<String,String> map = new HashMap<>();
         map.put("http://schemas.openxmlformats.org/markup-compatibility/2006", "ve");
         map.put("urn:schemas-microsoft-com:office:office", "o");
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "r");

@@ -83,7 +83,7 @@ public class XWPFParagraph implements IBodyElement, IRunBody, ISDTContents {
         }
 
         // Build up the character runs
-        runs = new ArrayList<XWPFRun>();
+        runs = new ArrayList<>();
         iruns = new ArrayList<IRunElement>();
         buildRunsInOrderFromXml(paragraph);
 

@@ -94,7 +94,7 @@ public final class XSLFChart extends POIXMLDocumentPart {
 		XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
 
 		xmlOptions.setSaveSyntheticDocumentElement(new QName(CTChartSpace.type.getName().getNamespaceURI(), "chartSpace", "c"));
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		map.put("http://schemas.openxmlformats.org/drawingml/2006/main", "a");
 		map.put("http://schemas.openxmlformats.org/drawingml/2006/chart", "c");
 		map.put("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "r");

@@ -78,7 +78,7 @@ public class XSSFMap {
      * @return the list of Single Xml Cells that provide a map rule to this mapping.
      */
     public List<XSSFSingleXmlCell> getRelatedSingleXMLCell() {
-        final List<XSSFSingleXmlCell> relatedSimpleXmlCells = new ArrayList<XSSFSingleXmlCell>();
+        final List<XSSFSingleXmlCell> relatedSimpleXmlCells = new ArrayList<>();
 
         int sheetNumber = mapInfo.getWorkbook().getNumberOfSheets();
         for (int i = 0; i < sheetNumber; i++) {
@@ -102,7 +102,7 @@ public class XSSFMap {
      */
     public List<XSSFTable> getRelatedTables() {
 
-        final List<XSSFTable> tables = new ArrayList<XSSFTable>();
+        final List<XSSFTable> tables = new ArrayList<>();
         int sheetNumber = mapInfo.getWorkbook().getNumberOfSheets();
 
         for (int i = 0; i < sheetNumber; i++) {

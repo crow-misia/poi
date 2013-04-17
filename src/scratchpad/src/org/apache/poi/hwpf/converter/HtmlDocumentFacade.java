@@ -35,7 +35,7 @@ public class HtmlDocumentFacade
     /**
      * Map from tag name, to map linking known styles and css class names
      */
-    private Map<String, Map<String, String>> stylesheet = new LinkedHashMap<String, Map<String, String>>();
+    private Map<String, Map<String, String>> stylesheet = new LinkedHashMap<>();
     private Element stylesheetElement;
 
     protected Element title;

@@ -50,7 +50,7 @@ public enum ParagraphAlignment {
         return value;
     }
 
-    private static Map<Integer, ParagraphAlignment> imap = new HashMap<Integer, ParagraphAlignment>();
+    private static Map<Integer, ParagraphAlignment> imap = new HashMap<>();
     static{
         for (ParagraphAlignment p : values()) {
             imap.put(Integer.valueOf(p.getValue()), p);

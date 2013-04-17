@@ -31,9 +31,9 @@ import java.util.List;
  * @author Yegor Kozlov
  */
 public class CustomGeometry implements Iterable<Path>{
-    List<Guide> adjusts = new ArrayList<Guide>();
-    List<Guide> guides = new ArrayList<Guide>();
-    List<Path> paths = new ArrayList<Path>();
+    List<Guide> adjusts = new ArrayList<>();
+    List<Guide> guides = new ArrayList<>();
+    List<Path> paths = new ArrayList<>();
     Path textBounds;
 
     public CustomGeometry(CTCustomGeometry2D geom) {

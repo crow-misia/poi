@@ -146,7 +146,7 @@ public final class ContentType {
 			this.type = mMediaType.group(1);
 			this.subType = mMediaType.group(2);
 			// Parameters
-			this.parameters = new Hashtable<String, String>(1);
+			this.parameters = new Hashtable<>(1);
 			for (int i = 4; i <= mMediaType.groupCount()
 					&& (mMediaType.group(i) != null); i += 2) {
 				this.parameters.put(mMediaType.group(i), mMediaType

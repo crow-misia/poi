@@ -468,7 +468,7 @@ public class XSLFColor {
     static final Map<String, Color> presetColors;
 
     static {
-        presetColors = new HashMap<String, Color>();    
+        presetColors = new HashMap<>();    
         presetColors.put("aliceBlue", new Color(240, 248, 255));
         presetColors.put("antiqueWhite", new Color(250, 235, 215));
         presetColors.put("aqua", new Color(0, 255, 255));

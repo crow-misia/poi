@@ -60,7 +60,7 @@ public class POIXMLDocumentPart {
     private PackagePart packagePart;
     private PackageRelationship packageRel;
     private POIXMLDocumentPart parent;
-    private Map<String,POIXMLDocumentPart> relations = new LinkedHashMap<String,POIXMLDocumentPart>();
+    private Map<String,POIXMLDocumentPart> relations = new LinkedHashMap<>();
 
     /**
      * Counter that provides the amount of incoming relations from other parts
@@ -170,7 +170,7 @@ public class POIXMLDocumentPart {
      * @return child relations
      */
     public final List<POIXMLDocumentPart> getRelations(){
-        return Collections.unmodifiableList(new ArrayList<POIXMLDocumentPart>(relations.values()));
+        return Collections.unmodifiableList(new ArrayList<>(relations.values()));
     }
 
     /**

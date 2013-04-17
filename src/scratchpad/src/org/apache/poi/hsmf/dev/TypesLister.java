@@ -21,6 +21,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import org.apache.poi.hsmf.datatypes.MAPIProperty;
 
@@ -31,7 +32,7 @@ public class TypesLister {
    public TypesLister() {}
    
    public void listByName(PrintStream out) {
-      ArrayList<MAPIProperty> all = new ArrayList<MAPIProperty>(MAPIProperty.getAll());
+      List<MAPIProperty> all = new ArrayList<>(MAPIProperty.getAll());
       Collections.sort(all, new Comparator<MAPIProperty>() {
          public int compare(MAPIProperty a, MAPIProperty b) {
             return a.name.compareTo(b.name);
@@ -40,7 +41,7 @@ public class TypesLister {
       list(all, out);
    }
    public void listById(PrintStream out) {
-      ArrayList<MAPIProperty> all = new ArrayList<MAPIProperty>(MAPIProperty.getAll());
+      List<MAPIProperty> all = new ArrayList<>(MAPIProperty.getAll());
       Collections.sort(all, new Comparator<MAPIProperty>() {
          public int compare(MAPIProperty a, MAPIProperty b) {
             if(a.id < b.id) return -1;
@@ -50,7 +51,7 @@ public class TypesLister {
       });
       list(all, out);
    }
-   private void list(ArrayList<MAPIProperty> list, PrintStream out) {
+   private void list(List<MAPIProperty> list, PrintStream out) {
       for(MAPIProperty attr : list) {
          String id = Integer.toHexString(attr.id);
          while(id.length() < 4) { id = "0"+id; }

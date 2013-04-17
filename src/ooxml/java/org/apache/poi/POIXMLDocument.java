@@ -150,7 +150,7 @@ public abstract class POIXMLDocument extends POIXMLDocumentPart{
     public abstract List<PackagePart> getAllEmbedds() throws OpenXML4JException;
 
     protected final void load(POIXMLFactory factory) throws IOException {
-        Map<PackagePart, POIXMLDocumentPart> context = new HashMap<PackagePart, POIXMLDocumentPart>();
+        Map<PackagePart, POIXMLDocumentPart> context = new HashMap<>();
         try {
             read(factory, context);
         } catch (OpenXML4JException e){
@@ -169,7 +169,7 @@ public abstract class POIXMLDocument extends POIXMLDocumentPart{
      */
     public final void write(OutputStream stream) throws IOException {
         //force all children to commit their changes into the underlying OOXML Package
-        Set<PackagePart> context = new HashSet<PackagePart>();
+        Set<PackagePart> context = new HashSet<>();
         onSave(context);
         context.clear();
 

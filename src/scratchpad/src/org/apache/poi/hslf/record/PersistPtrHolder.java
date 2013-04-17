@@ -140,8 +140,8 @@ public final class PersistPtrHolder extends PositionDependentRecordAtom
 		//      base number for these entries
 		//   count * 32 bit offsets
 		// Repeat as many times as you have data
-		_slideLocations = new Hashtable<Integer,Integer>();
-		_slideOffsetDataLocation = new Hashtable<Integer,Integer>();
+		_slideLocations = new Hashtable<>();
+		_slideOffsetDataLocation = new Hashtable<>();
 		_ptrData = new byte[len-8];
 		System.arraycopy(source,start+8,_ptrData,0,_ptrData.length);
 

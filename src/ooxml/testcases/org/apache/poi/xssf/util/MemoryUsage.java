@@ -138,7 +138,7 @@ public class MemoryUsage extends TestCase {
      * @see #testXmlAttached()
      */
     public void testXmlDetached(){
-        List<CTRow> rows = new ArrayList<CTRow>();
+        List<CTRow> rows = new ArrayList<>();
         int i = 0;
         try {
             for(;;){
@@ -160,7 +160,7 @@ public class MemoryUsage extends TestCase {
      * @see #testXmlAttached()
      */
     public void testXmlAttached(){
-        List<CTRow> rows = new ArrayList<CTRow>();
+        List<CTRow> rows = new ArrayList<>();
         int i = 0;
         //top-level element in sheet.xml
         CTWorksheet sh = CTWorksheet.Factory.newInstance();

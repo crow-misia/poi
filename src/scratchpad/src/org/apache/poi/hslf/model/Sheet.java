@@ -125,7 +125,7 @@ public abstract class Sheet {
      * For a given PPDrawing, grab all the TextRuns
      */
     public static TextRun[] findTextRuns(PPDrawing ppdrawing) {
-        final List<TextRun> runsV = new ArrayList<TextRun>();
+        final List<TextRun> runsV = new ArrayList<>();
         final EscherTextboxWrapper[] wrappers = ppdrawing.getTextboxWrappers();
         for (int i = 0; i < wrappers.length; i++) {
             int s1 = runsV.size();
@@ -207,7 +207,7 @@ public abstract class Sheet {
                 }
 
                 if (trun != null) {
-                    List<Record> lst = new ArrayList<Record>();
+                    List<Record> lst = new ArrayList<>();
                     for (int j = i; j < records.length; j++) {
                         if(j > i && records[j] instanceof TextHeaderAtom) break;
                         lst.add(records[j]);
@@ -249,7 +249,7 @@ public abstract class Sheet {
             throw new IllegalStateException("spgr not found");
         }
 
-        List<Shape> shapes = new ArrayList<Shape>();
+        List<Shape> shapes = new ArrayList<>();
         Iterator<EscherRecord> it = spgr.getChildIterator();
         if (it.hasNext()) {
             // skip first item

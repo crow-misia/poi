@@ -40,7 +40,7 @@ import org.apache.poi.ss.usermodel.ClientAnchor;
  */
 public final class HSSFPatriarch implements HSSFShapeContainer, Drawing {
     private static final POILogger log = POILogFactory.getLogger(HSSFPatriarch.class);
-    private final List<HSSFShape> _shapes = new ArrayList<HSSFShape>();
+    private final List<HSSFShape> _shapes = new ArrayList<>();
 
     private final EscherSpgrRecord _spgrRecord;
     private final EscherContainerRecord _mainSpgrContainer;
@@ -102,7 +102,7 @@ public final class HSSFPatriarch implements HSSFShapeContainer, Drawing {
         /**
          * contains coordinates of comments we iterate over
          */
-        Set<String> coordinates = new HashSet<String>(tailRecords.size());
+        Set<String> coordinates = new HashSet<>(tailRecords.size());
         for(NoteRecord rec : tailRecords.values()){
             String noteRef = new CellReference(rec.getRow(),
                     rec.getColumn()).formatAsString(); // A1-style notation
@@ -310,7 +310,7 @@ public final class HSSFPatriarch implements HSSFShapeContainer, Drawing {
      * remove all shapes inside patriarch
      */
     public void clear() {
-        ArrayList <HSSFShape> copy = new ArrayList<HSSFShape>(_shapes);
+        ArrayList <HSSFShape> copy = new ArrayList<>(_shapes);
         for (HSSFShape shape: copy){
             removeShape(shape);
         }

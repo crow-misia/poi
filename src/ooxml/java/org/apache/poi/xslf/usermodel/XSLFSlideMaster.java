@@ -88,7 +88,7 @@ import java.util.Map;
 
     private Map<String, XSLFSlideLayout> getLayouts(){
         if(_layouts == null){
-            _layouts = new HashMap<String, XSLFSlideLayout>();
+            _layouts = new HashMap<>();
             for (POIXMLDocumentPart p : getRelations()) {
                 if (p instanceof XSLFSlideLayout){
                     XSLFSlideLayout layout = (XSLFSlideLayout)p;

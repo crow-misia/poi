@@ -166,14 +166,14 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
         worksheet = newSheet();
         initRows(worksheet);
         columnHelper = new ColumnHelper(worksheet);
-        hyperlinks = new ArrayList<XSSFHyperlink>();
+        hyperlinks = new ArrayList<>();
     }
 
     private void initRows(CTWorksheet worksheet) {
-        _rows = new TreeMap<Integer, XSSFRow>();
-        tables = new TreeMap<String, XSSFTable>();
-        sharedFormulas = new HashMap<Integer, CTCellFormula>();
-        arrayFormulas = new ArrayList<CellRangeAddress>();
+        _rows = new TreeMap<>();
+        tables = new TreeMap<>();
+        sharedFormulas = new HashMap<>();
+        arrayFormulas = new ArrayList<>();
         for (final CTRow row : worksheet.getSheetData().getRowList()) {
             XSSFRow r = new XSSFRow(row, this);
             _rows.put(r.getRowNum(), r);
@@ -188,9 +188,9 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
         final List<CTHyperlink> list;
         if(worksheet.isSetHyperlinks()) {
             list = worksheet.getHyperlinks().getHyperlinkList();
-            hyperlinks = new ArrayList<XSSFHyperlink>(list.size());
+            hyperlinks = new ArrayList<>(list.size());
         } else {
-            hyperlinks = new ArrayList<XSSFHyperlink>();
+            hyperlinks = new ArrayList<>();
             return;
         }
 
@@ -1463,7 +1463,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
             throw new IllegalArgumentException("Specified row does not belong to this sheet");
         }
         // collect cells into a temporary array to avoid ConcurrentModificationException
-        ArrayList<XSSFCell> cellsToDelete = new ArrayList<XSSFCell>();
+        ArrayList<XSSFCell> cellsToDelete = new ArrayList<>();
         for(Cell cell : row) cellsToDelete.add((XSSFCell)cell);
 
         for(XSSFCell cell : cellsToDelete) row.removeCell(cell);
@@ -2374,7 +2374,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
         rowShifter.updateConditionalFormatting(shifter);
 
         //rebuild the _rows map
-        TreeMap<Integer, XSSFRow> map = new TreeMap<Integer, XSSFRow>();
+        TreeMap<Integer, XSSFRow> map = new TreeMap<>();
         for(XSSFRow r : _rows.values()) {
             map.put(r.getRowNum(), r);
         }
@@ -2709,7 +2709,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
 
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSaveSyntheticDocumentElement(new QName(CTWorksheet.type.getName().getNamespaceURI(), "worksheet"));
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put(STRelationshipId.type.getName().getNamespaceURI(), "r");
         xmlOptions.setSaveSuggestedPrefixes(map);
 
@@ -3048,7 +3048,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
         int lastColumn = range.getLastColumn();
         int height = lastRow - firstRow + 1;
         int width = lastColumn - firstColumn + 1;
-        List<XSSFCell> temp = new ArrayList<XSSFCell>(height*width);
+        List<XSSFCell> temp = new ArrayList<>(height*width);
         for (int rowIn = firstRow; rowIn <= lastRow; rowIn++) {
             for (int colIn = firstColumn; colIn <= lastColumn; colIn++) {
                 XSSFRow row = getRow(rowIn);
@@ -3099,7 +3099,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
 	}
     
     public List<XSSFDataValidation> getDataValidations() {
-    	List<XSSFDataValidation> xssfValidations = new ArrayList<XSSFDataValidation>();
+    	List<XSSFDataValidation> xssfValidations = new ArrayList<>();
     	CTDataValidations dataValidations = this.worksheet.getDataValidations();
     	if( dataValidations!=null && dataValidations.getCount() > 0 ) {
     		for (CTDataValidation ctDataValidation : dataValidations.getDataValidationList()) {
@@ -3187,7 +3187,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      * Returns any tables associated with this Sheet
      */
     public List<XSSFTable> getTables() {
-       List<XSSFTable> tableList = new ArrayList<XSSFTable>(
+       List<XSSFTable> tableList = new ArrayList<>(
              tables.values()
        );
        return tableList;
