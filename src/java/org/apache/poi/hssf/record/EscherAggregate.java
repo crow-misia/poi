@@ -298,12 +298,12 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
     /**
      * Maps shape container objects to their {@link TextObjectRecord} or {@link ObjRecord}
      */
-    private final Map<EscherRecord, Record> shapeToObj = new HashMap<EscherRecord, Record>();
+    private final Map<EscherRecord, Record> shapeToObj = new HashMap<>();
 
     /**
      * list of "tail" records that need to be serialized after all drawing group records
      */
-    private Map<Integer, NoteRecord> tailRec = new LinkedHashMap<Integer, NoteRecord>();
+    private Map<Integer, NoteRecord> tailRec = new LinkedHashMap<>();
 
     /**
      * create new EscherAggregate
@@ -379,7 +379,7 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
     public static EscherAggregate createAggregate(List<RecordBase> records, int locFirstDrawingRecord) {
         // Keep track of any shape records created so we can match them back to the object id's.
         // Textbox objects are also treated as shape objects.
-        final List<EscherRecord> shapeRecords = new ArrayList<EscherRecord>();
+        final List<EscherRecord> shapeRecords = new ArrayList<>();
         EscherRecordFactory recordFactory = new DefaultEscherRecordFactory() {
             public EscherRecord createRecord(byte[] data, int offset) {
                 EscherRecord r = super.createRecord(data, offset);
@@ -471,7 +471,7 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
 
         // Serialize escher records into one big data structure and keep note of ending offsets.
         final IntArrayList spEndingOffsets = new IntArrayList();
-        final List<EscherRecord> shapes = new ArrayList<EscherRecord>();
+        final List<EscherRecord> shapes = new ArrayList<>();
         int pos = 0;
         for (Object record : records) {
             EscherRecord e = (EscherRecord) record;

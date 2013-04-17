@@ -85,7 +85,7 @@ public abstract class XSLFSheet extends POIXMLDocumentPart implements XSLFShapeC
     }
 
     protected List<XSLFShape> buildShapes(CTGroupShape spTree){
-        List<XSLFShape> shapes = new ArrayList<XSLFShape>();
+        List<XSLFShape> shapes = new ArrayList<>();
         for(XmlObject ch : spTree.selectPath("*")){
             if(ch instanceof CTShape){ // simple shape
                 XSLFAutoShape shape = XSLFAutoShape.create((CTShape)ch, this);
@@ -270,7 +270,7 @@ public abstract class XSLFSheet extends POIXMLDocumentPart implements XSLFShapeC
     protected final void commit() throws IOException {
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
 
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put(STRelationshipId.type.getName().getNamespaceURI(), "r");
         map.put("http://schemas.openxmlformats.org/drawingml/2006/main", "a");
         map.put("http://schemas.openxmlformats.org/presentationml/2006/main", "p");
@@ -400,9 +400,9 @@ public abstract class XSLFSheet extends POIXMLDocumentPart implements XSLFShapeC
 
     void initPlaceholders() {
         if(_placeholders == null) {
-            _placeholders = new ArrayList<XSLFTextShape>();
-            _placeholderByIdMap = new HashMap<Integer, XSLFSimpleShape>();
-            _placeholderByTypeMap = new HashMap<Integer, XSLFSimpleShape>();
+            _placeholders = new ArrayList<>();
+            _placeholderByIdMap = new HashMap<>();
+            _placeholderByTypeMap = new HashMap<>();
 
             for(XSLFShape sh : getShapes()){
                 if(sh instanceof XSLFTextShape){

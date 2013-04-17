@@ -33,7 +33,7 @@ public class AggregatingUDFFinder implements UDFFinder {
 	private final Collection<UDFFinder> _usedToolPacks;
 
 	public AggregatingUDFFinder(UDFFinder ... usedToolPacks) {
-        _usedToolPacks = new ArrayList<UDFFinder>(usedToolPacks.length);
+        _usedToolPacks = new ArrayList<>(usedToolPacks.length);
 		_usedToolPacks.addAll(Arrays.asList(usedToolPacks));
 	}
 

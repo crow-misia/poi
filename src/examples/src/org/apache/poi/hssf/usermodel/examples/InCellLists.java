@@ -19,18 +19,19 @@
 package org.apache.poi.hssf.usermodel.examples;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 /**
  * This class contains code that demonstrates how to insert plain, numbered
@@ -73,8 +74,8 @@ public class InCellLists {
         HSSFCell cell = null;
         File outputFile = null;
         FileOutputStream fos = null;
-        ArrayList<MultiLevelListItem> multiLevelListItems = null;
-        ArrayList<String> listItems = null;
+        final List<MultiLevelListItem> multiLevelListItems = new ArrayList<>();
+        final List<String> listItems = new ArrayList<>();
         String listItem = null;
         try {
             workbook = new HSSFWorkbook();
@@ -90,7 +91,7 @@ public class InCellLists {
             // whose items are neither bulleted or numbered - into that cell.
             row = sheet.createRow(1);
             cell = row.createCell(0);
-            listItems = new ArrayList<String>();
+            listItems.clear();
             listItems.add("List Item One.");
             listItems.add("List Item Two.");
             listItems.add("List Item Three.");
@@ -133,8 +134,8 @@ public class InCellLists {
             // item recovered.
             row = sheet.createRow(4);
             cell = row.createCell(0);
-            multiLevelListItems = new ArrayList<MultiLevelListItem>();
-            listItems = new ArrayList<String>();
+            multiLevelListItems.clear();
+            listItems.clear();
             listItems.add("ML List Item One - Sub Item One.");
             listItems.add("ML List Item One - Sub Item Two.");
             listItems.add("ML List Item One - Sub Item Three.");
@@ -145,7 +146,7 @@ public class InCellLists {
             // item
             multiLevelListItems.add(new MultiLevelListItem("List Item Two.", null));
             multiLevelListItems.add(new MultiLevelListItem("List Item Three.", null));
-            listItems = new ArrayList<String>();
+            listItems.clear();
             listItems.add("ML List Item Four - Sub Item One.");
             listItems.add("ML List Item Four - Sub Item Two.");
             listItems.add("ML List Item Four - Sub Item Three.");
@@ -239,8 +240,8 @@ public class InCellLists {
      *             reference to the spreadsheet cell into which the list
      *             will be written.
      */
-    public void listInCell(HSSFWorkbook workbook, ArrayList<String> listItems, HSSFCell cell) {
-    	StringBuilder buffer = new StringBuilder();
+    public void listInCell(HSSFWorkbook workbook, List<String> listItems, HSSFCell cell) {
+        StringBuilder buffer = new StringBuilder();
         HSSFCellStyle wrapStyle = workbook.createCellStyle();
         wrapStyle.setWrapText(true);
         for(String listItem : listItems) {
@@ -269,7 +270,7 @@ public class InCellLists {
      *                  to calculate subsequent item numbers.
      */
     public void numberedListInCell(HSSFWorkbook workbook,
-                                   ArrayList<String> listItems,
+                                   List<String> listItems,
                                    HSSFCell cell,
                                    int startingValue,
                                    int increment) {
@@ -305,7 +306,7 @@ public class InCellLists {
      *             will be written.
      */
     public void bulletedListInCell(HSSFWorkbook workbook,
-                                   ArrayList<String> listItems,
+                                   List<String> listItems,
                                    HSSFCell cell) {
         StringBuilder buffer = new StringBuilder();
         // Note that again, an HSSFCellStye object is required and that
@@ -341,10 +342,10 @@ public class InCellLists {
      *             will be written.
      */
     public void multiLevelListInCell(HSSFWorkbook workbook,
-                                     ArrayList<MultiLevelListItem> multiLevelListItems,
+                                     List<MultiLevelListItem> multiLevelListItems,
                                      HSSFCell cell) {
         StringBuilder buffer = new StringBuilder();
-        ArrayList<String> lowerLevelItems = null;
+        List<String> lowerLevelItems = null;
         // Note that again, an HSSFCellStye object is required and that
         // it's wrap text property should be set to 'true'
         HSSFCellStyle wrapStyle = workbook.createCellStyle();
@@ -399,7 +400,7 @@ public class InCellLists {
      *                          subsequent low level item.
      */
     public void multiLevelNumberedListInCell(HSSFWorkbook workbook,
-                                             ArrayList<MultiLevelListItem> multiLevelListItems,
+                                             List<MultiLevelListItem> multiLevelListItems,
                                              HSSFCell cell,
                                              int highLevelStartingValue,
                                              int highLevelIncrement,
@@ -408,7 +409,7 @@ public class InCellLists {
         StringBuilder buffer = new StringBuilder();
         int highLevelItemNumber = highLevelStartingValue;
         int lowLevelItemNumber = 0;
-        ArrayList<String> lowerLevelItems = null;
+        List<String> lowerLevelItems = null;
         // Note that again, an HSSFCellStye object is required and that
         // it's wrap text property should be set to 'true'
         HSSFCellStyle wrapStyle = workbook.createCellStyle();
@@ -461,10 +462,10 @@ public class InCellLists {
      *             will be written.
      */
     public void multiLevelBulletedListInCell(HSSFWorkbook workbook,
-                                             ArrayList<MultiLevelListItem> multiLevelListItems,
+                                             List<MultiLevelListItem> multiLevelListItems,
                                              HSSFCell cell) {
         StringBuilder buffer = new StringBuilder();
-        ArrayList<String> lowerLevelItems = null;
+        List<String> lowerLevelItems = null;
         // Note that again, an HSSFCellStye object is required and that
         // it's wrap text property should be set to 'true'
         HSSFCellStyle wrapStyle = workbook.createCellStyle();
@@ -529,7 +530,7 @@ public class InCellLists {
     public final class MultiLevelListItem {
 
         private String itemText = null;
-        private ArrayList<String> lowerLevelItems = null;
+        private List<String> lowerLevelItems = null;
 
         /**
          * Create a new instance of the MultiLevelListItem class using the
@@ -541,7 +542,7 @@ public class InCellLists {
          *                        text for the associated lower level list
          *                        items.
          */
-        public MultiLevelListItem(String itemText, ArrayList<String> lowerLevelItems) {
+        public MultiLevelListItem(String itemText, List<String> lowerLevelItems) {
             this.itemText = itemText;
             this.lowerLevelItems = lowerLevelItems;
         }
@@ -562,7 +563,7 @@ public class InCellLists {
          * @return An ArrayList whose elements each encapsulate the text for a
          *         single associated lower level list item.
          */
-        public ArrayList<String> getLowerLevelItems() {
+        public List<String> getLowerLevelItems() {
             return(this.lowerLevelItems);
         }
     }

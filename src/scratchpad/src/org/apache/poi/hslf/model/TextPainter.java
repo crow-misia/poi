@@ -195,7 +195,7 @@ public final class TextPainter {
         int paragraphStart = it.getBeginIndex();
         int paragraphEnd = it.getEndIndex();
 
-        List<TextElement> lines = new ArrayList<TextElement>();
+        List<TextElement> lines = new ArrayList<>();
         LineBreakMeasurer measurer = new LineBreakMeasurer(it, frc);
         measurer.setPosition(paragraphStart);
         while (measurer.getPosition() < paragraphEnd) {

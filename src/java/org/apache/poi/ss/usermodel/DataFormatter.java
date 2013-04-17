@@ -211,7 +211,7 @@ public class DataFormatter {
         generalWholeNumFormat = new DecimalFormat("#", decimalSymbols);
         generalDecimalNumFormat = new DecimalFormat("#.##########", decimalSymbols);
 
-        formats = new HashMap<String,Format>();
+        formats = new HashMap<>();
 
         // init built-in formats
 

@@ -162,7 +162,7 @@ public final class TestPOIXMLProperties extends TestCase {
         CoreProperties cp = doc.getProperties().getCoreProperties();
 
         Date dateCreated = new GregorianCalendar(2010, 6, 15, 10, 0, 0).getTime();
-        cp.setCreated(new Nullable<Date>(dateCreated));
+        cp.setCreated(new Nullable<>(dateCreated));
         assertEquals(dateCreated.toString(), cp.getCreated().toString());
 
         doc = XWPFTestDataSamples.writeOutAndReadBack(doc);

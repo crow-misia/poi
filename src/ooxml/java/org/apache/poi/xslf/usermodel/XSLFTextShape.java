@@ -61,7 +61,7 @@ public abstract class XSLFTextShape extends XSLFSimpleShape implements Iterable<
     /*package*/ XSLFTextShape(XmlObject shape, XSLFSheet sheet) {
         super(shape, sheet);
 
-        _paragraphs = new ArrayList<XSLFTextParagraph>();
+        _paragraphs = new ArrayList<>();
         CTTextBody txBody = getTextBody(false);
         if (txBody != null) {
             for (CTTextParagraph p : txBody.getPList()) {

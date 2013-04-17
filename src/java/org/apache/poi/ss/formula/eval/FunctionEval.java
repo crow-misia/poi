@@ -306,7 +306,7 @@ public final class FunctionEval {
      * @since 3.8 beta6
      */
     public static Collection<String> getSupportedFunctionNames(){
-        Collection<String> lst = new TreeSet<String>();
+        Collection<String> lst = new TreeSet<>();
         for(int i = 0; i < functions.length; i++){
             Function func = functions[i];
             FunctionMetadata metaData = FunctionMetadataRegistry.getFunctionByIndex(i);
@@ -325,7 +325,7 @@ public final class FunctionEval {
      * @since 3.8 beta6
      */
     public static Collection<String> getNotSupportedFunctionNames(){
-        Collection<String> lst = new TreeSet<String>();
+        Collection<String> lst = new TreeSet<>();
         for(int i = 0; i < functions.length; i++){
             Function func = functions[i];
             if(func != null && (func instanceof NotImplementedFunction)){

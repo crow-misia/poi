@@ -1862,7 +1862,7 @@ if(1==2) {
                 "Good", "Heading 1", "Heading 2", "Heading 3", "Heading 4", "Input", "Linked Cell",
                 "Neutral", "Note", "Output", "Title", "Total", "Warning Text");
 
-        List<String> collecteddStyles = new ArrayList<String>();
+        List<String> collecteddStyles = new ArrayList<>();
         for (short i = 0; i < numCellStyles; i++) {
             HSSFCellStyle cellStyle = wb.getCellStyleAt(i);
             String styleName = cellStyle.getUserStyleName();
@@ -2263,7 +2263,7 @@ if(1==2) {
     }
     
     public void test51675(){
-        final List<Short> list = new ArrayList<Short>();
+        final List<Short> list = new ArrayList<>();
         HSSFWorkbook workbook = openSample("51675.xls");
         HSSFSheet sh = workbook.getSheetAt(0);
         InternalSheet ish = HSSFTestHelper.getSheetForTest(sh);

@@ -55,7 +55,7 @@ public final class EscherBSERecord extends EscherRecord {
     private byte field_11_unused3;
     private EscherBlipRecord field_12_blipRecord;
 
-    private byte[] _remainingData;
+    private byte[] _remainingData = ArrayUtil.EMPTY_BYTE_ARRAY;
 
     public int fillFields(byte[] data, int offset, EscherRecordFactory recordFactory) {
         int bytesRemaining = readHeader( data, offset );
@@ -91,12 +91,9 @@ public final class EscherBSERecord extends EscherRecord {
     public int serialize(int offset, byte[] data, EscherSerializationListener listener) {
         listener.beforeRecordSerialize( offset, getRecordId(), this );
 
-        if (_remainingData == null)
-            _remainingData = ArrayUtil.EMPTY_BYTE_ARRAY;
-
         LittleEndian.putShort( data, offset, getOptions() );
         LittleEndian.putShort( data, offset + 2, getRecordId() );
-        if (_remainingData == null) _remainingData = ArrayUtil.EMPTY_BYTE_ARRAY;
+
         int blipSize = field_12_blipRecord == null ? 0 : field_12_blipRecord.getRecordSize();
         int remainingBytes = _remainingData.length + 36 + blipSize;
         LittleEndian.putInt( data, offset + 4, remainingBytes );
@@ -118,8 +115,7 @@ public final class EscherBSERecord extends EscherRecord {
         {
             bytesWritten = field_12_blipRecord.serialize( offset + 44, data, new NullEscherSerializationListener() );
         }
-        if (_remainingData == null)
-            _remainingData = ArrayUtil.EMPTY_BYTE_ARRAY;
+
         System.arraycopy( _remainingData, 0, data, offset + 44 + bytesWritten, _remainingData.length );
         int pos = offset + 8 + 36 + _remainingData.length + bytesWritten;
 
@@ -132,10 +128,7 @@ public final class EscherBSERecord extends EscherRecord {
         if(field_12_blipRecord != null) {
             field_12_size = field_12_blipRecord.getRecordSize();
         }
-        int remaining_size = 0;
-        if(_remainingData != null) {
-            remaining_size = _remainingData.length;
-        }
+        int remaining_size = _remainingData.length;
         return 8 + 1 + 1 + 16 + 2 + 4 + 4 + 4 + 1 + 1 +
             1 + 1 + field_12_size + remaining_size;
     }
@@ -311,7 +304,6 @@ public final class EscherBSERecord extends EscherRecord {
     }
 
     public String toString() {
-        String extraData = _remainingData == null ? null : HexDump.toHex(_remainingData, 32);
         return getClass().getName() + ":" + '\n' +
                 "  RecordId: 0x" + HexDump.toHex( RECORD_ID ) + '\n' +
                 "  Version: 0x" + HexDump.toHex( getVersion() ) + '\n' +
@@ -328,7 +320,7 @@ public final class EscherBSERecord extends EscherRecord {
                 "  Unused2: " + field_10_unused2 + '\n' +
                 "  Unused3: " + field_11_unused3 + '\n' +
                 "  blipRecord: " + field_12_blipRecord + '\n' +
-                "  Extra Data:" + '\n' + extraData;
+                "  Extra Data:" + '\n' + HexDump.toHex(_remainingData, 32);
     }
 
     @Override

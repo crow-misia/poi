@@ -111,7 +111,7 @@ public final class PPDrawing extends RecordAtom {
 		}
 	}
 	private EscherTextboxWrapper[] findInDgContainer(final EscherContainerRecord escherContainerF002) {
-		final List<EscherTextboxWrapper> found = new LinkedList<EscherTextboxWrapper>();
+		final List<EscherTextboxWrapper> found = new LinkedList<>();
 		final EscherContainerRecord SpgrContainer = findFirstEscherContainerRecordOfType((short)0xf003, escherContainerF002);
 		final EscherContainerRecord[] escherContainersF004 = findAllEscherContainerRecordOfType((short)0xf004, SpgrContainer);
 		for (EscherContainerRecord spContainer : escherContainersF004) {
@@ -391,7 +391,7 @@ public final class PPDrawing extends RecordAtom {
     protected EscherContainerRecord[] findAllEscherContainerRecordOfType(short type, EscherContainerRecord parent) {
     	if (null == parent) { return new EscherContainerRecord[0]; }
 		final List<EscherContainerRecord> children = parent.getChildContainers();
-		final List<EscherContainerRecord> result = new LinkedList<EscherContainerRecord>();
+		final List<EscherContainerRecord> result = new LinkedList<>();
 		for (EscherContainerRecord child : children) {
 			if (type == child.getRecordId()) {
 				result.add(child);
@@ -413,7 +413,7 @@ public final class PPDrawing extends RecordAtom {
     }
 
     public StyleTextProp9Atom[] getNumberedListInfo() {
-    	final List<StyleTextProp9Atom> result = new LinkedList<StyleTextProp9Atom>();
+    	final List<StyleTextProp9Atom> result = new LinkedList<>();
     	EscherRecord[] escherRecords = this.getEscherRecords();
     	for (EscherRecord escherRecord : escherRecords) {
 			if (escherRecord instanceof EscherContainerRecord && (short)0xf002 == escherRecord.getRecordId()) {

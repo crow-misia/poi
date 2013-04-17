@@ -138,7 +138,7 @@ public class XSSFSheetConditionalFormatting implements SheetConditionalFormattin
         }
         CellRangeAddress[] mergeCellRanges = CellRangeUtil.mergeCellRanges(regions);
         CTConditionalFormatting cf = _sheet.getCTWorksheet().addNewConditionalFormatting();
-        List<String> refs = new ArrayList<String>();
+        List<String> refs = new ArrayList<>();
         for(CellRangeAddress a : mergeCellRanges) refs.add(a.formatAsString());
         cf.setSqref(refs);
 

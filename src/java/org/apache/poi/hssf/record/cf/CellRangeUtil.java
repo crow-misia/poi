@@ -96,7 +96,7 @@ public final class CellRangeUtil
 			return cellRanges;
 		}
 
-        List<CellRangeAddress> lst = new ArrayList<CellRangeAddress>();
+        List<CellRangeAddress> lst = new ArrayList<>();
         for(CellRangeAddress cr : cellRanges) lst.add(cr);
         List temp = mergeCellRanges(lst);
 		return toArray(temp);

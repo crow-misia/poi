@@ -295,7 +295,7 @@ public class XWPFHeaderFooterPolicy {
 
     private XmlOptions commit(XWPFHeaderFooter wrapper) {
         XmlOptions xmlOptions = new XmlOptions(wrapper.DEFAULT_XML_OPTIONS);
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/math", "m");
         map.put("urn:schemas-microsoft-com:office:office", "o");
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "r");

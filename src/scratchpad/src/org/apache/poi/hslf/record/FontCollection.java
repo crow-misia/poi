@@ -41,7 +41,7 @@ public final class FontCollection extends RecordContainer {
 		_children = Record.findChildRecords(source,start+8,len-8);
 
 		// Save font names into <code>List</code>
-		fonts = new ArrayList<String>();
+		fonts = new ArrayList<>();
 		for (int i = 0; i < _children.length; i++){
 			if(_children[i] instanceof FontEntityAtom) {
 	            FontEntityAtom atom = (FontEntityAtom)_children[i];

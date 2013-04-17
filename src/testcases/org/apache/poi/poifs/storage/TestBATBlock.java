@@ -275,7 +275,7 @@ public final class TestBATBlock extends TestCase {
     
     public void testGetBATBlockAndIndex() throws Exception {
        HeaderBlock header = new HeaderBlock(POIFSConstants.SMALLER_BIG_BLOCK_SIZE_DETAILS);
-       List<BATBlock> blocks = new ArrayList<BATBlock>();
+       List<BATBlock> blocks = new ArrayList<>();
        int offset;
        
        

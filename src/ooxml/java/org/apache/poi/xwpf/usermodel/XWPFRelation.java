@@ -31,7 +31,7 @@ public final class XWPFRelation extends POIXMLRelation {
     /**
      * A map to lookup POIXMLRelation by its relation type
      */
-    protected static Map<String, XWPFRelation> _table = new HashMap<String, XWPFRelation>();
+    protected static Map<String, XWPFRelation> _table = new HashMap<>();
 
 
     public static final XWPFRelation DOCUMENT = new XWPFRelation(

@@ -99,7 +99,7 @@ public abstract class ContentTypeManager {
 	public ContentTypeManager(InputStream in, OPCPackage pkg)
 			throws InvalidFormatException {
 		this.container = pkg;
-		this.defaultContentType = new TreeMap<String, String>();
+		this.defaultContentType = new TreeMap<>();
 		if (in != null) {
 			try {
 				parseContentTypesFile(in);
@@ -169,7 +169,7 @@ public abstract class ContentTypeManager {
 	private void addOverrideContentType(PackagePartName partName,
 			String contentType) {
 		if (overrideContentType == null)
-			overrideContentType = new TreeMap<PackagePartName, String>();
+			overrideContentType = new TreeMap<>();
 		overrideContentType.put(partName, contentType);
 	}
 

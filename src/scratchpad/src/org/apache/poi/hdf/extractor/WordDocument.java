@@ -18,14 +18,26 @@
 package org.apache.poi.hdf.extractor;
 
 
-import org.apache.poi.hdf.extractor.util.*;
-import org.apache.poi.hdf.extractor.data.*;
-import java.util.*;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.hdf.extractor.data.DOP;
+import org.apache.poi.hdf.extractor.data.LVL;
+import org.apache.poi.hdf.extractor.data.ListTables;
+import org.apache.poi.hdf.extractor.util.BTreeSet;
+import org.apache.poi.hdf.extractor.util.ChpxNode;
+import org.apache.poi.hdf.extractor.util.NumberFormatter;
+import org.apache.poi.hdf.extractor.util.PapxNode;
+import org.apache.poi.hdf.extractor.util.PropertyNode;
+import org.apache.poi.hdf.extractor.util.SepxNode;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
-
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
@@ -71,9 +83,9 @@ public final class WordDocument {
   /** used for XSL-FO table conversion*/
   StringBuilder _cellBuffer;
   /** used for XSL-FO table conversion*/
-  ArrayList _cells;
+  List _cells;
   /** used for XSL-FO table conversion*/
-  ArrayList _table;
+  List _table;
 
   /** document's header and footer information*/
   byte[] _plcfHdd;
@@ -1751,7 +1763,7 @@ public final class WordDocument {
         StringBuilder rowBuffer = tableBodyBuffer;
         TableRow row = (TableRow)_table.get(x);
         TAP tap = row.getTAP();
-        ArrayList cells = row.getCells();
+        List<String> cells = row.getCells();
 
         if(tap._fTableHeader)
         {
@@ -1781,7 +1793,7 @@ public final class WordDocument {
           addBorder(rowBuffer, tc._brcBottom, "bottom");
           addBorder(rowBuffer, tc._brcRight, "right");
           rowBuffer.append(">");
-          rowBuffer.append((String)cells.get(y));
+          rowBuffer.append(cells.get(y));
           rowBuffer.append("</fo:table-cell>");
         }
         rowBuffer.append("</fo:table-row>");

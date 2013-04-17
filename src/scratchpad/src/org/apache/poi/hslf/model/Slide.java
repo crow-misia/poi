@@ -75,7 +75,7 @@ public final class Slide extends Sheet
 		// For the text coming in from the SlideAtomsSet:
 		// Build up TextRuns from pairs of TextHeaderAtom and
 		//  one of TextBytesAtom or TextCharsAtom
-		final List<TextRun> textRuns = new LinkedList<TextRun>();
+		final List<TextRun> textRuns = new LinkedList<>();
 		if(_atomSet != null) {
 			findTextRuns(_atomSet.getSlideRecords(),textRuns);
 		} else {

@@ -41,7 +41,7 @@ public abstract class EscherPart extends HPBFPart {
 		DefaultEscherRecordFactory erf =
 			new DefaultEscherRecordFactory();
 
-		ArrayList<EscherRecord> ec = new ArrayList<EscherRecord>();
+		ArrayList<EscherRecord> ec = new ArrayList<>();
 		int left = data.length;
 		while(left > 0) {
 			EscherRecord er = erf.createRecord(data, 0);

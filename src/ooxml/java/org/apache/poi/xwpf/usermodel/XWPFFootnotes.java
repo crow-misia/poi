@@ -42,7 +42,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.FootnotesDocument;
  * Looks after the collection of Footnotes for a document
  */
 public class XWPFFootnotes extends POIXMLDocumentPart {
-    private List<XWPFFootnote> listFootnote = new ArrayList<XWPFFootnote>();
+    private List<XWPFFootnote> listFootnote = new ArrayList<>();
     private CTFootnotes ctFootnotes;
 
     protected XWPFDocument document;
@@ -87,7 +87,7 @@ public class XWPFFootnotes extends POIXMLDocumentPart {
     protected void commit() throws IOException {
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSaveSyntheticDocumentElement(new QName(CTFootnotes.type.getName().getNamespaceURI(), "footnotes"));
-        Map<String,String> map = new HashMap<String,String>();
+        Map<String,String> map = new HashMap<>();
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "r");
         map.put("http://schemas.openxmlformats.org/wordprocessingml/2006/main", "w");
         xmlOptions.setSaveSuggestedPrefixes(map);

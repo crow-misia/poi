@@ -92,7 +92,7 @@ public class POIFSFileSystem
     {
         HeaderBlock header_block = new HeaderBlock(bigBlockSize);
         _property_table = new PropertyTable(header_block);
-        _documents      = new ArrayList<POIFSDocument>();
+        _documents      = new ArrayList<>();
         _root           = null;
     }
 
@@ -310,7 +310,7 @@ public class POIFSFileSystem
 
         // create a list of BATManaged objects: the documents plus the
         // property table and the small block table
-        final List<BlockWritable> bm_objects = new ArrayList<BlockWritable>(_documents.size() + 3);
+        final List<BlockWritable> bm_objects = new ArrayList<>(_documents.size() + 3);
 
         bm_objects.addAll(_documents);
         bm_objects.add(_property_table);

@@ -66,7 +66,7 @@ public enum BreakType {
        return value;
     }
 
-    private static Map<Integer, BreakType> imap = new HashMap<Integer, BreakType>();
+    private static Map<Integer, BreakType> imap = new HashMap<>();
     static {
        for (BreakType p : values()) {
           imap.put(Integer.valueOf(p.getValue()), p);

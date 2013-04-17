@@ -20,7 +20,6 @@ package org.apache.poi;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,8 +28,8 @@ import junit.framework.TestCase;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackageRelationship;
-import org.apache.poi.util.TempFile;
 import org.apache.poi.util.PackageHelper;
+import org.apache.poi.util.TempFile;
 
 /**
  * Test recursive read and write of OPC packages
@@ -88,7 +87,7 @@ public final class TestPOIXMLDocument extends TestCase {
         OPCParser doc = new OPCParser(pkg1);
         doc.parse(new TestFactory());
 
-        HashMap<String,POIXMLDocumentPart> context = new HashMap<String,POIXMLDocumentPart>();
+        HashMap<String,POIXMLDocumentPart> context = new HashMap<>();
         traverse(doc, context);
         context.clear();
 
@@ -101,14 +100,14 @@ public final class TestPOIXMLDocument extends TestCase {
 
         doc = new OPCParser(pkg1);
         doc.parse(new TestFactory());
-        context = new HashMap<String,POIXMLDocumentPart>();
+        context = new HashMap<>();
         traverse(doc, context);
         context.clear();
 
         assertEquals(pkg1.getRelationships().size(), pkg2.getRelationships().size());
 
-        ArrayList<PackagePart> l1 = pkg1.getParts();
-        ArrayList<PackagePart> l2 = pkg2.getParts();
+        List<PackagePart> l1 = pkg1.getParts();
+        List<PackagePart> l2 = pkg2.getParts();
 
         assertEquals(l1.size(), l2.size());
         for (int i=0; i < l1.size(); i++){

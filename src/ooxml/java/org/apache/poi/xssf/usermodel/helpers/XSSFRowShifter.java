@@ -52,7 +52,7 @@ public final class XSSFRowShifter {
      * @return an array of affected cell regions
      */
     public List<CellRangeAddress> shiftMerged(int startRow, int endRow, int n) {
-        List<CellRangeAddress> shiftedRegions = new ArrayList<CellRangeAddress>();
+        List<CellRangeAddress> shiftedRegions = new ArrayList<>();
         //move merged regions completely if they fall within the new region boundaries when they are shifted
         for (int i = 0; i < sheet.getNumMergedRegions(); i++) {
             CellRangeAddress merged = sheet.getMergedRegion(i);
@@ -206,7 +206,7 @@ public final class XSSFRowShifter {
         for(int j = 0; j< n; j++){
             CTConditionalFormatting cf = cfList.get(j);
 
-            ArrayList<CellRangeAddress> cellRanges = new ArrayList<CellRangeAddress>();
+            ArrayList<CellRangeAddress> cellRanges = new ArrayList<>();
             for (Object stRef : cf.getSqref()) {
                 String[] regions = stRef.toString().split(" ");
                 for (final String region : regions) {
@@ -215,7 +215,7 @@ public final class XSSFRowShifter {
             }
 
             boolean changed = false;
-            List<CellRangeAddress> temp = new ArrayList<CellRangeAddress>(cellRanges.size());
+            List<CellRangeAddress> temp = new ArrayList<>(cellRanges.size());
             for (final CellRangeAddress craOld : cellRanges) {
                 CellRangeAddress craNew = shiftRange(shifter, craOld, sheetIndex);
                 if (craNew == null) {
@@ -234,7 +234,7 @@ public final class XSSFRowShifter {
                     ctsheet.removeConditionalFormatting(j);
                     continue;
                 }
-                List<String> refs = new ArrayList<String>();
+                List<String> refs = new ArrayList<>();
                 for(CellRangeAddress a : temp) refs.add(a.formatAsString());
                 cf.setSqref(refs);
             }

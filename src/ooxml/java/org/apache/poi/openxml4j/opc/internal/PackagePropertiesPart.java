@@ -313,7 +313,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 		if (modified.hasValue()) {
 			return getDateValue(modified);
 		}
-		return getDateValue(new Nullable<Date>(new Date()));
+		return getDateValue(new Nullable<>(new Date()));
 	}
 
 	/**
@@ -548,7 +548,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 		if (s == null || s.equals("")) {
 			return Nullable.empty();
 		}
-		return new Nullable<String>(s);
+		return new Nullable<>(s);
 	}
 
 	/**
@@ -568,7 +568,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 		if (d == null) {
 			throw new InvalidFormatException("Date not well formated");
 		}
-		return new Nullable<Date>(d);
+		return new Nullable<>(d);
 	}
 
 	/**

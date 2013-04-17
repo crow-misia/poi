@@ -65,7 +65,7 @@ public class MutablePropertySet extends PropertySet
 
         /* Initialize the sections. Since property set must have at least
          * one section it is added right here. */
-        sections = new LinkedList<Section>();
+        sections = new LinkedList<>();
         sections.add(new MutableSection());
     }
 

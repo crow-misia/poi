@@ -88,7 +88,7 @@ public final class OOXMLLite {
 
     void build() throws IOException{
 
-        List<String> lst = new ArrayList<String>();
+        List<String> lst = new ArrayList<>();
         //collect unit tests
         System.out.println("Collecting unit tests from " + _testDir);
         collectTests(_testDir, _testDir, lst, ".+?\\.Test.+?\\.class$");
@@ -175,7 +175,7 @@ public final class OOXMLLite {
         ClassLoader appLoader = ClassLoader.getSystemClassLoader();
         try {
             List<Class<?>> classes = (List<Class<?>>) _classes.get(appLoader);
-            Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+            Map<String, Class<?>> map = new HashMap<>();
             for (Class<?> cls : classes) {
                 String jar = cls.getProtectionDomain().getCodeSource().getLocation().toString();
                 if(jar.indexOf(ptrn) != -1) map.put(cls.getName(), cls);

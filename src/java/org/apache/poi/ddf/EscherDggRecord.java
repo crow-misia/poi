@@ -17,11 +17,15 @@
 
 package org.apache.poi.ddf;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.RecordFormatException;
-
-import java.util.*;
 
 /**
  * This record defines the drawing groups used for a particular sheet.
@@ -223,7 +227,7 @@ public final class EscherDggRecord extends EscherRecord {
      *  In Excel the clusters are sorted but in PPT they are not)
      */
     public void addCluster( int dgId, int numShapedUsed, boolean sort ) {
-        List<FileIdCluster> clusters = new ArrayList<FileIdCluster>(Arrays.asList(field_5_fileIdClusters));
+        List<FileIdCluster> clusters = new ArrayList<>(Arrays.asList(field_5_fileIdClusters));
         clusters.add(new FileIdCluster(dgId, numShapedUsed));
         if(sort) Collections.sort(clusters, MY_COMP );
         maxDgId = Math.min(maxDgId, dgId);

@@ -283,7 +283,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
             WorkbookDocument doc = WorkbookDocument.Factory.parse(getPackagePart().getInputStream());
             this.workbook = doc.getWorkbook();
 
-            Map<String, XSSFSheet> shIdMap = new HashMap<String, XSSFSheet>();
+            Map<String, XSSFSheet> shIdMap = new HashMap<>();
             for(POIXMLDocumentPart p : getRelations()){
                 if(p instanceof SharedStringsTable) sharedStringSource = (SharedStringsTable)p;
                 else if(p instanceof StylesTable) stylesSource = (StylesTable)p;
@@ -302,7 +302,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
             }
 
             // Load individual sheets. The order of sheets is defined by the order of CTSheet elements in the workbook
-            sheets = new ArrayList<XSSFSheet>(shIdMap.size());
+            sheets = new ArrayList<>(shIdMap.size());
             for (CTSheet ctSheet : this.workbook.getSheets().getSheetList()) {
                 XSSFSheet sh = shIdMap.get(ctSheet.getId());
                 if(sh == null) {
@@ -317,12 +317,12 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
             // Process the named ranges
             if(workbook.isSetDefinedNames()) {
                 final List<CTDefinedName> l = workbook.getDefinedNames().getDefinedNameList();
-                namedRanges = new ArrayList<XSSFName>(l.size());
+                namedRanges = new ArrayList<>(l.size());
                 for(CTDefinedName ctName : l) {
                     namedRanges.add(new XSSFName(ctName, this));
                 }
             } else {
-                namedRanges = new ArrayList<XSSFName>();
+                namedRanges = new ArrayList<>();
             }
 
         } catch (XmlException e) {
@@ -351,8 +351,8 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
         sharedStringSource = (SharedStringsTable)createRelationship(XSSFRelation.SHARED_STRINGS, XSSFFactory.getInstance());
         stylesSource = (StylesTable)createRelationship(XSSFRelation.STYLES, XSSFFactory.getInstance());
 
-        namedRanges = new ArrayList<XSSFName>();
-        sheets = new ArrayList<XSSFSheet>();
+        namedRanges = new ArrayList<>();
+        sheets = new ArrayList<>();
     }
 
     /**
@@ -721,7 +721,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
     public List<XSSFPictureData> getAllPictures() {
         if(pictures == null){
             List<PackagePart> mediaParts = getPackage().getPartsByName(Pattern.compile("/xl/media/.*?"));
-            pictures = new ArrayList<XSSFPictureData>(mediaParts.size());
+            pictures = new ArrayList<>(mediaParts.size());
             for(PackagePart part : mediaParts){
                 pictures.add(new XSSFPictureData(part, null));
             }
@@ -1326,7 +1326,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
 
         XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
         xmlOptions.setSaveSyntheticDocumentElement(new QName(CTWorkbook.type.getName().getNamespaceURI(), "workbook"));
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put(STRelationshipId.type.getName().getNamespaceURI(), "r");
         xmlOptions.setSaveSuggestedPrefixes(map);
 
@@ -1417,7 +1417,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
      * Get the document's embedded files.
      */
     public List<PackagePart> getAllEmbedds() throws OpenXML4JException {
-        List<PackagePart> embedds = new LinkedList<PackagePart>();
+        List<PackagePart> embedds = new LinkedList<>();
 
         for(XSSFSheet sheet : sheets){
             // Get the embeddings for the workbook

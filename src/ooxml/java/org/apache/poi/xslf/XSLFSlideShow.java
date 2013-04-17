@@ -76,7 +76,7 @@ public class XSLFSlideShow extends POIXMLDocument {
 		presentationDoc =
 			PresentationDocument.Factory.parse(getCorePart().getInputStream());
 		
-      embedds = new LinkedList<PackagePart>();
+      embedds = new LinkedList<>();
       for (CTSlideIdListEntry ctSlide : getSlideReferences().getSldIdList()) {
              PackagePart corePart = getCorePart();
 	          PackagePart slidePart = corePart.getRelatedPart(

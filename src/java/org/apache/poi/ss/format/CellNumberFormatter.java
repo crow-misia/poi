@@ -252,7 +252,7 @@ public class CellNumberFormatter extends CellFormatter {
 
         scale = 1;
 
-        specials = new LinkedList<Special>();
+        specials = new LinkedList<>();
 
         NumPartHandler partHandler = new NumPartHandler();
         StringBuffer descBuf = CellFormatPart.parseFormat(format,
@@ -585,7 +585,7 @@ public class CellNumberFormatter extends CellFormatter {
             }
         }
 
-        Set<StringMod> mods = new TreeSet<StringMod>();
+        Set<StringMod> mods = new TreeSet<>();
         StringBuilder output = new StringBuilder(desc);
 
         if (exponent != null) {

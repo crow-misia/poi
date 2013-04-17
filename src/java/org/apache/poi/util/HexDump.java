@@ -294,8 +294,9 @@ public class HexDump {
      */
     public static String toHex(final byte[] value, final int bytesPerLine)
     {
+        final int l = value.length;
         final int digits =
-            (int) Math.round(Math.log(value.length) / Math.log(10) + 0.5);
+            (int) Math.round(Math.log(l) / Math.log(10) + 0.5);
         final StringBuilder formatString = new StringBuilder();
         for (int i = 0; i < digits; i++)
             formatString.append('0');
@@ -304,7 +305,7 @@ public class HexDump {
         StringBuilder retVal = new StringBuilder();
         retVal.append(format.format(0));
         int i = -1;
-        for(int x = 0; x < value.length; x++)
+        for(int x = 0; x < l; x++)
         {
             if (++i == bytesPerLine)
             {

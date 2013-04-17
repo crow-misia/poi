@@ -33,7 +33,7 @@ public class XSLFRelation extends POIXMLRelation {
    /**
     * A map to lookup POIXMLRelation by its relation type
     */
-   protected static Map<String, XSLFRelation> _table = new HashMap<String, XSLFRelation>();
+   protected static Map<String, XSLFRelation> _table = new HashMap<>();
    
    public static final XSLFRelation MAIN = new XSLFRelation(
            "application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml",

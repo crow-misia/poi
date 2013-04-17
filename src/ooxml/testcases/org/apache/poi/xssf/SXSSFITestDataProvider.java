@@ -36,7 +36,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public final class SXSSFITestDataProvider implements ITestDataProvider {
     public static final SXSSFITestDataProvider instance = new SXSSFITestDataProvider();
 
-    private ArrayList<SXSSFWorkbook> instances = new ArrayList<SXSSFWorkbook>();
+    private ArrayList<SXSSFWorkbook> instances = new ArrayList<>();
 
     private SXSSFITestDataProvider() {
         // enforce singleton

@@ -71,7 +71,7 @@ public class IdentifierManager {
         }
         this.lowerbound = lowerbound;
         this.upperbound = upperbound;
-        this.segments = new LinkedList<Segment>();
+        this.segments = new LinkedList<>();
         segments.add(new Segment(lowerbound, upperbound));
     }
 

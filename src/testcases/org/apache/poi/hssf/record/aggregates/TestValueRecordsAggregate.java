@@ -56,7 +56,7 @@ public final class TestValueRecordsAggregate extends TestCase {
 	 */
     @SuppressWarnings("deprecation") // uses deprecated {@link ValueRecordsAggregate#getValueRecords()}
 	public void testSharedFormula() {
-		List<Record> records = new ArrayList<Record>();
+		List<Record> records = new ArrayList<>();
 		records.add(new FormulaRecord());
 		records.add(new SharedFormulaRecord());
 		records.add(new WindowTwoRecord());
@@ -82,7 +82,7 @@ public final class TestValueRecordsAggregate extends TestCase {
 	}
 
 	private static List<Record> testData() {
-		List<Record> records = new ArrayList<Record>();
+		List<Record> records = new ArrayList<>();
 		FormulaRecord formulaRecord = new FormulaRecord();
 		BlankRecord blankRecord = new BlankRecord();
 		formulaRecord.setRow(1);

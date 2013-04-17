@@ -56,7 +56,7 @@ public final class AnalysisToolPak implements UDFFinder {
     }
 
     private Map<String, FreeRefFunction> createFunctionsMap() {
-        Map<String, FreeRefFunction> m = new HashMap<String, FreeRefFunction>(108);
+        Map<String, FreeRefFunction> m = new HashMap<>(108);
 
         r(m, "ACCRINT", null);
         r(m, "ACCRINTM", null);
@@ -188,7 +188,7 @@ public final class AnalysisToolPak implements UDFFinder {
      */
     public static Collection<String> getSupportedFunctionNames(){
         AnalysisToolPak inst = (AnalysisToolPak)instance;
-        Collection<String> lst = new TreeSet<String>();
+        Collection<String> lst = new TreeSet<>();
         for(String name : inst._functionsByName.keySet()){
             FreeRefFunction func = inst._functionsByName.get(name);
             if(func != null && !(func instanceof NotImplemented)){
@@ -206,7 +206,7 @@ public final class AnalysisToolPak implements UDFFinder {
      */
     public static Collection<String> getNotSupportedFunctionNames(){
         AnalysisToolPak inst = (AnalysisToolPak)instance;
-        Collection<String> lst = new TreeSet<String>();
+        Collection<String> lst = new TreeSet<>();
         for(String name : inst._functionsByName.keySet()){
             FreeRefFunction func = inst._functionsByName.get(name);
             if(func != null && (func instanceof NotImplemented)){

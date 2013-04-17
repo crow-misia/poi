@@ -17,7 +17,7 @@
 
 package org.apache.poi.hdf.extractor;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Comment me
@@ -28,9 +28,9 @@ import java.util.*;
 public final class TableRow
 {
   TAP _descriptor;
-  ArrayList _cells;
+  List<String> _cells;
 
-  public TableRow(ArrayList cells, TAP descriptor)
+  public TableRow(List<String> cells, TAP descriptor)
   {
     _cells = cells;
     _descriptor = descriptor;
@@ -39,7 +39,7 @@ public final class TableRow
   {
     return _descriptor;
   }
-  public ArrayList getCells()
+  public List<String> getCells()
   {
     return _cells;
   }

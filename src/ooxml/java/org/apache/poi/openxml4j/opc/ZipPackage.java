@@ -42,15 +42,15 @@ import org.apache.poi.openxml4j.opc.internal.marshallers.ZipPartMarshaller;
 import org.apache.poi.openxml4j.util.ZipEntrySource;
 import org.apache.poi.openxml4j.util.ZipFileZipEntrySource;
 import org.apache.poi.openxml4j.util.ZipInputStreamZipEntrySource;
-import org.apache.poi.util.POILogger;
 import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.POILogger;
 
 /**
  * Physical zip package.
  *
  * @author Julien Chable
  */
-public final class ZipPackage extends Package {
+public final class ZipPackage extends OPCPackage {
 
 	private static final POILogger logger = POILogFactory.getLogger(ZipPackage.class);
 

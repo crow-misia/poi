@@ -37,7 +37,7 @@ public final class EscherRecordHolder {
 	private final ArrayList<EscherRecord> escherRecords;
 
 	public EscherRecordHolder() {
-		escherRecords = new ArrayList<EscherRecord>();
+		escherRecords = new ArrayList<>();
 	}
 
 	public EscherRecordHolder(byte[] data, int offset, int size) {
@@ -125,7 +125,7 @@ public final class EscherRecordHolder {
 
     public List<? extends EscherContainerRecord> getDgContainers()
     {
-        List<EscherContainerRecord> dgContainers = new ArrayList<EscherContainerRecord>(
+        List<EscherContainerRecord> dgContainers = new ArrayList<>(
                 1 );
         for ( EscherRecord escherRecord : getEscherRecords() )
         {
@@ -139,7 +139,7 @@ public final class EscherRecordHolder {
 
     public List<? extends EscherContainerRecord> getDggContainers()
     {
-        List<EscherContainerRecord> dggContainers = new ArrayList<EscherContainerRecord>(
+        List<EscherContainerRecord> dggContainers = new ArrayList<>(
                 1 );
         for ( EscherRecord escherRecord : getEscherRecords() )
         {
@@ -153,7 +153,7 @@ public final class EscherRecordHolder {
 
     public List<? extends EscherContainerRecord> getBStoreContainers()
     {
-        List<EscherContainerRecord> bStoreContainers = new ArrayList<EscherContainerRecord>(
+        List<EscherContainerRecord> bStoreContainers = new ArrayList<>(
                 1 );
         for ( EscherContainerRecord dggContainer : getDggContainers() )
         {
@@ -170,7 +170,7 @@ public final class EscherRecordHolder {
 
     public List<? extends EscherContainerRecord> getSpgrContainers()
     {
-        List<EscherContainerRecord> spgrContainers = new ArrayList<EscherContainerRecord>(
+        List<EscherContainerRecord> spgrContainers = new ArrayList<>(
                 1 );
         for ( EscherContainerRecord dgContainer : getDgContainers() )
         {
@@ -187,7 +187,7 @@ public final class EscherRecordHolder {
 
     public List<? extends EscherContainerRecord> getSpContainers()
     {
-        List<EscherContainerRecord> spContainers = new ArrayList<EscherContainerRecord>(
+        List<EscherContainerRecord> spContainers = new ArrayList<>(
                 1 );
         for ( EscherContainerRecord spgrContainer : getSpgrContainers() )
         {

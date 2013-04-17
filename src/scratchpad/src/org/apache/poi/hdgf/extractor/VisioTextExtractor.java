@@ -70,7 +70,7 @@ public final class VisioTextExtractor extends POIOLE2TextExtractor {
 	 *  contents.
 	 */
 	public String[] getAllText() {
-		ArrayList<String> text = new ArrayList<String>();
+		ArrayList<String> text = new ArrayList<>();
 		for(int i=0; i<hdgf.getTopLevelStreams().length; i++) {
 			findText(hdgf.getTopLevelStreams()[i], text);
 		}

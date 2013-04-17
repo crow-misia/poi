@@ -133,7 +133,7 @@ public class CalendarDemo {
      * cell styles used for formatting calendar sheets
      */
     private static Map<String, XSSFCellStyle> createStyles(XSSFWorkbook wb){
-        Map<String, XSSFCellStyle> styles = new HashMap<String, XSSFCellStyle>();
+        Map<String, XSSFCellStyle> styles = new HashMap<>();
 
         XSSFCellStyle style;
         XSSFFont titleFont = wb.createFont();
