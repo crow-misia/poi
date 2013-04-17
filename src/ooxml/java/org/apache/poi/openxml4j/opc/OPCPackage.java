@@ -52,8 +52,8 @@ import org.apache.poi.openxml4j.opc.internal.marshallers.ZipPackagePropertiesMar
 import org.apache.poi.openxml4j.opc.internal.unmarshallers.PackagePropertiesUnmarshaller;
 import org.apache.poi.openxml4j.opc.internal.unmarshallers.UnmarshallContext;
 import org.apache.poi.openxml4j.util.Nullable;
-import org.apache.poi.util.POILogger;
 import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.POILogger;
 
 /**
  * Represents a container that can store multiple data objects.
@@ -1334,7 +1334,13 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 *            The content type associated with the marshaller to remove.
 	 */
 	public void removeMarshaller(String contentType) {
-		partMarshallers.remove(contentType);
+		try {
+			partMarshallers.remove(new ContentType(contentType));
+		} catch (InvalidFormatException e) {
+			logger.log(POILogger.WARN, "The specified content type is not valid: '"
+					+ e.getMessage()
+					+ "'. The marshaller will not be removed !");
+		}
 	}
 
 	/**
@@ -1343,8 +1349,14 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 * @param contentType
 	 *            The content type associated with the unmarshaller to remove.
 	 */
-	public void removeUnmarshaller(String contentType) {
-		partUnmarshallers.remove(contentType);
+	public void removeUnmarshaller(String contentType) throws InvalidFormatException {
+		try {
+			partUnmarshallers.remove(new ContentType(contentType));
+		} catch (InvalidFormatException e) {
+			logger.log(POILogger.WARN, "The specified content type is not valid: '"
+					+ e.getMessage()
+					+ "'. The unmarshaller will not be removed !");
+		}
 	}
 
 	/* Accesseurs */
