@@ -17,8 +17,8 @@
 
 package org.apache.poi.openxml4j.opc.internal;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,21 +49,12 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
  * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">http://www.ietf.org/rfc/rfc2616.txt</a>
  */
 public final class ContentType {
+	private static final Map<String, ContentType> CACHE = new HashMap<>();
 
 	/**
-	 * Type in Type/Subtype.
+	 * Type/Subtype.
 	 */
-	private String type;
-
-	/**
-	 * Subtype
-	 */
-	private String subType;
-
-	/**
-	 * Parameters
-	 */
-	private Hashtable<String, String> parameters;
+	private final String type;
 
 	/**
 	 * Media type compiled pattern for parameters.
@@ -133,7 +124,7 @@ public final class ContentType {
 	 * @throws InvalidFormatException
 	 *             If the specified content type is not valid with RFC 2616.
 	 */
-	public ContentType(String contentType) throws InvalidFormatException {
+	private ContentType(String contentType) throws InvalidFormatException {
 		Matcher mMediaType = patternMediaType.matcher(contentType);
 		if (!mMediaType.matches())
 			throw new InvalidFormatException(
@@ -143,73 +134,42 @@ public final class ContentType {
 
 		// Type/subtype
 		if (mMediaType.groupCount() >= 2) {
-			this.type = mMediaType.group(1);
-			this.subType = mMediaType.group(2);
-			// Parameters
-			this.parameters = new Hashtable<>(1);
-			for (int i = 4; i <= mMediaType.groupCount()
-					&& (mMediaType.group(i) != null); i += 2) {
-				this.parameters.put(mMediaType.group(i), mMediaType
-						.group(i + 1));
-			}
+			this.type = mMediaType.group(1) + "/" + mMediaType.group(2);
+		} else {
+			this.type = "";
 		}
+	}
+
+	/**
+	 * Check the input with the RFC 2616 grammar.
+	 *
+	 * @param contentType
+	 *            The content type to store.
+	 * @throws InvalidFormatException
+	 *             If the specified content type is not valid with RFC 2616.
+	 */
+	public static ContentType getInstance(final String contentType) throws InvalidFormatException{
+		ContentType r = CACHE.get(contentType);
+		if (r == null) {
+			r = new ContentType(contentType);
+			CACHE.put(contentType, r);
+		}
+		return r;
 	}
 
 	@Override
 	public final String toString() {
-		StringBuilder retVal = new StringBuilder();
-		retVal.append(this.getType());
-		retVal.append("/");
-		retVal.append(this.getSubType());
-		// Keep for future implementation if needed
-		// for (String key : parameters.keySet()) {
-		// retVal.append(";");
-		// retVal.append(key);
-		// retVal.append("=");
-		// retVal.append(parameters.get(key));
-		// }
-		return retVal.toString();
+		return this.type;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return (!(obj instanceof ContentType))
-				|| (this.toString().equalsIgnoreCase(obj.toString()));
+		return (obj instanceof ContentType) &&
+				(this.type.equalsIgnoreCase(((ContentType) obj).type));
 	}
 
 	@Override
 	public int hashCode() {
-		return this.toString().hashCode();
-	}
-
-	/* Getters */
-
-	/**
-	 * Get the subtype.
-	 *
-	 * @return The subtype of this content type.
-	 */
-	public String getSubType() {
-		return this.subType;
-	}
-
-	/**
-	 * Get the type.
-	 *
-	 * @return The type of this content type.
-	 */
-	public String getType() {
-		return this.type;
-	}
-
-	/**
-	 * Gets the value associated to the specified key.
-	 *
-	 * @param key
-	 *            The key of the key/value pair.
-	 * @return The value associated to the specified key.
-	 */
-	public String getParameters(String key) {
-		return parameters.get(key);
+		return this.type.hashCode();
 	}
 }

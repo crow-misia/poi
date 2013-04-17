@@ -84,7 +84,7 @@ public final class MemoryPackagePart extends PackagePart {
 	public MemoryPackagePart(OPCPackage pack, PackagePartName partName,
 			String contentType, boolean loadRelationships)
 			throws InvalidFormatException {
-		super(pack, partName, new ContentType(contentType), loadRelationships);
+		super(pack, partName, ContentType.getInstance(contentType), loadRelationships);
 	}
 
 	@Override
