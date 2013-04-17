@@ -128,7 +128,7 @@ public final class SelectionRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append("[SELECTION]\n");
         sb.append("    .pane            = ").append(HexDump.byteToHex(getPane())).append("\n");

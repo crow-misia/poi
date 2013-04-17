@@ -296,7 +296,7 @@ public final class TextObjectRecord extends ContinuableRecord {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("[TXO]\n");
 		sb.append("    .options        = ").append(HexDump.shortToHex(field_1_options)).append("\n");

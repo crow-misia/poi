@@ -57,7 +57,7 @@ public final class PackagePartCollection extends
 	public PackagePart put(PackagePartName partName, PackagePart part) {
 		String[] segments = partName.getURI().toASCIIString().split(
 				PackagingURIHelper.FORWARD_SLASH_STRING);
-		StringBuffer concatSeg = new StringBuffer();
+		StringBuilder concatSeg = new StringBuilder();
 		for (String seg : segments) {
 			if (seg.length() > 0) {
 				concatSeg.append(PackagingURIHelper.FORWARD_SLASH_CHAR);

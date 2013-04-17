@@ -317,7 +317,7 @@ public final class TestUnicodeString extends TestCase {
      * @return a string of the specified number of characters
      */
     private static UnicodeString makeUnicodeString(int numChars, boolean is16Bit) {
-      StringBuffer b = new StringBuffer(numChars);
+      StringBuilder b = new StringBuilder(numChars);
       int charBase = is16Bit ? 0x8A00 : 'A';
       for (int i=0;i<numChars;i++) {
         char ch = (char) ((i%16)+charBase);

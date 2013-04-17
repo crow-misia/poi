@@ -114,7 +114,7 @@ public final class Value extends Fixed1ArgFunction {
 		boolean foundDecimalPoint = false;
 		int lastThousandsSeparatorIndex = Short.MIN_VALUE;
 
-		StringBuffer sb = new StringBuffer(len);
+		StringBuilder sb = new StringBuilder(len);
 		for (; i < len; i++) {
 			char ch = strText.charAt(i);
 			if (Character.isDigit(ch)) {

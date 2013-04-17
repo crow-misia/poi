@@ -38,7 +38,7 @@ public final class FontTable
       byte ffnLength = fontTable[currentIndex];
 
       int nameOffset = currentIndex + 40;
-      StringBuffer nameBuf = new StringBuffer();
+      StringBuilder nameBuf = new StringBuilder();
       char ch = Utils.getUnicodeCharacter(fontTable, nameOffset);
       while(ch != '\0')
       {

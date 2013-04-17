@@ -16,9 +16,9 @@
 ==================================================================== */
 package org.apache.poi.ss.format;
 
-import org.apache.poi.ss.format.CellFormatPart.PartHandler;
-
 import java.util.regex.Matcher;
+
+import org.apache.poi.ss.format.CellFormatPart.PartHandler;
 
 /**
  * This class implements printing out text.
@@ -59,7 +59,7 @@ public class CellTextFormatter extends CellFormatter {
     }
 
     /** {@inheritDoc} */
-    public void formatValue(StringBuffer toAppendTo, Object obj) {
+    public void formatValue(StringBuilder toAppendTo, Object obj) {
         int start = toAppendTo.length();
         String text = obj.toString();
         if (obj instanceof Boolean) {
@@ -77,7 +77,7 @@ public class CellTextFormatter extends CellFormatter {
      * <p/>
      * For text, this is just printing the text.
      */
-    public void simpleValue(StringBuffer toAppendTo, Object value) {
+    public void simpleValue(StringBuilder toAppendTo, Object value) {
         SIMPLE_TEXT.formatValue(toAppendTo, value);
     }
 }

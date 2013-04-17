@@ -29,11 +29,11 @@ public class XWPFComment
 {
     protected String id;
     protected String author;
-    protected StringBuffer text;
+    protected StringBuilder text;
     
     public XWPFComment(CTComment comment, XWPFDocument document)
     {
-        text = new StringBuffer();
+        text = new StringBuilder();
         id = comment.getId().toString();
         author = comment.getAuthor();
         

@@ -107,7 +107,7 @@ public final class TextBytesAtom extends RecordAtom
 	 * representation of the atom
 	 */
 	public String toString() {
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         out.append( "TextBytesAtom:\n");
 		out.append( HexDump.dump(_text, 0, 0) );
 		return out.toString();

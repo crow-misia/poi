@@ -120,7 +120,7 @@ public final class FileSharingRecord extends StandardRecord {
 
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[FILESHARING]\n");
         buffer.append("    .readonly       = ")

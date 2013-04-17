@@ -154,7 +154,7 @@ public final class NewOleFile extends RandomAccessFile
                 int nameSize = Utils.convertBytesToShort(propArray[0x41], propArray[0x40])/2 - 1;
                 if(nameSize > 0)
                 {
-                    StringBuffer nameBuffer = new StringBuffer(nameSize);
+                    StringBuilder nameBuffer = new StringBuilder(nameSize);
                     for(int z = 0; z < nameSize; z++)
                     {
                         nameBuffer.append((char)propArray[z*2]);

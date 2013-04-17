@@ -53,7 +53,7 @@ public abstract class CellFormatter {
      * @param toAppendTo The buffer to append to.
      * @param value      The value to format.
      */
-    public abstract void formatValue(StringBuffer toAppendTo, Object value);
+    public abstract void formatValue(StringBuilder toAppendTo, Object value);
 
     /**
      * Format a value according to the type, in the most basic way.
@@ -61,7 +61,7 @@ public abstract class CellFormatter {
      * @param toAppendTo The buffer to append to.
      * @param value      The value to format.
      */
-    public abstract void simpleValue(StringBuffer toAppendTo, Object value);
+    public abstract void simpleValue(StringBuilder toAppendTo, Object value);
 
     /**
      * Formats the value, returning the resulting string.
@@ -71,7 +71,7 @@ public abstract class CellFormatter {
      * @return The value, formatted.
      */
     public String format(Object value) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         formatValue(sb, value);
         return sb.toString();
     }
@@ -84,7 +84,7 @@ public abstract class CellFormatter {
      * @return The value, formatted.
      */
     public String simpleFormat(Object value) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         simpleValue(sb, value);
         return sb.toString();
     }

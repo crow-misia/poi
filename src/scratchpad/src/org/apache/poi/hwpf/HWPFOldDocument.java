@@ -67,7 +67,7 @@ public class HWPFOldDocument extends HWPFDocumentCore {
         // We need to get hold of the text that makes up the
         //  document, which might be regular or fast-saved
         ComplexFileTable cft = null;
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
         if(_fib.getFibBase().isFComplex()) {
             cft = new ComplexFileTable(
                     _mainStream, _mainStream,

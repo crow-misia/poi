@@ -141,7 +141,7 @@ public final class GutsRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[GUTS]\n");
         buffer.append("    .leftgutter     = ")

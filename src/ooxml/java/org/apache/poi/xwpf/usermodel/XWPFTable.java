@@ -44,7 +44,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
  * of paragraphs (and other block-level content) arranged in rows and columns.</p>
  */
 public class XWPFTable implements IBodyElement, ISDTContents {
-    protected StringBuffer text = new StringBuffer();
+    protected StringBuilder text = new StringBuilder();
     private CTTbl ctTbl;
     protected List<XWPFTableRow> tableRows;
     protected List<String> styleIDs;
@@ -104,7 +104,7 @@ public class XWPFTable implements IBodyElement, ISDTContents {
             createEmptyTable(table);
 
         for (CTRow row : table.getTrList()) {
-            StringBuffer rowText = new StringBuffer();
+            StringBuilder rowText = new StringBuilder();
             XWPFTableRow tabRow = new XWPFTableRow(row, this);
             tableRows.add(tabRow);
             for (CTTc cell : row.getTcList()) {

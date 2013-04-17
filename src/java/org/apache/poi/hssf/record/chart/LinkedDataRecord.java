@@ -67,7 +67,7 @@ public final class LinkedDataRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[AI]\n");
         buffer.append("    .linkType             = ").append(HexDump.byteToHex(getLinkType())).append('\n');

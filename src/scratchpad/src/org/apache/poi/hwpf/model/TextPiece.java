@@ -107,12 +107,6 @@ public class TextPiece extends PropertyNode<TextPiece>
      return _pd;
    }
 
-   @Deprecated
-   public StringBuffer getStringBuffer()
-   {
-     return new StringBuffer(getStringBuilder());
-   }
-
    public StringBuilder getStringBuilder()
    {
      return (StringBuilder)_buf;

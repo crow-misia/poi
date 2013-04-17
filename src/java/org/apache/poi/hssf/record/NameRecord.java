@@ -532,7 +532,7 @@ public final class NameRecord extends ContinuableRecord {
 	 */
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("[NAME]\n");
 		sb.append("    .option flags           = ").append(HexDump.shortToHex(field_1_option_flag)).append("\n");

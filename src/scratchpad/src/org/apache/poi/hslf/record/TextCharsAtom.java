@@ -103,7 +103,7 @@ public final class TextCharsAtom extends RecordAtom
 	 * representation of the atom
 	 */
 	public String toString() {
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         out.append( "TextCharsAtom:\n");
 		out.append( HexDump.dump(_text, 0, 0) );
 		return out.toString();

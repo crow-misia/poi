@@ -46,17 +46,17 @@ public class POIXMLPropertiesTextExtractor extends POIXMLTextExtractor {
 		super(otherExtractor.getDocument());
 	}
 	
-   private void appendIfPresent(StringBuffer text, String thing, boolean value) {
+   private void appendIfPresent(StringBuilder text, String thing, boolean value) {
       appendIfPresent(text, thing, Boolean.toString(value));
    }
-   private void appendIfPresent(StringBuffer text, String thing, int value) {
+   private void appendIfPresent(StringBuilder text, String thing, int value) {
       appendIfPresent(text, thing, Integer.toString(value));
    }
-   private void appendIfPresent(StringBuffer text, String thing, Date value) {
+   private void appendIfPresent(StringBuilder text, String thing, Date value) {
       if(value == null) { return; }
       appendIfPresent(text, thing, value.toString());
    }
-	private void appendIfPresent(StringBuffer text, String thing, String value) {
+	private void appendIfPresent(StringBuilder text, String thing, String value) {
 	   if(value == null) { return; }
 	   text.append(thing);
 	   text.append(" = ");
@@ -68,7 +68,7 @@ public class POIXMLPropertiesTextExtractor extends POIXMLTextExtractor {
 	 * Returns the core document properties, eg author
 	 */
 	public String getCorePropertiesText() {
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 		PackagePropertiesPart props =
 			getDocument().getProperties().getCoreProperties().getUnderlyingProperties();
 
@@ -100,7 +100,7 @@ public class POIXMLPropertiesTextExtractor extends POIXMLTextExtractor {
 	 *  application
 	 */
 	public String getExtendedPropertiesText() {
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 		org.openxmlformats.schemas.officeDocument.x2006.extendedProperties.CTProperties
 			props = getDocument().getProperties().getExtendedProperties().getUnderlyingProperties();
 
@@ -127,7 +127,7 @@ public class POIXMLPropertiesTextExtractor extends POIXMLTextExtractor {
     *  there are any
     */
    public String getCustomPropertiesText() {
-      StringBuffer text = new StringBuffer();
+      StringBuilder text = new StringBuilder();
       org.openxmlformats.schemas.officeDocument.x2006.customProperties.CTProperties
       props = getDocument().getProperties().getCustomProperties().getUnderlyingProperties();
 

@@ -411,7 +411,7 @@ public class XWPFTableCell implements IBody {
     }
 
     public String getText(){
-	StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
 	for (XWPFParagraph p : paragraphs) {
 	    text.append(p.getText());
 	}

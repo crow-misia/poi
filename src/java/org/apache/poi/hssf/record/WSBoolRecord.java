@@ -288,7 +288,7 @@ public final class WSBoolRecord extends StandardRecord {
     // end bitfields
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[WSBOOL]\n");
         buffer.append("    .wsbool1        = ")

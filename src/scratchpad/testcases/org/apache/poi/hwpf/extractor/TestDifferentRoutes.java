@@ -75,7 +75,7 @@ public final class TestDifferentRoutes extends TestCase {
 	 * Test textPieces based extraction
 	 */
 	public void testExtractFromTextPieces() throws Exception {
-		StringBuffer exp = new StringBuffer();
+		StringBuilder exp = new StringBuilder();
 		for (int i = 0; i < p_text.length; i++) {
 			exp.append(p_text[i]);
 		}

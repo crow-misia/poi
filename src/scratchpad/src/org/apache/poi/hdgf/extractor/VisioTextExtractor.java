@@ -115,7 +115,7 @@ public final class VisioTextExtractor extends POIOLE2TextExtractor {
 	 *  by a newline
 	 */
 	public String getText() {
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 		String[] allText = getAllText();
 		for(int i=0; i<allText.length; i++) {
 			text.append(allText[i]);

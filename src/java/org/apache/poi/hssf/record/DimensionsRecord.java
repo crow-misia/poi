@@ -136,7 +136,7 @@ public final class DimensionsRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[DIMENSIONS]\n");
         buffer.append("    .firstrow       = ")

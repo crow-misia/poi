@@ -47,17 +47,17 @@ public final class SheetNameFormatter {
 	 * sheet name will be converted to double single quotes ('').  
 	 */
 	public static String format(String rawSheetName) {
-		StringBuffer sb = new StringBuffer(rawSheetName.length() + 2);
+		StringBuilder sb = new StringBuilder(rawSheetName.length() + 2);
 		appendFormat(sb, rawSheetName);
 		return sb.toString();
 	}
 	
 	/**
-	 * Convenience method for ({@link #format(String)}) when a StringBuffer is already available.
+	 * Convenience method for ({@link #format(String)}) when a StringBuilder is already available.
 	 * 
 	 * @param out - sheet name will be appended here possibly with delimiting quotes 
 	 */
-	public static void appendFormat(StringBuffer out, String rawSheetName) {
+	public static void appendFormat(StringBuilder out, String rawSheetName) {
 		boolean needsQuotes = needsDelimiting(rawSheetName);
 		if(needsQuotes) {
 			out.append(DELIMITER);
@@ -67,7 +67,7 @@ public final class SheetNameFormatter {
 			out.append(rawSheetName);
 		}
 	}
-	public static void appendFormat(StringBuffer out, String workbookName, String rawSheetName) {
+	public static void appendFormat(StringBuilder out, String workbookName, String rawSheetName) {
 		boolean needsQuotes = needsDelimiting(workbookName) || needsDelimiting(rawSheetName);
 		if(needsQuotes) {
 			out.append(DELIMITER);
@@ -84,7 +84,7 @@ public final class SheetNameFormatter {
 		}
 	}
 
-	private static void appendAndEscape(StringBuffer sb, String rawSheetName) {
+	private static void appendAndEscape(StringBuilder sb, String rawSheetName) {
 		int len = rawSheetName.length();
 		for(int i=0; i<len; i++) {
 			char ch = rawSheetName.charAt(i);

@@ -300,7 +300,7 @@ public class ExOleObjAtom extends RecordAtom {
     }
 
     public String toString(){
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.append("ExOleObjAtom\n");
         buf.append("  drawAspect: " + getDrawAspect() + "\n");
         buf.append("  type: " + getType() + "\n");

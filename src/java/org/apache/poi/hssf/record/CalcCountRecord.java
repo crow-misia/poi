@@ -72,7 +72,7 @@ public final class CalcCountRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[CALCCOUNT]\n");
         buffer.append("    .iterations     = ")

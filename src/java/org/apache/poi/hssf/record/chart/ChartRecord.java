@@ -60,7 +60,7 @@ public final class ChartRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append("[CHART]\n");
         sb.append("    .x     = ").append(getX()).append('\n');

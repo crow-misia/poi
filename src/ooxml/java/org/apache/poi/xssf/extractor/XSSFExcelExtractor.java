@@ -123,7 +123,7 @@ public class XSSFExcelExtractor extends POIXMLTextExtractor implements org.apach
             formatter = new DataFormatter(locale);
         }
 
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
         for(int i=0; i<workbook.getNumberOfSheets(); i++) {
             XSSFSheet sheet = workbook.getSheetAt(i);
             if(includeSheetNames) {
@@ -198,10 +198,10 @@ public class XSSFExcelExtractor extends POIXMLTextExtractor implements org.apach
         return text.toString();
     }
 
-    private void handleStringCell(StringBuffer text, Cell cell) {
+    private void handleStringCell(StringBuilder text, Cell cell) {
         text.append(cell.getRichStringCellValue().getString());
     }
-    private void handleNonStringCell(StringBuffer text, Cell cell, DataFormatter formatter) {
+    private void handleNonStringCell(StringBuilder text, Cell cell, DataFormatter formatter) {
         int type = cell.getCellType();
         if (type == Cell.CELL_TYPE_FORMULA) {
             type = cell.getCachedFormulaResultType();

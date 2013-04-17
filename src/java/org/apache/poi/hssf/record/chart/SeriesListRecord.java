@@ -50,7 +50,7 @@ public final class SeriesListRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[SERIESLIST]\n");
         buffer.append("    .seriesNumbers= ").append(" (").append( getSeriesNumbers() ).append(" )");
