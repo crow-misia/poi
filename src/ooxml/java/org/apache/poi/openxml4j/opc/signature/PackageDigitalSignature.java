@@ -29,7 +29,7 @@ import org.apache.poi.openxml4j.opc.internal.ContentType;
 public final class PackageDigitalSignature extends PackagePart {
 
 	public PackageDigitalSignature() throws InvalidFormatException {
-		super(null, null, new ContentType(""));
+		super(null, null, ContentType.getInstance(""));
 	}
 
 	@Override

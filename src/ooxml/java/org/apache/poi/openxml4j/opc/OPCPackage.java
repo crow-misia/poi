@@ -30,8 +30,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,7 +40,6 @@ import java.util.regex.Pattern;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
-import org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException;
 import org.apache.poi.openxml4j.exceptions.PartAlreadyExistsException;
 import org.apache.poi.openxml4j.opc.internal.ContentType;
 import org.apache.poi.openxml4j.opc.internal.ContentTypeManager;
@@ -91,7 +91,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	/**
 	 * Part marshallers by content type.
 	 */
-	protected Hashtable<ContentType, PartMarshaller> partMarshallers;
+	protected Map<ContentType, PartMarshaller> partMarshallers;
 
 	/**
 	 * Default part marshaller.
@@ -101,7 +101,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	/**
 	 * Part unmarshallers by content type.
 	 */
-	protected Hashtable<ContentType, PartUnmarshaller> partUnmarshallers;
+	protected Map<ContentType, PartUnmarshaller> partUnmarshallers;
 
 	/**
 	 * Core package properties.
@@ -146,29 +146,18 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 * Initialize the package instance.
 	 */
 	private void init() {
-		this.partMarshallers = new Hashtable<>(5);
-		this.partUnmarshallers = new Hashtable<>(2);
+		this.partMarshallers = new HashMap<>(5);
+		this.partUnmarshallers = new HashMap<>(2);
 
-		try {
-			// Add 'default' unmarshaller
-			this.partUnmarshallers.put(new ContentType(
-					ContentTypes.CORE_PROPERTIES_PART),
-					new PackagePropertiesUnmarshaller());
+		// Add 'default' unmarshaller
+		this.partUnmarshallers.put(ContentTypes.CORE_PROPERTIES_PART_CT,
+				new PackagePropertiesUnmarshaller());
 
-			// Add default marshaller
-			this.defaultPartMarshaller = new DefaultMarshaller();
-			// TODO Delocalize specialized marshallers
-			this.partMarshallers.put(new ContentType(
-					ContentTypes.CORE_PROPERTIES_PART),
-					new ZipPackagePropertiesMarshaller());
-		} catch (InvalidFormatException e) {
-			// Should never happen
-			throw new OpenXML4JRuntimeException(
-					"Package.init() : this exception should never happen, " +
-					"if you read this message please send a mail to the developers team. : " +
-					e.getMessage()
-			);
-		}
+		// Add default marshaller
+		this.defaultPartMarshaller = new DefaultMarshaller();
+		// TODO Delocalize specialized marshallers
+		this.partMarshallers.put(ContentTypes.CORE_PROPERTIES_PART_CT,
+				new ZipPackagePropertiesMarshaller());
 	}
 
 
@@ -485,10 +474,10 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 				PackageRelationshipTypes.THUMBNAIL);
 
 		// Copy file data to the newly created part
-		FileInputStream is = new FileInputStream(path);
-		StreamHelper.copyStream(is, thumbnailPart
-				.getOutputStream());
-		is.close();
+		try (final FileInputStream is = new FileInputStream(path)) {
+			StreamHelper.copyStream(is, thumbnailPart
+					.getOutputStream());
+		}
 	}
 
 	/**
@@ -1301,7 +1290,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 */
 	public void addMarshaller(String contentType, PartMarshaller marshaller) {
 		try {
-			partMarshallers.put(new ContentType(contentType), marshaller);
+			partMarshallers.put(ContentType.getInstance(contentType), marshaller);
 		} catch (InvalidFormatException e) {
 			logger.log(POILogger.WARN, "The specified content type is not valid: '"
 					+ e.getMessage() + "'. The marshaller will not be added !");
@@ -1319,7 +1308,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	public void addUnmarshaller(String contentType,
 			PartUnmarshaller unmarshaller) {
 		try {
-			partUnmarshallers.put(new ContentType(contentType), unmarshaller);
+			partUnmarshallers.put(ContentType.getInstance(contentType), unmarshaller);
 		} catch (InvalidFormatException e) {
 			logger.log(POILogger.WARN, "The specified content type is not valid: '"
 					+ e.getMessage()
@@ -1335,7 +1324,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 */
 	public void removeMarshaller(String contentType) {
 		try {
-			partMarshallers.remove(new ContentType(contentType));
+			partMarshallers.remove(ContentType.getInstance(contentType));
 		} catch (InvalidFormatException e) {
 			logger.log(POILogger.WARN, "The specified content type is not valid: '"
 					+ e.getMessage()
@@ -1351,7 +1340,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 */
 	public void removeUnmarshaller(String contentType) throws InvalidFormatException {
 		try {
-			partUnmarshallers.remove(new ContentType(contentType));
+			partUnmarshallers.remove(ContentType.getInstance(contentType));
 		} catch (InvalidFormatException e) {
 			logger.log(POILogger.WARN, "The specified content type is not valid: '"
 					+ e.getMessage()
