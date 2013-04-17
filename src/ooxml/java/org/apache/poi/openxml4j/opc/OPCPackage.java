@@ -1335,7 +1335,13 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 *            The content type associated with the marshaller to remove.
 	 */
 	public void removeMarshaller(String contentType) {
-		partMarshallers.remove(contentType);
+		try {
+			partMarshallers.remove(new ContentType(contentType));
+		} catch (InvalidFormatException e) {
+			logger.log(POILogger.WARN, "The specified content type is not valid: '"
+					+ e.getMessage()
+					+ "'. The marshaller will not be removed !");
+		}
 	}
 
 	/**
@@ -1344,8 +1350,14 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 * @param contentType
 	 *            The content type associated with the unmarshaller to remove.
 	 */
-	public void removeUnmarshaller(String contentType) {
-		partUnmarshallers.remove(contentType);
+	public void removeUnmarshaller(String contentType) throws InvalidFormatException {
+		try {
+			partUnmarshallers.remove(new ContentType(contentType));
+		} catch (InvalidFormatException e) {
+			logger.log(POILogger.WARN, "The specified content type is not valid: '"
+					+ e.getMessage()
+					+ "'. The unmarshaller will not be removed !");
+		}
 	}
 
 	/* Accesseurs */
