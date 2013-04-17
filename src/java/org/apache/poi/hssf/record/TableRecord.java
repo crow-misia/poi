@@ -156,7 +156,7 @@ public final class TableRecord extends SharedValueRecordBase {
 	}
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("[TABLE]\n");
 		buffer.append("    .range    = ").append(getRange().toString()).append("\n");
 		buffer.append("    .flags    = ") .append(HexDump.byteToHex(field_5_flags)).append("\n");

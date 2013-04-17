@@ -69,7 +69,7 @@ public abstract class FLDAbstractType implements HDFType
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append( "[FLD]\n" );
 

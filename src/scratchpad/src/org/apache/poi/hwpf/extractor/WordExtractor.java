@@ -187,7 +187,7 @@ public final class WordExtractor extends POIOLE2TextExtractor
     /**
      * Add the header/footer text, if it's not empty
      */
-    private void appendHeaderFooter( String text, StringBuffer out )
+    private void appendHeaderFooter( String text, StringBuilder out )
     {
         if ( text == null || text.length() == 0 )
             return;
@@ -216,7 +216,7 @@ public final class WordExtractor extends POIOLE2TextExtractor
     {
         HeaderStories hs = new HeaderStories( doc );
 
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
         if ( hs.getFirstHeader() != null )
         {
             appendHeaderFooter( hs.getFirstHeader(), ret );
@@ -241,7 +241,7 @@ public final class WordExtractor extends POIOLE2TextExtractor
     {
         HeaderStories hs = new HeaderStories( doc );
 
-        StringBuffer ret = new StringBuffer();
+        StringBuilder ret = new StringBuilder();
         if ( hs.getFirstFooter() != null )
         {
             appendHeaderFooter( hs.getFirstFooter(), ret );

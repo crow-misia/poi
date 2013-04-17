@@ -98,7 +98,7 @@ public final class CalcModeRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[CALCMODE]\n");
         buffer.append("    .calcmode       = ")

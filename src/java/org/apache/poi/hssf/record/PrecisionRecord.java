@@ -76,7 +76,7 @@ public final class PrecisionRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[PRECISION]\n");
         buffer.append("    .precision       = ").append(getFullPrecision())

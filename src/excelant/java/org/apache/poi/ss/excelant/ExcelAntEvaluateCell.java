@@ -125,7 +125,7 @@ public class ExcelAntEvaluateCell extends Task {
 		}
 		result = wbUtil.evaluateCell(cell, expectedValue, precisionToUse ) ;
 		
-		StringBuffer sb = new StringBuffer() ;
+		StringBuilder sb = new StringBuilder() ;
 		sb.append( "evaluation of cell " ) ;
 		sb.append( cell ) ; 
 		sb.append( " resulted in " ) ;

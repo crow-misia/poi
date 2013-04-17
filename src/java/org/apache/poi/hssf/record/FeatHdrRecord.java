@@ -84,7 +84,7 @@ public final class FeatHdrRecord extends StandardRecord  {
 	}
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("[FEATURE HEADER]\n");
 		
 		// TODO ...

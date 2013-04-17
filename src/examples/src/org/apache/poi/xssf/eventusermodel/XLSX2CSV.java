@@ -127,7 +127,7 @@ public class XLSX2CSV {
         private int lastColumnNumber = -1;
 
         // Gathers characters as they are seen.
-        private StringBuffer value;
+        private StringBuilder value;
 
         /**
          * Accepts objects needed while parsing.
@@ -146,7 +146,7 @@ public class XLSX2CSV {
             this.sharedStringsTable = strings;
             this.minColumnCount = cols;
             this.output = target;
-            this.value = new StringBuffer();
+            this.value = new StringBuilder();
             this.nextDataType = xssfDataType.NUMBER;
             this.formatter = new DataFormatter();
         }

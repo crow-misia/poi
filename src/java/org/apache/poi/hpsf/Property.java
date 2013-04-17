@@ -231,7 +231,7 @@ public class Property
                 o += LittleEndian.INT_SIZE;
 
                 /* Read the string. */
-                final StringBuffer b = new StringBuffer();
+                final StringBuilder b = new StringBuilder();
                 switch (codepage)
                 {
                     case -1:
@@ -406,7 +406,7 @@ public class Property
      */
     public String toString()
     {
-        final StringBuffer b = new StringBuffer();
+        final StringBuilder b = new StringBuilder();
         b.append(getClass().getName());
         b.append('[');
         b.append("id: ");

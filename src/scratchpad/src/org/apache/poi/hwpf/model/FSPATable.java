@@ -89,7 +89,7 @@ public final class FSPATable
 
     public String toString()
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.append( "[FPSA PLC size=" ).append( _byStart.size() )
                 .append( "]\n" );
 

@@ -54,7 +54,7 @@ public final class FrameRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[FRAME]\n");
         buffer.append("    .borderType           = ")

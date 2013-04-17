@@ -114,7 +114,7 @@ public class TestCellFormatPart extends CellFormatTestBase {
             throw new IllegalArgumentException(
                     "Cannot find numer in \"" + str + "\"");
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         // The groups in the pattern are the parts of the number
         for (int i = 1; i <= m.groupCount(); i++) {
             String part = m.group(i);

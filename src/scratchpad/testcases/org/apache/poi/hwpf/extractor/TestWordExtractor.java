@@ -226,7 +226,7 @@ public final class TestWordExtractor extends TestCase {
 		extractor = new WordExtractor(doc);
 
 		String[] text = extractor.getFootnoteText();
-		StringBuffer b = new StringBuffer();
+		StringBuilder b = new StringBuilder();
 		for (int i = 0; i < text.length; i++) {
 			b.append(text[i]);
 		}
@@ -239,7 +239,7 @@ public final class TestWordExtractor extends TestCase {
 		extractor = new WordExtractor(doc);
 
 		String[] text = extractor.getEndnoteText();
-		StringBuffer b = new StringBuffer();
+		StringBuilder b = new StringBuilder();
 		for (int i = 0; i < text.length; i++) {
 			b.append(text[i]);
 		}
@@ -252,7 +252,7 @@ public final class TestWordExtractor extends TestCase {
 		extractor = new WordExtractor(doc);
 
 		String[] text = extractor.getCommentsText();
-		StringBuffer b = new StringBuffer();
+		StringBuilder b = new StringBuilder();
 		for (int i = 0; i < text.length; i++) {
 			b.append(text[i]);
 		}

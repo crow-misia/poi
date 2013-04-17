@@ -403,7 +403,7 @@ public class DVConstraint implements DataValidationConstraint {
 			// Some things like union and intersection are not allowed.
 		}
 		// explicit list was provided
-		StringBuffer sb = new StringBuffer(_explicitListValues.length * 16);
+		StringBuilder sb = new StringBuilder(_explicitListValues.length * 16);
 		for (int i = 0; i < _explicitListValues.length; i++) {
 			if (i > 0) {
 				sb.append('\0'); // list delimiter is the nul char

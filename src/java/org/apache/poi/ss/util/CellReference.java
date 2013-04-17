@@ -389,7 +389,7 @@ public class CellReference {
 		//   AreaReference.separateAreaRefs()
 		//   SheetNameFormatter.format() (inverse)
 
-		StringBuffer sb = new StringBuffer(indexOfSheetNameDelimiter);
+		StringBuilder sb = new StringBuilder(indexOfSheetNameDelimiter);
 
 		for(int i=1; i<lastQuotePos; i++) { // Note boundaries - skip outer quotes
 			char ch = reference.charAt(i);
@@ -449,7 +449,7 @@ public class CellReference {
 	 * @return the text representation of this cell reference as it would appear in a formula.
 	 */
 	public String formatAsString() {
-		StringBuffer sb = new StringBuffer(32);
+		StringBuilder sb = new StringBuilder(32);
 		if(_sheetName != null) {
 			SheetNameFormatter.appendFormat(sb, _sheetName);
 			sb.append(SHEET_NAME_DELIMITER);
@@ -459,7 +459,7 @@ public class CellReference {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer(64);
+		StringBuilder sb = new StringBuilder(64);
 		sb.append(getClass().getName()).append(" [");
 		sb.append(formatAsString());
 		sb.append("]");
@@ -486,7 +486,7 @@ public class CellReference {
 	 * Appends cell reference with '$' markers for absolute values as required.
 	 * Sheet name is not included.
 	 */
-	/* package */ void appendCellReference(StringBuffer sb) {
+	/* package */ void appendCellReference(StringBuilder sb) {
     if (_colIndex != -1) {
       if(_isColAbs) {
         sb.append(ABSOLUTE_REFERENCE_MARKER);

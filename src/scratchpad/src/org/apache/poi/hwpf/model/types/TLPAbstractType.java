@@ -67,7 +67,7 @@ public abstract class TLPAbstractType implements HDFType
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append( "[TLP]\n" );
 

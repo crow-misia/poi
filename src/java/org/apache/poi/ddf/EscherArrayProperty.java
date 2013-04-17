@@ -122,7 +122,7 @@ public final class EscherArrayProperty extends EscherComplexProperty {
     }
 
     public String toString() {
-        StringBuffer results = new StringBuffer();
+        StringBuilder results = new StringBuilder();
         results.append("    {EscherArrayProperty:" + '\n');
         results.append("     Num Elements: " + getNumberOfElementsInArray() + '\n');
         results.append("     Num Elements In Memory: " + getNumberOfElementsInMemory() + '\n');

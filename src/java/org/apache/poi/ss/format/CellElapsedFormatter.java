@@ -187,7 +187,7 @@ public class CellElapsedFormatter extends CellFormatter {
     }
 
     /** {@inheritDoc} */
-    public void formatValue(StringBuffer toAppendTo, Object value) {
+    public void formatValue(StringBuilder toAppendTo, Object value) {
         double elapsed = ((Number) value).doubleValue();
 
         if (elapsed < 0) {
@@ -209,7 +209,7 @@ public class CellElapsedFormatter extends CellFormatter {
      * <p/>
      * For a date, this is <tt>"mm/d/y"</tt>.
      */
-    public void simpleValue(StringBuffer toAppendTo, Object value) {
+    public void simpleValue(StringBuilder toAppendTo, Object value) {
         formatValue(toAppendTo, value);
     }
 }

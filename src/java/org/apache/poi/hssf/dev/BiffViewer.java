@@ -458,7 +458,7 @@ public final class BiffViewer {
 			return result;
 		}
 		private static String formatRecordDetails(int globalOffset, int sid, int size, int recordCounter) {
-			StringBuffer sb = new StringBuffer(64);
+			StringBuilder sb = new StringBuilder(64);
 			sb.append("Offset=").append(HexDump.intToHex(globalOffset)).append("(").append(globalOffset).append(")");
 			sb.append(" recno=").append(recordCounter);
 			sb.append(  " sid=").append(HexDump.shortToHex(sid));

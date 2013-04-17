@@ -78,7 +78,7 @@ public final class SharedFormulaRecord extends SharedValueRecordBase {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[SHARED FORMULA (").append(HexDump.intToHex(sid)).append("]\n");
         buffer.append("    .range      = ").append(getRange().toString()).append("\n");

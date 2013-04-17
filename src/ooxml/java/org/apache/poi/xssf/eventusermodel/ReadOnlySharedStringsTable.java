@@ -184,7 +184,7 @@ public class ReadOnlySharedStringsTable extends DefaultHandler {
 
     //// ContentHandler methods ////
 
-    private StringBuffer characters;
+    private StringBuilder characters;
     private boolean tIsOpen;
 
     public void startElement(String uri, String localName, String name,
@@ -197,7 +197,7 @@ public class ReadOnlySharedStringsTable extends DefaultHandler {
 
             this.strings = new ArrayList<String>(this.uniqueCount);
 
-            characters = new StringBuffer();
+            characters = new StringBuilder();
         } else if ("si".equals(name)) {
             characters.setLength(0);
         } else if ("t".equals(name)) {

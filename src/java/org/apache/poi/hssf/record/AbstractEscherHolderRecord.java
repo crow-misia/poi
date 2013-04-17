@@ -88,7 +88,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         final String nl = System.lineSeparator();
         buffer.append('[' + getRecordName() + ']' + nl);

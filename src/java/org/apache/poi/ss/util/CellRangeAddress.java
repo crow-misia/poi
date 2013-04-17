@@ -88,7 +88,7 @@ public class CellRangeAddress extends CellRangeAddressBase {
      * @return the text format of this range using specified sheet name.
      */
     public String formatAsString(String sheetName, boolean useAbsoluteAddress) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (sheetName != null) {
             sb.append(SheetNameFormatter.format(sheetName));
             sb.append("!");

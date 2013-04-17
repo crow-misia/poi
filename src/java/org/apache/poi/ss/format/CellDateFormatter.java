@@ -157,7 +157,7 @@ public class CellDateFormatter extends CellFormatter {
     }
 
     /** {@inheritDoc} */
-    public void formatValue(StringBuffer toAppendTo, Object value) {
+    public void formatValue(StringBuilder toAppendTo, Object value) {
         if (value == null)
             value = 0.0;
         if (value instanceof Number) {
@@ -214,7 +214,7 @@ public class CellDateFormatter extends CellFormatter {
      * <p/>
      * For a date, this is <tt>"mm/d/y"</tt>.
      */
-    public void simpleValue(StringBuffer toAppendTo, Object value) {
+    public void simpleValue(StringBuilder toAppendTo, Object value) {
         SIMPLE_DATE.formatValue(toAppendTo, value);
     }
 }
