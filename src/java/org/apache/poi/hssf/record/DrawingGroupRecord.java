@@ -17,13 +17,12 @@
 
 package org.apache.poi.hssf.record;
 
-import org.apache.poi.ddf.EscherRecord;
-import org.apache.poi.ddf.NullEscherSerializationListener;
-import org.apache.poi.util.ArrayUtil;
-import org.apache.poi.util.LittleEndian;
-
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.poi.ddf.EscherRecord;
+import org.apache.poi.ddf.NullEscherSerializationListener;
+import org.apache.poi.util.LittleEndian;
 
 
 public final class DrawingGroupRecord extends AbstractEscherHolderRecord {
@@ -116,7 +115,7 @@ public final class DrawingGroupRecord extends AbstractEscherHolderRecord {
                 writeHeader( data, offset, segmentLength );
             writtenActualData += 4;
             offset += 4;
-            ArrayUtil.arraycopy( rawData, writtenRawData, data, offset, segmentLength );
+            System.arraycopy( rawData, writtenRawData, data, offset, segmentLength );
             offset += segmentLength;
             writtenRawData += segmentLength;
             writtenActualData += segmentLength;

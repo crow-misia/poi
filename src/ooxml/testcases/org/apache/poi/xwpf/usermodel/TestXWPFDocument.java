@@ -19,6 +19,7 @@ package org.apache.poi.xwpf.usermodel;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -307,7 +308,7 @@ public final class TestXWPFDocument extends TestCase {
 	    String id1 = doc.addPictureData(newPic, Document.PICTURE_TYPE_JPEG);
 	    assertEquals(2,doc.getAllPackagePictures().size());
 	    /* copy data, to avoid instance-equality */
-	    byte[] newPicCopy = ArrayUtil.copyOf(newPic, newPic.length);
+	    byte[] newPicCopy = Arrays.copyOf(newPic, newPic.length);
 	    String id2 = doc.addPictureData(newPicCopy, Document.PICTURE_TYPE_JPEG);
 	    assertEquals(id1,id2);
 	    doc.getPackage().revert();

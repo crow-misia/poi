@@ -35,19 +35,12 @@ public final class IOUtils {
 	/**
 	 * Reads all the data from the input stream, and returns the bytes read.
 	 */
-	public static byte[] toByteArray(InputStream stream) throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	public static byte[] toByteArray(InputStream i) throws IOException {
+		final ByteArrayOutputStream o = new ByteArrayOutputStream();
 
-		byte[] buffer = new byte[4096];
-		int read = 0;
-		while (read != -1) {
-			read = stream.read(buffer);
-			if (read > 0) {
-				baos.write(buffer, 0, read);
-			}
-		}
+		copy(i, o);
 
-		return baos.toByteArray();
+		return o.toByteArray();
 	}
 
    /**
@@ -124,6 +117,7 @@ public final class IOUtils {
 	 * leaves both streams open, so you will still need to close them once done.
 	 */
 	public static void copy(InputStream inp, OutputStream out) throws IOException {
+	
 		byte[] buff = new byte[4096];
 		int count;
 		while ((count = inp.read(buff)) != -1) {

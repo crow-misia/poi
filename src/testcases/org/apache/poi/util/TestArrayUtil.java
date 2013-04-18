@@ -26,24 +26,6 @@ import junit.framework.TestCase;
  * @author Nick Burch
  */
 public class TestArrayUtil extends TestCase {
-	/**
-	 * Test to ensure that our own arraycopy behaves as it should do
-	 */
-	public void testarraycopy() {
-		byte[] bytes = new byte[] { 0x01, 0x02, 0x03, 0x04 };
-
-		// Test copy whole thing
-		byte[] dest = new byte[4];
-		ArrayUtil.arraycopy(bytes, 0, dest, 0, 4);
-
-		assertEquals(dest.length, bytes.length);
-		for(int i=0; i<dest.length; i++) {
-			assertEquals(bytes[i], dest[i]);
-		}
-
-		// ToDo - test exceptions are as expected
-	}
-
 
 	/**
 	 * Helper for testArrayMoveWithin

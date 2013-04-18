@@ -18,6 +18,8 @@
  */
 package org.apache.poi.hssf.record;
 
+import java.util.Arrays;
+
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.LittleEndianOutput;
@@ -273,7 +275,7 @@ public class DConRefRecord extends StandardRecord
      */
     public byte[] getPath()
     {
-        return ArrayUtil.copyOf(path, path.length);
+        return Arrays.copyOf(path, path.length);
     }
 
     /**
@@ -291,7 +293,7 @@ public class DConRefRecord extends StandardRecord
             {
                 offset++;
             }
-            String out = new String(ArrayUtil.copyOfRange(path, offset, path.length));
+            String out = new String(Arrays.copyOfRange(path, offset, path.length));
             //UNC paths have \u0003 chars as path separators.
             out = out.replaceAll("\u0003", "/");
             return out;

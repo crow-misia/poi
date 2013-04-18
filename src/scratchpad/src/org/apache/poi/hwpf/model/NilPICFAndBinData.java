@@ -16,6 +16,8 @@
 ==================================================================== */
 package org.apache.poi.hwpf.model;
 
+import java.util.Arrays;
+
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
@@ -49,7 +51,7 @@ public class NilPICFAndBinData
 
         // skip the 62 ignored bytes
         int binaryLength = lcb - cbHeader;
-        this._binData = ArrayUtil.copyOfRange( data, offset + cbHeader,
+        this._binData = Arrays.copyOfRange( data, offset + cbHeader,
                 offset + cbHeader + binaryLength );
     }
 
