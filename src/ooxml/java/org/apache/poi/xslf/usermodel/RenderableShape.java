@@ -34,7 +34,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -445,34 +444,27 @@ class RenderableShape {
      * The mapping is derived empirically on PowerPoint 2010
      */
     private static float[] getDashPattern(LineDash lineDash, float lineWidth) {
-        float[] dash = null;
         switch (lineDash) {
             case SYS_DOT:
-                dash = new float[]{lineWidth, lineWidth};
-                break;
+                return new float[]{lineWidth, lineWidth};
             case SYS_DASH:
-                dash = new float[]{2 * lineWidth, 2 * lineWidth};
-                break;
+                return new float[]{2 * lineWidth, 2 * lineWidth};
             case DASH:
-                dash = new float[]{3 * lineWidth, 4 * lineWidth};
-                break;
+                return new float[]{3 * lineWidth, 4 * lineWidth};
             case DASH_DOT:
-                dash = new float[]{4 * lineWidth, 3 * lineWidth, lineWidth,
+                return new float[]{4 * lineWidth, 3 * lineWidth, lineWidth,
                         3 * lineWidth};
-                break;
             case LG_DASH:
-                dash = new float[]{8 * lineWidth, 3 * lineWidth};
-                break;
+                return new float[]{8 * lineWidth, 3 * lineWidth};
             case LG_DASH_DOT:
-                dash = new float[]{8 * lineWidth, 3 * lineWidth, lineWidth,
+                return new float[]{8 * lineWidth, 3 * lineWidth, lineWidth,
                         3 * lineWidth};
-                break;
             case LG_DASH_DOT_DOT:
-                dash = new float[]{8 * lineWidth, 3 * lineWidth, lineWidth,
+                return new float[]{8 * lineWidth, 3 * lineWidth, lineWidth,
                         3 * lineWidth, lineWidth, 3 * lineWidth};
-                break;
+            default:
+                return null;
         }
-        return dash;
     }
 
 

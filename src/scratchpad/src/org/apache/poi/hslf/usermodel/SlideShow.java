@@ -24,7 +24,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.poi.ddf.EscherBSERecord;
 import org.apache.poi.ddf.EscherContainerRecord;
@@ -33,11 +41,40 @@ import org.apache.poi.ddf.EscherRecord;
 import org.apache.poi.hslf.HSLFSlideShow;
 import org.apache.poi.hslf.exceptions.CorruptPowerPointFileException;
 import org.apache.poi.hslf.exceptions.HSLFException;
-import org.apache.poi.hslf.model.*;
+import org.apache.poi.hslf.model.HeadersFooters;
+import org.apache.poi.hslf.model.Hyperlink;
+import org.apache.poi.hslf.model.MovieShape;
 import org.apache.poi.hslf.model.Notes;
+import org.apache.poi.hslf.model.PPFont;
+import org.apache.poi.hslf.model.Picture;
+import org.apache.poi.hslf.model.Shape;
 import org.apache.poi.hslf.model.Slide;
-import org.apache.poi.hslf.record.*;
+import org.apache.poi.hslf.model.SlideMaster;
+import org.apache.poi.hslf.model.TitleMaster;
+import org.apache.poi.hslf.record.Document;
+import org.apache.poi.hslf.record.DocumentAtom;
+import org.apache.poi.hslf.record.ExAviMovie;
+import org.apache.poi.hslf.record.ExControl;
+import org.apache.poi.hslf.record.ExHyperlink;
+import org.apache.poi.hslf.record.ExHyperlinkAtom;
+import org.apache.poi.hslf.record.ExMCIMovie;
+import org.apache.poi.hslf.record.ExObjList;
+import org.apache.poi.hslf.record.ExObjListAtom;
+import org.apache.poi.hslf.record.ExOleObjAtom;
+import org.apache.poi.hslf.record.ExVideoContainer;
+import org.apache.poi.hslf.record.FontCollection;
+import org.apache.poi.hslf.record.FontEntityAtom;
+import org.apache.poi.hslf.record.HeadersFootersContainer;
+import org.apache.poi.hslf.record.PersistPtrHolder;
+import org.apache.poi.hslf.record.PositionDependentRecord;
+import org.apache.poi.hslf.record.PositionDependentRecordContainer;
+import org.apache.poi.hslf.record.Record;
+import org.apache.poi.hslf.record.RecordContainer;
+import org.apache.poi.hslf.record.RecordTypes;
+import org.apache.poi.hslf.record.SlideListWithText;
 import org.apache.poi.hslf.record.SlideListWithText.SlideAtomsSet;
+import org.apache.poi.hslf.record.SlidePersistAtom;
+import org.apache.poi.hslf.record.UserEditAtom;
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -132,7 +169,7 @@ public final class SlideShow {
 	 */
 	private void findMostRecentCoreRecords() {
 		// To start with, find the most recent in the byte offset domain
-		Hashtable<Integer,Integer> mostRecentByBytes = new Hashtable<>();
+		Map<Integer,Integer> mostRecentByBytes = new HashMap<>();
 		for (int i = 0; i < _records.length; i++) {
 			if (_records[i] instanceof PersistPtrHolder) {
 				PersistPtrHolder pph = (PersistPtrHolder) _records[i];
@@ -148,7 +185,7 @@ public final class SlideShow {
 				}
 
 				// Now, update the byte level locations with their latest values
-				Hashtable<Integer,Integer> thisSetOfLocations = pph.getSlideLocationsLookup();
+				Map<Integer,Integer> thisSetOfLocations = pph.getSlideLocationsLookup();
 				for (int j = 0; j < ids.length; j++) {
 					Integer id = Integer.valueOf(ids[j]);
 					mostRecentByBytes.put(id, thisSetOfLocations.get(id));
@@ -163,26 +200,23 @@ public final class SlideShow {
 		// We'll also want to be able to turn the slide IDs into a position
 		// in this array
 		_sheetIdToCoreRecordsLookup = new Hashtable<>();
-		int[] allIDs = new int[_mostRecentCoreRecords.length];
-		Enumeration<Integer> ids = mostRecentByBytes.keys();
-		for (int i = 0; i < allIDs.length; i++) {
-			Integer id = ids.nextElement();
-			allIDs[i] = id.intValue();
-		}
-		Arrays.sort(allIDs);
-		for (int i = 0; i < allIDs.length; i++) {
-			_sheetIdToCoreRecordsLookup.put(Integer.valueOf(allIDs[i]), Integer.valueOf(i));
+		Set<Integer> ids = mostRecentByBytes.keySet();
+		List<Integer> allIDs = new ArrayList<>(ids);
+		Collections.sort(allIDs);
+		int i = 0;
+		for (final Integer id : allIDs) {
+			_sheetIdToCoreRecordsLookup.put(id, Integer.valueOf(i));
+			i++;
 		}
 
 		// Now convert the byte offsets back into record offsets
-		for (int i = 0; i < _records.length; i++) {
+		for (i = 0; i < _records.length; i++) {
 			if (_records[i] instanceof PositionDependentRecord) {
 				PositionDependentRecord pdr = (PositionDependentRecord) _records[i];
 				Integer recordAt = Integer.valueOf(pdr.getLastOnDiskOffset());
 
 				// Is it one we care about?
-				for (int j = 0; j < allIDs.length; j++) {
-					Integer thisID = Integer.valueOf(allIDs[j]);
+				for (final Integer thisID : allIDs) {
 					Integer thatRecordAt = mostRecentByBytes.get(thisID);
 
 					if (thatRecordAt.equals(recordAt)) {
@@ -204,12 +238,12 @@ public final class SlideShow {
 		}
 
 		// Now look for the interesting records in there
-		for (int i = 0; i < _mostRecentCoreRecords.length; i++) {
+		for (final Record r : _mostRecentCoreRecords) {
 			// Check there really is a record at this number
-			if (_mostRecentCoreRecords[i] != null) {
+			if (r != null) {
 				// Find the Document, and interesting things in it
-				if (_mostRecentCoreRecords[i].getRecordType() == RecordTypes.Document.typeID) {
-					_documentRecord = (Document) _mostRecentCoreRecords[i];
+				if (r.getRecordType() == RecordTypes.Document.typeID) {
+					_documentRecord = (Document) r;
 					_fonts = _documentRecord.getEnvironment().getFontCollection();
 				}
 			} else {

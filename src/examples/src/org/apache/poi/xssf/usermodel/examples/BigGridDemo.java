@@ -26,6 +26,7 @@ import java.util.zip.ZipOutputStream;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.*;
 
 /**
@@ -165,34 +166,24 @@ public class BigGridDemo {
      * @param out the stream to write the result to
      */
 	private static void substitute(File zipfile, File tmpfile, String entry, OutputStream out) throws IOException {
-        ZipFile zip = new ZipFile(zipfile);
+        try (final ZipFile zip = new ZipFile(zipfile);
+             final ZipOutputStream zos = new ZipOutputStream(out)) {
 
-        ZipOutputStream zos = new ZipOutputStream(out);
-
-        @SuppressWarnings("unchecked")
-        Enumeration<ZipEntry> en = (Enumeration<ZipEntry>) zip.entries();
+        Enumeration<? extends ZipEntry> en = zip.entries();
         while (en.hasMoreElements()) {
             ZipEntry ze = en.nextElement();
             if(!ze.getName().equals(entry)){
                 zos.putNextEntry(new ZipEntry(ze.getName()));
-                InputStream is = zip.getInputStream(ze);
-                copyStream(is, zos);
-                is.close();
+                try (final InputStream is = zip.getInputStream(ze)) {
+                    IOUtils.copy(is, zos);
+                }
             }
         }
         zos.putNextEntry(new ZipEntry(entry));
-        InputStream is = new FileInputStream(tmpfile);
-        copyStream(is, zos);
-        is.close();
+        try (final InputStream is = new FileInputStream(tmpfile)) {
+            IOUtils.copy(is, zos);
+        }
 
-        zos.close();
-    }
-
-    private static void copyStream(InputStream in, OutputStream out) throws IOException {
-        byte[] chunk = new byte[1024];
-        int count;
-        while ((count = in.read(chunk)) >=0 ) {
-          out.write(chunk,0,count);
         }
     }
 

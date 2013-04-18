@@ -79,7 +79,7 @@ public final class XSSFGraphicFrame extends XSSFShape {
 			offPoint.setX(0);
 			offPoint.setY(0);
 
-			CTGraphicalObject graphic = graphicFrame.addNewGraphic();
+			graphicFrame.addNewGraphic();
 
 			prototype = graphicFrame;
 		}

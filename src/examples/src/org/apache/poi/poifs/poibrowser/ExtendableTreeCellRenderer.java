@@ -20,6 +20,7 @@ package org.apache.poi.poifs.poibrowser;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.tree.*;
+
 import java.util.*;
 
 /**
@@ -43,13 +44,13 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
     /**
      * <p>Maps classes to renderers.</p>
      */
-    protected Map renderers;
+    protected Map<Class<?>, TreeCellRenderer> renderers;
 
 
 
     public ExtendableTreeCellRenderer()
     {
-        renderers = new HashMap();
+        renderers = new HashMap<>();
         register(Object.class, new DefaultTreeCellRenderer()
             {
                 public Component getTreeCellRendererComponent
@@ -73,7 +74,7 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
     /**
      * <p>Registers a renderer for a class.</p>
      **/
-    public void register(final Class c, final TreeCellRenderer renderer)
+    public void register(final Class<?> c, final TreeCellRenderer renderer)
     {
         renderers.put(c, renderer);
     }
@@ -84,7 +85,7 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
      * <p>Unregisters a renderer for a class. The renderer for the
      * {@link Object} class cannot be unregistered.</p>
      */
-    public void unregister(final Class c)
+    public void unregister(final Class<?> c)
     {
         if (c == Object.class)
             throw new IllegalArgumentException
@@ -127,7 +128,7 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
     /**
      * <p>Find the renderer for the specified class.</p>
      */
-    protected TreeCellRenderer findRenderer(final Class c)
+    protected TreeCellRenderer findRenderer(final Class<?> c)
     {
         final TreeCellRenderer r = (TreeCellRenderer) renderers.get(c);
         if (r != null)
@@ -135,11 +136,11 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
             return r;
 
         /* The class has no renderer, try the superclass, if any. */
-        final Class superclass = c.getSuperclass();
-        if (superclass != null) {
-            return findRenderer(superclass);
+        final Class<?> superclass = c.getSuperclass();
+        if (superclass == null) {
+            return null;
         }
-        return null;
+        return findRenderer(superclass);
     }
 
 }

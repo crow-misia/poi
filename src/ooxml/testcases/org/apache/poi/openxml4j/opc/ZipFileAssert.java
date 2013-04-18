@@ -28,8 +28,9 @@ import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import junit.framework.Assert;
 import junit.framework.AssertionFailedError;
+
+import org.junit.Assert;
 
 /**
  * Compare the contents of 2 zip files.

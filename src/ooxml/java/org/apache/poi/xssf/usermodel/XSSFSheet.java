@@ -1543,6 +1543,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      * be the third row if say for instance the second row is undefined.
      * Call getRowNum() on each row if you care which one it is.
      */
+    @SuppressWarnings("unchecked")
     public Iterator<Row> rowIterator() {
         return (Iterator<Row>)(Iterator<? extends Row>) _rows.values().iterator();
     }

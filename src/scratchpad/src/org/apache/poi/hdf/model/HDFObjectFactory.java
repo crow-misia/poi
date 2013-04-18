@@ -24,11 +24,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.hdf.event.HDFLowLevelParsingListener;
-import org.apache.poi.hdf.model.hdftypes.*;
+import org.apache.poi.hdf.model.hdftypes.CHPFormattedDiskPage;
+import org.apache.poi.hdf.model.hdftypes.ChpxNode;
+import org.apache.poi.hdf.model.hdftypes.DocumentProperties;
+import org.apache.poi.hdf.model.hdftypes.FileInformationBlock;
+import org.apache.poi.hdf.model.hdftypes.FontTable;
+import org.apache.poi.hdf.model.hdftypes.FormattedDiskPage;
+import org.apache.poi.hdf.model.hdftypes.ListTables;
+import org.apache.poi.hdf.model.hdftypes.PAPFormattedDiskPage;
+import org.apache.poi.hdf.model.hdftypes.PapxNode;
+import org.apache.poi.hdf.model.hdftypes.PlexOfCps;
+import org.apache.poi.hdf.model.hdftypes.SepxNode;
+import org.apache.poi.hdf.model.hdftypes.StyleSheet;
+import org.apache.poi.hdf.model.hdftypes.TextPiece;
 import org.apache.poi.hdf.model.util.ParsingState;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**

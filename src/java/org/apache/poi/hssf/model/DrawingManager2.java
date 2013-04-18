@@ -31,8 +31,8 @@ import java.util.ArrayList;
  */
 public class DrawingManager2
 {
-    EscherDggRecord dgg;
-    List drawingGroups = new ArrayList( );
+    final EscherDggRecord dgg;
+    final List<EscherDgRecord> drawingGroups = new ArrayList<>( );
 
 
     public DrawingManager2( EscherDggRecord dgg )

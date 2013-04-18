@@ -30,8 +30,8 @@ import java.util.HashMap;
  */
 public class DrawingManager
 {
-    EscherDggRecord dgg;
-    Map dgMap = new HashMap(); // key = Short(drawingId), value=EscherDgRecord
+    final EscherDggRecord dgg;
+    final Map<Short, EscherDgRecord> dgMap = new HashMap<>(); // key = Short(drawingId), value=EscherDgRecord
 
     public DrawingManager( EscherDggRecord dgg )
     {

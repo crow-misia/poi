@@ -564,11 +564,11 @@ public class POIFSFileSystem
 
     public Iterator<?> getViewableIterator()
     {
-        if (!preferArray())
+        if (preferArray())
         {
-            return (( POIFSViewable ) getRoot()).getViewableIterator();
+            return Collections.<Object>emptyIterator();
         }
-        return Collections.EMPTY_LIST.iterator();
+        return (( POIFSViewable ) getRoot()).getViewableIterator();
     }
 
     /**

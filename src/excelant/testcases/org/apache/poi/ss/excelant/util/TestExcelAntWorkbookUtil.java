@@ -16,14 +16,11 @@
 ==================================================================== */
 package org.apache.poi.ss.excelant.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.apache.poi.ss.examples.formula.CalculateMortgageFunction;
-import org.apache.poi.ss.excelant.util.ExcelAntEvaluationResult;
-import org.apache.poi.ss.excelant.util.ExcelAntWorkbookUtilTestHelper;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Workbook;

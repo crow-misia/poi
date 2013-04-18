@@ -17,13 +17,14 @@
 
 package org.apache.poi.hslf.record;
 
-import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.POILogger;
-
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.poi.util.LittleEndian;
+import org.apache.poi.util.POILogger;
 
 /**
  * General holder for PersistPtrFullBlock and PersistPtrIncrementalBlock
@@ -48,13 +49,13 @@ public final class PersistPtrHolder extends PositionDependentRecordAtom
 	 * You always need to check the most recent PersistPtrHolder
 	 *  that knows about a given slide to find the right location
 	 */
-	private Hashtable<Integer,Integer> _slideLocations;
+	private Map<Integer,Integer> _slideLocations;
 	/**
 	 * Holds the lookup from slide id to where their offset is
 	 *  held inside _ptrData. Used when writing out, and updating
 	 *  the positions of the slides
 	 */
-	private Hashtable<Integer,Integer> _slideOffsetDataLocation;
+	private Map<Integer,Integer> _slideOffsetDataLocation;
 
 	/**
 	 * Get the list of slides that this PersistPtrHolder knows about.
@@ -63,10 +64,11 @@ public final class PersistPtrHolder extends PositionDependentRecordAtom
 	 */
 	public int[] getKnownSlideIDs() {
 		int[] ids = new int[_slideLocations.size()];
-		Enumeration<Integer> e = _slideLocations.keys();
-		for(int i=0; i<ids.length; i++) {
-			Integer id = e.nextElement();
+		Set<Integer> e = _slideLocations.keySet();
+		int i = 0;
+		for (final Integer id : e) {
 			ids[i] = id.intValue();
+			i++;
 		}
 		return ids;
 	}
@@ -75,14 +77,14 @@ public final class PersistPtrHolder extends PositionDependentRecordAtom
 	 * Get the lookup from slide numbers to byte offsets, for the slides
 	 *  known about by this PersistPtrHolder.
 	 */
-	public Hashtable<Integer,Integer> getSlideLocationsLookup() {
+	public Map<Integer,Integer> getSlideLocationsLookup() {
 		return _slideLocations;
 	}
 	/**
 	 * Get the lookup from slide numbers to their offsets inside
 	 *  _ptrData, used when adding or moving slides.
 	 */
-	public Hashtable<Integer,Integer> getSlideOffsetDataLocationsLookup() {
+	public Map<Integer,Integer> getSlideOffsetDataLocationsLookup() {
 		return _slideOffsetDataLocation;
 	}
 

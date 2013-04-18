@@ -37,7 +37,6 @@ import org.apache.poi.poifs.storage.DocumentBlock;
 import org.apache.poi.poifs.storage.ListManagedBlock;
 import org.apache.poi.poifs.storage.RawDataBlock;
 import org.apache.poi.poifs.storage.SmallDocumentBlock;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.HexDump;
 

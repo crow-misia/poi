@@ -123,40 +123,38 @@ public class ColumnHelper {
             // overlapping types
             if (overlappingType == NumericRanges.OVERLAPS_1_MINOR) {
                 ithCol.setMax(overlappingRange[0] - 1);
-                CTCol rangeCol = insertCol(cols, overlappingRange[0],
+                insertCol(cols, overlappingRange[0],
                         overlappingRange[1], new CTCol[] { ithCol, col });
-                i++;
-                CTCol newCol = insertCol(cols, (overlappingRange[1] + 1), col
+                insertCol(cols, (overlappingRange[1] + 1), col
                         .getMax(), new CTCol[] { col });
-                i++;
+                i += 2;
             } else if (overlappingType == NumericRanges.OVERLAPS_2_MINOR) {
                 ithCol.setMin(overlappingRange[1] + 1);
-                CTCol rangeCol = insertCol(cols, overlappingRange[0],
+                insertCol(cols, overlappingRange[0],
                         overlappingRange[1], new CTCol[] { ithCol, col });
-                i++;
-                CTCol newCol = insertCol(cols, col.getMin(),
+                insertCol(cols, col.getMin(),
                         (overlappingRange[0] - 1), new CTCol[] { col });
-                i++;
+                i += 2;
             } else if (overlappingType == NumericRanges.OVERLAPS_2_WRAPS) {
                 setColumnAttributes(col, ithCol);
                 if (col.getMin() != ithCol.getMin()) {
-                    CTCol newColBefore = insertCol(cols, col.getMin(), (ithCol
+                    insertCol(cols, col.getMin(), (ithCol
                             .getMin() - 1), new CTCol[] { col });
                     i++;
                 }
                 if (col.getMax() != ithCol.getMax()) {
-                    CTCol newColAfter = insertCol(cols, (ithCol.getMax() + 1),
+                    insertCol(cols, (ithCol.getMax() + 1),
                             col.getMax(), new CTCol[] { col });
                     i++;
                 }
             } else if (overlappingType == NumericRanges.OVERLAPS_1_WRAPS) {
                 if (col.getMin() != ithCol.getMin()) {
-                    CTCol newColBefore = insertCol(cols, ithCol.getMin(), (col
+                    insertCol(cols, ithCol.getMin(), (col
                             .getMin() - 1), new CTCol[] { ithCol });
                     i++;
                 }
                 if (col.getMax() != ithCol.getMax()) {
-                    CTCol newColAfter = insertCol(cols, (col.getMax() + 1),
+                    insertCol(cols, (col.getMax() + 1),
                             ithCol.getMax(), new CTCol[] { ithCol });
                     i++;
                 }
@@ -169,7 +167,7 @@ public class ColumnHelper {
             }
         }
         if (!colOverlaps) {
-            CTCol newCol = cloneCol(cols, col);
+            cloneCol(cols, col);
         }
         sortColumns(cols);
         return cols;

@@ -249,18 +249,10 @@ public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBo
             xwpfPicData = (XWPFPictureData) createRelationship(relDesc, XWPFFactory.getInstance(),idx);
             /* write bytes to new part */
             PackagePart picDataPart = xwpfPicData.getPackagePart();
-            OutputStream out = null;
-            try {
-                out = picDataPart.getOutputStream();
+            try (final OutputStream out = picDataPart.getOutputStream()) {
                 out.write(pictureData);
             } catch (IOException e) {
                 throw new POIXMLException(e);
-            } finally {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    // ignore
-                }
             }
 
             document.registerPackagePictureData(xwpfPicData);
@@ -497,7 +489,7 @@ public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBo
             return null;
         }
         XWPFTableRow tableRow = table.getRow(row);
-        if(row == null){
+        if(tableRow == null){
             return null;
         }
         return tableRow.getTableCell(cell);

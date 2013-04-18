@@ -70,7 +70,7 @@ public class TreeReaderListener implements POIFSReaderListener
      * <p>Maps filenames and POI document paths to their associated
      * tree nodes.</p>
      */
-    protected Map pathToNode;
+    protected Map<Object, MutableTreeNode> pathToNode;
 
     /**
      * <p>The name of the file this {@link TreeReaderListener}
@@ -99,7 +99,7 @@ public class TreeReaderListener implements POIFSReaderListener
     {
         this.filename = filename;
         this.rootNode = rootNode;
-        pathToNode = new HashMap(15); // Should be a reasonable guess.
+        pathToNode = new HashMap<>(15); // Should be a reasonable guess.
     }
 
 
@@ -193,7 +193,7 @@ public class TreeReaderListener implements POIFSReaderListener
              * the POI filesystem itself. This is a tree node with the
              * POI filesystem's name (this the operating system file's
              * name) as its key it the path-to-node map. */
-            n = (MutableTreeNode) pathToNode.get(fsName);
+            n = pathToNode.get(fsName);
             if (n == null)
             {
                 /* A tree node for the POI filesystem does not yet

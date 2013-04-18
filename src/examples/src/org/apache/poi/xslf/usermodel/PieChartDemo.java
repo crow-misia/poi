@@ -62,7 +62,8 @@ public class PieChartDemo {
             return;
         }
 
-        BufferedReader modelReader = new BufferedReader(new FileReader(args[1]));
+        try (final FileReader fr = new FileReader(args[1]);
+             final BufferedReader modelReader = new BufferedReader(fr)) {
 
         String chartTitle = modelReader.readLine();  // first line is chart title
 
@@ -140,13 +141,14 @@ public class PieChartDemo {
         cat.getStrRef().setF(axisDataRange);
 
         // updated the embedded workbook with the data
-        OutputStream xlsOut = xlsPart.getPackagePart().getOutputStream();
-        wb.write(xlsOut);
-        xlsOut.close();
+        try (final OutputStream xlsOut = xlsPart.getPackagePart().getOutputStream()) {
+            wb.write(xlsOut);
+        }
 
         // save the result
-        FileOutputStream out = new FileOutputStream("pie-chart-demo-output.pptx");
-        pptx.write(out);
-        out.close();
+        try (final FileOutputStream out = new FileOutputStream("pie-chart-demo-output.pptx")) {
+            pptx.write(out);
+        }
+        }
     }
 }

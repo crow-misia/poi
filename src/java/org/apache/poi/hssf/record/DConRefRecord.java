@@ -20,7 +20,6 @@ package org.apache.poi.hssf.record;
 
 import java.util.Arrays;
 
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.LittleEndianOutput;
 

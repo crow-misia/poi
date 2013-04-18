@@ -297,11 +297,11 @@ public class XSLFTextRun {
         CharacterPropertyFetcher<Byte> visitor = new CharacterPropertyFetcher<Byte>(_p.getLevel()){
             public boolean fetch(CTTextCharacterProperties props){
                 CTTextFont font = props.getLatin();
-                if(font != null){
-                    setValue(font.getPitchFamily());
-                    return true;
+                if(font == null){
+                    return false;
                 }
-                return false;
+                setValue(font.getPitchFamily());
+                return true;
             }
         };
         fetchCharacterProperty(visitor);

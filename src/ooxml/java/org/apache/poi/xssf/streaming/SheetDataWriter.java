@@ -19,16 +19,19 @@
 
 package org.apache.poi.xssf.streaming;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
+import java.util.Iterator;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FormulaError;
 import org.apache.poi.ss.util.CellReference;
-import org.apache.xmlbeans.XmlCursor;
-import org.openxmlformats.schemas.spreadsheetml.x2006.main.STXstring;
-
-import javax.xml.namespace.QName;
-import java.io.*;
-import java.util.Iterator;
 
 /**
  * Initially copied from BigGridDemo "SpreadsheetWriter".

@@ -64,16 +64,6 @@ public class EventBasedExcelExtractor extends POIOLE2TextExtractor {
 	boolean _includeSheetNames = true;
 	boolean _formulasNotResults = false;
 
-    /**
-     * @deprecated Use {@link #EventBasedExcelExtractor(DirectoryNode)} instead
-     */
-    @Deprecated
-    @SuppressWarnings( "unused" )
-    public EventBasedExcelExtractor( DirectoryNode dir, POIFSFileSystem fs )
-    {
-        this( dir );
-    }
-
     public EventBasedExcelExtractor( DirectoryNode dir )
     {
         super( null );
@@ -82,16 +72,6 @@ public class EventBasedExcelExtractor extends POIOLE2TextExtractor {
 
    public EventBasedExcelExtractor(POIFSFileSystem fs) {
       this(fs.getRoot());
-   }
-
-   /**
-    * Return the underlying POIFS FileSystem of
-    *  this document.
-    *
-    * @deprecated Use {@link #getRoot()} instead
-    */
-   public POIFSFileSystem getFileSystem() {
-      return _dir.getFileSystem();
    }
 
 	/**

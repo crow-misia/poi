@@ -132,7 +132,7 @@ public final class TestPackageCoreProperties extends TestCase {
         String strDate = "2007-05-12T08:00:00Z";
         Date date = df.parse(strDate);
 
-        OPCPackage pkg = new ZipPackage();
+        try (final OPCPackage pkg = new ZipPackage()) {
         PackagePropertiesPart props = (PackagePropertiesPart)pkg.getPackageProperties();
 
         // created
@@ -179,6 +179,7 @@ public final class TestPackageCoreProperties extends TestCase {
         props.setModifiedProperty(strDate);
         assertEquals(strDate, props.getModifiedPropertyString());
         assertEquals(date, props.getModifiedProperty().getValue());
+        }
     }
 
     public void testGetPropertiesLO() throws Exception {

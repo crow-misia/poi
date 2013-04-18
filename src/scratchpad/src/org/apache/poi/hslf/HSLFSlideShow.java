@@ -277,7 +277,7 @@ public final class HSLFSlideShow extends POIDocument {
 
             PersistPtrHolder ptr = (PersistPtrHolder)Record.buildRecordAtOffset(docstream, psrOffset);
             lst.add(Integer.valueOf(psrOffset));
-            Hashtable<Integer,Integer> entries = ptr.getSlideLocationsLookup();
+            Map<Integer,Integer> entries = ptr.getSlideLocationsLookup();
             for(Integer id : entries.keySet()) {
                 Integer offset = entries.get(id);
                 lst.add(offset);

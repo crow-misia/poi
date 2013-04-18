@@ -308,9 +308,10 @@ public class ToHtml {
         if (style == null)
             style = wb.getCellStyleAt((short) 0);
         StringBuilder sb = new StringBuilder();
-        Formatter fmt = new Formatter(sb);
-        fmt.format("style_%02x", style.getIndex());
-        return fmt.toString();
+        try (Formatter fmt = new Formatter(sb)) {
+            fmt.format("style_%02x", style.getIndex());
+            return fmt.toString();
+        }
     }
 
     private <K> void styleOut(String attr, K key, Map<K, String> mapping) {

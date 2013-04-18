@@ -17,11 +17,10 @@
 
 package org.apache.poi.ddf;
 
-import org.apache.poi.util.LittleEndian;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import org.apache.poi.util.LittleEndian;
 
 /**
  * Generates a property given a reference into the byte array storing that property.

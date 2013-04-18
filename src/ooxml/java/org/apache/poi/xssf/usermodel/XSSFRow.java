@@ -26,8 +26,6 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.util.Internal;
-import org.apache.poi.util.POILogFactory;
-import org.apache.poi.util.POILogger;
 import org.apache.poi.xssf.model.CalculationChain;
 import org.apache.poi.xssf.model.StylesTable;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCell;
@@ -37,8 +35,6 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRow;
  * High level representation of a row of a spreadsheet.
  */
 public class XSSFRow implements Row, Comparable<XSSFRow> {
-    private static final POILogger _logger = POILogFactory.getLogger(XSSFRow.class);
-
     /**
      * the xml bean containing all cell definitions for this row
      */
@@ -92,6 +88,7 @@ public class XSSFRow implements Row, Comparable<XSSFRow> {
      *
      * @return an iterator over cells in this row.
      */
+    @SuppressWarnings("unchecked")
     public Iterator<Cell> cellIterator() {
         return (Iterator<Cell>)(Iterator<? extends Cell>)_cells.values().iterator();
     }

@@ -166,7 +166,7 @@ public class XWPFHeaderFooterPolicy {
         OutputStream outputStream = wrapper.getPackagePart().getOutputStream();
         hdrDoc.setHdr(hdr);
 
-        XmlOptions xmlOptions = commit(wrapper);
+        XmlOptions xmlOptions = commit();
 
         assignHeader(wrapper, type);
         hdrDoc.save(outputStream, xmlOptions);
@@ -191,7 +191,7 @@ public class XWPFHeaderFooterPolicy {
         OutputStream outputStream = wrapper.getPackagePart().getOutputStream();
         ftrDoc.setFtr(ftr);
 
-        XmlOptions xmlOptions = commit(wrapper);
+        XmlOptions xmlOptions = commit();
 
         assignFooter(wrapper, type);
         ftrDoc.save(outputStream, xmlOptions);
@@ -225,27 +225,6 @@ public class XWPFHeaderFooterPolicy {
         return hdr;
     }
 
-    private CTHdrFtr buildHdrFtr(String pStyle, XWPFParagraph[] paragraphs) {
-        CTHdrFtr ftr = CTHdrFtr.Factory.newInstance();
-        if (paragraphs != null) {
-            for (int i = 0 ; i < paragraphs.length ; i++) {
-                CTP p = ftr.addNewP();
-                //ftr.setPArray(0, paragraphs[i].getCTP());		// MB 23 May 2010
-                ftr.setPArray(i, paragraphs[i].getCTP());   	// MB 23 May 2010
-            }
-        }
-        else {
-            CTP p = ftr.addNewP();
-            byte[] rsidr = doc.getDocument().getBody().getPArray(0).getRsidR();
-            byte[] rsidrdefault = doc.getDocument().getBody().getPArray(0).getRsidRDefault();
-            p.setRsidP(rsidr);
-            p.setRsidRDefault(rsidrdefault);
-            CTPPr pPr = p.addNewPPr();
-            pPr.addNewPStyle().setVal(pStyle);
-        }
-        return ftr;
-    }
-
     /**
      * MB 24 May 2010. Created this overloaded buildHdrFtr() method because testing demonstrated
      * that the XWPFFooter or XWPFHeader object returned by calls to the createHeader(int, XWPFParagraph[])
@@ -259,21 +238,23 @@ public class XWPFHeaderFooterPolicy {
      * createFooter(int, XWPFParagraph[]) methods.
      */
     private CTHdrFtr buildHdrFtr(String pStyle, XWPFParagraph[] paragraphs, XWPFHeaderFooter wrapper) {
-        CTHdrFtr ftr = wrapper._getHdrFtr();
-        if (paragraphs != null) {
-            for (int i = 0 ; i < paragraphs.length ; i++) {
-                CTP p = ftr.addNewP();
-                ftr.setPArray(i, paragraphs[i].getCTP());
-            }
+    	final CTHdrFtr ftr = wrapper._getHdrFtr();
+        if (paragraphs == null) {
+            final CTP p = ftr.addNewP();
+            final CTP ctp = doc.getDocument().getBody().getPArray(0);
+            p.setRsidP(ctp.getRsidR());
+            p.setRsidRDefault(ctp.getRsidRDefault());
+            final CTPPr pPr = p.addNewPPr();
+            pPr.addNewPStyle().setVal(pStyle);
         }
         else {
-            CTP p = ftr.addNewP();
-            byte[] rsidr = doc.getDocument().getBody().getPArray(0).getRsidR();
-            byte[] rsidrdefault = doc.getDocument().getBody().getPArray(0).getRsidRDefault();
-            p.setRsidP(rsidr);
-            p.setRsidRDefault(rsidrdefault);
-            CTPPr pPr = p.addNewPPr();
-            pPr.addNewPStyle().setVal(pStyle);
+            final int n = paragraphs.length;
+            final CTP[] pa = new CTP[n];
+            for (int i = 0 ; i < n; i++) {
+                ftr.addNewP();
+                pa[i] = paragraphs[i].getCTP();
+            }
+            ftr.setPArray(pa);
         }
         return ftr;
     }
@@ -293,9 +274,9 @@ public class XWPFHeaderFooterPolicy {
     }
 
 
-    private XmlOptions commit(XWPFHeaderFooter wrapper) {
-        XmlOptions xmlOptions = new XmlOptions(wrapper.DEFAULT_XML_OPTIONS);
-        Map<String, String> map = new HashMap<>();
+    private XmlOptions commit() {
+        XmlOptions xmlOptions = new XmlOptions(POIXMLDocumentPart.DEFAULT_XML_OPTIONS);
+        Map<String, String> map = new HashMap<>(9);
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/math", "m");
         map.put("urn:schemas-microsoft-com:office:office", "o");
         map.put("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "r");

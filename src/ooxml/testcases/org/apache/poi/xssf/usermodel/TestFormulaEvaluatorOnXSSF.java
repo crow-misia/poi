@@ -20,11 +20,11 @@ package org.apache.poi.xssf.usermodel;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-import junit.framework.Assert;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
 import org.apache.poi.hssf.HSSFTestDataSamples;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.formula.eval.TestFormulasFromSpreadsheet;
 import org.apache.poi.ss.formula.functions.TestMathX;
 import org.apache.poi.ss.usermodel.Cell;
@@ -32,7 +32,7 @@ import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.junit.Assert;
 
 /**
  * Performs much the same role as {@link TestFormulasFromSpreadsheet},

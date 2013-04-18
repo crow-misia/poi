@@ -70,7 +70,6 @@ import java.util.regex.Pattern;
  *
  * @author Ken Arnold, Industrious Media LLC
  */
-@SuppressWarnings({"Singleton"})
 public class CellFormat {
     private final String format;
     private final CellFormatPart posNumFmt;
