@@ -459,6 +459,7 @@ under the License.
                 noupa=""
                 nodep="true"
                 rolist="true"
+                unsync="true"
                 memoryMaximumSize="${ooxml.memory}"
                 >
             <classpath refid="ooxml.classpath"/>
