@@ -132,7 +132,7 @@ public final class TestPackageCoreProperties extends TestCase {
         String strDate = "2007-05-12T08:00:00Z";
         Date date = df.parse(strDate);
 
-        OPCPackage pkg = new ZipPackage();
+        final OPCPackage pkg = new ZipPackage();
         PackagePropertiesPart props = (PackagePropertiesPart)pkg.getPackageProperties();
 
         // created
