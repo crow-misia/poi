@@ -19,6 +19,7 @@ package org.apache.poi.hssf.record;
 
 import java.util.Arrays;
 
+import org.apache.commons.codec.Charsets;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.LittleEndianOutput;
 import org.apache.poi.util.StringUtil;
@@ -68,7 +69,7 @@ public final class WriteAccessRecord extends StandardRecord {
 			LittleEndian.putUShort(data, 0, nChars);
 			LittleEndian.putByte(data, 2, is16BitFlag);
 			in.readFully(data, 3, data.length-3);
-			String rawValue = new String(data);
+			String rawValue = new String(data, Charsets.UTF_8);
 			setUsername(rawValue.trim());
 			return;
 		}

@@ -22,7 +22,7 @@ import org.apache.poi.util.LittleEndian;
 @Internal
 final class Array
 {
-    static final class ArrayDimension
+	private static final class ArrayDimension
     {
         static final int SIZE = 8;
 
@@ -36,7 +36,7 @@ final class Array
         }
     }
 
-    static final class ArrayHeader
+    private static final class ArrayHeader
     {
         private ArrayDimension[] _dimensions;
         private int _type;
@@ -78,14 +78,7 @@ final class Array
             return LittleEndian.INT_SIZE * 2 + _dimensions.length
                     * ArrayDimension.SIZE;
         }
-
-        int getType()
-        {
-            return _type;
-        }
     }
-
-    private ArrayHeader _header;
 
     Array()
     {
@@ -100,7 +93,7 @@ final class Array
     {
         int offset = startOffset;
 
-        _header = new ArrayHeader( data, offset );
+        final ArrayHeader _header = new ArrayHeader( data, offset );
         offset += _header.getSize();
 
         long numberOfScalarsLong = _header.getNumberOfScalarValues();
@@ -114,18 +107,17 @@ final class Array
         final int type = _header._type;
         if ( type == Variant.VT_VARIANT )
         {
+            final TypedPropertyValue typedPropertyValue = new TypedPropertyValue();
             for ( int i = 0; i < numberOfScalars; i++ )
             {
-                TypedPropertyValue typedPropertyValue = new TypedPropertyValue();
                 offset += typedPropertyValue.read( data, offset );
             }
         }
         else
         {
+            final TypedPropertyValue typedPropertyValue = new TypedPropertyValue(type, null );
             for ( int i = 0; i < numberOfScalars; i++ )
             {
-                TypedPropertyValue typedPropertyValue = new TypedPropertyValue(
-                        type, null );
                 offset += typedPropertyValue.readValuePadded( data, offset );
             }
         }

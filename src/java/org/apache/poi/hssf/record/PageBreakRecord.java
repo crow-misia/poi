@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.util.ArrayUtil;
+import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**
@@ -62,7 +63,7 @@ public abstract class PageBreakRecord extends StandardRecord {
             this.subTo = subTo;
         }
 
-        public Break(RecordInputStream in) {
+        public Break(LittleEndianInput in) {
             main = in.readUShort() - 1;
             subFrom = in.readUShort();
             subTo = in.readUShort();
@@ -80,7 +81,7 @@ public abstract class PageBreakRecord extends StandardRecord {
         _breakMap = new HashMap<>();
     }
 
-    public PageBreakRecord(RecordInputStream in)
+    public PageBreakRecord(LittleEndianInput in)
     {
         int nBreaks = in.readShort();
         _breaks = new ArrayList<>(nBreaks + 2);

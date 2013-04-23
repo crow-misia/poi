@@ -19,6 +19,8 @@ package org.apache.poi.hssf.record;
 
 import java.util.Iterator;
 
+import org.apache.poi.util.LittleEndianInput;
+
 /**
  * VerticalPageBreak (0x001A) record that stores page breaks at columns<p/>
  * 
@@ -39,7 +41,7 @@ public final class VerticalPageBreakRecord extends PageBreakRecord {
 	/**
 	 * @param in the RecordInputstream to read the record from
 	 */
-	public VerticalPageBreakRecord(RecordInputStream in) {
+	public VerticalPageBreakRecord(LittleEndianInput in) {
 		super(in);
 	}
 
@@ -49,9 +51,9 @@ public final class VerticalPageBreakRecord extends PageBreakRecord {
 
 	public Object clone() {
 		PageBreakRecord result = new VerticalPageBreakRecord();
-		Iterator iterator = getBreaksIterator();
+		Iterator<Break> iterator = getBreaksIterator();
 		while (iterator.hasNext()) {
-			Break original = (Break) iterator.next();
+			Break original = iterator.next();
 			result.addBreak(original.main, original.subFrom, original.subTo);
 		}
 		return result;

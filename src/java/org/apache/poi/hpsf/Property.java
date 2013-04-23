@@ -194,7 +194,7 @@ public class Property
      * @throws UnsupportedEncodingException if the dictionary's codepage is not
      *         (yet) supported.
      */
-    protected Map<?, ?> readDictionary(final byte[] src, final long offset,
+    protected final Map<?, ?> readDictionary(final byte[] src, final long offset,
                                  final int length, final int codepage)
     throws UnsupportedEncodingException
     {
@@ -394,9 +394,7 @@ public class Property
         hashCode += type;
         if (value != null)
             hashCode += value.hashCode();
-        final int returnHashCode = (int) (hashCode & 0x0ffffffffL );
-        return returnHashCode;
-
+        return (int) (hashCode & 0x0ffffffffL );
     }
 
 

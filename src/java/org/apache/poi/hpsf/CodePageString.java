@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.poi.util.CodePageUtil;
+import org.apache.commons.codec.Charsets;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
@@ -64,7 +65,7 @@ final class CodePageString
     {
         String result;
         if ( codepage == -1 )
-            result = new String( _value );
+            result = new String( _value, Charsets.UTF_8 );
         else
             result = CodePageUtil.getStringFromCodePage(_value, codepage);
         final int terminator = result.indexOf( '\0' );
@@ -96,7 +97,7 @@ final class CodePageString
     {
         String stringNT = string + "\0";
         if ( codepage == -1 )
-            _value = stringNT.getBytes();
+            _value = stringNT.getBytes(Charsets.UTF_8);
         else
             _value = CodePageUtil.getBytesInCodePage(stringNT, codepage);
     }

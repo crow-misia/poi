@@ -61,10 +61,9 @@ public class PropertySetFactory
         {
             if (ps.isSummaryInformation())
                 return new SummaryInformation(ps);
-            else if (ps.isDocumentSummaryInformation())
+            if (ps.isDocumentSummaryInformation())
                 return new DocumentSummaryInformation(ps);
-            else
-                return ps;
+            return ps;
         }
         catch (UnexpectedPropertySetTypeException ex)
         {
