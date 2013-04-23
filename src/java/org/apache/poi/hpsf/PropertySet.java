@@ -465,7 +465,7 @@ public class PropertySet
      */
     public boolean isSummaryInformation()
     {
-        if (sections.size() <= 0)
+        if (sections.isEmpty())
             return false;
         return Util.equal(sections.get(0).getFormatID().getBytes(),
                           SectionIDMap.SUMMARY_INFORMATION_ID);
@@ -482,7 +482,7 @@ public class PropertySet
      */
     public boolean isDocumentSummaryInformation()
     {
-        if (sections.size() <= 0)
+        if (sections.isEmpty())
             return false;
         return Util.equal(sections.get(0).getFormatID().getBytes(),
                           SectionIDMap.DOCUMENT_SUMMARY_INFORMATION_ID[0]);

@@ -20,6 +20,7 @@ package org.apache.poi.hssf.record;
 import org.apache.poi.util.BitField;
 import org.apache.poi.util.BitFieldFactory;
 import org.apache.poi.util.HexDump;
+import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**
@@ -39,7 +40,7 @@ public final class WindowProtectRecord extends StandardRecord {
         _options = options;
     }
 
-    public WindowProtectRecord(RecordInputStream in) {
+    public WindowProtectRecord(LittleEndianInput in) {
         this(in.readUShort());
     }
 

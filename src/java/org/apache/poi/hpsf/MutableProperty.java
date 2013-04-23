@@ -62,7 +62,7 @@ public class MutableProperty extends Property
      *
      * @param id the ID
      */
-    public void setID(final long id)
+    public final void setID(final long id)
     {
         this.id = id;
     }
@@ -74,7 +74,7 @@ public class MutableProperty extends Property
      *
      * @param type the property's type
      */
-    public void setType(final long type)
+    public final void setType(final long type)
     {
         this.type = type;
     }
@@ -86,7 +86,7 @@ public class MutableProperty extends Property
      *
      * @param value the property's value
      */
-    public void setValue(final Object value)
+    public final void setValue(final Object value)
     {
         this.value = value;
     }
