@@ -17,6 +17,7 @@
 
 package org.apache.poi.hssf.record;
 
+import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**
@@ -36,7 +37,7 @@ public final class VCenterRecord extends StandardRecord {
     {
     }
 
-    public VCenterRecord(RecordInputStream in)
+    public VCenterRecord(LittleEndianInput in)
     {
         field_1_vcenter = in.readShort();
     }

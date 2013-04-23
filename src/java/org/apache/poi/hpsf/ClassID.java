@@ -17,6 +17,7 @@
 
 package org.apache.poi.hpsf;
 
+import org.apache.commons.codec.Charsets;
 import org.apache.poi.util.HexDump;
 
 /**
@@ -35,7 +36,7 @@ public final class ClassID
      * <p>The bytes making out the class ID in correct order,
      * i.e. big-endian.</p>
      */
-    protected byte[] bytes;
+    private byte[] bytes;
 
 
 
@@ -212,7 +213,7 @@ public final class ClassID
      */
     public int hashCode()
     {
-        return new String(bytes).hashCode();
+        return new String(bytes,Charsets.UTF_8).hashCode();
     }
 
 

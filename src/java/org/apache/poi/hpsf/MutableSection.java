@@ -38,7 +38,7 @@ import org.apache.poi.util.LittleEndian;
  * <p>Please be aware that this class' functionality will be merged into the
  * {@link Section} class at a later time, so the API will change.</p>
  */
-public class MutableSection extends Section
+public final class MutableSection extends Section
 {
     /**
      * <p>If the "dirty" flag is true, the section's size must be
@@ -484,8 +484,7 @@ public class MutableSection extends Section
         /* Write the properties: */
         out.write(pb2);
 
-        int streamLength = LittleEndian.INT_SIZE * 2 + pb1.length + pb2.length;
-        return streamLength;
+        return LittleEndian.INT_SIZE * 2 + pb1.length + pb2.length;
     }
 
 
