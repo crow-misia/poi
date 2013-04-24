@@ -30,7 +30,7 @@ import java.io.*;
  * @author Marc Johnson (mjohnson at apache dot org
  */
 
-public class IntegerField
+public final class IntegerField
     implements FixedField
 {
     private int       _value;

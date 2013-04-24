@@ -32,7 +32,6 @@ public final class AllSSUtilTests {
 		result.addTestSuite(TestExpandedDouble.class);
 		result.addTestSuite(TestNumberComparer.class);
 		result.addTestSuite(TestNumberToTextConverter.class);
-		result.addTestSuite(TestRegion.class);
 		return result;
 	}
 }

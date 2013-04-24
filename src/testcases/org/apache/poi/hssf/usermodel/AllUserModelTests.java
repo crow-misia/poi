@@ -47,7 +47,6 @@ public class AllUserModelTests {
 		result.addTestSuite(TestHSSFConditionalFormatting.class);
 		result.addTestSuite(TestHSSFDataFormat.class);
 		result.addTestSuite(TestHSSFDataFormatter.class);
-		result.addTestSuite(TestHSSFDateUtil.class);
 		result.addTestSuite(TestHSSFFont.class);
 		result.addTestSuite(TestHSSFFormulaEvaluator.class);
 		result.addTestSuite(TestHSSFHeaderFooter.class);

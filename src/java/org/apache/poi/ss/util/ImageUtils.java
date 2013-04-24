@@ -34,7 +34,7 @@ import java.util.Iterator;
 /**
  * @author Yegor Kozlov
  */
-public class ImageUtils {
+public final class ImageUtils {
     private static final POILogger logger = POILogFactory.getLogger(ImageUtils.class);
 
     public static final int PIXEL_DPI = 96;
@@ -100,9 +100,8 @@ public class ImageUtils {
         int hdpi=96, vdpi=96;
         double mm2inch = 25.4;
 
-        NodeList lst;
         Element node = (Element)r.getImageMetadata(0).getAsTree("javax_imageio_1.0");
-        lst = node.getElementsByTagName("HorizontalPixelSize");
+        NodeList lst = node.getElementsByTagName("HorizontalPixelSize");
         if(lst != null && lst.getLength() == 1) hdpi = (int)(mm2inch/Float.parseFloat(((Element)lst.item(0)).getAttribute("value")));
 
         lst = node.getElementsByTagName("VerticalPixelSize");

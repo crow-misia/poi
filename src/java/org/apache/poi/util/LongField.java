@@ -30,7 +30,7 @@ import java.io.*;
  * @author Marc Johnson (mjohnson at apache dot org
  */
 
-public class LongField
+public final class LongField
     implements FixedField
 {
     private long      _value;

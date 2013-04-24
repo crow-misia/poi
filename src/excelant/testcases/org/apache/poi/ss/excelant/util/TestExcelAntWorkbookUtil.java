@@ -27,17 +27,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class TestExcelAntWorkbookUtil extends TestCase {
 	
-	private final String mortgageCalculatorFileName =
+	private static final String mortgageCalculatorFileName =
 		                                  "test-data/spreadsheet/excelant.xls" ;
-	private ExcelAntWorkbookUtilTestHelper fixture ;
-		
-	
-	public void tearDown() {
-		fixture = null ;
-	}
 
 	public void testStringConstructor() {
-		fixture = new ExcelAntWorkbookUtilTestHelper( 
+		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
 				                                  mortgageCalculatorFileName ) ;
 		
 		assertNotNull( fixture ) ;
@@ -45,7 +39,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 	}
 	
 	public void testAddFunction() {
-		fixture = new ExcelAntWorkbookUtilTestHelper( 
+		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
                 mortgageCalculatorFileName ) ;
 
 		assertNotNull( fixture ) ;
@@ -58,7 +52,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 	}
 
 	public void testGetWorkbook() {
-		fixture = new ExcelAntWorkbookUtilTestHelper( 
+		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
                 mortgageCalculatorFileName ) ;
 		
 		assertNotNull( fixture ) ;
@@ -69,7 +63,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 	}
 	
 	public void testFileName() {
-		fixture = new ExcelAntWorkbookUtilTestHelper( 
+		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
                 mortgageCalculatorFileName ) ;
 		
 		assertNotNull( fixture ) ;
@@ -83,7 +77,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 	}
 	
 	public void testGetEvaluator() {
-		fixture = new ExcelAntWorkbookUtilTestHelper( 
+		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
                 mortgageCalculatorFileName ) ;
 		
 		FormulaEvaluator evaluator = fixture.getEvaluator( 
@@ -99,7 +93,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 		double expectedValue = 790.79 ;
 		double precision = 0.1 ;
 
-		fixture = new ExcelAntWorkbookUtilTestHelper( 
+		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
                 mortgageCalculatorFileName ) ;
 
 		ExcelAntEvaluationResult result = fixture.evaluateCell( cell, 
@@ -112,7 +106,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 	}
 	
 	public void testGetSheets() {
-		fixture = new ExcelAntWorkbookUtilTestHelper( 
+		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
                 mortgageCalculatorFileName ) ;
 		
 		List<String> sheets = fixture.getSheets() ;
@@ -125,7 +119,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 		String cell = "'MortgageCalculator'!C14" ;
 		String cellValue = "testString" ;
 		
-		fixture = new ExcelAntWorkbookUtilTestHelper( 
+		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
                 mortgageCalculatorFileName ) ;
 		
 		fixture.setStringValue( cell, cellValue ) ;

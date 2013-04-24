@@ -23,7 +23,7 @@ import org.apache.poi.ddf.*;
 import org.apache.poi.hssf.model.DrawingManager2;
 import org.apache.poi.hssf.record.EscherAggregate;
 import org.apache.poi.hssf.record.NoteRecord;
-import org.apache.poi.hssf.util.CellReference;
+import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.ss.usermodel.Chart;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;

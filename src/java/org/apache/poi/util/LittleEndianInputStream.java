@@ -29,7 +29,7 @@ import java.io.InputStream;
  *
  * @author Josh Micich
  */
-public class LittleEndianInputStream extends FilterInputStream implements LittleEndianInput {
+public final class LittleEndianInputStream extends FilterInputStream implements LittleEndianInput {
 	public LittleEndianInputStream(InputStream is) {
 		super(is);
 	}

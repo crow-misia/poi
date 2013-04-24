@@ -27,7 +27,7 @@ import junit.framework.TestCase;
 import org.apache.poi.ss.formula.eval.BoolEval;
 import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.ss.usermodel.DateUtil;
 
 /**
  * @author Josh Micich
@@ -149,7 +149,7 @@ public final class TestDays360 extends TestCase {
 		return new Days360().evaluate(args, -1, -1);
 	}
 	private static NumberEval convert(Date d) {
-		return new NumberEval(HSSFDateUtil.getExcelDate(d));
+		return new NumberEval(DateUtil.getExcelDate(d));
 	}
 }
 

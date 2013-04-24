@@ -86,8 +86,7 @@ public class HSSFColor implements Color {
             result.put(index1, color);
         }
 
-        for (int i = 0; i < colors.length; i++) {
-            HSSFColor color = colors[i];
+        for (final HSSFColor color : colors) {
             Integer index2 = getIndex2(color);
             if (index2 == null) {
                 // most colors don't have a second index
@@ -119,9 +118,7 @@ public class HSSFColor implements Color {
         Short s;
         try {
             s = (Short) f.get(color);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
         return Integer.valueOf(s.intValue());
@@ -192,7 +189,7 @@ public class HSSFColor implements Color {
      * @return  triplet representation like that in Excel
      */
 
-    public short [] getTriplet()
+    public short[] getTriplet()
     {
         return BLACK.triplet;
     }
@@ -228,7 +225,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -259,7 +256,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -290,7 +287,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -321,7 +318,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -352,7 +349,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -384,7 +381,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -415,7 +412,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -446,7 +443,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -478,7 +475,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -509,7 +506,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -540,7 +537,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -571,7 +568,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -603,7 +600,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -635,7 +632,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -666,7 +663,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -697,7 +694,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -728,7 +725,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -759,7 +756,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -790,7 +787,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -821,7 +818,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -852,7 +849,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -883,7 +880,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -915,7 +912,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -946,7 +943,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -978,7 +975,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1009,7 +1006,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1041,7 +1038,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1078,7 +1075,7 @@ public class HSSFColor implements Color {
             return hexString;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1105,7 +1102,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1136,7 +1133,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1168,7 +1165,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1199,7 +1196,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1230,7 +1227,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1261,7 +1258,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1292,7 +1289,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1323,7 +1320,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1355,7 +1352,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1386,7 +1383,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1417,7 +1414,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1448,7 +1445,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1477,7 +1474,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1507,7 +1504,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1536,7 +1533,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1565,7 +1562,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1594,7 +1591,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1623,7 +1620,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1652,7 +1649,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return triplet;
         }
@@ -1682,7 +1679,7 @@ public class HSSFColor implements Color {
             return index;
         }
 
-        public short [] getTriplet()
+        public short[] getTriplet()
         {
             return BLACK.triplet;
         }

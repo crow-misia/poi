@@ -18,12 +18,13 @@
 package org.apache.poi.util;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.poi.util.list.ByteArrayList;
+import org.apache.commons.codec.Charsets;
 
 /**
  * Utilities to read hex from files.
@@ -32,7 +33,7 @@ import org.apache.poi.util.list.ByteArrayList;
  * @author Marc Johnson
  * @author Glen Stampoultzis (glens at apache.org)
  */
-public class HexRead
+public final class HexRead
 {
     /**
      * This method reads hex data from a filename and returns a byte array.
@@ -103,7 +104,7 @@ public class HexRead
     {
         int characterCount = 0;
         byte b = (byte) 0;
-        final ByteArrayList bytes = new ByteArrayList();
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         boolean done = false;
         while ( !done )
         {
@@ -122,7 +123,7 @@ public class HexRead
                     characterCount++;
                     if ( characterCount == 2 )
                     {
-                        bytes.add( b );
+                        bytes.write( b );
                         characterCount = 0;
                         b = (byte) 0;
                     }
@@ -145,7 +146,7 @@ public class HexRead
                     characterCount++;
                     if ( characterCount == 2 )
                     {
-                        bytes.add( b );
+                        bytes.write( b );
                         characterCount = 0;
                         b = (byte) 0;
                     }
@@ -157,12 +158,12 @@ public class HexRead
                     break;
             }
         }
-        return bytes.toArray();
+        return bytes.toByteArray();
     }
 
     static public byte[] readFromString(String data) {
         try {
-            return readData(new ByteArrayInputStream( data.getBytes() ), -1);
+            return readData(new ByteArrayInputStream( data.getBytes(Charsets.UTF_8) ), -1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

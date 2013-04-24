@@ -37,15 +37,15 @@ import org.apache.poi.util.LittleEndianOutput;
  * 
  * @author Dragos Buleandra (dragos.buleandra@trade2b.ro)
  */
-public class CellRangeAddressList {
+public final class CellRangeAddressList {
 
 	/**
 	 * List of <tt>CellRangeAddress</tt>es. Each structure represents a cell range
 	 */
-	protected final List _list;
+	protected final List<CellRangeAddress> _list;
 
 	public CellRangeAddressList() {
-		_list = new ArrayList();
+		_list = new ArrayList<>();
 	}
 	/**
 	 * Convenience constructor for creating a <tt>CellRangeAddressList</tt> with a single 

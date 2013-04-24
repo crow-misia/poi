@@ -19,14 +19,17 @@ package org.apache.poi.ss.excelant.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.formula.functions.FreeRefFunction;
 import org.apache.poi.ss.formula.udf.AggregatingUDFFinder;
 import org.apache.poi.ss.formula.udf.DefaultUDFFinder;
@@ -54,13 +57,13 @@ import org.apache.tools.ant.taskdefs.Typedef;
  * @author Brian Bush ( brian [dot] bush [at] nrel [dot] gov )
  * 
  */
-public class ExcelAntWorkbookUtil extends Typedef {
+public final class ExcelAntWorkbookUtil extends Typedef {
 
     private String excelFileName;
 
     private Workbook workbook;
 
-    private HashMap<String, FreeRefFunction> xlsMacroList;
+    private final Map<String, FreeRefFunction> xlsMacroList;
     
     /**
      * Constructs an instance using a String that contains the fully qualified
@@ -93,10 +96,9 @@ public class ExcelAntWorkbookUtil extends Typedef {
     private Workbook loadWorkbook() {
 
         File workbookFile = new File(excelFileName);
-        try {
-            FileInputStream fis = new FileInputStream(workbookFile);
+        try (final FileInputStream fis = new FileInputStream(workbookFile)) {
             workbook = WorkbookFactory.create(fis);
-        } catch(Exception e) {
+        } catch (final IOException | InvalidFormatException e) {
             throw new BuildException("Cannot load file " + excelFileName
                     + ". Make sure the path and file permissions are correct.", e);
         }
@@ -113,8 +115,8 @@ public class ExcelAntWorkbookUtil extends Typedef {
      * @throws IllegalAccessException
      */
     public void addFunction( String name, String clazzName ) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Class clazzInst = Class.forName( clazzName ) ;
-        Object newInst = clazzInst.newInstance() ;
+        final Class<?> clazzInst = Class.forName( clazzName ) ;
+        final Object newInst = clazzInst.newInstance() ;
         if( newInst instanceof FreeRefFunction ) {
             addFunction( name, (FreeRefFunction)newInst ) ;
         }
@@ -152,9 +154,7 @@ public class ExcelAntWorkbookUtil extends Typedef {
         }
 
         UDFFinder udff1 = new DefaultUDFFinder(names, functions);
-        UDFFinder udff = new AggregatingUDFFinder(udff1);
-
-        return udff;
+        return new AggregatingUDFFinder(udff1);
 
     }
     

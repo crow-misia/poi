@@ -62,7 +62,7 @@ public final class WindowOneRecord extends StandardRecord {
     {
     }
 
-    public WindowOneRecord(LittleEndianInput in)
+    public WindowOneRecord(RecordInputStream in)
     {
         field_1_h_hold            = in.readShort();
         field_2_v_hold            = in.readShort();
