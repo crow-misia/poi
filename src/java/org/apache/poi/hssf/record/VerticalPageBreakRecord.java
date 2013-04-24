@@ -41,7 +41,7 @@ public final class VerticalPageBreakRecord extends PageBreakRecord {
 	/**
 	 * @param in the RecordInputstream to read the record from
 	 */
-	public VerticalPageBreakRecord(LittleEndianInput in) {
+	public VerticalPageBreakRecord(RecordInputStream in) {
 		super(in);
 	}
 

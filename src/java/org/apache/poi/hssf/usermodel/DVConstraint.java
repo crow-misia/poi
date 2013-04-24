@@ -22,12 +22,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.poi.hssf.model.HSSFFormulaParser;
+import org.apache.poi.ss.formula.FormulaType;
 import org.apache.poi.ss.formula.ptg.NumberPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.ptg.StringPtg;
-import org.apache.poi.ss.formula.FormulaType;
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
-import org.apache.poi.util.ArrayUtil;
+import org.apache.poi.ss.usermodel.DateUtil;
 
 /**
  * 
@@ -51,10 +51,6 @@ public class DVConstraint implements DataValidationConstraint {
 		}
 		
 	}
-	
-	// convenient access to ValidationType namespace
-	private static final ValidationType VT = null;
-
 	
 	private final int _validationType;
 	private int _operator;
@@ -159,7 +155,7 @@ public class DVConstraint implements DataValidationConstraint {
 		// formula2 and value2 are mutually exclusive
 		String formula2 = getFormulaFromTextExpression(expr2);
 		Double value2 = formula2 == null ? convertTime(expr2) : null;
-		return new DVConstraint(VT.TIME, comparisonOperator, formula1, formula2, value1, value2, null);
+		return new DVConstraint(ValidationType.TIME, comparisonOperator, formula1, formula2, value1, value2, null);
 	}
 	
 	/**
@@ -189,7 +185,7 @@ public class DVConstraint implements DataValidationConstraint {
 		// formula2 and value2 are mutually exclusive
 		String formula2 = getFormulaFromTextExpression(expr2);
 		Double value2 = formula2 == null ? convertDate(expr2, df) : null;
-		return new DVConstraint(VT.DATE, comparisonOperator, formula1, formula2, value1, value2, null);
+		return new DVConstraint(ValidationType.DATE, comparisonOperator, formula1, formula2, value1, value2, null);
 	}
 	
 	/**
@@ -239,7 +235,7 @@ public class DVConstraint implements DataValidationConstraint {
 		if (timeStr == null) {
 			return null;
 		}
-		return Double.valueOf(HSSFDateUtil.convertTime(timeStr));
+		return Double.valueOf(DateUtil.convertTime(timeStr));
 	}
 	/**
 	 * @param dateFormat pass <code>null</code> for default YYYYMMDD
@@ -251,7 +247,7 @@ public class DVConstraint implements DataValidationConstraint {
 		}
 		Date dateVal; 
 		if (dateFormat == null) {
-			dateVal = HSSFDateUtil.parseYYYYMMDDDate(dateStr);
+			dateVal = DateUtil.parseYYYYMMDDDate(dateStr);
 		} else {
 			try {
 				dateVal = dateFormat.parse(dateStr);
@@ -260,14 +256,14 @@ public class DVConstraint implements DataValidationConstraint {
 						+ "' using specified format '" + dateFormat + "'", e);
 			}
 		}
-		return Double.valueOf(HSSFDateUtil.getExcelDate(dateVal));
+		return Double.valueOf(DateUtil.getExcelDate(dateVal));
 	}
 
 	public static DVConstraint createCustomFormulaConstraint(String formula) {
 		if (formula == null) {
 			throw new IllegalArgumentException("formula must be supplied");
 		}
-		return new DVConstraint(VT.FORMULA, OperatorType.IGNORED, formula, null, null, null, null);
+		return new DVConstraint(ValidationType.FORMULA, OperatorType.IGNORED, formula, null, null, null, null);
 	}
 	
 	/* (non-Javadoc)
@@ -281,14 +277,14 @@ public class DVConstraint implements DataValidationConstraint {
 	 * @return <code>true</code> if this constraint is a 'list' validation
 	 */
 	public boolean isListValidationType() {
-		return _validationType == VT.LIST;
+		return _validationType == ValidationType.LIST;
 	}
 	/**
 	 * Convenience method
 	 * @return <code>true</code> if this constraint is a 'list' validation with explicit values
 	 */
 	public boolean isExplicitList() {
-		return _validationType == VT.LIST && _explicitListValues != null;
+		return _validationType == ValidationType.LIST && _explicitListValues != null;
 	}
 	/* (non-Javadoc)
 	 * @see org.apache.poi.hssf.usermodel.DataValidationConstraint#getOperator()
@@ -313,7 +309,7 @@ public class DVConstraint implements DataValidationConstraint {
 	 * @see org.apache.poi.hssf.usermodel.DataValidationConstraint#setExplicitListValues(java.lang.String[])
 	 */
 	public void setExplicitListValues(String[] explicitListValues) {
-		if (_validationType != VT.LIST) {
+		if (_validationType != ValidationType.LIST) {
 			throw new RuntimeException("Cannot setExplicitListValues on non-list constraint");
 		}
 		_formula1 = null;

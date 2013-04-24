@@ -40,7 +40,7 @@ public final class WindowProtectRecord extends StandardRecord {
         _options = options;
     }
 
-    public WindowProtectRecord(LittleEndianInput in) {
+    public WindowProtectRecord(RecordInputStream in) {
         this(in.readUShort());
     }
 

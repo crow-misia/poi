@@ -18,7 +18,8 @@
 
 package org.apache.poi.util;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Returns immutable Btfield instances.
@@ -26,8 +27,8 @@ import java.util.*;
  * @author Jason Height (jheight at apache dot org)
  */
 
-public class BitFieldFactory {
-    private static Map instances = new HashMap();
+public final class BitFieldFactory {
+    private static Map<Integer, BitField> instances = new HashMap<>();
 
     public static BitField getInstance(int mask) {
       BitField f = (BitField)instances.get(Integer.valueOf(mask));

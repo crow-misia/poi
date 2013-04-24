@@ -27,12 +27,12 @@ import java.util.Map;
  * @author Andrew C. Oliver (acoliver at apache dot org)
  *
  */
-public class SheetReferences
+public final class SheetReferences
 {
-    Map map;
+    private final Map<Integer, String> map;
     public SheetReferences()
     {
-      map = new HashMap(5);
+      map = new HashMap<>(5);
     }
 
     public void addSheetReference(String sheetName, int number) {
@@ -40,6 +40,6 @@ public class SheetReferences
     }
 
     public String getSheetName(int number) {
-       return (String)map.get(Integer.valueOf(number));
+       return map.get(Integer.valueOf(number));
     }
 }
