@@ -26,8 +26,11 @@ import java.util.Map;
 import org.apache.poi.util.Internal;
 
 @Internal
-public class EntryUtils
+public final class EntryUtils
 {
+    private EntryUtils() {
+        // nop.
+    }
 
     /**
      * Copies an Entry into a target POIFS directory, recursively

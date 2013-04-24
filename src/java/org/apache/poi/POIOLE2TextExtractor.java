@@ -66,15 +66,4 @@ public abstract class POIOLE2TextExtractor extends POITextExtractor {
     {
         return document.directory;
     }
-
-    /**
-     * Return the underlying POIFS FileSystem of this document.
-     *
-     * @deprecated Use {@link #getRoot()} instead
-     */
-    @Deprecated
-    public POIFSFileSystem getFileSystem()
-    {
-        return document.directory.getFileSystem();
-    }
 }

@@ -57,11 +57,11 @@ public final class PAPFormattedDiskPage extends FormattedDiskPage
      */
     public byte[] getGrpprl(int index)
     {
-        int papxOffset = 2 * LittleEndian.getUnsignedByte(_fkp, ((_crun + 1) * 4) + (index * 13));
-        int size = 2 * LittleEndian.getUnsignedByte(_fkp, papxOffset);
+        int papxOffset = 2 * LittleEndian.getUByte(_fkp, ((_crun + 1) * 4) + (index * 13));
+        int size = 2 * LittleEndian.getUByte(_fkp, papxOffset);
         if(size == 0)
         {
-            size = 2 * LittleEndian.getUnsignedByte(_fkp, ++papxOffset);
+            size = 2 * LittleEndian.getUByte(_fkp, ++papxOffset);
         }
         else
         {

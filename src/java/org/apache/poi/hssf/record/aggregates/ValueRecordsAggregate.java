@@ -17,9 +17,7 @@
 
 package org.apache.poi.hssf.record.aggregates;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.poi.hssf.model.RecordStream;
 import org.apache.poi.hssf.record.BlankRecord;
@@ -357,33 +355,6 @@ public final class ValueRecordsAggregate implements Iterable<CellValueRecordInte
 	/** value iterator */
 	public Iterator<CellValueRecordInterface> iterator() {
 		return new ValueIterator();
-	}
-
-	/**
-	 * Gets all the cell records contained in this aggregate. 
-	 * Note {@link BlankRecord}s appear separate (not in {@link MulBlankRecord}s).
-	 * @deprecated use {@link #iterator()} instead
-	 */
-	@Deprecated
-	public CellValueRecordInterface[] getValueRecords() {
-		List<CellValueRecordInterface> temp = new ArrayList<>();
-
-		for (int rowIx = 0; rowIx < records.length; rowIx++) {
-			CellValueRecordInterface[] rowCells = records[rowIx];
-			if (rowCells == null) {
-				continue;
-			}
-			for (int colIx = 0; colIx < rowCells.length; colIx++) {
-				CellValueRecordInterface cell = rowCells[colIx];
-				if (cell != null) {
-					temp.add(cell);
-				}
-			}
-		}
-
-		CellValueRecordInterface[] result = new CellValueRecordInterface[temp.size()];
-		temp.toArray(result);
-		return result;
 	}
 
 	public Object clone() {

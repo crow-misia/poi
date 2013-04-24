@@ -326,9 +326,6 @@ public final class RecordFactoryInputStream {
 			ContinueRecord contRec = (ContinueRecord) record;
 
 			if (_lastRecord instanceof ObjRecord || _lastRecord instanceof TextObjectRecord) {
-				// Drawing records have a very strange continue behaviour.
-				//There can actually be OBJ records mixed between the continues.
-				_lastDrawingRecord.processContinueRecord(contRec.getData());
 				//we must remember the position of the continue record.
 				//in the serialization procedure the original structure of records must be preserved
 				if (_shouldIncludeContinueRecords) {

@@ -121,14 +121,13 @@ public final class Table extends ShapeGroup {
         List<EscherRecord> lst = spCont.getChildRecords();
         EscherOptRecord opt = (EscherOptRecord)lst.get(lst.size()-2);
         EscherArrayProperty p = (EscherArrayProperty)opt.getEscherProperty(1);
-        for (int i = 0; i < cells.length; i++) {
+        for (int i = 0, n = cells.length; i < n; i++) {
             TableCell cell = cells[i][0];
             int rowHeight = cell.getAnchor().height*MASTER_DPI/POINT_DPI;
             byte[] val = new byte[4];
-            LittleEndian.putInt(val, rowHeight);
+            LittleEndian.putInt(val, 0, rowHeight);
             p.setElement(i, val);
-            for (int j = 0; j < cells[i].length; j++) {
-                TableCell c = cells[i][j];
+            for (final TableCell c : cells[i]) {
                 addShape(c);
 
                 Line bt = c.getBorderTop();

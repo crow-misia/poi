@@ -59,7 +59,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
         escherRecords = new ArrayList<>();
         if ( DESERIALISE )
         {
-            byte[] data = in.readAllContinuedRemainder();
+            byte[] data = in.readRemainder();
             convertToEscherRecords( 0, data.length, data );
         }
         else
