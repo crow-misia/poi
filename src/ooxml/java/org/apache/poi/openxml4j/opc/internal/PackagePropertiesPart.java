@@ -22,7 +22,6 @@ import java.io.OutputStream;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.util.TimeZone;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -42,6 +41,22 @@ import org.apache.poi.util.StringUtil;
  */
 public final class PackagePropertiesPart extends PackagePart implements
 		PackageProperties {
+	private static final ThreadLocal<SimpleDateFormat> DATE_FORMAT = new ThreadLocal<SimpleDateFormat>() {
+		@Override
+		protected SimpleDateFormat initialValue() {
+			final SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+			f.setTimeZone(TimeZone.getTimeZone("UTC"));
+			return f;
+		}
+	};
+	private static final ThreadLocal<SimpleDateFormat> DATE2_FORMAT = new ThreadLocal<SimpleDateFormat>() {
+		@Override
+		protected SimpleDateFormat initialValue() {
+			final SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			f.setTimeZone(TimeZone.getTimeZone("UTC"));
+			return f;
+		}
+	};
 
 	public final static String NAMESPACE_DC_URI = "http://purl.org/dc/elements/1.1/";
 
@@ -389,7 +404,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 		try {
 			this.created = setDateValue(created);
 		} catch (InvalidFormatException e) {
-			new IllegalArgumentException("created  : "
+			throw new IllegalArgumentException("created  : "
 					+ e.getLocalizedMessage());
 		}
 	}
@@ -467,7 +482,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 		try {
 			this.lastPrinted = setDateValue(lastPrinted);
 		} catch (InvalidFormatException e) {
-			new IllegalArgumentException("lastPrinted  : "
+			throw new IllegalArgumentException("lastPrinted  : "
 					+ e.getLocalizedMessage());
 		}
 	}
@@ -491,7 +506,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 		try {
 			this.modified = setDateValue(modified);
 		} catch (InvalidFormatException e) {
-			new IllegalArgumentException("modified  : "
+			throw new IllegalArgumentException("modified  : "
 					+ e.getLocalizedMessage());
 		}
 	}
@@ -562,12 +577,14 @@ public final class PackagePropertiesPart extends PackagePart implements
 		if (StringUtil.isEmpty(s)) {
 			return Nullable.empty();
 		}
-		SimpleDateFormat df = new SimpleDateFormat(
-				"yyyy-MM-dd'T'HH:mm:ss'Z'");
-		df.setTimeZone(TimeZone.getTimeZone("UTC"));
+		SimpleDateFormat df = DATE_FORMAT.get();
 		Date d = df.parse(s, new ParsePosition(0));
 		if (d == null) {
-			throw new InvalidFormatException("Date not well formated");
+			df = DATE2_FORMAT.get();
+			d = df.parse(s, new ParsePosition(0));
+			if (d == null) {
+				throw new InvalidFormatException("Date not well formated [" + s + "]");
+			}
 		}
 		return new Nullable<>(d);
 	}
@@ -589,9 +606,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 		   return "";
 		}
 		
-		SimpleDateFormat df = new SimpleDateFormat(
-				"yyyy-MM-dd'T'HH:mm:ss'Z'");
-		df.setTimeZone(TimeZone.getTimeZone("UTC"));
+		SimpleDateFormat df = DATE_FORMAT.get();
 		return df.format(date);
 	}
 
