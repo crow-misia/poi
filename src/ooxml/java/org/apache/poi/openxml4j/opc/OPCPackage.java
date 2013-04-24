@@ -21,7 +21,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -694,8 +693,8 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 						logger.log(POILogger.WARN, "Unmarshall operation : IOException for "
 								+ part._partName);
 						continue;
-					} catch (InvalidOperationException invoe) {
-						throw new InvalidFormatException(invoe.getMessage());
+					} catch (InvalidOperationException e) {
+						throw new InvalidFormatException(e.getMessage());
 					}
 				} else {
 					try {
@@ -1394,14 +1393,9 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 		}
 		
 		// Do the save
-		FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(targetFile);
-		} catch (FileNotFoundException e) {
-			throw new IOException(e.getLocalizedMessage());
+		try (final FileOutputStream fos = new FileOutputStream(targetFile)) {
+			this.save(fos);
 		}
-		this.save(fos);
-		fos.close();
 	}
 
 	/**

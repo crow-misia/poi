@@ -57,8 +57,6 @@ import org.apache.poi.util.POILogFactory;
  * flag "Categories" is not empty, only tests that have at least one category
  * listed in "Categories" are run.
  */
-@SuppressWarnings(
-        {"JUnitTestCaseWithNoTests", "JUnitTestClassNamingConvention"})
 public class CellFormatTestBase extends TestCase {
     private static final POILogger logger = POILogFactory.getLogger(CellFormatTestBase.class);
 
