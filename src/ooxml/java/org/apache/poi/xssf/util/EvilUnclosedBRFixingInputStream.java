@@ -159,7 +159,7 @@ public class EvilUnclosedBRFixingInputStream extends InputStream {
          }
       }
       
-      if(fixAt.size()==0) {
+      if(fixAt.isEmpty()) {
          return read;
       }
       

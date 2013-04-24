@@ -468,8 +468,9 @@ public final class ParagraphSprmUncompressor
 
     for (int x = 0; x < tabPositions.length; x++)
     {
-      Integer key = list.get(x);
-      tabPositions[x] = key.intValue();
+      int p = list.get(x);
+      Integer key = Integer.valueOf(p);
+      tabPositions[x] = p;
       if (tabMap.containsKey( key ))
           tabDescriptors[x] = tabMap.get(key);
       else

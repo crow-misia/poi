@@ -448,7 +448,7 @@ public class DataFormatter {
             Excel displays the month instead of minutes."
           */
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         char[] chars = formatStr.toCharArray();
         boolean mIsMonth = true;
         final IntArrayList ms = new IntArrayList();
@@ -488,9 +488,7 @@ public class DataFormatter {
             else if (c == 'm' || c == 'M') {
                 if(mIsMonth) {
                     sb.append('M');
-                    ms.add(
-                            Integer.valueOf(sb.length() -1)
-                    );
+                    ms.add(sb.length() -1);
                 } else {
                     sb.append('m');
                 }
@@ -498,12 +496,14 @@ public class DataFormatter {
             else if (c == 's' || c == 'S') {
                 sb.append('s');
                 // if 'M' precedes 's' it should be minutes ('m')
-                for (int i = 0; i < ms.size(); i++) {
-                    int index = ms.get(i);
-                    if (sb.charAt(index) == 'M') {
-                        sb.replace(index, index+1, "m");
+                ms.iterate(new IntArrayList.Iteratable() {
+                    @Override
+                    public void run(int v) {
+                        if (sb.charAt(v) == 'M') {
+                            sb.replace(v, v+1, "m");
+                        }
                     }
-                }
+                });
                 mIsMonth = true;
                 ms.clear();
             }
@@ -895,12 +895,9 @@ public class DataFormatter {
           srm.invoke(format, roundingMode);
        } catch(NoSuchMethodException e) {
           // Java 1.5
-       } catch(IllegalAccessException iae) {
+       } catch(IllegalAccessException | InvocationTargetException e) {
           // Shouldn't happen
-          throw new RuntimeException("Unable to set rounding mode", iae);
-       } catch(InvocationTargetException ite) {
-          // Shouldn't happen
-          throw new RuntimeException("Unable to set rounding mode", ite);
+          throw new RuntimeException("Unable to set rounding mode", e);
        } catch(SecurityException se) {
           // Not much we can do here
        }
