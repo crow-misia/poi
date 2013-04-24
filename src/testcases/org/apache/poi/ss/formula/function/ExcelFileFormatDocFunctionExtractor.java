@@ -298,7 +298,7 @@ public final class ExcelFileFormatDocFunctionExtractor {
 
 		public void endElement(String namespaceURI, String localName, String name) {
 			String expectedName = (String) _elemNameStack.peek();
-			if(expectedName != name) {
+			if(!expectedName.equals(name)) {
 				throw new RuntimeException("close tag mismatch");
 			}
 			if(matchesPath(0, HEADING_PATH_NAMES)) {
@@ -477,33 +477,25 @@ public final class ExcelFileFormatDocFunctionExtractor {
 			throw new RuntimeException(e);
 		}
 		os = new SimpleAsciiOutputStream(os);
-		PrintStream ps;
-		try {
-			ps = new PrintStream(os, true, "UTF-8");
+		try (final PrintStream ps = new PrintStream(os, true, "UTF-8")) {
+			outputLicenseHeader(ps);
+			Class<?> genClass = ExcelFileFormatDocFunctionExtractor.class;
+			ps.println("# Created by (" + genClass.getName() + ")");
+			// identify the source file
+			ps.print("# from source file '" + SOURCE_DOC_FILE_NAME + "'");
+			ps.println(" (size=" + effDocFile.length() + ", md5=" + getFileMD5(effDocFile) + ")");
+			ps.println("#");
+			ps.println("#Columns: (index, name, minParams, maxParams, returnClass, paramClasses, isVolatile, hasFootnote )");
+			ps.println("");
+			try (final ZipFile zf = new ZipFile(effDocFile)) {
+				InputStream is = zf.getInputStream(zf.getEntry("content.xml"));
+				extractFunctionData(new FunctionDataCollector(ps), is);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 		} catch(UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
-
-		outputLicenseHeader(ps);
-		Class genClass = ExcelFileFormatDocFunctionExtractor.class;
-		ps.println("# Created by (" + genClass.getName() + ")");
-		// identify the source file
-		ps.print("# from source file '" + SOURCE_DOC_FILE_NAME + "'");
-		ps.println(" (size=" + effDocFile.length() + ", md5=" + getFileMD5(effDocFile) + ")");
-		ps.println("#");
-		ps.println("#Columns: (index, name, minParams, maxParams, returnClass, paramClasses, isVolatile, hasFootnote )");
-		ps.println("");
-		try {
-			ZipFile zf = new ZipFile(effDocFile);
-			InputStream is = zf.getInputStream(zf.getEntry("content.xml"));
-			extractFunctionData(new FunctionDataCollector(ps), is);
-			zf.close();
-		} catch (ZipException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		ps.close();
 
 		String canonicalOutputFileName;
 		try {
