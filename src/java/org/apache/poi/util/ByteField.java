@@ -31,7 +31,7 @@ import java.nio.BufferUnderflowException;
  * @author Marc Johnson (mjohnson at apache dot org
  */
 
-public class ByteField
+public final class ByteField
     implements FixedField
 {
     private static final byte _default_value = 0;

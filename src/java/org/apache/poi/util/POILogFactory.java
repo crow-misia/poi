@@ -30,7 +30,7 @@ import java.util.*;
  * @author Nicola Ken Barozzi (nicolaken at apache.org)
  */
 
-public class POILogFactory
+public final class POILogFactory
 {
 
     /**

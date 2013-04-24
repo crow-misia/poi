@@ -21,7 +21,7 @@ package org.apache.poi.hssf.util;
  * Holds information regarding a split plane or freeze plane for a sheet.
  *
  */
-public class PaneInformation
+public final class PaneInformation
 {
 	/** Constant for active pane being the lower right*/
     public static final byte PANE_LOWER_RIGHT = (byte)0;

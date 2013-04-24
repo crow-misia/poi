@@ -25,7 +25,7 @@ import java.util.List;
  * causes significantly more copying, which for a large number of byte arrays can cost
  * a large amount of time.
  */
-public class LazilyConcatenatedByteArray {
+public final class LazilyConcatenatedByteArray {
     private final List<byte[]> arrays = new ArrayList<>(1);
 
     /**
@@ -60,7 +60,8 @@ public class LazilyConcatenatedByteArray {
     public byte[] toArray() {
         if (arrays.isEmpty()) {
             return null;
-        } else if (arrays.size() > 1) {
+        }
+        if (arrays.size() > 1) {
             int totalLength = 0;
             for (byte[] array : arrays) {
                 totalLength += array.length;

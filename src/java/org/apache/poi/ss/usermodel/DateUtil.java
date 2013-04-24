@@ -35,8 +35,8 @@ import java.util.regex.Pattern;
  * @author  Pavel Krupets (pkrupets at palmtreebusiness dot com)
  * @author  Thies Wellpott
  */
-public class DateUtil {
-    protected DateUtil() {
+public final class DateUtil {
+    private DateUtil() {
         // no instances of this class
     }
 
@@ -465,7 +465,7 @@ public class DateUtil {
      * @param  cal the Calendar
      * @exception IllegalArgumentException if date is invalid
      */
-    protected static int absoluteDay(Calendar cal, boolean use1904windowing)
+    public static int absoluteDay(Calendar cal, boolean use1904windowing)
     {
         return cal.get(Calendar.DAY_OF_YEAR)
                + daysInPriorYears(cal.get(Calendar.YEAR), use1904windowing);

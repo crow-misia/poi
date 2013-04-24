@@ -26,6 +26,7 @@ import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.hssf.model.InternalSheet;
 import org.apache.poi.hssf.record.BOFRecord;
 import org.apache.poi.hssf.record.EOFRecord;
+import org.apache.poi.ss.usermodel.DateUtil;
 
 /**
  * @author Glen Stampoultzis (glens at apache.org)
@@ -43,7 +44,7 @@ public final class TestReadWriteChart extends TestCase {
 
         //System.out.println("first assertion for date");
         assertEquals(new GregorianCalendar(2000, 0, 1, 10, 51, 2).getTime(),
-                     HSSFDateUtil
+                     DateUtil
                          .getJavaDate(firstCell.getNumericCellValue(), false));
         HSSFRow  row  = sheet.createRow(15);
         HSSFCell cell = row.createCell(1);

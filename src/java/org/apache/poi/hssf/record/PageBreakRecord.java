@@ -81,7 +81,7 @@ public abstract class PageBreakRecord extends StandardRecord {
         _breakMap = new HashMap<>();
     }
 
-    public PageBreakRecord(LittleEndianInput in)
+    public PageBreakRecord(RecordInputStream in)
     {
         int nBreaks = in.readShort();
         _breaks = new ArrayList<>(nBreaks + 2);

@@ -30,7 +30,7 @@ import java.io.*;
  * @author Marc Johnson (mjohnson at apache dot org
  */
 
-public class ShortField
+public final class ShortField
     implements FixedField
 {
     private short     _value;

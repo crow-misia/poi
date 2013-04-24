@@ -28,7 +28,7 @@ import junit.framework.TestCase;
  */
 public class TestExcelAntWorkbookUtilFactory extends TestCase{
 
-	private final String mortgageCalculatorWorkbookFile = 
+	private static final String mortgageCalculatorWorkbookFile = 
 		                                 "test-data/spreadsheet/mortgage-calculation.xls" ;
 	
 	

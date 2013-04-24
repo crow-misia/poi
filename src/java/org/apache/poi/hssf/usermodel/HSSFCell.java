@@ -486,7 +486,7 @@ public class HSSFCell implements Cell {
      */
     public void setCellValue(Date value)
     {
-        setCellValue(HSSFDateUtil.getExcelDate(value, _book.getWorkbook().isUsing1904DateWindowing()));
+        setCellValue(DateUtil.getExcelDate(value, _book.getWorkbook().isUsing1904DateWindowing()));
     }
 
     /**
@@ -506,7 +506,7 @@ public class HSSFCell implements Cell {
      */
     public void setCellValue(Calendar value)
     {
-        setCellValue( HSSFDateUtil.getExcelDate(value, _book.getWorkbook().isUsing1904DateWindowing()) );
+        setCellValue( DateUtil.getExcelDate(value, _book.getWorkbook().isUsing1904DateWindowing()) );
     }
 
     /**
@@ -688,9 +688,9 @@ public class HSSFCell implements Cell {
         }
         double value = getNumericCellValue();
         if (_book.getWorkbook().isUsing1904DateWindowing()) {
-            return HSSFDateUtil.getJavaDate(value, true);
+            return DateUtil.getJavaDate(value, true);
         }
-        return HSSFDateUtil.getJavaDate(value, false);
+        return DateUtil.getJavaDate(value, false);
     }
 
     /**
@@ -977,7 +977,7 @@ public class HSSFCell implements Cell {
                 return getCellFormula();
             case CELL_TYPE_NUMERIC:
                 //TODO apply the dataformat for this cell
-                if (HSSFDateUtil.isCellDateFormatted(this)) {
+                if (DateUtil.isCellDateFormatted(this)) {
                     DateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
                     return sdf.format(getDateCellValue());
                 }

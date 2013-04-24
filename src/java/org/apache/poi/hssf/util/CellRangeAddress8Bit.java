@@ -17,8 +17,8 @@
 
 package org.apache.poi.hssf.util;
 
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellRangeAddressBase;
-import org.apache.poi.util.LittleEndianByteArrayOutputStream;
 import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianOutput;
 
@@ -49,13 +49,6 @@ public final class CellRangeAddress8Bit extends CellRangeAddressBase {
 		return in.readUShort();
 	}
 
-	/**
-	 * @deprecated use {@link #serialize(LittleEndianOutput)}
-	 */
-	public int serialize(int offset, byte[] data) {
-		serialize(new LittleEndianByteArrayOutputStream(data, offset, ENCODED_SIZE));
-		return ENCODED_SIZE;
-	}
 	public void serialize(LittleEndianOutput out) {
 		out.writeShort(getFirstRow());
 		out.writeShort(getLastRow());

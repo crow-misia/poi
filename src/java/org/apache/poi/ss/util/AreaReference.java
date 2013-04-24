@@ -17,12 +17,13 @@
 
 package org.apache.poi.ss.util;
 
-import org.apache.poi.ss.SpreadsheetVersion;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
-public class AreaReference {
+import org.apache.poi.ss.SpreadsheetVersion;
+
+public final class AreaReference {
 
     /** The character (!) that separates sheet names from cell references */ 
     private static final char SHEET_NAME_DELIMITER = '!';
@@ -199,14 +200,14 @@ public class AreaReference {
      *  returns an array of contiguous area references.
      */
     public static AreaReference[] generateContiguous(String reference) {
-        ArrayList refs = new ArrayList();
-        StringTokenizer st = new StringTokenizer(reference, ",");
+        final StringTokenizer st = new StringTokenizer(reference, ",");
+        final List<AreaReference> refs = new ArrayList<>(st.countTokens());
         while(st.hasMoreTokens()) {
             refs.add(
                     new AreaReference(st.nextToken())
             );
         }
-        return (AreaReference[])refs.toArray(new AreaReference[refs.size()]);
+        return refs.toArray(new AreaReference[refs.size()]);
     }
 
     /**
@@ -250,14 +251,14 @@ public class AreaReference {
         int maxCol = Math.max(_firstCell.getCol(), _lastCell.getCol());
         String sheetName = _firstCell.getSheetName();
         
-        ArrayList refs = new ArrayList();
+        final List<CellReference> refs = new ArrayList<>(Math.max((maxRow - minRow) * (maxCol - minCol), 1));
         for(int row=minRow; row<=maxRow; row++) {
             for(int col=minCol; col<=maxCol; col++) {
                 CellReference ref = new CellReference(sheetName, row, col, _firstCell.isRowAbsolute(), _firstCell.isColAbsolute());
                 refs.add(ref);
             }
         }
-        return (CellReference[])refs.toArray(new CellReference[refs.size()]);
+        return refs.toArray(new CellReference[refs.size()]);
     }
 
     /**
