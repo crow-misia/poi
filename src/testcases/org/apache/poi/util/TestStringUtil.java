@@ -17,12 +17,11 @@
 
 package org.apache.poi.util;
 
-import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 
-import org.apache.poi.util.StringUtil.StringsIterator;
-
 import junit.framework.TestCase;
+
+import org.apache.poi.util.StringUtil.StringsIterator;
 
 /**
  * Unit test for StringUtil

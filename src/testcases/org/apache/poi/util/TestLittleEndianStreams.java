@@ -17,7 +17,6 @@
 
 package org.apache.poi.util;
 
-import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 
 import junit.framework.AssertionFailedError;
