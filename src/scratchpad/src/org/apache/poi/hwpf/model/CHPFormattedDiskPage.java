@@ -126,7 +126,7 @@ public final class CHPFormattedDiskPage extends FormattedDiskPage
      */
     protected byte[] getGrpprl(int index)
     {
-        int chpxOffset = 2 * LittleEndian.getUnsignedByte(_fkp, _offset + (((_crun + 1) * 4) + index));
+        int chpxOffset = 2 * LittleEndian.getUByte(_fkp, _offset + (((_crun + 1) * 4) + index));
 
         //optimization if offset == 0 use "Normal" style
         if(chpxOffset == 0)
@@ -134,7 +134,7 @@ public final class CHPFormattedDiskPage extends FormattedDiskPage
             return ArrayUtil.EMPTY_BYTE_ARRAY;
         }
 
-        int size = LittleEndian.getUnsignedByte(_fkp, _offset + chpxOffset);
+        int size = LittleEndian.getUByte(_fkp, _offset + chpxOffset);
 
         byte[] chpx = new byte[size];
 

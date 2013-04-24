@@ -48,16 +48,6 @@ public class HSSFFormulaEvaluator implements FormulaEvaluator  {
 	private WorkbookEvaluator _bookEvaluator;
 	private HSSFWorkbook _book;
 
-	/**
-	 * @deprecated (Sep 2008) HSSFSheet parameter is ignored
-	 */
-	public HSSFFormulaEvaluator(HSSFSheet sheet, HSSFWorkbook workbook) {
-		this(workbook);
-		if (false) {
-			sheet.toString(); // suppress unused parameter compiler warning
-		}
-		this._book = workbook;
-	}
 	public HSSFFormulaEvaluator(HSSFWorkbook workbook) {
 		this(workbook, null);
       this._book = workbook;
@@ -102,17 +92,6 @@ public class HSSFFormulaEvaluator implements FormulaEvaluator  {
 			wbEvals[i] = evaluators[i]._bookEvaluator;
 		}
 		CollaboratingWorkbooksEnvironment.setup(workbookNames, wbEvals);
-	}
-
-	/**
-	 * Does nothing
-	 * @deprecated (Aug 2008) - not needed, since the current row can be derived from the cell
-	 */
-	public void setCurrentRow(HSSFRow row) {
-		// do nothing
-		if (false) {
-			row.getClass(); // suppress unused parameter compiler warning
-		}
 	}
 
 	/**

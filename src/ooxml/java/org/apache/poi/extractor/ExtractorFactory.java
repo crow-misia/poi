@@ -192,17 +192,6 @@ public class ExtractorFactory {
 		return (POIOLE2TextExtractor)createExtractor(fs.getRoot());
 	}
 
-    /**
-     * @deprecated Use {@link #createExtractor(DirectoryNode)} instead
-     */
-    @Deprecated
-    @SuppressWarnings("unused")
-    public static POITextExtractor createExtractor(DirectoryNode poifsDir, POIFSFileSystem fs)
-            throws IOException, InvalidFormatException, OpenXML4JException, XmlException
-    {
-        return createExtractor(poifsDir);
-    }
-
     public static POITextExtractor createExtractor(DirectoryNode poifsDir) throws IOException,
             InvalidFormatException, OpenXML4JException, XmlException
     {

@@ -155,18 +155,6 @@ public final class BuiltinFormats {
 		m.add(value);
 	}
 
-
-	/**
-	 * @deprecated (May 2009) use {@link #getAll()}
-	 */
-	public static Map<Integer, String> getBuiltinFormats() {
-		Map<Integer, String> result = new LinkedHashMap<>();
-		for (int i=0; i<_formats.length; i++) {
-			result.put(Integer.valueOf(i), _formats[i]);
-		}
-		return result;
-	}
-
 	/**
 	 * @return array of built-in data formats
 	 */

@@ -149,7 +149,7 @@ public final class SlideListWithText extends RecordContainer {
 	}
 
 	public void setInstance(int inst){
-		LittleEndian.putShort(_header, (short)((inst << 4) | 0xF));
+		LittleEndian.putShort(_header, 0, (short)((inst << 4) | 0xF));
 	}
 
 	/**

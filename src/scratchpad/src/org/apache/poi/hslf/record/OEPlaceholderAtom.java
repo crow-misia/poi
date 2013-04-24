@@ -227,8 +227,8 @@ public final class OEPlaceholderAtom extends RecordAtom{
         offset += _header.length;
 
         placementId = LittleEndian.getInt(source, offset); offset += 4;
-        placeholderId = LittleEndian.getUnsignedByte(source, offset); offset++;
-        placeholderSize = LittleEndian.getUnsignedByte(source, offset); offset++;
+        placeholderId = LittleEndian.getUByte(source, offset); offset++;
+        placeholderSize = LittleEndian.getUByte(source, offset); offset++;
 	}
 
     /**

@@ -121,7 +121,7 @@ public class ExOleObjStg extends RecordAtom implements PositionDependentRecord, 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         //first four bytes is the length of the raw data
         byte[] b = new byte[4];
-        LittleEndian.putInt(b, data.length);
+        LittleEndian.putInt(b, 0, data.length);
         out.write(b);
 
         DeflaterOutputStream def = new DeflaterOutputStream(out);
