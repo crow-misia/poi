@@ -64,13 +64,6 @@ public abstract class POIDocument {
     protected POIDocument(DirectoryNode dir) {
     	this.directory = dir;
     }
-    /**
-     * @deprecated use {@link POIDocument#POIDocument(DirectoryNode)} instead 
-     */
-    @Deprecated
-    protected POIDocument(DirectoryNode dir, POIFSFileSystem fs) {
-       this.directory = dir;
-    }
     protected POIDocument(POIFSFileSystem fs) {
        this(fs.getRoot());
     }
@@ -226,43 +219,4 @@ public abstract class POIDocument {
      * Writes the document out to the specified output stream
      */
     public abstract void write(OutputStream out) throws IOException;
-
-    /**
-     * Copies nodes from one POIFS to the other minus the excepts
-     * @param source is the source POIFS to copy from
-     * @param target is the target POIFS to copy to
-     * @param excepts is a list of Strings specifying what nodes NOT to copy
-     * @deprecated Use {@link EntryUtils#copyNodes(DirectoryEntry, DirectoryEntry, List)} instead
-     */
-    @Deprecated
-    protected void copyNodes( POIFSFileSystem source, POIFSFileSystem target,
-            List<String> excepts ) throws IOException {
-        EntryUtils.copyNodes( source, target, excepts );
-    }
-
-   /**
-    * Copies nodes from one POIFS to the other minus the excepts
-    * @param sourceRoot is the source POIFS to copy from
-    * @param targetRoot is the target POIFS to copy to
-    * @param excepts is a list of Strings specifying what nodes NOT to copy
-    * @deprecated Use {@link EntryUtils#copyNodes(DirectoryEntry, DirectoryEntry, List)} instead
-    */
-    @Deprecated
-    protected void copyNodes( DirectoryNode sourceRoot,
-            DirectoryNode targetRoot, List<String> excepts ) throws IOException
-    {
-        EntryUtils.copyNodes( sourceRoot, targetRoot, excepts );
-    }
-
-    /**
-     * Copies an Entry into a target POIFS directory, recursively
-     * @deprecated Use {@link EntryUtils#copyNodeRecursively(Entry, DirectoryEntry)} instead
-     */
-    @Internal
-    @Deprecated
-    protected void copyNodeRecursively( Entry entry, DirectoryEntry target )
-            throws IOException
-    {
-        EntryUtils.copyNodeRecursively( entry, target );
-    }
 }

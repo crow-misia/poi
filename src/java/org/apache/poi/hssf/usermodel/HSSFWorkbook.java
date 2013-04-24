@@ -46,6 +46,7 @@ import org.apache.poi.hssf.record.aggregates.RecordAggregate.RecordVisitor;
 import org.apache.poi.hssf.record.common.UnicodeString;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.poifs.filesystem.DirectoryNode;
+import org.apache.poi.poifs.filesystem.EntryUtils;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.formula.FormulaShifter;
 import org.apache.poi.ss.formula.FormulaType;
@@ -451,13 +452,6 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         }
         workbook.getWindowOne().setNumSelectedTabs((short)1);
     }
-    /**
-     * deprecated May 2008
-     * @deprecated use setSelectedTab(int)
-     */
-    public void setSelectedTab(short index) {
-        setSelectedTab((int)index);
-    }
     public void setSelectedTabs(int[] indexes) {
 
         for (int i = 0; i < indexes.length; i++) {
@@ -502,14 +496,6 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     public int getActiveSheetIndex() {
         return workbook.getWindowOne().getActiveSheetIndex();
     }
-    /**
-     * deprecated May 2008
-     * @deprecated - Misleading name - use getActiveSheetIndex()
-     */
-    public short getSelectedTab() {
-        return (short) getActiveSheetIndex();
-    }
-
 
     /**
      * sets the first tab that is displayed in the list of tabs
@@ -519,26 +505,12 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     public void setFirstVisibleTab(int index) {
         workbook.getWindowOne().setFirstVisibleTab(index);
     }
-    /**
-     * deprecated May 2008
-     * @deprecated - Misleading name - use setFirstVisibleTab()
-     */
-    public void setDisplayedTab(short index) {
-       setFirstVisibleTab(index);
-    }
 
     /**
      * sets the first tab that is displayed in the list of tabs in excel.
      */
     public int getFirstVisibleTab() {
         return workbook.getWindowOne().getFirstVisibleTab();
-    }
-    /**
-     * deprecated May 2008
-     * @deprecated - Misleading name - use getFirstVisibleTab()
-     */
-    public short getDisplayedTab() {
-        return (short) getFirstVisibleTab();
     }
 
     /**
@@ -620,42 +592,6 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         }
         return -1;
     }
-
-    /**
-     * Returns the external sheet index of the sheet
-     *  with the given internal index, creating one
-     *  if needed.
-     * Used by some of the more obscure formula and
-     *  named range things.
-     * @deprecated for POI internal use only (formula parsing).  This method is likely to
-     * be removed in future versions of POI.
-     */
-    public int getExternalSheetIndex(int internalSheetIndex) {
-        return workbook.checkExternSheet(internalSheetIndex);
-    }
-    /**
-     * @deprecated for POI internal use only (formula rendering).  This method is likely to
-     * be removed in future versions of POI.
-     */
-    public String findSheetNameFromExternSheet(int externSheetIndex){
-        // TODO - don't expose internal ugliness like externSheet indexes to the user model API
-        return workbook.findSheetNameFromExternSheet(externSheetIndex);
-    }
-    /**
-     * @deprecated for POI internal use only (formula rendering).  This method is likely to
-     * be removed in future versions of POI.
-     *
-     * @param refIndex Index to REF entry in EXTERNSHEET record in the Link Table
-     * @param definedNameIndex zero-based to DEFINEDNAME or EXTERNALNAME record
-     * @return the string representation of the defined or external name
-     */
-    public String resolveNameXText(int refIndex, int definedNameIndex) {
-        // TODO - make this less cryptic / move elsewhere
-        return workbook.resolveNameXText(refIndex, definedNameIndex);
-    }
-
-
-
 
     /**
      * create an HSSFSheet for this HSSFWorkbook, adds it to the sheets and returns
@@ -1194,7 +1130,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
             }
 
             // Copy over all the other nodes to our new poifs
-            copyNodes(this.directory, fs.getRoot(), excepts);
+            EntryUtils.copyNodes(this.directory, fs.getRoot(), excepts);
 
             // YK: preserve StorageClsid, it is important for embedded workbooks,
             // see Bugzilla 47920

@@ -125,14 +125,14 @@ public final class FontTable
     public void writeTo( HWPFOutputStream tableStream ) throws IOException
     {
 	  byte[] buf = new byte[LittleEndian.SHORT_SIZE];
-	  LittleEndian.putShort(buf, _stringCount);
+	  LittleEndian.putShort(buf, 0, _stringCount);
 	  tableStream.write(buf);
-	  LittleEndian.putShort(buf, _extraDataSz);
+	  LittleEndian.putShort(buf, 0, _extraDataSz);
 	  tableStream.write(buf);
 
-	  for(int i = 0; i < _fontNames.length; i++)
+	  for(final Ffn f : _fontNames)
 	  {
-		  tableStream.write(_fontNames[i].toByteArray());
+		  tableStream.write(f.toByteArray());
 	  }
 
   }

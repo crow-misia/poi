@@ -502,19 +502,6 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
     }
 
     /**
-     * Creates a new comment for this sheet. You still
-     *  need to assign it to a cell though
-     *
-     * @deprecated since Nov 2009 this method is not compatible with the common SS interfaces,
-     * use {@link org.apache.poi.xssf.usermodel.XSSFDrawing#createCellComment
-     *  (org.apache.poi.ss.usermodel.ClientAnchor)} instead
-     */
-    @Deprecated
-    public XSSFComment createComment() {
-        return createDrawingPatriarch().createCellComment(new XSSFClientAnchor());
-    }
-
-    /**
      * Create a new row within the sheet and return the high level representation
      *
      * @param rownum  row number
@@ -2482,21 +2469,6 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
         for (CTSheetView view : views.getSheetViewList()) {
             view.setTabSelected(value);
         }
-    }
-
-    /**
-     * Assign a cell comment to a cell region in this worksheet
-     *
-     * @param cellRef cell region
-     * @param comment the comment to assign
-     * @deprecated since Nov 2009 use {@link XSSFCell#setCellComment(org.apache.poi.ss.usermodel.Comment)} instead
-     */
-    @Deprecated
-    public static void setCellComment(String cellRef, XSSFComment comment) {
-        CellReference cellReference = new CellReference(cellRef);
-
-        comment.setRow(cellReference.getRow());
-        comment.setColumn(cellReference.getCol());
     }
 
     /**

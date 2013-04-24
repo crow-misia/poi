@@ -182,14 +182,6 @@ public class HSSFComment extends HSSFTextbox implements Comment {
     }
 
     /**
-     * @deprecated (Nov 2009) use {@link HSSFComment#setColumn(int)} }
-     */
-    @Deprecated
-    public void setColumn(short col) {
-        setColumn((int) col);
-    }
-
-    /**
      * Name of the original comment author
      *
      * @return the name of the original author of the comment

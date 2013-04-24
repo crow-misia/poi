@@ -26,7 +26,6 @@ public final class DrawingRecord extends StandardRecord {
     public static final short sid = 0x00EC;
 
     private byte[] recordData;
-    private byte[] contd;
 
     public DrawingRecord() {
         recordData = ArrayUtil.EMPTY_BYTE_ARRAY;
@@ -34,12 +33,6 @@ public final class DrawingRecord extends StandardRecord {
 
     public DrawingRecord(RecordInputStream in) {
         recordData = in.readRemainder();
-    }
-
-    @Deprecated
-    public void processContinueRecord(byte[] record) {
-        //don't merge continue record with the drawing record, it must be serialized separately
-        contd = record;
     }
 
     public void serialize(LittleEndianOutput out) {
@@ -52,11 +45,6 @@ public final class DrawingRecord extends StandardRecord {
 
     public short getSid() {
         return sid;
-    }
-
-    @Deprecated
-    public byte[] getData() {
-        return recordData;
     }
 
     public byte[] getRecordData(){
@@ -77,10 +65,6 @@ public final class DrawingRecord extends StandardRecord {
     public Object clone() {
         DrawingRecord rec = new DrawingRecord();
         rec.recordData = recordData.clone();
-        if (contd != null) {
-            // TODO - this code probably never executes
-            rec.contd = contd.clone();
-        }
 
         return rec;
     }

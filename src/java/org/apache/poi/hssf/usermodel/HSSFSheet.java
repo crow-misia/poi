@@ -407,42 +407,6 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
         dvt.addDataValidation(dvRecord);
     }
 
-
-    /**
-     * @deprecated (Sep 2008) use {@link #setColumnHidden(int, boolean)}
-     */
-    public void setColumnHidden(short columnIndex, boolean hidden) {
-        setColumnHidden(columnIndex & 0xFFFF, hidden);
-    }
-
-    /**
-     * @deprecated (Sep 2008) use {@link #isColumnHidden(int)}
-     */
-    public boolean isColumnHidden(short columnIndex) {
-        return isColumnHidden(columnIndex & 0xFFFF);
-    }
-
-    /**
-     * @deprecated (Sep 2008) use {@link #setColumnWidth(int, int)}
-     */
-    public void setColumnWidth(short columnIndex, short width) {
-        setColumnWidth(columnIndex & 0xFFFF, width & 0xFFFF);
-    }
-
-    /**
-     * @deprecated (Sep 2008) use {@link #getColumnWidth(int)}
-     */
-    public short getColumnWidth(short columnIndex) {
-        return (short) getColumnWidth(columnIndex & 0xFFFF);
-    }
-
-    /**
-     * @deprecated (Sep 2008) use {@link #setDefaultColumnWidth(int)}
-     */
-    public void setDefaultColumnWidth(short width) {
-        setDefaultColumnWidth(width & 0xFFFF);
-    }
-
     /**
      * Get the visibility state for a given column.
      *
@@ -712,15 +676,6 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
 
     public void setVerticallyCenter(boolean value) {
         _sheet.getPageSettings().getVCenter().setVCenter(value);
-    }
-
-    /**
-     * TODO: Boolean not needed, remove after next release
-     *
-     * @deprecated (Mar-2008) use getVerticallyCenter() instead
-     */
-    public boolean getVerticallyCenter(boolean value) {
-        return getVerticallyCenter();
     }
 
     /**
@@ -1820,27 +1775,6 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
             agg = (EscherAggregate) _sheet.getRecords().get(pos);
         }
         return new HSSFPatriarch(this, agg);
-    }
-
-    /**
-     * @deprecated (Sep 2008) use {@link #setColumnGroupCollapsed(int, boolean)}
-     */
-    public void setColumnGroupCollapsed(short columnNumber, boolean collapsed) {
-        setColumnGroupCollapsed(columnNumber & 0xFFFF, collapsed);
-    }
-
-    /**
-     * @deprecated (Sep 2008) use {@link #groupColumn(int, int)}
-     */
-    public void groupColumn(short fromColumn, short toColumn) {
-        groupColumn(fromColumn & 0xFFFF, toColumn & 0xFFFF);
-    }
-
-    /**
-     * @deprecated (Sep 2008) use {@link #ungroupColumn(int, int)}
-     */
-    public void ungroupColumn(short fromColumn, short toColumn) {
-        ungroupColumn(fromColumn & 0xFFFF, toColumn & 0xFFFF);
     }
 
     /**
