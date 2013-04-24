@@ -42,10 +42,10 @@ import org.apache.poi.util.list.IntArrayList;
  * @author Marc Johnson (mjohnson at apache dot org)
  */
 public final class BlockAllocationTableWriter implements BlockWritable, BATManaged {
-    private IntArrayList _entries;
+    private final IntArrayList _entries;
     private BATBlock[]   _blocks;
     private int          _start_block;
-    private POIFSBigBlockSize _bigBlockSize;
+    private final POIFSBigBlockSize _bigBlockSize;
 
     /**
      * create a BlockAllocationTableWriter

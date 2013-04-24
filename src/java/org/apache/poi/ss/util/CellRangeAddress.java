@@ -17,10 +17,9 @@
 
 package org.apache.poi.ss.util;
 
-import org.apache.poi.ss.formula.SheetNameFormatter;
 import org.apache.poi.hssf.record.RecordInputStream;
 import org.apache.poi.hssf.record.SelectionRecord;
-import org.apache.poi.util.LittleEndianByteArrayOutputStream;
+import org.apache.poi.ss.formula.SheetNameFormatter;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**
@@ -32,23 +31,13 @@ import org.apache.poi.util.LittleEndianOutput;
  * Note - {@link SelectionRecord} uses the BIFF5 version of this structure
  * @author Dragos Buleandra (dragos.buleandra@trade2b.ro)
  */
-public class CellRangeAddress extends CellRangeAddressBase {
-	/*
-	 * TODO - replace  org.apache.poi.hssf.util.Region
-	 */
+public final class CellRangeAddress extends CellRangeAddressBase {
 	public static final int ENCODED_SIZE = 8;
 
 	public CellRangeAddress(int firstRow, int lastRow, int firstCol, int lastCol) {
 		super(firstRow, lastRow, firstCol, lastCol);
 	}
 
-	/**
-	 * @deprecated use {@link #serialize(LittleEndianOutput)}
-	 */
-	public int serialize(int offset, byte[] data) {
-		serialize(new LittleEndianByteArrayOutputStream(data, offset, ENCODED_SIZE));
-		return ENCODED_SIZE;
-	}
 	public void serialize(LittleEndianOutput out) {
 		out.writeShort(getFirstRow());
 		out.writeShort(getLastRow());

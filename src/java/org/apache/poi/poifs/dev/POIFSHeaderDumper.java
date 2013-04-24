@@ -136,7 +136,7 @@ public class POIFSHeaderDumper {
          private int i = 0;
          @Override
          public void run(final int bn) {
-            String bnS = Integer.toString(bn);
+            String bnS;
             if(bn == POIFSConstants.END_OF_CHAIN) {
                bnS = "End Of Chain";
             } else if(bn == POIFSConstants.DIFAT_SECTOR_BLOCK) {
@@ -145,6 +145,8 @@ public class POIFSHeaderDumper {
                bnS = "Normal Fat Block";
             } else if(bn == POIFSConstants.UNUSED_BLOCK) {
                bnS = "Block Not Used (Free)";
+            } else {
+               bnS = Integer.toString(bn);
             }
 
             System.out.println("  Block  # " + (i++) + " -> " + bnS);
