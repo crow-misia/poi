@@ -29,7 +29,7 @@ import org.apache.poi.util.Beta;
  * @author Roman Kashitsyn
  */
 @Beta
-public class DataSources {
+public final class DataSources {
 
     private DataSources() {
     }

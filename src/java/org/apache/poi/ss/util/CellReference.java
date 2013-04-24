@@ -29,7 +29,7 @@ import org.apache.poi.ss.usermodel.Cell;
  * @author  Avik Sengupta
  * @author  Dennis Doubleday (patch to seperateRowColumns())
  */
-public class CellReference {
+public final class CellReference {
 	/**
 	 * Used to classify identifiers found in formulas as cell references or not.
 	 */
