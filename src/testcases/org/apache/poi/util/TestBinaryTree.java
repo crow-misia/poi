@@ -482,7 +482,7 @@ public final class TestBinaryTree extends TestCase {
         for (int k = 0; k < nodes.length; k++)
         {
             m.put(nodes[ k ].getKey(), nodes[ k ]);
-            if (k % 2 == 1)
+            if ((k & 1) == 1)
             {
                 c1.add(nodes[ k ].getKey());
             }
@@ -618,7 +618,7 @@ public final class TestBinaryTree extends TestCase {
         for (int k = 0; k < nodes.length; k++)
         {
             m.put(nodes[ k ].getKey(), nodes[ k ]);
-            if (k % 2 == 1)
+            if ((k & 1) == 1)
             {
                 c1.add(nodes[ k ]);
             }
@@ -1167,7 +1167,7 @@ public final class TestBinaryTree extends TestCase {
         for (int k = 0; k < nodes.length; k++)
         {
             m.put(nodes[ k ].getKey(), nodes[ k ]);
-            if (k % 2 == 1)
+            if ((k & 1) == 1)
             {
                 c1.add(nodes[ k ].getKey());
             }
@@ -1303,7 +1303,7 @@ public final class TestBinaryTree extends TestCase {
         for (int k = 0; k < nodes.length; k++)
         {
             m.put(nodes[ k ].getKey(), nodes[ k ]);
-            if (k % 2 == 1)
+            if ((k & 1) == 1)
             {
                 c1.add(nodes[ k ]);
             }
