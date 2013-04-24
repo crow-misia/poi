@@ -320,10 +320,10 @@ public final class PackageRelationshipCollection implements
 			// Check OPC compliance M4.1 rule
 			boolean fCorePropertiesRelationship = false;
 
-			for (Iterator i = root
+			for (Iterator<Element> i = root
 					.elementIterator(PackageRelationship.RELATIONSHIP_TAG_NAME); i
 					.hasNext();) {
-				Element element = (Element) i.next();
+				Element element = i.next();
 				// Relationship ID
 				String id = element.attribute(
 						PackageRelationship.ID_ATTRIBUTE_NAME).getValue();

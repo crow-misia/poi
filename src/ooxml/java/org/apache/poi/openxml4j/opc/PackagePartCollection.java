@@ -17,7 +17,8 @@
 
 package org.apache.poi.openxml4j.opc;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
@@ -37,7 +38,7 @@ public final class PackagePartCollection extends
 	 * Arraylist use to store this collection part names as string for rule
 	 * M1.11 optimized checking.
 	 */
-	private ArrayList<String> registerPartNameStr = new ArrayList<>();
+	private final Set<String> registerPartNameStr = new HashSet<>();
 
 	@Override
 	public Object clone() {

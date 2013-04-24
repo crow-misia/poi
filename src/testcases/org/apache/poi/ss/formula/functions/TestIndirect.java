@@ -186,7 +186,7 @@ public final class TestIndirect extends TestCase {
 		}
 		int expCode = expectedResult.getErrorCode();
 		if (cv.getErrorValue() != expCode) {
-			throw new AssertionFailedError("Expected error '" + EE.getText(expCode)
+			throw new AssertionFailedError("Expected error '" + ErrorEval.getText(expCode)
 					+ "' but got '" + cv.formatAsString() + "'.");
 		}
 	}

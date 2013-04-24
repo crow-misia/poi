@@ -41,12 +41,11 @@ public final class TestTime extends TestCase {
 	private static final double SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR;
 	private HSSFCell cell11;
 	private HSSFFormulaEvaluator evaluator;
-	private HSSFWorkbook wb;
 	private HSSFDataFormatter form;
 	private HSSFCellStyle style;
 
 	public void setUp() {
-		wb = new HSSFWorkbook();
+		HSSFWorkbook wb = new HSSFWorkbook();
 		HSSFSheet sheet = wb.createSheet("new sheet");
 		style = wb.createCellStyle();
 		HSSFDataFormat fmt = wb.createDataFormat();
