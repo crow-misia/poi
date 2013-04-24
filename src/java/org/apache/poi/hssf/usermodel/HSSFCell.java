@@ -227,15 +227,6 @@ public class HSSFCell implements Cell {
     public int getRowIndex() {
         return _record.getRow();
     }
-    /**
-     * Set the cell's number within the row (0 based).
-     * @param num  short the cell number
-     * @deprecated (Jan 2008) Doesn't update the row's idea of what cell this is, use {@link HSSFRow#moveCell(HSSFCell, short)} instead
-     */
-    public void setCellNum(short num)
-    {
-        _record.setColumn(num);
-    }
 
     /**
      * Updates the cell record's idea of what
@@ -245,13 +236,6 @@ public class HSSFCell implements Cell {
     protected void updateCellNum(short num)
     {
         _record.setColumn(num);
-    }
-
-    /**
-     * @deprecated (Oct 2008) use {@link #getColumnIndex()}
-     */
-    public short getCellNum() {
-        return (short) getColumnIndex();
     }
 
     public int getColumnIndex() {

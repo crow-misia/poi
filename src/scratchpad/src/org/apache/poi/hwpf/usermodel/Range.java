@@ -481,7 +481,7 @@ public class Range { // TODO -instantiable superclass
 
 		byte[] grpprl = ParagraphSprmCompressor.compressParagraphProperty(props, baseStyle);
 		byte[] withIndex = new byte[grpprl.length + LittleEndian.SHORT_SIZE];
-		LittleEndian.putShort(withIndex, (short) styleIndex);
+		LittleEndian.putShort(withIndex, 0, (short) styleIndex);
 		System.arraycopy(grpprl, 0, withIndex, LittleEndian.SHORT_SIZE, grpprl.length);
 		SprmBuffer buf = new SprmBuffer(withIndex, 2);
 
@@ -534,7 +534,7 @@ public class Range { // TODO -instantiable superclass
 
 		byte[] grpprl = ParagraphSprmCompressor.compressParagraphProperty(props, baseStyle);
 		byte[] withIndex = new byte[grpprl.length + LittleEndian.SHORT_SIZE];
-		LittleEndian.putShort(withIndex, (short) styleIndex);
+		LittleEndian.putShort(withIndex, 0, (short) styleIndex);
 		System.arraycopy(grpprl, 0, withIndex, LittleEndian.SHORT_SIZE, grpprl.length);
 		SprmBuffer buf = new SprmBuffer(withIndex, 2);
 

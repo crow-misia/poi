@@ -50,7 +50,7 @@ public abstract class FormattedDiskPage
      */
     public FormattedDiskPage(byte[] fkp)
     {
-        _crun = LittleEndian.getUnsignedByte(fkp, 511);
+        _crun = LittleEndian.getUByte(fkp, 511);
         _fkp = fkp;
     }
     /**

@@ -48,6 +48,7 @@ import org.apache.poi.hssf.record.UnknownRecord;
 import org.apache.poi.hssf.record.aggregates.FormulaRecordAggregate;
 import org.apache.poi.hssf.record.aggregates.PageSettingsBlock;
 import org.apache.poi.hssf.record.aggregates.RecordAggregate;
+import org.apache.poi.hssf.record.aggregates.TestValueRecordsAggregate;
 import org.apache.poi.hssf.record.common.UnicodeString;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -1060,8 +1061,8 @@ public final class TestBugs extends BaseTestBugzillaIssues {
         confirmCachedValue("90210", nc3);
 
         @SuppressWarnings("deprecation")
-        CellValueRecordInterface[] cvrs = ns.getSheet().getValueRecords();
-        for (int i = 0; i < cvrs.length; i++) {
+        CellValueRecordInterface[] cvrs = TestValueRecordsAggregate.getValueRecords(ns.getSheet().getCellValueIterator());
+        for (int i = 0, n = cvrs.length; i < n; i++) {
             CellValueRecordInterface cvr = cvrs[i];
             if(cvr instanceof FormulaRecordAggregate) {
                 FormulaRecordAggregate fr = (FormulaRecordAggregate)cvr;

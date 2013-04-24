@@ -63,12 +63,6 @@ public final class ForkedEvaluator {
 		throw new IllegalArgumentException("Unexpected workbook type (" + wb.getClass().getName() + ")");
 	}
 	/**
-	 * @deprecated (Sep 2009) (reduce overloading) use {@link #create(Workbook, IStabilityClassifier, UDFFinder)}
-	 */
-	public static ForkedEvaluator create(Workbook wb, IStabilityClassifier stabilityClassifier) {
-		return create(wb, stabilityClassifier, null);
-	}
-	/**
 	 * @param udfFinder pass <code>null</code> for default (AnalysisToolPak only)
 	 */
 	public static ForkedEvaluator create(Workbook wb, IStabilityClassifier stabilityClassifier, UDFFinder udfFinder) {

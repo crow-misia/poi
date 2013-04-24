@@ -53,12 +53,6 @@ public class XSSFExcelExtractor extends POIXMLTextExtractor implements org.apach
     private boolean includeCellComments = false;
     private boolean includeHeadersFooters = true;
 
-    /**
-     * @deprecated  Use {@link #XSSFExcelExtractor(org.apache.poi.openxml4j.opc.OPCPackage)} instead.
-     */
-    public XSSFExcelExtractor(String path) throws XmlException, OpenXML4JException, IOException {
-        this(new XSSFWorkbook(path));
-    }
     public XSSFExcelExtractor(OPCPackage container) throws XmlException, OpenXML4JException, IOException {
         this(new XSSFWorkbook(container));
     }
@@ -73,9 +67,10 @@ public class XSSFExcelExtractor extends POIXMLTextExtractor implements org.apach
             System.err.println("  XSSFExcelExtractor <filename.xlsx>");
             System.exit(1);
         }
-        POIXMLTextExtractor extractor =
-                new XSSFExcelExtractor(args[0]);
-        System.out.println(extractor.getText());
+        try (OPCPackage pkg = OPCPackage.open(args[0])) {
+            POIXMLTextExtractor extractor = new XSSFExcelExtractor(pkg);
+            System.out.println(extractor.getText());
+        }
     }
 
     /**

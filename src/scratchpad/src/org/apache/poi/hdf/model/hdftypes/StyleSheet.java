@@ -734,7 +734,7 @@ public final class StyleSheet implements HDFType {
                    //there is one sprm that is a very special case
                    if(sprm != (short)0xd608)
                    {
-                     opSize = LittleEndian.getUnsignedByte(grpprl, offset);
+                     opSize = LittleEndian.getUByte(grpprl, offset);
                      offset++;
                    }
                    else

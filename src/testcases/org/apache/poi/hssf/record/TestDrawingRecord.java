@@ -18,12 +18,13 @@
 package org.apache.poi.hssf.record;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import junit.framework.TestCase;
+
+import org.apache.poi.util.FastByteArrayOutputStream;
 
 public final class TestDrawingRecord extends TestCase {
 
@@ -34,7 +35,7 @@ public final class TestDrawingRecord extends TestCase {
     public void testReadContinued() throws IOException {
 
         //simulate a continues drawing record
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         //main part
         DrawingRecord dg = new DrawingRecord();
         byte[] data1 = new byte[8224];
@@ -48,12 +49,12 @@ public final class TestDrawingRecord extends TestCase {
         ContinueRecord cn = new ContinueRecord(data2);
         out.write(cn.serialize());
 
-        List<Record> rec = RecordFactory.createRecords(new ByteArrayInputStream(out.toByteArray()));
+        List<Record> rec = RecordFactory.createRecords(out.toInputStream());
         assertEquals(2, rec.size());
         assertTrue(rec.get(0) instanceof DrawingRecord);
         assertTrue(rec.get(1) instanceof ContinueRecord);
 
-        assertTrue(Arrays.equals(data1, ((DrawingRecord)rec.get(0)).getData()));
+        assertTrue(Arrays.equals(data1, ((DrawingRecord)rec.get(0)).getRecordData()));
         assertTrue(Arrays.equals(data2, ((ContinueRecord)rec.get(1)).getData()));
 
     }

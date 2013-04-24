@@ -47,6 +47,7 @@ import org.apache.poi.hslf.usermodel.PictureData;
 import org.apache.poi.poifs.filesystem.DirectoryNode;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
+import org.apache.poi.poifs.filesystem.EntryUtils;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.FastByteArrayOutputStream;
@@ -507,7 +508,7 @@ public final class HSLFSlideShow extends POIDocument {
 
         // If requested, write out any other streams we spot
         if(preserveNodes) {
-            copyNodes(directory.getFileSystem(), outFS, writtenEntries);
+        	EntryUtils.copyNodes(directory.getFileSystem(), outFS, writtenEntries);
         }
 
         // Send the POIFSFileSystem object out to the underlying stream
