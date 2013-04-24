@@ -37,7 +37,7 @@ public final class VCenterRecord extends StandardRecord {
     {
     }
 
-    public VCenterRecord(LittleEndianInput in)
+    public VCenterRecord(RecordInputStream in)
     {
         field_1_vcenter = in.readShort();
     }

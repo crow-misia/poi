@@ -28,13 +28,13 @@ import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 
 import org.apache.poi.hssf.HSSFTestDataSamples;
-import org.apache.poi.ss.formula.eval.EvaluationException;
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.formula.eval.EvaluationException;
+import org.apache.poi.ss.usermodel.DateUtil;
 
 /**
  * Tests YearFracCalculator using test-cases listed in a sample spreadsheet
@@ -121,7 +121,7 @@ public final class TestYearFracCalculatorFromSpreadsheet extends TestCase {
 		int day = getIntCell(row, yearColumn + 2);
 		Calendar c = new GregorianCalendar(year, month-1, day, 0, 0, 0);
 		c.set(Calendar.MILLISECOND, 0);
-		return HSSFDateUtil.getExcelDate(c.getTime());
+		return DateUtil.getExcelDate(c.getTime());
 	}
 
 	private static int getIntCell(HSSFRow row, int colIx) {

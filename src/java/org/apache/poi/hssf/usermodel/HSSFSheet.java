@@ -623,17 +623,6 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
     }
 
     /**
-     * @deprecated (Aug-2008) use <tt>CellRangeAddress</tt> instead of <tt>Region</tt>
-     */
-    public int addMergedRegion(org.apache.poi.ss.util.Region region) {
-        return _sheet.addMergedRegion(region.getRowFrom(),
-                region.getColumnFrom(),
-                //(short) region.getRowTo(),
-                region.getRowTo(),
-                region.getColumnTo());
-    }
-
-    /**
      * adds a merged region of cells (hence those cells form one)
      *
      * @param region (rowfrom/colfrom-rowto/colto) to merge
@@ -799,16 +788,6 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
     }
 
     /**
-     * @deprecated (Aug-2008) use {@link HSSFSheet#getMergedRegion(int)}
-     */
-    public org.apache.poi.hssf.util.Region getMergedRegionAt(int index) {
-        CellRangeAddress cra = getMergedRegion(index);
-
-        return new org.apache.poi.hssf.util.Region(cra.getFirstRow(), (short) cra.getFirstColumn(),
-                cra.getLastRow(), (short) cra.getLastColumn());
-    }
-
-    /**
      * @return the merged region at the specified index
      */
     public CellRangeAddress getMergedRegion(int index) {
@@ -822,7 +801,7 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
      */
     public Iterator<Row> rowIterator() {
         @SuppressWarnings("unchecked") // can this clumsy generic syntax be improved?
-                Iterator<Row> result = (Iterator<Row>) (Iterator<? extends Row>) _rows.values().iterator();
+        final Iterator<Row> result = (Iterator<Row>) (Iterator<? extends Row>) _rows.values().iterator();
         return result;
     }
 
@@ -1784,8 +1763,7 @@ public final class HSSFSheet implements org.apache.poi.ss.usermodel.Sheet {
         }
 
         // Grab our aggregate record, and wire it up
-        EscherAggregate agg = (EscherAggregate) _sheet.findFirstRecordBySid(EscherAggregate.sid);
-        return agg;
+        return (EscherAggregate) _sheet.findFirstRecordBySid(EscherAggregate.sid);
     }
 
     /**
