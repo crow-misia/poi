@@ -28,6 +28,7 @@ import org.apache.poi.ss.excelant.util.ExcelAntWorkbookUtil;
 import org.apache.poi.ss.excelant.util.ExcelAntWorkbookUtilFactory;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.util.DateConstants;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
@@ -88,7 +89,7 @@ public class ExcelAntTask extends Task {
 		versionBffr.append(  "ExcelAnt version " ) ;
 		versionBffr.append( VERSION ) ;
 		versionBffr.append( " Copyright 2011" ) ;
-		SimpleDateFormat sdf = new SimpleDateFormat( "yyyy" ) ;
+		SimpleDateFormat sdf = DateConstants.yyyy.get();
 		double currYear = Double.parseDouble( sdf.format( new Date() ) );
 		if( currYear > 2011 ) {
 		    versionBffr.append( "-" ) ;

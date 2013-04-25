@@ -27,7 +27,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -434,16 +433,16 @@ public final class HSLFSlideShow extends POIDocument {
         // For position dependent records, hold where they were and now are
         // As we go along, update, and hand over, to any Position Dependent
         //  records we happen across
-        Hashtable<Integer,Integer> oldToNewPositions = new Hashtable<>();
+        final Map<Integer,Integer> oldToNewPositions = new HashMap<>();
 
         // First pass - figure out where all the position dependent
         //   records are going to end up, in the new scheme
         // (Annoyingly, some powerpoing files have PersistPtrHolders
         //  that reference slides after the PersistPtrHolder)
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        for(int i=0; i<_records.length; i++) {
-            if(_records[i] instanceof PositionDependentRecord) {
-                PositionDependentRecord pdr = (PositionDependentRecord)_records[i];
+        for(final Record r : _records) {
+            if(r instanceof PositionDependentRecord) {
+                PositionDependentRecord pdr = (PositionDependentRecord) r;
                 int oldPos = pdr.getLastOnDiskOffset();
                 int newPos = baos.size();
                 pdr.setLastOnDiskOffset(newPos);
@@ -452,26 +451,26 @@ public final class HSLFSlideShow extends POIDocument {
             }
 
             // Dummy write out, so the position winds on properly
-            _records[i].writeOut(baos);
+            r.writeOut(baos);
         }
 
         // No go back through, actually writing ourselves out
         baos.reset();
-        for(int i=0; i<_records.length; i++) {
+        for(final Record r : _records) {
             // For now, we're only handling PositionDependentRecord's that
             //  happen at the top level.
             // In future, we'll need the handle them everywhere, but that's
             //  a bit trickier
-            if(_records[i] instanceof PositionDependentRecord) {
+            if(r instanceof PositionDependentRecord) {
                 // We've already figured out their new location, and
                 //  told them that
                 // Tell them of the positions of the other records though
-                PositionDependentRecord pdr = (PositionDependentRecord)_records[i];
+                PositionDependentRecord pdr = (PositionDependentRecord) r;
                 pdr.updateOtherRecordReferences(oldToNewPositions);
             }
 
             // Whatever happens, write out that record tree
-            _records[i].writeOut(baos);
+            r.writeOut(baos);
         }
         // Update our cached copy of the bytes that make up the PPT stream
         _docstream = baos.toByteArray();

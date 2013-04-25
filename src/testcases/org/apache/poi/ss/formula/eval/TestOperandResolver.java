@@ -66,7 +66,7 @@ public final class TestOperandResolver extends TestCase {
 		
 		for (String value : values) {
 			assertTrue(OperandResolver.parseDouble(value) != null);
-			assertEquals(OperandResolver.parseDouble(value), Double.parseDouble(value));
+			assertEquals(OperandResolver.parseDouble(value), Double.valueOf(value));
 		}
 
 	}

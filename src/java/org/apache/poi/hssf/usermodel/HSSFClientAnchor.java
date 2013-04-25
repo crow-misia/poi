@@ -170,7 +170,7 @@ public final class HSSFClientAnchor extends HSSFAnchor implements ClientAnchor {
      */
     public void setRow1(int row1) {
         checkRange(row1, 0, 256 * 256, "row1");
-        _escherClientAnchor.setRow1(Integer.valueOf(row1).shortValue());
+        _escherClientAnchor.setRow1((short) row1);
     }
 
     /**
@@ -185,7 +185,7 @@ public final class HSSFClientAnchor extends HSSFAnchor implements ClientAnchor {
      */
     public void setRow2(int row2) {
         checkRange(row2, 0, 256 * 256, "row2");
-        _escherClientAnchor.setRow2(Integer.valueOf(row2).shortValue());
+        _escherClientAnchor.setRow2((short) row2);
     }
 
     /**
@@ -255,7 +255,7 @@ public final class HSSFClientAnchor extends HSSFAnchor implements ClientAnchor {
      * 0 = Move and size with Cells, 2 = Move but don't size with cells, 3 = Don't move or size with cells.
      */
     public void setAnchorType(int anchorType) {
-        _escherClientAnchor.setFlag(Integer.valueOf(anchorType).shortValue());
+        _escherClientAnchor.setFlag((short) anchorType);
     }
 
     private void checkRange(int value, int minRange, int maxRange, String varName) {
@@ -285,7 +285,7 @@ public final class HSSFClientAnchor extends HSSFAnchor implements ClientAnchor {
 
     @Override
     public void setDx1(int dx1) {
-        _escherClientAnchor.setDx1(Integer.valueOf(dx1).shortValue());
+        _escherClientAnchor.setDx1((short) dx1);
     }
 
     @Override
@@ -295,7 +295,7 @@ public final class HSSFClientAnchor extends HSSFAnchor implements ClientAnchor {
 
     @Override
     public void setDy1(int dy1) {
-        _escherClientAnchor.setDy1(Integer.valueOf(dy1).shortValue());
+        _escherClientAnchor.setDy1((short) dy1);
     }
 
     @Override
@@ -305,7 +305,7 @@ public final class HSSFClientAnchor extends HSSFAnchor implements ClientAnchor {
 
     @Override
     public void setDy2(int dy2) {
-        _escherClientAnchor.setDy2(Integer.valueOf(dy2).shortValue());
+        _escherClientAnchor.setDy2((short) dy2);
     }
 
     @Override
@@ -315,6 +315,6 @@ public final class HSSFClientAnchor extends HSSFAnchor implements ClientAnchor {
 
     @Override
     public void setDx2(int dx2) {
-        _escherClientAnchor.setDx2(Integer.valueOf(dx2).shortValue());
+        _escherClientAnchor.setDx2((short) dx2);
     }
 }

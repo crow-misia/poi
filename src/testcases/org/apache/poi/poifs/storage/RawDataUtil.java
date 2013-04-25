@@ -61,7 +61,7 @@ public final class RawDataUtil {
 				System.out.println("\",");
 				System.out.print("\t\"");
 			} else {
-				System.out.print(" ");
+				System.out.print(' ');
 			}
 		}
 		System.out.println("\",");

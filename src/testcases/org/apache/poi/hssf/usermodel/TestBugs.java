@@ -1978,7 +1978,7 @@ if(1==2) {
        HSSFSheet s = wb.getSheetAt(0);
        HSSFRow r17 = s.getRow(16);
        HSSFRow r18 = s.getRow(17);
-       HSSFDataFormatter df = new HSSFDataFormatter();
+       DataFormatter df = new DataFormatter();
        
        assertEquals(10.0, r17.getCell(1).getNumericCellValue());
        assertEquals(20.0, r17.getCell(2).getNumericCellValue());

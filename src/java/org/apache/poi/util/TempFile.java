@@ -39,10 +39,11 @@ public final class TempFile {
     public static File createTempFile(String prefix, String suffix) {
         if (dir == null)
         {
-            dir = new File(System.getProperty("java.io.tmpdir"), "poifiles");
-            dir.mkdir();
+            final File tmp = new File(System.getProperty("java.io.tmpdir"), "poifiles");
+            tmp.mkdir();
             if (System.getProperty("poi.keep.tmp.files") == null)
-                dir.deleteOnExit();
+                tmp.deleteOnExit();
+            dir = tmp;
         }
 
         File newFile = new File(dir, prefix + rnd.nextInt() + suffix);

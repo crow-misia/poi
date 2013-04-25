@@ -312,7 +312,7 @@ public class XSLFGroupShape extends XSLFShape implements XSLFShapeContainer {
 
             // restore the coordinate system
             graphics.setTransform(at);
-            graphics.setRenderingHint(XSLFRenderingHint.GRESTORE, true);
+            graphics.setRenderingHint(XSLFRenderingHint.GRESTORE, Boolean.TRUE);
         }
 
         graphics.setRenderingHint(XSLFRenderingHint.GROUP_TRANSFORM, tx0);

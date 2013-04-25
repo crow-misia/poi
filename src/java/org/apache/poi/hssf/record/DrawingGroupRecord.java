@@ -54,7 +54,7 @@ public final class DrawingGroupRecord extends AbstractEscherHolderRecord {
     public int serialize(int offset, byte[] data)
     {
         byte[] rawData = getRawData();
-        if (getEscherRecords().size() == 0 && rawData != null)
+        if (getEscherRecords().isEmpty() && rawData != null)
         {
             return writeData( offset, data, rawData );
         }
@@ -85,7 +85,7 @@ public final class DrawingGroupRecord extends AbstractEscherHolderRecord {
     private int getRawDataSize() {
         List<?> escherRecords = getEscherRecords();
         byte[] rawData = getRawData();
-        if (escherRecords.size() == 0 && rawData != null)
+        if (escherRecords.isEmpty() && rawData != null)
         {
             return rawData.length;
         }

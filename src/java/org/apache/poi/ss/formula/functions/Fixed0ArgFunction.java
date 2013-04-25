@@ -27,9 +27,9 @@ import org.apache.poi.ss.formula.eval.ValueEval;
  */
 public abstract class Fixed0ArgFunction implements Function0Arg {
 	public final ValueEval evaluate(ValueEval[] args, int srcRowIndex, int srcColumnIndex) {
-		if (args.length != 0) {
-			return ErrorEval.VALUE_INVALID;
+		if (args.length == 0) {
+			return evaluate(srcRowIndex, srcColumnIndex);
 		}
-		return evaluate(srcRowIndex, srcColumnIndex);
+		return ErrorEval.VALUE_INVALID;
 	}
 }

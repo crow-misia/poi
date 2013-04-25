@@ -83,7 +83,7 @@ public final class HMEFMessage {
          }
       } else if(level == TNEFProperty.LEVEL_ATTACHMENT) {
          // Previous attachment or a new one?
-         if(attachments.size() == 0 || attr.getProperty() == TNEFProperty.ID_ATTACHRENDERDATA) {
+         if(attachments.isEmpty() || attr.getProperty() == TNEFProperty.ID_ATTACHRENDERDATA) {
             attachments.add(new Attachment());
          }
          

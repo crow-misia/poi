@@ -292,7 +292,7 @@ public final class SSTRecord extends ContinuableRecord {
      * @return  The new SST record.
      */
     public ExtSSTRecord createExtSSTRecord(int sstOffset) {
-        if (bucketAbsoluteOffsets == null || bucketAbsoluteOffsets == null)
+        if (bucketAbsoluteOffsets == null || bucketRelativeOffsets == null)
             throw new IllegalStateException("SST record has not yet been serialized.");
 
         ExtSSTRecord extSST = new ExtSSTRecord();

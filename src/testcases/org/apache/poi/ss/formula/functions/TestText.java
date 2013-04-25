@@ -18,7 +18,6 @@
 package org.apache.poi.ss.formula.functions;
 
 import java.text.DecimalFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -28,6 +27,7 @@ import org.apache.poi.ss.formula.eval.ErrorEval;
 import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
+import org.apache.poi.util.DateConstants;
 
 /**
  * Test case for TEXT()
@@ -110,7 +110,7 @@ public final class TestText extends TestCase {
       assertEquals(testResult.toString(), result.toString());
 
       // this line is intended to compute how "November" would look like in the current locale
-      String november = new SimpleDateFormat("MMMM").format(new GregorianCalendar(2010,10,15).getTime());
+      String november = DateConstants.MMMM.get().format(new GregorianCalendar(2010,10,15).getTime());
 
       // Again with Java style
       formatArg = new StringEval("MMMM dd, yyyy");
@@ -130,7 +130,7 @@ public final class TestText extends TestCase {
    public void testTextMidB() {
        final ValueEval numArg = new NumberEval(1);
        final ValueEval num2Arg = new NumberEval(2);
-       final ValueEval strArg = new StringEval("あいうえお");
+       final ValueEval strArg = new StringEval("あいぁ��);
        ValueEval[] args = new ValueEval[] { strArg };
 
        ValueEval result = TextFunction.LENB.evaluate(args, -1, (short) -1);
@@ -139,19 +139,19 @@ public final class TestText extends TestCase {
 
        args = new ValueEval[] { strArg, numArg, num2Arg, };
        result = TextFunction.MIDB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("あ");
+       testResult = new StringEval("�);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(2);
        args[2] = new NumberEval(3);
        result = TextFunction.MIDB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval(" い");
+       testResult = new StringEval(" �);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(2);
        args[2] = new NumberEval(5);
        result = TextFunction.MIDB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval(" いう");
+       testResult = new StringEval(" ぁ�");
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(1);
@@ -163,7 +163,7 @@ public final class TestText extends TestCase {
        args[1] = new NumberEval(1);
        args[2] = new NumberEval(6);
        result = TextFunction.MIDB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("あいう");
+       testResult = new StringEval("あい�);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(2);
@@ -184,7 +184,7 @@ public final class TestText extends TestCase {
        testResult = StringEval.EMPTY_INSTANCE;
        assertEquals(testResult.toString(), result.toString());
 
-       args[0] = new StringEval("abcdあいうえお");
+       args[0] = new StringEval("abcdあいぁ��);
        args[1] = new NumberEval(1);
        args[2] = new NumberEval(0);
        result = TextFunction.MIDB.evaluate(args, -1, (short) -1);
@@ -206,18 +206,18 @@ public final class TestText extends TestCase {
        args[1] = new NumberEval(1);
        args[2] = new NumberEval(6);
        result = TextFunction.MIDB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("abcdあ");
+       testResult = new StringEval("abcd�);
        assertEquals(testResult.toString(), result.toString());
    }
 
    public void testTextLeftB() {
        final ValueEval numArg = new NumberEval(2);
-       final ValueEval strArg = new StringEval("あいうえお");
+       final ValueEval strArg = new StringEval("あいぁ��);
        ValueEval[] args = new ValueEval[] { strArg };
 
        args = new ValueEval[] { strArg, numArg, };
        ValueEval result = TextFunction.LEFTB.evaluate(args, -1, (short) -1);
-       ValueEval testResult = new StringEval("あ");
+       ValueEval testResult = new StringEval("�);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(1);
@@ -227,7 +227,7 @@ public final class TestText extends TestCase {
 
        args[1] = new NumberEval(3);
        result = TextFunction.LEFTB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("あ ");
+       testResult = new StringEval("�");
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(5);
@@ -237,7 +237,7 @@ public final class TestText extends TestCase {
 
        args[1] = new NumberEval(6);
        result = TextFunction.LEFTB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("あいう");
+       testResult = new StringEval("あい�);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(0);
@@ -245,7 +245,7 @@ public final class TestText extends TestCase {
        testResult = StringEval.EMPTY_INSTANCE;
        assertEquals(testResult.toString(), result.toString());
 
-       args[0] = new StringEval("abcあいうえお");
+       args[0] = new StringEval("abcあいぁ��);
        args[1] = new NumberEval(0);
        result = TextFunction.LEFTB.evaluate(args, -1, (short) -1);
        testResult = StringEval.EMPTY_INSTANCE;
@@ -263,18 +263,18 @@ public final class TestText extends TestCase {
 
        args[1] = new NumberEval(5);
        result = TextFunction.LEFTB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("abcあ");
+       testResult = new StringEval("abc�);
        assertEquals(testResult.toString(), result.toString());
    }
 
    public void testTextRightB() {
        final ValueEval numArg = new NumberEval(2);
-       final ValueEval strArg = new StringEval("あいうえお");
+       final ValueEval strArg = new StringEval("あいぁ��);
        ValueEval[] args = new ValueEval[] { strArg };
 
        args = new ValueEval[] { strArg, numArg, };
        ValueEval result = TextFunction.RIGHTB.evaluate(args, -1, (short) -1);
-       ValueEval testResult = new StringEval("お");
+       ValueEval testResult = new StringEval("�);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(1);
@@ -284,7 +284,7 @@ public final class TestText extends TestCase {
 
        args[1] = new NumberEval(3);
        result = TextFunction.RIGHTB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval(" お");
+       testResult = new StringEval(" �);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(5);
@@ -294,7 +294,7 @@ public final class TestText extends TestCase {
 
        args[1] = new NumberEval(6);
        result = TextFunction.RIGHTB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("うえお");
+       testResult = new StringEval("ぁ��);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(0);
@@ -302,7 +302,7 @@ public final class TestText extends TestCase {
        testResult = StringEval.EMPTY_INSTANCE;
        assertEquals(testResult.toString(), result.toString());
 
-       args[0] = new StringEval("あいうえおabc");
+       args[0] = new StringEval("あいぁ�おabc");
        args[1] = new NumberEval(0);
        result = TextFunction.RIGHTB.evaluate(args, -1, (short) -1);
        testResult = StringEval.EMPTY_INSTANCE;
@@ -327,7 +327,7 @@ public final class TestText extends TestCase {
    public void testTextReplaceB() {
        final Function REPLACEB = new ReplaceB();
 
-       final ValueEval oldStrArg = new StringEval("あいうえお");
+       final ValueEval oldStrArg = new StringEval("あいぁ��);
        final ValueEval numArg = new NumberEval(1);
        final ValueEval num2Arg = new NumberEval(2);
        final ValueEval newStrArg = new StringEval("ABC");
@@ -335,51 +335,51 @@ public final class TestText extends TestCase {
        final ValueEval[] args = new ValueEval[] { oldStrArg, numArg, num2Arg, newStrArg, };
 
        ValueEval result = REPLACEB.evaluate(args, -1, (short) -1);
-       ValueEval testResult = new StringEval("ABCいうえお");
+       ValueEval testResult = new StringEval("ABCぁ�えお");
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(2);
        result = REPLACEB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval(" ABC うえお");
+       testResult = new StringEval(" ABC ぁ��);
        assertEquals(testResult.toString(), result.toString());
 
        args[2] = new NumberEval(1);
        result = REPLACEB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval(" ABCいうえお");
+       testResult = new StringEval(" ABCぁ�えお");
        assertEquals(testResult.toString(), result.toString());
 
        args[2] = new NumberEval(1);
-       args[3] = new StringEval("かきく");
+       args[3] = new StringEval("かき�);
        result = REPLACEB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval(" かきくいうえお");
+       testResult = new StringEval(" かきくいぁ��);
        assertEquals(testResult.toString(), result.toString());
 
        args[2] = new NumberEval(10);
-       args[3] = new StringEval("かきく");
+       args[3] = new StringEval("かき�);
        result = REPLACEB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval(" かきく");
+       testResult = new StringEval(" かき�);
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(3);
        args[2] = new NumberEval(10);
-       args[3] = new StringEval("かきく");
+       args[3] = new StringEval("かき�);
        result = REPLACEB.evaluate(args, -1, (short) -1);
        testResult = new StringEval("あかきく");
        assertEquals(testResult.toString(), result.toString());
 
-       args[0] = new StringEval("ABCあいうえおDEF");
+       args[0] = new StringEval("ABCあいぁ�おDEF");
        args[1] = new NumberEval(3);
        args[2] = new NumberEval(1);
-       args[3] = new StringEval("かきく");
+       args[3] = new StringEval("かき�);
        result = REPLACEB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("ABかきくあいうえおDEF");
+       testResult = new StringEval("ABかきくあぁ�えおDEF");
        assertEquals(testResult.toString(), result.toString());
 
        args[1] = new NumberEval(3);
        args[2] = new NumberEval(2);
-       args[3] = new StringEval("かきく");
+       args[3] = new StringEval("かき�);
        result = REPLACEB.evaluate(args, -1, (short) -1);
-       testResult = new StringEval("ABかきく いうえおDEF");
+       testResult = new StringEval("ABかき�ぁ�えおDEF");
        assertEquals(testResult.toString(), result.toString());
    }
 
@@ -391,7 +391,7 @@ public final class TestText extends TestCase {
        final ValueEval[] args = new ValueEval[] { strArg, };
 
        final ValueEval result = ASC.evaluate(args, -1, (short) -1);
-       final ValueEval testResult = new StringEval("ｱｲｳｴｵ");
+       final ValueEval testResult = new StringEval("�����");
        assertEquals(testResult.toString(), result.toString());
    }
 }

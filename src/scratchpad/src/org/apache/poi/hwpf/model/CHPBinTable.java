@@ -266,7 +266,7 @@ public class CHPBinTable
                     }
                 }
     
-                if ( chpxs.size() == 0 )
+                if ( chpxs.isEmpty() )
                 {
                     logger.log( POILogger.WARN, "Text piece [",
                             Integer.valueOf( startInclusive ), "; ",

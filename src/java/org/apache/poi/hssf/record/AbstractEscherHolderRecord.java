@@ -92,7 +92,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
 
         final String nl = System.lineSeparator();
         buffer.append('[' + getRecordName() + ']' + nl);
-        if (escherRecords.size() == 0)
+        if (escherRecords.isEmpty())
             buffer.append("No Escher Records Decoded" + nl);
         for ( Iterator<EscherRecord> iterator = escherRecords.iterator(); iterator.hasNext(); )
         {
@@ -111,7 +111,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
         LittleEndian.putShort( data, 0 + offset, getSid() );
         LittleEndian.putShort( data, 2 + offset, (short) ( getRecordSize() - 4 ) );
         byte[] rawData = getRawData();
-        if ( escherRecords.size() == 0 && rawData != null )
+        if ( escherRecords.isEmpty() && rawData != null )
         {
             LittleEndian.putShort(data, 0 + offset, getSid());
             LittleEndian.putShort(data, 2 + offset, (short)(getRecordSize() - 4));
@@ -132,7 +132,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
 
     public int getRecordSize() {
         byte[] rawData = getRawData();
-        if (escherRecords.size() == 0 && rawData != null) {
+        if (escherRecords.isEmpty() && rawData != null) {
             // XXX: It should be possible to derive this without concatenating the array, too.
             return rawData.length;
         }
@@ -257,7 +257,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
      */
     public void decode()
     {
-        if (null == escherRecords || 0 == escherRecords.size()){
+        if (null == escherRecords || escherRecords.isEmpty()){
             byte[] rawData = getRawData();
             convertToEscherRecords(0, rawData.length, rawData );
         }

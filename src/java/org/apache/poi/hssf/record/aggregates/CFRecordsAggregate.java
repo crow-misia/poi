@@ -24,9 +24,9 @@ import org.apache.poi.hssf.model.RecordStream;
 import org.apache.poi.hssf.record.CFHeaderRecord;
 import org.apache.poi.hssf.record.CFRuleRecord;
 import org.apache.poi.hssf.record.Record;
+import org.apache.poi.ss.formula.FormulaShifter;
 import org.apache.poi.ss.formula.ptg.AreaErrPtg;
 import org.apache.poi.ss.formula.ptg.AreaPtg;
-import org.apache.poi.ss.formula.FormulaShifter;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.util.CellRangeAddress;
 
@@ -183,8 +183,9 @@ public final class CFRecordsAggregate extends RecordAggregate {
 	public boolean updateFormulasAfterCellShift(FormulaShifter shifter, int currentExternSheetIx) {
 		CellRangeAddress[] cellRanges = header.getCellRanges();
 		boolean changed = false;
-		List temp = new ArrayList();
-		for (int i = 0; i < cellRanges.length; i++) {
+		final int n = cellRanges.length;
+		List<CellRangeAddress> temp = new ArrayList<>(n);
+		for (int i = 0; i < n; i++) {
 			CellRangeAddress craOld = cellRanges[i];
 			CellRangeAddress craNew = shiftRange(shifter, craOld, currentExternSheetIx);
 			if (craNew == null) {
@@ -198,10 +199,10 @@ public final class CFRecordsAggregate extends RecordAggregate {
 		}
 
 		if (changed) {
-			int nRanges = temp.size();
-			if (nRanges == 0) {
+			if (temp.isEmpty()) {
 				return false;
 			}
+			int nRanges = temp.size();
 			CellRangeAddress[] newRanges = new CellRangeAddress[nRanges];
 			temp.toArray(newRanges);
 			header.setCellRanges(newRanges);

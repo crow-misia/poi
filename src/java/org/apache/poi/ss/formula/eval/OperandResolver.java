@@ -250,7 +250,7 @@ public final class OperandResolver {
 		
 	    if (Pattern.matches(fpRegex, pText))
 			try {
-				return Double.parseDouble(pText);
+				return Double.valueOf(pText);
 			} catch (NumberFormatException e) {
 				return null;
 			}

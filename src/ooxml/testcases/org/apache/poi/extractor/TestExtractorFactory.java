@@ -462,7 +462,7 @@ public class TestExtractorFactory extends TestCase {
       assertEquals(true, ExtractorFactory.getThreadPrefersEventExtractors());
       assertEquals(null, ExtractorFactory.getAllThreadsPreferEventExtractors());
       
-      ExtractorFactory.setAllThreadsPreferEventExtractors(false);
+      ExtractorFactory.setAllThreadsPreferEventExtractors(Boolean.FALSE);
       
       assertEquals(false, ExtractorFactory.getPreferEventExtractor());
       assertEquals(true, ExtractorFactory.getThreadPrefersEventExtractors());

@@ -473,7 +473,7 @@ public class XWPFParagraph implements IBodyElement, IRunBody, ISDTContents {
     public void setBorderTop(Borders border) {
         CTPBdr ct = getCTPBrd(true);
 
-        CTBorder pr = (ct != null && ct.isSetTop()) ? ct.getTop() : ct.addNewTop();
+        CTBorder pr = ct.isSetTop() ? ct.getTop() : ct.addNewTop();
         if (border.getValue() == Borders.NONE.getValue())
             ct.unsetTop();
         else

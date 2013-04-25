@@ -79,17 +79,17 @@ public class TestUnicode extends TestCase {
         PropertySet ps =
             PropertySetFactory.create(new ByteArrayInputStream(b));
         Assert.assertTrue(ps.isDocumentSummaryInformation());
-        Assert.assertEquals(ps.getSectionCount(), 2);
+        Assert.assertEquals(2, ps.getSectionCount());
         Section s = (Section) ps.getSections().get(1);
-        Assert.assertEquals(s.getProperty(1),
-                            Integer.valueOf(CodePageUtil.CP_UTF16));
-        Assert.assertEquals(s.getProperty(2),
-                            Integer.valueOf(-96070278));
-        Assert.assertEquals(s.getProperty(3),
-                            "MCon_Info zu Office bei Schreiner");
-        Assert.assertEquals(s.getProperty(4),
-                            "petrovitsch@schreiner-online.de");
-        Assert.assertEquals(s.getProperty(5),
-                            "Petrovitsch, Wilhelm");
+        Assert.assertEquals(Integer.valueOf(CodePageUtil.CP_UTF16),
+                            s.getProperty(1));
+        Assert.assertEquals(Integer.valueOf(-96070278),
+                            s.getProperty(2));
+        Assert.assertEquals("MCon_Info zu Office bei Schreiner",
+                            s.getProperty(3));
+        Assert.assertEquals("petrovitsch@schreiner-online.de",
+                            s.getProperty(4));
+        Assert.assertEquals("Petrovitsch, Wilhelm",
+                            s.getProperty(5));
     }
 }
