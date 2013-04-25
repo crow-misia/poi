@@ -42,6 +42,7 @@ import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.util.DateConstants;
 
 /**
  * @author jfaenomoto@gmail.com
@@ -49,7 +50,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 @SuppressWarnings("deprecation") // YK: heavily uses deprecated {@link java.util.Date(int year, int month, int date)}
 public class TestWorkdayFunction extends TestCase {
 
-    private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+    private static final SimpleDateFormat formatter = DateConstants.yyyyMMdd.get();
 
     private static final String STARTING_DATE = formatter.format(new Date(108, OCTOBER, 1));
 

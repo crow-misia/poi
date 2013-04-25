@@ -60,11 +60,11 @@ public class FromHowTo {
 		Iterator<InputStream> sheets = r.getSheetsData();
 		while(sheets.hasNext()) {
 			System.out.println("Processing new sheet:\n");
-			InputStream sheet = sheets.next();
-			InputSource sheetSource = new InputSource(sheet);
-			parser.parse(sheetSource);
-			sheet.close();
-			System.out.println("");
+			try (InputStream sheet = sheets.next()) {
+				InputSource sheetSource = new InputSource(sheet);
+				parser.parse(sheetSource);
+			}
+			System.out.println();
 		}
 	}
 

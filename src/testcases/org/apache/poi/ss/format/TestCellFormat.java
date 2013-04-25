@@ -17,10 +17,11 @@
 package org.apache.poi.ss.format;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+
+import junit.framework.TestCase;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -28,8 +29,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-
-import junit.framework.TestCase;
+import org.apache.poi.util.DateConstants;
 
 public class TestCellFormat extends TestCase {
     
@@ -773,7 +773,7 @@ public class TestCellFormat extends TestCase {
     public void testApplyObjectDate() throws ParseException {
         
         CellFormat cf1 = CellFormat.getInstance("m/d/yyyy");
-        Date date1 = new SimpleDateFormat("M/d/y").parse("01/11/2012");
+        Date date1 = DateConstants.Mdy.get().parse("01/11/2012");
         assertEquals("1/11/2012", cf1.apply(date1).text);
         
     }
@@ -819,9 +819,9 @@ public class TestCellFormat extends TestCase {
         CellFormat cf2 = CellFormat.getInstance("General");
         CellFormat cf3 = CellFormat.getInstance("@");
         
-        assertEquals("TRUE", cf1.apply(true).text);
-        assertEquals("FALSE", cf2.apply(false).text);
-        assertEquals("TRUE", cf3.apply(true).text);
+        assertEquals("TRUE", cf1.apply(Boolean.TRUE).text);
+        assertEquals("FALSE", cf2.apply(Boolean.FALSE).text);
+        assertEquals("TRUE", cf3.apply(Boolean.TRUE).text);
         
     }
     

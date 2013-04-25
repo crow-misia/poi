@@ -104,7 +104,7 @@ public abstract class POIXMLRelation {
      *  e.g. /xl/comments4.xml
      */
     public String getFileName(int index) {
-        if(_defaultName.indexOf("#") == -1) {
+        if(_defaultName.indexOf('#') == -1) {
             // Generic filename in all cases
             return getDefaultFileName();
         }

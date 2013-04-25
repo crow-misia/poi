@@ -24,6 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import junit.framework.TestCase;
+
+import org.apache.poi.POIDataSamples;
 import org.apache.poi.hsmf.MAPIMessage;
 import org.apache.poi.hsmf.datatypes.AttachmentChunks;
 import org.apache.poi.hsmf.datatypes.ChunkGroup;
@@ -36,9 +39,7 @@ import org.apache.poi.hsmf.datatypes.StringChunk;
 import org.apache.poi.hsmf.datatypes.Types;
 import org.apache.poi.hsmf.exceptions.ChunkNotFoundException;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.POIDataSamples;
-
-import junit.framework.TestCase;
+import org.apache.poi.util.DateConstants;
 
 /**
  * Tests to verify that the chunk parser works properly
@@ -75,7 +76,7 @@ public final class TestPOIFSChunkParser extends TestCase {
       
       // Check date too
       try {
-         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+         SimpleDateFormat f = DateConstants.yyyyMMddHHmmss.get();
          
          Calendar c = msg.getMessageDate();
          assertEquals( "2007-06-14 09:42:55", f.format(c.getTime()) );

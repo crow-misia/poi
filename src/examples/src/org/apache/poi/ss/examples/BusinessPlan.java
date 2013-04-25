@@ -17,15 +17,24 @@
 
 package org.apache.poi.ss.examples;
 
-import org.apache.poi.xssf.usermodel.*;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Calendar;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.PrintSetup;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.DateConstants;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * A business plan demo
@@ -34,9 +43,9 @@ import java.text.SimpleDateFormat;
  *
  * @author Yegor Kozlov
  */
-public class BusinessPlan {
+public final class BusinessPlan {
 
-    private static SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM");
+    private static final ThreadLocal<SimpleDateFormat> fmt = DateConstants.ddMMM;
 
     private static final String[] titles = {
             "ID", "Project Name", "Owner", "Days", "Start", "End"};
@@ -113,7 +122,7 @@ public class BusinessPlan {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
 
-        calendar.setTime(fmt.parse("9-Jul"));
+        calendar.setTime(fmt.get().parse("9-Jul"));
         calendar.set(Calendar.YEAR, year);
         for (int i = 0; i < 11; i++) {
             Cell cell = headerRow.createCell(titles.length + i);
@@ -162,7 +171,7 @@ public class BusinessPlan {
                         cell.setCellValue(Integer.parseInt(data[i][j]));
                         break;
                     case 4: {
-                        calendar.setTime(fmt.parse(data[i][j]));
+                        calendar.setTime(fmt.get().parse(data[i][j]));
                         calendar.set(Calendar.YEAR, year);
                         cell.setCellValue(calendar);
                         styleName = isHeader ? "cell_b_date" : "cell_normal_date";

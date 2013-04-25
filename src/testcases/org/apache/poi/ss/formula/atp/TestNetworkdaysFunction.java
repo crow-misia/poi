@@ -39,6 +39,7 @@ import org.apache.poi.ss.formula.eval.AreaEvalBase;
 import org.apache.poi.ss.formula.eval.NumericValueEval;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
+import org.apache.poi.util.DateConstants;
 
 /**
  * @author jfaenomoto@gmail.com
@@ -46,7 +47,7 @@ import org.apache.poi.ss.formula.eval.ValueEval;
 @SuppressWarnings("deprecation") // YK: uses deprecated {@link java.util.Date(int year, int month, int date)}
 public class TestNetworkdaysFunction extends TestCase {
 
-    private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+    private static final SimpleDateFormat formatter = DateConstants.yyyyMMdd.get();
 
     private static final String STARTING_DATE = formatter.format(new Date(108, OCTOBER, 1));
 

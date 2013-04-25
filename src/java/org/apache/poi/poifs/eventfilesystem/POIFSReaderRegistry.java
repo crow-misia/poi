@@ -19,7 +19,11 @@
 
 package org.apache.poi.poifs.eventfilesystem;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.poi.poifs.filesystem.DocumentDescriptor;
 import org.apache.poi.poifs.filesystem.POIFSDocumentPath;
@@ -32,24 +36,24 @@ import org.apache.poi.poifs.filesystem.POIFSDocumentPath;
  * @version %I%, %G%
  */
 
-class POIFSReaderRegistry
+final class POIFSReaderRegistry
 {
 
     // the POIFSReaderListeners who listen to all POIFSReaderEvents
-    private Set omnivorousListeners;
+    private Set<POIFSReaderListener> omnivorousListeners;
 
     // Each mapping in this Map has a key consisting of a
     // POIFSReaderListener and a value cosisting of a Set of
     // DocumentDescriptors for the documents that POIFSReaderListener
     // is interested in; used to efficiently manage the registry
-    private Map selectiveListeners;
+    private Map<POIFSReaderListener, Set<DocumentDescriptor>> selectiveListeners;
 
     // Each mapping in this Map has a key consisting of a
     // DocumentDescriptor and a value consisting of a Set of
     // POIFSReaderListeners for the document matching that
     // DocumentDescriptor; used when a document is found, to quickly
     // get the listeners interested in that document
-    private Map chosenDocumentDescriptors;
+    private Map<DocumentDescriptor, Set<POIFSReaderListener>> chosenDocumentDescriptors;
 
     /**
      * Construct the registry
@@ -57,9 +61,9 @@ class POIFSReaderRegistry
 
     POIFSReaderRegistry()
     {
-        omnivorousListeners       = new HashSet();
-        selectiveListeners        = new HashMap();
-        chosenDocumentDescriptors = new HashMap();
+        omnivorousListeners       = new HashSet<>();
+        selectiveListeners        = new HashMap<>();
+        chosenDocumentDescriptors = new HashMap<>();
     }
 
     /**
@@ -79,13 +83,13 @@ class POIFSReaderRegistry
 
             // not an omnivorous listener (if it was, this method is a
             // no-op)
-            Set descriptors = ( Set ) selectiveListeners.get(listener);
+            Set<DocumentDescriptor> descriptors = selectiveListeners.get(listener);
 
             if (descriptors == null)
             {
 
                 // this listener has not registered before
-                descriptors = new HashSet();
+                descriptors = new HashSet<>();
                 selectiveListeners.put(listener, descriptors);
             }
             DocumentDescriptor descriptor = new DocumentDescriptor(path,
@@ -97,14 +101,13 @@ class POIFSReaderRegistry
                 // this listener wasn't already listening for this
                 // document -- add the listener to the set of
                 // listeners for this document
-                Set listeners =
-                    ( Set ) chosenDocumentDescriptors.get(descriptor);
+                Set<POIFSReaderListener> listeners = chosenDocumentDescriptors.get(descriptor);
 
                 if (listeners == null)
                 {
 
                     // nobody was listening for this document before
-                    listeners = new HashSet();
+                    listeners = new HashSet<>();
                     chosenDocumentDescriptors.put(descriptor, listeners);
                 }
                 listeners.add(listener);
@@ -141,12 +144,11 @@ class POIFSReaderRegistry
      * @return an Iterator POIFSReaderListeners; may be empty
      */
 
-    Iterator getListeners(final POIFSDocumentPath path, final String name)
+    Iterator<POIFSReaderListener> getListeners(final POIFSDocumentPath path, final String name)
     {
-        Set rval               = new HashSet(omnivorousListeners);
-        Set selectiveListeners =
-            ( Set ) chosenDocumentDescriptors.get(new DocumentDescriptor(path,
-                name));
+        Set<POIFSReaderListener> rval               = new HashSet<>(omnivorousListeners);
+        Set<POIFSReaderListener> selectiveListeners =
+                chosenDocumentDescriptors.get(new DocumentDescriptor(path, name));
 
         if (selectiveListeners != null)
         {
@@ -157,15 +159,13 @@ class POIFSReaderRegistry
 
     private void removeSelectiveListener(final POIFSReaderListener listener)
     {
-        Set selectedDescriptors = ( Set ) selectiveListeners.remove(listener);
+        Set<DocumentDescriptor> selectedDescriptors = selectiveListeners.remove(listener);
 
         if (selectedDescriptors != null)
         {
-            Iterator iter = selectedDescriptors.iterator();
-
-            while (iter.hasNext())
+            for (final DocumentDescriptor d : selectedDescriptors)
             {
-                dropDocument(listener, ( DocumentDescriptor ) iter.next());
+                dropDocument(listener, d);
             }
         }
     }
@@ -173,10 +173,10 @@ class POIFSReaderRegistry
     private void dropDocument(final POIFSReaderListener listener,
                               final DocumentDescriptor descriptor)
     {
-        Set listeners = ( Set ) chosenDocumentDescriptors.get(descriptor);
+        Set<POIFSReaderListener> listeners = chosenDocumentDescriptors.get(descriptor);
 
         listeners.remove(listener);
-        if (listeners.size() == 0)
+        if (listeners.isEmpty())
         {
             chosenDocumentDescriptors.remove(descriptor);
         }

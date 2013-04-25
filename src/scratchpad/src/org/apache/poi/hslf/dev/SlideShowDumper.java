@@ -384,19 +384,19 @@ public void walkTree(int depth, int startPos, int maxLen) {
 			if(bv < 0) { bv += 256; }
 			System.out.print(i + "=" + bv + " (" + makeHex(bv) + ")  ");
 		}
-		System.out.println("");
+		System.out.println();
 		System.out.print(ind);
 		for(int i=20; i<28; i++) {
 			short bv = _docstream[i+pos];
 			if(bv < 0) { bv += 256; }
 			System.out.print(i + "=" + bv + " (" + makeHex(bv) + ")  ");
 		}
-		System.out.println("");
+		System.out.println();
 	}
 
 
 	// Blank line before next entry
-	System.out.println("");
+	System.out.println();
 
 	// Look in children if we are a container
 	if(type == 61443l || type == 61444l) {

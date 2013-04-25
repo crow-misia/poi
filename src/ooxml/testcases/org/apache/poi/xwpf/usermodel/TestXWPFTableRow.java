@@ -50,7 +50,7 @@ public class TestXWPFTableRow extends TestCase {
 
             tr.setCantSplitRow(true);
             boolean isCant = tr.isCantSplitRow();
-            assert(isCant);
+            assertTrue(isCant);
 	}
 
 	public void testSetGetRepeatHeader() {
@@ -64,6 +64,6 @@ public class TestXWPFTableRow extends TestCase {
 
             tr.setRepeatHeader(true);
             boolean isRpt = tr.isRepeatHeader();
-            assert(isRpt);
+            assertTrue(isRpt);
 	}
 }

@@ -151,19 +151,11 @@ public class XWPFPictureData extends POIXMLDocumentPart {
 
     public Long getChecksum() {
         if (this.checksum == null) {
-            InputStream is = null;
             byte[] data;
-            try {
-                is = getPackagePart().getInputStream();
+            try (InputStream is = getPackagePart().getInputStream()) {
                 data = IOUtils.toByteArray(is);
             } catch (IOException e) {
                 throw new POIXMLException(e);
-            } finally {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    throw new POIXMLException(e);
-                }
             }
             this.checksum = IOUtils.calculateChecksum(data);
         }

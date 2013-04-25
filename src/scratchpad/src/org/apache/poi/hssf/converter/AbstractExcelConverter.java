@@ -18,7 +18,6 @@ package org.apache.poi.hssf.converter;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -27,6 +26,7 @@ import org.apache.poi.hwpf.converter.DefaultFontReplacer;
 import org.apache.poi.hwpf.converter.FontReplacer;
 import org.apache.poi.hwpf.converter.NumberFormatter;
 import org.apache.poi.ss.formula.eval.ErrorEval;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.util.Beta;
 import org.w3c.dom.Document;
 
@@ -51,7 +51,7 @@ public abstract class AbstractExcelConverter
                 .getDefaultColumnWidth() );
     }
 
-    protected final HSSFDataFormatter _formatter = new HSSFDataFormatter();
+    protected final DataFormatter _formatter = new DataFormatter();
 
     private FontReplacer fontReplacer = new DefaultFontReplacer();
 

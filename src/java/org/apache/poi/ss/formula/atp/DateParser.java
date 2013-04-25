@@ -29,9 +29,9 @@ import org.apache.poi.ss.formula.eval.EvaluationException;
  * 
  * @author jfaenomoto@gmail.com
  */
-public class DateParser {
+public final class DateParser {
 
-    public DateParser instance = new DateParser();
+    public static final DateParser instance = new DateParser();
 
     private DateParser() {
         // enforcing singleton

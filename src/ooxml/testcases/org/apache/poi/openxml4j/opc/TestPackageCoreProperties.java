@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 import junit.framework.TestCase;
 
@@ -31,6 +30,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.apache.poi.openxml4j.opc.internal.PackagePropertiesPart;
 import org.apache.poi.openxml4j.util.Nullable;
+import org.apache.poi.util.DateConstants;
 import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -66,8 +66,7 @@ public final class TestPackageCoreProperties extends TestCase {
 		// Open package
 		OPCPackage p = OPCPackage.open(inputPath, PackageAccess.READ_WRITE);
 
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+		SimpleDateFormat df = DateConstants.yyyyMMddTHHmmssZ.get();
 		Date dateToInsert = df.parse("2007-05-12T08:00:00Z", new ParsePosition(
 				0));
 
@@ -99,8 +98,7 @@ public final class TestPackageCoreProperties extends TestCase {
 	}
 
 	private void compareProperties(OPCPackage p) throws InvalidFormatException {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-		df.setTimeZone(TimeZone.getTimeZone("UTC"));
+		SimpleDateFormat df = DateConstants.yyyyMMddTHHmmssZ.get();
 		Date expectedDate = df.parse("2007-05-12T08:00:00Z", new ParsePosition(
 				0));
 
@@ -127,8 +125,7 @@ public final class TestPackageCoreProperties extends TestCase {
 	}
 
     public void testCoreProperties_bug51374() throws Exception {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat df = DateConstants.yyyyMMddTHHmmssZ.get();
         String strDate = "2007-05-12T08:00:00Z";
         Date date = df.parse(strDate);
 

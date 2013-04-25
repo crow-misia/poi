@@ -198,7 +198,7 @@ public final class PackagingURIHelper {
 	 */
 	public static String getFilenameWithoutExtension(URI uri) {
 		String filename = getFilename(uri);
-		int dotIndex = filename.lastIndexOf(".");
+		int dotIndex = filename.lastIndexOf('.');
 		if (dotIndex == -1)
 			return filename;
 		return filename.substring(0, dotIndex);
@@ -352,8 +352,6 @@ public final class PackagingURIHelper {
                 // "/ppt/slides/slide1.xml" and the targetURI is "slide1.xml" then
                 // this it should be relativized as "slide1.xml", i.e. the last segment.
                 retVal.append(segmentsSource[segmentsSource.length - 1]);
-            } else {
-                retVal.append("");
             }
 
 		} else {
@@ -696,7 +694,7 @@ public final class PackagingURIHelper {
      */
     public static URI toURI(String value) throws URISyntaxException  {
         //5. Convert all back slashes to forward slashes
-        if (value.indexOf("\\") != -1) {
+        if (value.indexOf('\\') != -1) {
              value = value.replace('\\', '/');
         }
 

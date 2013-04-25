@@ -17,10 +17,14 @@
 
 package org.apache.poi.hslf.record;
 
-import java.io.*;
-import java.util.zip.InflaterInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Map;
 import java.util.zip.DeflaterOutputStream;
-import java.util.Hashtable;
+import java.util.zip.InflaterInputStream;
 
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.BoundedInputStream;
@@ -181,7 +185,7 @@ public class ExOleObjStg extends RecordAtom implements PositionDependentRecord, 
         myLastOnDiskOffset = offset;
     }
 
-    public void updateOtherRecordReferences(Hashtable<Integer,Integer> oldToNewReferencesLookup) {
+    public void updateOtherRecordReferences(Map<Integer,Integer> oldToNewReferencesLookup) {
         return;
     }
 

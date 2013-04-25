@@ -25,7 +25,7 @@ import org.apache.poi.ss.util.CellReference;
  *
  * @author Aniket Banerjee (banerjee@google.com)
  */
-public class Address implements Function {
+public final class Address implements Function {
     public static final int REF_ABSOLUTE = 1;
     public static final int REF_ROW_ABSOLUTE_COLUMN_RELATIVE = 2;
     public static final int REF_ROW_RELATIVE_RELATIVE_ABSOLUTE = 3;

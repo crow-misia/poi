@@ -58,7 +58,7 @@ public final class SlideIdListing {
 			}
 		}
 
-		System.out.println("");
+		System.out.println();
 
 
 		// Look for SlidePersistAtoms, and report what they have to
@@ -76,7 +76,7 @@ public final class SlideIdListing {
 			}
 		}
 
-		System.out.println("");
+		System.out.println();
 
 		// Look for latest core records that are slides or notes
 		for(int i=0; i<latestRecords.length; i++) {
@@ -91,7 +91,7 @@ public final class SlideIdListing {
 				System.out.println("\tNotes ID is " + sa.getNotesID());
 			}
 		}
-		System.out.println("");
+		System.out.println();
 		for(int i=0; i<latestRecords.length; i++) {
 			if(latestRecords[i] instanceof Notes) {
 				Notes n = (Notes)latestRecords[i];
@@ -104,7 +104,7 @@ public final class SlideIdListing {
 			}
 		}
 
-		System.out.println("");
+		System.out.println();
 
 		// Find any persist ones first
 		int pos = 0;
@@ -146,7 +146,7 @@ public final class SlideIdListing {
 			pos += baos.size();
 		}
 
-		System.out.println("");
+		System.out.println();
 	}
 
 

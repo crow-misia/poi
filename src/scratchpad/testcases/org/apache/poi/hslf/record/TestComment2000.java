@@ -18,10 +18,13 @@
 package org.apache.poi.hslf.record;
 
 
-import junit.framework.TestCase;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import junit.framework.TestCase;
+
+import org.apache.poi.util.DateConstants;
 
 /**
  * Tests that Comment2000 works properly.
@@ -82,7 +85,7 @@ public final class TestComment2000 extends TestCase {
 		0x0A, 00, 00, 00
 		};
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	private final SimpleDateFormat sdf = DateConstants.yyyyMMddHHmmssSSS.get();
 
     public void testRecordType() {
 		Comment2000 ca = new Comment2000(data_a, 0, data_a.length);

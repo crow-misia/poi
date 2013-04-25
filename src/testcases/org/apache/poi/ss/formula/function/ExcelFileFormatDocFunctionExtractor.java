@@ -484,9 +484,9 @@ public final class ExcelFileFormatDocFunctionExtractor {
 			// identify the source file
 			ps.print("# from source file '" + SOURCE_DOC_FILE_NAME + "'");
 			ps.println(" (size=" + effDocFile.length() + ", md5=" + getFileMD5(effDocFile) + ")");
-			ps.println("#");
+			ps.println('#');
 			ps.println("#Columns: (index, name, minParams, maxParams, returnClass, paramClasses, isVolatile, hasFootnote )");
-			ps.println("");
+			ps.println();
 			try (final ZipFile zf = new ZipFile(effDocFile)) {
 				InputStream is = zf.getInputStream(zf.getEntry("content.xml"));
 				extractFunctionData(new FunctionDataCollector(ps), is);

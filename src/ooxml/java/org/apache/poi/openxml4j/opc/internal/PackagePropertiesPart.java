@@ -22,7 +22,6 @@ import java.io.OutputStream;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
@@ -32,7 +31,7 @@ import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackagePartName;
 import org.apache.poi.openxml4j.opc.PackageProperties;
 import org.apache.poi.openxml4j.util.Nullable;
-import org.apache.poi.util.StringUtil;
+import org.apache.poi.util.DateConstants;
 
 /**
  * Represents the core properties part of a package.
@@ -41,22 +40,8 @@ import org.apache.poi.util.StringUtil;
  */
 public final class PackagePropertiesPart extends PackagePart implements
 		PackageProperties {
-	private static final ThreadLocal<SimpleDateFormat> DATE_FORMAT = new ThreadLocal<SimpleDateFormat>() {
-		@Override
-		protected SimpleDateFormat initialValue() {
-			final SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-			f.setTimeZone(TimeZone.getTimeZone("UTC"));
-			return f;
-		}
-	};
-	private static final ThreadLocal<SimpleDateFormat> DATE2_FORMAT = new ThreadLocal<SimpleDateFormat>() {
-		@Override
-		protected SimpleDateFormat initialValue() {
-			final SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-			f.setTimeZone(TimeZone.getTimeZone("UTC"));
-			return f;
-		}
-	};
+	private static final ThreadLocal<SimpleDateFormat> DATE_FORMAT = DateConstants.yyyyMMddTHHmmssZ;
+	private static final ThreadLocal<SimpleDateFormat> DATE2_FORMAT = DateConstants.yyyyMMddTHHmmssSSSZ;
 
 	public final static String NAMESPACE_DC_URI = "http://purl.org/dc/elements/1.1/";
 
