@@ -21,6 +21,8 @@ package org.apache.poi.hslf.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.poi.util.DateConstants;
+
 import junit.framework.TestCase;
 
 /**
@@ -43,7 +45,7 @@ public final class TestSystemTimeUtils extends TestCase {
 		0x0A, 00, 00, 00
 	};
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+	private final SimpleDateFormat sdf = DateConstants.yyyyMMddHHmmssSSS.get();
 
 	public void testGetDateA() throws Exception {
 		Date date = SystemTimeUtils.getDate(data_a);

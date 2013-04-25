@@ -23,6 +23,8 @@ import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.poi.util.DateConstants;
+
 /**
  * Tests that Comment2000Atom works properly.
  *
@@ -45,7 +47,7 @@ public final class TestComment2000Atom extends TestCase {
 		0x0E, 00, 00, 00
 		};
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+	private final SimpleDateFormat sdf = DateConstants.yyyyMMddHHmmssSSS.get();
 
 	public void testRecordType() {
 		Comment2000Atom ca = new Comment2000Atom(data_a, 0, data_a.length);

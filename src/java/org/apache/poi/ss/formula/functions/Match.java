@@ -235,11 +235,4 @@ public final class Match extends Var2or3ArgFunction {
 	private static LookupValueComparer createLookupComparer(ValueEval lookupValue, boolean matchExact) {
 		return LookupUtils.createLookupComparer(lookupValue, matchExact, true);
 	}
-
-	private static boolean isLookupValueWild(String stringValue) {
-		if(stringValue.indexOf('?') >=0 || stringValue.indexOf('*') >=0) {
-			return true;
-		}
-		return false;
-	}
 }

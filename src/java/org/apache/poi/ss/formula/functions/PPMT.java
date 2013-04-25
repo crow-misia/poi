@@ -19,9 +19,10 @@
 
 package org.apache.poi.ss.formula.functions;
 
-import org.apache.poi.ss.formula.*;
-import org.apache.poi.ss.formula.functions.*;
-import org.apache.poi.ss.formula.eval.*;
+import org.apache.poi.ss.formula.eval.ErrorEval;
+import org.apache.poi.ss.formula.eval.EvaluationException;
+import org.apache.poi.ss.formula.eval.OperandResolver;
+import org.apache.poi.ss.formula.eval.ValueEval;
 
 /**
   * Compute the interest portion of a payment.

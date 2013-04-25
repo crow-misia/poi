@@ -40,9 +40,9 @@ public class XWPFLatentStyles {
 	*/
 	protected boolean isLatentStyle(String latentStyleID){	
 		for ( CTLsdException lsd: latentStyles.getLsdExceptionList()) {
-			if(lsd.getName().equals(latentStyleID));
+			if(lsd.getName().equals(latentStyleID))
 				return true;
 		}
-		return false;		
+		return false;
 	}
 }

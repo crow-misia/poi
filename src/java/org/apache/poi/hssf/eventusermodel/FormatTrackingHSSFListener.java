@@ -30,7 +30,7 @@ import org.apache.poi.hssf.record.FormulaRecord;
 import org.apache.poi.hssf.record.NumberRecord;
 import org.apache.poi.hssf.record.Record;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
-import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
@@ -42,7 +42,7 @@ import org.apache.poi.util.POILogger;
 public class FormatTrackingHSSFListener implements HSSFListener {
 	private static final POILogger logger = POILogFactory.getLogger(FormatTrackingHSSFListener.class);
 	private final HSSFListener _childListener;
-	private final HSSFDataFormatter _formatter;
+	private final DataFormatter _formatter;
 	private final NumberFormat _defaultFormat;
 	private final Map<Integer, FormatRecord> _customFormatRecords = new Hashtable<>();
 	private final List<ExtendedFormatRecord> _xfRecords = new ArrayList<>();
@@ -62,7 +62,7 @@ public class FormatTrackingHSSFListener implements HSSFListener {
 	public FormatTrackingHSSFListener(
 			HSSFListener childListener, Locale locale) {
 		_childListener = childListener;
-		_formatter = new HSSFDataFormatter(locale);
+		_formatter = new DataFormatter(locale);
 		_defaultFormat = NumberFormat.getInstance(locale);
 	}
 

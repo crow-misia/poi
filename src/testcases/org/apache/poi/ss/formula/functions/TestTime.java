@@ -24,10 +24,10 @@ import junit.framework.TestCase;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
-import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.DataFormatter;
 
 /**
  * Tests for {@link TimeFunc}
@@ -41,7 +41,7 @@ public final class TestTime extends TestCase {
 	private static final double SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR;
 	private HSSFCell cell11;
 	private HSSFFormulaEvaluator evaluator;
-	private HSSFDataFormatter form;
+	private DataFormatter form;
 	private HSSFCellStyle style;
 
 	public void setUp() {
@@ -52,7 +52,7 @@ public final class TestTime extends TestCase {
 		style.setDataFormat(fmt.getFormat("hh:mm:ss"));
 
 		cell11 = sheet.createRow(0).createCell(0);
-		form = new HSSFDataFormatter();
+		form = new DataFormatter();
 
 		evaluator = new HSSFFormulaEvaluator(wb);
 	}

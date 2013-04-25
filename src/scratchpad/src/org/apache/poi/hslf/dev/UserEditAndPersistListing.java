@@ -46,7 +46,7 @@ public final class UserEditAndPersistListing {
 		// Create the slideshow object, for normal working with
 		HSLFSlideShow ss = new HSLFSlideShow(args[0]);
 		fileContents = ss.getUnderlyingBytes();
-		System.out.println("");
+		System.out.println();
 
 		// Find any persist ones first
 		Record[] records = ss.getRecords();
@@ -89,7 +89,7 @@ public final class UserEditAndPersistListing {
 			pos += baos.size();
 		}
 
-		System.out.println("");
+		System.out.println();
 
 		pos = 0;
 		// Now look for UserEditAtoms
@@ -111,7 +111,7 @@ public final class UserEditAndPersistListing {
 			pos += baos.size();
 		}
 
-		System.out.println("");
+		System.out.println();
 
 
 		// Query the CurrentUserAtom
@@ -119,7 +119,7 @@ public final class UserEditAndPersistListing {
 		System.out.println("Checking Current User Atom");
 		System.out.println("  Thinks the CurrentEditOffset is " + cua.getCurrentEditOffset());
 
-		System.out.println("");
+		System.out.println();
 	}
 
 

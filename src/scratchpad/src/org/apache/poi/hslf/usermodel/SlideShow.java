@@ -357,7 +357,7 @@ public final class SlideShow {
 		// notesSLWT
 		org.apache.poi.hslf.record.Notes[] notesRecords;
 		SlideAtomsSet[] notesSets = new SlideAtomsSet[0];
-		Hashtable<Integer,Integer> slideIdToNotes = new Hashtable<>();
+		final Map<Integer,Integer> slideIdToNotes = new HashMap<>();
 		if (notesSLWT == null) {
 			// None
 			notesRecords = new org.apache.poi.hslf.record.Notes[0];

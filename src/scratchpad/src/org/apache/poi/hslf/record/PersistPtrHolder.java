@@ -183,14 +183,14 @@ public final class PersistPtrHolder extends PositionDependentRecordAtom
 	 * At write-out time, update the references to the sheets to their
 	 *  new positions
 	 */
-	public void updateOtherRecordReferences(Hashtable<Integer,Integer> oldToNewReferencesLookup) {
+	public void updateOtherRecordReferences(Map<Integer,Integer> oldToNewReferencesLookup) {
 		int[] slideIDs = getKnownSlideIDs();
 
 		// Loop over all the slides we know about
 		// Find where they used to live, and where they now live
 		// Then, update the right bit of _ptrData with their new location
-		for(int i=0; i<slideIDs.length; i++) {
-			Integer id = Integer.valueOf(slideIDs[i]);
+		for(final int slideID : slideIDs) {
+			Integer id = Integer.valueOf(slideID);
 			Integer oldPos = (Integer)_slideLocations.get(id);
 			Integer newPos = (Integer)oldToNewReferencesLookup.get(oldPos);
 

@@ -18,15 +18,16 @@
 package org.apache.poi.ss.formula.functions;
 
 import java.text.DecimalFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import junit.framework.TestCase;
+
 import org.apache.poi.ss.formula.eval.ErrorEval;
 import org.apache.poi.ss.formula.eval.NumberEval;
-import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.formula.eval.StringEval;
+import org.apache.poi.ss.formula.eval.ValueEval;
+import org.apache.poi.util.DateConstants;
 
 /**
  * Test case for TEXT()
@@ -109,7 +110,7 @@ public final class TestText extends TestCase {
       assertEquals(testResult.toString(), result.toString());
 
       // this line is intended to compute how "November" would look like in the current locale
-      String november = new SimpleDateFormat("MMMM").format(new GregorianCalendar(2010,10,15).getTime());
+      String november = DateConstants.MMMM.get().format(new GregorianCalendar(2010,10,15).getTime());
 
       // Again with Java style
       formatArg = new StringEval("MMMM dd, yyyy");

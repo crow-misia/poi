@@ -195,9 +195,8 @@ public final class SlideShowRecordDumper {
   }
 
   public String printEscherContainerRecord( EscherContainerRecord ecr ) {
-  		String indent = "";
-
-        String nl = System.lineSeparator();
+        final String newIndent = "   ";
+        final String nl = System.lineSeparator();
 
         StringBuilder children = new StringBuilder();
         int count = 0;
@@ -206,7 +205,6 @@ public final class SlideShowRecordDumper {
             if (count < 1) {
                 children.append( "  children: " + nl );
             }
-            String newIndent = "   ";
 
             EscherRecord record = iterator.next();
             children.append(newIndent + "Child " + count + ":" + nl);
@@ -217,12 +215,12 @@ public final class SlideShowRecordDumper {
         }
 
         return
-        	indent + ecr.getClass().getName() + " (" + ecr.getRecordName() + "):" + nl +
-            indent + "  isContainer: " + ecr.isContainerRecord() + nl +
-            indent + "  options: 0x" + HexDump.toHex( ecr.getOptions() ) + nl +
-            indent + "  recordId: 0x" + HexDump.toHex( ecr.getRecordId() ) + nl +
-            indent + "  numchildren: " + ecr.getChildRecords().size() + nl +
-            indent + children.toString();
+            ecr.getClass().getName() + " (" + ecr.getRecordName() + "):" + nl +
+            "  isContainer: " + ecr.isContainerRecord() + nl +
+            "  options: 0x" + HexDump.toHex( ecr.getOptions() ) + nl +
+            "  recordId: 0x" + HexDump.toHex( ecr.getRecordId() ) + nl +
+            "  numchildren: " + ecr.getChildRecords().size() + nl +
+            children.toString();
   }
 
 

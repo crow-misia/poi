@@ -452,7 +452,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 			try {
 				thumbnailPartName = PackagingURIHelper
 						.createPartName("/docProps/thumbnail"
-								+ path.substring(path.lastIndexOf(".") + 1));
+								+ path.substring(path.lastIndexOf('.') + 1));
 			} catch (InvalidFormatException e2) {
 				throw new InvalidOperationException(
 						"Can't add a thumbnail file named '" + filename + "'");

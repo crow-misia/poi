@@ -31,12 +31,11 @@ import java.util.Map;
  */
 public class ExcelAntWorkbookUtilFactory {
     
-    private static Map<String, ExcelAntWorkbookUtil> workbookUtilMap ;
+    private static final Map<String, ExcelAntWorkbookUtil> workbookUtilMap = new HashMap<>();
     
-    private static ExcelAntWorkbookUtilFactory factory ;
+    private static final ExcelAntWorkbookUtilFactory factory = new ExcelAntWorkbookUtilFactory();
     
     private ExcelAntWorkbookUtilFactory() {
-        workbookUtilMap = new HashMap<>() ; 
     }
     
     /**
@@ -47,18 +46,12 @@ public class ExcelAntWorkbookUtilFactory {
      * @return
      */
     public static ExcelAntWorkbookUtil getInstance( String fileName ) {
-        
-        if( factory == null ) {
-            factory = new ExcelAntWorkbookUtilFactory() ;
-        }
-        if( workbookUtilMap != null && 
-                workbookUtilMap.containsKey( fileName ) ) {
+        if( workbookUtilMap.containsKey( fileName ) ) {
             return workbookUtilMap.get( fileName ) ;
-        } else {
-            ExcelAntWorkbookUtil wbu = new ExcelAntWorkbookUtil( fileName ) ;
-            workbookUtilMap.put( fileName, wbu ) ;
-            return wbu ;
         }
+        ExcelAntWorkbookUtil wbu = new ExcelAntWorkbookUtil( fileName ) ;
+        workbookUtilMap.put( fileName, wbu ) ;
+        return wbu ;
     }
 
 }

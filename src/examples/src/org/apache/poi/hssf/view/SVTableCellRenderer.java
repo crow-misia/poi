@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.text.*;
 
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.util.DateConstants;
 
 
 /**
@@ -39,10 +40,12 @@ import org.apache.poi.hssf.usermodel.*;
  *
  * @author Andrew C. Oliver
  */
-public class SVTableCellRenderer extends JLabel
+public final class SVTableCellRenderer extends JLabel
     implements TableCellRenderer, Serializable
 {
-    protected static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
+    private static final long serialVersionUID = 1L;
+
+    protected static final Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
     protected SVBorder cellBorder = new SVBorder();
 
 
@@ -71,15 +74,15 @@ public class SVTableCellRenderer extends JLabel
         textFormatter[0x0B] = new DecimalFormat("0.00E0");
         textFormatter[0x0C] = new SVFractionalFormat("# ?/?");
         textFormatter[0x0D] = new SVFractionalFormat("# ??/??");
-        textFormatter[0x0E] = new SimpleDateFormat("M/d/yy");
-        textFormatter[0x0F] = new SimpleDateFormat("d-MMM-yy");
-        textFormatter[0x10] = new SimpleDateFormat("d-MMM");
-        textFormatter[0x11] = new SimpleDateFormat("MMM-yy");
-        textFormatter[0x12] = new SimpleDateFormat("h:mm a");
-        textFormatter[0x13] = new SimpleDateFormat("h:mm:ss a");
-        textFormatter[0x14] = new SimpleDateFormat("h:mm");
-        textFormatter[0x15] = new SimpleDateFormat("h:mm:ss");
-        textFormatter[0x16] = new SimpleDateFormat("M/d/yy h:mm");
+        textFormatter[0x0E] = DateConstants.Mdyy.get();
+        textFormatter[0x0F] = DateConstants.dMMMyy.get();
+        textFormatter[0x10] = DateConstants.dMMM.get();
+        textFormatter[0x11] = DateConstants.MMMyy.get();
+        textFormatter[0x12] = DateConstants.hmma.get();
+        textFormatter[0x13] = DateConstants.hmmssa.get();
+        textFormatter[0x14] = DateConstants.hmm.get();
+        textFormatter[0x15] = DateConstants.hmmss.get();
+        textFormatter[0x16] = DateConstants.Mdyyhmm.get();
         // 0x17 - 0x24 reserved for international and undocumented 0x25, "(#,##0_);(#,##0)"
         //start at 0x26
         //jmh need to do colour
@@ -93,9 +96,9 @@ public class SVTableCellRenderer extends JLabel
 //??        textFormatter[0x2A] = new DecimalFormat("_($*#,##0_);_($*(#,##0);_($* \"-\"_);_(@_)");
 //??        textFormatter[0x2B] = new DecimalFormat("_(*#,##0.00_);_(*(#,##0.00);_(*\"-\"??_);_(@_)");
 //??        textFormatter[0x2C] = new DecimalFormat("_($*#,##0.00_);_($*(#,##0.00);_($*\"-\"??_);_(@_)");
-        textFormatter[0x2D] = new SimpleDateFormat("mm:ss");
+        textFormatter[0x2D] = DateConstants.mmss.get();
 //??        textFormatter[0x2E] = new SimpleDateFormat("[h]:mm:ss");
-        textFormatter[0x2F] = new SimpleDateFormat("mm:ss.0");
+        textFormatter[0x2F] = DateConstants.mmss0.get();
         textFormatter[0x30] = new DecimalFormat("##0.0E0");
       }
 
@@ -257,7 +260,7 @@ public class SVTableCellRenderer extends JLabel
 
     protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
 	// Strings get interned...
-	if (propertyName=="text") {
+	if ("text".equals(propertyName)) {
 	    super.firePropertyChange(propertyName, oldValue, newValue);
 	}
     }

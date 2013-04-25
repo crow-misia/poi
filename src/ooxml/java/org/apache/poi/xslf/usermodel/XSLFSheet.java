@@ -508,7 +508,7 @@ public abstract class XSLFSheet extends POIXMLDocumentPart implements XSLFShapeC
             // restore the coordinate system
             graphics.setTransform(at);
 
-            graphics.setRenderingHint(XSLFRenderingHint.GRESTORE, true);
+            graphics.setRenderingHint(XSLFRenderingHint.GRESTORE, Boolean.TRUE);
 
         }
     }

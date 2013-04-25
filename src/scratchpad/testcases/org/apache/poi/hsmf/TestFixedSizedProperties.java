@@ -38,6 +38,7 @@ import org.apache.poi.hsmf.datatypes.PropertyValue.TimePropertyValue;
 import org.apache.poi.hsmf.dev.HSMFDump;
 import org.apache.poi.hsmf.extractor.OutlookTextExtactor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.DateConstants;
 
 /**
  * Tests that we can read fixed sized properties, as well as variable

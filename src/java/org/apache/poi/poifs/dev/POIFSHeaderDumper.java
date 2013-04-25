@@ -104,7 +104,7 @@ public class POIFSHeaderDumper {
       System.out.println(" SBAT (MiniFAT) block count: " + header_block.getSBATCount());
       System.out.println(" SBAT (MiniFAT) block 1 at: " + header_block.getSBATStart());
       System.out.println(" Property table at: " + header_block.getPropertyStart());
-      System.out.println("");
+      System.out.println();
 	}
 
    public static void displayRawBlocksSummary(RawDataBlockList data_blocks) throws Exception {
@@ -123,7 +123,7 @@ public class POIFSHeaderDumper {
          System.out.println(HexDump.dump(data, 0, 0));
       }
       
-      System.out.println("");
+      System.out.println();
    }
    
    public static void displayBATReader(BlockAllocationTableReader batReader) throws Exception {
@@ -153,6 +153,6 @@ public class POIFSHeaderDumper {
          }
       });
       
-      System.out.println("");
+      System.out.println();
    }
 }

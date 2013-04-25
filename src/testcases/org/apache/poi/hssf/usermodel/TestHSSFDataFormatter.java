@@ -24,11 +24,12 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
+import junit.framework.TestCase;
+
 import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.DateUtil;
-
-import junit.framework.TestCase;
 
 /**
  * Unit tests for HSSFDataFormatter.java
@@ -38,12 +39,12 @@ import junit.framework.TestCase;
  */
 public final class TestHSSFDataFormatter extends TestCase {
 
-	private final HSSFDataFormatter formatter;
+	private final DataFormatter formatter;
 	private final HSSFWorkbook wb;
 
 	public TestHSSFDataFormatter() {
 		// create the formatter to test
-		formatter = new HSSFDataFormatter();
+		formatter = new DataFormatter();
 
 		// create a workbook to test with
 		wb = new HSSFWorkbook();
@@ -346,7 +347,7 @@ public final class TestHSSFDataFormatter extends TestCase {
 		assertEquals(2345.0, cellA1.getNumericCellValue(), 0.0001);
 		assertEquals("@", cellA1.getCellStyle().getDataFormatString());
 
-		HSSFDataFormatter f = new HSSFDataFormatter();
+		DataFormatter f = new DataFormatter();
 
 		assertEquals("2345", f.formatCellValue(cellA1));
 	}
@@ -358,7 +359,7 @@ public final class TestHSSFDataFormatter extends TestCase {
       HSSFWorkbook workbook = HSSFTestDataSamples.openSampleWorkbook("Formatting.xls");
       HSSFSheet sheet = workbook.getSheetAt(0);
 	   
-      HSSFDataFormatter f = new HSSFDataFormatter();
+      DataFormatter f = new DataFormatter();
 
       // This one is one of the nasty auto-locale changing ones...
       assertEquals("dd/mm/yyyy", sheet.getRow(1).getCell(0).getStringCellValue());

@@ -130,7 +130,7 @@ public class PieChartDemo {
             idx++;
             XSSFRow row = sheet.createRow(rownum++);
             row.createCell(0).setCellValue(vals[0]);
-            row.createCell(1).setCellValue(Double.valueOf(vals[1]));
+            row.createCell(1).setCellValue(Double.parseDouble(vals[1]));
         }
         numData.getPtCount().setVal(idx);
         strData.getPtCount().setVal(idx);

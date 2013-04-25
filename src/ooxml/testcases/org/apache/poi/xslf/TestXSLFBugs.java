@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.apache.poi.POITestCase;
 import org.apache.poi.POIXMLDocumentPart;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.xslf.usermodel.DrawingParagraph;
 import org.apache.poi.xslf.usermodel.DrawingTextBody;
@@ -40,8 +41,9 @@ public class TestXSLFBugs extends POITestCase {
        
        // Check the relations on it
        // Note - rId3 is a self reference
-       PackagePart slidePart = ss._getXSLFSlideShow().getSlidePart(
-             ss._getXSLFSlideShow().getSlideReferences().getSldIdArray(0)
+       OPCPackage pkg = ss.getPackage();
+       XSLFSlideShow slideShow = new XSLFSlideShow(pkg);
+       PackagePart slidePart = slideShow.getSlidePart(slideShow.getSlideReferences().getSldIdArray(0)
        );
        assertEquals("/ppt/slides/slide1.xml", slidePart.getPartName().toString());
        assertEquals("/ppt/slideLayouts/slideLayout12.xml", slidePart.getRelationship("rId1").getTargetURI().toString());
@@ -53,8 +55,10 @@ public class TestXSLFBugs extends POITestCase {
        ss = XSLFTestDataSamples.writeOutAndReadBack(ss);
        assertEquals(1, ss.getSlides().length);
        
-       slidePart = ss._getXSLFSlideShow().getSlidePart(
-             ss._getXSLFSlideShow().getSlideReferences().getSldIdArray(0)
+       pkg = ss.getPackage();
+       slideShow = new XSLFSlideShow(pkg);
+       slidePart = slideShow.getSlidePart(
+    		   slideShow.getSlideReferences().getSldIdArray(0)
        );
        assertEquals("/ppt/slides/slide1.xml", slidePart.getPartName().toString());
        assertEquals("/ppt/slideLayouts/slideLayout12.xml", slidePart.getRelationship("rId1").getTargetURI().toString());
