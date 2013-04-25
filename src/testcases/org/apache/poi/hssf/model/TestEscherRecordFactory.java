@@ -64,16 +64,16 @@ public class TestEscherRecordFactory extends TestCase{
         assertEquals(true, DefaultEscherRecordFactory.isContainer((short) 0x0, EscherContainerRecord.SPGR_CONTAINER));
 
         for (Short i=EscherContainerRecord.DGG_CONTAINER; i<= EscherContainerRecord.SOLVER_CONTAINER; i++){
-            assertEquals(true, DefaultEscherRecordFactory.isContainer(Integer.valueOf(rnd.nextInt(Short.MAX_VALUE)).shortValue(), i));
+            assertEquals(true, DefaultEscherRecordFactory.isContainer((short) rnd.nextInt(Short.MAX_VALUE), i));
         }
 
-        assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0x0, Integer.valueOf(EscherContainerRecord.DGG_CONTAINER-1).shortValue()));
-        assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0x0, Integer.valueOf(EscherContainerRecord.SOLVER_CONTAINER+1).shortValue()));
+        assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0x0, (short) (EscherContainerRecord.DGG_CONTAINER-1)));
+        assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0x0, (short) (EscherContainerRecord.SOLVER_CONTAINER+1)));
 
-        assertEquals(true, DefaultEscherRecordFactory.isContainer((short) 0x000F, Integer.valueOf(EscherContainerRecord.DGG_CONTAINER-1).shortValue()));
-        assertEquals(true, DefaultEscherRecordFactory.isContainer((short) 0xFFFF, Integer.valueOf(EscherContainerRecord.DGG_CONTAINER-1).shortValue()));
-        assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0x000C, Integer.valueOf(EscherContainerRecord.DGG_CONTAINER-1).shortValue()));
-        assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0xCCCC, Integer.valueOf(EscherContainerRecord.DGG_CONTAINER-1).shortValue()));
+        assertEquals(true, DefaultEscherRecordFactory.isContainer((short) 0x000F, (short) (EscherContainerRecord.DGG_CONTAINER-1)));
+        assertEquals(true, DefaultEscherRecordFactory.isContainer((short) 0xFFFF, (short) (EscherContainerRecord.DGG_CONTAINER-1)));
+        assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0x000C, (short) (EscherContainerRecord.DGG_CONTAINER-1)));
+        assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0xCCCC, (short) (EscherContainerRecord.DGG_CONTAINER-1)));
         assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0x000F, EscherTextboxRecord.RECORD_ID));
         assertEquals(false, DefaultEscherRecordFactory.isContainer((short) 0xCCCC, EscherTextboxRecord.RECORD_ID));
     }

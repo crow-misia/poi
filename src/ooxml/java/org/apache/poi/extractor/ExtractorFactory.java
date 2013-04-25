@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.POIOLE2TextExtractor;
 import org.apache.poi.POITextExtractor;
@@ -254,9 +255,9 @@ public class ExtractorFactory {
 	 */
 	public static POITextExtractor[] getEmbededDocsTextExtractors(POIOLE2TextExtractor ext) throws IOException, InvalidFormatException, OpenXML4JException, XmlException {
 	   // All the embded directories we spotted
-		ArrayList<Entry> dirs = new ArrayList<>();
+		final List<Entry> dirs = new ArrayList<>();
 		// For anything else not directly held in as a POIFS directory
-		ArrayList<InputStream> nonPOIFS = new ArrayList<>();
+		final List<InputStream> nonPOIFS = new ArrayList<>();
 
       // Find all the embeded directories
 		DirectoryEntry root = ext.getRoot();
@@ -304,19 +305,21 @@ public class ExtractorFactory {
 
 		// Create the extractors
 		if(
-		      (dirs == null || dirs.size() == 0) &&
-		      (nonPOIFS == null || nonPOIFS.size() == 0)
+		      (dirs.isEmpty()) &&
+		      (nonPOIFS.isEmpty())
 		){
 			return new POITextExtractor[0];
 		}
 
-		ArrayList<POITextExtractor> e = new ArrayList<>();
-		for(int i=0; i<dirs.size(); i++) {
+		final int dirNum = dirs.size();
+		final int nonpoifsNum = nonPOIFS.size();
+		final List<POITextExtractor> e = new ArrayList<>(dirNum + nonpoifsNum);
+		for(int i=0; i<dirNum; i++) {
 			e.add( createExtractor(
 					(DirectoryNode)dirs.get(i)
 			) );
 		}
-		for(int i=0; i<nonPOIFS.size(); i++) {
+		for(int i=0; i<nonpoifsNum; i++) {
 		   try {
 		      e.add( createExtractor(nonPOIFS.get(i)) );
          } catch(IllegalArgumentException ie) {

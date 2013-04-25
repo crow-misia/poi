@@ -150,7 +150,7 @@ public class TestDrawingAggregate extends TestCase {
             }
         }
 
-        if(aggs.size() != 0){
+        if(!aggs.isEmpty()){
             HSSFWorkbook wb2 = HSSFTestDataSamples.writeOutAndReadBack(wb);
             for(int i = 0; i < wb2.getNumberOfSheets(); i++){
                 DrawingAggregateInfo info1 = aggs.get(i);

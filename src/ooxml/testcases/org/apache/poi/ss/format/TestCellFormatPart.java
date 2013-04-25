@@ -121,6 +121,6 @@ public class TestCellFormatPart extends CellFormatTestBase {
             if (part != null)
                 sb.append(part);
         }
-        return Double.valueOf(sb.toString());
+        return Double.parseDouble(sb.toString());
     }
 }

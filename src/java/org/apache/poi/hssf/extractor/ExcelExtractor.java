@@ -27,7 +27,6 @@ import org.apache.poi.POIOLE2TextExtractor;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFComment;
-import org.apache.poi.hssf.usermodel.HSSFDataFormatter;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -35,6 +34,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.DirectoryNode;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.formula.eval.ErrorEval;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.HeaderFooter;
 
 /**
@@ -53,7 +53,7 @@ import org.apache.poi.ss.usermodel.HeaderFooter;
  */
 public class ExcelExtractor extends POIOLE2TextExtractor implements org.apache.poi.ss.extractor.ExcelExtractor {
 	private HSSFWorkbook _wb;
-	private HSSFDataFormatter _formatter;
+	private DataFormatter _formatter;
 	private boolean _includeSheetNames = true;
 	private boolean _shouldEvaluateFormulas = true;
 	private boolean _includeCellComments = false;
@@ -63,7 +63,7 @@ public class ExcelExtractor extends POIOLE2TextExtractor implements org.apache.p
 	public ExcelExtractor(HSSFWorkbook wb) {
 		super(wb);
 		_wb = wb;
-		_formatter = new HSSFDataFormatter();
+		_formatter = new DataFormatter();
 	}
 	public ExcelExtractor(POIFSFileSystem fs) throws IOException {
 		this(fs.getRoot());

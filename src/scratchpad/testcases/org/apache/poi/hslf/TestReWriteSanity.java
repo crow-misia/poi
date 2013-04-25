@@ -18,12 +18,19 @@
 package org.apache.poi.hslf;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 import junit.framework.TestCase;
-import java.io.*;
-import java.util.*;
-import org.apache.poi.hslf.record.*;
-import org.apache.poi.poifs.filesystem.*;
+
 import org.apache.poi.POIDataSamples;
+import org.apache.poi.hslf.record.CurrentUserAtom;
+import org.apache.poi.hslf.record.PersistPtrHolder;
+import org.apache.poi.hslf.record.Record;
+import org.apache.poi.hslf.record.UserEditAtom;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
  * Tests that HSLFSlideShow writes the powerpoint bit of data back out
@@ -57,9 +64,9 @@ public final class TestReWriteSanity extends TestCase {
 		// Find the location of the PersistPtrIncrementalBlocks and
 		// UserEditAtoms
 		Record[] r = wss.getRecords();
-		Hashtable pp = new Hashtable();
-		Hashtable ue = new Hashtable();
-		ue.put(Integer.valueOf(0),Integer.valueOf(0)); // Will show 0 if first
+		final Map<Integer, Record> pp = new HashMap<>();
+		final Map<Integer, Object> ue = new HashMap<>();
+		ue.put(Integer.valueOf(0), Integer.valueOf(0)); // Will show 0 if first
 		int pos = 0;
 		int lastUEPos = -1;
 
@@ -78,9 +85,9 @@ public final class TestReWriteSanity extends TestCase {
 		}
 
 		// Check that the UserEditAtom's point to right stuff
-		for(int i=0; i<r.length; i++) {
-			if(r[i] instanceof UserEditAtom) {
-				UserEditAtom uea = (UserEditAtom)r[i];
+		for(final Record ri : r) {
+			if(ri instanceof UserEditAtom) {
+				UserEditAtom uea = (UserEditAtom)ri;
 				int luPos = uea.getLastUserEditAtomOffset();
 				int ppPos = uea.getPersistPointersOffset();
 

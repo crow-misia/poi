@@ -22,9 +22,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.apache.poi.POIDataSamples;
 import org.apache.poi.hpsf.Constants;
 import org.apache.poi.hpsf.DocumentSummaryInformation;
 import org.apache.poi.hpsf.HPSFException;
@@ -32,7 +32,7 @@ import org.apache.poi.hpsf.PropertySet;
 import org.apache.poi.hpsf.PropertySetFactory;
 import org.apache.poi.hpsf.Section;
 import org.apache.poi.hpsf.SummaryInformation;
-import org.apache.poi.POIDataSamples;
+import org.junit.Assert;
 
 /**
  * <p>Tests whether Unicode string can be read from a
@@ -79,17 +79,17 @@ public class TestUnicode extends TestCase {
         PropertySet ps =
             PropertySetFactory.create(new ByteArrayInputStream(b));
         Assert.assertTrue(ps.isDocumentSummaryInformation());
-        Assert.assertEquals(ps.getSectionCount(), 2);
+        Assert.assertEquals(2, ps.getSectionCount());
         Section s = (Section) ps.getSections().get(1);
-        Assert.assertEquals(s.getProperty(1),
-                            Integer.valueOf(Constants.CP_UTF16));
-        Assert.assertEquals(s.getProperty(2),
-                            Integer.valueOf(-96070278));
-        Assert.assertEquals(s.getProperty(3),
-                            "MCon_Info zu Office bei Schreiner");
-        Assert.assertEquals(s.getProperty(4),
-                            "petrovitsch@schreiner-online.de");
-        Assert.assertEquals(s.getProperty(5),
-                            "Petrovitsch, Wilhelm");
+        Assert.assertEquals(Integer.valueOf(Constants.CP_UTF16),
+                            s.getProperty(1));
+        Assert.assertEquals(Integer.valueOf(-96070278),
+                            s.getProperty(2));
+        Assert.assertEquals("MCon_Info zu Office bei Schreiner",
+                            s.getProperty(3));
+        Assert.assertEquals("petrovitsch@schreiner-online.de",
+                            s.getProperty(4));
+        Assert.assertEquals("Petrovitsch, Wilhelm",
+                            s.getProperty(5));
     }
 }

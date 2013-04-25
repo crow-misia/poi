@@ -53,11 +53,11 @@ public final class SectionProperties extends SEPAbstractType
         AccessibleObject.setAccessible( fields, true );
         try
         {
-            for ( int x = 0; x < fields.length; x++ )
+            for ( final Field f : fields)
             {
-                Object obj1 = fields[x].get( this );
-                Object obj2 = fields[x].get( obj );
-                if ( obj1 == null && obj2 == null )
+                Object obj1 = f.get( this );
+                Object obj2 = f.get( obj );
+                if ( obj1 == null || obj2 == null )
                 {
                     continue;
                 }

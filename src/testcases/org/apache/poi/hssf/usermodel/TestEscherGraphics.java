@@ -54,13 +54,15 @@ public final class TestEscherGraphics extends TestCase {
 
     public void testGetFont() {
         Font f = graphics.getFont();
-        if (f.toString().indexOf("dialog") == -1 && f.toString().indexOf("Dialog") == -1)
-            assertEquals("java.awt.Font[family=Arial,name=Arial,style=plain,size=10]", f.toString());
+        final String fs = f.toString();
+        if (fs.indexOf("dialog") == -1 && fs.indexOf("Dialog") == -1)
+            assertEquals("java.awt.Font[family=Arial,name=Arial,style=plain,size=10]", fs);
     }
 
     public void testGetFontMetrics() {
         Font f = graphics.getFont();
-        if (f.toString().indexOf("dialog") != -1 || f.toString().indexOf("Dialog") != -1)
+        final String fs = f.toString();
+        if (fs.indexOf("dialog") != -1 || fs.indexOf("Dialog") != -1)
             return;
         FontMetrics fontMetrics = graphics.getFontMetrics(graphics.getFont());
         assertEquals(7, fontMetrics.charWidth('X'));

@@ -31,6 +31,7 @@ import org.apache.poi.POIDataSamples;
 import org.apache.poi.hsmf.dev.HSMFDump;
 import org.apache.poi.hsmf.extractor.OutlookTextExtactor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.DateConstants;
 
 /**
  * Tests that we can read fixed sized properties, as well as variable
@@ -105,8 +106,7 @@ public final class TestFixedSizedProperties extends TestCase {
     * TODO Work out why the Fri 22nd vs Monday 25th problem is occurring and fix
     */
 	public void DISABLEDtestClientSubmitTime() throws Exception {
-	   SimpleDateFormat f = new SimpleDateFormat("E, d MMM yyyy HH:mm:ss");
-	   f.setTimeZone(TimeZone.getTimeZone("GMT"));
+	   SimpleDateFormat f = DateConstants.EdMMMyyyyHHmmss.get();
 
 	   Calendar clientSubmitTime = mapiMessageSucceeds.getMessageDate();
 	   assertEquals("Fri, 22 Jun 2012 18:32:54", f.format(clientSubmitTime.getTime()));

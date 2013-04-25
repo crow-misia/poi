@@ -641,11 +641,11 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
         ParagraphPropertyFetcher<Boolean> fetcher = new ParagraphPropertyFetcher<Boolean>(getLevel()){
             public boolean fetch(CTTextParagraphProperties props){
                 if(props.isSetBuNone()) {
-                    setValue(false);
+                    setValue(Boolean.FALSE);
                     return true;
                 }
                 if(props.isSetBuFont() || props.isSetBuChar()){
-                    setValue(true);
+                    setValue(Boolean.TRUE);
                     return true;
                 }
                 return false;

@@ -37,7 +37,7 @@ public final class Odd extends NumericFunction.OneArg {
 	private static long calcOdd(double d) {
 		double dpm1 = d+1;
 		long x = ((long) dpm1) & PARITY_MASK;
-		if (x == dpm1) {
+		if (Math.abs(x - dpm1) < 0.0000001) {
 			return x-1;
 		}
 		return x + 1;

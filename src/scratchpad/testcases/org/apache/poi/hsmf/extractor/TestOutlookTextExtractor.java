@@ -29,6 +29,7 @@ import junit.framework.TestCase;
 import org.apache.poi.POIDataSamples;
 import org.apache.poi.hsmf.MAPIMessage;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.DateConstants;
 
 /**
  * Tests to verify that the text extractor works
@@ -63,8 +64,7 @@ public final class TestOutlookTextExtractor extends TestCase {
       assertEquals(-1, text.indexOf("Attachment:"));
       assertContains(text, "Subject: Test the content transformer\n");
       Calendar cal = new GregorianCalendar(2007, 5, 14, 9, 42, 55);
-      SimpleDateFormat f = new SimpleDateFormat("E, d MMM yyyy HH:mm:ss Z");
-      f.setTimeZone(TimeZone.getTimeZone("UTC"));
+      SimpleDateFormat f = DateConstants.EdMMMyyyyHHmmssZ.get();
       String dateText = f.format(cal.getTime());
       assertContains(text, "Date: " + dateText + "\n");
       assertContains(text, "The quick brown fox jumps over the lazy dog");

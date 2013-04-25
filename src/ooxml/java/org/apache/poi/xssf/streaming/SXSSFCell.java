@@ -18,15 +18,23 @@
 package org.apache.poi.xssf.streaming;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.poi.ss.formula.eval.ErrorEval;
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.formula.FormulaParseException;
+import org.apache.poi.ss.formula.eval.ErrorEval;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Comment;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.FormulaError;
+import org.apache.poi.ss.usermodel.Hyperlink;
+import org.apache.poi.ss.usermodel.RichTextString;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.util.DateConstants;
 import org.apache.poi.xssf.usermodel.XSSFHyperlink;
 
 /**
@@ -623,7 +631,7 @@ public class SXSSFCell implements Cell
                 return getCellFormula();
             case CELL_TYPE_NUMERIC:
                 if (DateUtil.isCellDateFormatted(this)) {
-                    DateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+                    DateFormat sdf = DateConstants.ddMMMyyyy.get();
                     return sdf.format(getDateCellValue());
                 }
                 return getNumericCellValue() + "";
