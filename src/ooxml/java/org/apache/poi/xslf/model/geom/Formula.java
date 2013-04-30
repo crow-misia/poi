@@ -37,7 +37,7 @@ public abstract class Formula {
 
     abstract double evaluate(Context ctx);
 
-    static Map<String, Formula> builtInFormulas = new HashMap<>();
+    static final Map<String, Formula> builtInFormulas = new HashMap<>();
     static {
         // 3 x 360 / 4 = 270
         builtInFormulas.put("3cd4",  new Formula(){

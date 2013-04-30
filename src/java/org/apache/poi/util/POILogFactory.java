@@ -19,7 +19,8 @@
 
 package org.apache.poi.util;
 
-import java.util.*;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Provides logging without clients having to mess with
@@ -36,7 +37,7 @@ public final class POILogFactory
     /**
      * Map of POILogger instances, with classes as keys
      */
-    private static final Map<String,POILogger> _loggers = new HashMap<>();
+    private static final Map<String,POILogger> _loggers = new ConcurrentHashMap<>();
 
     /**
      * A common instance of NullLogger, as it does nothing

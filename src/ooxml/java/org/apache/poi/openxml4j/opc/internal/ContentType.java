@@ -17,8 +17,8 @@
 
 package org.apache.poi.openxml4j.opc.internal;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +49,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
  * @see <a href="http://www.ietf.org/rfc/rfc2616.txt">http://www.ietf.org/rfc/rfc2616.txt</a>
  */
 public final class ContentType {
-	private static final Map<String, ContentType> CACHE = new HashMap<>();
+	private static final Map<String, ContentType> CACHE = new ConcurrentHashMap<>();
 
 	/**
 	 * Type/Subtype.

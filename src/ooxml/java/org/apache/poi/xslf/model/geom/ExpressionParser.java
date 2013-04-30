@@ -20,6 +20,7 @@
 package org.apache.poi.xslf.model.geom;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,8 +29,8 @@ import java.util.regex.Pattern;
  *
  * @author Yegor Kozlov
  */
-public class ExpressionParser {
-    static final HashMap<String, Class<?>> impls = new HashMap<>();
+public final class ExpressionParser {
+    private static final Map<String, Class<?>> impls = new HashMap<>();
     static {
         impls.put("\\*/ +([\\-\\w]+) +([\\-\\w]+) +([\\-\\w]+)", MultiplyDivideExpression.class);
         impls.put("\\+- +([\\-\\w]+) +([\\-\\w]+) +([\\-\\w]+)( 0)?", AddSubtractExpression.class);

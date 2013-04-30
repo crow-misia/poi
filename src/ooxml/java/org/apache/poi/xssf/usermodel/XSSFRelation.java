@@ -51,7 +51,7 @@ public final class XSSFRelation extends POIXMLRelation {
     /**
      * A map to lookup POIXMLRelation by its relation type
      */
-    protected static Map<String, XSSFRelation> _table = new HashMap<>();
+    private static final Map<String, XSSFRelation> _table = new HashMap<>();
 
 
 	public static final XSSFRelation WORKBOOK = new XSSFRelation(
