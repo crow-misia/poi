@@ -34,16 +34,16 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.STDataValidationOpera
  * @author <a href="rjankiraman@emptoris.com">Radhakrishnan J</a>
  *
  */
-public class XSSFDataValidation implements DataValidation {
+public final class XSSFDataValidation implements DataValidation {
 	private CTDataValidation ctDdataValidation;
 	private XSSFDataValidationConstraint validationConstraint;
 	private CellRangeAddressList regions;
 
-    static Map<Integer,STDataValidationOperator.Enum> operatorTypeMappings = new HashMap<>();
-	static Map<STDataValidationOperator.Enum,Integer> operatorTypeReverseMappings = new HashMap<>();
-	static Map<Integer,STDataValidationType.Enum> validationTypeMappings = new HashMap<>();
-	static Map<STDataValidationType.Enum,Integer> validationTypeReverseMappings = new HashMap<>();
-    static Map<Integer,STDataValidationErrorStyle.Enum> errorStyleMappings = new HashMap<>();
+    static final Map<Integer,STDataValidationOperator.Enum> operatorTypeMappings = new HashMap<>();
+	static final Map<STDataValidationOperator.Enum,Integer> operatorTypeReverseMappings = new HashMap<>();
+	static final Map<Integer,STDataValidationType.Enum> validationTypeMappings = new HashMap<>();
+	static final Map<STDataValidationType.Enum,Integer> validationTypeReverseMappings = new HashMap<>();
+    static final Map<Integer,STDataValidationErrorStyle.Enum> errorStyleMappings = new HashMap<>();
     static {
 		errorStyleMappings.put(DataValidation.ErrorStyle.INFO, STDataValidationErrorStyle.INFORMATION);
 		errorStyleMappings.put(DataValidation.ErrorStyle.STOP, STDataValidationErrorStyle.STOP);

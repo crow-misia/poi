@@ -145,7 +145,7 @@ public enum UnderlinePatterns {
        return value;
     }
 
-    private static Map<Integer, UnderlinePatterns> imap = new HashMap<>();
+    private static final Map<Integer, UnderlinePatterns> imap = new HashMap<>();
     static {
        for (UnderlinePatterns p : values()) {
           imap.put(Integer.valueOf(p.getValue()), p);
