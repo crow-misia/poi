@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -69,7 +70,7 @@ public final class TestPOIXMLDocument extends TestCase {
     /**
      * Recursively traverse a OOXML document and assert that same logical parts have the same physical instances
      */
-    private static void traverse(POIXMLDocumentPart part, HashMap<String,POIXMLDocumentPart> context) throws IOException{
+    private static void traverse(POIXMLDocumentPart part, Map<String,POIXMLDocumentPart> context) throws IOException{
         context.put(part.getPackageRelationship().getTargetURI().toString(), part);
         for(POIXMLDocumentPart p : part.getRelations()){
             String uri = p.getPackageRelationship().getTargetURI().toString();
@@ -87,7 +88,7 @@ public final class TestPOIXMLDocument extends TestCase {
         OPCParser doc = new OPCParser(pkg1);
         doc.parse(new TestFactory());
 
-        HashMap<String,POIXMLDocumentPart> context = new HashMap<>();
+        Map<String,POIXMLDocumentPart> context = new HashMap<>();
         traverse(doc, context);
         context.clear();
 

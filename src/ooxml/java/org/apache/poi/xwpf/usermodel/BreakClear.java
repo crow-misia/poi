@@ -93,7 +93,7 @@ public enum BreakClear {
        return value;
     }
 
-    private static Map<Integer, BreakClear> imap = new HashMap<>();
+    private static final Map<Integer, BreakClear> imap = new HashMap<>();
     static {
        for (BreakClear p : values()) {
           imap.put(Integer.valueOf(p.getValue()), p);

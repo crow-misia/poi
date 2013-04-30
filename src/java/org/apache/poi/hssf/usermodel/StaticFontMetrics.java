@@ -23,9 +23,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Allows the user to lookup the font metrics for a particular font without
@@ -40,7 +40,7 @@ final class StaticFontMetrics {
 	/** The font metrics property file we're using */
 	private static Properties fontMetricsProps;
 	/** Our cache of font details we've already looked up */
-	private static Map<String, FontDetails> fontDetailsMap = new HashMap<>();
+	private static final Map<String, FontDetails> fontDetailsMap = new ConcurrentHashMap<>();
 
 	/**
 	 * Retrieves the fake font details for a given font.
