@@ -18,6 +18,8 @@
 package org.apache.poi.hslf.record;
 
 
+import static org.junit.Assert.assertArrayEquals;
+
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -127,10 +129,7 @@ public final class TestComment2000 extends TestCase {
 		ca.writeOut(baos);
 		byte[] b = baos.toByteArray();
 
-		assertEquals(data_a.length, b.length);
-		for(int i=0; i<data_a.length; i++) {
-			assertEquals(data_a[i],b[i]);
-		}
+		assertArrayEquals(data_a, b);
 	}
 
 	// Change a few things
@@ -169,10 +168,9 @@ public final class TestComment2000 extends TestCase {
 
 		// Check bytes weren't the same
 		try {
-			for(int i=0; i<data_a.length; i++) {
-				assertEquals(data_a[i],data_b[i]);
-			}
-			fail();
+		    assertArrayEquals(data_a, data_b);
+
+		    fail();
 		} catch(Error e) {
 			// Good, they're not the same
 		}
@@ -186,14 +184,9 @@ public final class TestComment2000 extends TestCase {
 		byte[] bn = baosn.toByteArray();
 
 		// Should now be the same
-		assertEquals(data_b.length, ba.length);
-		for(int i=0; i<data_b.length; i++) {
-			assertEquals(data_b[i],ba[i]);
-		}
-		assertEquals(data_b.length, bn.length);
-		for(int i=0; i<data_b.length; i++) {
-			assertEquals(data_b[i],bn[i]);
-		}
+		assertArrayEquals(data_b, ba);
+
+		assertArrayEquals(data_b, bn);
 	}
 
     /**

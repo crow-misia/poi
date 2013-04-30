@@ -19,6 +19,7 @@ package org.apache.poi.hwpf.model.types;
 import java.util.Arrays;
 
 import org.apache.poi.hwpf.model.Grfhic;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.BitField;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;
@@ -57,7 +58,7 @@ public abstract class LSTFAbstractType
 
     protected LSTFAbstractType()
     {
-        this.field_3_rgistdPara = new short[0];
+        this.field_3_rgistdPara = ArrayUtil.EMPTY_SHORT_ARRAY;
         this.field_5_grfhic = new Grfhic();
     }
 

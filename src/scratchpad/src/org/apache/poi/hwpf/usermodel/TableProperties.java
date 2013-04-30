@@ -18,6 +18,7 @@
 package org.apache.poi.hwpf.usermodel;
 
 import org.apache.poi.hwpf.model.types.TAPAbstractType;
+import org.apache.poi.util.ArrayUtil;
 
 public final class TableProperties extends TAPAbstractType implements Cloneable
 {
@@ -34,8 +35,8 @@ public final class TableProperties extends TAPAbstractType implements Cloneable
         setBrcVertical( new BorderCode() );
         setRgbrcInsideDefault_0( new BorderCode() );
         setRgbrcInsideDefault_1( new BorderCode() );
-        setRgdxaCenter( new short[0] );
-        setRgdxaCenterPrint( new short[0] );
+        setRgdxaCenter( ArrayUtil.EMPTY_SHORT_ARRAY );
+        setRgdxaCenterPrint( ArrayUtil.EMPTY_SHORT_ARRAY );
         setRgshd( new ShadingDescriptor[0] );
         setRgtc( new TableCellDescriptor[0] );
     }

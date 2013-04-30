@@ -17,15 +17,16 @@
 
 package org.apache.poi.hslf.record;
 
-import org.apache.poi.util.ArrayUtil;
-import org.apache.poi.util.LittleEndian;
-import org.apache.poi.hslf.util.MutableByteArrayOutputStream;
-
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
+
+import org.apache.poi.hslf.util.MutableByteArrayOutputStream;
+import org.apache.poi.util.ArrayUtil;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.util.LittleEndian;
 
 /**
  * Abstract class which all container records will extend. Providers
@@ -330,8 +331,8 @@ public abstract class RecordContainer extends Record
 			mout.write(new byte[4]);
 
 			// Write out the children
-			for(int i=0; i<children.length; i++) {
-				children[i].writeOut(mout);
+			for(final Record c : children) {
+				c.writeOut(mout);
 			}
 
 			// Update our header with the size

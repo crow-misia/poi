@@ -148,8 +148,8 @@ public abstract class TAPAbstractType
     protected TAPAbstractType()
     {
         this.field_8_tlp = new TableAutoformatLookSpecifier();
-        this.field_33_rgdxaCenter = new short[0];
-        this.field_34_rgdxaCenterPrint = new short[0];
+        this.field_33_rgdxaCenter = ArrayUtil.EMPTY_SHORT_ARRAY;
+        this.field_34_rgdxaCenterPrint = ArrayUtil.EMPTY_SHORT_ARRAY;
         this.field_35_shdTable = new ShadingDescriptor();
         this.field_36_brcBottom = new BorderCode();
         this.field_37_brcTop = new BorderCode();
