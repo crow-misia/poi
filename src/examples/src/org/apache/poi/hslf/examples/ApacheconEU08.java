@@ -17,13 +17,27 @@
 
 package org.apache.poi.hslf.examples;
 
-import org.apache.poi.hslf.usermodel.*;
-import org.apache.poi.hslf.model.*;
-import org.apache.poi.hslf.record.TextHeaderAtom;
-
-import java.io.IOException;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.io.FileOutputStream;
-import java.awt.*;
+import java.io.IOException;
+
+import org.apache.poi.hslf.model.AutoShape;
+import org.apache.poi.hslf.model.Line;
+import org.apache.poi.hslf.model.PPGraphics2D;
+import org.apache.poi.hslf.model.ShapeGroup;
+import org.apache.poi.hslf.model.ShapeTypes;
+import org.apache.poi.hslf.model.Slide;
+import org.apache.poi.hslf.model.Table;
+import org.apache.poi.hslf.model.TableCell;
+import org.apache.poi.hslf.model.TextBox;
+import org.apache.poi.hslf.model.TextRun;
+import org.apache.poi.hslf.record.TextHeaderAtom;
+import org.apache.poi.hslf.usermodel.RichTextRun;
+import org.apache.poi.hslf.usermodel.SlideShow;
 
 /**
  * Presentation for Fast Feather Track on ApacheconEU 2008

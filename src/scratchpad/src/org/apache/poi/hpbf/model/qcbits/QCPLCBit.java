@@ -17,6 +17,7 @@
 
 package org.apache.poi.hpbf.model.qcbits;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.StringUtil;
 
@@ -186,7 +187,7 @@ public abstract class QCPLCBit extends QCBit {
 			// How many hyperlinks do we really have?
 			// (zero hyperlinks gets numberOfPLCs=1)
 			if(data.length == 0x34) {
-				hyperlinks = new String[0];
+				hyperlinks = ArrayUtil.EMPTY_STRING_ARRAY;
 			} else {
 				hyperlinks = new String[numberOfPLCs];
 			}
@@ -209,9 +210,10 @@ public abstract class QCPLCBit extends QCBit {
 				until = twoStartsAt + (numberOfPLCs-2)*threePlusIncrement;
 			}
 
-			plcValA = new long[(until-at)/2];
-			plcValB = new long[0];
-			for(int i=0; i<plcValA.length; i++) {
+			final int n = (until-at)/2;
+			plcValA = new long[n];
+			plcValB = ArrayUtil.EMPTY_LONG_ARRAY;
+			for(int i=0; i<n; i++) {
 				plcValA[i] = LittleEndian.getUShort(data, at+(i*2));
 			}
 

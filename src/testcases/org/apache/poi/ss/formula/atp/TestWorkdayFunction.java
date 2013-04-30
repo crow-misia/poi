@@ -19,15 +19,10 @@
 package org.apache.poi.ss.formula.atp;
 
 import static java.util.Calendar.APRIL;
-import static java.util.Calendar.DECEMBER;
-import static java.util.Calendar.JANUARY;
 import static java.util.Calendar.MAY;
-import static java.util.Calendar.NOVEMBER;
-import static java.util.Calendar.OCTOBER;
 import static java.util.Calendar.SEPTEMBER;
 import static org.apache.poi.ss.formula.eval.ErrorEval.VALUE_INVALID;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +37,6 @@ import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.util.DateConstants;
 
 /**
  * @author jfaenomoto@gmail.com
@@ -50,17 +44,15 @@ import org.apache.poi.util.DateConstants;
 @SuppressWarnings("deprecation") // YK: heavily uses deprecated {@link java.util.Date(int year, int month, int date)}
 public class TestWorkdayFunction extends TestCase {
 
-    private static final SimpleDateFormat formatter = DateConstants.yyyyMMdd.get();
+    private static final String STARTING_DATE = "2008/10/01";
 
-    private static final String STARTING_DATE = formatter.format(new Date(108, OCTOBER, 1));
+    private static final String FIRST_HOLIDAY = "2008/11/26";
 
-    private static final String FIRST_HOLIDAY = formatter.format(new Date(108, NOVEMBER, 26));
+    private static final String SECOND_HOLIDAY = "2008/12/04";
 
-    private static final String SECOND_HOLIDAY = formatter.format(new Date(108, DECEMBER, 4));
+    private static final String THIRD_HOLIDAY = "2009/01/21";
 
-    private static final String THIRD_HOLIDAY = formatter.format(new Date(109, JANUARY, 21));
-
-    private static final String RETROATIVE_HOLIDAY = formatter.format(new Date(108, SEPTEMBER, 29));
+    private static final String RETROATIVE_HOLIDAY = "2008/09/29";
 
     private static final OperationEvaluationContext EC = new OperationEvaluationContext(null, null, 1, 1, 1, null);
 

@@ -91,8 +91,8 @@ public class WorkdayCalculator {
         int pastDaysOfWeek = 0;
         int startDay = (int) Math.floor(start < end ? start : end);
         int endDay = (int) Math.floor(end > start ? end : start);
+        final Calendar today = Calendar.getInstance();
         for (; startDay <= endDay; startDay++) {
-            Calendar today = Calendar.getInstance();
             today.setTime(DateUtil.getJavaDate(startDay));
             if (today.get(Calendar.DAY_OF_WEEK) == dayOfWeek) {
                 pastDaysOfWeek++;
@@ -113,9 +113,9 @@ public class WorkdayCalculator {
         int nonWeekendHolidays = 0;
         double startDay = start < end ? start : end;
         double endDay = end > start ? end : start;
-        for (int i = 0; i < holidays.length; i++) {
-            if (isInARange(startDay, endDay, holidays[i])) {
-                if (!isWeekend(holidays[i])) {
+        for (final double h : holidays) {
+            if (isInARange(startDay, endDay, h)) {
+                if (!isWeekend(h)) {
                     nonWeekendHolidays++;
                 }
             }
@@ -162,7 +162,7 @@ public class WorkdayCalculator {
      * @param aDate a date to be analyzed.
      * @return <code>true</code> if aDate is between start and end dates, <code>false</code> otherwise.
      */
-    protected boolean isInARange(double start, double end, double aDate) {
+    protected static boolean isInARange(double start, double end, double aDate) {
         return aDate >= start && aDate <= end;
     }
 }
