@@ -281,7 +281,7 @@ public class TestComment extends TestCase {
             HSSFTestDataSamples.writeOutAndReadBack(wb);
         } catch (IllegalStateException e){
             err = 1;
-            assertEquals(e.getMessage(), "found multiple cell comments for cell $A$1");
+            assertEquals(e.getMessage(), "found multiple cell comments for cell A1");
         }
         assertNotNull(err);
     }

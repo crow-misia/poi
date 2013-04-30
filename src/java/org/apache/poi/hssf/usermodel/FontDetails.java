@@ -27,10 +27,10 @@ import java.util.StringTokenizer;
  *
  * @author Glen Stampoultzis (glens at apache.org)
  */
-public class FontDetails
+public final class FontDetails
 {
-    private String _fontName;
-    private int _height;
+    private final String _fontName;
+    private final int _height;
     private final Map<Character, Integer> charWidths = new HashMap<>();
 
     /**
@@ -55,7 +55,7 @@ public class FontDetails
         return _height;
     }
 
-    public void addChar( char c, int width )
+    private void addChar( char c, int width )
     {
         charWidths.put(Character.valueOf(c), Integer.valueOf(width));
     }
@@ -68,18 +68,10 @@ public class FontDetails
     public int getCharWidth( char c )
     {
         Integer widthInteger = charWidths.get(Character.valueOf(c));
-        if (widthInteger == null || c != 'W') {
+        if (widthInteger == null) {
             return getCharWidth('W');
         }
         return widthInteger.intValue();
-    }
-
-    public void addChars( char[] characters, int[] widths )
-    {
-        for ( int i = 0; i < characters.length; i++ )
-        {
-            charWidths.put( Character.valueOf(characters[i]), Integer.valueOf(widths[i]));
-        }
     }
 
     protected static String buildFontHeightProperty(String fontName) {
@@ -119,10 +111,13 @@ public class FontDetails
         String[] widthsStrArray = split(widthsStr, ",", -1);
         if (charactersStrArray.length != widthsStrArray.length)
             throw new RuntimeException("Number of characters does not number of widths for font " + fontName);
-        for ( int i = 0; i < widthsStrArray.length; i++ )
+        int i = 0;
+        for (final String w : widthsStrArray)
         {
-            if (charactersStrArray[i].length() != 0)
-                d.addChar(charactersStrArray[i].charAt(0), Integer.parseInt(widthsStrArray[i]));
+            final String c = charactersStrArray[i];
+            if (c.length() != 0)
+                d.addChar(c.charAt(0), Integer.parseInt(w));
+            i++;
         }
         return d;
     }
@@ -135,8 +130,9 @@ public class FontDetails
      */
     public int getStringWidth(String str)
     {
+        final int n = str.length();
         int width = 0;
-        for (int i = 0; i < str.length(); i++)
+        for (int i = 0; i < n; i++)
         {
             width += getCharWidth(str.charAt(i));
         }
@@ -154,11 +150,12 @@ public class FontDetails
         if(max != -1 && listSize > max)
             listSize = max;
         String list[] = new String[listSize];
+        final StringBuilder buf = new StringBuilder(text.length());
         for(int i = 0; tok.hasMoreTokens(); i++)
         {
             if(max != -1 && i == listSize - 1)
             {
-                StringBuilder buf = new StringBuilder((text.length() * (listSize - i)) / listSize);
+                buf.setLength(0);
                 while(tok.hasMoreTokens())
                 {
                     buf.append(tok.nextToken());

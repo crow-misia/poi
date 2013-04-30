@@ -196,8 +196,10 @@ public class CellElapsedFormatter extends CellFormatter {
         }
 
         Object[] parts = new Long[specs.size()];
-        for (int i = 0; i < specs.size(); i++) {
-            parts[i] = specs.get(i).valueFor(elapsed);
+        int i = 0;
+        for (final TimeSpec s : specs) {
+            parts[i] = s.valueFor(elapsed);
+            i++;
         }
 
         Formatter formatter = new Formatter(toAppendTo);

@@ -121,8 +121,8 @@ public final class LongArrayList
     }
 
     public void iterate(final Iteratable i) {
-        for (final long v : this.values) {
-            i.run(v);
+        for (int p = 0; p < pos; p++) {
+            i.run(this.values[p]);
         }
     }
 

@@ -121,8 +121,8 @@ public final class IntArrayList
     }
 
     public void iterate(final Iteratable i) {
-        for (final int v : this.values) {
-            i.run(v);
+        for (int p = 0; p < pos; p++) {
+            i.run(this.values[p]);
         }
     }
 

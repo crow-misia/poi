@@ -116,11 +116,11 @@ final class StaticFontMetrics {
 		}
 
 		// Get the details on this font
-		if (fontDetailsMap.get(fontName) == null) {
-			FontDetails fontDetails = FontDetails.create(fontName, fontMetricsProps);
+		FontDetails fontDetails = fontDetailsMap.get(fontName);
+		if (fontDetails == null) {
+			fontDetails = FontDetails.create(fontName, fontMetricsProps);
 			fontDetailsMap.put(fontName, fontDetails);
-			return fontDetails;
 		}
-		return fontDetailsMap.get(fontName);
+		return fontDetails;
 	}
 }
