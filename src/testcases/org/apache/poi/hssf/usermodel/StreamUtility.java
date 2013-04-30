@@ -114,7 +114,7 @@ public final class StreamUtility {
 		return false;
 	}
 
-	private static int[] toPrimitiveIntArray(List temp) {
+	private static int[] toPrimitiveIntArray(List<Integer> temp) {
 		int nItems = temp.size();
 		if(nItems < 1) {
 			return null;
@@ -122,8 +122,8 @@ public final class StreamUtility {
 		Integer[] boxInts = new Integer[nItems];
 		temp.toArray(boxInts);
 
-		int[] result = new int[nItems];
-		for (int i = 0; i < result.length; i++) {
+		final int[] result = new int[nItems];
+		for (int i = 0; i < nItems; i++) {
 			result[i] = boxInts[i].intValue();
 		}
 		return result;

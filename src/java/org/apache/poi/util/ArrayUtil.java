@@ -39,6 +39,10 @@ public final class ArrayUtil
 
     public static final short[] EMPTY_SHORT_ARRAY = new short[0];
 
+    public static final long[] EMPTY_LONG_ARRAY = new long[0];
+
+    public static final double[] EMPTY_DOUBLE_ARRAY = new double[0];
+
     private ArrayUtil() {
         // nop.
     }

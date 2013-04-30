@@ -75,7 +75,7 @@ public class TestBug47563 extends TestCase {
 
 		String text = range.text();
 		int mustBeAfter = 0;
-		for (int i = 0; i < rows * columns; i++) {
+		for (int i = 0, n = rows * columns; i < n; i++) {
 			int next = text.indexOf(Integer.toString(i), mustBeAfter);
 			assertFalse(next == -1);
 			mustBeAfter = next;

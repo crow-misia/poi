@@ -453,8 +453,7 @@ public class DataFormatter {
         boolean mIsMonth = true;
         final IntArrayList ms = new IntArrayList();
         boolean isElapsed = false;
-        for(int j=0; j<chars.length; j++) {
-            char c = chars[j];
+        for(final char c : chars) {
             if (c == '[' && !isElapsed) {
                 isElapsed = true;
                 mIsMonth = false;

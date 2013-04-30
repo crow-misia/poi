@@ -151,18 +151,18 @@ public final class ExcelFileFormatDocFunctionExtractor {
 
 	private static final class FunctionDataCollector {
 
-		private final Map _allFunctionsByIndex;
-		private final Map _allFunctionsByName;
-		private final Set _groupFunctionIndexes;
-		private final Set _groupFunctionNames;
+		private final Map<Integer, FunctionData> _allFunctionsByIndex;
+		private final Map<String, FunctionData> _allFunctionsByName;
+		private final Set<Integer> _groupFunctionIndexes;
+		private final Set<String> _groupFunctionNames;
 		private final PrintStream _ps;
 
 		public FunctionDataCollector(PrintStream ps) {
 			_ps = ps;
-			_allFunctionsByIndex = new HashMap();
-			_allFunctionsByName = new HashMap();
-			_groupFunctionIndexes = new HashSet();
-			_groupFunctionNames = new HashSet();
+			_allFunctionsByIndex = new HashMap<>();
+			_allFunctionsByName = new HashMap<>();
+			_groupFunctionIndexes = new HashSet<>();
+			_groupFunctionNames = new HashSet<>();
 		}
 
 		public void addFuntion(int funcIx, boolean hasFootnote, String funcName, int minParams, int maxParams,
@@ -212,14 +212,15 @@ public final class ExcelFileFormatDocFunctionExtractor {
 		}
 
 		public void endTableGroup(String headingText) {
-			Integer[] keys = new Integer[_groupFunctionIndexes.size()];
+		    final int n = _groupFunctionIndexes.size();
+			Integer[] keys = new Integer[n];
 			_groupFunctionIndexes.toArray(keys);
 			_groupFunctionIndexes.clear();
 			_groupFunctionNames.clear();
 			Arrays.sort(keys);
 
 			_ps.println("# " + headingText);
-			for (int i = 0; i < keys.length; i++) {
+			for (int i = 0; i < n; i++) {
 				FunctionData fd = (FunctionData) _allFunctionsByIndex.get(keys[i]);
 				_ps.println(fd.formatAsDataLine());
 			}

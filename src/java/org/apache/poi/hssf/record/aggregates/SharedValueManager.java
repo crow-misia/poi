@@ -176,7 +176,7 @@ public final class SharedValueManager {
         return sfg;
     }
 
-    private Integer getKeyForCache(final CellReference cellRef) {
+    private static Integer getKeyForCache(final CellReference cellRef) {
         // The HSSF has a max of 2^16 rows and 2^8 cols
         return Integer.valueOf((cellRef.getCol()+1)<<16 | cellRef.getRow());
     }

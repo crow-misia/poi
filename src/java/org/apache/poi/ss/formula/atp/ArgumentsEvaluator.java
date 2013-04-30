@@ -25,6 +25,7 @@ import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.list.DoubleArrayList;
 
 /**
@@ -75,12 +76,13 @@ final class ArgumentsEvaluator {
      */
     public double[] evaluateDatesArg(ValueEval arg, int srcCellRow, int srcCellCol) throws EvaluationException {
         if (arg == null) {
-            return new double[0];
+            return ArrayUtil.EMPTY_DOUBLE_ARRAY;
         }
 
         if (arg instanceof StringEval) {
             return new double[]{ evaluateDateArg(arg, srcCellRow, srcCellCol) };
-        } else if (arg instanceof AreaEvalBase) {
+        }
+        if (arg instanceof AreaEvalBase) {
             final DoubleArrayList valuesList = new DoubleArrayList();
             AreaEvalBase area = (AreaEvalBase) arg;
             for (int i = area.getFirstRow(), ie = area.getLastRow(); i <= ie; i++) {
