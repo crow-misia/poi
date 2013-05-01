@@ -68,6 +68,10 @@ public final class HexDump {
             throws IOException, ArrayIndexOutOfBoundsException,
                     IllegalArgumentException
     {
+        if (stream == null)
+        {
+            throw new IllegalArgumentException("cannot write to nullstream");
+        }
         if (data.length == 0)
         {
             stream.write( ("No Data" + System.lineSeparator()).getBytes() );
@@ -79,10 +83,6 @@ public final class HexDump {
             throw new ArrayIndexOutOfBoundsException(
                 "illegal index: " + index + " into array of length "
                 + data.length);
-        }
-        if (stream == null)
-        {
-            throw new IllegalArgumentException("cannot write to nullstream");
         }
 
         long         display_offset = offset + index;
@@ -150,7 +150,7 @@ public final class HexDump {
      *            null
      */
 
-    public synchronized static void dump(final byte [] data, final long offset,
+    public static void dump(final byte [] data, final long offset,
                             final OutputStream stream, final int index)
         throws IOException, ArrayIndexOutOfBoundsException,
                 IllegalArgumentException
