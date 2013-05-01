@@ -39,6 +39,10 @@ public final class ImageUtils {
 
     public static final int PIXEL_DPI = 96;
 
+    private ImageUtils() {
+        // nop.
+    }
+
     /**
      * Return the dimension of this image
      *

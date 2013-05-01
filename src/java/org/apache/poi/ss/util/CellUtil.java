@@ -338,8 +338,7 @@ public final class CellUtil {
 		boolean foundUnicode = false;
 		String lowerCaseStr = s.toLowerCase();
 
-		for (int i = 0; i < unicodeMappings.length; i++) {
-			UnicodeMapping entry = unicodeMappings[i];
+		for (final UnicodeMapping entry : unicodeMappings) {
 			String key = entry.entityName;
 			if (lowerCaseStr.indexOf(key) != -1) {
 				s = s.replaceAll(key, entry.resolvedValue);

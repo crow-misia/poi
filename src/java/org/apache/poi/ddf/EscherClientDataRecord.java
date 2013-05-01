@@ -113,7 +113,7 @@ public class EscherClientDataRecord
         {
             extraData = "error";
         }
-        if (extraData.contains("No Data")){
+        if (extraData.startsWith("No Data")){
             extraData = "No Data";
         }
         StringBuilder builder = new StringBuilder();

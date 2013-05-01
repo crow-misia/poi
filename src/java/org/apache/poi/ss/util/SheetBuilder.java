@@ -31,7 +31,7 @@ import org.apache.poi.ss.usermodel.Cell;
  *
  * @author Roman Kashitsyn
  */
-public class SheetBuilder {
+public final class SheetBuilder {
 
     private final Workbook workbook;
     private final Object[][] cells;

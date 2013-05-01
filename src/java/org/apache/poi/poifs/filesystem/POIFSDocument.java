@@ -358,7 +358,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 					System.arraycopy(data, 0, tmp, 0, tmp.length);
 					data = tmp;
 				}
-				output = new ByteArrayOutputStream();
+				output.reset();
 				HexDump.dump(data, 0, output, 0);
 				result = output.toString();
 			} else {
