@@ -33,6 +33,9 @@ import java.net.URI;
  * @author Yegor Kozlov
  */
 public final class PackageHelper {
+    private PackageHelper() {
+        // nop.
+    }
 
     public static OPCPackage open(InputStream is) throws IOException {
         try {
@@ -53,7 +56,7 @@ public final class PackageHelper {
 
         String path = file.getAbsolutePath();
 
-        OPCPackage dest = OPCPackage.create(path);
+        try (OPCPackage dest = OPCPackage.create(path)) {
         PackageRelationshipCollection rels = pkg.getRelationships();
         for (PackageRelationship rel : rels) {
             PackagePart part = pkg.getPart(rel);
@@ -65,15 +68,15 @@ public final class PackageHelper {
             dest.addRelationship(part.getPartName(), rel.getTargetMode(), rel.getRelationshipType());
             part_tgt = dest.createPart(part.getPartName(), part.getContentType());
 
-            OutputStream out = part_tgt.getOutputStream();
-            IOUtils.copy(part.getInputStream(), out);
-            out.close();
+            try (OutputStream out = part_tgt.getOutputStream()) {
+                IOUtils.copy(part.getInputStream(), out);
+            }
 
             if(part.hasRelationships()) {
                 copy(pkg, part, dest, part_tgt);
             }
         }
-        dest.close();
+        }
 
         //the temp file will be deleted when JVM terminates
         new File(path).deleteOnExit();

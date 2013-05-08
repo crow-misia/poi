@@ -27,9 +27,9 @@ import java.awt.RenderingHints;
  *
  * @author Yegor Kozlov
  */
-public class XSLFRenderingHint extends RenderingHints.Key {
+public final class XSLFRenderingHint extends RenderingHints.Key {
 
-    public XSLFRenderingHint(int i){
+    private XSLFRenderingHint(int i){
         super(i);
     }
 

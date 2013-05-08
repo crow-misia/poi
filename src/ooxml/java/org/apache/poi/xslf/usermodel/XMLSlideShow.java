@@ -16,25 +16,6 @@
 ==================================================================== */
 package org.apache.poi.xslf.usermodel;
 
-import org.apache.poi.POIXMLDocument;
-import org.apache.poi.POIXMLDocumentPart;
-import org.apache.poi.POIXMLException;
-import org.apache.poi.POIXMLRelation;
-import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
-import org.apache.poi.openxml4j.opc.*;
-import org.apache.poi.util.*;
-import org.apache.poi.xslf.XSLFSlideShow;
-import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
-import org.openxmlformats.schemas.drawingml.x2006.main.CTTextParagraphProperties;
-import org.openxmlformats.schemas.officeDocument.x2006.relationships.STRelationshipId;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTPresentation;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTSlideIdList;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTSlideIdListEntry;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTSlideSize;
-import org.openxmlformats.schemas.presentationml.x2006.main.PresentationDocument;
-
 import java.awt.Dimension;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +26,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import org.apache.poi.POIXMLDocument;
+import org.apache.poi.POIXMLDocumentPart;
+import org.apache.poi.POIXMLException;
+import org.apache.poi.POIXMLRelation;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.openxml4j.opc.PackagePart;
+import org.apache.poi.openxml4j.opc.PackagePartName;
+import org.apache.poi.openxml4j.opc.TargetMode;
+import org.apache.poi.util.Beta;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.util.Internal;
+import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.POILogger;
+import org.apache.poi.util.PackageHelper;
+import org.apache.poi.util.Units;
+import org.apache.xmlbeans.XmlException;
+import org.apache.xmlbeans.XmlObject;
+import org.apache.xmlbeans.XmlOptions;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTTextParagraphProperties;
+import org.openxmlformats.schemas.officeDocument.x2006.relationships.STRelationshipId;
+import org.openxmlformats.schemas.presentationml.x2006.main.CTPresentation;
+import org.openxmlformats.schemas.presentationml.x2006.main.CTSlideIdList;
+import org.openxmlformats.schemas.presentationml.x2006.main.CTSlideIdListEntry;
+import org.openxmlformats.schemas.presentationml.x2006.main.CTSlideSize;
+import org.openxmlformats.schemas.presentationml.x2006.main.PresentationDocument;
 
 /**
  * High level representation of a ooxml slideshow.
@@ -78,7 +87,7 @@ public class XMLSlideShow  extends POIXMLDocument {
 
             //build a tree of POIXMLDocumentParts, this presentation being the root
             load(XSLFFactory.getInstance());
-        } catch (Exception e){
+        } catch (IOException | InvalidFormatException e){
             throw new POIXMLException(e);
         }
     }
@@ -88,13 +97,12 @@ public class XMLSlideShow  extends POIXMLDocument {
     }
 
     static final OPCPackage empty() {
-        InputStream is = XMLSlideShow.class.getResourceAsStream("empty.pptx");
-        if (is == null) {
-            throw new RuntimeException("Missing resource 'empty.pptx'");
-        }
-        try {
+        try (InputStream is = XMLSlideShow.class.getResourceAsStream("empty.pptx")) {
+            if (is == null) {
+                throw new RuntimeException("Missing resource 'empty.pptx'");
+            }
             return OPCPackage.open(is);
-        } catch (Exception e){
+        } catch (IOException | InvalidFormatException e){
             throw new POIXMLException(e);
         }
     }

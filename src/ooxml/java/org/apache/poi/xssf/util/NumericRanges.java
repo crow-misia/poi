@@ -17,13 +17,17 @@
 
 package org.apache.poi.xssf.util;
 
-public class NumericRanges {
+public final class NumericRanges {
 
     public static int NO_OVERLAPS = -1;
     public static int OVERLAPS_1_MINOR = 0;
     public static int OVERLAPS_2_MINOR = 1;
     public static int OVERLAPS_1_WRAPS = 2;
     public static int OVERLAPS_2_WRAPS = 3;
+    
+    private NumericRanges() {
+        // nop.
+    }
     
     public static long[] getOverlappingRange(long[] range1, long[] range2) {
         int overlappingType = getOverlappingType(range1, range2);
