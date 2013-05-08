@@ -551,8 +551,7 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
         };
         fetchParagraphProperty(fetcher);
 
-        double spcBef = fetcher.getValue() == null ? 0 : fetcher.getValue();
-        return spcBef;
+        return fetcher.getValue() == null ? 0 : fetcher.getValue();
     }
 
     /**
@@ -711,7 +710,6 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
         Rectangle2D anchor = rShape.getAnchor(graphics);
 
         double leftMargin = getLeftMargin();
-        double indent = getIndent();
 
         double width;
         if(!_shape.getWordWrap()) {
@@ -720,6 +718,7 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
         } else {
             width = anchor.getWidth() -  leftInset - rightInset - leftMargin;
             if(firstLine) {
+                double indent = getIndent();
                 if(isBullet()){
                     if(indent > 0) width -= indent;
                 } else {
@@ -802,7 +801,7 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
         return penY - y;
     }
 
-    AttributedString getAttributedString(Graphics2D graphics){
+    private AttributedString getAttributedString(Graphics2D graphics){
 
         String text = getRenderableText();
 
@@ -882,10 +881,10 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
         _lines = new ArrayList<>();
 
         // does this paragraph contain text?
-        boolean emptyParagraph = _runs.size() == 0;
+        boolean emptyParagraph = _runs.isEmpty();
 
         // ensure that the paragraph contains at least one character
-        if(_runs.size() == 0) ensureNotEmpty();
+        if(emptyParagraph) ensureNotEmpty();
 
         String text = getRenderableText();
         if(text.length() == 0) return _lines;

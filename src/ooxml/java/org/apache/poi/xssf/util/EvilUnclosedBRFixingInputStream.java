@@ -18,6 +18,7 @@ package org.apache.poi.xssf.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import org.apache.poi.util.list.IntArrayList;
 
@@ -33,8 +34,8 @@ import org.apache.poi.util.list.IntArrayList;
  * It should only be used where experience shows the problem
  *  can occur...
  */
-public class EvilUnclosedBRFixingInputStream extends InputStream {
-   private InputStream source;
+public final class EvilUnclosedBRFixingInputStream extends InputStream {
+   private final InputStream source;
    private byte[] spare;
    
    private static byte[] detect = new byte[] {
@@ -107,8 +108,7 @@ public class EvilUnclosedBRFixingInputStream extends InputStream {
    }
    private void addToSpare(byte[] b, int offset, int len, boolean atTheEnd) {
       if(spare == null) {
-         spare = new byte[len];
-         System.arraycopy(b, offset, spare, 0, len);
+         spare = Arrays.copyOfRange(b, offset, offset + len);
       } else {
          byte[] newspare = new byte[spare.length+len];
          if(atTheEnd) {

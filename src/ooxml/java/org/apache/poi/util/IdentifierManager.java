@@ -27,7 +27,7 @@ import java.util.ListIterator;
  * @author Stefan Stern<br>
  */
 
-public class IdentifierManager {
+public final class IdentifierManager {
 
     public static final long MAX_ID = Long.MAX_VALUE - 1;
 
