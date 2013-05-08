@@ -16,9 +16,11 @@
 ==================================================================== */
 package org.apache.poi.xslf;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.poi.POIDataSamples;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
@@ -29,10 +31,9 @@ import org.apache.poi.xslf.usermodel.XMLSlideShow;
 public class XSLFTestDataSamples {
 
     public static XMLSlideShow openSampleDocument(String sampleName) {
-        InputStream is = POIDataSamples.getSlideShowInstance().openResourceAsStream(sampleName);
-        try {
+        try (InputStream is = POIDataSamples.getSlideShowInstance().openResourceAsStream(sampleName)) {
             return new XMLSlideShow(OPCPackage.open(is));
-        } catch (Exception e) {
+        } catch (IOException | InvalidFormatException e) {
             throw new RuntimeException(e);
         }
     }
@@ -41,7 +42,7 @@ public class XSLFTestDataSamples {
         try (final FastByteArrayOutputStream baos = new FastByteArrayOutputStream(4096)) {
             doc.write(baos);
             return new XMLSlideShow(OPCPackage.open(baos.toInputStream()));
-        } catch (Exception e) {
+        } catch (IOException | InvalidFormatException e) {
             throw new RuntimeException(e);
         }
     }
