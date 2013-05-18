@@ -17,6 +17,8 @@
 
 package org.apache.poi.xssf.usermodel;
 
+import org.apache.poi.ss.usermodel.Anchor;
+import org.apache.poi.ss.usermodel.Shape;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTLineProperties;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTNoFillProperties;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTPresetLineDashProperties;
@@ -30,7 +32,7 @@ import org.openxmlformats.schemas.drawingml.x2006.main.STPresetLineDashVal;
  *
  * @author Yegor Kozlov
  */
-public abstract class XSSFShape {
+public abstract class XSSFShape implements Shape {
     public static final int EMU_PER_PIXEL = 9525;
     public static final int EMU_PER_POINT = 12700;
 
@@ -50,31 +52,36 @@ public abstract class XSSFShape {
     /**
      * anchor that is used by this shape
      */
-    protected XSSFAnchor anchor;
+    protected Anchor anchor;
 
-    /**
-     * Return the drawing that owns this shape
-     *
-     * @return the parent drawing that owns this shape
-     */
     public XSSFDrawing getDrawing(){
         return drawing;
     }
 
-    /**
-     * Gets the parent shape.
-     */
     public XSSFShapeGroup getParent()
     {
         return parent;
     }
 
-    /**
-     * @return  the anchor that is used by this shape.
-     */
-    public XSSFAnchor getAnchor()
+    public Anchor getAnchor()
     {
         return anchor;
+    }
+
+    public void setAnchor( Anchor anchor )
+    {
+        if ( parent == null )
+        {
+            if ( anchor instanceof XSSFChildAnchor )
+                throw new IllegalArgumentException( "Must use client anchors for shapes directly attached to sheet." );
+        }
+        else
+        {
+            if ( anchor instanceof XSSFClientAnchor )
+                throw new IllegalArgumentException( "Must use child anchors for shapes attached to groups." );
+        }
+
+        this.anchor = anchor;
     }
 
     /**

@@ -17,20 +17,32 @@
 
 package org.apache.poi.hssf.usermodel;
 
-import org.apache.poi.ddf.*;
-import org.apache.poi.hssf.record.CommonObjectDataSubRecord;
-import org.apache.poi.hssf.record.ObjRecord;
-import org.apache.poi.util.LittleEndian;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import org.apache.poi.ddf.EscherBoolProperty;
+import org.apache.poi.ddf.EscherChildAnchorRecord;
+import org.apache.poi.ddf.EscherClientAnchorRecord;
+import org.apache.poi.ddf.EscherContainerRecord;
+import org.apache.poi.ddf.EscherOptRecord;
+import org.apache.poi.ddf.EscherProperties;
+import org.apache.poi.ddf.EscherProperty;
+import org.apache.poi.ddf.EscherRGBProperty;
+import org.apache.poi.ddf.EscherSimpleProperty;
+import org.apache.poi.ddf.EscherSpRecord;
+import org.apache.poi.hssf.record.CommonObjectDataSubRecord;
+import org.apache.poi.hssf.record.ObjRecord;
+import org.apache.poi.ss.usermodel.Anchor;
+import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.Shape;
+import org.apache.poi.util.LittleEndian;
 
 /**
  * An abstract shape.
  *
  * @author Glen Stampoultzis (glens at apache.org)
  */
-public abstract class HSSFShape {
+public abstract class HSSFShape implements Shape {
     public static final int LINEWIDTH_ONE_PT = 12700;
     public static final int LINEWIDTH_DEFAULT = 9525;
     public static final int LINESTYLE__COLOR_DEFAULT = 0x08000040;
@@ -54,7 +66,7 @@ public abstract class HSSFShape {
 
     // TODO - make all these fields private
     private HSSFShape parent;
-    HSSFAnchor anchor;
+    Anchor anchor;
     private HSSFPatriarch _patriarch;
 
     private final EscherContainerRecord _escherContainer;
@@ -131,31 +143,19 @@ public abstract class HSSFShape {
         return _optRecord;
     }
 
-    /**
-     * Gets the parent shape.
-     */
-    public HSSFShape getParent() {
+    public Drawing getDrawing() {
+        return _patriarch;
+    }
+
+    public Shape getParent() {
         return parent;
     }
 
-    /**
-     * @return the anchor that is used by this shape.
-     */
-    public HSSFAnchor getAnchor() {
+    public Anchor getAnchor() {
         return anchor;
     }
 
-    /**
-     * Sets a particular anchor.  A top-level shape must have an anchor of
-     * HSSFClientAnchor.  A child anchor must have an anchor of HSSFChildAnchor
-     *
-     * @param anchor the anchor to use.
-     * @throws IllegalArgumentException when the wrong anchor is used for
-     *                                  this particular shape.
-     * @see HSSFChildAnchor
-     * @see HSSFClientAnchor
-     */
-    public void setAnchor(HSSFAnchor anchor) {
+    public void setAnchor(Anchor anchor) {
         int i = 0;
         int recordId = -1;
         if (parent == null) {

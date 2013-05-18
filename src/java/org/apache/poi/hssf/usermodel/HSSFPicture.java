@@ -239,7 +239,7 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
      *
      * @return image dimension
      */
-    public Dimension getImageDimension(){
+    protected Dimension getImageDimension(){
         EscherBSERecord bse = getPatriarch().getSheet()._book.getBSERecord(getPictureIndex());
         byte[] data = bse.getBlipRecord().getPicturedata();
         int type = bse.getBlipTypeWin32();
