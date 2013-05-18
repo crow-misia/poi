@@ -455,4 +455,9 @@ public final class HSSFPatriarch implements HSSFShapeContainer, Drawing {
     protected HSSFSheet getSheet() {
         return _sheet;
     }
+
+    @Override
+    public List<HSSFShape> getShapes() {
+        return _shapes;
+    }
 }

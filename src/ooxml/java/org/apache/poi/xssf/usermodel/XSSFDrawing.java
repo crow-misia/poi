@@ -364,11 +364,7 @@ public final class XSSFDrawing extends POIXMLDocumentPart implements Drawing {
         return drawing.sizeOfTwoCellAnchorArray() + 1;
     }
 
-    /**
-     *
-     * @return list of shapes in this drawing
-     */
-    public List<XSSFShape>  getShapes(){
+    public List<XSSFShape> getShapes(){
         List<XSSFShape> lst = new ArrayList<XSSFShape>();
         for(XmlObject obj : drawing.selectPath("./*/*")) {
             XSSFShape shape = null;
