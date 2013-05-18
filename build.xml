@@ -62,8 +62,8 @@ under the License.
     <property name="forrest.home" value="${env.FORREST_HOME}"/>
 
     <!-- compiler options options -->
-    <property name="jdk.version.source" value="1.7" description="JDK version of source code"/>
-    <property name="jdk.version.class" value="1.7" description="JDK version of generated class files"/>
+    <property name="jdk.version.source" value="1.5" description="JDK version of source code"/>
+    <property name="jdk.version.class" value="1.5" description="JDK version of generated class files"/>
     <property name="compile.debug" value="true"/>
 
     <!-- 
@@ -72,8 +72,8 @@ under the License.
     -->
     <property name="org.apache.poi.util.POILogger" value="org.apache.poi.util.NullLogger"/>
 
-    <!-- issue warnings if source code contains unmappable characters for encoding UTF-8 -->
-    <property name="java.source.encoding" value="UTF-8"/>
+    <!-- issue warnings if source code contains unmappable characters for encoding ASCII  -->
+    <property name="java.source.encoding" value="ASCII"/>
 
     <!--
       JVM system properties for running tests,

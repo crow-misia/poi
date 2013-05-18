@@ -18,9 +18,22 @@
 
 package org.apache.poi.hssf.model;
 
-import org.apache.poi.ddf.*;
-import org.apache.poi.hssf.record.*;
-import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ddf.EscherBoolProperty;
+import org.apache.poi.ddf.EscherClientAnchorRecord;
+import org.apache.poi.ddf.EscherClientDataRecord;
+import org.apache.poi.ddf.EscherContainerRecord;
+import org.apache.poi.ddf.EscherOptRecord;
+import org.apache.poi.ddf.EscherProperties;
+import org.apache.poi.ddf.EscherRecord;
+import org.apache.poi.ddf.EscherShapePathProperty;
+import org.apache.poi.ddf.EscherSpRecord;
+import org.apache.poi.hssf.record.CommonObjectDataSubRecord;
+import org.apache.poi.hssf.record.EndSubRecord;
+import org.apache.poi.hssf.record.EscherAggregate;
+import org.apache.poi.hssf.record.ObjRecord;
+import org.apache.poi.hssf.usermodel.HSSFShape;
+import org.apache.poi.hssf.usermodel.HSSFSimpleShape;
+import org.apache.poi.ss.usermodel.Anchor;
 
 /**
  * Represents a line shape and creates all the line specific low level records.
@@ -71,7 +84,7 @@ public class LineShape
         opt.addEscherProperty( new EscherShapePathProperty( EscherProperties.GEOMETRY__SHAPEPATH, EscherShapePathProperty.COMPLEX ) );
         opt.addEscherProperty( new EscherBoolProperty( EscherProperties.LINESTYLE__NOLINEDRAWDASH, 1048592 ) );
         addStandardOptions(shape, opt);
-        HSSFAnchor userAnchor = shape.getAnchor();
+        Anchor userAnchor = shape.getAnchor();
         if (userAnchor.isHorizontallyFlipped())
             sp.setFlags(sp.getFlags() | EscherSpRecord.FLAG_FLIPHORIZ);
         if (userAnchor.isVerticallyFlipped())

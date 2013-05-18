@@ -14,17 +14,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 ==================================================================== */
-
-package org.apache.poi.xssf.usermodel;
-
-import org.apache.poi.ss.usermodel.Anchor;
+package org.apache.poi.ss.usermodel;
 
 /**
- * An anchor is what specifics the position of a shape within a client object
- * or within another containing shape.
- *
- * @author Yegor Kozlov
+ * @author Zenichi Amano
  */
-public abstract class XSSFAnchor implements Anchor {
+public interface ChildAnchor extends Anchor {
 
 }

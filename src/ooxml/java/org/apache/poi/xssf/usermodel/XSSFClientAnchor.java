@@ -17,6 +17,7 @@
 
 package org.apache.poi.xssf.usermodel;
 
+import org.apache.poi.ddf.EscherRecord;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.util.Internal;
 import org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker;
@@ -229,5 +230,21 @@ public final class XSSFClientAnchor extends XSSFAnchor implements ClientAnchor {
     public boolean isSet(){
         return !(cell1.getCol() == 0 && cell2.getCol() == 0 &&
                  cell1.getRow() == 0 && cell2.getRow() == 0);
+    }
+
+    @Override
+    @Internal
+    public EscherRecord getEscherAnchor() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isHorizontallyFlipped() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isVerticallyFlipped() {
+        throw new UnsupportedOperationException();
     }
 }
