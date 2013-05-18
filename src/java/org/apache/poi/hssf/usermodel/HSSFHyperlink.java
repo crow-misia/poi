@@ -27,26 +27,6 @@ import org.apache.poi.ss.usermodel.Hyperlink;
 public class HSSFHyperlink implements Hyperlink {
 
     /**
-     * Link to an existing file or web page
-     */
-    public static final int LINK_URL = 1;
-
-    /**
-     * Link to a place in this document
-     */
-    public static final int LINK_DOCUMENT = 2;
-
-    /**
-     * Link to an E-mail address
-     */
-    public static final int LINK_EMAIL = 3;
-
-    /**
-     * Link to a file
-     */
-    public static final int LINK_FILE = 4;
-
-    /**
      * Low-level record object that stores the actual hyperlink data
      */
     protected HyperlinkRecord record = null;
@@ -103,83 +83,38 @@ public class HSSFHyperlink implements Hyperlink {
         }
     }
 
-    /**
-     * Return the row of the first cell that contains the hyperlink
-     *
-     * @return the 0-based row of the cell that contains the hyperlink
-     */
     public int getFirstRow(){
         return record.getFirstRow();
     }
 
-    /**
-     * Set the row of the first cell that contains the hyperlink
-     *
-     * @param row the 0-based row of the first cell that contains the hyperlink
-     */
     public void setFirstRow(int row){
         record.setFirstRow(row);
     }
 
-    /**
-     * Return the row of the last cell that contains the hyperlink
-     *
-     * @return the 0-based row of the last cell that contains the hyperlink
-     */
     public int getLastRow(){
         return record.getLastRow();
     }
 
-    /**
-     * Set the row of the last cell that contains the hyperlink
-     *
-     * @param row the 0-based row of the last cell that contains the hyperlink
-     */
     public void setLastRow(int row){
         record.setLastRow(row);
     }
 
-    /**
-     * Return the column of the first cell that contains the hyperlink
-     *
-     * @return the 0-based column of the first cell that contains the hyperlink
-     */
     public int getFirstColumn(){
         return record.getFirstColumn();
     }
 
-    /**
-     * Set the column of the first cell that contains the hyperlink
-     *
-     * @param col the 0-based column of the first cell that contains the hyperlink
-     */
     public void setFirstColumn(int col){
         record.setFirstColumn((short)col);
     }
 
-    /**
-     * Return the column of the last cell that contains the hyperlink
-     *
-     * @return the 0-based column of the last cell that contains the hyperlink
-     */
     public int getLastColumn(){
         return record.getLastColumn();
     }
 
-    /**
-     * Set the column of the last cell that contains the hyperlink
-     *
-     * @param col the 0-based column of the last cell that contains the hyperlink
-     */
     public void setLastColumn(int col){
         record.setLastColumn((short)col);
     }
 
-    /**
-     * Hyperlink address. Depending on the hyperlink type it can be URL, e-mail, path to a file, etc.
-     *
-     * @return  the address of this hyperlink
-     */
     public String getAddress(){
         return record.getAddress();
     }
@@ -207,38 +142,18 @@ public class HSSFHyperlink implements Hyperlink {
         record.setShortFilename(shortFilename);
     }
 
-    /**
-     * Hyperlink address. Depending on the hyperlink type it can be URL, e-mail, path to a file, etc.
-     *
-     * @param address  the address of this hyperlink
-     */
     public void setAddress(String address){
         record.setAddress(address);
     }
 
-    /**
-     * Return text label for this hyperlink
-     *
-     * @return  text to display
-     */
     public String getLabel(){
         return record.getLabel();
     }
 
-    /**
-     * Sets text label for this hyperlink
-     *
-     * @param label text label for this hyperlink
-     */
     public void setLabel(String label){
         record.setLabel(label);
     }
 
-    /**
-     * Return the type of this hyperlink
-     *
-     * @return the type of this hyperlink
-     */
     public int getType(){
         return link_type;
     }
