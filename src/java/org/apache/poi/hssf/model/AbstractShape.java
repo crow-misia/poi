@@ -17,9 +17,21 @@
 
 package org.apache.poi.hssf.model;
 
-import org.apache.poi.ddf.*;
+import org.apache.poi.ddf.EscherBoolProperty;
+import org.apache.poi.ddf.EscherContainerRecord;
+import org.apache.poi.ddf.EscherOptRecord;
+import org.apache.poi.ddf.EscherProperties;
+import org.apache.poi.ddf.EscherRGBProperty;
+import org.apache.poi.ddf.EscherRecord;
+import org.apache.poi.ddf.EscherSimpleProperty;
+import org.apache.poi.ddf.EscherSpRecord;
 import org.apache.poi.hssf.record.ObjRecord;
-import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.usermodel.HSSFComment;
+import org.apache.poi.hssf.usermodel.HSSFPolygon;
+import org.apache.poi.hssf.usermodel.HSSFShape;
+import org.apache.poi.hssf.usermodel.HSSFSimpleShape;
+import org.apache.poi.hssf.usermodel.HSSFTextbox;
+import org.apache.poi.ss.usermodel.Anchor;
 
 /**
  * An abstract shape is the lowlevel model for a shape.
@@ -102,7 +114,7 @@ public abstract class AbstractShape
      * @param userAnchor    The high level anchor to convert.
      * @return  An escher anchor record.
      */
-    protected EscherRecord createAnchor( HSSFAnchor userAnchor )
+    protected EscherRecord createAnchor( Anchor userAnchor )
     {
         return ConvertAnchor.createAnchor(userAnchor);
     }

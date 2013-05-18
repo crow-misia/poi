@@ -20,8 +20,10 @@ package org.apache.poi.hssf.usermodel;
 
 import org.apache.poi.ddf.EscherChildAnchorRecord;
 import org.apache.poi.ddf.EscherRecord;
+import org.apache.poi.ss.usermodel.ChildAnchor;
+import org.apache.poi.util.Internal;
 
-public final class HSSFChildAnchor extends HSSFAnchor {
+public final class HSSFChildAnchor extends HSSFAnchor implements ChildAnchor {
 
     private EscherChildAnchorRecord _escherChildAnchor;
 
@@ -118,7 +120,8 @@ public final class HSSFChildAnchor extends HSSFAnchor {
     }
 
     @Override
-    protected EscherRecord getEscherAnchor() {
+    @Internal
+    public EscherRecord getEscherAnchor() {
         return _escherChildAnchor;
     }
 
