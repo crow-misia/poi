@@ -16,6 +16,8 @@
 ==================================================================== */
 package org.apache.poi.ss.usermodel;
 
+import java.util.List;
+
 /**
  * High level representation of spreadsheet drawing.
  * @author Yegor Kozlov
@@ -64,4 +66,10 @@ public interface Drawing {
 	 * @return the newly created client anchor
 	 */
 	ClientAnchor createAnchor(int dx1, int dy1, int dx2, int dy2, int col1, int row1, int col2, int row2);
+	
+	/**
+	 *
+	 * @return list of shapes in this drawing
+	 */
+	List<? extends Shape> getShapes();
 }
