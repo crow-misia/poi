@@ -22,7 +22,7 @@ package org.apache.poi.ss.usermodel;
  *
  * @author Yegor Kozlov
  */
-public interface ClientAnchor {
+public interface ClientAnchor extends Anchor {
     /**
      * Move and Resize With Anchor Cells
      * <p>
@@ -117,95 +117,6 @@ public interface ClientAnchor {
      * @param row2 0-based row of the first cell.
      */
     public void setRow2(int row2);
-
-    /**
-     * Returns the x coordinate within the first cell.
-     * 
-     * Note - XSSF and HSSF have a slightly different coordinate
-     *  system, values in XSSF are larger by a factor of
-     *  {@link org.apache.poi.xssf.usermodel.XSSFShape#EMU_PER_PIXEL}
-     *
-     * @return the x coordinate within the first cell
-     */
-    public int getDx1();
-
-    /**
-     * Sets the x coordinate within the first cell
-     *
-     * Note - XSSF and HSSF have a slightly different coordinate
-     *  system, values in XSSF are larger by a factor of
-     *  {@link org.apache.poi.xssf.usermodel.XSSFShape#EMU_PER_PIXEL}
-     *
-     * @param dx1 the x coordinate within the first cell
-     */
-    public void setDx1(int dx1);
-
-    /**
-     * Returns the y coordinate within the first cell
-     *
-     * Note - XSSF and HSSF have a slightly different coordinate
-     *  system, values in XSSF are larger by a factor of
-     *  {@link org.apache.poi.xssf.usermodel.XSSFShape#EMU_PER_PIXEL}
-     *
-     * @return the y coordinate within the first cell
-     */
-    public int getDy1();
-
-    /**
-     * Sets the y coordinate within the first cell
-     *
-     * Note - XSSF and HSSF have a slightly different coordinate
-     *  system, values in XSSF are larger by a factor of
-     *  {@link org.apache.poi.xssf.usermodel.XSSFShape#EMU_PER_PIXEL}
-     *
-     * @param dy1 the y coordinate within the first cell
-     */
-    public void setDy1(int dy1);
-
-    /**
-     * Sets the y coordinate within the second cell
-     *
-     * Note - XSSF and HSSF have a slightly different coordinate
-     *  system, values in XSSF are larger by a factor of
-     *  {@link org.apache.poi.xssf.usermodel.XSSFShape#EMU_PER_PIXEL}
-     *
-     * @return the y coordinate within the second cell
-     */
-    public int getDy2();
-
-    /**
-     * Sets the y coordinate within the second cell
-     *
-     * Note - XSSF and HSSF have a slightly different coordinate
-     *  system, values in XSSF are larger by a factor of
-     *  {@link org.apache.poi.xssf.usermodel.XSSFShape#EMU_PER_PIXEL}
-     *
-     * @param dy2 the y coordinate within the second cell
-     */
-    public void setDy2(int dy2);
-
-    /**
-     * Returns the x coordinate within the second cell
-     *
-     * Note - XSSF and HSSF have a slightly different coordinate
-     *  system, values in XSSF are larger by a factor of
-     *  {@link org.apache.poi.xssf.usermodel.XSSFShape#EMU_PER_PIXEL}
-     *
-     * @return the x coordinate within the second cell
-     */
-    public int getDx2();
-
-    /**
-     * Sets the x coordinate within the second cell
-     *
-     * Note - XSSF and HSSF have a slightly different coordinate
-     *  system, values in XSSF are larger by a factor of
-     *  {@link org.apache.poi.xssf.usermodel.XSSFShape#EMU_PER_PIXEL}
-     *
-     * @param dx2 the x coordinate within the second cell
-     */
-    public void setDx2(int dx2);
-
 
     /**
      * Sets the anchor type

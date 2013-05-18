@@ -21,7 +21,8 @@ package org.apache.poi.ss.usermodel;
  *
  * @author Yegor Kozlov
  */
-public interface Picture {
+public interface Picture extends Shape {
+    int getPictureIndex();
 
     /**
      * Reset the image to the original size.
@@ -49,8 +50,21 @@ public interface Picture {
      */
     void resize(double scale);
 
+    /**
+     * Calculate the preferred size for this picture.
+     *
+     * @return ClientAnchor with the preferred size for this image
+     */
     ClientAnchor getPreferredSize();
-    
+
+    /**
+     * Calculate the preferred size for this picture.
+     *
+     * @param scale the amount by which image dimensions are multiplied relative to the original size.
+     * @return ClientAnchor with the preferred size for this image
+     */
+    public ClientAnchor getPreferredSize(double scale);
+
     /**
      * Return picture data for this picture
      *

@@ -20,15 +20,14 @@ package org.apache.poi.xssf.usermodel;
 import java.awt.Dimension;
 import java.io.IOException;
 
-import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackageRelationship;
 import org.apache.poi.ss.usermodel.Picture;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.ImageUtils;
+import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
-import org.apache.poi.util.Internal;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTBlipFillProperties;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTNonVisualDrawingProps;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTNonVisualPictureProperties;
@@ -140,30 +139,16 @@ public final class XSSFPicture extends XSSFShape implements Picture {
     }
 
     /**
-     * Reset the image to the original size.
-     *
-     * <p>
-     * Please note, that this method works correctly only for workbooks
-     * with the default font size (Calibri 11pt for .xlsx).
-     * If the default font is changed the resized image can be streched vertically or horizontally.
-     * </p>
+     * @return shapeId
      */
+    public int getPictureIndex(){
+    	return (int) ctPicture.getNvPicPr().getCNvPr().getId();
+    }
+
     public void resize(){
         resize(1.0);
     }
 
-    /**
-     * Reset the image to the original size.
-     * <p>
-     * Please note, that this method works correctly only for workbooks
-     * with the default font size (Calibri 11pt for .xlsx).
-     * If the default font is changed the resized image can be streched vertically or horizontally.
-     * </p>
-     *
-     * @param scale the amount by which image dimensions are multiplied relative to the original size.
-     * <code>resize(1.0)</code> sets the original size, <code>resize(0.5)</code> resize to 50% of the original,
-     * <code>resize(2.0)</code> resizes to 200% of the original.
-     */
     public void resize(double scale){
         XSSFClientAnchor anchor = (XSSFClientAnchor)getAnchor();
 
@@ -181,21 +166,10 @@ public final class XSSFPicture extends XSSFShape implements Picture {
         anchor.setDy2(pref.getDy2());
     }
 
-    /**
-     * Calculate the preferred size for this picture.
-     *
-     * @return XSSFClientAnchor with the preferred size for this image
-     */
     public XSSFClientAnchor getPreferredSize(){
         return getPreferredSize(1);
     }
 
-    /**
-     * Calculate the preferred size for this picture.
-     *
-     * @param scale the amount by which image dimensions are multiplied relative to the original size.
-     * @return XSSFClientAnchor with the preferred size for this image
-     */
     public XSSFClientAnchor getPreferredSize(double scale){
         XSSFClientAnchor anchor = (XSSFClientAnchor)getAnchor();
 

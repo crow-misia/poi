@@ -20,6 +20,7 @@ package org.apache.poi.hssf.usermodel;
 import org.apache.poi.ddf.EscherClientAnchorRecord;
 import org.apache.poi.ddf.EscherRecord;
 import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.util.Internal;
 
 /**
  * A client anchor is attached to an excel worksheet.  It anchors against a
@@ -229,7 +230,8 @@ public final class HSSFClientAnchor extends HSSFAnchor implements ClientAnchor {
     }
 
     @Override
-    protected EscherRecord getEscherAnchor() {
+    @Internal
+    public EscherRecord getEscherAnchor() {
         return _escherClientAnchor;
     }
 

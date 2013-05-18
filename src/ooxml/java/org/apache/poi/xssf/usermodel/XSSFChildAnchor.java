@@ -20,13 +20,15 @@ package org.apache.poi.xssf.usermodel;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTPoint2D;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTPositiveSize2D;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTTransform2D;
+import org.apache.poi.ddf.EscherRecord;
+import org.apache.poi.ss.usermodel.ChildAnchor;
 import org.apache.poi.util.Internal;
 
 /**
  * @author Yegor Kozlov
  */
-public final class XSSFChildAnchor extends XSSFAnchor {
-    private CTTransform2D t2d;
+public final class XSSFChildAnchor extends XSSFAnchor implements ChildAnchor {
+    private final CTTransform2D t2d;
 
     public XSSFChildAnchor(int x, int y, int cx, int cy) {
         t2d = CTTransform2D.Factory.newInstance();
@@ -80,5 +82,21 @@ public final class XSSFChildAnchor extends XSSFAnchor {
 
     public void setDx2(int dx2) {
         t2d.getExt().setCx(dx2 - getDx1());
+    }
+
+    @Override
+    @Internal
+    public EscherRecord getEscherAnchor() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isHorizontallyFlipped() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isVerticallyFlipped() {
+        throw new UnsupportedOperationException();
     }
 }

@@ -17,23 +17,23 @@
 
 package org.apache.poi.hssf.model;
 
-import org.apache.poi.ddf.EscherRecord;
-import org.apache.poi.ddf.EscherClientAnchorRecord;
 import org.apache.poi.ddf.EscherChildAnchorRecord;
-import org.apache.poi.hssf.usermodel.HSSFAnchor;
-import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
-import org.apache.poi.hssf.usermodel.HSSFChildAnchor;
+import org.apache.poi.ddf.EscherClientAnchorRecord;
+import org.apache.poi.ddf.EscherRecord;
+import org.apache.poi.ss.usermodel.Anchor;
+import org.apache.poi.ss.usermodel.ChildAnchor;
+import org.apache.poi.ss.usermodel.ClientAnchor;
 
 /**
  *
  */
 public class ConvertAnchor
 {
-    public static EscherRecord createAnchor( HSSFAnchor userAnchor )
+    public static EscherRecord createAnchor( Anchor userAnchor )
     {
-        if (userAnchor instanceof HSSFClientAnchor)
+        if (userAnchor instanceof ClientAnchor)
         {
-            HSSFClientAnchor a = (HSSFClientAnchor) userAnchor;
+            ClientAnchor a = (ClientAnchor) userAnchor;
 
             EscherClientAnchorRecord anchor = new EscherClientAnchorRecord();
             anchor.setRecordId( EscherClientAnchorRecord.RECORD_ID );
@@ -50,7 +50,7 @@ public class ConvertAnchor
             anchor.setDy2( (short) a.getDy2() );
             return anchor;
         }
-        HSSFChildAnchor a = (HSSFChildAnchor) userAnchor;
+        ChildAnchor a = (ChildAnchor) userAnchor;
         EscherChildAnchorRecord anchor = new EscherChildAnchorRecord();
         anchor.setRecordId( EscherChildAnchorRecord.RECORD_ID );
         anchor.setOptions( (short) 0x0000 );
