@@ -61,7 +61,7 @@ public class XSSFHyperlink implements Hyperlink {
 
         // If it has a location, it's internal
         if (ctHyperlink.getLocation() != null) {
-            _type = Hyperlink.LINK_DOCUMENT;
+            _type = LINK_DOCUMENT;
             _location = ctHyperlink.getLocation();
         } else {
             // Otherwise it's somehow external, check
@@ -72,7 +72,7 @@ public class XSSFHyperlink implements Hyperlink {
                             " references relation " + ctHyperlink.getId() + ", but that didn't exist!");
                 }
                 // hyperlink is internal and is not related to other parts
-                _type = Hyperlink.LINK_DOCUMENT;
+                _type = LINK_DOCUMENT;
             } else {
                 URI target = _externalRel.getTargetURI();
                 _location = target.toString();
@@ -80,11 +80,11 @@ public class XSSFHyperlink implements Hyperlink {
                 // Try to figure out the type
                 if (_location.startsWith("http://") || _location.startsWith("https://")
                         || _location.startsWith("ftp://")) {
-                    _type = Hyperlink.LINK_URL;
+                    _type = LINK_URL;
                 } else if (_location.startsWith("mailto:")) {
-                    _type = Hyperlink.LINK_EMAIL;
+                    _type = LINK_EMAIL;
                 } else {
-                    _type = Hyperlink.LINK_FILE;
+                    _type = LINK_FILE;
                 }
             }
 
@@ -104,7 +104,7 @@ public class XSSFHyperlink implements Hyperlink {
      * this hyperlink?
      */
     public boolean needsRelationToo() {
-        return (_type != Hyperlink.LINK_DOCUMENT);
+        return (_type != LINK_DOCUMENT);
     }
 
     /**
@@ -195,7 +195,7 @@ public class XSSFHyperlink implements Hyperlink {
 
        _location = address;
         //we must set location for internal hyperlinks
-        if (_type == Hyperlink.LINK_DOCUMENT) {
+        if (_type == LINK_DOCUMENT) {
             setLocation(address);
         }
     }
@@ -203,9 +203,9 @@ public class XSSFHyperlink implements Hyperlink {
     private void validate(String address) {
         switch (_type){
             // email, path to file and url must be valid URIs
-            case Hyperlink.LINK_EMAIL:
-            case Hyperlink.LINK_FILE:
-            case Hyperlink.LINK_URL:
+            case LINK_EMAIL:
+            case LINK_FILE:
+            case LINK_URL:
                 try {
                     new URI(address);
                 } catch (URISyntaxException x) {
