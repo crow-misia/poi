@@ -173,7 +173,7 @@ public final class Chunk {
 					command.value = Byte.valueOf(contents[offset]);
 					break;
 				case 9:
-					command.value = new Double(
+					command.value = Double.valueOf(
 							LittleEndian.getDouble(contents, offset)
 					);
 					break;

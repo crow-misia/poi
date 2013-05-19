@@ -148,12 +148,12 @@ public enum UnderlinePatterns {
     private static Map<Integer, UnderlinePatterns> imap = new HashMap<Integer, UnderlinePatterns>();
     static {
        for (UnderlinePatterns p : values()) {
-          imap.put(new Integer(p.getValue()), p);
+          imap.put(Integer.valueOf(p.getValue()), p);
        }
     }
 
     public static UnderlinePatterns valueOf(int type) {
-       UnderlinePatterns align = imap.get(new Integer(type));
+       UnderlinePatterns align = imap.get(Integer.valueOf(type));
        if (align == null)
           throw new IllegalArgumentException("Unknown underline pattern: "
                 + type);

@@ -96,12 +96,12 @@ public enum BreakClear {
     private static Map<Integer, BreakClear> imap = new HashMap<Integer, BreakClear>();
     static {
        for (BreakClear p : values()) {
-          imap.put(new Integer(p.getValue()), p);
+          imap.put(Integer.valueOf(p.getValue()), p);
        }
     }
 
     public static BreakClear valueOf(int type) {
-       BreakClear bType = imap.get(new Integer(type));
+       BreakClear bType = imap.get(Integer.valueOf(type));
        if (bType == null)
           throw new IllegalArgumentException("Unknown break clear type: "
                 + type);

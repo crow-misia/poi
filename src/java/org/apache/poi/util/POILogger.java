@@ -653,7 +653,7 @@ public abstract class POILogger {
 
             for (int j = 0; j < array.length; j++)
             {
-                results.add(new Float(array[ j ]));
+                results.add(Float.valueOf(array[ j ]));
             }
         }
         else if (object instanceof double [])
@@ -662,7 +662,7 @@ public abstract class POILogger {
 
             for (int j = 0; j < array.length; j++)
             {
-                results.add(new Double(array[ j ]));
+                results.add(Double.valueOf(array[ j ]));
             }
         }
         else if (object instanceof Object [])
