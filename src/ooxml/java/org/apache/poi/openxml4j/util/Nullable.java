@@ -24,14 +24,16 @@ package org.apache.poi.openxml4j.util;
  * @version 0.9
  */
 public final class Nullable<E> {
+	/** Empty Instance */
+	public static final Nullable<?> EMPTY = new Nullable<Object>();
 
-	private E value;
+	private final E value;
 
 	/**
 	 * Constructor.
 	 */
-	public Nullable() {
-		// Do nothing
+	private Nullable() {
+		value = null;
 	}
 
 	/**
@@ -64,9 +66,10 @@ public final class Nullable<E> {
 	}
 
 	/**
-	 * Set the stored value to <i>null</i>.
+	 * Get Empty Instance
 	 */
-	public void nullify() {
-		value = null;
+	@SuppressWarnings("unchecked")
+	public static <E> Nullable<E> empty() {
+		return (Nullable<E>) EMPTY;
 	}
 }
