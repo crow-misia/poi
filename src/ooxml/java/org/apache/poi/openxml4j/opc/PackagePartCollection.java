@@ -59,9 +59,10 @@ public final class PackagePartCollection extends
 				PackagingURIHelper.FORWARD_SLASH_STRING);
 		StringBuffer concatSeg = new StringBuffer();
 		for (String seg : segments) {
-			if (!seg.equals(""))
+			if (seg.length() > 0) {
 				concatSeg.append(PackagingURIHelper.FORWARD_SLASH_CHAR);
-			concatSeg.append(seg);
+				concatSeg.append(seg);
+			}
 			if (this.registerPartNameStr.contains(concatSeg.toString())) {
 				throw new InvalidOperationException(
 						"You can't add a part with a part name derived from another part ! [M1.11]");

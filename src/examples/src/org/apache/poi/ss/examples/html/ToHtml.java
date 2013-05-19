@@ -22,6 +22,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.format.CellFormat;
 import org.apache.poi.ss.format.CellFormatResult;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.util.StringUtil;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.BufferedReader;
@@ -412,7 +413,7 @@ public class ToHtml {
                                 style.getDataFormatString());
                         CellFormatResult result = cf.apply(cell);
                         content = result.text;
-                        if (content.equals(""))
+                        if (StringUtil.isEmpty(content))
                             content = "&nbsp;";
                     }
                 }
