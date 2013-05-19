@@ -34,7 +34,7 @@ import org.apache.poi.hssf.record.RecordInputStream;
  *@author     Sergei Kozello (sergeikozello at mail.ru)
  *@author     Toshiaki Kamoshida (kamoshida.toshiaki at future dot co dot jp)
  */
-public class StringUtil {
+public final class StringUtil {
 	private static final String ENCODING_ISO_8859_1 = "ISO-8859-1";
 
 	private StringUtil() {
@@ -393,8 +393,16 @@ public class StringUtil {
 			return true;
 		}
 	}
-	
-   /**
+
+	public static boolean isEmpty(final String s) {
+		return s == null || s.length() == 0;
+	}
+
+	public static boolean isNotEmpty(final String s) {
+		return s != null && s.length() > 0;
+	}
+
+	/**
     * An Iterator over an array of Strings.
     */
    public static class StringsIterator implements Iterator<String> {
