@@ -62,12 +62,12 @@ public enum LineSpacingRule {
     private static Map<Integer, LineSpacingRule> imap = new HashMap<Integer, LineSpacingRule>();
     static {
        for (LineSpacingRule p : values()) {
-          imap.put(new Integer(p.getValue()), p);
+          imap.put(Integer.valueOf(p.getValue()), p);
        }
     }
 
     public static LineSpacingRule valueOf(int type) {
-       LineSpacingRule lineType = imap.get(new Integer(type));
+       LineSpacingRule lineType = imap.get(Integer.valueOf(type));
        if (lineType == null)
           throw new IllegalArgumentException("Unknown line type: " + type);
        return lineType;

@@ -211,12 +211,12 @@ public final class TestMetaDataIPI extends TestCase{
 		/* Insert some custom properties into the container. */
 		customProperties.put("Key1", "Value1");
 		customProperties.put("Schl\u00fcssel2", "Wert2");
-		customProperties.put("Sample Integer", new Integer(12345));
+		customProperties.put("Sample Integer", Integer.valueOf(12345));
 		customProperties.put("Sample Boolean", Boolean.TRUE);
 		Date date = new Date();
 		customProperties.put("Sample Date", date);
-		customProperties.put("Sample Double", new Double(-1.0001));
-		customProperties.put("Sample Negative Integer", new Integer(-100000));
+		customProperties.put("Sample Double", Double.valueOf(-1.0001));
+		customProperties.put("Sample Negative Integer", Integer.valueOf(-100000));
 
 		dsi.setCustomProperties(customProperties);
 
@@ -253,17 +253,17 @@ public final class TestMetaDataIPI extends TestCase{
 		String a2 = (String) customProperties.get("Schl\u00fcssel2");
 		assertEquals("Schl\u00fcssel2", "Wert2", a2);
 		Integer a3 = (Integer) customProperties.get("Sample Integer");
-		assertEquals("Sample Number", new Integer(12345), a3);
+		assertEquals("Sample Number", Integer.valueOf(12345), a3);
 		Boolean a4 = (Boolean) customProperties.get("Sample Boolean");
 		assertEquals("Sample Boolean", Boolean.TRUE, a4);
 		Date a5 = (Date) customProperties.get("Sample Date");
 		assertEquals("Custom Date:", date, a5);
 
 		Double a6 = (Double) customProperties.get("Sample Double");
-		assertEquals("Custom Float", new Double(-1.0001), a6);
+		assertEquals("Custom Float", Double.valueOf(-1.0001), a6);
 
 		Integer a7 = (Integer) customProperties.get("Sample Negative Integer");
-		assertEquals("Neg", new Integer(-100000), a7);
+		assertEquals("Neg", Integer.valueOf(-100000), a7);
 	}
 
 	/**
@@ -315,7 +315,7 @@ public final class TestMetaDataIPI extends TestCase{
 		/* Insert some custom properties into the container. */
 		customProperties.put(k1, p1);
 		customProperties.put(k2, p2);
-		customProperties.put("Sample Number", new Integer(12345));
+		customProperties.put("Sample Number", Integer.valueOf(12345));
 		customProperties.put("Sample Boolean", Boolean.TRUE);
 		Date date = new Date();
 		customProperties.put("Sample Date", date);
@@ -356,7 +356,7 @@ public final class TestMetaDataIPI extends TestCase{
 		String a2 = (String) customProperties.get(k2);
 		assertEquals("Schl\u00fcssel2", p2, a2);
 		Integer a3 = (Integer) customProperties.get("Sample Number");
-		assertEquals("Sample Number", new Integer(12345), a3);
+		assertEquals("Sample Number", Integer.valueOf(12345), a3);
 		Boolean a4 = (Boolean) customProperties.get("Sample Boolean");
 		assertEquals("Sample Boolean", Boolean.TRUE, a4);
 		Date a5 = (Date) customProperties.get("Sample Date");
@@ -428,7 +428,7 @@ public final class TestMetaDataIPI extends TestCase{
 		/* Insert some custom properties into the container. */
 		customProperties.put(k1, p1);
 		customProperties.put(k2, p2);
-		customProperties.put("Sample Number", new Integer(12345));
+		customProperties.put("Sample Number", Integer.valueOf(12345));
 		customProperties.put("Sample Boolean", Boolean.FALSE);
 		Date date = new Date(0);
 		customProperties.put("Sample Date", date);
@@ -470,7 +470,7 @@ public final class TestMetaDataIPI extends TestCase{
 		String a2 = (String) customProperties.get(k2);
 		assertEquals("Schl\u00fcssel2", p2, a2);
 		Integer a3 = (Integer) customProperties.get("Sample Number");
-		assertEquals("Sample Number", new Integer(12345), a3);
+		assertEquals("Sample Number", Integer.valueOf(12345), a3);
 		Boolean a4 = (Boolean) customProperties.get("Sample Boolean");
 		assertEquals("Sample Boolean", Boolean.FALSE, a4);
 		Date a5 = (Date) customProperties.get("Sample Date");
@@ -552,7 +552,7 @@ public final class TestMetaDataIPI extends TestCase{
 		/* Insert some custom properties into the container. */
 		customProperties.put(k1, p1);
 		customProperties.put(k2, p2);
-		customProperties.put("Sample Number", new Integer(12345));
+		customProperties.put("Sample Number", Integer.valueOf(12345));
 		customProperties.put("Sample Boolean", Boolean.TRUE);
 		Date date = new Date();
 		customProperties.put("Sample Date", date);
@@ -594,7 +594,7 @@ public final class TestMetaDataIPI extends TestCase{
 		String a2 = (String) customProperties.get(k2);
 		assertEquals("Schl\u00fcssel2", p2, a2);
 		Integer a3 = (Integer) customProperties.get("Sample Number");
-		assertEquals("Sample Number", new Integer(12345), a3);
+		assertEquals("Sample Number", Integer.valueOf(12345), a3);
 		Boolean a4 = (Boolean) customProperties.get("Sample Boolean");
 		assertEquals("Sample Boolean", Boolean.TRUE, a4);
 		Date a5 = (Date) customProperties.get("Sample Date");
@@ -625,16 +625,16 @@ public final class TestMetaDataIPI extends TestCase{
 		}
 
 		/* Insert some custom properties into the container. */
-		customProperties.put("int", new Integer(12345));
-		customProperties.put("negint", new Integer(-12345));
-		customProperties.put("long", new Long(12345));
-		customProperties.put("neglong", new Long(-12345));
+		customProperties.put("int", Integer.valueOf(12345));
+		customProperties.put("negint", Integer.valueOf(-12345));
+		customProperties.put("long", Long.valueOf(12345));
+		customProperties.put("neglong", Long.valueOf(-12345));
 		customProperties.put("boolean", Boolean.TRUE);
 		customProperties.put("string", "a String");
-		// customProperties.put("float", new Float(12345.0)); is not valid
-		// customProperties.put("negfloat", new Float(-12345.1)); is not valid
-		customProperties.put("double", new Double(12345.2));
-		customProperties.put("negdouble", new Double(-12345.3));
+		// customProperties.put("float", Float.valueOf(12345.0)); is not valid
+		// customProperties.put("negfloat", Float.valueOf(-12345.1)); is not valid
+		customProperties.put("double", Double.valueOf(12345.2));
+		customProperties.put("negdouble", Double.valueOf(-12345.3));
 		// customProperties.put("char", new Character('a')); is not valid
 
 		Date date = new Date();
@@ -673,16 +673,16 @@ public final class TestMetaDataIPI extends TestCase{
 		/* Insert some custom properties into the container. */
 
 		Integer a3 = (Integer) customProperties.get("int");
-		assertEquals("int", new Integer(12345), a3);
+		assertEquals("int", Integer.valueOf(12345), a3);
 
 		a3 = (Integer) customProperties.get("negint");
-		assertEquals("negint", new Integer(-12345), a3);
+		assertEquals("negint", Integer.valueOf(-12345), a3);
 
 		Long al = (Long) customProperties.get("neglong");
-		assertEquals("neglong", new Long(-12345), al);
+		assertEquals("neglong", Long.valueOf(-12345), al);
 
 		al = (Long) customProperties.get("long");
-		assertEquals("long", new Long(12345), al);
+		assertEquals("long", Long.valueOf(12345), al);
 
 		Boolean a4 = (Boolean) customProperties.get("boolean");
 		assertEquals("boolean", Boolean.TRUE, a4);
@@ -691,10 +691,10 @@ public final class TestMetaDataIPI extends TestCase{
 		assertEquals("Custom Date:", date, a5);
 
 		Double d = (Double) customProperties.get("double");
-		assertEquals("int", new Double(12345.2), d);
+		assertEquals("int", Double.valueOf(12345.2), d);
 
 		d = (Double) customProperties.get("negdouble");
-		assertEquals("string", new Double(-12345.3), d);
+		assertEquals("string", Double.valueOf(-12345.3), d);
 
 		String s = (String) customProperties.get("string");
 		assertEquals("sring", "a String", s);

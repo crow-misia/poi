@@ -279,19 +279,19 @@ public class TestWriteWellKnown extends TestCase {
         final int     P_SLIDE_COUNT = ++nr;
         final Date    now = new Date();
 
-        final Integer POSITIVE_INTEGER = new Integer(2222);
+        final Integer POSITIVE_INTEGER = Integer.valueOf(2222);
         final Long POSITIVE_LONG = new  Long(3333);
         final Double POSITIVE_DOUBLE = new  Double(4444);
-        final Integer NEGATIVE_INTEGER = new Integer(2222);
+        final Integer NEGATIVE_INTEGER = Integer.valueOf(2222);
         final Long NEGATIVE_LONG = new  Long(3333);
         final Double NEGATIVE_DOUBLE = new  Double(4444);
 
-        final Integer MAX_INTEGER = new Integer(Integer.MAX_VALUE);
-        final Integer MIN_INTEGER = new Integer(Integer.MIN_VALUE);
-        final Long MAX_LONG = new Long(Long.MAX_VALUE);
-        final Long MIN_LONG = new Long(Long.MIN_VALUE);
-        final Double MAX_DOUBLE = new Double(Double.MAX_VALUE);
-        final Double MIN_DOUBLE = new Double(Double.MIN_VALUE);
+        final Integer MAX_INTEGER = Integer.valueOf(Integer.MAX_VALUE);
+        final Integer MIN_INTEGER = Integer.valueOf(Integer.MIN_VALUE);
+        final Long MAX_LONG = Long.valueOf(Long.MAX_VALUE);
+        final Long MIN_LONG = Long.valueOf(Long.MIN_VALUE);
+        final Double MAX_DOUBLE = Double.valueOf(Double.MAX_VALUE);
+        final Double MIN_DOUBLE = Double.valueOf(Double.MIN_VALUE);
 
         si.setApplicationName(P_APPLICATION_NAME);
         si.setAuthor(P_AUTHOR);

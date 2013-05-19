@@ -214,7 +214,7 @@ public class TestStatsLib extends AbstractNumericTestCase {
         confirmMode(v, 0.0);
     }
     private static void confirmMode(double[] v, double expectedResult) {
-    	confirmMode(v, new Double(expectedResult));
+    	confirmMode(v, Double.valueOf(expectedResult));
     }
     private static void confirmMode(double[] v, Double expectedResult) {
     	double actual;

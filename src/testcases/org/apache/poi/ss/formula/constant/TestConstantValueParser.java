@@ -34,7 +34,7 @@ public final class TestConstantValueParser extends TestCase {
 	private static final Object[] SAMPLE_VALUES = {
 			Boolean.TRUE,
 			null,
-			new Double(1.1),
+			Double.valueOf(1.1),
 			"Sample text",
 			ErrorConstant.valueOf(HSSFErrorConstants.ERROR_DIV_0),
 		};

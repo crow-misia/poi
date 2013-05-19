@@ -367,10 +367,10 @@ public final class ApacheconEU08 {
         tr3.setText(
                 "        //bar chart data. The first value is the bar color, the second is the width\r" +
                 "        Object[] def = new Object[]{\r" +
-                "            Color.yellow, new Integer(100),\r" +
-                "            Color.green, new Integer(150),\r" +
-                "            Color.gray, new Integer(75),\r" +
-                "            Color.red, new Integer(200),\r" +
+                "            Color.yellow, Integer.valueOf(100),\r" +
+                "            Color.green, Integer.valueOf(150),\r" +
+                "            Color.gray, Integer.valueOf(75),\r" +
+                "            Color.red, Integer.valueOf(200),\r" +
                 "        };\r" +
                 "\r" +
                 "        SlideShow ppt = new SlideShow();\r" +
@@ -410,10 +410,10 @@ public final class ApacheconEU08 {
     public static void slide10(SlideShow ppt) throws IOException {
         //bar chart data. The first value is the bar color, the second is the width
         Object[] def = new Object[]{
-            Color.yellow, new Integer(100),
-            Color.green, new Integer(150),
-            Color.gray, new Integer(75),
-            Color.red, new Integer(200),
+            Color.yellow, Integer.valueOf(100),
+            Color.green, Integer.valueOf(150),
+            Color.gray, Integer.valueOf(75),
+            Color.red, Integer.valueOf(200),
         };
 
         Slide slide = ppt.createSlide();

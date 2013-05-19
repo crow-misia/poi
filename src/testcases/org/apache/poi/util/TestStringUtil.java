@@ -132,10 +132,10 @@ public final class TestStringUtil extends TestCase {
 
     public void testFormat() {
 
-        confirm("This is a test " + fmt(1.2345, 2, 2), "This is a test %2.2", new Double(1.2345));
-        confirm("This is a test " + fmt(1.2345, -1, 3), "This is a test %.3", new Double(1.2345));
+        confirm("This is a test " + fmt(1.2345, 2, 2), "This is a test %2.2", Double.valueOf(1.2345));
+        confirm("This is a test " + fmt(1.2345, -1, 3), "This is a test %.3", Double.valueOf(1.2345));
         confirm("This is a great test " + fmt(1.2345, -1, 3),
-                "This is a % test %.3", "great", new Double(1.2345));
+                "This is a % test %.3", "great", Double.valueOf(1.2345));
         confirm("This is a test 1", "This is a test %", Integer.valueOf(1));
         confirm("This is a test 1", "This is a test %", Integer.valueOf(1), Integer.valueOf(1));
         confirm("This is a test 1.x", "This is a test %1.x", Integer.valueOf(1));
