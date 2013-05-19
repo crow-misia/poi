@@ -224,7 +224,7 @@ public class DVConstraint implements DataValidationConstraint {
 			return null;
 		}
 		try {
-			return new Double(numberStr);
+			return Double.valueOf(numberStr);
 		} catch (NumberFormatException e) {
 			throw new RuntimeException("The supplied text '" + numberStr 
 					+ "' could not be parsed as a number");
@@ -238,7 +238,7 @@ public class DVConstraint implements DataValidationConstraint {
 		if (timeStr == null) {
 			return null;
 		}
-		return new Double(HSSFDateUtil.convertTime(timeStr));
+		return Double.valueOf(HSSFDateUtil.convertTime(timeStr));
 	}
 	/**
 	 * @param dateFormat pass <code>null</code> for default YYYYMMDD
@@ -259,7 +259,7 @@ public class DVConstraint implements DataValidationConstraint {
 						+ "' using specified format '" + dateFormat + "'", e);
 			}
 		}
-		return new Double(HSSFDateUtil.getExcelDate(dateVal));
+		return Double.valueOf(HSSFDateUtil.getExcelDate(dateVal));
 	}
 
 	public static DVConstraint createCustomFormulaConstraint(String formula) {
@@ -359,7 +359,7 @@ public class DVConstraint implements DataValidationConstraint {
 	 */
 	public void setValue1(double value1) {
 		_formula1 = null;
-		_value1 = new Double(value1);
+		_value1 = Double.valueOf(value1);
 	}
 
 	/**
@@ -373,7 +373,7 @@ public class DVConstraint implements DataValidationConstraint {
 	 */
 	public void setValue2(double value2) {
 		_formula2 = null;
-		_value2 = new Double(value2);
+		_value2 = Double.valueOf(value2);
 	}
 	
 	/**
