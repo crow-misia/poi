@@ -78,7 +78,7 @@ public final class TextPainter {
             }
 
             at.addAttribute(TextAttribute.FAMILY, rt[i].getFontName(), start, end);
-            at.addAttribute(TextAttribute.SIZE, new Float(rt[i].getFontSize()), start, end);
+            at.addAttribute(TextAttribute.SIZE, Float.valueOf(rt[i].getFontSize()), start, end);
             at.addAttribute(TextAttribute.FOREGROUND, rt[i].getFontColor(), start, end);
             if(rt[i].isBold()) at.addAttribute(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD, start, end);
             if(rt[i].isItalic()) at.addAttribute(TextAttribute.POSTURE, TextAttribute.POSTURE_OBLIQUE, start, end);
@@ -312,7 +312,7 @@ public final class TextPainter {
                 int bulletSize = rt.getBulletSize();
                 int fontSize = rt.getFontSize();
                 if(bulletSize != -1) fontSize = Math.round(fontSize*bulletSize*0.01f);
-                bat.addAttribute(TextAttribute.SIZE, new Float(fontSize));
+                bat.addAttribute(TextAttribute.SIZE, Float.valueOf(fontSize));
 
                 if(!new Font(bulletFont.getFontName(), Font.PLAIN, 1).canDisplay(rt.getBulletChar())){
                     bat.addAttribute(TextAttribute.FAMILY, "Arial");

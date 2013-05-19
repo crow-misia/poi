@@ -705,7 +705,7 @@ public class DataFormatter {
         if (numberFormat == null) {
             return String.valueOf(d);
         }
-        return numberFormat.format(new Double(d));
+        return numberFormat.format(Double.valueOf(d));
     }
 
     /**
@@ -744,7 +744,7 @@ public class DataFormatter {
                 return String.valueOf(value);
             }
             // RK: This hack handles scientific notation by adding the missing + back.
-            String result = numberFormat.format(new Double(value));
+            String result = numberFormat.format(Double.valueOf(value));
             if (result.contains("E") && !result.contains("E-")) {
                 result = result.replaceFirst("E", "E+");
             }

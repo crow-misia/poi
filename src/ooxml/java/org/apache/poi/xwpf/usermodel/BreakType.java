@@ -69,12 +69,12 @@ public enum BreakType {
     private static Map<Integer, BreakType> imap = new HashMap<Integer, BreakType>();
     static {
        for (BreakType p : values()) {
-          imap.put(new Integer(p.getValue()), p);
+          imap.put(Integer.valueOf(p.getValue()), p);
        }
     }
 
     public static BreakType valueOf(int type) {
-       BreakType bType = imap.get(new Integer(type));
+       BreakType bType = imap.get(Integer.valueOf(type));
        if (bType == null)
           throw new IllegalArgumentException("Unknown break type: "
                 + type);

@@ -380,17 +380,17 @@ public class TestWrite extends TestCase
                     4 }, codepage );
             check(Variant.VT_I4, Integer.valueOf(27), codepage);
             check(Variant.VT_I8, Long.valueOf(28), codepage);
-            check(Variant.VT_R8, new Double(29.0), codepage);
+            check(Variant.VT_R8, Double.valueOf(29.0), codepage);
             check(Variant.VT_I4, Integer.valueOf(-27), codepage);
             check(Variant.VT_I8, Long.valueOf(-28), codepage);
-            check(Variant.VT_R8, new Double(-29.0), codepage);
+            check(Variant.VT_R8, Double.valueOf(-29.0), codepage);
             check(Variant.VT_FILETIME, new Date(), codepage);
-            check(Variant.VT_I4, new Integer(Integer.MAX_VALUE), codepage);
-            check(Variant.VT_I4, new Integer(Integer.MIN_VALUE), codepage);
-            check(Variant.VT_I8, new Long(Long.MAX_VALUE), codepage);
-            check(Variant.VT_I8, new Long(Long.MIN_VALUE), codepage);
-            check(Variant.VT_R8, new Double(Double.MAX_VALUE), codepage);
-            check(Variant.VT_R8, new Double(Double.MIN_VALUE), codepage);
+            check(Variant.VT_I4, Integer.valueOf(Integer.MAX_VALUE), codepage);
+            check(Variant.VT_I4, Integer.valueOf(Integer.MIN_VALUE), codepage);
+            check(Variant.VT_I8, Long.valueOf(Long.MAX_VALUE), codepage);
+            check(Variant.VT_I8, Long.valueOf(Long.MIN_VALUE), codepage);
+            check(Variant.VT_R8, Double.valueOf(Double.MAX_VALUE), codepage);
+            check(Variant.VT_R8, Double.valueOf(Double.MIN_VALUE), codepage);
 
             check(Variant.VT_LPSTR,
                   "", codepage);

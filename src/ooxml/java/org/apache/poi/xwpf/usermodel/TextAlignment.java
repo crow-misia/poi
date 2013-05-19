@@ -65,12 +65,12 @@ public enum TextAlignment {
     private static Map<Integer, TextAlignment> imap = new HashMap<Integer, TextAlignment>();
     static{
        for (TextAlignment p : values()) {
-          imap.put(new Integer(p.getValue()), p);
+          imap.put(Integer.valueOf(p.getValue()), p);
        }
     }
 
     public static TextAlignment valueOf(int type){
-       TextAlignment align = imap.get(new Integer(type));
+       TextAlignment align = imap.get(Integer.valueOf(type));
        if(align == null) throw new IllegalArgumentException("Unknown text alignment: " + type);
        return align;
     }
