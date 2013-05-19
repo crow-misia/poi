@@ -40,6 +40,7 @@ import org.apache.poi.openxml4j.opc.StreamHelper;
 import org.apache.poi.openxml4j.opc.TargetMode;
 import org.apache.poi.openxml4j.opc.internal.PartMarshaller;
 import org.apache.poi.openxml4j.opc.internal.ZipHelper;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.POILogger;
 import org.apache.poi.util.POILogFactory;
 
@@ -76,15 +77,7 @@ public final class ZipPartMarshaller implements PartMarshaller {
 
 			// Saving data in the ZIP file
 			InputStream ins = part.getInputStream();
-			byte[] buff = new byte[ZipHelper.READ_WRITE_FILE_BUFFER_SIZE];
-			while (ins.available() > 0) {
-				int resultRead = ins.read(buff);
-				if (resultRead == -1) {
-					// End of file reached
-					break;
-				}
-				zos.write(buff, 0, resultRead);
-			}
+			IOUtils.copy(ins, zos);
 			zos.closeEntry();
 		} catch (IOException ioe) {
 			logger.log(POILogger.ERROR,"Cannot write: " + part.getPartName() + ": in ZIP",

@@ -141,7 +141,7 @@ public final class TestPackageCoreProperties extends TestCase {
         props.setCreatedProperty((String)null);
         assertEquals("", props.getCreatedPropertyString());
         assertNull(props.getCreatedProperty().getValue());
-        props.setCreatedProperty(new Nullable<Date>());
+        props.setCreatedProperty(Nullable.<Date>empty());
         assertEquals("", props.getCreatedPropertyString());
         assertNull(props.getCreatedProperty().getValue());
         props.setCreatedProperty(new Nullable<Date>(date));
@@ -157,7 +157,7 @@ public final class TestPackageCoreProperties extends TestCase {
         props.setLastPrintedProperty((String)null);
         assertEquals("", props.getLastPrintedPropertyString());
         assertNull(props.getLastPrintedProperty().getValue());
-        props.setLastPrintedProperty(new Nullable<Date>());
+        props.setLastPrintedProperty(Nullable.<Date>empty());
         assertEquals("", props.getLastPrintedPropertyString());
         assertNull(props.getLastPrintedProperty().getValue());
         props.setLastPrintedProperty(new Nullable<Date>(date));
@@ -171,7 +171,7 @@ public final class TestPackageCoreProperties extends TestCase {
         assertNull(props.getModifiedProperty().getValue());
         props.setModifiedProperty((String)null);
         assertNull(props.getModifiedProperty().getValue());
-        props.setModifiedProperty(new Nullable<Date>());
+        props.setModifiedProperty(Nullable.<Date>empty());
         assertNull(props.getModifiedProperty().getValue());
         props.setModifiedProperty(new Nullable<Date>(date));
         assertEquals(strDate, props.getModifiedPropertyString());
