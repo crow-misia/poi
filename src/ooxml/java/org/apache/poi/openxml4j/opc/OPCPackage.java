@@ -54,6 +54,7 @@ import org.apache.poi.openxml4j.opc.internal.unmarshallers.UnmarshallContext;
 import org.apache.poi.openxml4j.util.Nullable;
 import org.apache.poi.util.POILogger;
 import org.apache.poi.util.POILogFactory;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Represents a container that can store multiple data objects.
@@ -764,7 +765,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 			throw new IllegalArgumentException("partName");
 		}
 
-		if (contentType == null || contentType.equals("")) {
+		if (StringUtil.isEmpty(contentType)) {
 			throw new IllegalArgumentException("contentType");
 		}
 

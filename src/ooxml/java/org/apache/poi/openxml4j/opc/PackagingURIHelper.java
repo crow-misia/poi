@@ -27,6 +27,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Helper for part and pack URI.
@@ -322,12 +323,12 @@ public final class PackagingURIHelper {
 
 		// If we didn't have a good match or at least except a first empty element
 		if ((segmentsTheSame == 0 || segmentsTheSame == 1) &&
-				segmentsSource[0].equals("") && segmentsTarget[0].equals("")) {
+				StringUtil.isEmpty(segmentsSource[0]) && StringUtil.isEmpty(segmentsTarget[0])) {
 			for (int i = 0; i < segmentsSource.length - 2; i++) {
 				retVal.append("../");
 			}
 			for (int i = 0; i < segmentsTarget.length; i++) {
-				if (segmentsTarget[i].equals(""))
+				if (StringUtil.isEmpty(segmentsTarget[i]))
 					continue;
 				retVal.append(segmentsTarget[i]);
 				if (i != segmentsTarget.length - 1)
