@@ -38,10 +38,10 @@ public final class Graphics2DDemo {
 
         //bar chart data. The first value is the bar color, the second is the width
         Object[] def = new Object[]{
-            Color.yellow, new Integer(40),
-            Color.green, new Integer(60),
-            Color.gray, new Integer(30),
-            Color.red, new Integer(80),
+            Color.yellow, Integer.valueOf(40),
+            Color.green, Integer.valueOf(60),
+            Color.gray, Integer.valueOf(30),
+            Color.red, Integer.valueOf(80),
         };
 
         Slide slide = ppt.createSlide();

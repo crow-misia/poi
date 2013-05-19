@@ -133,7 +133,7 @@ public class SXSSFSheet implements Sheet, Cloneable
         if(initialAllocationSize<=0)
             initialAllocationSize=10;
         SXSSFRow newRow=new SXSSFRow(this,initialAllocationSize);
-        _rows.put(new Integer(rownum),newRow);
+        _rows.put(Integer.valueOf(rownum),newRow);
         if(_randomAccessWindowSize>=0&&_rows.size()>_randomAccessWindowSize)
         {
             try
@@ -179,7 +179,7 @@ public class SXSSFSheet implements Sheet, Cloneable
      */
     public Row getRow(int rownum)
     {
-        return _rows.get(new Integer(rownum));
+        return _rows.get(Integer.valueOf(rownum));
     }
 
     /**
@@ -1379,7 +1379,7 @@ public class SXSSFSheet implements Sheet, Cloneable
     {
         
         removeRow(row);
-        _rows.put(new Integer(newRowNum),row);
+        _rows.put(Integer.valueOf(newRowNum),row);
     }
 
     public int getRowNum(SXSSFRow row)
