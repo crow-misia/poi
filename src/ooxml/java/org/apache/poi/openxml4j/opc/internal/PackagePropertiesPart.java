@@ -33,6 +33,7 @@ import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackagePartName;
 import org.apache.poi.openxml4j.opc.PackageProperties;
 import org.apache.poi.openxml4j.util.Nullable;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Represents the core properties part of a package.
@@ -545,7 +546,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 	 * Convert a strig value into a Nullable<String>
 	 */
 	private Nullable<String> setStringValue(String s) {
-		if (s == null || s.equals("")) {
+		if (StringUtil.isEmpty(s)) {
 			return Nullable.empty();
 		}
 		return new Nullable<String>(s);
@@ -558,7 +559,7 @@ public final class PackagePropertiesPart extends PackagePart implements
 	 *             Throws if the date format isnot valid.
 	 */
 	private Nullable<Date> setDateValue(String s) throws InvalidFormatException {
-		if (s == null || s.equals("")) {
+		if (StringUtil.isEmpty(s)) {
 			return Nullable.empty();
 		}
 		SimpleDateFormat df = new SimpleDateFormat(
