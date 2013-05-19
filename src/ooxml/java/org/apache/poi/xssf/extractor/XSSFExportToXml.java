@@ -41,6 +41,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.util.StringUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFMap;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -371,7 +372,7 @@ public class XSSFExportToXml implements Comparator<String>{
 
     private boolean isNamespaceDeclared() {
         String schemaNamespace = getNamespace();
-        return schemaNamespace!=null && !schemaNamespace.equals("");
+        return StringUtil.isNotEmpty(schemaNamespace);
     }
 
     private String getNamespace() {

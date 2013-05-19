@@ -20,6 +20,7 @@ package org.apache.poi.hssf.usermodel;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
@@ -270,7 +271,7 @@ public class EscherGraphics
 
     public void drawString(String str, int x, int y)
     {
-        if (str == null || str.equals(""))
+        if (StringUtil.isEmpty(str))
             return;
 
         Font excelFont = font;
