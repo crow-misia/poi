@@ -62,8 +62,8 @@ public final class AnalysisToolPak implements UDFFinder {
         r(m, "ACCRINTM", null);
         r(m, "AMORDEGRC", null);
         r(m, "AMORLINC", null);
-        r(m, "AVERAGEIF", null);
-        r(m, "AVERAGEIFS", null);
+        r(m, "AVERAGEIF", Averageif.instance);
+        r(m, "AVERAGEIFS", Averageifs.instance);
         r(m, "BAHTTEXT", null);
         r(m, "BESSELI", null);
         r(m, "BESSELJ", null);
@@ -74,7 +74,7 @@ public final class AnalysisToolPak implements UDFFinder {
         r(m, "BIN2OCT", null);
         r(m, "COMPLEX", Complex.instance);
         r(m, "CONVERT", null);
-        r(m, "COUNTIFS", null);
+        r(m, "COUNTIFS", Countifs.instance);
         r(m, "COUPDAYBS", null);
         r(m, "COUPDAYS", null);
         r(m, "COUPDAYSNC", null);
