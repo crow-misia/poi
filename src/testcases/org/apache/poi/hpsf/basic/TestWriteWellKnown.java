@@ -280,11 +280,11 @@ public class TestWriteWellKnown extends TestCase {
         final Date    now = new Date();
 
         final Integer POSITIVE_INTEGER = Integer.valueOf(2222);
-        final Long POSITIVE_LONG = new  Long(3333);
-        final Double POSITIVE_DOUBLE = new  Double(4444);
+        final Long POSITIVE_LONG = Long.valueOf(3333);
+        final Double POSITIVE_DOUBLE = Double.valueOf(4444);
         final Integer NEGATIVE_INTEGER = Integer.valueOf(2222);
-        final Long NEGATIVE_LONG = new  Long(3333);
-        final Double NEGATIVE_DOUBLE = new  Double(4444);
+        final Long NEGATIVE_LONG = Long.valueOf(3333);
+        final Double NEGATIVE_DOUBLE = Double.valueOf(4444);
 
         final Integer MAX_INTEGER = Integer.valueOf(Integer.MAX_VALUE);
         final Integer MIN_INTEGER = Integer.valueOf(Integer.MIN_VALUE);
