@@ -39,7 +39,7 @@ public final class Value extends Fixed1ArgFunction {
 
 	/** "1,0000" is valid, "1,00" is not */
 	private static final int MIN_DISTANCE_BETWEEN_THOUSANDS_SEPARATOR = 4;
-	private static final Double ZERO = new Double(0.0);
+	private static final Double ZERO = Double.valueOf(0.0);
 
 	public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0) {
 		ValueEval veText;
@@ -179,6 +179,6 @@ public final class Value extends Fixed1ArgFunction {
 			// still a problem parsing the number - probably out of range
 			return null;
 		}
-		return new Double(foundUnaryMinus ? -d : d);
+		return Double.valueOf(foundUnaryMinus ? -d : d);
 	}
 }
