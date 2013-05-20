@@ -73,7 +73,7 @@ public class Address implements Function {
             if(args.length > 3){
                 ValueEval ve = OperandResolver.getSingleValue(args[3], srcRowIndex, srcColumnIndex);
                 // TODO R1C1 style is not yet supported
-                a1 = ve == MissingArgEval.instance ? true : OperandResolver.coerceValueToBoolean(ve, false);
+                a1 = ve == MissingArgEval.instance ? true : OperandResolver.coerceValueToBoolean(ve, false).bool;
             } else {
                 a1 = true;
             }

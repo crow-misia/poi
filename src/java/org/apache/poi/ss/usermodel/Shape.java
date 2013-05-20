@@ -17,11 +17,6 @@
 
 package org.apache.poi.ss.usermodel;
 
-import org.apache.poi.hssf.usermodel.HSSFChildAnchor;
-import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
-import org.apache.poi.xssf.usermodel.XSSFChildAnchor;
-import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
-
 /**
  * An interface shape.
  *
@@ -54,9 +49,9 @@ public interface Shape
      * @throws IllegalArgumentException     when the wrong anchor is used for
      *                                      this particular shape.
      *
-     * @see HSSFChildAnchor
-     * @see HSSFClientAnchor
-     * @see XSSFClientAnchor
-     * @see XSSFChildAnchor
+     * @see org.apache.poi.hssf.usermodel.HSSFChildAnchor
+     * @see org.apache.poi.hssf.usermodel.HSSFClientAnchor
+     * @see org.apache.poi.xssf.usermodel.XSSFClientAnchor
+     * @see org.apache.poi.xssf.usermodel.XSSFChildAnchor
      */
     void setAnchor( Anchor anchor );}
