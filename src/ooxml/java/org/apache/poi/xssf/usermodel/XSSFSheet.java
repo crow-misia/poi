@@ -433,6 +433,9 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
     protected CTLegacyDrawing getCTLegacyDrawing() {
        return worksheet.getLegacyDrawing();
     }
+    protected CTLegacyDrawing getCTLegacyDrawingHF() {
+        return worksheet.getLegacyDrawingHF();
+    }
 
     /**
      * Creates a split (freezepane). Any existing freezepane or split pane is overwritten.
@@ -787,7 +790,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      *  {@link #getOddFooter()} and
      *  {@link #getEvenFooter()}
      */
-    public Footer getFooter() {
+    public XSSFOddFooter getFooter() {
         // The default footer is an odd footer
         return getOddFooter();
     }
@@ -800,7 +803,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      *  {@link #getOddHeader()} and
      *  {@link #getEvenHeader()}
      */
-    public Header getHeader() {
+    public XSSFOddHeader getHeader() {
         // The default header is an odd header
         return getOddHeader();
     }
@@ -810,21 +813,21 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      *  other footers also present, when used on only
      *  odd pages.
      */
-    public Footer getOddFooter() {
+    public XSSFOddFooter getOddFooter() {
         return new XSSFOddFooter(getSheetTypeHeaderFooter());
     }
     /**
      * Returns the even footer. Not there by default, but
      *  when set, used on even pages.
      */
-    public Footer getEvenFooter() {
+    public XSSFEvenFooter getEvenFooter() {
         return new XSSFEvenFooter(getSheetTypeHeaderFooter());
     }
     /**
      * Returns the first page footer. Not there by
      *  default, but when set, used on the first page.
      */
-    public Footer getFirstFooter() {
+    public XSSFFirstFooter getFirstFooter() {
         return new XSSFFirstFooter(getSheetTypeHeaderFooter());
     }
 
@@ -833,21 +836,21 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      *  other headers also present, when used on only
      *  odd pages.
      */
-    public Header getOddHeader() {
+    public XSSFOddHeader getOddHeader() {
         return new XSSFOddHeader(getSheetTypeHeaderFooter());
     }
     /**
      * Returns the even header. Not there by default, but
      *  when set, used on even pages.
      */
-    public Header getEvenHeader() {
+    public XSSFEvenHeader getEvenHeader() {
         return new XSSFEvenHeader(getSheetTypeHeaderFooter());
     }
     /**
      * Returns the first page header. Not there by
      *  default, but when set, used on the first page.
      */
-    public Header getFirstHeader() {
+    public XSSFFirstHeader getFirstHeader() {
         return new XSSFFirstHeader(getSheetTypeHeaderFooter());
     }
 

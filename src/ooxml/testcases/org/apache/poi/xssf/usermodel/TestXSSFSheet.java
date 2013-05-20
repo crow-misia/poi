@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.hssf.record.PasswordRecord;
+import java.io.*;
+
 import org.apache.poi.ss.usermodel.BaseTestSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -113,6 +115,43 @@ public final class TestXSSFSheet extends BaseTestSheet {
         assertEquals("", ftr.getLeft());
         assertEquals("", ftr.getCenter());
         assertEquals("", ftr.getRight());
+    }
+
+    public void testCloneSheetWithDrawingInHeader() throws FileNotFoundException, IOException {
+        final XSSFWorkbook workbook = XSSFTestDataSamples.openSampleWorkbook("drawing_in_header.xlsx");
+
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        XSSFOddHeader hdr = sheet.getOddHeader();
+        STXstring str = hdr.getHeaderFooter().xgetOddHeader();
+
+        XSSFSheet clonedSheet = workbook.cloneSheet(0);
+        XSSFOddHeader clonedHdr = clonedSheet.getOddHeader();
+        STXstring clonedStr = clonedHdr.getHeaderFooter().xgetOddHeader();
+
+        assertEquals(hdr.getLeft(), clonedHdr.getLeft());
+        assertEquals(hdr.getCenter(), clonedHdr.getCenter());
+        assertEquals(hdr.getRight(), clonedHdr.getRight());
+        assertEquals(str.toString(), clonedStr.toString());
+
+        sheet = workbook.getSheetAt(1);
+        hdr = sheet.getOddHeader();
+        str = hdr.getHeaderFooter().xgetOddHeader();
+
+        clonedSheet = workbook.cloneSheet(1);
+        clonedHdr = clonedSheet.getOddHeader();
+        clonedStr = clonedHdr.getHeaderFooter().xgetOddHeader();
+
+        assertEquals(hdr.getLeft(), clonedHdr.getLeft());
+        assertEquals(hdr.getCenter(), clonedHdr.getCenter());
+        assertEquals(hdr.getRight(), clonedHdr.getRight());
+        assertEquals(str.toString(), clonedStr.toString());
+
+        final XSSFVMLDrawing drawing = sheet.getVMLDrawing(false);
+        final XSSFVMLDrawing clonedDrawing = clonedSheet.getVMLDrawing(false);
+        assertNull(drawing);
+        assertNull(clonedDrawing);
+        
+        workbook.write(new FileOutputStream("d:/temp/a.xlsx"));
     }
 
     public void testGetAllHeadersFooters() {
