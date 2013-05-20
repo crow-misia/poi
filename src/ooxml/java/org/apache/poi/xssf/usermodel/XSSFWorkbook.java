@@ -438,9 +438,14 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
             logger.log(POILogger.WARN, "Cloning sheets with comments is not yet supported.");
             ct.unsetLegacyDrawing();
         }
-        if (ct.isSetPageSetup()) {
-            logger.log(POILogger.WARN, "Cloning sheets with page setup is not yet supported.");
-            ct.unsetPageSetup();
+
+        // copy PrintArea
+        final String srcPrintArea = getPrintArea(sheetNum);
+        if (srcPrintArea != null && srcPrintArea.length() > 0) {
+            final int clonedSheetIndex = getSheetIndex(clonedSheet);
+            // remove Sheet Name
+            String clonedPrintArea = srcPrintArea.substring(srcPrintArea.indexOf('!') + 1);
+            setPrintArea(clonedSheetIndex, clonedPrintArea);
         }
 
         clonedSheet.setSelected(false);
@@ -449,10 +454,15 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
         List<POIXMLDocumentPart> rels = srcSheet.getRelations();
         // if the sheet being cloned has a drawing then rememebr it and re-create tpoo
         XSSFDrawing dg = null;
+        XSSFVMLDrawing vg = null;
         for(POIXMLDocumentPart r : rels) {
             // do not copy the drawing relationship, it will be re-created
             if(r instanceof XSSFDrawing) {
                 dg = (XSSFDrawing)r;
+                continue;
+            }
+            if(r instanceof XSSFVMLDrawing) {
+                vg = (XSSFVMLDrawing)r;
                 continue;
             }
 
@@ -477,8 +487,29 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
             List<POIXMLDocumentPart> srcRels = srcSheet.createDrawingPatriarch().getRelations();
             for (POIXMLDocumentPart rel : srcRels) {
                 PackageRelationship relation = rel.getPackageRelationship();
-                clonedSheet
-                        .createDrawingPatriarch()
+                clonedDg
+                    .getPackagePart()
+                    .addRelationship(relation.getTargetURI(), relation.getTargetMode(),
+                            relation.getRelationshipType(), relation.getId());
+            }
+        }
+        
+        // clone the sheet drawing alongs with its relationships
+        if (vg != null) {
+            // Copy legacy drawing
+            final XSSFVMLDrawing clonedVg = clonedSheet.getVMLDrawing(true);
+            // FIXME
+            ct.unsetLegacyDrawing();
+            
+            // copy drawing contents
+            clonedVg.getItems().clear();
+            clonedVg.getItems().addAll(vg.getItems());
+            clonedVg.getQName().clear();
+            clonedVg.getQName().addAll(vg.getQName());
+            // Clone legacy drawing relations
+            for (final POIXMLDocumentPart rel : vg.getRelations()) {
+                final PackageRelationship relation = rel.getPackageRelationship();
+                clonedVg
                         .getPackagePart()
                         .addRelationship(relation.getTargetURI(), relation.getTargetMode(),
                                 relation.getRelationshipType(), relation.getId());
