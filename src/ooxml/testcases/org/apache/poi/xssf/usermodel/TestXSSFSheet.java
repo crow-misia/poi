@@ -23,23 +23,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.apache.poi.hssf.HSSFTestDataSamples;
-import org.apache.poi.hssf.record.PasswordRecord;
-import org.apache.poi.ss.usermodel.BaseTestSheet;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.RichTextString;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import java.io.*;
+
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.util.HexDump;
 import org.apache.poi.xssf.XSSFITestDataProvider;
 import org.apache.poi.xssf.XSSFTestDataSamples;
-import org.apache.poi.xssf.model.CalculationChain;
 import org.apache.poi.xssf.model.CommentsTable;
 import org.apache.poi.xssf.model.StylesTable;
+import org.apache.poi.xssf.model.CalculationChain;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.helpers.ColumnHelper;
+import org.apache.poi.util.HexDump;
+import org.apache.poi.hssf.record.PasswordRecord;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.*;
 
 
@@ -113,6 +109,43 @@ public final class TestXSSFSheet extends BaseTestSheet {
         assertEquals("", ftr.getLeft());
         assertEquals("", ftr.getCenter());
         assertEquals("", ftr.getRight());
+    }
+
+    public void testCloneSheetWithDrawingInHeader() throws FileNotFoundException, IOException {
+        final XSSFWorkbook workbook = XSSFTestDataSamples.openSampleWorkbook("drawing_in_header.xlsx");
+
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        XSSFOddHeader hdr = sheet.getOddHeader();
+        STXstring str = hdr.getHeaderFooter().xgetOddHeader();
+
+        XSSFSheet clonedSheet = workbook.cloneSheet(0);
+        XSSFOddHeader clonedHdr = clonedSheet.getOddHeader();
+        STXstring clonedStr = clonedHdr.getHeaderFooter().xgetOddHeader();
+
+        assertEquals(hdr.getLeft(), clonedHdr.getLeft());
+        assertEquals(hdr.getCenter(), clonedHdr.getCenter());
+        assertEquals(hdr.getRight(), clonedHdr.getRight());
+        assertEquals(str.toString(), clonedStr.toString());
+
+        sheet = workbook.getSheetAt(1);
+        hdr = sheet.getOddHeader();
+        str = hdr.getHeaderFooter().xgetOddHeader();
+
+        clonedSheet = workbook.cloneSheet(1);
+        clonedHdr = clonedSheet.getOddHeader();
+        clonedStr = clonedHdr.getHeaderFooter().xgetOddHeader();
+
+        assertEquals(hdr.getLeft(), clonedHdr.getLeft());
+        assertEquals(hdr.getCenter(), clonedHdr.getCenter());
+        assertEquals(hdr.getRight(), clonedHdr.getRight());
+        assertEquals(str.toString(), clonedStr.toString());
+
+        final XSSFVMLDrawing drawing = sheet.getVMLDrawing(false);
+        final XSSFVMLDrawing clonedDrawing = clonedSheet.getVMLDrawing(false);
+        assertNull(drawing);
+        assertNull(clonedDrawing);
+        
+        workbook.write(new FileOutputStream("d:/temp/a.xlsx"));
     }
 
     public void testGetAllHeadersFooters() {
