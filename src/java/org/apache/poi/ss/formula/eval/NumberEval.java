@@ -32,6 +32,7 @@ import org.apache.poi.ss.util.NumberToTextConverter;
 public final class NumberEval implements NumericValueEval, StringValueEval {
     
     public static final NumberEval ZERO = new NumberEval(0);
+    public static final NumberEval ONE = new NumberEval(1.0);
 
     private final double _value;
     private String _stringValue;
