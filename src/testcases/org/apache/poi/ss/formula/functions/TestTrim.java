@@ -56,7 +56,7 @@ public final class TestTrim extends TestCase {
 		confirmTrim(new StringEval("hi "), "hi");
 		confirmTrim(new StringEval("  hi"), "hi");
 		confirmTrim(new StringEval(" hi there  "), "hi there");
-		confirmTrim(new StringEval(""), "");
+		confirmTrim(StringEval.EMPTY_INSTANCE, "");
 		confirmTrim(new StringEval("   "), "");
 	}
 

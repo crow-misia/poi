@@ -55,8 +55,8 @@ public final class TestCountFuncs extends TestCase {
 		ValueEval[] values;
 
 		values = new ValueEval[] {
-				new NumberEval(0),
-				new StringEval(""),	// note - does not match blank
+				NumberEval.ZERO,
+				StringEval.EMPTY_INSTANCE,	// note - does not match blank
 				BoolEval.TRUE,
 				BoolEval.FALSE,
 				ErrorEval.DIV_ZERO,
@@ -66,8 +66,8 @@ public final class TestCountFuncs extends TestCase {
 		confirmCountBlank(1, range);
 
 		values = new ValueEval[] {
-				new NumberEval(0),
-				new StringEval(""),	// note - does not match blank
+				NumberEval.ZERO,
+				StringEval.EMPTY_INSTANCE,	// note - does not match blank
 				BlankEval.instance,
 				BoolEval.FALSE,
 				BoolEval.TRUE,
@@ -82,14 +82,14 @@ public final class TestCountFuncs extends TestCase {
 		ValueEval[] args;
 
 		args = new ValueEval[] {
-			new NumberEval(0),
+			NumberEval.ZERO,
 		};
 		confirmCountA(1, args);
 
 		args = new ValueEval[] {
-			new NumberEval(0),
-			new NumberEval(0),
-			new StringEval(""),
+			NumberEval.ZERO,
+			NumberEval.ZERO,
+			StringEval.EMPTY_INSTANCE,
 		};
 		confirmCountA(3, args);
 
@@ -306,7 +306,7 @@ public final class TestCountFuncs extends TestCase {
 		confirmPredicate(true, mp, NULL);
 
 		// pred '' matches both blank cell but not empty string
-		mp = createCriteriaPredicate(new StringEval(""));
+		mp = createCriteriaPredicate(StringEval.EMPTY_INSTANCE);
 		confirmPredicate(true, mp, "");
 		confirmPredicate(true, mp, NULL);
 
