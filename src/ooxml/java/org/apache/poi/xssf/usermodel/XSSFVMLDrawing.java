@@ -137,6 +137,9 @@ public final class XSSFVMLDrawing extends POIXMLDocumentPart {
     protected List<XmlObject> getItems(){
         return _items;
     }
+    protected List<QName> getQName() {
+        return _qnames;
+    }
 
     protected void write(OutputStream out) throws IOException {
         XmlObject rootObject = XmlObject.Factory.newInstance();
