@@ -85,7 +85,7 @@ public final class Indirect implements FreeRefFunction {
 		}
 		// numeric quantities follow standard boolean conversion rules
 		// for strings, only "TRUE" and "FALSE" (case insensitive) are valid
-		return OperandResolver.coerceValueToBoolean(ve, false).booleanValue();
+		return OperandResolver.coerceValueToBoolean(ve, false).bool;
 	}
 
 	private static ValueEval evaluateIndirect(OperationEvaluationContext ec, String text,
