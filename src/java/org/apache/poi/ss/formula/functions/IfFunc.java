@@ -70,10 +70,6 @@ public final class IfFunc extends Var2or3ArgFunction {
 	public static boolean evaluateFirstArg(ValueEval arg, int srcCellRow, int srcCellCol)
 			throws EvaluationException {
 		ValueEval ve = OperandResolver.getSingleValue(arg, srcCellRow, srcCellCol);
-		Boolean b = OperandResolver.coerceValueToBoolean(ve, false);
-		if (b == null) {
-			return false;
-		}
-		return b.booleanValue();
+		return OperandResolver.coerceValueToBoolean(ve, false).bool;
 	}
 }

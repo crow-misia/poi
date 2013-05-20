@@ -279,30 +279,30 @@ public final class OperandResolver {
 	 * @return <code>null</code> to represent blank values
 	 * @throws EvaluationException if ve is an ErrorEval, or if a string value cannot be converted
 	 */
-	public static Boolean coerceValueToBoolean(ValueEval ve, boolean stringsAreBlanks) throws EvaluationException {
+	public static ThreeState coerceValueToBoolean(ValueEval ve, boolean stringsAreBlanks) throws EvaluationException {
 
 		if (ve == null || ve == BlankEval.instance) {
 			// TODO - remove 've == null' condition once AreaEval is fixed
-			return null;
+			return ThreeState.NULL;
 		}
 		if (ve instanceof BoolEval) {
-			return Boolean.valueOf(((BoolEval) ve).getBooleanValue());
+			return ThreeState.bool(((BoolEval) ve).getBooleanValue());
 		}
 
 		if (ve == BlankEval.instance) {
-			return null;
+			return ThreeState.NULL;
 		}
 
 		if (ve instanceof StringEval) {
 			if (stringsAreBlanks) {
-				return null;
+				return ThreeState.NULL;
 			}
 			String str = ((StringEval) ve).getStringValue();
 			if (str.equalsIgnoreCase("true")) {
-				return Boolean.TRUE;
+				return ThreeState.TRUE;
 			}
 			if (str.equalsIgnoreCase("false")) {
-				return Boolean.FALSE;
+				return ThreeState.FALSE;
 			}
 			// else - string cannot be converted to boolean
 			throw new EvaluationException(ErrorEval.VALUE_INVALID);
@@ -314,7 +314,7 @@ public final class OperandResolver {
 			if (Double.isNaN(d)) {
 				throw new EvaluationException(ErrorEval.VALUE_INVALID);
 			}
-			return Boolean.valueOf(d != 0);
+			return ThreeState.bool(d != 0);
 		}
 		if (ve instanceof ErrorEval) {
 			throw new EvaluationException((ErrorEval) ve);
