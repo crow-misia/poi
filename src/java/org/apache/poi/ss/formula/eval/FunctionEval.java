@@ -175,8 +175,18 @@ public final class FunctionEval {
 		retval[197] = NumericFunction.TRUNC;
 		retval[198] = LogicalFunction.ISLOGICAL;
 
+		retval[205] = TextFunction.FINDB;
+		retval[206] = TextFunction.SEARCHB;
+		retval[207] = new ReplaceB();
+		retval[208] = TextFunction.LEFTB;
+		retval[209] = TextFunction.RIGHTB;
+		retval[210] = TextFunction.MIDB;
+		retval[211] = TextFunction.LENB;
+
 		retval[212] = NumericFunction.ROUNDUP;
 		retval[213] = NumericFunction.ROUNDDOWN;
+		retval[214] = TextFunction.ASC;
+		retval[215] = TextFunction.JIS;
         retval[216] = new Rank();
         retval[219] = new Address();  //Aniket Banerjee
         retval[220] = new Days360();

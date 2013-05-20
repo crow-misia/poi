@@ -25,6 +25,7 @@ import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.util.Transliterator;
 
 /**
  * @author Amol S. Deshmukh &lt; amolweb at ya hoo dot com &gt;
@@ -102,6 +103,22 @@ public abstract class TextFunction implements Function {
 			return new NumberEval(arg.length());
 		}
 	};
+	public static final Function LENB = new SingleArgTextFunc() {
+		@Override
+		protected ValueEval evaluate(final String arg) {
+			final int n = arg.length();
+			int l = 0;
+			for (int i = 0; i < n; i++) {
+				final char c = arg.charAt(i);
+				if (c >= 0x00 && c <= 0xff) {
+					l++;
+				} else {
+					l += 2;
+				}
+			}
+			return new NumberEval(l);
+		}
+	};
 	public static final Function LOWER = new SingleArgTextFunc() {
 		protected ValueEval evaluate(String arg) {
 			return new StringEval(arg.toLowerCase());
@@ -154,8 +171,7 @@ public abstract class TextFunction implements Function {
          * @return  whether the character is printable
          */
         private boolean isPrintable(char c){
-            int charCode = (int)c ;
-            return charCode >= 32;
+            return c >= 32;
         }
     };
 
@@ -193,9 +209,12 @@ public abstract class TextFunction implements Function {
 			if (numChars < 0) {
 				return ErrorEval.VALUE_INVALID;
 			}
+			if (numChars == 0) {
+				return StringEval.EMPTY_INSTANCE;
+			}
 			int len = text.length();
-			if (numChars < 0 || startIx > len) {
-				return new StringEval("");
+			if (startIx > len) {
+				return StringEval.EMPTY_INSTANCE;
 			}
 			int endIx = Math.min(startIx + numChars, len);
 			String result = text.substring(startIx, endIx);
@@ -203,14 +222,101 @@ public abstract class TextFunction implements Function {
 		}
 	};
 
+	/**
+	 * An implementation of the MIDB function<br/>
+	 * MID returns a specific number of
+	 * characters from a text string, starting at the specified position.<p/>
+	 *
+	 * <b>Syntax<b>:<br/> <b>MIDB</b>(<b>text</b>, <b>start_num</b>,
+	 * <b>num_bytes</b>)<br/>
+	 *
+	 * Author: Manda Wilson &lt; wilson at c bio dot msk cc dot org &gt;
+	 */
+	public static final Function MIDB = new Fixed3ArgFunction() {
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0, final ValueEval arg1, final ValueEval arg2) {
+			String text;
+			int startCharNum;
+			int numBytes;
+			try {
+				text = evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+				startCharNum = evaluateIntArg(arg1, srcRowIndex, srcColumnIndex);
+				numBytes = evaluateIntArg(arg2, srcRowIndex, srcColumnIndex);
+			} catch (final EvaluationException e) {
+				return e.getErrorEval();
+			}
+			final int startIx = startCharNum;
+			final int endIx = startIx + numBytes;
+			
+			// Note - for start_num arg, blank/zero causes error(#VALUE!),
+			// but for num_chars causes empty string to be returned.
+			if (startIx <= 0) {
+				return ErrorEval.VALUE_INVALID;
+			}
+			if (numBytes < 0) {
+				return ErrorEval.VALUE_INVALID;
+			}
+			
+			final int n = text.length();
+			int idx = 0;
+			boolean padLeft = false;
+			boolean padRight = false;
+			int s = -1;
+			int e = n;
+			for (int i = 0; i < n; i++) {
+				final char c = text.charAt(i);
+				// 半角
+				if (c >= 0x00 && c <= 0xff) {
+					idx++;
+					if (s < 0 && idx >= startIx) {
+						s = i;
+					}
+					// end.
+					if (idx >= endIx) {
+						e = i;
+						break;
+					}
+					// 全角
+				} else {
+					idx += 2;
+					if (s < 0 && idx >= startIx) {
+						if (idx == startIx) {
+							padLeft = true;
+							s = i + 1;
+						} else {
+							s = i;
+						}
+					}
+					// end.
+					if (idx >= endIx) {
+						padRight = (idx == endIx);
+						e = i;
+						break;
+					}
+				}
+			}
+			
+			String result;
+			if (e == 0) {
+				if (!padLeft) {
+					return StringEval.EMPTY_INSTANCE;
+				}
+				result = " ";
+			} else if (s < 0 || e < 0) {
+				result = (padLeft ? " " : "") + (padRight ? " " : "");
+			} else {
+				result = (padLeft ? " " : "") + text.substring(s, e) + (padRight ? " " : "");
+			}
+			return new StringEval(result);
+		}
+	};
+	
 	private static final class LeftRight extends Var1or2ArgFunction {
-		private static final ValueEval DEFAULT_ARG1 = new NumberEval(1.0);
 		private final boolean _isLeft;
 		protected LeftRight(boolean isLeft) {
 			_isLeft = isLeft;
 		}
 		public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0) {
-			return evaluate(srcRowIndex, srcColumnIndex, arg0, DEFAULT_ARG1);
+			return evaluate(srcRowIndex, srcColumnIndex, arg0, NumberEval.ONE);
 		}
 		public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0,
 				ValueEval arg1) {
@@ -240,6 +346,124 @@ public abstract class TextFunction implements Function {
 	public static final Function LEFT = new LeftRight(true);
 	public static final Function RIGHT = new LeftRight(false);
 
+	public static final Function LEFTB = new Var1or2ArgFunction() {
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0) {
+			return evaluate(srcRowIndex, srcColumnIndex, arg0, NumberEval.ONE);
+		}
+
+		@Override
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0, final ValueEval arg1) {
+			String text;
+			int numBytes;
+			try {
+				text = evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+				numBytes = evaluateIntArg(arg1, srcRowIndex, srcColumnIndex);
+			} catch (final EvaluationException e) {
+				return e.getErrorEval();
+			}
+			final int endIx = 1 + numBytes;
+			
+			if (numBytes < 0) {
+				return ErrorEval.VALUE_INVALID;
+			}
+			if (numBytes == 0) {
+				return StringEval.EMPTY_INSTANCE;
+			}
+			
+			final int n = text.length();
+			int idx = 0;
+			boolean padRight = false;
+			int e = n;
+			for (int i = 0; i < n; i++) {
+				final char c = text.charAt(i);
+				// 半角
+				if (c >= 0x00 && c <= 0xff) {
+					idx++;
+					// end.
+					if (idx >= endIx) {
+						e = i;
+						break;
+					}
+					// 全角
+				} else {
+					idx += 2;
+					// end.
+					if (idx >= endIx) {
+						padRight = (idx == endIx);
+						e = i;
+						break;
+					}
+				}
+			}
+			
+			final String result = text.substring(0, e) + (padRight ? " " : "");
+			return new StringEval(result);
+		}
+	};
+
+	public static final Function RIGHTB = new Var1or2ArgFunction() {
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0) {
+			return evaluate(srcRowIndex, srcColumnIndex, arg0, NumberEval.ONE);
+		}
+		
+		@Override
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0, final ValueEval arg1) {
+			String text;
+			int numBytes;
+			try {
+				text = evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+				numBytes = evaluateIntArg(arg1, srcRowIndex, srcColumnIndex);
+			} catch (final EvaluationException e) {
+				return e.getErrorEval();
+			}
+			final int endIx = 1 + numBytes;
+			
+			if (numBytes < 0) {
+				return ErrorEval.VALUE_INVALID;
+			}
+			
+			final int n = text.length();
+			int idx = 0;
+			boolean padLeft = false;
+			int s = 0;
+			for (int i = n - 1; i > 0; i--) {
+				final char c = text.charAt(i);
+				// 半角
+				if (c >= 0x00 && c <= 0xff) {
+					idx++;
+					// end.
+					if (idx >= endIx) {
+						s = i + 1;
+						break;
+					}
+					// 全角
+				} else {
+					idx += 2;
+					// end.
+					if (idx >= endIx) {
+						padLeft = (idx == endIx);
+						s = i + 1;
+						break;
+					}
+				}
+			}
+			
+			String result;
+			if (s < 0) {
+				return StringEval.EMPTY_INSTANCE;
+			}
+			if (s == n) {
+				if (!padLeft) {
+					return StringEval.EMPTY_INSTANCE;
+				}
+				result = " ";
+			} else {
+				result = (padLeft ? " " : "") + text.substring(s, n);
+			}
+			return new StringEval(result);
+		}
+	};
+	
 	public static final Function CONCATENATE = new Function() {
 
 		public ValueEval evaluate(ValueEval[] args, int srcRowIndex, int srcColumnIndex) {
@@ -300,6 +524,46 @@ public abstract class TextFunction implements Function {
 			} catch (Exception e) {
 				return ErrorEval.VALUE_INVALID;
 			}
+		}
+	};
+	
+	public static final Function ASC = new Fixed1ArgFunction() {
+		private final Transliterator F = new Transliterator();
+		{
+			F.addFilter(Transliterator.KATAKANA_TO_HANKAKU_KANA);
+			F.addFilter(Transliterator.ZENKAKU_TO_HANKAKU_ALPHANUMSYMBOL);
+		};
+		
+		@Override
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0) {
+			String t;
+			try {
+				t = evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+			} catch (final EvaluationException e) {
+				return e.getErrorEval();
+			}
+			
+			return new StringEval(F.transform(t));
+		}
+	};
+	
+	public static final Function JIS = new Fixed1ArgFunction() {
+		private final Transliterator F = new Transliterator();
+		{
+			F.addFilter(Transliterator.HANKAKU_KANA_TO_KATAKANA);
+			F.addFilter(Transliterator.HANKAKU_TO_ZENKAKU_ALPHANUMSYMBOL_EXPAND);
+		};
+		
+		@Override
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0) {
+			String t;
+			try {
+				t = evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+			} catch (final EvaluationException e) {
+				return e.getErrorEval();
+			}
+			
+			return new StringEval(F.transform(t));
 		}
 	};
 	
@@ -370,4 +634,81 @@ public abstract class TextFunction implements Function {
 	 * SEARCH is a case-insensitive version of FIND()
 	 */
 	public static final Function SEARCH = new SearchFind(false);
+
+	private static final class SearchFindB extends Var2or3ArgFunction {
+		private final boolean _isCaseSensitive;
+		public SearchFindB(final boolean isCaseSensitive) {
+			_isCaseSensitive = isCaseSensitive;
+		}
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0, final ValueEval arg1) {
+			try {
+				final String needle = TextFunction.evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+				final String haystack = TextFunction.evaluateStringArg(arg1, srcRowIndex, srcColumnIndex);
+				return eval(haystack, needle, 0);
+			} catch (final EvaluationException e) {
+				return e.getErrorEval();
+			}
+		}
+		public ValueEval evaluate(final int srcRowIndex, final int srcColumnIndex, final ValueEval arg0, final ValueEval arg1,
+				final ValueEval arg2) {
+			try {
+				final String needle = TextFunction.evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+				final String haystack = TextFunction.evaluateStringArg(arg1, srcRowIndex, srcColumnIndex);
+				// evaluate third arg and convert from 1-based to 0-based index
+				final int startpos = TextFunction.evaluateIntArg(arg2, srcRowIndex, srcColumnIndex) - 1;
+				if (startpos < 0) {
+					return ErrorEval.VALUE_INVALID;
+				}
+				return eval(haystack, needle, startpos);
+			} catch (final EvaluationException e) {
+				return e.getErrorEval();
+			}
+		}
+		private ValueEval eval(final String haystack, final String needle, final int startIndex) {
+			int result;
+			if (_isCaseSensitive) {
+				result = haystack.indexOf(needle, startIndex);
+			} else {
+				result = haystack.toUpperCase().indexOf(needle.toUpperCase(), startIndex);
+			}
+			if (result == -1) {
+				return ErrorEval.VALUE_INVALID;
+			}
+			
+			// 一致箇所までのバイト数を取得する
+			int idx = 0;
+			for (int i = 0; i <= result; i++) {
+				final char c = haystack.charAt(i);
+				if (c >= 0x00 && c <= 0xff) {
+					idx++;
+				} else {
+					idx += 2;
+				}
+			}
+			
+			return new NumberEval(idx);
+		}
+	}
+	
+	/**
+	 * Implementation of the FINDB() function.<p/>
+	 *
+	 * <b>Syntax</b>:<br/>
+	 * <b>FINDB</b>(<b>find_text</b>, <b>within_text</b>, start_num)<p/>
+	 *
+	 * FIND returns the character position of the first (case sensitive) occurrence of
+	 * <tt>find_text</tt> inside <tt>within_text</tt>.  The third parameter,
+	 * <tt>start_num</tt>, is optional (default=1) and specifies where to start searching
+	 * from.  Character positions are 1-based.<p/>
+	 */
+	public static final Function FINDB = new SearchFindB(true);
+	/**
+	 * Implementation of the FINDB() function.<p/>
+	 *
+	 * <b>Syntax</b>:<br/>
+	 * <b>SEARCHB</b>(<b>find_text</b>, <b>within_text</b>, start_num)<p/>
+	 *
+	 * SEARCHB is a case-insensitive version of FINDB()
+	 */
+	public static final Function SEARCHB = new SearchFindB(false);
 }
