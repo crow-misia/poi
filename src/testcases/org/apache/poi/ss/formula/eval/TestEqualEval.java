@@ -58,7 +58,7 @@ public final class TestEqualEval extends TestCase {
 	public void testBlankEqualToEmptyString() {
 
 		ValueEval[] args = {
-			new StringEval(""),
+			StringEval.EMPTY_INSTANCE,
 			BlankEval.instance,
 		};
 		ValueEval result = evaluate(EI.Equal, args, 10, 10);
@@ -97,7 +97,7 @@ public final class TestEqualEval extends TestCase {
 
 	public void testBooleanCompares() {
 		confirmCompares(BoolEval.TRUE, new StringEval("TRUE"), +1);
-		confirmCompares(BoolEval.TRUE, new NumberEval(1.0), +1);
+		confirmCompares(BoolEval.TRUE, NumberEval.ONE, +1);
 		confirmCompares(BoolEval.TRUE, BoolEval.TRUE, 0);
 		confirmCompares(BoolEval.TRUE, BoolEval.FALSE, +1);
 
