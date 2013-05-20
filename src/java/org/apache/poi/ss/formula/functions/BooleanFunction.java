@@ -23,6 +23,7 @@ import org.apache.poi.ss.formula.eval.EvaluationException;
 import org.apache.poi.ss.formula.eval.MissingArgEval;
 import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.RefEval;
+import org.apache.poi.ss.formula.eval.ThreeState;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.formula.TwoDEval;
 
@@ -69,28 +70,28 @@ public abstract class BooleanFunction implements Function {
 				for (int rrIx=0; rrIx<height; rrIx++) {
 					for (int rcIx=0; rcIx<width; rcIx++) {
 						ValueEval ve = ae.getValue(rrIx, rcIx);
-						Boolean tempVe = OperandResolver.coerceValueToBoolean(ve, true);
-						if (tempVe != null) {
-							result = partialEvaluate(result, tempVe.booleanValue());
+						ThreeState tempVe = OperandResolver.coerceValueToBoolean(ve, true);
+						if (tempVe != ThreeState.NULL) {
+							result = partialEvaluate(result, tempVe.bool);
 							atleastOneNonBlank = true;
 						}
 					}
 				}
 				continue;
 			}
-			Boolean tempVe;
+			ThreeState tempVe;
 			if (arg instanceof RefEval) {
 				ValueEval ve = ((RefEval) arg).getInnerValueEval();
 				tempVe = OperandResolver.coerceValueToBoolean(ve, true);
 			} else if (arg == MissingArgEval.instance) {
-				tempVe = null;		// you can leave out parameters, they are simply ignored
+				tempVe = ThreeState.NULL;		// you can leave out parameters, they are simply ignored
 			} else {
 				tempVe = OperandResolver.coerceValueToBoolean(arg, false);
 			}
 
 
-			if (tempVe != null) {
-				result = partialEvaluate(result, tempVe.booleanValue());
+			if (tempVe != ThreeState.NULL) {
+				result = partialEvaluate(result, tempVe.bool);
 				atleastOneNonBlank = true;
 			}
 		}
@@ -137,8 +138,7 @@ public abstract class BooleanFunction implements Function {
 			boolean boolArgVal;
 			try {
 				ValueEval ve = OperandResolver.getSingleValue(arg0, srcRowIndex, srcColumnIndex);
-				Boolean b = OperandResolver.coerceValueToBoolean(ve, false);
-				boolArgVal = b == null ? false : b.booleanValue();
+				boolArgVal = OperandResolver.coerceValueToBoolean(ve, false).bool;
 			} catch (EvaluationException e) {
 				return e.getErrorEval();
 			}

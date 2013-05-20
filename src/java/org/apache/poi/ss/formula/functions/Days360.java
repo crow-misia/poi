@@ -22,6 +22,7 @@ import java.util.GregorianCalendar;
 import org.apache.poi.ss.formula.eval.EvaluationException;
 import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.OperandResolver;
+import org.apache.poi.ss.formula.eval.ThreeState;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.usermodel.DateUtil;
 
@@ -54,8 +55,8 @@ public class Days360 extends Var2or3ArgFunction {
             double d0 = NumericFunction.singleOperandEvaluate(arg0, srcRowIndex, srcColumnIndex);
             double d1 = NumericFunction.singleOperandEvaluate(arg1, srcRowIndex, srcColumnIndex);
             ValueEval ve = OperandResolver.getSingleValue(arg2, srcRowIndex, srcColumnIndex);
-            Boolean method = OperandResolver.coerceValueToBoolean(ve, false);
-            result = evaluate(d0, d1, method == null ? false : method.booleanValue());
+            ThreeState method = OperandResolver.coerceValueToBoolean(ve, false);
+            result = evaluate(d0, d1, method.bool);
         } catch (EvaluationException e) {
             return e.getErrorEval();
         }
