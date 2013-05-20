@@ -26,6 +26,7 @@ import org.apache.poi.ss.formula.eval.NumericValueEval;
 import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.RefEval;
 import org.apache.poi.ss.formula.eval.StringEval;
+import org.apache.poi.ss.formula.eval.ThreeState;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.formula.TwoDEval;
 
@@ -435,10 +436,10 @@ final class LookupUtils {
 				throw EvaluationException.invalidValue();
 			}
 			// TODO move parseBoolean to OperandResolver
-			Boolean b = Countif.parseBoolean(stringValue);
-			if(b != null) {
+			ThreeState b = Countif.parseBoolean(stringValue);
+			if(b != ThreeState.NULL) {
 				// string converted to boolean OK
-				return b.booleanValue();
+				return b.bool;
 			}
 			// Even more trickiness:
 			// Note - even if the StringEval represents a number value (for example "1"),

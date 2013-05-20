@@ -40,7 +40,7 @@ public final class FunctionEval {
 		/** 4 */
 		public static final int SUM = FunctionMetadataRegistry.FUNCTION_INDEX_SUM;
 		/** 78 */
-		public static final int OFFSET = 78;
+		public static final int OFFSET = FunctionMetadataRegistry.FUNCTION_INDEX_OFFSET;
 		/** 100 */
 		public static final int CHOOSE = FunctionMetadataRegistry.FUNCTION_INDEX_CHOOSE;
 		/** 148 */

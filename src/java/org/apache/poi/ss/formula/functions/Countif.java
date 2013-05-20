@@ -19,6 +19,7 @@ package org.apache.poi.ss.formula.functions;
 
 import java.util.regex.Pattern;
 
+import org.apache.poi.ss.formula.TwoDEval;
 import org.apache.poi.ss.formula.eval.BlankEval;
 import org.apache.poi.ss.formula.eval.BoolEval;
 import org.apache.poi.ss.formula.eval.ErrorEval;
@@ -27,9 +28,9 @@ import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.RefEval;
 import org.apache.poi.ss.formula.eval.StringEval;
+import org.apache.poi.ss.formula.eval.ThreeState;
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.formula.functions.CountUtils.I_MatchPredicate;
-import org.apache.poi.ss.formula.TwoDEval;
 import org.apache.poi.ss.usermodel.ErrorConstants;
 
 /**
@@ -258,12 +259,12 @@ public final class Countif extends Fixed2ArgFunction {
 					return false;
 				}
 				StringEval se = (StringEval)x;
-				Boolean val = parseBoolean(se.getStringValue());
+				ThreeState val = parseBoolean(se.getStringValue());
 				if(val == null) {
 					// x is text that is not a boolean
 					return false;
 				}
-				testValue = boolToInt(val.booleanValue());
+				testValue = boolToInt(val.bool);
 			} else if((x instanceof BoolEval)) {
 				BoolEval be = (BoolEval) x;
 				testValue = boolToInt(be.getBooleanValue());
@@ -502,9 +503,9 @@ public final class Countif extends Fixed2ArgFunction {
 		CmpOp operator = CmpOp.getOperator(value);
 		value = value.substring(operator.getLength());
 
-		Boolean booleanVal = parseBoolean(value);
-		if(booleanVal != null) {
-			return new BooleanMatcher(booleanVal.booleanValue(), operator);
+		ThreeState booleanVal = parseBoolean(value);
+		if(booleanVal != ThreeState.NULL) {
+			return new BooleanMatcher(booleanVal.bool, operator);
 		}
 
 		Double doubleVal = OperandResolver.parseDouble(value);
@@ -536,24 +537,24 @@ public final class Countif extends Fixed2ArgFunction {
 	/**
 	 * Boolean literals ('TRUE', 'FALSE') treated similarly but NOT same as numbers.
 	 */
-	/* package */ static Boolean parseBoolean(String strRep) {
+	/* package */ static ThreeState parseBoolean(String strRep) {
 		if (strRep.length() < 1) {
-			return null;
+			return ThreeState.NULL;
 		}
 		switch(strRep.charAt(0)) {
 			case 't':
 			case 'T':
 				if("TRUE".equalsIgnoreCase(strRep)) {
-					return Boolean.TRUE;
+					return ThreeState.TRUE;
 				}
 				break;
 			case 'f':
 			case 'F':
 				if("FALSE".equalsIgnoreCase(strRep)) {
-					return Boolean.FALSE;
+					return ThreeState.FALSE;
 				}
 				break;
 		}
-		return null;
+		return ThreeState.NULL;
 	}
 }
