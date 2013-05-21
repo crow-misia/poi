@@ -16,7 +16,6 @@
 ==================================================================== */
 package org.apache.poi.xwpf.usermodel;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -47,6 +46,7 @@ import org.apache.poi.openxml4j.opc.PackageRelationship;
 import org.apache.poi.openxml4j.opc.PackageRelationshipTypes;
 import org.apache.poi.openxml4j.opc.PackagingURIHelper;
 import org.apache.poi.openxml4j.opc.TargetMode;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.IdentifierManager;
 import org.apache.poi.util.Internal;
@@ -252,7 +252,7 @@ public class XWPFDocument extends POIXMLDocument implements Document, IBody {
      */
     protected static OPCPackage newPackage() {
         try {
-            OPCPackage pkg = OPCPackage.create(new ByteArrayOutputStream());
+            OPCPackage pkg = OPCPackage.create(new FastByteArrayOutputStream());
             // Main part
             PackagePartName corePartName = PackagingURIHelper.createPartName(XWPFRelation.DOCUMENT.getDefaultFileName());
             // Create main part relationship
@@ -707,9 +707,9 @@ public class XWPFDocument extends POIXMLDocument implements Document, IBody {
         xmlOptions.setSaveSuggestedPrefixes(map);
 
         PackagePart part = getPackagePart();
-        OutputStream out = part.getOutputStream();
-        ctDocument.save(out, xmlOptions);
-        out.close();
+        try (final OutputStream out = part.getOutputStream()) {
+            ctDocument.save(out, xmlOptions);
+        }
     }
 
     /**
@@ -1148,18 +1148,10 @@ public class XWPFDocument extends POIXMLDocument implements Document, IBody {
             xwpfPicData = (XWPFPictureData) createRelationship(relDesc, XWPFFactory.getInstance(),idx);
             /* write bytes to new part */
             PackagePart picDataPart = xwpfPicData.getPackagePart();
-            OutputStream out = null;
-            try {
-                out = picDataPart.getOutputStream();
+            try (final OutputStream out = picDataPart.getOutputStream()) {
                 out.write(pictureData);
             } catch (IOException e) {
                 throw new POIXMLException(e);
-            } finally {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    // ignore
-                }
             }
 
             registerPackagePictureData(xwpfPicData);

@@ -32,6 +32,7 @@ import org.apache.poi.openxml4j.opc.PackagePartName;
 import org.apache.poi.openxml4j.opc.PackageProperties;
 import org.apache.poi.openxml4j.util.Nullable;
 import org.apache.poi.util.DateConstants;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Represents the core properties part of a package.
