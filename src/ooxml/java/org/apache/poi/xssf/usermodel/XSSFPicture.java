@@ -28,6 +28,7 @@ import org.apache.poi.ss.util.ImageUtils;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.Units;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTBlipFillProperties;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTNonVisualDrawingProps;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTNonVisualPictureProperties;
@@ -167,7 +168,7 @@ public final class XSSFPicture extends XSSFShape implements Picture {
     }
 
     public XSSFClientAnchor getPreferredSize(){
-        return getPreferredSize(1);
+        return getPreferredSize(1.0);
     }
 
     public XSSFClientAnchor getPreferredSize(double scale){
@@ -178,45 +179,73 @@ public final class XSSFPicture extends XSSFShape implements Picture {
         double scaledWidth = size.getWidth() * scale;
         double scaledHeight = size.getHeight() * scale;
 
-        float w = 0;
-        int col2 = anchor.getCol1();
-        int dx2 = 0;
+        return getPreferredSize(anchor, data, scaledWidth, scaledHeight);
+    }
 
-        for (;;) {
-            w += getColumnWidthInPixels(col2);
-            if(w > scaledWidth) break;
-            col2++;
+    public XSSFClientAnchor getPreferredSize(final double width, final double height, final boolean aspectLock) {
+        final XSSFClientAnchor anchor = (XSSFClientAnchor)getAnchor();
+
+        final XSSFPictureData data = getPictureData();
+        double scaledWidth;
+        double scaledHeight;
+        if (aspectLock) {
+            final Dimension size = getImageDimension(data.getPackagePart(), data.getPictureType());
+            final double aspect = size.getWidth() / size.getHeight();
+            if (width > height) {
+                scaledHeight = width / aspect;
+                scaledWidth = scaledHeight * aspect;
+            } else {
+                scaledWidth = height * aspect;
+                scaledHeight = scaledWidth / aspect;
+            }
+        } else {
+            scaledWidth = width;
+            scaledHeight = height;
         }
 
-        if(w > scaledWidth) {
-            double cw = getColumnWidthInPixels(col2 );
-            double delta = w - scaledWidth;
-            dx2 = (int)(EMU_PER_PIXEL*(cw-delta));
+        return getPreferredSize(anchor, data, scaledWidth, scaledHeight);
+    }
+
+    private XSSFClientAnchor getPreferredSize(final XSSFClientAnchor anchor, final XSSFPictureData data, final double width, final double height) {
+        //space in the leftmost cell
+        double w = getColumnWidthInPixels(anchor.getCol1()) - Units.emuToPixel(anchor.getDx1());
+        int col2 = anchor.getCol1() + 1;
+        int dx2 = 0;
+
+        while (w < width) {
+            w += getColumnWidthInPixels(col2++);
+        }
+
+        if(w > width) {
+            //calculate dx2, offset in the rightmost cell
+            col2--;
+            final double cw = getColumnWidthInPixels(col2);
+            final double delta = w - width;
+            dx2 = Units.pixelToEMU(cw - delta);
         }
         anchor.setCol2(col2);
         anchor.setDx2(dx2);
 
-        double h = 0;
-        int row2 = anchor.getRow1();
+        double h = getRowHeightInPixels(anchor.getRow1()) - Units.emuToPixel(anchor.getDy1());
+        int row2 = anchor.getRow1() + 1;
         int dy2 = 0;
 
-        for (;;) {
-            h += getRowHeightInPixels(row2);
-            if(h > scaledHeight) break;
-            row2++;
+        while (h < height) {
+            h += getRowHeightInPixels(row2++);
         }
 
-        if(h > scaledHeight) {
-            double ch = getRowHeightInPixels(row2);
-            double delta = h - scaledHeight;
-            dy2 = (int)(EMU_PER_PIXEL*(ch-delta));
+        if(h > height) {
+            row2--;
+            final double ch = getRowHeightInPixels(row2);
+            final double delta = h - height;
+            dy2 = Units.pixelToEMU(ch - delta);
         }
         anchor.setRow2(row2);
         anchor.setDy2(dy2);
 
-        CTPositiveSize2D size2d =  ctPicture.getSpPr().getXfrm().getExt();
-        size2d.setCx((long)(scaledWidth*EMU_PER_PIXEL));
-        size2d.setCy((long)(scaledHeight*EMU_PER_PIXEL));
+        final CTPositiveSize2D size2d =  ctPicture.getSpPr().getXfrm().getExt();
+        size2d.setCx(Units.pixelToEMU(width));
+        size2d.setCy(Units.pixelToEMU(height));
 
         return anchor;
     }

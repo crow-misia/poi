@@ -44,7 +44,7 @@ public class HSSFPictureData implements PictureData
     /**
      * Underlying escher blip record containing the bitmap data.
      */
-    private EscherBlipRecord blip;
+    private final EscherBlipRecord blip;
 
     /**
      * Constructs a picture object.

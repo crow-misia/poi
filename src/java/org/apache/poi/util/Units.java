@@ -19,15 +19,39 @@ package org.apache.poi.util;
 /**
  * @author Yegor Kozlov
  */
-public class Units {
+public final class Units {
     public static final int EMU_PER_PIXEL = 9525;
     public static final int EMU_PER_POINT = 12700;
 
-    public static int toEMU(double value){
-        return (int)Math.round(EMU_PER_POINT*value);
+    public static int pixelToEMU(final int value) {
+        return EMU_PER_PIXEL * value;
     }
 
-    public static double toPoints(long emu){
-        return (double)emu/EMU_PER_POINT;
+    public static int pixelToEMU(final double value) {
+        return (int) (EMU_PER_PIXEL * value);
+    }
+
+    public static int toEMU(final double value){
+        return (int) Math.round(EMU_PER_POINT * value);
+    }
+
+    public static double toPoints(final long emu) {
+        return (double) emu / EMU_PER_POINT;
+    }
+
+    public static double emuToPoint(final double emu) {
+        return emu / EMU_PER_POINT;
+    }
+
+    public static double emuToPixel(final long emu) {
+        return (double) emu / EMU_PER_PIXEL;
+    }
+
+    public static double emuToPixel(final double emu) {
+        return emu / EMU_PER_PIXEL;
+    }
+
+    private Units() {
+        // empty
     }
 }

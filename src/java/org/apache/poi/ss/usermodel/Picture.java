@@ -16,6 +16,8 @@
 ==================================================================== */
 package org.apache.poi.ss.usermodel;
 
+import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
+
 /**
  * Repersents a picture in a SpreadsheetML document
  *
@@ -64,6 +66,16 @@ public interface Picture extends Shape {
      * @return ClientAnchor with the preferred size for this image
      */
     public ClientAnchor getPreferredSize(double scale);
+
+    /**
+     * Calculate the preferred size for this picture.
+     *
+     * @param width image width
+     * @param height image height
+     * @param aspectLock image aspect lock
+     * @return ClientAnchor with the preferred size for this image
+     */
+    public ClientAnchor getPreferredSize(final double width, final double height, final boolean aspectLock);
 
     /**
      * Return picture data for this picture

@@ -25,6 +25,7 @@ import org.apache.poi.ddf.*;
 import org.apache.poi.hssf.record.CommonObjectDataSubRecord;
 import org.apache.poi.hssf.record.EscherAggregate;
 import org.apache.poi.hssf.record.ObjRecord;
+import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.Picture;
 import org.apache.poi.ss.util.ImageUtils;
 import org.apache.poi.util.POILogFactory;
@@ -114,7 +115,7 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
      */
     public void resize(double scale){
         HSSFClientAnchor anchor = (HSSFClientAnchor)getAnchor();
-        anchor.setAnchorType(2);
+        anchor.setAnchorType(ClientAnchor.MOVE_DONT_RESIZE);
 
         HSSFClientAnchor pref = getPreferredSize(scale);
 
@@ -161,16 +162,35 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
      * @since POI 3.0.2
      */
     public HSSFClientAnchor getPreferredSize(double scale){
-        HSSFClientAnchor anchor = (HSSFClientAnchor)getAnchor();
-
         Dimension size = getImageDimension();
         double scaledWidth = size.getWidth() * scale;
         double scaledHeight = size.getHeight() * scale;
 
-        float w = 0;
+        return getPreferredSize(scaledWidth, scaledHeight, false);
+    }
+
+    public HSSFClientAnchor getPreferredSize(final double width, final double height, final boolean aspectLock) {
+        final HSSFClientAnchor anchor = (HSSFClientAnchor)getAnchor();
+
+        double scaledWidth;
+        double scaledHeight;
+        if (aspectLock) {
+            final Dimension size = getImageDimension();
+            final double aspect = size.getWidth() / size.getHeight();
+            if (width > height) {
+                scaledHeight = width / aspect;
+                scaledWidth = scaledHeight * aspect;
+            } else {
+                scaledWidth = height * aspect;
+                scaledHeight = scaledWidth / aspect;
+            }
+        } else {
+            scaledWidth = width;
+            scaledHeight = height;
+        }
 
         //space in the leftmost cell
-        w += getColumnWidthInPixels(anchor.getCol1())*(1 - (float)anchor.getDx1()/1024);
+        float w = getColumnWidthInPixels(anchor.getCol1())*(1 - (float)anchor.getDx1()/1024);
         short col2 = (short)(anchor.getCol1() + 1);
         int dx2 = 0;
 
@@ -181,9 +201,9 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
         if(w > scaledWidth) {
             //calculate dx2, offset in the rightmost cell
             col2--;
-            double cw = getColumnWidthInPixels(col2);
-            double delta = w - scaledWidth;
-            dx2 = (int)((cw-delta)/cw*1024);
+            final double cw = getColumnWidthInPixels(col2);
+            final double delta = w - scaledWidth;
+            dx2 = (int)((cw - delta) / cw * 1024);
         }
         anchor.setCol2(col2);
         anchor.setDx2(dx2);
@@ -198,8 +218,8 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
         }
         if(h > scaledHeight) {
             row2--;
-            double ch = getRowHeightInPixels(row2);
-            double delta = h - scaledHeight;
+            final double ch = getRowHeightInPixels(row2);
+            final double delta = h - scaledHeight;
             dy2 = (int)((ch-delta)/ch*256);
         }
         anchor.setRow2(row2);
