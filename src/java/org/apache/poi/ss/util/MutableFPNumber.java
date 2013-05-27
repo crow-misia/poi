@@ -135,7 +135,7 @@ final class MutableFPNumber {
 		static {
 			BigInteger[] bis = new BigInteger[33];
 			long acc=1;
-			for (int i = 1; i < bis.length; i++) {
+			for (int i = 1; i < 33; i++) {
 				bis[i] = BigInteger.valueOf(acc);
 				acc <<=1;
 			}

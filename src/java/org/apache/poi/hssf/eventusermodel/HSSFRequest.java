@@ -79,8 +79,8 @@ public class HSSFRequest {
 	public void addListenerForAllRecords(HSSFListener lsnr) {
 		short[] rectypes = RecordFactory.getAllKnownRecordSIDs();
 
-		for (int k = 0; k < rectypes.length; k++) {
-			addListener(lsnr, rectypes[k]);
+		for (final short t : rectypes) {
+			addListener(lsnr, t);
 		}
 	}
 

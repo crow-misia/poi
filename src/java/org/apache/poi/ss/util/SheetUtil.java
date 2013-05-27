@@ -120,8 +120,8 @@ public class SheetUtil {
         if (cellType == Cell.CELL_TYPE_STRING) {
             RichTextString rt = cell.getRichStringCellValue();
             String[] lines = rt.getString().split("\\n");
-            for (int i = 0; i < lines.length; i++) {
-                String txt = lines[i] + defaultChar;
+            for (final String line : lines) {
+                String txt = line + defaultChar;
 
                 str = new AttributedString(txt);
                 copyAttributes(font, str, 0, txt.length());

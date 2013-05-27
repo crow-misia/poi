@@ -19,7 +19,6 @@ package org.apache.poi.hpsf.examples;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.hpsf.NoPropertySetStreamException;
@@ -93,12 +92,11 @@ public class ReadCustomPropertySets
             out("   No. of sections: " + sectionCount);
 
             /* Print the list of sections: */
-            List sections = ps.getSections();
+            List<Section> sections = ps.getSections();
             int nr = 0;
-            for (Iterator i = sections.iterator(); i.hasNext();)
+            for (final Section sec : sections)
             {
                 /* Print a single section: */
-                Section sec = (Section) i.next();
                 out("   Section " + nr++ + ":");
                 String s = hex(sec.getFormatID().getBytes());
                 s = s.substring(0, s.length() - 1);
@@ -110,10 +108,9 @@ public class ReadCustomPropertySets
 
                 /* Print the properties: */
                 Property[] properties = sec.getProperties();
-                for (int i2 = 0; i2 < properties.length; i2++)
+                for (final Property p : properties)
                 {
                     /* Print a single property: */
-                    Property p = properties[i2];
                     long id = p.getID();
                     long type = p.getType();
                     Object value = p.getValue();

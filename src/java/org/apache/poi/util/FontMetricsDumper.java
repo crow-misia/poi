@@ -32,9 +32,8 @@ public class FontMetricsDumper
         Properties props = new Properties();
 
         Font[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-        for ( int i = 0; i < allFonts.length; i++ )
-        {
-            String fontName = allFonts[i].getFontName();
+        for (final Font f : allFonts) {
+            String fontName = f.getFontName();
 
             Font font = new Font(fontName, Font.BOLD, 10);
             FontMetrics fontMetrics = Toolkit.getDefaultToolkit().getFontMetrics(font);

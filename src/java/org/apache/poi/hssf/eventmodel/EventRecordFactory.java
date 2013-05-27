@@ -92,13 +92,13 @@ public final class EventRecordFactory {
 			recStream.nextRecord();
 			Record[] recs = RecordFactory.createRecord(recStream);   // handle MulRK records
 			if (recs.length > 1) {
-				for (int k = 0; k < recs.length; k++) {
+				for (final Record r: recs) {
 					if ( last_record != null ) {
 						if (!processRecord(last_record)) {
 							return;
 						}
 					}
-					last_record = recs[ k ]; // do to keep the algorithm homogeneous...you can't
+					last_record = r;		// do to keep the algorithm homogeneous...you can't
 				}							// actually continue a number record anyhow.
 			} else {
 				Record record = recs[ 0 ];

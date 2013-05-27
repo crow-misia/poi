@@ -103,7 +103,7 @@ public final class FormulaShifter {
 	 */
 	public boolean adjustFormula(Ptg[] ptgs, int currentExternSheetIx) {
 		boolean refsWereChanged = false;
-		for(int i=0; i<ptgs.length; i++) {
+		for(int i=0,n=ptgs.length; i<n; i++) {
 			Ptg newPtg = adjustPtg(ptgs[i], currentExternSheetIx);
 			if (newPtg != null) {
 				refsWereChanged = true;

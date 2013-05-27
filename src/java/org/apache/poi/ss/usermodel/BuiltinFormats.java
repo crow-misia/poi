@@ -160,8 +160,9 @@ public final class BuiltinFormats {
 	 * @deprecated (May 2009) use {@link #getAll()}
 	 */
 	public static Map<Integer, String> getBuiltinFormats() {
-		Map<Integer, String> result = new LinkedHashMap<Integer, String>();
-		for (int i=0; i<_formats.length; i++) {
+		final int n = _formats.length;
+		Map<Integer, String> result = new LinkedHashMap<Integer, String>(n);
+		for (int i=0; i<n; i++) {
 			result.put(Integer.valueOf(i), _formats[i]);
 		}
 		return result;
@@ -203,7 +204,7 @@ public final class BuiltinFormats {
 			fmt = pFmt;
 		}
 
-		for(int i =0; i< _formats.length; i++) {
+		for(int i =0, n = _formats.length; i < n; i++) {
 			if(fmt.equals(_formats[i])) {
 				return i;
 			}

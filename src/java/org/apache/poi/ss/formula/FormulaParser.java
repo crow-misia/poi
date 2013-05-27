@@ -1176,7 +1176,7 @@ public final class FormulaParser {
 		return new ParseNode(new ArrayPtg(values2d));
 	}
 	private void checkRowLengths(Object[][] values2d, int nColumns) {
-		for (int i = 0; i < values2d.length; i++) {
+		for (int i = 0, n = values2d.length; i < n; i++) {
 			int rowLen = values2d[i].length;
 			if (rowLen != nColumns) {
 				throw new FormulaParseException("Array row " + i + " has length " + rowLen

@@ -77,11 +77,12 @@ public final class Mode implements Function {
 		double result;
 		try {
 			List<Double> temp = new ArrayList<Double>();
-			for (int i = 0; i < args.length; i++) {
-				collectValues(args[i], temp);
+			for (final ValueEval v : args) {
+				collectValues(v, temp);
 			}
-			double[] values = new double[temp.size()];
-			for (int i = 0; i < values.length; i++) {
+			final int n = temp.size();
+			double[] values = new double[n];
+			for (int i = 0; i < n; i++) {
 				values[i] = temp.get(i).doubleValue();
 			}
 			result = evaluate(values);

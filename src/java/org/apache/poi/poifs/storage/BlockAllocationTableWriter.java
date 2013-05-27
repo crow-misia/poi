@@ -151,9 +151,8 @@ public final class BlockAllocationTableWriter implements BlockWritable, BATManag
     public void writeBlocks(final OutputStream stream)
         throws IOException
     {
-        for (int j = 0; j < _blocks.length; j++)
-        {
-            _blocks[ j ].writeBlocks(stream);
+        for (final BATBlock b : _blocks) {
+            b.writeBlocks(stream);
         }
     }
     

@@ -75,11 +75,11 @@ public final class SmallDocumentBlock implements BlockWritable, ListManagedBlock
                                                 byte [] array,
                                                 int size)
     {
-        SmallDocumentBlock[] rval   =
-            new SmallDocumentBlock[ (size + _block_size - 1) / _block_size ];
+        final int n = (size + _block_size - 1) / _block_size;
+        SmallDocumentBlock[] rval   = new SmallDocumentBlock[ n ];
         int                  offset = 0;
 
-        for (int k = 0; k < rval.length; k++)
+        for (int k = 0; k < n; k++)
         {
             rval[ k ] = new SmallDocumentBlock(bigBlockSize);
             if (offset < array.length)
@@ -145,7 +145,7 @@ public final class SmallDocumentBlock implements BlockWritable, ListManagedBlock
     {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-        for (int j = 0; j < store.length; j++)
+        for (int j = 0, n = store.length; j < n; j++)
         {
             store[ j ].writeBlocks(stream);
         }
@@ -153,9 +153,9 @@ public final class SmallDocumentBlock implements BlockWritable, ListManagedBlock
         SmallDocumentBlock[] rval =
             new SmallDocumentBlock[ convertToBlockCount(size) ];
 
-        for (int index = 0; index < rval.length; index++)
+        for (int i = 0, n = rval.length; i < n; i++)
         {
-            rval[ index ] = new SmallDocumentBlock(bigBlockSize, data, index);
+            rval[ i ] = new SmallDocumentBlock(bigBlockSize, data, i);
         }
         return rval;
     }
@@ -175,7 +175,7 @@ public final class SmallDocumentBlock implements BlockWritable, ListManagedBlock
         
         List sdbs = new ArrayList();
 
-        for (int j = 0; j < blocks.length; j++)
+        for (int j = 0, n = blocks.length; j < n; j++)
         {
             byte[] data = blocks[ j ].getData();
 

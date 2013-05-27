@@ -48,7 +48,8 @@ public final class Sumifs implements FreeRefFunction {
     public static final FreeRefFunction instance = new Sumifs();
 
 	public ValueEval evaluate(ValueEval[] args, OperationEvaluationContext ec) {
-        if(args.length < 3 || args.length % 2 == 0) {
+        final int n = args.length;
+        if(n < 3 || n % 2 == 0) {
             return ErrorEval.VALUE_INVALID;
         }
 
@@ -56,9 +57,9 @@ public final class Sumifs implements FreeRefFunction {
             AreaEval sumRange = convertRangeArg(args[0]);
 
             // collect pairs of ranges and criteria
-            AreaEval[] ae = new AreaEval[(args.length - 1)/2];
+            AreaEval[] ae = new AreaEval[(n - 1)/2];
             I_MatchPredicate[] mp = new I_MatchPredicate[ae.length];
-            for(int i = 1, k=0; i < args.length; i += 2, k++){
+            for(int i = 1, k=0; i < n; i += 2, k++){
                 ae[k] = convertRangeArg(args[i]);
                 mp[k] = Countif.createCriteriaPredicate(args[i+1], ec.getRowIndex(), ec.getColumnIndex());
             }
@@ -99,12 +100,13 @@ public final class Sumifs implements FreeRefFunction {
         int height = aeSum.getHeight();
         int width = aeSum.getWidth();
 
+        final int n = ranges.length;
         double result = 0.0;
         for (int r = 0; r < height; r++) {
             for (int c = 0; c < width; c++) {
 
                 boolean matches = true;
-                for(int i = 0; i < ranges.length; i++){
+                for(int i = 0; i < n; i++){
                     AreaEval aeRange = ranges[i];
                     I_MatchPredicate mp = predicates[i];
 
