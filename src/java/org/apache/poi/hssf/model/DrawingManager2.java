@@ -19,6 +19,7 @@ package org.apache.poi.hssf.model;
 
 import org.apache.poi.ddf.EscherDgRecord;
 import org.apache.poi.ddf.EscherDggRecord;
+import org.apache.poi.ddf.EscherDggRecord.FileIdCluster;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -82,9 +83,11 @@ public class DrawingManager2
         dgg.setNumShapesSaved( dgg.getNumShapesSaved() + 1 );
 
         // Add to existing cluster if space available
-        for (int i = 0; i < dgg.getFileIdClusters().length; i++)
+        FileIdCluster[] clusters = dgg.getFileIdClusters();
+        int n = clusters.length;
+        for (int i = 0; i < n; i++)
         {
-            EscherDggRecord.FileIdCluster c = dgg.getFileIdClusters()[i];
+            EscherDggRecord.FileIdCluster c = clusters[i];
             if (c.getDrawingGroupId() == drawingGroupId && c.getNumShapeIdsUsed() != 1024)
             {
                 int result = c.getNumShapeIdsUsed() + (1024 * (i+1));
@@ -99,9 +102,13 @@ public class DrawingManager2
 
         // Create new cluster
         dgg.addCluster( drawingGroupId, 0 );
-        dgg.getFileIdClusters()[dgg.getFileIdClusters().length-1].incrementShapeId();
+
+        clusters = dgg.getFileIdClusters();
+        n = clusters.length;
+
+        clusters[n-1].incrementShapeId();
         dg.setNumShapes( dg.getNumShapes() + 1 );
-        int result = (1024 * dgg.getFileIdClusters().length);
+        int result = (1024 * n);
         dg.setLastMSOSPID( result );
         if (result >= dgg.getShapeIdMax())
             dgg.setShapeIdMax( result + 1 );
@@ -127,9 +134,10 @@ public class DrawingManager2
 
     boolean drawingGroupExists( short dgId )
     {
-        for ( int i = 0; i < dgg.getFileIdClusters().length; i++ )
+        final FileIdCluster[] clusters = dgg.getFileIdClusters();
+        for (final FileIdCluster cluster : clusters)
         {
-            if ( dgg.getFileIdClusters()[i].getDrawingGroupId() == dgId )
+            if ( cluster.getDrawingGroupId() == dgId )
                 return true;
         }
         return false;

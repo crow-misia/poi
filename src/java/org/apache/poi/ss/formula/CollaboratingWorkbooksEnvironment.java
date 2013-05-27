@@ -112,13 +112,11 @@ public final class CollaboratingWorkbooksEnvironment {
 	 */
 	private void unhookOldEnvironments(WorkbookEvaluator[] evaluators) {
 		Set<CollaboratingWorkbooksEnvironment> oldEnvs = new HashSet<CollaboratingWorkbooksEnvironment>();
-		for(int i=0; i<evaluators.length; i++) {
-			oldEnvs.add(evaluators[i].getEnvironment());
+		for(final WorkbookEvaluator e : evaluators) {
+			oldEnvs.add(e.getEnvironment());
 		}
-		CollaboratingWorkbooksEnvironment[] oldCWEs = new CollaboratingWorkbooksEnvironment[oldEnvs.size()];
-		oldEnvs.toArray(oldCWEs);
-		for (int i = 0; i < oldCWEs.length; i++) {
-			oldCWEs[i].unhook();
+		for (final CollaboratingWorkbooksEnvironment o : oldEnvs) {
+			o.unhook();
 		}
 	}
 

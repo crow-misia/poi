@@ -150,8 +150,8 @@ abstract class BlockListImpl implements BlockList {
      */
     protected int remainingBlocks() {
        int c = 0;
-       for(int i=0; i<_blocks.length; i++) {
-          if(_blocks[i] != null) c++;
+       for(final ListManagedBlock b : _blocks) {
+          if(b != null) c++;
        }
        return c;
     }

@@ -298,9 +298,10 @@ public final class HeaderBlock implements HeaderBlockConstants {
 	 */
 	public int[] getBATArray() {
       // Read them in
-		int[] result = new int[ Math.min(_bat_count,_max_bats_in_header) ];
+		final int n = Math.min(_bat_count,_max_bats_in_header);
+		int[] result = new int[ n ];
 		int offset = _bat_array_offset;
-		for (int j = 0; j < result.length; j++) {
+		for (int j = 0; j < n; j++) {
 			result[ j ] = LittleEndian.getInt(_data, offset);
 			offset     += LittleEndianConsts.INT_SIZE;
 		}

@@ -49,11 +49,12 @@ public class CellTextFormatter extends CellFormatter {
                 }).toString();
 
         // Remember the "@" positions in last-to-first order (to make insertion easier)
-        textPos = new int[numPlaces[0]];
-        int pos = desc.length() - 1;
-        for (int i = 0; i < textPos.length; i++) {
-            textPos[i] = desc.lastIndexOf("\u0000", pos);
-            pos = textPos[i] - 1;
+        final int n = numPlaces[0];
+        textPos = new int[n];
+        int pos = desc.length();
+        for (int i = 0; i < n; i++) {
+            pos = desc.lastIndexOf("\u0000", pos - 1);
+            textPos[i] = pos;
         }
     }
 
@@ -65,8 +66,8 @@ public class CellTextFormatter extends CellFormatter {
             text = text.toUpperCase();
         }
         toAppendTo.append(desc);
-        for (int i = 0; i < textPos.length; i++) {
-            int pos = start + textPos[i];
+        for (final int p : textPos) {
+            int pos = start + p;
             toAppendTo.replace(pos, pos + 1, text);
         }
     }

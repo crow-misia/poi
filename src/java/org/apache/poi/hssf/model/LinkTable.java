@@ -78,7 +78,7 @@ final class LinkTable {
 			_countRecord = (CRNCountRecord) rs.getNext();
 			int nCRNs = _countRecord.getNumberOfCRNs();
 			CRNRecord[] crns = new CRNRecord[nCRNs];
-			for (int i = 0; i < crns.length; i++) {
+			for (int i = 0; i < nCRNs; i++) {
 				crns[i] = (CRNRecord) rs.getNext();
 			}
 			_crns = crns;
@@ -150,7 +150,7 @@ final class LinkTable {
 		 * @return -1 if not found
 		 */
 		public int getIndexOfName(String name) {
-			for (int i = 0; i < _externalNameRecords.length; i++) {
+			for (int i = 0, n = _externalNameRecords.length; i < n; i++) {
 				if(_externalNameRecords[i].getText().equalsIgnoreCase(name)) {
 					return i;
 				}

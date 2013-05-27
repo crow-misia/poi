@@ -245,7 +245,8 @@ public final class PackagePartName implements Comparable<PackagePartName> {
 					"A part name shall not have empty segments [M1.3]: "
 							+ partUri.getPath());
 
-		for (String seg : segments) {
+		for (int i = 1; i < segments.length; ++i) {
+			final String seg = segments[i];
 			if (StringUtil.isEmpty(seg)) {
 				throw new InvalidFormatException(
 						"A part name shall not have empty segments [M1.3]: "
@@ -258,7 +259,7 @@ public final class PackagePartName implements Comparable<PackagePartName> {
 								+ partUri.getPath());
 			}
 
-			if ("".equals(seg.replaceAll("\\\\.", ""))) {
+			if (seg.replaceAll("\\\\.", "").length() == 0) {
 				// Normally will never been invoked with the previous
 				// implementation rule [M1.9]
 				throw new InvalidFormatException(

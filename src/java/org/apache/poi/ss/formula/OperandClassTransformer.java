@@ -100,8 +100,8 @@ final class OperandClassTransformer {
 
 		if (isSimpleValueFunc) {
 			boolean localForceArray = desiredOperandClass == Ptg.CLASS_ARRAY;
-			for (int i = 0; i < children.length; i++) {
-				transformNode(children[i], desiredOperandClass, localForceArray);
+			for (final ParseNode c : children) {
+				transformNode(c, desiredOperandClass, localForceArray);
 			}
 			setSimpleValueFuncClass((AbstractFunctionPtg) token, desiredOperandClass, callerForceArrayFlag);
 			return;
@@ -125,8 +125,8 @@ final class OperandClassTransformer {
 			// All direct operands of value operators that are initially 'R' type will
 			// be converted to 'V' type.
 			byte localDesiredOperandClass = desiredOperandClass == Ptg.CLASS_REF ? Ptg.CLASS_VALUE : desiredOperandClass;
-			for (int i = 0; i < children.length; i++) {
-				transformNode(children[i], localDesiredOperandClass, callerForceArrayFlag);
+			for (final ParseNode c : children) {
+				transformNode(c, localDesiredOperandClass, callerForceArrayFlag);
 			}
 			return;
 		}
@@ -272,7 +272,7 @@ final class OperandClassTransformer {
 			}
 		}
 
-		for (int i = 0; i < children.length; i++) {
+		for (int i = 0, n = children.length; i < n; i++) {
 			ParseNode child = children[i];
 			byte paramOperandClass = afp.getParameterClass(i);
 			transformNode(child, paramOperandClass, localForceArrayFlag);

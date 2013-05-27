@@ -118,10 +118,10 @@ public final class StringUtil {
 	}
 	public static String readCompressedUnicode(LittleEndianInput in, int nChars) {
 		char[] buf = new char[nChars];
-		for (int i = 0; i < buf.length; i++) {
+		for (int i = 0; i < nChars; i++) {
 			buf[i] = (char) in.readUByte();
 		}
-		return new String(buf);
+		return String.valueOf(buf);
 	}
 	/**
 	 * InputStream <tt>in</tt> is expected to contain:
@@ -273,10 +273,10 @@ public final class StringUtil {
 
 	public static String readUnicodeLE(LittleEndianInput in, int nChars) {
 		char[] buf = new char[nChars];
-		for (int i = 0; i < buf.length; i++) {
+		for (int i = 0; i < nChars; i++) {
 			buf[i] = (char) in.readUShort();
 		}
-		return new String(buf);
+		return String.valueOf(buf);
 	}
 
 	/**

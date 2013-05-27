@@ -120,7 +120,7 @@ public final class Sumproduct implements Function {
 	}
 
 	private static ValueEval evaluateAreaSumProduct(ValueEval[] evalArgs) throws EvaluationException {
-		int maxN = evalArgs.length;
+		final int maxN = evalArgs.length;
 		TwoDEval[] args = new TwoDEval[maxN];
 		try {
 			System.arraycopy(evalArgs, 0, args, 0, maxN);
@@ -139,7 +139,7 @@ public final class Sumproduct implements Function {
 		if (!areasAllSameSize(args, height, width)) {
 			// normally this results in #VALUE!,
 			// but errors in individual cells take precedence
-			for (int i = 1; i < args.length; i++) {
+			for (int i = 1; i < maxN; i++) {
 				throwFirstError(args[i]);
 			}
 			return ErrorEval.VALUE_INVALID;
@@ -175,8 +175,7 @@ public final class Sumproduct implements Function {
 	}
 
 	private static boolean areasAllSameSize(TwoDEval[] args, int height, int width) {
-		for (int i = 0; i < args.length; i++) {
-			TwoDEval areaEval = args[i];
+		for (final TwoDEval areaEval : args) {
 			// check that height and width match
 			if(areaEval.getHeight() != height) {
 				return false;

@@ -131,11 +131,11 @@ public final class DocumentBlock extends BigBlock {
                                            final byte [] array,
                                            final int size)
     {
-        DocumentBlock[] rval   =
-            new DocumentBlock[ (size + bigBlockSize.getBigBlockSize() - 1) / bigBlockSize.getBigBlockSize() ];
+        final int n = (size + bigBlockSize.getBigBlockSize() - 1) / bigBlockSize.getBigBlockSize();
+        DocumentBlock[] rval   = new DocumentBlock[ n ];
         int             offset = 0;
 
-        for (int k = 0; k < rval.length; k++)
+        for (int k = 0; k < n; k++)
         {
             rval[ k ] = new DocumentBlock(bigBlockSize);
             if (offset < array.length)

@@ -19,6 +19,7 @@ package org.apache.poi.hssf.model;
 
 import org.apache.poi.ddf.EscherDggRecord;
 import org.apache.poi.ddf.EscherDgRecord;
+import org.apache.poi.ddf.EscherDggRecord.FileIdCluster;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -78,9 +79,10 @@ public class DrawingManager
         {
             // No:
                 // Find the cluster for this drawing group with free space.
-            for (int i = 0; i < dgg.getFileIdClusters().length; i++)
+            final FileIdCluster[] clusters = dgg.getFileIdClusters();
+            for (int i = 0; i < clusters.length; i++)
             {
-                EscherDggRecord.FileIdCluster c = dgg.getFileIdClusters()[i];
+                EscherDggRecord.FileIdCluster c = clusters[i];
                 if (c.getDrawingGroupId() == drawingGroupId)
                 {
                     if (c.getNumShapeIdsUsed() != 1024)
@@ -130,9 +132,10 @@ public class DrawingManager
 
     boolean drawingGroupExists( short dgId )
     {
-        for ( int i = 0; i < dgg.getFileIdClusters().length; i++ )
+        final FileIdCluster[] clusters = dgg.getFileIdClusters();
+        for (final FileIdCluster c : clusters)
         {
-            if ( dgg.getFileIdClusters()[i].getDrawingGroupId() == dgId )
+            if ( c.getDrawingGroupId() == dgId )
                 return true;
         }
         return false;

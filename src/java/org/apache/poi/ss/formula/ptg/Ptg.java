@@ -174,8 +174,8 @@ public abstract class Ptg {
 	 */
 	public static int getEncodedSize(Ptg[] ptgs) {
 		int result = 0;
-		for (int i = 0; i < ptgs.length; i++) {
-			result += ptgs[i].getSize();
+		for (final Ptg p : ptgs) {
+			result += p.getSize();
 		}
 		return result;
 	}
@@ -185,12 +185,11 @@ public abstract class Ptg {
 	 */
 	public static int getEncodedSizeWithoutArrayData(Ptg[] ptgs) {
 		int result = 0;
-		for (int i = 0; i < ptgs.length; i++) {
-			Ptg ptg = ptgs[i];
-			if (ptg instanceof ArrayPtg) {
+		for (final Ptg p : ptgs) {
+			if (p instanceof ArrayPtg) {
 				result += ArrayPtg.PLAIN_TOKEN_SIZE;
 			} else {
-				result += ptg.getSize();
+				result += p.getSize();
 			}
 		}
 		return result;
@@ -293,8 +292,8 @@ public abstract class Ptg {
 	public abstract boolean isBaseToken();
 
 	public static boolean doesFormulaReferToDeletedCell(Ptg[] ptgs) {
-		for (int i = 0; i < ptgs.length; i++) {
-			if (isDeletedCellRef(ptgs[i])) {
+		for (final Ptg p : ptgs) {
+			if (isDeletedCellRef(p)) {
 				return true;
 			}
 		}

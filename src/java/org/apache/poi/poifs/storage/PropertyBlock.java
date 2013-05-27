@@ -44,10 +44,7 @@ public final class PropertyBlock extends BigBlock {
         super(bigBlockSize);
         
         _properties = new Property[ bigBlockSize.getPropertiesPerBlock() ]; 
-        for (int j = 0; j < _properties.length; j++)
-        {
-            _properties[ j ] = properties[ j + offset ];
-        }
+        System.arraycopy(properties, offset, _properties, 0, _properties.length);
     }
 
     /**
@@ -68,12 +65,12 @@ public final class PropertyBlock extends BigBlock {
         int        block_count   =
             (properties.size() + _properties_per_block - 1)
             / _properties_per_block;
-        Property[] to_be_written =
-            new Property[ block_count * _properties_per_block ];
+        final int ps = block_count * _properties_per_block;
+        Property[] to_be_written = new Property[ ps ];
 
         System.arraycopy(properties.toArray(new Property[ 0 ]), 0,
                          to_be_written, 0, properties.size());
-        for (int j = properties.size(); j < to_be_written.length; j++)
+        for (int j = properties.size(); j < ps; j++)
         {
 
             // create an instance of an anonymous inner class that
