@@ -121,26 +121,22 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
         Map<Short, Constructor<? extends EscherRecord>> result = new HashMap<Short, Constructor<? extends EscherRecord>>();
         final Class<?>[] EMPTY_CLASS_ARRAY = new Class[0];
 
-        for (int i = 0; i < recClasses.length; i++) {
-            @SuppressWarnings("unchecked")
-            final Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) recClasses[i];
-            final short sid;
-            try {
-                sid = recCls.getField("RECORD_ID").getShort(null);
-            } catch (IllegalArgumentException e) {
-                throw new RuntimeException(e);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            } catch (NoSuchFieldException e) {
-                throw new RuntimeException(e);
+        try {
+            for (final Class<?> tmpCls : recClasses) {
+                @SuppressWarnings("unchecked")
+                final Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) tmpCls;
+                final short sid = recCls.getField("RECORD_ID").getShort(null);
+                final Constructor<? extends EscherRecord> constructor = recCls.getConstructor( EMPTY_CLASS_ARRAY );
+                result.put(Short.valueOf(sid), constructor);
             }
-            final Constructor<? extends EscherRecord> constructor;
-            try {
-                constructor = recCls.getConstructor( EMPTY_CLASS_ARRAY );
-            } catch (NoSuchMethodException e) {
-                throw new RuntimeException(e);
-            }
-            result.put(Short.valueOf(sid), constructor);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
         return result;
     }

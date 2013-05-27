@@ -449,13 +449,12 @@ public class DataFormatter {
             Excel displays the month instead of minutes."
           */
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         char[] chars = formatStr.toCharArray();
         boolean mIsMonth = true;
         List<Integer> ms = new ArrayList<Integer>();
         boolean isElapsed = false;
-        for(int j=0; j<chars.length; j++) {
-            char c = chars[j];
+        for(final char c : chars) {
             if (c == '[' && !isElapsed) {
                 isElapsed = true;
                 mIsMonth = false;

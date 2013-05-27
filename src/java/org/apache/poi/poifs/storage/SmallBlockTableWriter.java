@@ -67,8 +67,9 @@ public class SmallBlockTableWriter
 
             if (blocks.length != 0)
             {
-                doc.setStartBlock(_sbat.allocateSpace(blocks.length));
-                for (int j = 0; j < blocks.length; j++)
+                final int n = blocks.length;
+                doc.setStartBlock(_sbat.allocateSpace(n));
+                for (int j = 0; j < n; j++)
                 {
                     _small_blocks.add(blocks[ j ]);
                 }

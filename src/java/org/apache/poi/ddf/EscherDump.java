@@ -717,9 +717,9 @@ public final class EscherDump {
             new PropName(959, "groupshape.print"),
         };
 
-        for (int i = 0; i < props.length; i++) {
-            if (props[i]._id == propertyId) {
-                return props[i]._name;
+        for (final PropName p : props) {
+            if (p._id == propertyId) {
+                return p._name;
             }
         }
 

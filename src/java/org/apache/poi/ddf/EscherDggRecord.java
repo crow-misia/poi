@@ -73,10 +73,11 @@ public final class EscherDggRecord extends EscherRecord {
         field_3_numShapesSaved =  LittleEndian.getInt( data, pos + size );size+=4;
         field_4_drawingsSaved  =  LittleEndian.getInt( data, pos + size );size+=4;
         field_5_fileIdClusters = new FileIdCluster[(bytesRemaining-size) / 8];  // Can't rely on field_2_numIdClusters
-        for (int i = 0; i < field_5_fileIdClusters.length; i++)
+        for (int i = 0, n = field_5_fileIdClusters.length; i < n; i++)
         {
-            field_5_fileIdClusters[i] = new FileIdCluster(LittleEndian.getInt( data, pos + size ), LittleEndian.getInt( data, pos + size + 4 ));
-            maxDgId = Math.max(maxDgId, field_5_fileIdClusters[i].getDrawingGroupId());
+            final FileIdCluster t = new FileIdCluster(LittleEndian.getInt( data, pos + size ), LittleEndian.getInt( data, pos + size + 4 ));
+            field_5_fileIdClusters[i] = t;
+            maxDgId = Math.max(maxDgId, t.getDrawingGroupId());
             size += 8;
         }
         bytesRemaining         -= size;
@@ -98,9 +99,9 @@ public final class EscherDggRecord extends EscherRecord {
         LittleEndian.putInt( data, pos, getNumIdClusters() );          pos += 4;
         LittleEndian.putInt( data, pos, field_3_numShapesSaved );      pos += 4;
         LittleEndian.putInt( data, pos, field_4_drawingsSaved );       pos += 4;
-        for (int i = 0; i < field_5_fileIdClusters.length; i++) {
-            LittleEndian.putInt( data, pos, field_5_fileIdClusters[i].field_1_drawingGroupId );   pos += 4;
-            LittleEndian.putInt( data, pos, field_5_fileIdClusters[i].field_2_numShapeIdsUsed );  pos += 4;
+        for (final FileIdCluster c : field_5_fileIdClusters) {
+            LittleEndian.putInt( data, pos, c.field_1_drawingGroupId );   pos += 4;
+            LittleEndian.putInt( data, pos, c.field_2_numShapeIdsUsed );  pos += 4;
         }
 
         listener.afterRecordSerialize( pos, getRecordId(), getRecordSize(), this );
@@ -122,7 +123,7 @@ public final class EscherDggRecord extends EscherRecord {
     public String toString() {
 
         StringBuffer field_5_string = new StringBuffer();
-        if(field_5_fileIdClusters != null) for (int i = 0; i < field_5_fileIdClusters.length; i++) {
+        if(field_5_fileIdClusters != null) for (int i = 0, n = field_5_fileIdClusters.length; i < n; i++) {
             field_5_string.append("  DrawingGroupId").append(i+1).append(": ");
             field_5_string.append(field_5_fileIdClusters[i].field_1_drawingGroupId);
             field_5_string.append('\n');

@@ -591,9 +591,9 @@ public abstract class POILogger {
     {
         List<Object> results = new ArrayList<Object>();
 
-        for (int i = 0; i < objects.length; i++)
+        for (final Object obj : objects)
         {
-            results.addAll(objectToObjectArray(objects[ i ]));
+            results.addAll(objectToObjectArray(obj));
         }
         return results.toArray(new Object[ results.size() ]);
     }
@@ -606,72 +606,72 @@ public abstract class POILogger {
         {
             byte[] array = ( byte [] ) object;
 
-            for (int j = 0; j < array.length; j++)
+            for (final byte b : array)
             {
-                results.add(Byte.valueOf(array[ j ]));
+                results.add(Byte.valueOf(b));
             }
         }
         if (object instanceof char [])
         {
             char[] array = ( char [] ) object;
 
-            for (int j = 0; j < array.length; j++)
+            for (final char c : array)
             {
-                results.add(Character.valueOf(array[ j ]));
+                results.add(Character.valueOf(c));
             }
         }
         else if (object instanceof short [])
         {
             short[] array = ( short [] ) object;
 
-            for (int j = 0; j < array.length; j++)
+            for (final short s : array)
             {
-                results.add(Short.valueOf(array[ j ]));
+                results.add(Short.valueOf(s));
             }
         }
         else if (object instanceof int [])
         {
             int[] array = ( int [] ) object;
 
-            for (int j = 0; j < array.length; j++)
+            for (final int i : array)
             {
-                results.add(Integer.valueOf(array[ j ]));
+                results.add(Integer.valueOf(i));
             }
         }
         else if (object instanceof long [])
         {
             long[] array = ( long [] ) object;
 
-            for (int j = 0; j < array.length; j++)
+            for (final long l : array)
             {
-                results.add(Long.valueOf(array[ j ]));
+                results.add(Long.valueOf(l));
             }
         }
         else if (object instanceof float [])
         {
             float[] array = ( float [] ) object;
 
-            for (int j = 0; j < array.length; j++)
+            for (final float f : array)
             {
-                results.add(Float.valueOf(array[ j ]));
+                results.add(Float.valueOf(f));
             }
         }
         else if (object instanceof double [])
         {
             double[] array = ( double [] ) object;
 
-            for (int j = 0; j < array.length; j++)
+            for (final double d : array)
             {
-                results.add(Double.valueOf(array[ j ]));
+                results.add(Double.valueOf(d));
             }
         }
         else if (object instanceof Object [])
         {
             Object[] array = ( Object [] ) object;
 
-            for (int j = 0; j < array.length; j++)
+            for (final Object o : array)
             {
-                results.add(array[ j ]);
+                results.add(o);
             }
         }
         else

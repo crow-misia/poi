@@ -26,6 +26,7 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
 import org.apache.poi.util.HexDump;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.RecordFormatException;
 
@@ -393,8 +394,7 @@ public class EscherBlipWMFRecord
         DeflaterOutputStream  deflaterOutputStream = new DeflaterOutputStream( out );
         try
         {
-            for ( int i = 0; i < data.length; i++ )
-                deflaterOutputStream.write( data[i] );
+            deflaterOutputStream.write(data);
         }
         catch ( IOException e )
         {
@@ -418,9 +418,8 @@ public class EscherBlipWMFRecord
         try (final InputStream           compressedInputStream = new ByteArrayInputStream(data, pos + 50, length);
              final InflaterInputStream   inflaterInputStream   = new InflaterInputStream(compressedInputStream);
              final ByteArrayOutputStream out                   = new ByteArrayOutputStream()) {
-            int                   c;
-            while ( ( c = inflaterInputStream.read() ) != -1 )
-                out.write( c );
+
+            IOUtils.copy(inflaterInputStream, out);
 
             return out.toByteArray();
         }

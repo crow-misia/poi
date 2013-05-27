@@ -45,7 +45,7 @@ public class SharedFormula {
 
         Ptg[] newPtgStack = new Ptg[ptgs.length];
 
-        for (int k = 0; k < ptgs.length; k++) {
+        for (int k = 0, n = ptgs.length; k < n; k++) {
             Ptg ptg = ptgs[k];
             byte originalOperandClass = -1;
             if (!ptg.isBaseToken()) {

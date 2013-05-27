@@ -47,8 +47,8 @@ final class ParseNode {
 		_children = children;
 		_isIf = isIf(token);
 		int tokenCount = 1;
-		for (int i = 0; i < children.length; i++) {
-			tokenCount += children[i].getTokenCount();
+		for (final ParseNode n : children) {
+			tokenCount += n.getTokenCount();
 		}
 		if (_isIf) {
 			// there will be 2 or 3 extra tAttr tokens according to whether the false param is present
@@ -70,8 +70,8 @@ final class ParseNode {
 	}
 	public int getEncodedSize() {
 		int result = _token instanceof ArrayPtg ? ArrayPtg.PLAIN_TOKEN_SIZE : _token.getSize();
-		for (int i = 0; i < _children.length; i++) {
-			result += _children[i].getEncodedSize();
+		for (final ParseNode c : _children) {
+			result += c.getEncodedSize();
 		}
 		return result;
 	}
@@ -93,8 +93,8 @@ final class ParseNode {
 		if (isPreFixOperator) {
 			temp.add(_token);
 		}
-		for (int i=0; i< getChildren().length; i++) {
-			getChildren()[i].collectPtgs(temp);
+		for (final ParseNode c : getChildren()) {
+			c.collectPtgs(temp);
 		}
 		if (!isPreFixOperator) {
 			temp.add(_token);

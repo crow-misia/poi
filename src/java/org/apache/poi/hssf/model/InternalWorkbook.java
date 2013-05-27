@@ -783,9 +783,10 @@ public final class InternalWorkbook {
     private int fixTabIdRecord() {
         TabIdRecord tir = ( TabIdRecord ) records.get(records.getTabpos());
         int sz = tir.getRecordSize();
-        short[]     tia = new short[ boundsheets.size() ];
+        final int n = boundsheets.size();
+        short[]     tia = new short[ n ];
 
-        for (short k = 0; k < tia.length; k++) {
+        for (short k = 0; k < n; k++) {
             tia[ k ] = k;
         }
         tir.setTabIdArray(tia);
@@ -2442,7 +2443,7 @@ public final class InternalWorkbook {
         // copy original formula but adjust 3D refs to the new external sheet index
         int newExtSheetIx = checkExternSheet(newSheetIndex);
         Ptg[] ptgs = origNameRecord.getNameDefinition();
-        for (int i=0; i< ptgs.length; i++) {
+        for (int i=0,n=ptgs.length; i< n; i++) {
             Ptg ptg = ptgs[i];
 
             if (ptg instanceof Area3DPtg) {

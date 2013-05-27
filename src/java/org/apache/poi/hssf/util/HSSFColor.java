@@ -73,9 +73,7 @@ public class HSSFColor implements Color {
         HSSFColor[] colors = getAllColors();
         Hashtable<Integer,HSSFColor> result = new Hashtable<Integer,HSSFColor>(colors.length * 3 / 2);
 
-        for (int i = 0; i < colors.length; i++) {
-            HSSFColor color = colors[i];
-
+        for (final HSSFColor color : colors) {
             Integer index1 = Integer.valueOf(color.getIndex());
             if (result.containsKey(index1)) {
                 HSSFColor prevColor = (HSSFColor)result.get(index1);
@@ -86,8 +84,7 @@ public class HSSFColor implements Color {
             result.put(index1, color);
         }
 
-        for (int i = 0; i < colors.length; i++) {
-            HSSFColor color = colors[i];
+        for (final HSSFColor color : colors) {
             Integer index2 = getIndex2(color);
             if (index2 == null) {
                 // most colors don't have a second index
@@ -162,9 +159,7 @@ public class HSSFColor implements Color {
         HSSFColor[] colors = getAllColors();
         Hashtable<String,HSSFColor> result = new Hashtable<String,HSSFColor>(colors.length * 3 / 2);
 
-        for (int i = 0; i < colors.length; i++) {
-            HSSFColor color = colors[i];
-
+        for (final HSSFColor color : colors) {
             String hexString = color.getHexString();
             if (result.containsKey(hexString)) {
             	HSSFColor other = (HSSFColor)result.get(hexString);

@@ -86,7 +86,7 @@ public class HexDump {
         }
 
         long         display_offset = offset + index;
-        StringBuffer buffer         = new StringBuffer(74);
+        StringBuilder buffer         = new StringBuilder(74);
 
 
         int data_length = Math.min(data.length,index+length);
@@ -172,7 +172,7 @@ public class HexDump {
 
     public static String dump(final byte [] data, final long offset,
                             final int index) {
-        StringBuffer buffer;
+        StringBuilder buffer;
         if ((index < 0) || (index >= data.length))
         {
             throw new ArrayIndexOutOfBoundsException(
@@ -180,11 +180,11 @@ public class HexDump {
                 + data.length);
         }
         long         display_offset = offset + index;
-        buffer         = new StringBuffer(74);
+        buffer         = new StringBuilder(74);
 
-        for (int j = index; j < data.length; j += 16)
+        for (int j = index, n = data.length; j < n; j += 16)
         {
-            int chars_read = data.length - j;
+            int chars_read = n - j;
 
             if (chars_read > 16)
             {
@@ -223,7 +223,7 @@ public class HexDump {
 
     private static String dump(final long value)
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.setLength(0);
         for (int j = 0; j < 8; j++)
         {
@@ -234,7 +234,7 @@ public class HexDump {
 
     private static String dump(final byte value)
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.setLength(0);
         for (int j = 0; j < 2; j++)
         {
@@ -251,13 +251,14 @@ public class HexDump {
      */
     public static String toHex(final byte[] value)
     {
-        StringBuffer retVal = new StringBuffer();
-        retVal.append('[');
-        for(int x = 0; x < value.length; x++)
+        final StringBuilder retVal = new StringBuilder("[");
+        final int n = value.length;
+        if (n > 0) {
+            retVal.append(toHex(value[0]));
+        }
+        for(int x = 1; x < n; x++)
         {
-            if (x>0) {
-                retVal.append(", ");
-            }
+            retVal.append(", ");
             retVal.append(toHex(value[x]));
         }
         retVal.append(']');
@@ -272,12 +273,15 @@ public class HexDump {
      */
     public static String toHex(final short[] value)
     {
-        StringBuffer retVal = new StringBuffer();
-        retVal.append('[');
-        for(int x = 0; x < value.length; x++)
+        final StringBuilder retVal = new StringBuilder("[");
+        final int n = value.length;
+        if (n > 0) {
+            retVal.append(toHex(value[0]));
+        }
+        for(int x = 1; x < n; x++)
         {
-            retVal.append(toHex(value[x]));
             retVal.append(", ");
+            retVal.append(toHex(value[x]));
         }
         retVal.append(']');
         return retVal.toString();
@@ -296,15 +300,15 @@ public class HexDump {
     {
         final int digits =
             (int) Math.round(Math.log(value.length) / Math.log(10) + 0.5);
-        final StringBuffer formatString = new StringBuffer();
+        final StringBuilder formatString = new StringBuilder();
         for (int i = 0; i < digits; i++)
             formatString.append('0');
         formatString.append(": ");
         final DecimalFormat format = new DecimalFormat(formatString.toString());
-        StringBuffer retVal = new StringBuffer();
+        StringBuilder retVal = new StringBuilder();
         retVal.append(format.format(0));
         int i = -1;
-        for(int x = 0; x < value.length; x++)
+        for(int x = 0, n = value.length; x < n; x++)
         {
             if (++i == bytesPerLine)
             {
@@ -365,7 +369,7 @@ public class HexDump {
 
     private static String toHex(final long value, final int digits)
     {
-        StringBuffer result = new StringBuffer(digits);
+        StringBuilder result = new StringBuilder(digits);
         for (int j = 0; j < digits; j++)
         {
             result.append( _hexcodes[ (int) ((value >> _shifts[ j + (16 - digits) ]) & 15)]);
@@ -415,7 +419,7 @@ public class HexDump {
     private static char[] toHexChars(long pValue, int nBytes) {
         int charPos = 2 + nBytes*2;
         // The return type is char array because most callers will probably append the value to a
-        // StringBuffer, or write it to a Stream / Writer so there is no need to create a String;
+        // StringBuilder, or write it to a Stream / Writer so there is no need to create a String;
         char[] result = new char[charPos];
 
         long value = pValue;

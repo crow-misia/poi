@@ -80,7 +80,7 @@ public final class AttrPtg extends ControlPtg {
         if (isOptimizedChoose()) {
             int nCases = _data;
             int[] jumpTable = new int[nCases];
-            for (int i = 0; i < jumpTable.length; i++) {
+            for (int i = 0; i < nCases; i++) {
                 jumpTable[i] = in.readUShort();
             }
             _jumpTable = jumpTable;
@@ -201,7 +201,7 @@ public final class AttrPtg extends ControlPtg {
         out.writeShort(_data);
         int[] jt = _jumpTable;
         if (jt != null) {
-            for (int i = 0; i < jt.length; i++) {
+            for (int i = 0, n = jt.length; i < n; i++) {
                 out.writeShort(jt[i]);
             }
             out.writeShort(_chooseFuncOffset);
