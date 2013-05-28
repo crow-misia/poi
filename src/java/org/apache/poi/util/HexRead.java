@@ -91,13 +91,6 @@ public final class HexRead
 
         throw new IOException( "Section '" + section + "' not found" );
     }
-    public static byte[] readData( String filename, String section ) throws IOException
-    {
-        File file = new File( filename );
-        try (FileInputStream stream = new FileInputStream( file )) {
-            return readData(stream, section);
-        }
-    }
 
     static public byte[] readData( InputStream stream, int eofChar )
             throws IOException

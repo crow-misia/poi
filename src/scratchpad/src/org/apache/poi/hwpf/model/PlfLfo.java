@@ -116,11 +116,11 @@ public class PlfLfo
     {
         final int newLfoMac = _lfoMac + 1;
 
-        _rgLfo = ArrayUtil.copyOf( _rgLfo, new LFO[newLfoMac] );
-        _rgLfo[_lfoMac + 1] = lfo;
+        _rgLfo = Arrays.copyOf( _rgLfo, newLfoMac );
+        _rgLfo[newLfoMac] = lfo;
 
-        _rgLfoData = ArrayUtil.copyOf( _rgLfoData, new LFOData[_lfoMac + 1] );
-        _rgLfoData[_lfoMac + 1] = lfoData;
+        _rgLfoData = Arrays.copyOf( _rgLfoData, newLfoMac );
+        _rgLfoData[newLfoMac] = lfoData;
 
         this._lfoMac = newLfoMac;
     }
