@@ -27,15 +27,11 @@ import org.apache.poi.hpsf.MutablePropertySet;
 import org.apache.poi.hpsf.PropertySet;
 import org.apache.poi.hpsf.PropertySetFactory;
 import org.apache.poi.hpsf.SummaryInformation;
-import org.apache.poi.poifs.filesystem.DirectoryEntry;
 import org.apache.poi.poifs.filesystem.DirectoryNode;
 import org.apache.poi.poifs.filesystem.DocumentInputStream;
-import org.apache.poi.poifs.filesystem.Entry;
-import org.apache.poi.poifs.filesystem.EntryUtils;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.FastByteArrayOutputStream;
-import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
@@ -156,8 +152,7 @@ public abstract class POIDocument {
 
         try {
             // Create the Property Set
-            PropertySet set = PropertySetFactory.create(dis);
-            return set;
+            return PropertySetFactory.create(dis);
 	   } catch(IOException | org.apache.poi.hpsf.HPSFException e) {
             // Must be corrupt or something like that
 	      logger.log(POILogger.WARN, "Error creating property set with name " + setName + "\n" + e);

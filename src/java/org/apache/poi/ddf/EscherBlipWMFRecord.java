@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.LittleEndian;
@@ -117,9 +118,9 @@ public class EscherBlipWMFRecord
         return 58 + field_12_data.length;
     }
 
-    public String getRecordName() {
-        return "Blip";
-    }
+//    public String getRecordName() {
+//        return "Blip";
+//    }
 
     /**
      * Retrieve the secondary UID
@@ -388,21 +389,20 @@ public class EscherBlipWMFRecord
      * @param data An uncompressed byte array
      * @see DeflaterOutputStream#write(int b)
      */
-    public static byte[] compress( byte[] data )
+    public static InputStream compress( byte[] data )
     {
-        ByteArrayOutputStream out                  = new ByteArrayOutputStream();
-        DeflaterOutputStream  deflaterOutputStream = new DeflaterOutputStream( out );
-        try
+        try (final FastByteArrayOutputStream out = new FastByteArrayOutputStream();
+             final DeflaterOutputStream deflaterOutputStream = new DeflaterOutputStream( out ))
         {
             deflaterOutputStream.write( data );
             deflaterOutputStream.finish();
+
+            return out.toInputStream();
         }
         catch ( IOException e )
         {
             throw new RecordFormatException( e.toString() );
         }
-
-        return out.toByteArray();
     }
 
     /**
@@ -414,15 +414,15 @@ public class EscherBlipWMFRecord
      * @return An uncompressed byte array
      * @see InflaterInputStream#read
      */
-    public static byte[] decompress( byte[] data, int pos, int length )
+    public static InputStream decompress( byte[] data, int pos, int length )
     {
         try (final InputStream           compressedInputStream = new ByteArrayInputStream(data, pos + 50, length);
              final InflaterInputStream   inflaterInputStream   = new InflaterInputStream(compressedInputStream);
-             final ByteArrayOutputStream out                   = new ByteArrayOutputStream()) {
+             final FastByteArrayOutputStream out               = new FastByteArrayOutputStream()) {
 
             IOUtils.copy(inflaterInputStream, out);
 
-            return out.toByteArray();
+            return out.toInputStream();
         }
         catch ( IOException e )
         {
