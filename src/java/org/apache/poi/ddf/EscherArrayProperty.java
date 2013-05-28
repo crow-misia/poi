@@ -17,6 +17,8 @@
 
 package org.apache.poi.ddf;
 
+import java.util.Arrays;
+
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.HexDump;
@@ -55,7 +57,7 @@ public final class EscherArrayProperty extends EscherComplexProperty {
     }
 
     private static byte[] checkComplexData(byte[] complexData) {
-        if (complexData == null || complexData.length == 0) {
+        if (ArrayUtil.isEmpty(complexData)) {
             return new byte[6];
         }
 
@@ -72,9 +74,7 @@ public final class EscherArrayProperty extends EscherComplexProperty {
     public void setNumberOfElementsInArray(int numberOfElements) {
         int expectedArraySize = numberOfElements * getActualSizeOfElements(getSizeOfElements()) + FIXED_SIZE;
         if (expectedArraySize != _complexData.length) {
-            byte[] newArray = new byte[expectedArraySize];
-            System.arraycopy(_complexData, 0, newArray, 0, _complexData.length);
-            _complexData = newArray;
+            _complexData = Arrays.copyOf(_complexData, expectedArraySize);
         }
         LittleEndian.putShort(_complexData, 0, (short) numberOfElements);
     }
@@ -86,9 +86,7 @@ public final class EscherArrayProperty extends EscherComplexProperty {
     public void setNumberOfElementsInMemory(int numberOfElements) {
         int expectedArraySize = numberOfElements * getActualSizeOfElements(getSizeOfElements()) + FIXED_SIZE;
         if (expectedArraySize != _complexData.length) {
-            byte[] newArray = new byte[expectedArraySize];
-            System.arraycopy(_complexData, 0, newArray, 0, expectedArraySize);
-            _complexData = newArray;
+            _complexData = Arrays.copyOf(_complexData, expectedArraySize);
         }
         LittleEndian.putShort(_complexData, 2, (short) numberOfElements);
     }
@@ -122,12 +120,13 @@ public final class EscherArrayProperty extends EscherComplexProperty {
     }
 
     public String toString() {
+        final int num = getNumberOfElementsInArray();
         StringBuilder results = new StringBuilder();
         results.append("    {EscherArrayProperty:" + '\n');
-        results.append("     Num Elements: " + getNumberOfElementsInArray() + '\n');
+        results.append("     Num Elements: " + num + '\n');
         results.append("     Num Elements In Memory: " + getNumberOfElementsInMemory() + '\n');
         results.append("     Size of elements: " + getSizeOfElements() + '\n');
-        for (int i = 0; i < getNumberOfElementsInArray(); i++) {
+        for (int i = 0; i < num; i++) {
             results.append("     Element " + i + ": " + HexDump.toHex(getElement(i)) + '\n');
         }
         results.append("}" + '\n');

@@ -20,7 +20,6 @@ import org.apache.poi.hpsf.DocumentSummaryInformation;
 import org.apache.poi.hpsf.SummaryInformation;
 import org.apache.poi.hpsf.extractor.HPSFPropertiesExtractor;
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 /**
  * Common Parent for OLE2 based Text Extractors

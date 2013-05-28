@@ -29,6 +29,8 @@ public final class ArrayUtil
 
     public static final String[] EMPTY_STRING_ARRAY = new String[0];
 
+    public static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
+
     public static final byte[][] EMPTY_BYTE_ARRAY_ARRAY = new byte[0][];
 
     public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
@@ -126,4 +128,11 @@ public final class ArrayUtil
     	// We're done - array will now have everything moved as required
     }
 
+    public static boolean isEmpty(final Object[] a) {
+        return a == null || a.length == 0;
+    }
+
+    public static boolean isEmpty(final byte[] a) {
+        return a == null || a.length == 0;
+    }
 }

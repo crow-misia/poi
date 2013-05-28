@@ -94,9 +94,8 @@ public abstract class AbstractEscherHolderRecord extends Record {
         buffer.append('[' + getRecordName() + ']' + nl);
         if (escherRecords.isEmpty())
             buffer.append("No Escher Records Decoded" + nl);
-        for ( Iterator<EscherRecord> iterator = escherRecords.iterator(); iterator.hasNext(); )
+        for (final EscherRecord r : escherRecords)
         {
-            EscherRecord r = iterator.next();
             buffer.append(r.toString());
         }
         buffer.append("[/" + getRecordName() + ']' + nl);
