@@ -63,22 +63,22 @@ public final class HexDump {
      * @exception IllegalArgumentException if the output stream is
      *            null
      */
-    public static void dump(final byte [] data, final long offset,
+    private static void dump(final byte [] data, final long offset,
                             final OutputStream stream, final int index, final int length)
             throws IOException, ArrayIndexOutOfBoundsException,
                     IllegalArgumentException
     {
-        if (data.length == 0)
+        if (length == 0)
         {
-            stream.write( ("No Data" + System.lineSeparator()).getBytes() );
+            stream.write( ("No Data" + EOL).getBytes() );
             stream.flush();
             return;
         }
-        if ((index < 0) || (index >= data.length))
+        if ((index < 0) || (index >= length))
         {
             throw new ArrayIndexOutOfBoundsException(
                 "illegal index: " + index + " into array of length "
-                + data.length);
+                + length);
         }
         if (stream == null)
         {
@@ -89,10 +89,9 @@ public final class HexDump {
         StringBuilder buffer         = new StringBuilder(74);
 
 
-        int data_length = Math.min(data.length,index+length);
-        for (int j = index; j < data_length; j += 16)
+        for (int j = index; j < length; j += 16)
         {
-            int chars_read = data_length - j;
+            int chars_read = length - j;
 
             if (chars_read > 16)
             {
@@ -150,12 +149,12 @@ public final class HexDump {
      *            null
      */
 
-    public synchronized static void dump(final byte [] data, final long offset,
+    public static void dump(final byte [] data, final long offset,
                             final OutputStream stream, final int index)
         throws IOException, ArrayIndexOutOfBoundsException,
                 IllegalArgumentException
     {
-        dump(data, offset, stream, index, data.length-index);
+        dump(data, offset, stream, index, data.length);
     }
 
     /**
@@ -378,42 +377,6 @@ public final class HexDump {
         return result.toString();
     }
 
-    /**
-     * Dumps <code>bytesToDump</code> bytes to an output stream.
-     *
-     * @param in          The stream to read from
-     * @param out         The output stream
-     * @param start       The index to use as the starting position for the left hand side label
-     * @param bytesToDump The number of bytes to output.  Use -1 to read until the end of file.
-     */
-    public static void dump( InputStream in, PrintStream out, int start, int bytesToDump ) throws IOException
-    {
-        ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        if (bytesToDump == -1)
-        {
-            int c = in.read();
-            while (c != -1)
-            {
-                buf.write(c);
-                c = in.read();
-            }
-        }
-        else
-        {
-            int bytesRemaining = bytesToDump;
-            while (bytesRemaining-- > 0)
-            {
-                int c = in.read();
-                if (c == -1) {
-                    break;
-                }
-                buf.write(c);
-            }
-        }
-
-        byte[] data = buf.toByteArray();
-        dump(data, 0, out, start, data.length);
-    }
     /**
      * @return char array of uppercase hex chars, zero padded and prefixed with '0x'
      */
