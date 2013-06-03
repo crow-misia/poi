@@ -124,7 +124,7 @@ public final class IOUtils {
 	 * leaves both streams open, so you will still need to close them once done.
 	 */
 	public static void copy(InputStream inp, OutputStream out) throws IOException {
-		byte[] buff = new byte[4096];
+		final byte[] buff = new byte[4096];
 		int count;
 		while ((count = inp.read(buff)) != -1) {
 			if (count > 0) {

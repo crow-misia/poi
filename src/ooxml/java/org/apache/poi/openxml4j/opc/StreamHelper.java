@@ -17,7 +17,6 @@
 
 package org.apache.poi.openxml4j.opc;
 
-import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.dom4j.Document;
@@ -43,32 +42,10 @@ public final class StreamHelper {
 	public static boolean saveXmlInStream(Document xmlContent,
 			OutputStream outStream) {
 		try {
-			OutputFormat outformat = OutputFormat.createPrettyPrint();
+			OutputFormat outformat = OutputFormat.createCompactFormat();
 			outformat.setEncoding("UTF-8");
 			XMLWriter writer = new XMLWriter(outStream, outformat);
 			writer.write(xmlContent);
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Copy the input stream into the output stream.
-	 *
-	 * @param inStream
-	 *            The source stream.
-	 * @param outStream
-	 *            The destination stream.
-	 * @return <b>true</b> if the operation succeed, else return <b>false</b>.
-	 */
-	public static boolean copyStream(InputStream inStream, OutputStream outStream) {
-		try {
-			byte[] buffer = new byte[1024];
-			int bytesRead;
-			while ((bytesRead = inStream.read(buffer)) >= 0) {
-				outStream.write(buffer, 0, bytesRead);
-			}
 		} catch (Exception e) {
 			return false;
 		}

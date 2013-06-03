@@ -468,7 +468,7 @@ public class CopyCompare
         /** Contains the directory paths that have already been created in the
          * output POI filesystem and maps them to their corresponding
          * {@link org.apache.poi.poifs.filesystem.DirectoryNode}s. */
-        private final Map paths = new HashMap();
+        private final Map<String, DirectoryEntry> paths = new HashMap<>();
 
 
 
@@ -502,7 +502,7 @@ public class CopyCompare
             {
                 /* Check whether this directory has already been created. */
                 final String s = path.toString();
-                DirectoryEntry de = (DirectoryEntry) paths.get(s);
+                DirectoryEntry de = paths.get(s);
                 if (de != null)
                     /* Yes: return the corresponding DirectoryEntry. */
                     return de;

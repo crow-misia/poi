@@ -51,6 +51,7 @@ import org.apache.poi.openxml4j.opc.internal.marshallers.ZipPackagePropertiesMar
 import org.apache.poi.openxml4j.opc.internal.unmarshallers.PackagePropertiesUnmarshaller;
 import org.apache.poi.openxml4j.opc.internal.unmarshallers.UnmarshallContext;
 import org.apache.poi.openxml4j.util.Nullable;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.POILogger;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.StringUtil;
@@ -475,7 +476,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 
 		// Copy file data to the newly created part
 		try (final FileInputStream is = new FileInputStream(path)) {
-			StreamHelper.copyStream(is, thumbnailPart
+			IOUtils.copy(is, thumbnailPart
 					.getOutputStream());
 		}
 	}

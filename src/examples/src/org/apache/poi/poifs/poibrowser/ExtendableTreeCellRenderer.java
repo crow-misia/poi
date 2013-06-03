@@ -43,15 +43,16 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
     /**
      * <p>Maps classes to renderers.</p>
      */
-    protected Map renderers;
+    protected Map<Class<?>, TreeCellRenderer> renderers;
 
 
 
     public ExtendableTreeCellRenderer()
     {
-        renderers = new HashMap();
+        renderers = new HashMap<>();
         register(Object.class, new DefaultTreeCellRenderer()
             {
+                private static final long serialVersionUID = 1L;
                 public Component getTreeCellRendererComponent
                     (JTree tree, Object value, boolean selected,
                      boolean expanded, boolean leaf, int row, boolean hasFocus)
@@ -73,7 +74,7 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
     /**
      * <p>Registers a renderer for a class.</p>
      **/
-    public void register(final Class c, final TreeCellRenderer renderer)
+    public final void register(final Class<?> c, final TreeCellRenderer renderer)
     {
         renderers.put(c, renderer);
     }
@@ -84,7 +85,7 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
      * <p>Unregisters a renderer for a class. The renderer for the
      * {@link Object} class cannot be unregistered.</p>
      */
-    public void unregister(final Class c)
+    public void unregister(final Class<?> c)
     {
         if (c == Object.class)
             throw new IllegalArgumentException

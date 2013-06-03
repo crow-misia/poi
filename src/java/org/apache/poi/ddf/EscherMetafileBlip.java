@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.zip.InflaterInputStream;
 
 import org.apache.poi.util.HexDump;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -151,11 +152,9 @@ public final class EscherMetafileBlip extends EscherBlipRecord {
         try (final ByteArrayInputStream bais = new ByteArrayInputStream(data);
              final InflaterInputStream in = new InflaterInputStream(bais);
              final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            byte[] buf = new byte[4096];
-            int readBytes;
-            while ((readBytes = in.read(buf)) > 0) {
-                out.write(buf, 0, readBytes);
-            }
+
+            IOUtils.copy(in, out);
+
             return out.toByteArray();
         } catch (IOException e) {
             log.log(POILogger.WARN, "Possibly corrupt compression or non-compressed data", e);

@@ -54,7 +54,6 @@ public interface POIFSViewable
      * @return an Iterator; may not be null, but may have an empty
      * back end store
      */
-    @SuppressWarnings("unchecked")
     public Iterator getViewableIterator();
 
     /**

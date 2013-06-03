@@ -17,6 +17,7 @@
 package org.apache.poi.poifs.dev;
 
 import org.apache.poi.poifs.filesystem.*;
+import org.apache.poi.util.IOUtils;
 
 import java.io.FileInputStream;
 import java.io.File;
@@ -49,18 +50,15 @@ public class POIFSDump {
 
 
     public static void dump(DirectoryEntry root, File parent) throws IOException {
-        for(Iterator it = root.getEntries(); it.hasNext();){
-            Entry entry = (Entry)it.next();
+        for(Iterator<Entry> it = root.getEntries(); it.hasNext();){
+            Entry entry = it.next();
             if(entry instanceof DocumentNode){
                 DocumentNode node = (DocumentNode)entry;
-                DocumentInputStream is = new DocumentInputStream(node);
-                byte[] bytes = new byte[node.getSize()];
-                is.read(bytes);
-                is.close();
+                try (DocumentInputStream in = new DocumentInputStream(node);
+                     FileOutputStream out = new FileOutputStream(new File(parent, node.getName().trim()))) {
 
-                FileOutputStream out = new FileOutputStream(new File(parent, node.getName().trim()));
-                out.write(bytes);
-                out.close();
+                    IOUtils.copy(in, out);
+                }
             } else if (entry instanceof DirectoryEntry){
                 DirectoryEntry dir = (DirectoryEntry)entry;
                 File file = new File(parent, entry.getName());

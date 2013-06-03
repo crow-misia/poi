@@ -30,7 +30,6 @@ import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.ss.util.CellReference.NameType;
-import org.apache.poi.util.ArrayUtil;
 
 /**
  * This class parses a formula string into a List of tokens in RPN order.
