@@ -176,8 +176,9 @@ public final class OperationEvaluationContext {
 				case CELL:
 					CellReference cr = new CellReference(refStrPart1);
 					return new LazyRefEval(cr.getRow(), cr.getCol(), sre);
+				default:
+					throw new IllegalStateException("Unexpected reference classification of '" + refStrPart1 + "'.");
 			}
-			throw new IllegalStateException("Unexpected reference classification of '" + refStrPart1 + "'.");
 		}
 		NameType part2refType = classifyCellReference(refStrPart1, ssVersion);
 		switch (part2refType) {

@@ -23,7 +23,6 @@ import java.util.Set;
 
 import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.formula.FormulaUsedBlankCellSet.BookSheetKey;
-import org.apache.poi.util.ArrayUtil;
 
 
 /**

@@ -19,7 +19,7 @@ package org.apache.poi.hssf.util;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Color;
@@ -65,13 +65,13 @@ public class HSSFColor implements Color {
      *  the table, then call {@link #getIndexHash()} which returns a
      *  statically cached imuatable map of colours.
      */
-    public final static Hashtable<Integer,HSSFColor> getMutableIndexHash() {
+    public final static Map<Integer,HSSFColor> getMutableIndexHash() {
        return createColorsByIndexMap();
     }
 
-    private static Hashtable<Integer,HSSFColor> createColorsByIndexMap() {
+    private static Map<Integer,HSSFColor> createColorsByIndexMap() {
         HSSFColor[] colors = getAllColors();
-        Hashtable<Integer,HSSFColor> result = new Hashtable<>(colors.length * 3 / 2);
+        Map<Integer,HSSFColor> result = new HashMap<>(colors.length * 3 / 2);
 
         for (final HSSFColor color : colors) {
             Integer index1 = Integer.valueOf(color.getIndex());
@@ -148,14 +148,14 @@ public class HSSFColor implements Color {
      *
      * @return a hashtable containing all colors keyed by String gnumeric-like triplets
      */
-    public final static Hashtable<String,HSSFColor> getTripletHash()
+    public final static Map<String,HSSFColor> getTripletHash()
     {
         return createColorsByHexStringMap();
     }
 
-    private static Hashtable<String,HSSFColor> createColorsByHexStringMap() {
+    private static Map<String,HSSFColor> createColorsByHexStringMap() {
         HSSFColor[] colors = getAllColors();
-        Hashtable<String,HSSFColor> result = new Hashtable<>(colors.length * 3 / 2);
+        Map<String,HSSFColor> result = new HashMap<>(colors.length * 3 / 2);
 
         for (final HSSFColor color : colors) {
             String hexString = color.getHexString();

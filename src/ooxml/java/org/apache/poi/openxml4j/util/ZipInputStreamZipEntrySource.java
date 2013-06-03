@@ -27,6 +27,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.poi.util.FastByteArrayOutputStream;
+import org.apache.poi.util.IOUtils;
 
 /**
  * Provides a way to get at all the ZipEntries
@@ -124,12 +125,8 @@ public class ZipInputStreamZipEntrySource implements ZipEntrySource {
     			baos = new FastByteArrayOutputStream();
             }
 
-			byte[] buffer = new byte[4096];
-			int read = 0;
-			while( (read = inp.read(buffer)) != -1 ) {
-				baos.write(buffer, 0, read);
-			}
-			
+            IOUtils.copy(inp, baos);
+
 			is = baos.toInputStream();
 		}
 		

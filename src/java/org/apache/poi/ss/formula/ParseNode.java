@@ -24,7 +24,6 @@ import org.apache.poi.ss.formula.ptg.MemAreaPtg;
 import org.apache.poi.ss.formula.ptg.MemFuncPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.function.FunctionMetadataRegistry;
-import org.apache.poi.util.ArrayUtil;
 /**
  * Represents a syntactic element from a formula by encapsulating the corresponding <tt>Ptg</tt>
  * token.  Each <tt>ParseNode</tt> may have child <tt>ParseNode</tt>s in the case when the wrapped

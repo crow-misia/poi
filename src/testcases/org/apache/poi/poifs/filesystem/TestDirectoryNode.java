@@ -106,7 +106,7 @@ public final class TestDirectoryNode extends TestCase {
 
         // verify that getEntries behaves correctly
         int           count = 0;
-        Iterator      iter  = node.getEntries();
+        Iterator<Entry> iter = node.getEntries();
 
         while (iter.hasNext())
         {

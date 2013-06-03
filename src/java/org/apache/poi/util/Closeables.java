@@ -14,30 +14,28 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 ==================================================================== */
-package org.apache.poi.openxml4j.util;
+
+package org.apache.poi.util;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
 
 /**
- * An Interface to make getting the different bits
- *  of a Zip File easy.
- * Allows you to get at the ZipEntries, without
- *  needing to worry about ZipFile vs ZipInputStream
- *  being annoyingly very different.
+ * Close Utillity Class.
+ * @author Zenichi Amano
  */
-public interface ZipEntrySource extends Closeable {
-	/**
-	 * Returns an Enumeration of all the Entries
-	 */
-	Enumeration<? extends ZipEntry> getEntries();
-	
-	/**
-	 * Returns an InputStream of the decompressed 
-	 *  data that makes up the entry
-	 */
-	InputStream getInputStream(ZipEntry entry) throws IOException;
+public final class Closeables {
+	private Closeables() {
+		// nop.
+	}
+
+	public static void close(final Closeable s) {
+		if (s != null) {
+			try {
+				s.close();
+			} catch (final IOException e){
+				// ignore.
+			}
+		}
+	}
 }

@@ -42,6 +42,7 @@ import org.apache.poi.openxml4j.opc.internal.marshallers.ZipPartMarshaller;
 import org.apache.poi.openxml4j.util.ZipEntrySource;
 import org.apache.poi.openxml4j.util.ZipFileZipEntrySource;
 import org.apache.poi.openxml4j.util.ZipInputStreamZipEntrySource;
+import org.apache.poi.util.Closeables;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
@@ -80,9 +81,13 @@ public final class ZipPackage extends OPCPackage {
 	 */
 	ZipPackage(InputStream in, PackageAccess access) throws IOException {
 		super(access);
-		this.zipArchive = new ZipInputStreamZipEntrySource(
-				new ZipInputStream(in)
-		);
+		ZipInputStream zis = null;
+		try {
+			zis = new ZipInputStream(in);
+			this.zipArchive = new ZipInputStreamZipEntrySource(zis);
+		} finally {
+			Closeables.close(zis);
+		}
 	}
 
    /**
