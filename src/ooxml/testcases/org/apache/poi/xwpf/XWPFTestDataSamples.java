@@ -42,7 +42,6 @@ public class XWPFTestDataSamples {
 
     public static byte[] getImage(String filename) throws IOException {
         InputStream is = POIDataSamples.getDocumentInstance().openResourceAsStream(filename);
-        byte[] result = IOUtils.toByteArray(is);
-        return result;
+        return IOUtils.toByteArray(is);
     }
 }

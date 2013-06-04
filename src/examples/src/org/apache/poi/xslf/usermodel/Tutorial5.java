@@ -38,8 +38,10 @@ public class Tutorial5 {
 
         XSLFSlide slide = ppt.createSlide();
         File img = new File(System.getProperty("POI.testdata.path"), "slideshow/clock.jpg");
-        byte[] data = IOUtils.toByteArray(new FileInputStream(img));
-        int pictureIndex = ppt.addPicture(data, XSLFPictureData.PICTURE_TYPE_PNG);
+        int pictureIndex;
+        try (final FileInputStream fis = new FileInputStream(img)) {
+            pictureIndex = ppt.addPicture(fis, XSLFPictureData.PICTURE_TYPE_PNG);
+        }
 
         XSLFPictureShape shape = slide.createPicture(pictureIndex);
 

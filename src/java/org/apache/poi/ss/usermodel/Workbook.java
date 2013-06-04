@@ -18,6 +18,7 @@
 package org.apache.poi.ss.usermodel;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
@@ -50,6 +51,23 @@ public interface Workbook {
     /** Device independent bitmap */
     public static final int PICTURE_TYPE_DIB = 7;
 
+    /** GIF image format (only XSSF) */
+    public static final int PICTURE_TYPE_GIF = 8;
+
+    /** Tag Image File (.tiff) (only XSSF) */
+    public static final int PICTURE_TYPE_TIFF = 9;
+
+    /** Encapsulated Postscript (.eps) (only XSSF) */
+    public static final int PICTURE_TYPE_EPS = 10;
+
+    /** Windows Bitmap (.bmp) (only XSSF) */
+    public static final int PICTURE_TYPE_BMP = 11;
+
+    /** WordPerfect graphics (.wpg) (only XSSF) */
+    public static final int PICTURE_TYPE_WPG = 12;
+
+    /** Microsoft Windows Media Photo image (.wdp) (only XSSF) */
+    public static final int PICTURE_TYPE_WDP = 13;
 
     /**
      * Indicates the sheet is visible.
@@ -474,8 +492,35 @@ public interface Workbook {
      * @see #PICTURE_TYPE_JPEG
      * @see #PICTURE_TYPE_PNG
      * @see #PICTURE_TYPE_DIB
+     * @see #PICTURE_TYPE_GIF
+     * @see #PICTURE_TYPE_TIFF
+     * @see #PICTURE_TYPE_EPS
+     * @see #PICTURE_TYPE_BMP
+     * @see #PICTURE_TYPE_WPG
      */
     int addPicture(byte[] pictureData, int format);
+
+    /**
+     * Adds a picture to the workbook.
+     *
+     * @param in                The inputstream of the picture
+     * @param format            The format of the picture.
+     *
+     * @return the index to this picture (1 based).
+     * @throws IOException
+     * @see #PICTURE_TYPE_EMF
+     * @see #PICTURE_TYPE_WMF
+     * @see #PICTURE_TYPE_PICT
+     * @see #PICTURE_TYPE_JPEG
+     * @see #PICTURE_TYPE_PNG
+     * @see #PICTURE_TYPE_DIB
+     * @see #PICTURE_TYPE_GIF
+     * @see #PICTURE_TYPE_TIFF
+     * @see #PICTURE_TYPE_EPS
+     * @see #PICTURE_TYPE_BMP
+     * @see #PICTURE_TYPE_WPG
+     */
+    int addPicture(InputStream in, int format) throws IOException;
 
     /**
      * Gets all pictures from the Workbook.

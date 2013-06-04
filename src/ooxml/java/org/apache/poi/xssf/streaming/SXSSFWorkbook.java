@@ -931,30 +931,16 @@ public class SXSSFWorkbook implements Workbook
         return _wb.createDataFormat();
     }
 
-    /**
-     * Adds a picture to the workbook.
-     *
-     * @param pictureData       The bytes of the picture
-     * @param format            The format of the picture.
-     *
-     * @return the index to this picture (1 based).
-     * @see #PICTURE_TYPE_EMF
-     * @see #PICTURE_TYPE_WMF
-     * @see #PICTURE_TYPE_PICT
-     * @see #PICTURE_TYPE_JPEG
-     * @see #PICTURE_TYPE_PNG
-     * @see #PICTURE_TYPE_DIB
-     */
     public int addPicture(byte[] pictureData, int format)
     {
         return _wb.addPicture(pictureData,format);
     }
 
-    /**
-     * Gets all pictures from the Workbook.
-     *
-     * @return the list of pictures (a list of {@link PictureData} objects.)
-     */
+    public int addPicture(InputStream in, int format) throws IOException
+    {
+        return _wb.addPicture(in, format);
+    }
+
     public List<? extends PictureData> getAllPictures()
     {
         return _wb.getAllPictures();

@@ -39,10 +39,10 @@ public class WorkingWithPictures {
         CreationHelper helper = wb.getCreationHelper();
 
         //add a picture in this workbook.
-        InputStream is = new FileInputStream(args[0]);
-        byte[] bytes = IOUtils.toByteArray(is);
-        is.close();
-        int pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_JPEG);
+        int pictureIdx;
+        try (final InputStream is = new FileInputStream(args[0])) {
+            pictureIdx = wb.addPicture(is, Workbook.PICTURE_TYPE_JPEG);
+        }
 
         //create sheet
         Sheet sheet = wb.createSheet();

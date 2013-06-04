@@ -17,6 +17,7 @@
 package org.apache.poi.xslf.usermodel;
 
 import java.awt.Dimension;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -334,24 +335,39 @@ public class XMLSlideShow  extends POIXMLDocument {
      */
     public int addPicture(byte[] pictureData, int format) {
         XSLFPictureData img = findPictureData(pictureData);
-        POIXMLRelation relDesc = XSLFPictureData.RELATIONS[format];
 
         if(img == null) {
             int imageNumber = _pictures.size();
             img = (XSLFPictureData) createRelationship(
                     XSLFPictureData.RELATIONS[format], XSLFFactory.getInstance(), imageNumber + 1, true);
             _pictures.add(img);
-            try {
-                OutputStream out = img.getPackagePart().getOutputStream();
+            try (final OutputStream out = img.getPackagePart().getOutputStream()) {
                 out.write(pictureData);
-                out.close();
             } catch (IOException e) {
                 throw new POIXMLException(e);
             }
             return _pictures.size() - 1;
-        } else {
-            return _pictures.indexOf(img);
         }
+        return _pictures.indexOf(img);
+    }
+
+    /**
+     * Adds a picture to the workbook.
+     *
+     * @param pictureData       The bytes of the picture
+     * @param format            The format of the picture.
+     *
+     * @return the index to this picture (1 based).
+     * @throws IOException 
+     * @see XSLFPictureData#PICTURE_TYPE_EMF
+     * @see XSLFPictureData#PICTURE_TYPE_WMF
+     * @see XSLFPictureData#PICTURE_TYPE_PICT
+     * @see XSLFPictureData#PICTURE_TYPE_JPEG
+     * @see XSLFPictureData#PICTURE_TYPE_PNG
+     * @see XSLFPictureData#PICTURE_TYPE_DIB
+     */
+    public int addPicture(InputStream in, int format) throws IOException {
+        return addPicture(IOUtils.toByteArray(in), format);
     }
 
     /**
