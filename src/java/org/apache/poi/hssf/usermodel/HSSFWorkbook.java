@@ -24,9 +24,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -57,6 +59,7 @@ import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.WorkbookUtil;
 import org.apache.poi.util.Configurator;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 import org.apache.poi.ss.formula.udf.IndexedUDFFinder;
@@ -113,19 +116,19 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      * this holds the HSSFName objects attached to this workbook
      */
 
-    private ArrayList<HSSFName> names;
+    private List<HSSFName> names;
 
     /**
      * this holds the HSSFFont objects attached to this workbook.
      * We only create these from the low level records as required.
      */
-    private Hashtable fonts;
+    private final Map<Short, HSSFFont> fonts = new HashMap<>();
 
     /**
      * holds whether or not to preserve other nodes in the POIFS.  Used
      * for macros and embedded objects.
      */
-    private boolean   preserveNodes;
+    private boolean preserveNodes;
 
     /**
      * Used to keep track of the data formatter so that all
@@ -354,19 +357,19 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
       * @see org.apache.poi.hssf.record.SSTRecord
       */
 
-     private void convertLabelRecords(List records, int offset)
+     private void convertLabelRecords(List<Record> records, int offset)
      {
          if (log.check( POILogger.DEBUG ))
              log.log(POILogger.DEBUG, "convertLabelRecords called");
-         for (int k = offset; k < records.size(); k++)
+         ListIterator<Record> it = records.listIterator();
+         while (it.hasNext())
          {
-             Record rec = ( Record ) records.get(k);
+             Record rec = it.next();
 
              if (rec.getSid() == LabelRecord.sid)
              {
                  LabelRecord oldrec = ( LabelRecord ) rec;
 
-                 records.remove(k);
                  LabelSSTRecord newrec   = new LabelSSTRecord();
                  int            stringid =
                      workbook.addSSTString(new UnicodeString(oldrec.getValue()));
@@ -375,7 +378,8 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
                  newrec.setColumn(oldrec.getColumn());
                  newrec.setXFIndex(oldrec.getXFIndex());
                  newrec.setSSTIndex(stringid);
-                       records.add(k, newrec);
+
+                 it.set(newrec);
              }
          }
          if (log.check( POILogger.DEBUG ))
@@ -454,14 +458,14 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     }
     public void setSelectedTabs(int[] indexes) {
 
-        for (int i = 0; i < indexes.length; i++) {
-            validateSheetIndex(indexes[i]);
+        for (int i : indexes) {
+            validateSheetIndex(i);
         }
         int nSheets = _sheets.size();
         for (int i=0; i<nSheets; i++) {
             boolean bSelect = false;
-            for (int j = 0; j < indexes.length; j++) {
-                if (indexes[j] == i) {
+            for (int j : indexes) {
+                if (j == i) {
                     bSelect = true;
                     break;
                 }
@@ -751,12 +755,6 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         return workbook.getSheetIndexFromExternSheetIndex(externSheetNumber);
     }
 
-    private HSSFSheet[] getSheets() {
-        HSSFSheet[] result = new HSSFSheet[_sheets.size()];
-        _sheets.toArray(result);
-        return result;
-    }
-
     /**
      * Get the HSSFSheet object at the given index.
      * @param index of the sheet number (0-based physical & logical)
@@ -1022,19 +1020,17 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      * @return HSSFFont at the index
      */
     public HSSFFont getFontAt(short idx) {
-        if(fonts == null) fonts = new Hashtable();
-
         // So we don't confuse users, give them back
         //  the same object every time, but create
         //  them lazily
         Short sIdx = Short.valueOf(idx);
-        if(fonts.containsKey(sIdx)) {
-            return (HSSFFont)fonts.get(sIdx);
-        }
+        HSSFFont retval = fonts.get(sIdx);
 
-        FontRecord font = workbook.getFontRecordAt(idx);
-        HSSFFont retval = new HSSFFont(idx, font);
-        fonts.put(sIdx, retval);
+        if (retval == null) {
+            FontRecord font = workbook.getFontRecordAt(idx);
+            retval = new HSSFFont(idx, font);
+            fonts.put(sIdx, retval);
+        }
 
         return retval;
     }
@@ -1046,7 +1042,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      *  and that's not something you should normally do
      */
     protected void resetFontCache() {
-        fonts = new Hashtable();
+        fonts.clear();
     }
 
     /**
@@ -1144,12 +1140,12 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      */
     private static final class SheetRecordCollector implements RecordVisitor {
 
-        private List _list;
+        private List<Record> _list;
         private int _totalSize;
 
         public SheetRecordCollector() {
             _totalSize = 0;
-            _list = new ArrayList(128);
+            _list = new ArrayList<>(128);
         }
         public int getTotalSize() {
             return _totalSize;
@@ -1160,9 +1156,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         }
         public int serialize(int offset, byte[] data) {
             int result = 0;
-            int nRecs = _list.size();
-            for(int i=0; i<nRecs; i++) {
-                Record rec = (Record)_list.get(i);
+            for(final Record rec : _list) {
                 result += rec.serialize(offset + result, data);
             }
             return result;
@@ -1183,16 +1177,16 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
             log.log(DEBUG, "HSSFWorkbook.getBytes()");
         }
 
-        HSSFSheet[] sheets = getSheets();
-        int nSheets = sheets.length;
+        int nSheets = _sheets.size();
+        HSSFSheet[] sheets = _sheets.toArray(new HSSFSheet[nSheets]);
 
 
         // before getting the workbook size we must tell the sheets that
         // serialization is about to occur.
         workbook.preSerialize();
-        for (int i = 0; i < nSheets; i++) {
-            sheets[i].getSheet().preSerialize();
-            sheets[i].preSerialize();
+        for (final HSSFSheet sheet : sheets) {
+            sheet.getSheet().preSerialize();
+            sheet.preSerialize();
         }
 
         int totalsize = workbook.getSize();
@@ -1225,22 +1219,6 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
             pos += serializedSize;
         }
         return retval;
-    }
-
-    /** @deprecated Do not call this method from your applications. Use the methods
-     *  available in the HSSFRow to add string HSSFCells
-     */
-    public int addSSTString(String string)
-    {
-        return workbook.addSSTString(new UnicodeString(string));
-    }
-
-    /** @deprecated Do not call this method from your applications. Use the methods
-     *  available in the HSSFRow to get string HSSFCells
-     */
-    public String getSSTString(int index)
-    {
-        return workbook.getSSTString(index).getString();
     }
 
     InternalWorkbook getWorkbook() {
@@ -1304,12 +1282,17 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         }
         String[] parts = COMMA_PATTERN.split(reference);
         StringBuilder sb = new StringBuilder(32);
-        for (int i = 0; i < parts.length; i++) {
-            if(i>0) {
-                sb.append(",");
-            }
-            SheetNameFormatter.appendFormat(sb, getSheetName(sheetIndex));
-            sb.append("!");
+        final int num = parts.length;
+        final String sheetName = getSheetName(sheetIndex);
+        if (num > 0) {
+            SheetNameFormatter.appendFormat(sb, sheetName);
+            sb.append('!');
+            sb.append(parts[0]);
+        }
+        for (int i = 1; i < num; i++) {
+            sb.append(',');
+            SheetNameFormatter.appendFormat(sb, sheetName);
+            sb.append('!');
             sb.append(parts[i]);
         }
         name.setNameDefinition(HSSFFormulaParser.parse(sb.toString(), this, FormulaType.NAMEDRANGE, sheetIndex));
@@ -1481,11 +1464,9 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     {
         DrawingGroupRecord r = (DrawingGroupRecord) workbook.findFirstRecordBySid( DrawingGroupRecord.sid );
         r.decode();
-        List escherRecords = r.getEscherRecords();
         PrintWriter w = new PrintWriter(System.out);
-        for ( Iterator iterator = escherRecords.iterator(); iterator.hasNext(); )
+        for (final EscherRecord escherRecord : r.getEscherRecords())
         {
-            EscherRecord escherRecord = (EscherRecord) iterator.next();
             if (fat)
                 System.out.println(escherRecord.toString());
             else
@@ -1534,10 +1515,10 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
             case PICTURE_TYPE_PNG:
                 blipRecord.setOptions(HSSFPictureData.MSOBI_PNG);
                 break;
-            case HSSFWorkbook.PICTURE_TYPE_JPEG:
+            case PICTURE_TYPE_JPEG:
                 blipRecord.setOptions(HSSFPictureData.MSOBI_JPEG);
                 break;
-            case HSSFWorkbook.PICTURE_TYPE_DIB:
+            case PICTURE_TYPE_DIB:
                 blipRecord.setOptions(HSSFPictureData.MSOBI_DIB);
                 break;
         }
@@ -1562,6 +1543,20 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     }
 
     /**
+     * Adds a picture to the workbook.
+     *
+     * @param in                The inputstream of the picture
+     * @param format            The format of the picture.  One of <code>PICTURE_TYPE_*</code>
+     *
+     * @return the index to this picture (1 based).
+     * @throws IOException 
+     */
+    public int addPicture(InputStream in, int format) throws IOException
+    {
+        return addPicture(IOUtils.toByteArray(in), format);
+    }
+
+    /**
      * Gets all pictures from the Workbook.
      *
      * @return the list of pictures (a list of {@link HSSFPictureData} objects.)
@@ -1569,11 +1564,17 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     public List<HSSFPictureData> getAllPictures()
     {
         // The drawing group record always exists at the top level, so we won't need to do this recursively.
-        List<HSSFPictureData> pictures = new ArrayList<>();
-        Iterator<Record> recordIter = workbook.getRecords().iterator();
-        while (recordIter.hasNext())
+        final List<Record> records = workbook.getRecords();
+        int num = 0;
+        for (final Record r : records)
         {
-            Record r = recordIter.next();
+            if (r instanceof AbstractEscherHolderRecord)
+                num++;
+        }
+
+        final List<HSSFPictureData> pictures = new ArrayList<>(num);
+        for (final Record r : records)
+        {
             if (r instanceof AbstractEscherHolderRecord)
             {
                 ((AbstractEscherHolderRecord) r).decode();
@@ -1644,9 +1645,9 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     public List<HSSFObjectData> getAllEmbeddedObjects()
     {
         List<HSSFObjectData> objects = new ArrayList<>();
-        for (int i = 0; i < getNumberOfSheets(); i++)
+        for (final HSSFSheet sheet : _sheets)
         {
-            getAllEmbeddedObjects(getSheetAt(i), objects);
+            getAllEmbeddedObjects(sheet, objects);
         }
         return objects;
     }

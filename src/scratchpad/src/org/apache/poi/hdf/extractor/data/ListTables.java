@@ -32,7 +32,7 @@ public final class ListTables
 {
 
   LFO[] _pllfo;
-  Hashtable _lists = new Hashtable();
+  Map<Integer, LST> _lists = new HashMap<>();
 
   public ListTables(byte[] plcflst, byte[] plflfo)
   {
@@ -51,14 +51,14 @@ public final class ListTables
         LFOLVL lfolvl = override._levels[x];
         if(lfolvl._fFormatting)
         {
-          LST lst = (LST)_lists.get(Integer.valueOf(override._lsid));
+          LST lst = _lists.get(Integer.valueOf(override._lsid));
           LVL lvl = lfolvl._override;
           lvl._istd = Utils.convertBytesToShort(lst._rgistd, level * 2);
           return lvl;
         }
         else if(lfolvl._fStartAt)
         {
-          LST lst = (LST)_lists.get(Integer.valueOf(override._lsid));
+          LST lst = _lists.get(Integer.valueOf(override._lsid));
           LVL lvl = lst._levels[level];
           LVL newLvl = (LVL)lvl.clone();
           newLvl._istd = Utils.convertBytesToShort(lst._rgistd, level * 2);
@@ -68,7 +68,7 @@ public final class ListTables
       }
     }
 
-    LST lst = (LST)_lists.get(Integer.valueOf(override._lsid));
+    LST lst = _lists.get(Integer.valueOf(override._lsid));
     LVL lvl = lst._levels[level];
     lvl._istd = Utils.convertBytesToShort(lst._rgistd, level * 2);
     return lvl;

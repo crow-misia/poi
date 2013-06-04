@@ -32,6 +32,7 @@ import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.util.Closeables;
 
 /**
  * This class contains code that demonstrates how to insert plain, numbered
@@ -128,7 +129,7 @@ public class InCellLists {
             // the major difference here is that the list items are passed as
             // an ArrayList of MultiLevelListItems. Note that an ArrayList
             // of instances of an inner class was used here in preference to
-            // a Hashtable or HashMap as the ArrayList will preserve the
+            // a HashMap as the ArrayList will preserve the
             // ordering of the items added to it; the first item added will
             // be the first item recovered and the last item added, the last
             // item recovered.
@@ -176,27 +177,14 @@ public class InCellLists {
             fos = new FileOutputStream(outputFile);
             workbook.write(fos);
         }
-        catch(FileNotFoundException fnfEx) {
-            System.out.println("Caught a: " + fnfEx.getClass().getName());
-            System.out.println("Message: " + fnfEx.getMessage());
+        catch(IOException ex) {
+            System.out.println("Caught a: " + ex.getClass().getName());
+            System.out.println("Message: " + ex.getMessage());
             System.out.println("Stacktrace follows...........");
-            fnfEx.printStackTrace(System.out);
-        }
-        catch(IOException ioEx) {
-            System.out.println("Caught a: " + ioEx.getClass().getName());
-            System.out.println("Message: " + ioEx.getMessage());
-            System.out.println("Stacktrace follows...........");
-            ioEx.printStackTrace(System.out);
+            ex.printStackTrace(System.out);
         }
         finally {
-            if(fos != null) {
-                try {
-                    fos.close();
-                }
-                catch(IOException ioEx) {
-
-                }
-            }
+            Closeables.close(fos);
         }
     }
 

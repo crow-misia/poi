@@ -63,7 +63,7 @@ public final class SlideShow {
 	private Record[] _mostRecentCoreRecords;
 	// Lookup between the PersitPtr "sheet" IDs, and the position
 	// in the mostRecentCoreRecords array
-	private Hashtable<Integer,Integer> _sheetIdToCoreRecordsLookup;
+	private Map<Integer,Integer> _sheetIdToCoreRecordsLookup;
 
 	// Records that are interesting
 	private Document _documentRecord;
@@ -132,7 +132,7 @@ public final class SlideShow {
 	 */
 	private void findMostRecentCoreRecords() {
 		// To start with, find the most recent in the byte offset domain
-		Hashtable<Integer,Integer> mostRecentByBytes = new Hashtable<>();
+		Map<Integer,Integer> mostRecentByBytes = new HashMap<>();
 		for (int i = 0; i < _records.length; i++) {
 			if (_records[i] instanceof PersistPtrHolder) {
 				PersistPtrHolder pph = (PersistPtrHolder) _records[i];
@@ -142,13 +142,11 @@ public final class SlideShow {
 				int[] ids = pph.getKnownSlideIDs();
 				for (int j = 0; j < ids.length; j++) {
 					Integer id = Integer.valueOf(ids[j]);
-					if (mostRecentByBytes.containsKey(id)) {
-						mostRecentByBytes.remove(id);
-					}
+					mostRecentByBytes.remove(id);
 				}
 
 				// Now, update the byte level locations with their latest values
-				Hashtable<Integer,Integer> thisSetOfLocations = pph.getSlideLocationsLookup();
+				Map<Integer,Integer> thisSetOfLocations = pph.getSlideLocationsLookup();
 				for (int j = 0; j < ids.length; j++) {
 					Integer id = Integer.valueOf(ids[j]);
 					mostRecentByBytes.put(id, thisSetOfLocations.get(id));
@@ -162,11 +160,11 @@ public final class SlideShow {
 
 		// We'll also want to be able to turn the slide IDs into a position
 		// in this array
-		_sheetIdToCoreRecordsLookup = new Hashtable<>();
+		_sheetIdToCoreRecordsLookup = new HashMap<>();
 		int[] allIDs = new int[_mostRecentCoreRecords.length];
-		Enumeration<Integer> ids = mostRecentByBytes.keys();
+		Iterator<Integer> ids = mostRecentByBytes.keySet().iterator();
 		for (int i = 0; i < allIDs.length; i++) {
-			Integer id = ids.nextElement();
+			Integer id = ids.next();
 			allIDs[i] = id.intValue();
 		}
 		Arrays.sort(allIDs);

@@ -79,7 +79,7 @@ public final class Transliterator {
             "ﾗ", "ﾘ", "ﾙ", "ﾚ", "ﾛ", };
 
     /** Filter */
-    private final List<TransliterateFilter> filters = new ArrayList<TransliterateFilter>();
+    private final List<TransliterateFilter> filters = new ArrayList<>();
 
     /**
      * フィルタを追加
