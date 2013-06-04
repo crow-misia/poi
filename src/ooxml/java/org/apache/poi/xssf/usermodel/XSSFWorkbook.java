@@ -107,15 +107,6 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
     private static final int MAX_SENSITIVE_SHEET_NAME_LEN = 31;
 
     /**
-     * Images formats supported by XSSF but not by HSSF
-     */
-    public static final int PICTURE_TYPE_GIF = 8;
-    public static final int PICTURE_TYPE_TIFF = 9;
-    public static final int PICTURE_TYPE_EPS = 10;
-    public static final int PICTURE_TYPE_BMP = 11;
-    public static final int PICTURE_TYPE_WPG = 12;
-
-    /**
      * The underlying XML bean
      */
     private CTWorkbook workbook;
@@ -404,10 +395,8 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
     public int addPicture(byte[] pictureData, int format) {
         int imageNumber = getAllPictures().size() + 1;
         XSSFPictureData img = (XSSFPictureData)createRelationship(XSSFPictureData.RELATIONS[format], XSSFFactory.getInstance(), imageNumber, true);
-        try {
-            OutputStream out = img.getPackagePart().getOutputStream();
+        try (final OutputStream out = img.getPackagePart().getOutputStream()) {
             out.write(pictureData);
-            out.close();
         } catch (IOException e){
             throw new POIXMLException(e);
         }
@@ -433,9 +422,9 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
     public int addPicture(InputStream is, int format) throws IOException {
         int imageNumber = getAllPictures().size() + 1;
         XSSFPictureData img = (XSSFPictureData)createRelationship(XSSFPictureData.RELATIONS[format], XSSFFactory.getInstance(), imageNumber, true);
-        OutputStream out = img.getPackagePart().getOutputStream();
-        IOUtils.copy(is, out);
-        out.close();
+        try (final OutputStream out = img.getPackagePart().getOutputStream()) {
+            IOUtils.copy(is, out);
+        }
         pictures.add(img);
         return imageNumber - 1;
     }

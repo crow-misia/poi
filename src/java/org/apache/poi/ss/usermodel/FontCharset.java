@@ -47,7 +47,7 @@ public enum FontCharset {
      OEM(255);
 
     
-    private int charset;
+    private final int charset;
 
     private FontCharset(int value){
         charset = value;

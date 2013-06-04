@@ -303,8 +303,7 @@ public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBo
      * @throws IOException 
      */
     public String addPictureData(InputStream is, int format) throws InvalidFormatException,IOException {
-        byte[] data = IOUtils.toByteArray(is);
-        return addPictureData(data,format);
+        return addPictureData(IOUtils.toByteArray(is),format);
     }
 
     /**

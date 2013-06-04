@@ -394,7 +394,7 @@ public class AddDimensionedImage {
                 sURL);
 	}
         int index = sheet.getWorkbook().addPicture(
-            IOUtils.toByteArray(imageFile.openStream()), imageType);
+            imageFile.openStream(), imageType);
         drawing.createPicture(anchor, index);
     }
 
