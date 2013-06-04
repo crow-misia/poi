@@ -60,7 +60,7 @@ public class HSSFColor implements Color {
         return indexHash;
     }
     /**
-     * This function returns all the Colours, stored in a Hashtable that
+     * This function returns all the Colours, stored in a HashMap that
      *  can be edited. No caching is performed. If you don't need to edit
      *  the table, then call {@link #getIndexHash()} which returns a
      *  statically cached imuatable map of colours.

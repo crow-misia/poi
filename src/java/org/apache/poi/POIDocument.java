@@ -153,11 +153,11 @@ public abstract class POIDocument {
         try {
             // Create the Property Set
             return PropertySetFactory.create(dis);
-	   } catch(IOException | org.apache.poi.hpsf.HPSFException e) {
+        } catch(IOException | org.apache.poi.hpsf.HPSFException e) {
             // Must be corrupt or something like that
-	      logger.log(POILogger.WARN, "Error creating property set with name " + setName + "\n" + e);
+            logger.log(POILogger.WARN, "Error creating property set with name " + setName, e);
+            return null;
         }
-        return null;
     }
 
     /**

@@ -88,7 +88,7 @@ public final class TestPOIXMLDocument extends TestCase {
         OPCParser doc = new OPCParser(pkg1);
         doc.parse(new TestFactory());
 
-        Map<String,POIXMLDocumentPart> context = new HashMap<>();
+        final Map<String,POIXMLDocumentPart> context = new HashMap<>();
         traverse(doc, context);
         context.clear();
 
@@ -101,7 +101,7 @@ public final class TestPOIXMLDocument extends TestCase {
 
         doc = new OPCParser(pkg1);
         doc.parse(new TestFactory());
-        context = new HashMap<>();
+        context.clear();
         traverse(doc, context);
         context.clear();
 

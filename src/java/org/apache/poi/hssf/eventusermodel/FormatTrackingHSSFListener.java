@@ -18,7 +18,7 @@ package org.apache.poi.hssf.eventusermodel;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -44,7 +44,7 @@ public class FormatTrackingHSSFListener implements HSSFListener {
 	private final HSSFListener _childListener;
 	private final DataFormatter _formatter;
 	private final NumberFormat _defaultFormat;
-	private final Map<Integer, FormatRecord> _customFormatRecords = new Hashtable<>();
+	private final Map<Integer, FormatRecord> _customFormatRecords = new HashMap<>();
 	private final List<ExtendedFormatRecord> _xfRecords = new ArrayList<>();
 
 	/**

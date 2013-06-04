@@ -22,8 +22,8 @@ import org.apache.poi.util.POILogger;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -49,24 +49,24 @@ public final class PersistPtrHolder extends PositionDependentRecordAtom
 	 * You always need to check the most recent PersistPtrHolder
 	 *  that knows about a given slide to find the right location
 	 */
-	private Hashtable<Integer,Integer> _slideLocations;
+	private Map<Integer,Integer> _slideLocations;
 	/**
 	 * Holds the lookup from slide id to where their offset is
 	 *  held inside _ptrData. Used when writing out, and updating
 	 *  the positions of the slides
 	 */
-	private Hashtable<Integer,Integer> _slideOffsetDataLocation;
+	private Map<Integer,Integer> _slideOffsetDataLocation;
 
 	/**
 	 * Get the list of slides that this PersistPtrHolder knows about.
-	 * (They will be the keys in the hashtable for looking up the positions
+	 * (They will be the keys in the HashMap for looking up the positions
 	 *  of these slides)
 	 */
 	public int[] getKnownSlideIDs() {
 		int[] ids = new int[_slideLocations.size()];
-		Enumeration<Integer> e = _slideLocations.keys();
+		Iterator<Integer> e = _slideLocations.keySet().iterator();
 		for(int i=0; i<ids.length; i++) {
-			Integer id = e.nextElement();
+			Integer id = e.next();
 			ids[i] = id.intValue();
 		}
 		return ids;
@@ -76,14 +76,14 @@ public final class PersistPtrHolder extends PositionDependentRecordAtom
 	 * Get the lookup from slide numbers to byte offsets, for the slides
 	 *  known about by this PersistPtrHolder.
 	 */
-	public Hashtable<Integer,Integer> getSlideLocationsLookup() {
+	public Map<Integer,Integer> getSlideLocationsLookup() {
 		return _slideLocations;
 	}
 	/**
 	 * Get the lookup from slide numbers to their offsets inside
 	 *  _ptrData, used when adding or moving slides.
 	 */
-	public Hashtable<Integer,Integer> getSlideOffsetDataLocationsLookup() {
+	public Map<Integer,Integer> getSlideOffsetDataLocationsLookup() {
 		return _slideOffsetDataLocation;
 	}
 
@@ -141,8 +141,8 @@ public final class PersistPtrHolder extends PositionDependentRecordAtom
 		//      base number for these entries
 		//   count * 32 bit offsets
 		// Repeat as many times as you have data
-		_slideLocations = new Hashtable<>();
-		_slideOffsetDataLocation = new Hashtable<>();
+		_slideLocations = new HashMap<>();
+		_slideOffsetDataLocation = new HashMap<>();
 		_ptrData = new byte[len-8];
 		System.arraycopy(source,start+8,_ptrData,0,_ptrData.length);
 

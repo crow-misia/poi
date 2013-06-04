@@ -18,7 +18,7 @@
 package org.apache.poi.hslf.dev;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Hashtable;
+import java.util.Map;
 
 import org.apache.poi.hslf.HSLFSlideShow;
 import org.apache.poi.hslf.record.*;
@@ -61,10 +61,10 @@ public final class UserEditAndPersistListing {
 
 				// Check the sheet offsets
 				int[] sheetIDs = pph.getKnownSlideIDs();
-				Hashtable sheetOffsets = pph.getSlideLocationsLookup();
+				Map<Integer, Integer> sheetOffsets = pph.getSlideLocationsLookup();
 				for(int j=0; j<sheetIDs.length; j++) {
 					Integer id = Integer.valueOf(sheetIDs[j]);
-					Integer offset = (Integer)sheetOffsets.get(id);
+					Integer offset = sheetOffsets.get(id);
 
 					System.out.println("  Knows about sheet " + id);
 					System.out.println("    That sheet lives at " + offset);
