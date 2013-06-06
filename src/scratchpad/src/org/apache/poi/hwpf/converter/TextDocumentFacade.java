@@ -17,6 +17,7 @@
 package org.apache.poi.hwpf.converter;
 
 import org.apache.poi.util.Beta;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -159,7 +160,7 @@ public class TextDocumentFacade
 
     public void setTitle( String titleText )
     {
-        if ( WordToHtmlUtils.isEmpty( titleText ) && this.title != null )
+        if ( StringUtil.isEmpty( titleText ) && this.title != null )
         {
             this.head.removeChild( this.title );
             this.title = null;

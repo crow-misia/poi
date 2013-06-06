@@ -17,6 +17,7 @@
 package org.apache.poi.ss.format;
 
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.util.StringUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -230,7 +231,7 @@ public class CellFormatPart {
      */
     private static Color getColor(Matcher m) {
         String cdesc = m.group(COLOR_GROUP);
-        if (cdesc == null || cdesc.length() == 0)
+        if (StringUtil.isEmpty(cdesc))
             return null;
         Color c = NAMED_COLORS.get(cdesc);
         if (c == null)
@@ -248,7 +249,7 @@ public class CellFormatPart {
      */
     private CellFormatCondition getCondition(Matcher m) {
         String mdesc = m.group(CONDITION_OPERATOR_GROUP);
-        if (mdesc == null || mdesc.length() == 0)
+        if (StringUtil.isEmpty(mdesc))
             return null;
         return CellFormatCondition.getInstance(m.group(
                 CONDITION_OPERATOR_GROUP), m.group(CONDITION_VALUE_GROUP));
@@ -289,7 +290,7 @@ public class CellFormatPart {
      */
     private CellFormatType formatType(String fdesc) {
         fdesc = fdesc.trim();
-        if (fdesc.length() == 0 || fdesc.equalsIgnoreCase("General"))
+        if (fdesc.isEmpty() || fdesc.equalsIgnoreCase("General"))
             return CellFormatType.GENERAL;
 
         Matcher m = SPECIFICATION_PAT.matcher(fdesc);

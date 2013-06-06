@@ -45,6 +45,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.Beta;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -361,7 +362,7 @@ public class ExcelToHtmlConverter extends AbstractExcelConverter
             return true;
         }
 
-        final boolean noText = ExcelToHtmlUtils.isEmpty( value );
+        final boolean noText = StringUtil.isEmpty( value );
         final boolean wrapInDivs = !noText && isUseDivsToSpan()
                 && !cellStyle.getWrapText();
 
@@ -442,7 +443,7 @@ public class ExcelToHtmlConverter extends AbstractExcelConverter
             tableCellElement.appendChild( text );
         }
 
-        return ExcelToHtmlUtils.isEmpty( value ) && cellStyleIndex == 0;
+        return StringUtil.isEmpty( value ) && cellStyleIndex == 0;
     }
 
     protected void processColumnHeaders( HSSFSheet sheet, int maxSheetColumns,
@@ -501,16 +502,16 @@ public class ExcelToHtmlConverter extends AbstractExcelConverter
     protected void processDocumentInformation(
             SummaryInformation summaryInformation )
     {
-        if ( ExcelToHtmlUtils.isNotEmpty( summaryInformation.getTitle() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getTitle() ) )
             htmlDocumentFacade.setTitle( summaryInformation.getTitle() );
 
-        if ( ExcelToHtmlUtils.isNotEmpty( summaryInformation.getAuthor() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getAuthor() ) )
             htmlDocumentFacade.addAuthor( summaryInformation.getAuthor() );
 
-        if ( ExcelToHtmlUtils.isNotEmpty( summaryInformation.getKeywords() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getKeywords() ) )
             htmlDocumentFacade.addKeywords( summaryInformation.getKeywords() );
 
-        if ( ExcelToHtmlUtils.isNotEmpty( summaryInformation.getComments() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getComments() ) )
             htmlDocumentFacade
                     .addDescription( summaryInformation.getComments() );
     }

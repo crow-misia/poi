@@ -200,7 +200,7 @@ public final class PackagePartName implements Comparable<PackagePartName> {
 			throw new IllegalArgumentException("partURI");
 
 		String uriPath = partURI.getPath();
-		if (uriPath.length() == 0
+		if (uriPath.isEmpty()
 				|| ((uriPath.length() == 1) && (uriPath.charAt(0) == PackagingURIHelper.FORWARD_SLASH_CHAR)))
 			throw new InvalidFormatException(
 					"A part name shall not be empty [M1.1]: "
@@ -259,7 +259,7 @@ public final class PackagePartName implements Comparable<PackagePartName> {
 								+ partUri.getPath());
 			}
 
-			if (seg.replaceAll("\\\\.", "").length() == 0) {
+			if (seg.replaceAll("\\\\.", "").isEmpty()) {
 				// Normally will never been invoked with the previous
 				// implementation rule [M1.9]
 				throw new InvalidFormatException(

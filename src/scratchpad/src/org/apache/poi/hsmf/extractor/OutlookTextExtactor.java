@@ -29,6 +29,7 @@ import org.apache.poi.poifs.filesystem.DirectoryNode;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.DateConstants;
+import org.apache.poi.util.StringUtil;
 import org.apache.poi.util.StringUtil.StringsIterator;
 
 /**
@@ -166,7 +167,7 @@ public class OutlookTextExtactor extends POIOLE2TextExtractor {
     *  "Nick <nick@example.com>; Jim <jim@example.com>"
     */
    protected void handleEmails(StringBuilder s, String type, String displayText, StringsIterator emails) {
-      if(displayText == null || displayText.length() == 0) {
+      if(StringUtil.isEmpty(displayText)) {
          return;
       }
       

@@ -17,6 +17,8 @@
 
 package org.apache.poi.hssf.usermodel;
 
+import org.apache.poi.util.StringUtil;
+
 
 /**
  * Common class for {@link HSSFHeader} and {@link HSSFFooter}.
@@ -279,7 +281,7 @@ outer:
 		int pos;
 
 		// Check we really got something to work on
-		if (pText == null || pText.length() == 0) {
+		if (StringUtil.isEmpty(pText)) {
 			return pText;
 		}
 

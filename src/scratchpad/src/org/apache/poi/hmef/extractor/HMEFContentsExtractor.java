@@ -27,6 +27,7 @@ import org.apache.poi.hmef.Attachment;
 import org.apache.poi.hmef.HMEFMessage;
 import org.apache.poi.hmef.attribute.MAPIRtfAttribute;
 import org.apache.poi.hsmf.datatypes.MAPIProperty;
+import org.apache.poi.util.StringUtil;
 
 /**
  * A utility for extracting out the message body, and all attachments
@@ -89,10 +90,10 @@ public final class HMEFContentsExtractor {
          
          // Decide what to call it
          String filename = att.getLongFilename();
-         if(filename == null || filename.length() == 0) {
+         if(StringUtil.isEmpty(filename)) {
             filename = att.getFilename();
          }
-         if(filename == null || filename.length() == 0) {
+         if(StringUtil.isEmpty(filename)) {
             filename = "attachment" + count;
             if(att.getExtension() != null) {
                filename += att.getExtension();
@@ -101,9 +102,9 @@ public final class HMEFContentsExtractor {
          
          // Save it
          File file = new File(dir, filename);
-         FileOutputStream fout = new FileOutputStream(file);
-         fout.write( att.getContents() );
-         fout.close();
+         try (final FileOutputStream fout = new FileOutputStream(file)) {
+             fout.write( att.getContents() );
+         }
       }
    }
 }

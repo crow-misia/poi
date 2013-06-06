@@ -45,6 +45,7 @@ import org.apache.poi.hwpf.usermodel.TableRow;
 import org.apache.poi.util.Beta;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -211,7 +212,7 @@ public class WordToHtmlConverter extends AbstractWordConverter
         BlockProperies blockProperies = this.blocksProperies.peek();
         Triplet triplet = getCharacterRunTriplet( characterRun );
 
-        if ( WordToHtmlUtils.isNotEmpty( triplet.fontName )
+        if ( StringUtil.isNotEmpty( triplet.fontName )
                 && !WordToHtmlUtils.equals( triplet.fontName,
                         blockProperies.pFontName ) )
         {
@@ -260,16 +261,16 @@ public class WordToHtmlConverter extends AbstractWordConverter
     protected void processDocumentInformation(
             SummaryInformation summaryInformation )
     {
-        if ( WordToHtmlUtils.isNotEmpty( summaryInformation.getTitle() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getTitle() ) )
             htmlDocumentFacade.setTitle( summaryInformation.getTitle() );
 
-        if ( WordToHtmlUtils.isNotEmpty( summaryInformation.getAuthor() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getAuthor() ) )
             htmlDocumentFacade.addAuthor( summaryInformation.getAuthor() );
 
-        if ( WordToHtmlUtils.isNotEmpty( summaryInformation.getKeywords() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getKeywords() ) )
             htmlDocumentFacade.addKeywords( summaryInformation.getKeywords() );
 
-        if ( WordToHtmlUtils.isNotEmpty( summaryInformation.getComments() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getComments() ) )
             htmlDocumentFacade
                     .addDescription( summaryInformation.getComments() );
     }
@@ -541,7 +542,7 @@ public class WordToHtmlConverter extends AbstractWordConverter
         }
         try
         {
-            if ( WordToHtmlUtils.isNotEmpty( bulletText ) )
+            if ( StringUtil.isNotEmpty( bulletText ) )
             {
                 if ( bulletText.endsWith( "\t" ) )
                 {

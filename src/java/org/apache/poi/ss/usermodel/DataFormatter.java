@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.poi.util.StringUtil;
 import org.apache.poi.util.list.IntArrayList;
 
 /**
@@ -251,7 +252,7 @@ public class DataFormatter {
 
         int formatIndex = cell.getCellStyle().getDataFormat();
         String formatStr = cell.getCellStyle().getDataFormatString();
-        if(formatStr == null || formatStr.trim().length() == 0) {
+        if(StringUtil.isBlank(formatStr)) {
             return null;
         }
         return getFormat(cell.getNumericCellValue(), formatIndex, formatStr);
@@ -363,7 +364,7 @@ public class DataFormatter {
         }
 
         // Check for special cases
-        if(formatStr == null || formatStr.trim().length() == 0) {
+        if(StringUtil.isBlank(formatStr)) {
             return getDefaultFormat(cellValue);
         }
         

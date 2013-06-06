@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.poi.util.Beta;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -88,7 +89,7 @@ public class HtmlDocumentFacade
     {
         String exising = element.getAttribute( "class" );
         String addition = getOrCreateCssClass( classNamePrefix, style );
-        String newClassValue = WordToHtmlUtils.isEmpty( exising ) ? addition
+        String newClassValue = StringUtil.isEmpty( exising ) ? addition
                 : ( exising + " " + addition );
         element.setAttribute( "class", newClassValue );
     }
@@ -274,7 +275,7 @@ public class HtmlDocumentFacade
 
     public void setTitle( String titleText )
     {
-        if ( WordToHtmlUtils.isEmpty( titleText ) && this.title != null )
+        if ( StringUtil.isEmpty( titleText ) && this.title != null )
         {
             this.head.removeChild( this.title );
             this.title = null;

@@ -419,7 +419,7 @@ public class POIFSFileSystem
      * @return the root entry
      */
 
-    public DirectoryNode getRoot()
+    public final DirectoryNode getRoot()
     {
         if (_root == null)
         {

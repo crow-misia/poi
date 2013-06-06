@@ -112,7 +112,7 @@ final class FunctionMetadataReader {
 	
 
 	private static byte parseReturnTypeCode(String code) {
-		if(code.length() == 0) {
+		if(code.isEmpty()) {
 			return Ptg.CLASS_REF; // happens for GETPIVOTDATA
 		}
 		return parseOperandTypeCode(code);

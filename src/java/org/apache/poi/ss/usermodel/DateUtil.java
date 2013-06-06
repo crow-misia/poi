@@ -24,6 +24,8 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
+import org.apache.poi.util.StringUtil;
+
 /**
  * Contains methods for dealing with Excel dates.
  *
@@ -297,7 +299,7 @@ public final class DateUtil {
         }
 
         // If we didn't get a real string, it can't be
-        if(formatString == null || formatString.length() == 0) {
+        if(StringUtil.isEmpty(formatString)) {
             return false;
         }
 
