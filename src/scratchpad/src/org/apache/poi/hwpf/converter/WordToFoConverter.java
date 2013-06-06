@@ -48,6 +48,7 @@ import org.apache.poi.hwpf.usermodel.TableRow;
 import org.apache.poi.util.Beta;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -224,7 +225,7 @@ public class WordToFoConverter extends AbstractWordConverter
 
         Triplet triplet = getCharacterRunTriplet( characterRun );
 
-        if ( WordToFoUtils.isNotEmpty( triplet.fontName ) )
+        if ( StringUtil.isNotEmpty( triplet.fontName ) )
             WordToFoUtils.setFontFamily( inline, triplet.fontName );
         WordToFoUtils.setBold( inline, triplet.bold );
         WordToFoUtils.setItalic( inline, triplet.italic );
@@ -270,16 +271,16 @@ public class WordToFoConverter extends AbstractWordConverter
     protected void processDocumentInformation(
             SummaryInformation summaryInformation )
     {
-        if ( WordToHtmlUtils.isNotEmpty( summaryInformation.getTitle() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getTitle() ) )
             foDocumentFacade.setTitle( summaryInformation.getTitle() );
 
-        if ( WordToHtmlUtils.isNotEmpty( summaryInformation.getAuthor() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getAuthor() ) )
             foDocumentFacade.setCreator( summaryInformation.getAuthor() );
 
-        if ( WordToHtmlUtils.isNotEmpty( summaryInformation.getKeywords() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getKeywords() ) )
             foDocumentFacade.setKeywords( summaryInformation.getKeywords() );
 
-        if ( WordToHtmlUtils.isNotEmpty( summaryInformation.getComments() ) )
+        if ( StringUtil.isNotEmpty( summaryInformation.getComments() ) )
             foDocumentFacade.setDescription( summaryInformation.getComments() );
     }
 
@@ -453,7 +454,7 @@ public class WordToFoConverter extends AbstractWordConverter
 
         boolean haveAnyText = false;
 
-        if ( WordToFoUtils.isNotEmpty( bulletText ) )
+        if ( StringUtil.isNotEmpty( bulletText ) )
         {
             Element inline = foDocumentFacade.createInline();
             block.appendChild( inline );

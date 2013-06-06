@@ -23,6 +23,7 @@ import org.apache.poi.hwpf.usermodel.Picture;
 import org.apache.poi.hwpf.usermodel.TableCell;
 import org.apache.poi.hwpf.usermodel.TableRow;
 import org.apache.poi.util.Beta;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Element;
 
 @Beta
@@ -47,7 +48,7 @@ public class WordToFoUtils extends AbstractWordUtils
         if ( borderCode == null || borderCode.isEmpty() )
             return;
 
-        if ( isEmpty( where ) )
+        if ( StringUtil.isEmpty( where ) )
         {
             element.setAttribute( "border-style", getBorderType( borderCode ) );
             element.setAttribute( "border-color",
@@ -137,7 +138,7 @@ public class WordToFoUtils extends AbstractWordUtils
     public static void setFontFamily( final Element element,
             final String fontFamily )
     {
-        if ( isEmpty( fontFamily ) )
+        if ( StringUtil.isEmpty( fontFamily ) )
             return;
 
         element.setAttribute( "font-family", fontFamily );
@@ -198,7 +199,7 @@ public class WordToFoUtils extends AbstractWordUtils
             final Element element )
     {
         String justification = getJustification( paragraph.getJustification() );
-        if ( isNotEmpty( justification ) )
+        if ( StringUtil.isNotEmpty( justification ) )
             element.setAttribute( "text-align", justification );
     }
 
@@ -208,7 +209,7 @@ public class WordToFoUtils extends AbstractWordUtils
         if ( characterRun.getLanguageCode() != 0 )
         {
             final String language = getLanguage( characterRun.getLanguageCode() );
-            if ( isNotEmpty( language ) )
+            if ( StringUtil.isNotEmpty( language ) )
                 inline.setAttribute( "language", language );
         }
     }

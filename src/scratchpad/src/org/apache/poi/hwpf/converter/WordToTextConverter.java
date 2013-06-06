@@ -50,6 +50,7 @@ import org.apache.poi.poifs.filesystem.Entry;
 import org.apache.poi.util.Beta;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -230,18 +231,18 @@ public class WordToTextConverter extends AbstractWordConverter
     {
         if ( isOutputSummaryInformation() )
         {
-            if ( AbstractWordUtils.isNotEmpty( summaryInformation.getTitle() ) )
+            if ( StringUtil.isNotEmpty( summaryInformation.getTitle() ) )
                 textDocumentFacade.setTitle( summaryInformation.getTitle() );
 
-            if ( AbstractWordUtils.isNotEmpty( summaryInformation.getAuthor() ) )
+            if ( StringUtil.isNotEmpty( summaryInformation.getAuthor() ) )
                 textDocumentFacade.addAuthor( summaryInformation.getAuthor() );
 
-            if ( AbstractWordUtils
+            if ( StringUtil
                     .isNotEmpty( summaryInformation.getComments() ) )
                 textDocumentFacade.addDescription( summaryInformation
                         .getComments() );
 
-            if ( AbstractWordUtils
+            if ( StringUtil
                     .isNotEmpty( summaryInformation.getKeywords() ) )
                 textDocumentFacade.addKeywords( summaryInformation
                         .getKeywords() );

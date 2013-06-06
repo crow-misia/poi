@@ -17,13 +17,14 @@
 package org.apache.poi.hwpf.converter;
 
 import org.apache.poi.util.Beta;
+import org.apache.poi.util.StringUtil;
 
 @Beta
 public class DefaultFontReplacer implements FontReplacer
 {
     public Triplet update( Triplet original )
     {
-        if ( AbstractWordUtils.isNotEmpty( original.fontName ) )
+        if ( StringUtil.isNotEmpty( original.fontName ) )
         {
             String fontName = original.fontName;
 
@@ -53,7 +54,7 @@ public class DefaultFontReplacer implements FontReplacer
             original.fontName = fontName;
         }
 
-        if ( AbstractWordUtils.isNotEmpty( original.fontName ) )
+        if ( StringUtil.isNotEmpty( original.fontName ) )
         {
             if ( "Times Regular".equals( original.fontName )
                     || "Times-Regular".equals( original.fontName )

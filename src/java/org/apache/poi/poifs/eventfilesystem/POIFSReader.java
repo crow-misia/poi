@@ -34,6 +34,7 @@ import org.apache.poi.poifs.storage.BlockList;
 import org.apache.poi.poifs.storage.HeaderBlock;
 import org.apache.poi.poifs.storage.RawDataBlockList;
 import org.apache.poi.poifs.storage.SmallBlockTableReader;
+import org.apache.poi.util.StringUtil;
 
 /**
  * An event-driven reader for POIFS file systems. Users of this class
@@ -164,7 +165,7 @@ public class POIFSReader
                                  final POIFSDocumentPath path,
                                  final String name)
     {
-        if ((listener == null) || (name == null) || (name.length() == 0))
+        if (listener == null || StringUtil.isEmpty(name))
         {
             throw new NullPointerException();
         }

@@ -29,6 +29,7 @@ import org.apache.poi.hwpf.usermodel.Paragraph;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.poifs.filesystem.DirectoryNode;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Class to extract the text from a Word Document.
@@ -189,7 +190,7 @@ public final class WordExtractor extends POIOLE2TextExtractor
      */
     private void appendHeaderFooter( String text, StringBuilder out )
     {
-        if ( text == null || text.length() == 0 )
+        if ( StringUtil.isEmpty(text) )
             return;
 
         text = text.replace( '\r', '\n' );

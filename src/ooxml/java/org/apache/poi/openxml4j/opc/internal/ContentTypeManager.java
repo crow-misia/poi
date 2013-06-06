@@ -150,7 +150,7 @@ public abstract class ContentTypeManager {
 	public void addContentType(PackagePartName partName, String contentType) {
 		boolean defaultCTExists = false;
 		String extension = partName.getExtension().toLowerCase();
-		if ((extension.length() == 0)
+		if ((extension.isEmpty())
 				|| (this.defaultContentType.containsKey(extension) && !(defaultCTExists = this.defaultContentType
 						.containsValue(contentType))))
 			this.addOverrideContentType(partName, contentType);

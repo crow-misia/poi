@@ -887,7 +887,7 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
         if(emptyParagraph) ensureNotEmpty();
 
         String text = getRenderableText();
-        if(text.length() == 0) return _lines;
+        if(text.isEmpty()) return _lines;
 
         AttributedString at = getAttributedString(graphics);
         AttributedCharacterIterator it = at.getIterator();

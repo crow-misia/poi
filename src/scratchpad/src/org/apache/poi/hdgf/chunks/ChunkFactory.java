@@ -73,10 +73,10 @@ public final class ChunkFactory {
 
 		BufferedReader inp = new BufferedReader(new InputStreamReader(cpd));
 		while( (line = inp.readLine()) != null ) {
+			if(line.isEmpty()) continue;
 			if(line.startsWith("#")) continue;
 			if(line.startsWith(" ")) continue;
 			if(line.startsWith("\t")) continue;
-			if(line.length() == 0) continue;
 
 			// Start xxx
 			if(!line.startsWith("start")) {

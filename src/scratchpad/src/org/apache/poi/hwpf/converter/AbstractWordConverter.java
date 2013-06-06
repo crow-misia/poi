@@ -52,6 +52,7 @@ import org.apache.poi.util.Beta;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -335,7 +336,7 @@ public abstract class AbstractWordConverter
                 if ( characterRun.getStartOffset() < skipUntil )
                     continue;
                 String text = characterRun.text();
-                if ( text == null || text.length() == 0
+                if ( StringUtil.isEmpty(text)
                         || text.charAt( 0 ) != FIELD_BEGIN_MARK )
                     continue;
 
@@ -879,7 +880,7 @@ public abstract class AbstractWordConverter
                     String hyperlink = matcher.group( 1 );
                     Range textRange = null;
                     String text = matcher.group( 2 );
-                    if ( AbstractWordUtils.isNotEmpty( text ) )
+                    if ( StringUtil.isNotEmpty( text ) )
                     {
                         textRange = new Range( firstSubrange.getStartOffset()
                                 + matcher.start( 2 ),
@@ -936,7 +937,7 @@ public abstract class AbstractWordConverter
                     picture.suggestPictureType(),
                     picture.suggestFullFileName(), imageWidth, imageHeight );
 
-            if ( WordToFoUtils.isNotEmpty( url ) )
+            if ( StringUtil.isNotEmpty( url ) )
             {
                 processImage( currentBlock, inlined, picture, url );
                 return;

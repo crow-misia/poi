@@ -28,6 +28,7 @@ import org.apache.poi.hwpf.converter.NumberFormatter;
 import org.apache.poi.ss.formula.eval.ErrorEval;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.util.Beta;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 
 /**
@@ -175,7 +176,7 @@ public abstract class AbstractExcelConverter
             return true;
         }
 
-        return ExcelToHtmlUtils.isEmpty( value );
+        return StringUtil.isEmpty( value );
     }
 
     public void setFontReplacer( FontReplacer fontReplacer )

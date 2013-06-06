@@ -21,6 +21,7 @@ import java.util.Arrays;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.Beta;
+import org.apache.poi.util.StringUtil;
 
 @Beta
 public class ExcelToHtmlUtils extends AbstractExcelUtils
@@ -28,7 +29,7 @@ public class ExcelToHtmlUtils extends AbstractExcelUtils
     public static void appendAlign( StringBuilder style, short alignment )
     {
         String cssAlign = getAlign( alignment );
-        if ( isEmpty( cssAlign ) )
+        if ( StringUtil.isEmpty( cssAlign ) )
             return;
 
         style.append( "text-align:" );

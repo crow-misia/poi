@@ -37,9 +37,9 @@ import org.apache.poi.hwpf.usermodel.TableRow;
 import org.apache.poi.poifs.filesystem.DirectoryNode;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.Beta;
-import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -117,7 +117,7 @@ public class AbstractWordUtils
         {
             final Attr attr1 = (Attr) attributes1.item( i );
             final Attr attr2;
-            if ( isNotEmpty( attr1.getNamespaceURI() ) )
+            if ( StringUtil.isNotEmpty( attr1.getNamespaceURI() ) )
                 attr2 = (Attr) attributes2.getNamedItemNS(
                         attr1.getNamespaceURI(), attr1.getLocalName() );
             else
@@ -459,16 +459,6 @@ public class AbstractWordUtils
         return String.valueOf( number );
     }
 
-    static boolean isEmpty( String str )
-    {
-        return str == null || str.length() == 0;
-    }
-
-    static boolean isNotEmpty( String str )
-    {
-        return !isEmpty( str );
-    }
-
     public static HWPFDocumentCore loadDoc( final DirectoryNode root )
             throws IOException
     {
@@ -504,7 +494,7 @@ public class AbstractWordUtils
 
     static String substringBeforeLast( String str, String separator )
     {
-        if ( isEmpty( str ) || isEmpty( separator ) )
+        if ( StringUtil.isEmpty( str ) || StringUtil.isEmpty( separator ) )
         {
             return str;
         }

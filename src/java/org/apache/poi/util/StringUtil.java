@@ -362,11 +362,23 @@ public final class StringUtil {
 	}
 
 	public static boolean isEmpty(final String s) {
-		return s == null || s.length() == 0;
+		return s == null || s.isEmpty();
 	}
 
 	public static boolean isNotEmpty(final String s) {
-		return s != null && s.length() > 0;
+		return s != null && !s.isEmpty();
+	}
+
+	public static boolean isBlank(final String s) {
+		if (s != null) {
+			final char[] a = s.toCharArray();
+			for (final char c : a) {
+				if (c != '\u0020') {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	/**

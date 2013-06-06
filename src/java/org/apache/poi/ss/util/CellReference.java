@@ -97,7 +97,7 @@ public final class CellReference {
 		if (_isColAbs) {
 		  colRef = colRef.substring(1);
 		}
-		if (colRef.length() == 0) {
+		if (colRef.isEmpty()) {
 		  _colIndex = -1;
 		} else {
 		  _colIndex = convertColStringToIndex(colRef);
@@ -108,7 +108,7 @@ public final class CellReference {
 		if (_isRowAbs) {
 		  rowRef = rowRef.substring(1);
 		}
-		if (rowRef.length() == 0) {
+		if (rowRef.isEmpty()) {
 		  _rowIndex = -1;
 		} else {
 		  _rowIndex = Integer.parseInt(rowRef)-1; // -1 to convert 1-based to zero-based

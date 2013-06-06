@@ -20,9 +20,12 @@
 package org.apache.poi.poifs.filesystem;
 
 import java.io.File;
+import java.util.Arrays;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Class POIFSDocumentPath
@@ -67,21 +70,19 @@ public class POIFSDocumentPath
     {
         if (components == null)
         {
-            this.components = new String[ 0 ];
+            this.components = ArrayUtil.EMPTY_STRING_ARRAY;
         }
         else
         {
-            this.components = new String[ components.length ];
-            for (int j = 0; j < components.length; j++)
+            for (final String c : components)
             {
-                if ((components[ j ] == null)
-                        || (components[ j ].length() == 0))
+                if (StringUtil.isEmpty(c))
                 {
                     throw new IllegalArgumentException(
                         "components cannot contain null or empty strings");
                 }
-                this.components[ j ] = components[ j ];
             }
+            this.components = Arrays.copyOf(components, components.length);
         }
     }
 
@@ -94,7 +95,7 @@ public class POIFSDocumentPath
 
     public POIFSDocumentPath()
     {
-        this.components = new String[ 0 ];
+        this.components = ArrayUtil.EMPTY_STRING_ARRAY;
     }
 
     /**
@@ -113,37 +114,29 @@ public class POIFSDocumentPath
                              final String [] components)
         throws IllegalArgumentException
     {
+        final String[] pathComponents = path.components;
         if (components == null)
         {
-            this.components = new String[ path.components.length ];
+            this.components = Arrays.copyOf(pathComponents, pathComponents.length);
         }
         else
         {
-            this.components =
-                new String[ path.components.length + components.length ];
-        }
-        for (int j = 0; j < path.components.length; j++)
-        {
-            this.components[ j ] = path.components[ j ];
-        }
-        if (components != null)
-        {
-            for (int j = 0; j < components.length; j++)
+            this.components = Arrays.copyOf(pathComponents, pathComponents.length + components.length);
+
+            for (final String c : components)
             {
-                if (components[ j ] == null)
+                if (c == null)
                 {
                     throw new IllegalArgumentException(
                         "components cannot contain null");
                 }
-                if (components[ j ].length() == 0)
+                if (c.isEmpty())
                 {
                     log.log(POILogger.WARN, "Directory under " + path + " has an empty name, " +
                             "not all OLE2 readers will handle this file correctly!");
                 }
-                
-                this.components[ j + path.components.length ] =
-                    components[ j ];
             }
+            System.arraycopy(components, 0, this.components, pathComponents.length, components.length);
         }
     }
 
@@ -171,10 +164,11 @@ public class POIFSDocumentPath
             {
                 POIFSDocumentPath path = ( POIFSDocumentPath ) o;
 
-                if (path.components.length == this.components.length)
+                final int len = this.components.length;
+                if (path.components.length == len)
                 {
                     rval = true;
-                    for (int j = 0; j < this.components.length; j++)
+                    for (int j = 0; j < len; j++)
                     {
                         if (!path.components[ j ]
                                 .equals(this.components[ j ]))
@@ -199,10 +193,7 @@ public class POIFSDocumentPath
     {
         if (hashcode == 0)
         {
-            for (int j = 0; j < components.length; j++)
-            {
-                hashcode += components[ j ].hashCode();
-            }
+            hashcode = Arrays.hashCode(this.components);
         }
         return hashcode;
     }
@@ -251,8 +242,7 @@ public class POIFSDocumentPath
         }
         POIFSDocumentPath parent = new POIFSDocumentPath(null);
 
-        parent.components = new String[ length ];
-        System.arraycopy(components, 0, parent.components, 0, length);
+        parent.components = Arrays.copyOf(components, length);
         return parent;
     }
 
@@ -270,14 +260,10 @@ public class POIFSDocumentPath
         final StringBuilder b = new StringBuilder();
         final int          l = length();
 
-        b.append(File.separatorChar);
         for (int i = 0; i < l; i++)
         {
+            b.append(File.separatorChar);
             b.append(getComponent(i));
-            if (i < l - 1)
-            {
-                b.append(File.separatorChar);
-            }
         }
         return b.toString();
     }

@@ -22,6 +22,7 @@ import org.apache.poi.hwpf.usermodel.Paragraph;
 import org.apache.poi.hwpf.usermodel.TableCell;
 import org.apache.poi.hwpf.usermodel.TableRow;
 import org.apache.poi.util.Beta;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Element;
 
 @Beta
@@ -38,7 +39,7 @@ public class WordToHtmlUtils extends AbstractWordUtils
         if ( borderCode == null || borderCode.isEmpty() )
             return;
 
-        if ( isEmpty( where ) )
+        if ( StringUtil.isEmpty( where ) )
         {
             style.append( "border:" );
         }
@@ -115,7 +116,7 @@ public class WordToHtmlUtils extends AbstractWordUtils
     public static void addFontFamily( final String fontFamily,
             StringBuilder style )
     {
-        if ( isEmpty( fontFamily ) )
+        if ( StringUtil.isEmpty( fontFamily ) )
             return;
 
         style.append( "font-family:" + fontFamily + ";" );
@@ -150,7 +151,7 @@ public class WordToHtmlUtils extends AbstractWordUtils
             final StringBuilder style )
     {
         String justification = getJustification( paragraph.getJustification() );
-        if ( isNotEmpty( justification ) )
+        if ( StringUtil.isNotEmpty( justification ) )
             style.append( "text-align:" + justification + ";" );
     }
 

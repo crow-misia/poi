@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FormulaError;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.util.StringUtil;
 import org.apache.xmlbeans.XmlCursor;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.STXstring;
 
@@ -238,7 +239,7 @@ public class SheetDataWriter {
 
     //Taken from jdk1.3/src/javax/swing/text/html/HTMLWriter.java
     protected void outputQuotedString(String s) throws IOException {
-        if (s == null || s.length() == 0) {
+        if (StringUtil.isEmpty(s)) {
             return;
         }
 

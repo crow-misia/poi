@@ -17,6 +17,7 @@
 package org.apache.poi.hwpf.converter;
 
 import org.apache.poi.util.Beta;
+import org.apache.poi.util.StringUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -309,8 +310,8 @@ public class FoDocumentFacade
             if ( child.getNodeType() == Node.ELEMENT_NODE )
             {
                 Element childElement = (Element) child;
-                if ( WordToFoUtils.isNotEmpty( childElement.getNamespaceURI() )
-                        && WordToFoUtils.isNotEmpty( childElement
+                if ( StringUtil.isNotEmpty( childElement.getNamespaceURI() )
+                        && StringUtil.isNotEmpty( childElement
                                 .getLocalName() )
                         && namespace.equals( childElement.getNamespaceURI() )
                         && name.equals( childElement.getLocalName() ) )
@@ -321,7 +322,7 @@ public class FoDocumentFacade
             }
         }
 
-        if ( WordToFoUtils.isNotEmpty( value ) )
+        if ( StringUtil.isNotEmpty( value ) )
         {
             Element property = document.createElementNS( namespace, prefix
                     + ":" + name );

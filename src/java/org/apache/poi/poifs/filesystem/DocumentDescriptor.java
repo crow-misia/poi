@@ -49,7 +49,7 @@ public class DocumentDescriptor
         {
             throw new NullPointerException("name must not be null");
         }
-        if (name.length() == 0)
+        if (name.isEmpty())
         {
             throw new IllegalArgumentException("name cannot be empty");
         }

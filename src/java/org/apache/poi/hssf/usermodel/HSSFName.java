@@ -157,7 +157,7 @@ public final class HSSFName implements Name {
     }
 
     private static void validateName(String name){
-        if(name.length() == 0)  throw new IllegalArgumentException("Name cannot be blank");
+        if(name.isEmpty())  throw new IllegalArgumentException("Name cannot be blank");
 
         char c = name.charAt(0);
         if(!(c == '_' || Character.isLetter(c)) || name.indexOf(' ') != -1) {

@@ -343,11 +343,11 @@ public final class Countif extends Fixed2ArgFunction {
 				switch(getCode()) {
 					case CmpOp.NONE:
 					case CmpOp.EQ:
-						return _value.length() == 0;
+						return _value.isEmpty();
                     case CmpOp.NE:
                         // pred '<>' matches empty string but not blank cell
                         // pred '<>ABC'  matches blank and 'not ABC'
-                        return _value.length() != 0;
+                        return !_value.isEmpty();
 				}
 				// no other criteria matches a blank cell
 				return false;

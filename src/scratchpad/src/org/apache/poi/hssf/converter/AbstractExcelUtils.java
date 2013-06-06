@@ -174,21 +174,9 @@ public class AbstractExcelUtils
     {
         CellRangeAddress[] mergedRangeRowInfo = rowNumber < mergedRanges.length ? mergedRanges[rowNumber]
                 : null;
-        CellRangeAddress cellRangeAddress = mergedRangeRowInfo != null
+        return mergedRangeRowInfo != null
                 && columnNumber < mergedRangeRowInfo.length ? mergedRangeRowInfo[columnNumber]
                 : null;
-
-        return cellRangeAddress;
-    }
-
-    static boolean isEmpty( String str )
-    {
-        return str == null || str.length() == 0;
-    }
-
-    static boolean isNotEmpty( String str )
-    {
-        return !isEmpty( str );
     }
 
     public static HSSFWorkbook loadXls( File xlsFile ) throws IOException

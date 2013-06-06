@@ -98,7 +98,7 @@ public final class VisioTextExtractor extends POIOLE2TextExtractor {
 					   // Capture the text, as long as it isn't
 					   //  simply an empty string
 					   String str = cmd.getValue().toString();
-					   if(str.length() == 0 || str.equals("\n")) {
+					   if(str.isEmpty() || str.equals("\n")) {
 					      // Ignore empty strings
 					   } else {
 					      text.add( str );

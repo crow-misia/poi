@@ -48,6 +48,7 @@ import org.apache.poi.hslf.record.TextHeaderAtom;
 import org.apache.poi.hslf.record.TxInteractiveInfoAtom;
 import org.apache.poi.hslf.usermodel.RichTextRun;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 
 /**
  * A common superclass of all shapes that can hold text.
@@ -237,7 +238,7 @@ public abstract class TextShape extends SimpleShape {
      */
     public Rectangle2D resizeToFitText(){
         String txt = getText();
-        if(txt == null || txt.length() == 0) return new Rectangle2D.Float();
+        if(StringUtil.isEmpty(txt)) return new Rectangle2D.Float();
 
         RichTextRun rt = getTextRun().getRichTextRuns()[0];
         int size = rt.getFontSize();
@@ -249,10 +250,10 @@ public abstract class TextShape extends SimpleShape {
 
         float width = 0, height = 0, leading = 0;
         String[] lines = txt.split("\n");
-        for (int i = 0; i < lines.length; i++) {
-            if(lines[i].length() == 0) continue;
+        for (final String line : lines) {
+            if(line.isEmpty()) continue;
 
-            TextLayout layout = new TextLayout(lines[i], font, _frc);
+            TextLayout layout = new TextLayout(line, font, _frc);
 
             leading = Math.max(leading, layout.getLeading());
             width = Math.max(width, layout.getAdvance());
