@@ -27,9 +27,9 @@ public final class PieceDescriptor
 {
 
   short descriptor;
-   private static BitField fNoParaLast = BitFieldFactory.getInstance(0x01);
-   private static BitField fPaphNil = BitFieldFactory.getInstance(0x02);
-   private static BitField fCopied = BitFieldFactory.getInstance(0x04);
+   private static final BitField fNoParaLast = BitFieldFactory.getInstance(0x01);
+   private static final BitField fPaphNil = BitFieldFactory.getInstance(0x02);
+   private static final BitField fCopied = BitFieldFactory.getInstance(0x04);
   int fc;
   PropertyModifier prm;
   boolean unicode;

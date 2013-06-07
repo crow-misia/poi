@@ -59,40 +59,35 @@ public final class CFRuleRecord extends StandardRecord {
 
 	private int   field_5_options;
 
-	private static final BitField modificationBits = bf(0x003FFFFF); // Bits: font,align,bord,patt,prot
-	private static final BitField alignHor      = bf(0x00000001); // 0 = Horizontal alignment modified
-	private static final BitField alignVer      = bf(0x00000002); // 0 = Vertical alignment modified
-	private static final BitField alignWrap     = bf(0x00000004); // 0 = Text wrapped flag modified
-	private static final BitField alignRot      = bf(0x00000008); // 0 = Text rotation modified
-	private static final BitField alignJustLast = bf(0x00000010); // 0 = Justify last line flag modified
-	private static final BitField alignIndent   = bf(0x00000020); // 0 = Indentation modified
-	private static final BitField alignShrin    = bf(0x00000040); // 0 = Shrink to fit flag modified
-	private static final BitField notUsed1      = bf(0x00000080); // Always 1
-	private static final BitField protLocked    = bf(0x00000100); // 0 = Cell locked flag modified
-	private static final BitField protHidden    = bf(0x00000200); // 0 = Cell hidden flag modified
-	private static final BitField bordLeft      = bf(0x00000400); // 0 = Left border style and colour modified
-	private static final BitField bordRight     = bf(0x00000800); // 0 = Right border style and colour modified
-	private static final BitField bordTop       = bf(0x00001000); // 0 = Top border style and colour modified
-	private static final BitField bordBot       = bf(0x00002000); // 0 = Bottom border style and colour modified
-	private static final BitField bordTlBr      = bf(0x00004000); // 0 = Top-left to bottom-right border flag modified
-	private static final BitField bordBlTr      = bf(0x00008000); // 0 = Bottom-left to top-right border flag modified
-	private static final BitField pattStyle     = bf(0x00010000); // 0 = Pattern style modified
-	private static final BitField pattCol       = bf(0x00020000); // 0 = Pattern colour modified
-	private static final BitField pattBgCol     = bf(0x00040000); // 0 = Pattern background colour modified
-	private static final BitField notUsed2      = bf(0x00380000); // Always 111
-	private static final BitField undocumented  = bf(0x03C00000); // Undocumented bits
-	private static final BitField fmtBlockBits  = bf(0x7C000000); // Bits: font,align,bord,patt,prot
-	private static final BitField font          = bf(0x04000000); // 1 = Record contains font formatting block
-	private static final BitField align         = bf(0x08000000); // 1 = Record contains alignment formatting block
-	private static final BitField bord          = bf(0x10000000); // 1 = Record contains border formatting block
-	private static final BitField patt          = bf(0x20000000); // 1 = Record contains pattern formatting block
-	private static final BitField prot          = bf(0x40000000); // 1 = Record contains protection formatting block
-	private static final BitField alignTextDir  = bf(0x80000000); // 0 = Text direction modified
-
-
-	private static BitField bf(int i) {
-		return BitFieldFactory.getInstance(i);
-	}
+	private static final BitField modificationBits = BitFieldFactory.getInstance(0x003FFFFF); // Bits: font,align,bord,patt,prot
+	private static final BitField alignHor      = BitFieldFactory.getInstance(0x00000001); // 0 = Horizontal alignment modified
+	private static final BitField alignVer      = BitFieldFactory.getInstance(0x00000002); // 0 = Vertical alignment modified
+	private static final BitField alignWrap     = BitFieldFactory.getInstance(0x00000004); // 0 = Text wrapped flag modified
+	private static final BitField alignRot      = BitFieldFactory.getInstance(0x00000008); // 0 = Text rotation modified
+	private static final BitField alignJustLast = BitFieldFactory.getInstance(0x00000010); // 0 = Justify last line flag modified
+	private static final BitField alignIndent   = BitFieldFactory.getInstance(0x00000020); // 0 = Indentation modified
+	private static final BitField alignShrin    = BitFieldFactory.getInstance(0x00000040); // 0 = Shrink to fit flag modified
+	private static final BitField notUsed1      = BitFieldFactory.getInstance(0x00000080); // Always 1
+	private static final BitField protLocked    = BitFieldFactory.getInstance(0x00000100); // 0 = Cell locked flag modified
+	private static final BitField protHidden    = BitFieldFactory.getInstance(0x00000200); // 0 = Cell hidden flag modified
+	private static final BitField bordLeft      = BitFieldFactory.getInstance(0x00000400); // 0 = Left border style and colour modified
+	private static final BitField bordRight     = BitFieldFactory.getInstance(0x00000800); // 0 = Right border style and colour modified
+	private static final BitField bordTop       = BitFieldFactory.getInstance(0x00001000); // 0 = Top border style and colour modified
+	private static final BitField bordBot       = BitFieldFactory.getInstance(0x00002000); // 0 = Bottom border style and colour modified
+	private static final BitField bordTlBr      = BitFieldFactory.getInstance(0x00004000); // 0 = Top-left to bottom-right border flag modified
+	private static final BitField bordBlTr      = BitFieldFactory.getInstance(0x00008000); // 0 = Bottom-left to top-right border flag modified
+	private static final BitField pattStyle     = BitFieldFactory.getInstance(0x00010000); // 0 = Pattern style modified
+	private static final BitField pattCol       = BitFieldFactory.getInstance(0x00020000); // 0 = Pattern colour modified
+	private static final BitField pattBgCol     = BitFieldFactory.getInstance(0x00040000); // 0 = Pattern background colour modified
+	private static final BitField notUsed2      = BitFieldFactory.getInstance(0x00380000); // Always 111
+	private static final BitField undocumented  = BitFieldFactory.getInstance(0x03C00000); // Undocumented bits
+	private static final BitField fmtBlockBits  = BitFieldFactory.getInstance(0x7C000000); // Bits: font,align,bord,patt,prot
+	private static final BitField font          = BitFieldFactory.getInstance(0x04000000); // 1 = Record contains font formatting block
+	private static final BitField align         = BitFieldFactory.getInstance(0x08000000); // 1 = Record contains alignment formatting block
+	private static final BitField bord          = BitFieldFactory.getInstance(0x10000000); // 1 = Record contains border formatting block
+	private static final BitField patt          = BitFieldFactory.getInstance(0x20000000); // 1 = Record contains pattern formatting block
+	private static final BitField prot          = BitFieldFactory.getInstance(0x40000000); // 1 = Record contains protection formatting block
+	private static final BitField alignTextDir  = BitFieldFactory.getInstance(0x80000000); // 0 = Text direction modified
 
 	private short field_6_not_used;
 

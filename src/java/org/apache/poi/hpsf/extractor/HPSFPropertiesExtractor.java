@@ -19,7 +19,6 @@ package org.apache.poi.hpsf.extractor;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 
 import org.apache.poi.POIDocument;
 import org.apache.poi.POITextExtractor;
@@ -62,11 +61,9 @@ public class HPSFPropertiesExtractor extends POITextExtractor {
         // Now custom ones
         CustomProperties cps = dsi == null ? null : dsi.getCustomProperties();
         if (cps != null) {
-            Iterator<String> keys = cps.nameSet().iterator();
-            while (keys.hasNext()) {
-                String key = keys.next();
+            for(final String key : cps.nameSet()) {
                 String val = HelperPropertySet.getPropertyValueText( cps.get(key) );
-                text.append(key + " = " + val + "\n");
+                text.append(key).append(" = ").append(val).append('\n');
             }
         }
 

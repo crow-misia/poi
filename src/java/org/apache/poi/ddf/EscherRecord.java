@@ -31,8 +31,8 @@ import org.apache.poi.util.*;
  * @author Glen Stampoultzis
  */
 public abstract class EscherRecord {
-    private static BitField fInstance = BitFieldFactory.getInstance(0xfff0);
-    private static BitField fVersion = BitFieldFactory.getInstance(0x000f);
+    private static final BitField fInstance = BitFieldFactory.getInstance(0xfff0);
+    private static final BitField fVersion = BitFieldFactory.getInstance(0x000f);
 
     private short _options;
     private short _recordId;

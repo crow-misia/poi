@@ -21,15 +21,19 @@ package org.apache.poi.util;
  *
  * @author Cedric Walter (cedric.walter at innoveo.com)
  */
-public class Configurator {
+public final class Configurator {
 
-    private static POILogger logger = POILogFactory.getLogger(Configurator.class);
+    private static final POILogger logger = POILogFactory.getLogger(Configurator.class);
+
+    private Configurator() {
+        // nop.
+    }
 
     public static int getIntValue(String systemProperty, int defaultValue) {
         int result = defaultValue;
         String property = System.getProperty(systemProperty);
         try {
-            result = Integer.valueOf(property);
+            result = Integer.parseInt(property);
         } catch (Exception e) {
             logger.log(POILogger.ERROR, "System property -D"+systemProperty +" do not contains a valid integer " + property);
         }

@@ -19,8 +19,6 @@ package org.apache.poi.hssf.record;
 
 import java.util.Iterator;
 
-import org.apache.poi.util.LittleEndianInput;
-
 /**
  * VerticalPageBreak (0x001A) record that stores page breaks at columns<p/>
  * 

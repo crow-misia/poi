@@ -34,14 +34,14 @@ public abstract class TCAbstractType
 {
 
     private  short field_1_rgf;
-        private static BitField  fFirstMerged = BitFieldFactory.getInstance(0x0001);
-        private static BitField  fMerged = BitFieldFactory.getInstance(0x0002);
-        private static BitField  fVertical = BitFieldFactory.getInstance(0x0004);
-        private static BitField  fBackward = BitFieldFactory.getInstance(0x0008);
-        private static BitField  fRotateFont = BitFieldFactory.getInstance(0x0010);
-        private static BitField  fVertMerge = BitFieldFactory.getInstance(0x0020);
-        private static BitField  fVertRestart = BitFieldFactory.getInstance(0x0040);
-        private static BitField  vertAlign = BitFieldFactory.getInstance(0x0180);
+        private static final BitField  fFirstMerged = BitFieldFactory.getInstance(0x0001);
+        private static final BitField  fMerged = BitFieldFactory.getInstance(0x0002);
+        private static final BitField  fVertical = BitFieldFactory.getInstance(0x0004);
+        private static final BitField  fBackward = BitFieldFactory.getInstance(0x0008);
+        private static final BitField  fRotateFont = BitFieldFactory.getInstance(0x0010);
+        private static final BitField  fVertMerge = BitFieldFactory.getInstance(0x0020);
+        private static final BitField  fVertRestart = BitFieldFactory.getInstance(0x0040);
+        private static final BitField  vertAlign = BitFieldFactory.getInstance(0x0180);
     private  short field_2_unused;
     private  short[] field_3_brcTop;
     private  short[] field_4_brcLeft;

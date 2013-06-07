@@ -289,7 +289,6 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         workbook = InternalWorkbook.createWorkbook(records);
         setPropertiesFromWorkbook(workbook);
         int recOffset = workbook.getNumRecords();
-        int sheetNum = 0;
 
         // convert all LabelRecord records to LabelSSTRecord
         convertLabelRecords(records, recOffset);
@@ -299,7 +298,8 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
             _sheets.add(new HSSFSheet(this, sheet));
         }
 
-        for (int i = 0 ; i < workbook.getNumNames() ; ++i){
+        final int sheetNum = workbook.getNumNames();
+        for (int i = 0 ; i < sheetNum ; ++i){
             NameRecord nameRecord = workbook.getNameRecord(i);
             HSSFName name = new HSSFName(this, nameRecord, workbook.getNameCommentRecord(nameRecord));
             names.add(name);
@@ -777,7 +777,8 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     {
         HSSFSheet retval = null;
 
-        for (int k = 0; k < _sheets.size(); k++)
+        final int n = _sheets.size();
+        for (int k = 0; k < n; k++)
         {
             String sheetname = workbook.getSheetName(k);
 
