@@ -29,6 +29,10 @@ public final class TempFile {
     private static File dir;
     private static final Random rnd = new Random();
 
+    private TempFile() {
+        // nop.
+    }
+
     /**
      * Creates a temporary file.  Files are collected into one directory and by default are
      * deleted on exit from the VM.  Files can be kept by defining the system property

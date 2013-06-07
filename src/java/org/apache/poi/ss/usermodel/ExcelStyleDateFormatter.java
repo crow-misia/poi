@@ -33,6 +33,7 @@ import java.util.Locale;
  * as 26 hours.
  */
 public class ExcelStyleDateFormatter extends SimpleDateFormat {
+    private static final long serialVersionUID = 1L;
     public static final char MMMMM_START_SYMBOL = '\ue001';
     public static final char MMMMM_TRUNCATE_SYMBOL = '\ue002';
     public static final char H_BRACKET_SYMBOL = '\ue010';
@@ -90,8 +91,7 @@ public class ExcelStyleDateFormatter extends SimpleDateFormat {
         t = t.replaceAll("\\[ss\\]", String.valueOf(SS_BRACKET_SYMBOL));
         t = t.replaceAll("s.000", "s.SSS");
         t = t.replaceAll("s.00", "s." + LL_BRACKET_SYMBOL);
-        t = t.replaceAll("s.0", "s." + L_BRACKET_SYMBOL);
-        return t;
+        return t.replaceAll("s.0", "s." + L_BRACKET_SYMBOL);
     }
 
     /**

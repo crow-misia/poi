@@ -197,14 +197,14 @@ public class POIFSReader
         }
 
         // register for all
-        for (int j = 0; j < args.length; j++)
+        for (final String arg : args)
         {
             POIFSReader         reader   = new POIFSReader();
             POIFSReaderListener listener = new SampleListener();
 
             reader.registerListener(listener);
-            System.out.println("reading " + args[ j ]);
-            FileInputStream istream = new FileInputStream(args[ j ]);
+            System.out.println("reading " + arg);
+            FileInputStream istream = new FileInputStream(arg);
 
             reader.read(istream);
             istream.close();
@@ -213,13 +213,13 @@ public class POIFSReader
 
     private void processProperties(final BlockList small_blocks,
                                    final BlockList big_blocks,
-                                   final Iterator properties,
+                                   final Iterator<Property> properties,
                                    final POIFSDocumentPath path)
         throws IOException
     {
         while (properties.hasNext())
         {
-            Property property = ( Property ) properties.next();
+            Property property = properties.next();
             String   name     = property.getName();
 
             if (property.isDirectory())
@@ -237,7 +237,7 @@ public class POIFSReader
             else
             {
                 int      startBlock = property.getStartBlock();
-                Iterator listeners  = registry.getListeners(path, name);
+                Iterator<POIFSReaderListener> listeners = registry.getListeners(path, name);
 
                 if (listeners.hasNext())
                 {
@@ -258,8 +258,7 @@ public class POIFSReader
                     }
                     while (listeners.hasNext())
                     {
-                        POIFSReaderListener listener =
-                            ( POIFSReaderListener ) listeners.next();
+                        POIFSReaderListener listener = listeners.next();
 
                         listener.processPOIFSReaderEvent(
                             new POIFSReaderEvent(

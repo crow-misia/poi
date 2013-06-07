@@ -513,7 +513,9 @@ public final class DateUtil {
 
 
     private static final class FormatException extends Exception {
-        public FormatException(String msg) {
+		private static final long serialVersionUID = 1L;
+
+		public FormatException(String msg) {
             super(msg);
         }
     }
