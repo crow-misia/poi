@@ -17,11 +17,6 @@
 
 package org.apache.poi.ddf;
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**
@@ -33,15 +28,6 @@ import org.apache.poi.util.LittleEndian;
  * @see EscherRecordFactory
  */
 public class DefaultEscherRecordFactory implements EscherRecordFactory {
-    private static final Class<?>[] escherRecordClasses = { EscherBSERecord.class,
-            EscherOptRecord.class, EscherTertiaryOptRecord.class,
-            EscherClientAnchorRecord.class, EscherDgRecord.class,
-            EscherSpgrRecord.class, EscherSpRecord.class,
-            EscherClientDataRecord.class, EscherDggRecord.class,
-            EscherSplitMenuColorsRecord.class, EscherChildAnchorRecord.class,
-            EscherTextboxRecord.class };
-    private static final Map<Short, Constructor<? extends EscherRecord>> recordsMap = recordsToMap( escherRecordClasses );
-
     /**
      * Creates an instance of the escher record factory
      */
@@ -60,6 +46,8 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
     public EscherRecord createRecord(byte[] data, int offset) {
         final short options = LittleEndian.getShort( data, offset );
         final short recordId = LittleEndian.getShort( data, offset + 2 );
+        final EscherRecord r;
+
         // int remainingBytes = LittleEndian.getInt( data, offset + 4 );
 
         // Options of 0x000F means container record
@@ -67,15 +55,10 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
         //  host application, not of other Escher records, so treat them
         //  differently
         if (isContainer(options, recordId)) {
-            final EscherContainerRecord r = new EscherContainerRecord();
-            r.setRecordId( recordId );
-            r.setOptions( options );
-            return r;
+            r = new EscherContainerRecord();
         }
-
-        if (recordId >= EscherBlipRecord.RECORD_ID_START
+        else if (recordId >= EscherBlipRecord.RECORD_ID_START
                 && recordId <= EscherBlipRecord.RECORD_ID_END) {
-            final EscherBlipRecord r;
             if (recordId == EscherBitmapBlip.RECORD_ID_DIB ||
                     recordId == EscherBitmapBlip.RECORD_ID_JPEG ||
                     recordId == EscherBitmapBlip.RECORD_ID_PNG)
@@ -90,48 +73,55 @@ public class DefaultEscherRecordFactory implements EscherRecordFactory {
             } else {
                 r = new EscherBlipRecord();
             }
-            r.setRecordId( recordId );
-            r.setOptions( options );
-            return r;
-        }
 
-        final Constructor<? extends EscherRecord> recordConstructor = recordsMap.get(Short.valueOf(recordId));
-        if (recordConstructor == null) {
-            return new UnknownEscherRecord();
-        }
-        final EscherRecord escherRecord;
-        try {
-            escherRecord = recordConstructor.newInstance(ArrayUtil.EMPTY_OBJECT_ARRAY);
-        } catch (Exception e) {
-            return new UnknownEscherRecord();
-        }
-        escherRecord.setRecordId(recordId);
-        escherRecord.setOptions(options);
-        return escherRecord;
-    }
+        } else {
 
-    /**
-     * Converts from a list of classes into a map that contains the record id as the key and
-     * the Constructor in the value part of the map.  It does this by using reflection to look up
-     * the RECORD_ID field then using reflection again to find a reference to the constructor.
-     *
-     * @param recClasses The records to convert
-     * @return The map containing the id/constructor pairs.
-     */
-    private static Map<Short, Constructor<? extends EscherRecord>> recordsToMap(Class<?>[] recClasses) {
-        final Map<Short, Constructor<? extends EscherRecord>> result = new HashMap<>(recClasses.length);
-        try {
-            for (final Class<?> cls : recClasses) {
-                @SuppressWarnings("unchecked")
-                final Class<? extends EscherRecord> recCls = (Class<? extends EscherRecord>) cls;
-                final short sid = recCls.getField("RECORD_ID").getShort(null);
-                final Constructor<? extends EscherRecord> constructor = recCls.getConstructor( ArrayUtil.EMPTY_CLASS_ARRAY );
-                result.put(Short.valueOf(sid), constructor);
+            switch (recordId) {
+            case EscherBSERecord.RECORD_ID:
+                r = new EscherBSERecord();
+                break;
+            case EscherOptRecord.RECORD_ID:
+                r = new EscherOptRecord();
+                break;
+            case EscherTertiaryOptRecord.RECORD_ID:
+                r = new EscherTertiaryOptRecord();
+                break;
+            case EscherClientAnchorRecord.RECORD_ID:
+                r = new EscherClientAnchorRecord();
+                break;
+            case EscherDgRecord.RECORD_ID:
+                r = new EscherDgRecord();
+                break;
+            case EscherSpgrRecord.RECORD_ID:
+                r = new EscherSpgrRecord();
+                break;
+            case EscherSpRecord.RECORD_ID:
+                r = new EscherSpRecord();
+                break;
+            case EscherClientDataRecord.RECORD_ID:
+                r = new EscherClientDataRecord();
+                break;
+            case EscherDggRecord.RECORD_ID:
+                r = new EscherDggRecord();
+                break;
+            case EscherSplitMenuColorsRecord.RECORD_ID:
+                r = new EscherSplitMenuColorsRecord();
+                break;
+            case EscherChildAnchorRecord.RECORD_ID:
+                r = new EscherChildAnchorRecord();
+                break;
+            case EscherTextboxRecord.RECORD_ID:
+                r = new EscherTextboxRecord();
+                break;
+            default:
+                return new UnknownEscherRecord();
             }
-        } catch (final IllegalArgumentException | IllegalAccessException | NoSuchFieldException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
         }
-        return result;
+
+        r.setRecordId(recordId);
+        r.setOptions(options);
+
+        return r;
     }
 
     public static boolean isContainer(short options, short recordId){
