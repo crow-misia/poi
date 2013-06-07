@@ -31,8 +31,8 @@ import org.apache.poi.util.LittleEndian;
 public final class DropCapSpecifier implements Cloneable
 {
     private short _fdct;
-        private static BitField _lines = BitFieldFactory.getInstance( 0xf8 );
-        private static BitField _type = BitFieldFactory.getInstance( 0x07 );
+        private static final BitField _lines = BitFieldFactory.getInstance( 0xf8 );
+        private static final BitField _type = BitFieldFactory.getInstance( 0x07 );
 
     public DropCapSpecifier()
     {

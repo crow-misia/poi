@@ -55,11 +55,7 @@ public final class RecordFactory {
 			Object[] args = { in, };
 			try {
 				return _c.newInstance(args);
-			} catch (IllegalArgumentException e) {
-				throw new RuntimeException(e);
-			} catch (InstantiationException e) {
-				throw new RuntimeException(e);
-			} catch (IllegalAccessException e) {
+			} catch (final IllegalArgumentException | InstantiationException | IllegalAccessException e) {
 				throw new RuntimeException(e);
 			} catch (InvocationTargetException e) {
 				throw new RecordFormatException("Unable to construct record instance" , e.getTargetException());
@@ -83,9 +79,7 @@ public final class RecordFactory {
 			Object[] args = { in, };
 			try {
 				return (Record) _m.invoke(null, args);
-			} catch (IllegalArgumentException e) {
-				throw new RuntimeException(e);
-			} catch (IllegalAccessException e) {
+			} catch (final IllegalArgumentException | IllegalAccessException e) {
 				throw new RuntimeException(e);
 			} catch (InvocationTargetException e) {
 				throw new RecordFormatException("Unable to construct record instance" , e.getTargetException());
@@ -107,8 +101,8 @@ public final class RecordFactory {
 	@SuppressWarnings("unchecked")
 	private static final Class<? extends Record>[] recordClasses = new Class[] {
 		ArrayRecord.class,
-        AutoFilterInfoRecord.class,
-        BackupRecord.class,
+		AutoFilterInfoRecord.class,
+		BackupRecord.class,
 		BlankRecord.class,
 		BOFRecord.class,
 		BookBoolRecord.class,
@@ -129,7 +123,7 @@ public final class RecordFactory {
 		CRNRecord.class,
 		DateWindow1904Record.class,
 		DBCellRecord.class,
-                DConRefRecord.class,
+		DConRefRecord.class,
 		DefaultColWidthRecord.class,
 		DefaultRowHeightRecord.class,
 		DeltaRecord.class,
@@ -158,7 +152,7 @@ public final class RecordFactory {
 		GutsRecord.class,
 		HCenterRecord.class,
 		HeaderRecord.class,
-        HeaderFooterRecord.class,
+		HeaderFooterRecord.class,
 		HideObjRecord.class,
 		HorizontalPageBreakRecord.class,
 		HyperlinkRecord.class,
@@ -234,7 +228,7 @@ public final class RecordFactory {
 		ChartStartObjectRecord.class,
 		ChartEndObjectRecord.class,
 		CatLabRecord.class,
-      DataFormatRecord.class,
+		DataFormatRecord.class,
 		EndRecord.class,
 		LinkedDataRecord.class,
 		SeriesToChartGroupRecord.class,

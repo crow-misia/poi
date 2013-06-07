@@ -79,7 +79,7 @@ final class SSTSerializer {
 
     private static UnicodeString getUnicodeString( IntMapper<UnicodeString> strings, int index )
     {
-        return ( strings.get( index ) );
+        return strings.get( index );
     }
 
     public int[] getBucketAbsoluteOffsets()

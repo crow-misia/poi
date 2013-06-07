@@ -36,9 +36,9 @@ public final class Ffn
 {
   private int _cbFfnM1;//total length of FFN - 1.
   private byte _info;
-    private static BitField _prq = BitFieldFactory.getInstance(0x0003);// pitch request
-    private static BitField _fTrueType = BitFieldFactory.getInstance(0x0004);// when 1, font is a TrueType font
-    private static BitField _ff = BitFieldFactory.getInstance(0x0070);
+    private static final BitField _prq = BitFieldFactory.getInstance(0x0003);// pitch request
+    private static final BitField _fTrueType = BitFieldFactory.getInstance(0x0004);// when 1, font is a TrueType font
+    private static final BitField _ff = BitFieldFactory.getInstance(0x0070);
   private short _wWeight;// base weight of font
   private byte _chs;// character set identifier
   private byte _ixchSzAlt;  // index into ffn.szFfn to the name of

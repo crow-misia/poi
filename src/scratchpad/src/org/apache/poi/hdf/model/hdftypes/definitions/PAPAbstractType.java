@@ -69,9 +69,9 @@ public abstract class PAPAbstractType
     private  byte field_33_fAutoSpaceDN;
     private  int field_34_wAlignFont;
     private  short field_35_fontAlign;
-        private static BitField  fVertical = BitFieldFactory.getInstance(0x0001);
-        private static BitField  fBackward = BitFieldFactory.getInstance(0x0002);
-        private static BitField  fRotateFont = BitFieldFactory.getInstance(0x0004);
+        private static final BitField  fVertical = BitFieldFactory.getInstance(0x0001);
+        private static final BitField  fBackward = BitFieldFactory.getInstance(0x0002);
+        private static final BitField  fRotateFont = BitFieldFactory.getInstance(0x0004);
     private  byte field_36_fBackward;
     private  byte field_37_fRotateFont;
     private  byte field_38_fInTable;

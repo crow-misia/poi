@@ -35,22 +35,14 @@ import org.apache.poi.util.LittleEndianOutput;
  *  of the Excel binary file format documentation.
  */
 public final class FeatFormulaErr2 implements SharedFeature {
-	static BitField checkCalculationErrors =
-		BitFieldFactory.getInstance(0x01);
-	static BitField checkEmptyCellRef =
-		BitFieldFactory.getInstance(0x02);
-	static BitField checkNumbersAsText =
-		BitFieldFactory.getInstance(0x04);
-	static BitField checkInconsistentRanges =
-		BitFieldFactory.getInstance(0x08);
-	static BitField checkInconsistentFormulas =
-		BitFieldFactory.getInstance(0x10);
-	static BitField checkDateTimeFormats =
-		BitFieldFactory.getInstance(0x20);
-	static BitField checkUnprotectedFormulas =
-		BitFieldFactory.getInstance(0x40);
-	static BitField performDataValidation =
-		BitFieldFactory.getInstance(0x80);
+	private static final BitField checkCalculationErrors    = BitFieldFactory.getInstance(0x01);
+	private static final BitField checkEmptyCellRef         = BitFieldFactory.getInstance(0x02);
+	private static final BitField checkNumbersAsText        = BitFieldFactory.getInstance(0x04);
+	private static final BitField checkInconsistentRanges   = BitFieldFactory.getInstance(0x08);
+	private static final BitField checkInconsistentFormulas = BitFieldFactory.getInstance(0x10);
+	private static final BitField checkDateTimeFormats      = BitFieldFactory.getInstance(0x20);
+	private static final BitField checkUnprotectedFormulas  = BitFieldFactory.getInstance(0x40);
+	private static final BitField performDataValidation     = BitFieldFactory.getInstance(0x80);
 	
 	/**
 	 * What errors we should ignore

@@ -17,6 +17,8 @@
 
 package org.apache.poi.hpsf;
 
+import java.util.Arrays;
+
 import org.apache.commons.codec.Charsets;
 import org.apache.poi.util.HexDump;
 
@@ -60,8 +62,7 @@ public final class ClassID
     public ClassID()
     {
         bytes = new byte[LENGTH];
-        for (int i = 0; i < LENGTH; i++)
-            bytes[i] = 0x00;
+        Arrays.fill(bytes, (byte) 0x00);
     }
 
 
@@ -137,8 +138,7 @@ public final class ClassID
         bytes[7] = src[6 + offset];
 
         /* Read 8 bytes. */
-        for (int i = 8; i < 16; i++)
-            bytes[i] = src[i + offset];
+        System.arraycopy(src, offset + 8, bytes, 8, 8);
 
         return bytes;
     }
@@ -179,8 +179,7 @@ public final class ClassID
         dst[7 + offset] = bytes[6];
 
         /* Write 8 bytes. */
-        for (int i = 8; i < 16; i++)
-            dst[i + offset] = bytes[i];
+        System.arraycopy(bytes, 8, dst, offset + 8, 8);
     }
 
 
@@ -198,12 +197,8 @@ public final class ClassID
         if (o == null || !(o instanceof ClassID))
             return false;
         final ClassID cid = (ClassID) o;
-        if (bytes.length != cid.bytes.length)
-            return false;
-        for (int i = 0; i < bytes.length; i++)
-            if (bytes[i] != cid.bytes[i])
-                return false;
-        return true;
+
+        return Arrays.equals(bytes, cid.bytes);
     }
 
 

@@ -29,10 +29,10 @@ import org.apache.poi.util.LittleEndian;
 public final class ParagraphHeight
 {
   private short infoField;
-    private BitField fSpare = BitFieldFactory.getInstance(0x0001);
-    private BitField fUnk = BitFieldFactory.getInstance(0x0002);
-    private BitField fDiffLines = BitFieldFactory.getInstance(0x0004);
-    private BitField clMac = BitFieldFactory.getInstance(0xff00);
+    private static final BitField fSpare = BitFieldFactory.getInstance(0x0001);
+    private static final BitField fUnk = BitFieldFactory.getInstance(0x0002);
+    private static final BitField fDiffLines = BitFieldFactory.getInstance(0x0004);
+    private static final BitField clMac = BitFieldFactory.getInstance(0xff00);
   private short reserved;
   private int dxaCol;
   private int dymLineOrHeight;

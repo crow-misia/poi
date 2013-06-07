@@ -17,7 +17,6 @@
 
 package org.apache.poi.hssf.record;
 
-import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianOutput;
 
 /**

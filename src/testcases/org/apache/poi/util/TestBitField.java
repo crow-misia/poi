@@ -26,8 +26,8 @@ import junit.framework.*;
  * @author Glen Stampoultzis (gstamp@iprimus.com.au)
  */
 public final class TestBitField extends TestCase {
-    private static BitField bf_multi  = BitFieldFactory.getInstance(0x3F80);
-    private static BitField bf_single = BitFieldFactory.getInstance(0x4000);
+    private static final BitField bf_multi  = BitFieldFactory.getInstance(0x3F80);
+    private static final BitField bf_single = BitFieldFactory.getInstance(0x4000);
 
     public void testGetValue() {
         assertEquals(bf_multi.getValue(-1), 127);

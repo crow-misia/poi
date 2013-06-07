@@ -451,12 +451,11 @@ public class HSSFCell implements Cell {
             // instead it immediately generates a #NUM! error.
             setCellErrorValue(FormulaError.NUM.getCode());
         } else {
-            int row=_record.getRow();
-            short col=_record.getColumn();
-            short styleIndex=_record.getXFIndex();
-
             switch (_cellType) {
                 default:
+                    final int row=_record.getRow();
+                    final short col=_record.getColumn();
+                    final short styleIndex=_record.getXFIndex();
                     setCellType(CELL_TYPE_NUMERIC, false, row, col, styleIndex);
                 case CELL_TYPE_NUMERIC:
                     (( NumberRecord ) _record).setValue(value);
@@ -728,12 +727,11 @@ public class HSSFCell implements Cell {
      *        will change the cell to a boolean cell and set its value.
      */
     public void setCellValue(boolean value) {
-        int row=_record.getRow();
-        short col=_record.getColumn();
-        short styleIndex=_record.getXFIndex();
-
         switch (_cellType) {
             default:
+            	final int row=_record.getRow();
+                final short col=_record.getColumn();
+                final short styleIndex=_record.getXFIndex();
                 setCellType(CELL_TYPE_BOOLEAN, false, row, col, styleIndex);
             case CELL_TYPE_BOOLEAN:
                 (( BoolErrRecord ) _record).setValue(value);
@@ -753,11 +751,11 @@ public class HSSFCell implements Cell {
      *        cell and set its value.
      */
     public void setCellErrorValue(byte errorCode) {
-        int row=_record.getRow();
-        short col=_record.getColumn();
-        short styleIndex=_record.getXFIndex();
         switch (_cellType) {
             default:
+                final int row=_record.getRow();
+                final short col=_record.getColumn();
+                final short styleIndex=_record.getXFIndex();
                 setCellType(CELL_TYPE_ERROR, false, row, col, styleIndex);
             case CELL_TYPE_ERROR:
                 (( BoolErrRecord ) _record).setValue(errorCode);
