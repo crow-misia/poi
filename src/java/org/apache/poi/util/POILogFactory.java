@@ -108,9 +108,8 @@ public final class POILogFactory
         
         // Fetch the right logger for them, creating
         //  it if that's required 
-        if (_loggers.containsKey(cat)) {
-            logger = _loggers.get(cat);
-        } else {
+        logger = _loggers.get(cat);
+        if (logger == null) {
             try {
               Class<? extends POILogger> loggerClass = 
                  (Class<? extends POILogger>)Class.forName(_loggerClassName);

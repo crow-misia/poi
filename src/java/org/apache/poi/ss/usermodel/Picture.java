@@ -16,8 +16,6 @@
 ==================================================================== */
 package org.apache.poi.ss.usermodel;
 
-import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
-
 /**
  * Repersents a picture in a SpreadsheetML document
  *

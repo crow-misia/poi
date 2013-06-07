@@ -60,7 +60,7 @@ public final class CellUtil {
 	public static final String VERTICAL_ALIGNMENT = "verticalAlignment";
 	public static final String WRAP_TEXT = "wrapText";
 
-	private static UnicodeMapping unicodeMappings[];
+	private static final UnicodeMapping unicodeMappings[];
 
 	private static final class UnicodeMapping {
 
@@ -332,7 +332,7 @@ public final class CellUtil {
 	 *@param  cell  The cell to check for unicode values
 	 *@return       translated to unicode
 	 */
-	public static Cell translateUnicodeValues(Cell cell) {
+	public static Cell translateUnicodeValues(final Cell cell) {
 
 		String s = cell.getRichStringCellValue().getString();
 		boolean foundUnicode = false;

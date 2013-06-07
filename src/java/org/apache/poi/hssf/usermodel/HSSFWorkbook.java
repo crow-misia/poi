@@ -1062,10 +1062,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         }
         ExtendedFormatRecord xfr = workbook.createCellXF();
         short index = (short) (getNumCellStyles() - 1);
-        HSSFCellStyle style = new HSSFCellStyle(index, xfr, this);
-
-        return style;
-    }
+        return new HSSFCellStyle(index, xfr, this);    }
 
     /**
      * get the number of styles the workbook contains
@@ -1227,8 +1224,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     }
 
     public int getNumberOfNames(){
-        int result = names.size();
-        return result;
+        return names.size();
     }
 
     public HSSFName getName(String name) {
