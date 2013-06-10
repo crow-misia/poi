@@ -93,42 +93,21 @@ public final class EscherBitmapBlip extends EscherBlipRecord {
 
     public String toString()
     {
-        String nl = System.lineSeparator();
+        final String nl = System.lineSeparator();
 
-        String extraData;
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        try
-        {
-            HexDump.dump( this.field_pictureData, 0, b, 0 );
-            extraData = b.toString();
-        }
-        catch ( Exception e )
-        {
-            extraData = e.toString();
-        }
         return getClass().getName() + ":" + nl +
                 "  RecordId: 0x" + HexDump.toHex( getRecordId() ) + nl +
                 "  Version: 0x" + HexDump.toHex( getVersion() ) + nl +
                 "  Instance: 0x" + HexDump.toHex( getInstance() ) + nl +
                 "  UID: 0x" + HexDump.toHex( field_1_UID ) + nl +
                 "  Marker: 0x" + HexDump.toHex( field_2_marker ) + nl +
-                "  Extra Data:" + nl + extraData;
+                "  Extra Data:" + nl + HexDump.dump( this.field_pictureData, 0, 0, "No Data" + nl );
     }
 
     @Override
     public String toXml(String tab) {
-        String extraData;
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        try
-        {
-            HexDump.dump( this.field_pictureData, 0, b, 0 );
-            extraData = b.toString();
-        }
-        catch ( Exception e )
-        {
-            extraData = e.toString();
-        }
-        StringBuilder builder = new StringBuilder();
+        final String extraData = HexDump.dump( this.field_pictureData, 0, 0, "No Data");
+        final StringBuilder builder = new StringBuilder();
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()), HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
                 .append(tab).append("\t").append("<UID>0x").append(HexDump.toHex(field_1_UID)).append("</UID>\n")
                 .append(tab).append("\t").append("<Marker>0x").append(HexDump.toHex(field_2_marker)).append("</Marker>\n")

@@ -30,8 +30,8 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 /**
  * This is a low-level debugging class, which simply prints
  *  out what records come in what order.
- * Most people will want to use {@link BiffViewer} or
- *  {@link EFBiffViewer}, but this can be handy when
+ * Most people will want to use {@link org.apache.poi.hssf.dev.BiffViewer} or
+ *  {@link org.apache.poi.hssf.dev.EFBiffViewer}, but this can be handy when
  *  trying to make sense of {@link ContinueRecord}
  *  special cases.
  * 

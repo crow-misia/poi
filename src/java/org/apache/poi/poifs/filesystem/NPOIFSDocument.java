@@ -134,32 +134,18 @@ public final class NPOIFSDocument implements POIFSViewable {
     *
     * @return an array of Object; may not be null, but may be empty
     */
-   public Object[] getViewableArray() {
-      Object[] results = new Object[1];
-      String result;
-
-      try {
-         if(getSize() > 0) {
-            // Get all the data into a single array
-            byte[] data = new byte[getSize()];
-            int offset = 0;
-            for(ByteBuffer buffer : _stream) {
-               int length = Math.min(_block_size, data.length-offset); 
-               buffer.get(data, offset, length);
-               offset += length;
-            }
-
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            HexDump.dump(data, 0, output, 0);
-            result = output.toString();
-         } else {
-            result = "<NO DATA>";
-         }
-      } catch (IOException e) {
-         result = e.getMessage();
+   public String[] getViewableArray() {
+      final int size = getSize();
+      // Get all the data into a single array
+      byte[] data = new byte[size];
+      int offset = 0;
+      for(ByteBuffer buffer : _stream) {
+        int length = Math.min(_block_size, data.length-offset); 
+        buffer.get(data, offset, length);
+        offset += length;
       }
-      results[0] = result;
-      return results;
+
+      return new String[] { HexDump.dump(data, 0, 0, "<NO DATA>"), };
    }
 
    /**
@@ -169,7 +155,7 @@ public final class NPOIFSDocument implements POIFSViewable {
     *		 store
     */
    public Iterator getViewableIterator() {
-      return Collections.EMPTY_LIST.iterator();
+      return Collections.emptyIterator();
    }
 
    /**

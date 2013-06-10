@@ -130,6 +130,10 @@ under the License.
     <property name="excelant.output.test.dir" location="build/excelant-test-classes"/>
     <property name="excelant.testokfile" location="build/excelant-testokfile.txt"/>
 
+    <!-- Dev: -->
+    <property name="dev.src" location="src/dev/java"/>
+    <property name="dev.output.dir" location="build/ooxml-classes"/>
+    
     <!-- jars in the /lib directory, see the fetch-jars target-->
     <property name="main.commons-codec.jar" location="${main.lib}/commons-codec-1.8.jar"/>
     <property name="main.commons-codec.url"
@@ -205,6 +209,12 @@ under the License.
     </path>
 
     <path id="extension.classpath">
+        <path refid="main.classpath"/>
+        <pathelement location="${main.output.dir}"/>
+        <pathelement location="${dev.output.dir}"/>
+    </path>
+
+    <path id="dev.classpath">
         <path refid="main.classpath"/>
         <path refid="ooxml.classpath"/>
         <pathelement location="${main.output.dir}"/>
@@ -302,6 +312,7 @@ under the License.
         <mkdir dir="${excelant.output.test.dir}"/>
         <mkdir dir="${excelant.reports.test}"/>
         <mkdir dir="${examples.output.dir}"/>
+        <mkdir dir="${dev.output.dir}"/>
         <mkdir dir="${dist.dir}"/>
         <mkdir dir="${build.site}"/>
     </target>
@@ -477,7 +488,7 @@ under the License.
     </target>
 
     <target name="compile" depends="init, compile-main,
-            compile-scratchpad, compile-examples, compile-excelant"
+            compile-scratchpad, compile-examples, compile-excelant, compile-extension, compile-dev"
             description="Compiles the POI main classes, scratchpad and examples"/>
 
     <target name="compile-all" depends="compile,compile-ooxml-lite"/>
@@ -633,6 +644,21 @@ under the License.
                includeantruntime="false">
             <classpath>
                 <path refid="extension.classpath"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="compile-dev" depends="compile-main,compile-ooxml">
+        <javac target="${jdk.version.class}"
+               source="${jdk.version.source}"
+               destdir="${dev.output.dir}"
+               srcdir="${dev.src}"
+               debug="${compile.debug}"
+               encoding="${java.source.encoding}"
+               fork="yes"
+               includeantruntime="false">
+            <classpath>
+                <path refid="dev.classpath"/>
             </classpath>
         </javac>
     </target>

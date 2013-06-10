@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.IOUtils;
@@ -321,19 +322,8 @@ public class EscherBlipWMFRecord
      */
     public String toString()
     {
-        String nl = System.lineSeparator();
+        final String nl = System.lineSeparator();
 
-        String extraData;
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        try
-        {
-            HexDump.dump( this.field_12_data, 0, b, 0 );
-            extraData = b.toString();
-        }
-        catch ( Exception e )
-        {
-            extraData = e.toString();
-        }
         return getClass().getName() + ":" + nl +
                 "  RecordId: 0x" + HexDump.toHex( getRecordId() ) + nl +
                 "  Version: 0x" + HexDump.toHex( getVersion() ) + nl +
@@ -349,22 +339,12 @@ public class EscherBlipWMFRecord
                 "  CacheOfSavedSize: " + field_9_cacheOfSavedSize + nl +
                 "  CompressionFlag: " + field_10_compressionFlag + nl +
                 "  Filter: " + field_11_filter + nl +
-                "  Data:" + nl + extraData;
+                "  Data:" + nl + HexDump.dump( this.field_12_data, 0, 0, "No Data" + nl );
     }
 
     @Override
     public String toXml(String tab) {
-        String extraData;
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        try
-        {
-            HexDump.dump( this.field_12_data, 0, b, 0 );
-            extraData = b.toString();
-        }
-        catch ( Exception e )
-        {
-            extraData = e.toString();
-        }
+        final String extraData = HexDump.dump( this.field_12_data, 0, 0, "No Data" );
         StringBuilder builder = new StringBuilder();
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()), HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
                 .append(tab).append("\t").append("<SecondaryUID>0x").append(HexDump.toHex(field_1_secondaryUID)).append("</SecondaryUID>\n")
