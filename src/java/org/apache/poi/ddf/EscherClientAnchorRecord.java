@@ -140,17 +140,6 @@ public class EscherClientAnchorRecord
     {
         final String nl = System.lineSeparator();
 
-        String extraData;
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        try
-        {
-            HexDump.dump(this.remainingData, 0, b, 0);
-            extraData = b.toString();
-        }
-        catch ( Exception e )
-        {
-            extraData = "error\n";
-        }
         return getClass().getName() + ":" + nl +
                 "  RecordId: 0x" + HexDump.toHex(RECORD_ID) + nl +
                 "  Version: 0x" + HexDump.toHex(getVersion()) + nl +
@@ -164,26 +153,13 @@ public class EscherClientAnchorRecord
                 "  DX2: " + field_7_dx2 + nl +
                 "  Row2: " + field_8_row2 + nl +
                 "  DY2: " + field_9_dy2 + nl +
-                "  Extra Data:" + nl + extraData;
+                "  Extra Data:" + nl + HexDump.dump(this.remainingData, 0, 0, "No Data" + nl);
 
     }
 
     @Override
     public String toXml(String tab) {
-        String extraData;
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        try
-        {
-            HexDump.dump(this.remainingData, 0, b, 0);
-            extraData = b.toString();
-        }
-        catch ( Exception e )
-        {
-            extraData = "error\n";
-        }
-        if (extraData.contains("No Data")){
-            extraData = "No Data";
-        }
+        final String extraData = HexDump.dump(this.remainingData, 0, 0, "No Data");
         StringBuilder builder = new StringBuilder();
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()), HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
                 .append(tab).append("\t").append("<Flag>").append(field_1_flag).append("</Flag>\n")

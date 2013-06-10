@@ -408,7 +408,7 @@ public final class BiffViewer {
 				byte[] data = new byte[size];
 
 				is.read(data);
-				HexDump.dump(data, 0, System.out, 0);
+				System.out.println(HexDump.dump(data, 0, 0, "No Data\n"));
 			} else {
 				boolean dumpInterpretedRecords = cmdArgs.shouldDumpRecordInterpretations();
 				boolean dumpHex = cmdArgs.shouldDumpBiffHex();

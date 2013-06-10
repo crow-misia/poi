@@ -18,14 +18,15 @@
 package org.apache.poi.util;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
+
+import org.apache.commons.codec.Charsets;
 
 /**
  * dump data in hexadecimal format; derived from a HexDump utility I
@@ -35,7 +36,7 @@ import java.text.DecimalFormat;
  * @author Glen Stampoultzis  (glens at apache.org)
  */
 public final class HexDump {
-    public static final String EOL = System.lineSeparator();
+    static final String EOL = System.lineSeparator();
     private static final char _hexcodes[] = "0123456789ABCDEF".toCharArray();
     private static final int _shifts[]   =
     {
@@ -47,114 +48,23 @@ public final class HexDump {
     }
 
     /**
-     * dump an array of bytes to an OutputStream
+     * dump an array of bytes to a String
      *
      * @param data the byte array to be dumped
      * @param offset its offset, whatever that might mean
-     * @param stream the OutputStream to which the data is to be
-     *               written
      * @param index initial index into the byte array
-     * @param length number of characters to output
+     * @param nullstring string for null
      *
-     * @exception IOException is thrown if anything goes wrong writing
-     *            the data to stream
      * @exception ArrayIndexOutOfBoundsException if the index is
      *            outside the data array's bounds
-     * @exception IllegalArgumentException if the output stream is
-     *            null
+     * @return output string
      */
-    private static void dump(final byte [] data, final long offset,
-                            final OutputStream stream, final int index, final int length)
-            throws IOException, ArrayIndexOutOfBoundsException,
-                    IllegalArgumentException
-    {
-        if (length == 0)
-        {
-            stream.write( ("No Data" + EOL).getBytes() );
-            stream.flush();
-            return;
+    public static String dump(final byte [] data, final long offset,
+                            final int index, final String nullString) {
+        if (data == null || data.length == 0) {
+            return nullString;
         }
-        if ((index < 0) || (index >= length))
-        {
-            throw new ArrayIndexOutOfBoundsException(
-                "illegal index: " + index + " into array of length "
-                + length);
-        }
-        if (stream == null)
-        {
-            throw new IllegalArgumentException("cannot write to nullstream");
-        }
-
-        long         display_offset = offset + index;
-        StringBuilder buffer         = new StringBuilder(74);
-
-
-        for (int j = index; j < length; j += 16)
-        {
-            int chars_read = length - j;
-
-            if (chars_read > 16)
-            {
-                chars_read = 16;
-            }
-            buffer.append(
-                        dump(display_offset)
-                         ).append(' ');
-            for (int k = 0; k < 16; k++)
-            {
-                if (k < chars_read)
-                {
-                    buffer.append(dump(data[ k + j ]));
-                }
-                else
-                {
-                    buffer.append("  ");
-                }
-                buffer.append(' ');
-            }
-            for (int k = 0; k < chars_read; k++)
-            {
-                if ((data[ k + j ] >= ' ') && (data[ k + j ] < 127))
-                {
-                    buffer.append(( char ) data[ k + j ]);
-                }
-                else
-                {
-                    buffer.append('.');
-                }
-            }
-            buffer.append(EOL);
-            stream.write(buffer.toString().getBytes());
-            stream.flush();
-            buffer.setLength(0);
-            display_offset += chars_read;
-        }
-
-    }
-
-    /**
-     * dump an array of bytes to an OutputStream
-     *
-     * @param data the byte array to be dumped
-     * @param offset its offset, whatever that might mean
-     * @param stream the OutputStream to which the data is to be
-     *               written
-     * @param index initial index into the byte array
-     *
-     * @exception IOException is thrown if anything goes wrong writing
-     *            the data to stream
-     * @exception ArrayIndexOutOfBoundsException if the index is
-     *            outside the data array's bounds
-     * @exception IllegalArgumentException if the output stream is
-     *            null
-     */
-
-    public static void dump(final byte [] data, final long offset,
-                            final OutputStream stream, final int index)
-        throws IOException, ArrayIndexOutOfBoundsException,
-                IllegalArgumentException
-    {
-        dump(data, offset, stream, index, data.length);
+        return dump(data, offset, index);
     }
 
     /**

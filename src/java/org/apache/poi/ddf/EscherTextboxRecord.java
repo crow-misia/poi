@@ -113,21 +113,7 @@ public class EscherTextboxRecord extends EscherRecord
 
     public String toString()
     {
-        String nl = System.lineSeparator();
-
-        String theDumpHex = "";
-        try
-        {
-            if (thedata.length != 0)
-            {
-                theDumpHex = "  Extra Data:" + nl;
-                theDumpHex += HexDump.dump(thedata, 0, 0);
-            }
-        }
-        catch ( Exception e )
-        {
-            theDumpHex = "Error!!";
-        }
+        final String nl = System.lineSeparator();
 
         return getClass().getName() + ":" + nl +
                 "  isContainer: " + isContainerRecord() + nl +
@@ -135,24 +121,13 @@ public class EscherTextboxRecord extends EscherRecord
                 "  instance: 0x" + HexDump.toHex( getInstance() ) + nl +
                 "  recordId: 0x" + HexDump.toHex( getRecordId() ) + nl +
                 "  numchildren: " + getChildRecords().size() + nl +
-                theDumpHex;
+                "  Extra Data: " + nl + HexDump.dump(thedata, 0, 0, "No Data" + nl);
     }
 
     @Override
     public String toXml(String tab) {
-        String theDumpHex = "";
-        try
-        {
-            if (thedata.length != 0)
-            {
-                theDumpHex += HexDump.dump(thedata, 0, 0);
-            }
-        }
-        catch ( Exception e )
-        {
-            theDumpHex = "Error!!";
-        }
-        StringBuilder builder = new StringBuilder();
+        final String theDumpHex = HexDump.dump(thedata, 0, 0, "No Data");
+        final StringBuilder builder = new StringBuilder();
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()), HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
                 .append(tab).append("\t").append("<ExtraData>").append(theDumpHex).append("</ExtraData>\n");
         builder.append(tab).append("</").append(getClass().getSimpleName()).append(">\n");

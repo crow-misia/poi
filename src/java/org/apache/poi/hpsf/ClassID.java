@@ -103,8 +103,7 @@ public final class ClassID
      */
     public void setBytes(final byte[] bytes)
     {
-        for (int i = 0; i < this.bytes.length; i++)
-            this.bytes[i] = bytes[i];
+        System.arraycopy(bytes, 0, this.bytes, 0, this.bytes.length);
     }
 
 

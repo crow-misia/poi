@@ -40,9 +40,7 @@ public final class TestHexDump extends TestCase {
         {
             testArray[ j ] = ( byte ) j;
         }
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-        HexDump.dump(testArray, 0, stream, 0);
         byte[] outputArray = new byte[ 16 * (73 + HexDump.EOL.length()) ];
 
         for (int j = 0; j < 16; j++)
@@ -71,7 +69,7 @@ public final class TestHexDump extends TestCase {
             System.arraycopy(HexDump.EOL.getBytes(), 0, outputArray, offset,
                              HexDump.EOL.getBytes().length);
         }
-        byte[] actualOutput = stream.toByteArray();
+        byte[] actualOutput = HexDump.dump(testArray, 0, 0, "No Data").getBytes();
 
         assertEquals("array size mismatch", outputArray.length,
                      actualOutput.length);
@@ -82,8 +80,6 @@ public final class TestHexDump extends TestCase {
         }
 
         // verify proper behavior with non-zero offset
-        stream = new ByteArrayOutputStream();
-        HexDump.dump(testArray, 0x10000000, stream, 0);
         outputArray = new byte[ 16 * (73 + HexDump.EOL.length()) ];
         for (int j = 0; j < 16; j++)
         {
@@ -111,7 +107,7 @@ public final class TestHexDump extends TestCase {
             System.arraycopy(HexDump.EOL.getBytes(), 0, outputArray, offset,
                              HexDump.EOL.getBytes().length);
         }
-        actualOutput = stream.toByteArray();
+        actualOutput = HexDump.dump(testArray, 0x10000000, 0, "No Data").getBytes();
         assertEquals("array size mismatch", outputArray.length,
                      actualOutput.length);
         for (int j = 0; j < outputArray.length; j++)
@@ -121,8 +117,6 @@ public final class TestHexDump extends TestCase {
         }
 
         // verify proper behavior with negative offset
-        stream = new ByteArrayOutputStream();
-        HexDump.dump(testArray, 0xFF000000, stream, 0);
         outputArray = new byte[ 16 * (73 + HexDump.EOL.length()) ];
         for (int j = 0; j < 16; j++)
         {
@@ -150,7 +144,7 @@ public final class TestHexDump extends TestCase {
             System.arraycopy(HexDump.EOL.getBytes(), 0, outputArray, offset,
                              HexDump.EOL.getBytes().length);
         }
-        actualOutput = stream.toByteArray();
+        actualOutput = HexDump.dump(testArray, 0xFF000000, 0, "No Data").getBytes();
         assertEquals("array size mismatch", outputArray.length,
                      actualOutput.length);
         for (int j = 0; j < outputArray.length; j++)
@@ -160,8 +154,6 @@ public final class TestHexDump extends TestCase {
         }
 
         // verify proper behavior with non-zero index
-        stream = new ByteArrayOutputStream();
-        HexDump.dump(testArray, 0x10000000, stream, 0x81);
         outputArray = new byte[ (8 * (73 + HexDump.EOL.length())) - 1 ];
         for (int j = 0; j < 8; j++)
         {
@@ -204,7 +196,7 @@ public final class TestHexDump extends TestCase {
             System.arraycopy(HexDump.EOL.getBytes(), 0, outputArray, offset,
                              HexDump.EOL.getBytes().length);
         }
-        actualOutput = stream.toByteArray();
+        actualOutput = HexDump.dump(testArray, 0x10000000, 0x81, "No Data").getBytes();
         assertEquals("array size mismatch", outputArray.length,
                      actualOutput.length);
         for (int j = 0; j < outputArray.length; j++)
@@ -216,7 +208,7 @@ public final class TestHexDump extends TestCase {
         // verify proper behavior with negative index
         try
         {
-            HexDump.dump(testArray, 0x10000000, new ByteArrayOutputStream(), -1);
+            HexDump.dump(testArray, 0x10000000, -1).getBytes();
             fail("should have caught ArrayIndexOutOfBoundsException on negative index");
         }
         catch (ArrayIndexOutOfBoundsException ignored_exception)
@@ -228,8 +220,7 @@ public final class TestHexDump extends TestCase {
         // verify proper behavior with index that is too large
         try
         {
-            HexDump.dump(testArray, 0x10000000, new ByteArrayOutputStream(),
-                         testArray.length);
+            HexDump.dump(testArray, 0x10000000, testArray.length).getBytes();
             fail("should have caught ArrayIndexOutOfBoundsException on large index");
         }
         catch (ArrayIndexOutOfBoundsException ignored_exception)
@@ -238,22 +229,8 @@ public final class TestHexDump extends TestCase {
             // as expected
         }
 
-        // verify proper behavior with null stream
-        try
-        {
-            HexDump.dump(testArray, 0x10000000, null, 0);
-            fail("should have caught IllegalArgumentException on negative index");
-        }
-        catch (IllegalArgumentException ignored_exception)
-        {
-
-            // as expected
-        }
-
         // verify proper behaviour with empty byte array
-        ByteArrayOutputStream os = new ByteArrayOutputStream( );
-        HexDump.dump( ArrayUtil.EMPTY_BYTE_ARRAY, 0, os, 0 );
-        assertEquals( "No Data" + System.lineSeparator(), os.toString() );
+        assertEquals( "", HexDump.dump( ArrayUtil.EMPTY_BYTE_ARRAY, 0, 0, "" ) );
 
     }
 

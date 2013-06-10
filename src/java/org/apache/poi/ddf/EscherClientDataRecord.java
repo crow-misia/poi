@@ -80,43 +80,17 @@ public class EscherClientDataRecord
     {
         final String nl = System.lineSeparator();
 
-        String extraData;
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        try
-        {
-            HexDump.dump(this.remainingData, 0, b, 0);
-            extraData = b.toString();
-        }
-        catch ( Exception e )
-        {
-            extraData = "error\n";
-        }
         return getClass().getName() + ":" + nl +
                 "  RecordId: 0x" + HexDump.toHex(RECORD_ID) + nl +
                 "  Version: 0x" + HexDump.toHex(getVersion()) + nl +
                 "  Instance: 0x" + HexDump.toHex(getInstance()) + nl +
-                "  Extra Data:" + nl +
-                extraData;
-
+                "  Extra Data:" + nl + HexDump.dump(this.remainingData, 0, 0, "No Data" + nl);
     }
 
     @Override
     public String toXml(String tab) {
-        String extraData;
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        try
-        {
-            HexDump.dump(this.remainingData, 0, b, 0);
-            extraData = b.toString();
-        }
-        catch ( Exception e )
-        {
-            extraData = "error";
-        }
-        if (extraData.contains("No Data")){
-            extraData = "No Data";
-        }
-        StringBuilder builder = new StringBuilder();
+        final String extraData = HexDump.dump(this.remainingData, 0, 0, "No Data");
+        final StringBuilder builder = new StringBuilder();
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()),
                 HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
                 .append(tab).append("\t").append("<ExtraData>").append(extraData).append("</ExtraData>\n");

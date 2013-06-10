@@ -20,7 +20,6 @@ package org.apache.poi.hssf.record;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-import org.apache.poi.hssf.dev.BiffViewer;
 import org.apache.poi.hssf.record.crypto.Biff8DecryptingStream;
 import org.apache.poi.hssf.record.crypto.Biff8EncryptionKey;
 import org.apache.poi.util.ArrayUtil;
@@ -45,7 +44,7 @@ public final class RecordInputStream implements LittleEndianInput {
 	private static final int DATA_LEN_NEEDS_TO_BE_READ = -1;
 
 	/**
-	 * For use in {@link BiffViewer} which may construct {@link Record}s that don't completely
+	 * For use in {@link org.apache.poi.hssf.dev.BiffViewer} which may construct {@link Record}s that don't completely
 	 * read all available data.  This exception should never be thrown otherwise.
 	 */
 	@SuppressWarnings("serial")
