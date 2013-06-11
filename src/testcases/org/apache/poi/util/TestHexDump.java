@@ -17,7 +17,6 @@
 
 package org.apache.poi.util;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import junit.framework.TestCase;

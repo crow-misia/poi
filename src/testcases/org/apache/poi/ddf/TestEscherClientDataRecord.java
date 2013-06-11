@@ -29,7 +29,7 @@ public class TestEscherClientDataRecord extends TestCase
         EscherClientDataRecord r = createRecord();
 
         byte[] data = new byte[8];
-        int bytesWritten = r.serialize( 0, data, new NullEscherSerializationListener() );
+        int bytesWritten = r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
         assertEquals( 8, bytesWritten );
         assertEquals( "[02, 00, " +
                 "11, F0, " +

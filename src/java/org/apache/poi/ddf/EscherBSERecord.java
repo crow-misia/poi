@@ -113,7 +113,7 @@ public final class EscherBSERecord extends EscherRecord {
         int bytesWritten = 0;
         if (field_12_blipRecord != null)
         {
-            bytesWritten = field_12_blipRecord.serialize( offset + 44, data, new NullEscherSerializationListener() );
+            bytesWritten = field_12_blipRecord.serialize( offset + 44, data, NullEscherSerializationListener.INSTANCE );
         }
 
         System.arraycopy( _remainingData, 0, data, offset + 44 + bytesWritten, _remainingData.length );

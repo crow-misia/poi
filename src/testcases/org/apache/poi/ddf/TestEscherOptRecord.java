@@ -95,7 +95,7 @@ public final class TestEscherOptRecord extends TestCase {
         r.addEscherProperty( prop3 );
 
         byte[] data = new byte[28];
-        int bytesWritten = r.serialize(0, data, new NullEscherSerializationListener() );
+        int bytesWritten = r.serialize(0, data, NullEscherSerializationListener.INSTANCE );
         assertEquals( 28, bytesWritten );
         String dataStr = "[33, 00, " +
                 "0B, F0, " +
@@ -121,7 +121,7 @@ public final class TestEscherOptRecord extends TestCase {
         r.addEscherProperty( prop3 );
 
         byte[] data = new byte[26];
-        int bytesWritten = r.serialize(0, data, new NullEscherSerializationListener() );
+        int bytesWritten = r.serialize(0, data, NullEscherSerializationListener.INSTANCE );
         String dataStr = "[33, 00, " +
                 "0B, F0, " +
                 "12, 00, 00, 00, " +

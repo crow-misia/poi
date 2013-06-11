@@ -17,16 +17,7 @@
 
 package org.apache.poi.util;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
-
-import org.apache.commons.codec.Charsets;
 
 /**
  * dump data in hexadecimal format; derived from a HexDump utility I
@@ -99,12 +90,12 @@ public final class HexDump {
             {
                 chars_read = 16;
             }
-            buffer.append(dump(display_offset)).append(' ');
+            dump(buffer, display_offset).append(' ');
             for (int k = 0; k < 16; k++)
             {
                 if (k < chars_read)
                 {
-                    buffer.append(dump(data[ k + j ]));
+                    dump(buffer, data[ k + j ]);
                 }
                 else
                 {
@@ -130,26 +121,20 @@ public final class HexDump {
     }
 
 
-    private static String dump(final long value)
+    private static StringBuilder dump(final StringBuilder buf, final long value)
     {
-        StringBuilder buf = new StringBuilder();
-        buf.setLength(0);
         for (int j = 0; j < 8; j++)
         {
             buf.append( _hexcodes[ (( int ) (value >> _shifts[ j + _shifts.length - 8 ])) & 15 ]);
         }
-        return buf.toString();
+        return buf;
     }
 
-    private static String dump(final byte value)
+    private static StringBuilder dump(final StringBuilder buf, final byte value)
     {
-        StringBuilder buf = new StringBuilder();
-        buf.setLength(0);
-        for (int j = 0; j < 2; j++)
-        {
-            buf.append(_hexcodes[ (value >> _shifts[ j + 6 ]) & 15 ]);
-        }
-        return buf.toString();
+        buf.append(_hexcodes[ (value >> 4) & 15 ]);
+        buf.append(_hexcodes[ value & 15 ]);
+        return buf;
     }
 
     /**
@@ -330,14 +315,5 @@ public final class HexDump {
      */
     public static char[] byteToHex(int value) {
         return toHexChars(value, 1);
-    }
-
-    public static void main(String[] args) throws Exception {
-        File file = new File(args[0]);
-        try (final InputStream in = new BufferedInputStream(new FileInputStream(file))) {
-            byte[] b = new byte[(int)file.length()];
-            in.read(b);
-            System.out.println(HexDump.dump(b, 0, 0));
-        }
     }
 }

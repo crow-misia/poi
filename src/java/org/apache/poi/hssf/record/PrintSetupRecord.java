@@ -40,24 +40,24 @@ public final class PrintSetupRecord extends StandardRecord {
     private short                 field_4_fit_width;
     private short                 field_5_fit_height;
     private short                 field_6_options;
-    static final private BitField lefttoright   =
+    private static final BitField lefttoright   =
         BitFieldFactory.getInstance(0x01);   // print over then down
-    static final private BitField landscape     =
+    private static final BitField landscape     =
         BitFieldFactory.getInstance(0x02);   // landscape mode
-    static final private BitField validsettings = BitFieldFactory.getInstance(
+    private static final BitField validsettings = BitFieldFactory.getInstance(
         0x04);                // if papersize, scale, resolution, copies, landscape
 
     // weren't obtained from the print consider them
     // mere bunk
-    static final private BitField nocolor       =
+    private static final BitField nocolor       =
         BitFieldFactory.getInstance(0x08);   // print mono/b&w, colorless
-    static final private BitField draft         =
+    private static final BitField draft         =
         BitFieldFactory.getInstance(0x10);   // print draft quality
-    static final private BitField notes         =
+    private static final BitField notes         =
         BitFieldFactory.getInstance(0x20);   // print the notes
-    static final private BitField noOrientation =
+    private static final BitField noOrientation =
         BitFieldFactory.getInstance(0x40);   // the orientation is not set
-    static final private BitField usepage       =
+    private static final BitField usepage       =
         BitFieldFactory.getInstance(0x80);   // use a user set page no, instead of auto
     private short                 field_7_hresolution;
     private short                 field_8_vresolution;

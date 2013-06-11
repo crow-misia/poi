@@ -107,7 +107,7 @@ public final class TestBorderCode extends TestCase {
         fail("Expected paragraph not found");
 
         // should never come here
-        throw null;
+        throw new RuntimeException();
     }
 
 }

@@ -122,7 +122,7 @@ public final class TestUnknownEscherRecord extends TestCase {
         r.setOptions( (short) 0x1234 );
         r.setRecordId( (short) 0xF112 );
         byte[] data = new byte[8];
-        r.serialize( 0, data, new NullEscherSerializationListener() );
+        r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
 
         assertEquals( "[34, 12, 12, F1, 00, 00, 00, 00]", HexDump.toHex( data ) );
 
@@ -132,7 +132,7 @@ public final class TestUnknownEscherRecord extends TestCase {
         r.addChildRecord( childRecord );
         r.setOptions( (short) 0x123F );
         data = new byte[16];
-        r.serialize( 0, data, new NullEscherSerializationListener() );
+        r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
 
         assertEquals( "[3F, 12, 12, F1, 08, 00, 00, 00, 99, 99, 01, FF, 00, 00, 00, 00]", HexDump.toHex( data ) );
     }
@@ -142,7 +142,7 @@ public final class TestUnknownEscherRecord extends TestCase {
         r.setOptions( (short) 0x1234 );
         r.setRecordId( (short) 0xF112 );
         byte[] data = new byte[8];
-        r.serialize( 0, data, new NullEscherSerializationListener() );
+        r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
 
         assertEquals( "org.apache.poi.ddf.UnknownEscherRecord:" + '\n' +
                 "  isContainer: false" + '\n' +

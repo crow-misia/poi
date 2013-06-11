@@ -124,7 +124,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
         for ( Iterator<EscherRecord> iterator = escherRecords.iterator(); iterator.hasNext(); )
         {
             EscherRecord r = iterator.next();
-            pos += r.serialize( pos, data, new NullEscherSerializationListener() );
+            pos += r.serialize( pos, data, NullEscherSerializationListener.INSTANCE );
         }
         return getRecordSize();
     }

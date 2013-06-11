@@ -161,7 +161,7 @@ public abstract class EscherRecord {
      */
     public int serialize( int offset, byte[] data)
     {
-        return serialize( offset, data, new NullEscherSerializationListener() );
+        return serialize( offset, data, NullEscherSerializationListener.INSTANCE );
     }
 
     /**

@@ -28,10 +28,7 @@ import org.apache.poi.poifs.common.POIFSConstants;
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.IOUtils;
-import org.apache.poi.util.IntegerField;
 import org.apache.poi.util.LittleEndian;
-import org.apache.poi.util.LongField;
-import org.apache.poi.util.ShortField;
 
 /**
  * The block containing the archive header
@@ -119,10 +116,10 @@ public final class HeaderBlock implements HeaderBlockConstants {
 		if (signature != _signature) {
 			// Is it one of the usual suspects?
 			byte[] OOXML_FILE_HEADER = POIFSConstants.OOXML_FILE_HEADER;
-			if(_data[0] == OOXML_FILE_HEADER[0] &&
-				_data[1] == OOXML_FILE_HEADER[1] &&
-				_data[2] == OOXML_FILE_HEADER[2] &&
-				_data[3] == OOXML_FILE_HEADER[3]) {
+			if(data[0] == OOXML_FILE_HEADER[0] &&
+				data[1] == OOXML_FILE_HEADER[1] &&
+				data[2] == OOXML_FILE_HEADER[2] &&
+				data[3] == OOXML_FILE_HEADER[3]) {
 				throw new OfficeXmlFileException("The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)");
 			}
 			if ((signature & 0xFF8FFFFFFFFFFFFFL) == 0x0010000200040009L) {
@@ -140,21 +137,21 @@ public final class HeaderBlock implements HeaderBlockConstants {
 
 
 		// Figure out our block size
-		if (_data[30] == 12) {
+		if (data[30] == 12) {
 			this.bigBlockSize = POIFSConstants.LARGER_BIG_BLOCK_SIZE_DETAILS;
-		} else if(_data[30] == 9) {
+		} else if(data[30] == 9) {
 			this.bigBlockSize = POIFSConstants.SMALLER_BIG_BLOCK_SIZE_DETAILS;
 		} else {
-		   throw new IOException("Unsupported blocksize  (2^"+ _data[30] + "). Expected 2^9 or 2^12.");
+		   throw new IOException("Unsupported blocksize  (2^"+ data[30] + "). Expected 2^9 or 2^12.");
 		}
 
 	   // Setup the fields to read and write the counts and starts
-      _bat_count      = new IntegerField(_bat_count_offset, data).get();
-      _property_start = new IntegerField(_property_start_offset,_data).get();
-      _sbat_start = new IntegerField(_sbat_start_offset, _data).get();
-      _sbat_count = new IntegerField(_sbat_block_count_offset, _data).get();
-      _xbat_start = new IntegerField(_xbat_start_offset, _data).get();
-      _xbat_count = new IntegerField(_xbat_count_offset, _data).get();
+      _bat_count      = LittleEndian.getInt(data, _bat_count_offset);
+      _property_start = LittleEndian.getInt(data, _property_start_offset);
+      _sbat_start     = LittleEndian.getInt(data, _sbat_start_offset);
+      _sbat_count     = LittleEndian.getInt(data, _sbat_block_count_offset);
+      _xbat_start     = LittleEndian.getInt(data, _xbat_start_offset);
+      _xbat_count     = LittleEndian.getInt(data, _xbat_count_offset);
 	}
 	
    /**
@@ -165,25 +162,26 @@ public final class HeaderBlock implements HeaderBlockConstants {
       this.bigBlockSize = bigBlockSize;
 
       // Our data is always 512 big no matter what
-      _data = new byte[ POIFSConstants.SMALLER_BIG_BLOCK_SIZE ];
-      Arrays.fill(_data, _default_value);
+      final byte[] data = new byte[ POIFSConstants.SMALLER_BIG_BLOCK_SIZE ];
+      _data = data;
+      Arrays.fill(data, _default_value);
       
       // Set all the default values
-      new LongField(_signature_offset, _signature, _data);
-      new IntegerField(0x08, 0, _data);
-      new IntegerField(0x0c, 0, _data);
-      new IntegerField(0x10, 0, _data);
-      new IntegerField(0x14, 0, _data);
-      new ShortField(0x18, ( short ) 0x3b, _data);
-      new ShortField(0x1a, ( short ) 0x3, _data);
-      new ShortField(0x1c, ( short ) -2, _data);
-       
-      new ShortField(0x1e, bigBlockSize.getHeaderValue(), _data);
-      new IntegerField(0x20, 0x6, _data);
-      new IntegerField(0x24, 0, _data);
-      new IntegerField(0x28, 0, _data);
-      new IntegerField(0x34, 0, _data);
-      new IntegerField(0x38, 0x1000, _data);
+      LittleEndian.putLong(data, _signature_offset, _signature);
+      LittleEndian.putInt(data, 0x08, 0);
+      LittleEndian.putInt(data, 0x0c, 0);
+      LittleEndian.putInt(data, 0x10, 0);
+      LittleEndian.putInt(data, 0x14, 0);
+      LittleEndian.putShort(data, 0x18, ( short ) 0x3b);
+      LittleEndian.putShort(data, 0x1a, ( short ) 0x03);
+      LittleEndian.putShort(data, 0x1c, ( short ) -2);
+      
+      LittleEndian.putShort(data, 0x1e, bigBlockSize.getHeaderValue());
+      LittleEndian.putInt(data, 0x20, 0x06);
+      LittleEndian.putInt(data, 0x24, 0);
+      LittleEndian.putInt(data, 0x28, 0);
+      LittleEndian.putInt(data, 0x34, 0);
+      LittleEndian.putInt(data, 0x38, 0x1000);
       
       // Initialise the variables
       _bat_count = 0;
@@ -366,13 +364,13 @@ public final class HeaderBlock implements HeaderBlockConstants {
    void writeData(final OutputStream stream)
        throws IOException
    {
-      // Update the counts and start positions 
-      new IntegerField(_bat_count_offset,      _bat_count, _data);
-      new IntegerField(_property_start_offset, _property_start, _data);
-      new IntegerField(_sbat_start_offset,     _sbat_start, _data);
-      new IntegerField(_sbat_block_count_offset, _sbat_count, _data);
-      new IntegerField(_xbat_start_offset,      _xbat_start, _data);
-      new IntegerField(_xbat_count_offset,      _xbat_count, _data);
+      // Update the counts and start positions
+      LittleEndian.putInt(_data, _bat_count_offset, _bat_count);
+      LittleEndian.putInt(_data, _property_start_offset, _property_start);
+      LittleEndian.putInt(_data, _sbat_start_offset, _sbat_start);
+      LittleEndian.putInt(_data, _sbat_block_count_offset, _sbat_count);
+      LittleEndian.putInt(_data, _xbat_start_offset, _xbat_start);
+      LittleEndian.putInt(_data, _xbat_count_offset, _xbat_count);
       
       // Write the main data out
       stream.write(_data, 0, 512);

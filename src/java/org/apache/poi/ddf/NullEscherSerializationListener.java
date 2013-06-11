@@ -22,7 +22,14 @@ package org.apache.poi.ddf;
  *
  * @author Glen Stampoultzis (glens at apache.org)
  */
-public class NullEscherSerializationListener implements EscherSerializationListener {
+public final class NullEscherSerializationListener implements EscherSerializationListener {
+    /** Singleton Instance */
+    public static final NullEscherSerializationListener INSTANCE = new NullEscherSerializationListener();
+
+    private NullEscherSerializationListener() {
+        // no instances of this class
+    }
+
     public void beforeRecordSerialize(int offset, short recordId, EscherRecord record) {
         // do nothing
     }

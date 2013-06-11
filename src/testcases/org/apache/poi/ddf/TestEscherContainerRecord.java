@@ -54,7 +54,7 @@ public final class TestEscherContainerRecord extends TestCase {
 		r.setOptions((short) 0x123F);
 		r.setRecordId((short) 0xF112);
 		byte[] data = new byte[8];
-		r.serialize(0, data, new NullEscherSerializationListener());
+		r.serialize(0, data, NullEscherSerializationListener.INSTANCE);
 
 		assertEquals("[3F, 12, 12, F1, 00, 00, 00, 00]", HexDump.toHex(data));
 
@@ -63,7 +63,7 @@ public final class TestEscherContainerRecord extends TestCase {
 		childRecord.setRecordId((short) 0xFF01);
 		r.addChildRecord(childRecord);
 		data = new byte[16];
-		r.serialize(0, data, new NullEscherSerializationListener());
+		r.serialize(0, data, NullEscherSerializationListener.INSTANCE);
 
 		assertEquals("[3F, 12, 12, F1, 08, 00, 00, 00, 99, 99, 01, FF, 00, 00, 00, 00]", HexDump.toHex(data));
 

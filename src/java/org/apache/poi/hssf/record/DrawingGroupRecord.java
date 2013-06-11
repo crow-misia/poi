@@ -61,7 +61,7 @@ public final class DrawingGroupRecord extends AbstractEscherHolderRecord {
         byte[] buffer = new byte[getRawDataSize()];
         int pos = 0;
         for (final EscherRecord r : getEscherRecords()) {
-            pos += r.serialize(pos, buffer, new NullEscherSerializationListener() );
+            pos += r.serialize(pos, buffer, NullEscherSerializationListener.INSTANCE );
         }
 
         return writeData( offset, data, buffer );
