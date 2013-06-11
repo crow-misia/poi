@@ -26,7 +26,7 @@ public final class TestEscherSpgrRecord extends TestCase {
         EscherSpgrRecord r = createRecord();
 
         byte[] data = new byte[24];
-        int bytesWritten = r.serialize( 0, data, new NullEscherSerializationListener() );
+        int bytesWritten = r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
         assertEquals( 24, bytesWritten );
         assertEquals( "[10, 00, " +
                 "09, F0, " +

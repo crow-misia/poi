@@ -73,7 +73,7 @@ public final class TestEscherBlipRecord extends TestCase {
         EscherBitmapBlip blip2 = (EscherBitmapBlip)bse1.getBlipRecord();
         assertEquals(blip1.getOptions(), blip2.getOptions());
         assertEquals(blip1.getRecordId(), blip2.getRecordId());
-        assertEquals(blip1.getUID(), blip2.getUID());
+        assertTrue(Arrays.equals(blip1.getUID(), blip2.getUID()));
 
         assertTrue(Arrays.equals(blip1.getPicturedata(), blip1.getPicturedata()));
     }

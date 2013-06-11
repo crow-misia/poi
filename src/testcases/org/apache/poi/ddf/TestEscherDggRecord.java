@@ -26,7 +26,7 @@ public final class TestEscherDggRecord extends TestCase {
         EscherDggRecord r = createRecord();
 
         byte[] data = new byte[32];
-        int bytesWritten = r.serialize( 0, data, new NullEscherSerializationListener() );
+        int bytesWritten = r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
         assertEquals( 32, bytesWritten );
         assertEquals( "[00, 00, " +
                 "06, F0, " +

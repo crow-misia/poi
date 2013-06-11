@@ -27,7 +27,7 @@ public class TestEscherSpRecord extends TestCase
         EscherSpRecord r = createRecord();
 
         byte[] data = new byte[16];
-        int bytesWritten = r.serialize( 0, data, new NullEscherSerializationListener() );
+        int bytesWritten = r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
         assertEquals( 16, bytesWritten );
         assertEquals( "[02, 00, " +
                 "0A, F0, " +

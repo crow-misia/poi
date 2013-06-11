@@ -31,7 +31,7 @@ import junit.framework.TestCase;
  * @author Marc Johnson
  */
 public final class TestDocumentBlock extends TestCase {
-    static final private byte[] _testdata;
+    private static final byte[] _testdata;
 
     static
     {

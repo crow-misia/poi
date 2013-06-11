@@ -26,7 +26,7 @@ public final class TestEscherSplitMenuColorsRecord extends TestCase {
         EscherSplitMenuColorsRecord r = createRecord();
 
         byte[] data = new byte[24];
-        int bytesWritten = r.serialize( 0, data, new NullEscherSerializationListener() );
+        int bytesWritten = r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
         assertEquals( 24, bytesWritten );
         assertEquals( "[40, 00, " +
                 "1E, F1, " +

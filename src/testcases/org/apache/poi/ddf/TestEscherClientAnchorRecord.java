@@ -27,7 +27,7 @@ public class TestEscherClientAnchorRecord extends TestCase
         EscherClientAnchorRecord r = createRecord();
 
         byte[] data = new byte[8 + 18 + 2];
-        int bytesWritten = r.serialize( 0, data, new NullEscherSerializationListener() );
+        int bytesWritten = r.serialize( 0, data, NullEscherSerializationListener.INSTANCE );
         assertEquals( 28, bytesWritten );
         assertEquals( "[01, 00, " +
                 "10, F0, " +

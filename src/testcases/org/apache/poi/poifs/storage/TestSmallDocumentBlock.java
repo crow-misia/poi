@@ -34,8 +34,8 @@ import junit.framework.TestCase;
  * @author Marc Johnson
  */
 public final class TestSmallDocumentBlock extends TestCase {
-    static final private byte[] _testdata;
-    static final private int    _testdata_size = 2999;
+    private static final byte[] _testdata;
+    private static final int    _testdata_size = 2999;
 
     static
     {

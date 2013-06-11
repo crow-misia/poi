@@ -54,7 +54,7 @@ public final class TestEscherBlipWMFRecord extends TestCase {
         r.setData(new byte[] { (byte)0x01, (byte)0x02 } );
 
         byte[] buf = new byte[r.getRecordSize()];
-        r.serialize(0, buf, new NullEscherSerializationListener() );
+        r.serialize(0, buf, NullEscherSerializationListener.INSTANCE );
 
         assertEquals("[2C, 15, 18, F0, 26, 00, 00, 00, " +
                 "01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, " +

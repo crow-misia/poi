@@ -41,32 +41,32 @@ import org.apache.poi.util.ShortField;
  */
 
 public abstract class Property implements Child, POIFSViewable {
-    static final private byte   _default_fill             = ( byte ) 0x00;
-    static final private int    _name_size_offset         = 0x40;
-    static final private int    _max_name_length          =
+    private static final byte   _default_fill             = ( byte ) 0x00;
+    private static final int    _name_size_offset         = 0x40;
+    private static final int    _max_name_length          =
         (_name_size_offset / LittleEndian.SHORT_SIZE) - 1;
-    static final protected int  _NO_INDEX                 = -1;
+    protected static final int  _NO_INDEX                 = -1;
 
     // useful offsets
-    static final private int    _node_color_offset        = 0x43;
-    static final private int    _previous_property_offset = 0x44;
-    static final private int    _next_property_offset     = 0x48;
-    static final private int    _child_property_offset    = 0x4C;
-    static final private int    _storage_clsid_offset     = 0x50;
-    static final private int    _user_flags_offset        = 0x60;
-    static final private int    _seconds_1_offset         = 0x64;
-    static final private int    _days_1_offset            = 0x68;
-    static final private int    _seconds_2_offset         = 0x6C;
-    static final private int    _days_2_offset            = 0x70;
-    static final private int    _start_block_offset       = 0x74;
-    static final private int    _size_offset              = 0x78;
+    private static final int    _node_color_offset        = 0x43;
+    private static final int    _previous_property_offset = 0x44;
+    private static final int    _next_property_offset     = 0x48;
+    private static final int    _child_property_offset    = 0x4C;
+    private static final int    _storage_clsid_offset     = 0x50;
+    private static final int    _user_flags_offset        = 0x60;
+    private static final int    _seconds_1_offset         = 0x64;
+    private static final int    _days_1_offset            = 0x68;
+    private static final int    _seconds_2_offset         = 0x6C;
+    private static final int    _days_2_offset            = 0x70;
+    private static final int    _start_block_offset       = 0x74;
+    private static final int    _size_offset              = 0x78;
 
     // node colors
-    static final protected byte _NODE_BLACK               = 1;
-    static final protected byte _NODE_RED                 = 0;
+    protected static final byte _NODE_BLACK               = 1;
+    protected static final byte _NODE_RED                 = 0;
 
     // documents must be at least this size to be stored in big blocks
-    static final private int    _big_block_minimum_bytes  = POIFSConstants.BIG_BLOCK_MINIMUM_DOCUMENT_SIZE;
+    private static final int    _big_block_minimum_bytes  = POIFSConstants.BIG_BLOCK_MINIMUM_DOCUMENT_SIZE;
     private String              _name;
     private ShortField          _name_size;
     private ByteField           _property_type;
@@ -162,8 +162,7 @@ public abstract class Property implements Child, POIFSViewable {
 
             for (int j = 0; j < name_length; j++)
             {
-                char_array[ j ] = ( char ) new ShortField(name_offset,
-                                                          _raw_data).get();
+                char_array[ j ] = ( char ) LittleEndian.getShort(_raw_data, name_offset);
                 name_offset     += LittleEndian.SHORT_SIZE;
             }
             _name = new String(char_array, 0, name_length);
@@ -281,12 +280,12 @@ public abstract class Property implements Child, POIFSViewable {
 
         for (; j < limit; j++)
         {
-            new ShortField(offset, ( short ) char_array[ j ], _raw_data);
+            LittleEndian.putShort(_raw_data, offset, ( short ) char_array[ j ]);
             offset += LittleEndian.SHORT_SIZE;
         }
         for (; j < _max_name_length + 1; j++)
         {
-            new ShortField(offset, ( short ) 0, _raw_data);
+            LittleEndian.putShort(_raw_data, offset, ( short ) 0);
             offset += LittleEndian.SHORT_SIZE;
         }
 
@@ -501,7 +500,7 @@ public abstract class Property implements Child, POIFSViewable {
      */
     public Iterator getViewableIterator()
     {
-        return Collections.EMPTY_LIST.iterator();
+        return Collections.emptyIterator();
     }
 
     /**
