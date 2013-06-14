@@ -24,9 +24,10 @@ package org.apache.poi.hssf.record;
  * Description: Used by records to indicate invalid format/data.<P>
  */
 
-public class RecordFormatException
+public final class RecordFormatException
     extends org.apache.poi.util.RecordFormatException
 {
+    private static final long serialVersionUID = 1L;
     public RecordFormatException(String exception)
     {
         super(exception);

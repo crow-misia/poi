@@ -27,8 +27,7 @@ import java.util.*;
  * @author Marc Johnson (mjohnson at apache dot org)
  */
 
-public class SmallDocumentBlockList
-    extends BlockListImpl
+public final class SmallDocumentBlockList extends BlockListImpl
 {
 
     /**
@@ -37,10 +36,9 @@ public class SmallDocumentBlockList
      * @param blocks a list of SmallDocumentBlock instances
      */
 
-    public SmallDocumentBlockList(final List blocks)
+    public SmallDocumentBlockList(final List<SmallDocumentBlock> blocks)
     {
-        setBlocks(( SmallDocumentBlock [] ) blocks
-            .toArray(new SmallDocumentBlock[ blocks.size() ]));
+        setBlocks(blocks.toArray(new SmallDocumentBlock[ blocks.size() ]));
     }
 }   // end public class SmallDocumentBlockList
 

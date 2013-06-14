@@ -19,13 +19,11 @@
 package org.apache.poi.ddf;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.IOUtils;

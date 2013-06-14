@@ -23,6 +23,7 @@ import java.util.*;
 
 import org.apache.poi.poifs.dev.POIFSViewable;
 import org.apache.poi.poifs.property.DocumentProperty;
+import org.apache.poi.util.ArrayUtil;
 
 /**
  * Simple implementation of DocumentEntry
@@ -118,7 +119,7 @@ public class DocumentNode
 
     public Object [] getViewableArray()
     {
-        return new Object[ 0 ];
+        return ArrayUtil.EMPTY_OBJECT_ARRAY;
     }
 
     /**

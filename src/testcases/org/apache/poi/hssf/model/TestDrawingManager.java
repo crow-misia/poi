@@ -20,7 +20,6 @@ package org.apache.poi.hssf.model;
 import junit.framework.TestCase;
 import org.apache.poi.ddf.EscherDggRecord;
 import org.apache.poi.ddf.EscherDgRecord;
-import org.apache.poi.util.ArrayUtil;
 
 public final class TestDrawingManager extends TestCase {
     public void testFindFreeSPIDBlock() {

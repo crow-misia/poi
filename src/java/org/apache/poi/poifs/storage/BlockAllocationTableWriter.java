@@ -55,7 +55,7 @@ public final class BlockAllocationTableWriter implements BlockWritable, BATManag
        _bigBlockSize = bigBlockSize; 
         _start_block  = POIFSConstants.END_OF_CHAIN;
         _entries      = new IntArrayList();
-        _blocks       = new BATBlock[ 0 ];
+        _blocks       = BATBlock.EMPTY_ARRAY;
     }
 
     /**

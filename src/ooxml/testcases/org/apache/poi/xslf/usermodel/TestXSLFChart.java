@@ -27,10 +27,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openxmlformats.schemas.drawingml.x2006.chart.*;
-import org.openxmlformats.schemas.drawingml.x2006.main.*;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTConnector;
 
-import java.awt.*;
 import java.io.*;
 import java.util.LinkedHashMap;
 import java.util.Map;

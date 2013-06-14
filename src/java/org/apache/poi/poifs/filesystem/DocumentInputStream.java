@@ -91,9 +91,10 @@ public class DocumentInputStream extends InputStream implements LittleEndianInpu
 
 	public void close() {
 	   delegate.close();
+	   delegate = null;
 	}
 
-	public synchronized void mark(int ignoredReadlimit) {
+	public void mark(int ignoredReadlimit) {
 		delegate.mark(ignoredReadlimit);
 	}
 
@@ -123,7 +124,7 @@ public class DocumentInputStream extends InputStream implements LittleEndianInpu
 	 * last called on this input stream. If mark() has not been called this
 	 * method repositions the stream to its beginning.
 	 */
-	public synchronized void reset() {
+	public void reset() {
 	   delegate.reset();
 	}
 

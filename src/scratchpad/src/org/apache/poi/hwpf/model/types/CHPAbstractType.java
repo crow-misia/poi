@@ -504,8 +504,7 @@ public abstract class CHPAbstractType
         result = prime * result + ( field_65_fSpecVanish? 1231 : 1237 );
         result = prime * result + ( field_66_fHasOldProps? 1231 : 1237 );
         result = prime * result + ( field_67_fSdtVanish? 1231 : 1237 );
-        result = prime * result + field_68_wCharScale;
-        return result;
+        return prime * result + field_68_wCharScale;
     }
 
     public String toString()
@@ -685,7 +684,7 @@ public abstract class CHPAbstractType
         builder.append("    .dttmDispFldRMark     = ");
         builder.append(" (").append(getDttmDispFldRMark()).append(" )\n");
         builder.append("    .xstDispFldRMark      = ");
-        builder.append(" (").append(getXstDispFldRMark()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getXstDispFldRMark())).append(" )\n");
         builder.append("    .fcObjp               = ");
         builder.append(" (").append(getFcObjp()).append(" )\n");
         builder.append("    .lbrCRJ               = ");

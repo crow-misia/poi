@@ -21,7 +21,6 @@ package org.apache.poi.xssf.streaming;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.SXSSFITestDataProvider;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 

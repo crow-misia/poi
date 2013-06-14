@@ -99,7 +99,7 @@ public final class ODocumentInputStream extends DocumentInputStream {
 	}
 
    @Override
-	public synchronized void mark(int ignoredReadlimit) {
+	public void mark(int ignoredReadlimit) {
 		_marked_offset = _current_offset;
 	}
 
@@ -147,7 +147,7 @@ public final class ODocumentInputStream extends DocumentInputStream {
 	 * method repositions the stream to its beginning.
 	 */
    @Override
-	public synchronized void reset() {
+	public void reset() {
 		_current_offset = _marked_offset;
 		_currentBlock = getDataInputBlock(_current_offset);
 	}

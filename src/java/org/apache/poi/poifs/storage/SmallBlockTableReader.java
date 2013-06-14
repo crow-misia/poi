@@ -45,16 +45,15 @@ public final class SmallBlockTableReader {
      */
     public static BlockList getSmallDocumentBlocks(
             final POIFSBigBlockSize bigBlockSize,
-            final RawDataBlockList blockList, final RootProperty root,
+            final BlockListImpl blockList, final RootProperty root,
             final int sbatStart)
         throws IOException
     {
        // Fetch the blocks which hold the Small Blocks stream
-       ListManagedBlock [] smallBlockBlocks = 
-          blockList.fetchBlocks(root.getStartBlock(), -1);
+       ListManagedBlock[] smallBlockBlocks = blockList.fetchBlocks(root.getStartBlock(), -1);
         
        // Turn that into a list
-       BlockList list =new SmallDocumentBlockList(
+       BlockList list = new SmallDocumentBlockList(
              SmallDocumentBlock.extract(bigBlockSize, smallBlockBlocks));
 
        // Process

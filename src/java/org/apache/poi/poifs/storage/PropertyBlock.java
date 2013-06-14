@@ -30,7 +30,7 @@ import org.apache.poi.poifs.property.Property;
  * @author Marc Johnson (mjohnson at apache dot org)
  */
 public final class PropertyBlock extends BigBlock {
-    private Property[]       _properties;
+    private final Property[]       _properties;
 
     /**
      * Create a single instance initialized with default values
@@ -66,26 +66,13 @@ public final class PropertyBlock extends BigBlock {
             (properties.size() + _properties_per_block - 1)
             / _properties_per_block;
         final int ps = block_count * _properties_per_block;
-        Property[] to_be_written = new Property[ ps ];
-
-        System.arraycopy(properties.toArray(new Property[ 0 ]), 0,
-                         to_be_written, 0, properties.size());
+        final Property[] to_be_written = properties.toArray(new Property[ ps ]);
         for (int j = properties.size(); j < ps; j++)
         {
 
             // create an instance of an anonymous inner class that
             // extends Property
-            to_be_written[ j ] = new Property()
-            {
-                protected void preWrite()
-                {
-                }
-
-                public boolean isDirectory()
-                {
-                    return false;
-                }
-            };
+            to_be_written[ j ] = Property.NULL;
         }
         BlockWritable[] rvalue = new BlockWritable[ block_count ];
 

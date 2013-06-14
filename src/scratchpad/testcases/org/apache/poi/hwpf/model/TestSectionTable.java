@@ -20,7 +20,6 @@ package org.apache.poi.hwpf.model;
 import junit.framework.*;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.hwpf.*;

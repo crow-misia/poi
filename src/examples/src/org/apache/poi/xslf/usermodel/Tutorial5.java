@@ -19,8 +19,6 @@
 
 package org.apache.poi.xslf.usermodel;
 
-import org.apache.poi.util.IOUtils;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

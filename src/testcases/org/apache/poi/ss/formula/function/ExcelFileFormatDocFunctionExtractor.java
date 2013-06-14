@@ -40,7 +40,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 import org.xml.sax.Attributes;

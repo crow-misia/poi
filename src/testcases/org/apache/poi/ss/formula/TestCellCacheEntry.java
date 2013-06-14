@@ -21,7 +21,6 @@ import junit.framework.TestCase;
 
 import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.util.ArrayUtil;
 
 /**
  * Tests {@link org.apache.poi.ss.formula.CellCacheEntry}.

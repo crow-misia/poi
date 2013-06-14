@@ -56,6 +56,12 @@ public final class WSBoolRecord extends StandardRecord {
     {
     }
 
+    public WSBoolRecord(final byte bool1, final byte bool2)
+    {
+        field_1_wsbool = bool1;
+        field_2_wsbool = bool2;
+    }
+
     public WSBoolRecord(RecordInputStream in)
     {
        byte data[] = in.readRemainder();
@@ -70,15 +76,6 @@ public final class WSBoolRecord extends StandardRecord {
     // budweiser though its ironically good...its sold in the USs
     // as czechvar  --- odd that they had the name first but can't
     // use it)...
-
-    /**
-     * set first byte (see bit setters)
-     */
-
-    public void setWSBool1(byte bool1)
-    {
-        field_1_wsbool = bool1;
-    }
 
     // bool1 bitfields
 
@@ -123,15 +120,6 @@ public final class WSBoolRecord extends StandardRecord {
     }
 
     // end bitfields
-
-    /**
-     * set the second byte (see bit setters)
-     */
-
-    public void setWSBool2(byte bool2)
-    {
-        field_2_wsbool = bool2;
-    }
 
     // bool2 bitfields
 
@@ -180,15 +168,6 @@ public final class WSBoolRecord extends StandardRecord {
 
     // end bitfields
 
-    /**
-     * get first byte (see bit getters)
-     */
-
-    public byte getWSBool1()
-    {
-        return field_1_wsbool;
-    }
-
     // bool1 bitfields
 
     /**
@@ -232,15 +211,6 @@ public final class WSBoolRecord extends StandardRecord {
     }
 
     // end bitfields
-
-    /**
-     * get the second byte (see bit getters)
-     */
-
-    public byte getWSBool2()
-    {
-        return field_2_wsbool;
-    }
 
     // bool2 bitfields
 
@@ -292,7 +262,7 @@ public final class WSBoolRecord extends StandardRecord {
 
         buffer.append("[WSBOOL]\n");
         buffer.append("    .wsbool1        = ")
-            .append(Integer.toHexString(getWSBool1())).append("\n");
+            .append(Integer.toHexString(field_1_wsbool)).append("\n");
         buffer.append("        .autobreaks = ").append(getAutobreaks())
             .append("\n");
         buffer.append("        .dialog     = ").append(getDialog())
@@ -302,7 +272,7 @@ public final class WSBoolRecord extends StandardRecord {
         buffer.append("        .rowsumsrigt= ").append(getRowSumsRight())
             .append("\n");
         buffer.append("    .wsbool2        = ")
-            .append(Integer.toHexString(getWSBool2())).append("\n");
+            .append(Integer.toHexString(field_2_wsbool)).append("\n");
         buffer.append("        .fittopage  = ").append(getFitToPage())
             .append("\n");
         buffer.append("        .displayguts= ").append(getDisplayGuts())
@@ -316,8 +286,8 @@ public final class WSBoolRecord extends StandardRecord {
     }
 
     public void serialize(LittleEndianOutput out) {
-        out.writeByte(getWSBool2());
-        out.writeByte(getWSBool1());
+        out.writeByte(field_2_wsbool);
+        out.writeByte(field_1_wsbool);
     }
 
     protected int getDataSize() {

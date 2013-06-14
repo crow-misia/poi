@@ -45,7 +45,7 @@ public final class CFRecordsAggregate extends RecordAggregate {
 	private final CFHeaderRecord header;
 
 	/** List of CFRuleRecord objects */
-	private final List rules;
+	private final List<CFRuleRecord> rules;
 
 	private CFRecordsAggregate(CFHeaderRecord pHeader, CFRuleRecord[] pRules) {
 		if(pHeader == null) {
@@ -62,9 +62,9 @@ public final class CFRecordsAggregate extends RecordAggregate {
 			throw new RuntimeException("Mismatch number of rules");
 		}
 		header = pHeader;
-		rules = new ArrayList(3);
-		for (int i = 0; i < pRules.length; i++) {
-			rules.add(pRules[i]);
+		rules = new ArrayList<>(3);
+		for (final CFRuleRecord r : pRules) {
+			rules.add(r);
 		}
 	}
 

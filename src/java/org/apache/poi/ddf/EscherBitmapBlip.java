@@ -20,8 +20,6 @@ package org.apache.poi.ddf;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 
-import java.io.ByteArrayOutputStream;
-
 /**
  * @author Glen Stampoultzis
  */

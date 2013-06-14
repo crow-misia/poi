@@ -18,6 +18,8 @@
 package org.apache.poi.hwpf.model.types;
 
 
+import java.util.Arrays;
+
 import org.apache.poi.hdf.model.hdftypes.HDFType;
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.BitField;
@@ -459,9 +461,9 @@ public abstract class DOPAbstractType implements HDFType {
         builder.append("    .adt                  = ");
         builder.append(" (").append(getAdt()).append(" )\n");
         builder.append("    .doptypography        = ");
-        builder.append(" (").append(getDoptypography()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getDoptypography())).append(" )\n");
         builder.append("    .dogrid               = ");
-        builder.append(" (").append(getDogrid()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getDogrid())).append(" )\n");
         builder.append("    .docinfo5             = ");
         builder.append(" (").append(getDocinfo5()).append(" )\n");
         builder.append("         .lvl                      = ").append(getLvl()).append('\n');
@@ -480,7 +482,7 @@ public abstract class DOPAbstractType implements HDFType {
         builder.append("         .fHaveVersions            = ").append(isFHaveVersions()).append('\n');
         builder.append("         .fAutoVersions            = ").append(isFAutoVersions()).append('\n');
         builder.append("    .asumyi               = ");
-        builder.append(" (").append(getAsumyi()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getAsumyi())).append(" )\n");
         builder.append("    .cChWS                = ");
         builder.append(" (").append(getCChWS()).append(" )\n");
         builder.append("    .cChWSFtnEdn          = ");
@@ -493,7 +495,7 @@ public abstract class DOPAbstractType implements HDFType {
         builder.append("         .fVirusLoadSafe           = ").append(isFVirusLoadSafe()).append('\n');
         builder.append("         .KeyVirusSession30        = ").append(getKeyVirusSession30()).append('\n');
         builder.append("    .Spare                = ");
-        builder.append(" (").append(getSpare()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getSpare())).append(" )\n");
         builder.append("    .reserved1            = ");
         builder.append(" (").append(getReserved1()).append(" )\n");
         builder.append("    .reserved2            = ");

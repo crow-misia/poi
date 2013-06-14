@@ -57,7 +57,7 @@ public final class BlockAllocationTableReader {
      */
     private static final int MAX_BLOCK_COUNT = 65535;
     private final IntArrayList _entries;
-    private POIFSBigBlockSize bigBlockSize;
+    private final POIFSBigBlockSize bigBlockSize;
 
     /**
      * create a BlockAllocationTableReader for an existing filesystem. Side

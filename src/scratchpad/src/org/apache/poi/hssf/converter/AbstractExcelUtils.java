@@ -27,7 +27,6 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.hwpf.converter.AbstractWordUtils;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.Beta;
-import org.apache.poi.util.IOUtils;
 
 /**
  * Common class for {@link ExcelToFoUtils} and {@link ExcelToHtmlUtils}

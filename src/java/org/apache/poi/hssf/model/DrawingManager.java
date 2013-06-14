@@ -32,7 +32,7 @@ import java.util.HashMap;
 public class DrawingManager
 {
     EscherDggRecord dgg;
-    Map dgMap = new HashMap(); // key = Short(drawingId), value=EscherDgRecord
+    Map<Short, EscherDgRecord> dgMap = new HashMap<>(); // key = Short(drawingId), value=EscherDgRecord
 
     public DrawingManager( EscherDggRecord dgg )
     {
@@ -61,7 +61,7 @@ public class DrawingManager
     public int allocateShapeId(short drawingGroupId)
     {
         // Get the last shape id for this drawing group.
-        EscherDgRecord dg = (EscherDgRecord) dgMap.get(Short.valueOf(drawingGroupId));
+        EscherDgRecord dg = dgMap.get(Short.valueOf(drawingGroupId));
         int lastShapeId = dg.getLastMSOSPID();
 
 
@@ -144,8 +144,7 @@ public class DrawingManager
     int findFreeSPIDBlock()
     {
         int max = dgg.getShapeIdMax();
-        int next = ( ( max / 1024 ) + 1 ) * 1024;
-        return next;
+        return ( ( max / 1024 ) + 1 ) * 1024;
     }
 
     public EscherDggRecord getDgg()

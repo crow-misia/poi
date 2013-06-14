@@ -106,6 +106,7 @@ public final class Section extends Range
         return "Section [" + getStartOffset() + "; " + getEndOffset() + ")";
     }
 
+    @SuppressWarnings("deprecation")
     public int type()
     {
         return TYPE_SECTION;

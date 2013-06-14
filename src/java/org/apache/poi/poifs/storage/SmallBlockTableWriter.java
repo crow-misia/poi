@@ -40,7 +40,7 @@ public class SmallBlockTableWriter
     implements BlockWritable, BATManaged
 {
     private BlockAllocationTableWriter _sbat;
-    private List                       _small_blocks;
+    private List<SmallDocumentBlock>   _small_blocks;
     private int                        _big_block_count;
     private RootProperty               _root;
 
@@ -52,26 +52,26 @@ public class SmallBlockTableWriter
      */
 
     public SmallBlockTableWriter(final POIFSBigBlockSize bigBlockSize,
-                                 final List documents,
+                                 final List<POIFSDocument> documents,
                                  final RootProperty root)
     {
         _sbat         = new BlockAllocationTableWriter(bigBlockSize);
-        _small_blocks = new ArrayList();
+        _small_blocks = new ArrayList<>();
         _root         = root;
-        Iterator iter = documents.iterator();
+        Iterator<POIFSDocument> iter = documents.iterator();
 
         while (iter.hasNext())
         {
-            POIFSDocument   doc    = ( POIFSDocument ) iter.next();
-            BlockWritable[] blocks = doc.getSmallBlocks();
+            POIFSDocument   doc    = iter.next();
+            SmallDocumentBlock[] blocks = doc.getSmallBlocks();
 
             if (blocks.length != 0)
             {
                 final int n = blocks.length;
                 doc.setStartBlock(_sbat.allocateSpace(n));
-                for (int j = 0; j < n; j++)
+                for (final SmallDocumentBlock b : blocks)
                 {
-                    _small_blocks.add(blocks[ j ]);
+                    _small_blocks.add(b);
                 }
             } else {
             	doc.setStartBlock(POIFSConstants.END_OF_CHAIN);
@@ -144,11 +144,9 @@ public class SmallBlockTableWriter
     public void writeBlocks(final OutputStream stream)
         throws IOException
     {
-        Iterator iter = _small_blocks.iterator();
-
-        while (iter.hasNext())
+        for (final SmallDocumentBlock b: _small_blocks)
         {
-            (( BlockWritable ) iter.next()).writeBlocks(stream);
+            b.writeBlocks(stream);
         }
     }
 

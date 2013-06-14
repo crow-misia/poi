@@ -17,10 +17,7 @@
 
 package org.apache.poi.ss.formula.functions;
 
-import org.apache.poi.ss.formula.OperationEvaluationContext;
 import org.apache.poi.ss.formula.eval.*;
-
-import java.math.BigDecimal;
 
 /**
  * Implementation for Excel REPT () function.<p/>

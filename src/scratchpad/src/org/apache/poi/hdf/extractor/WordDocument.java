@@ -83,9 +83,9 @@ public final class WordDocument {
   /** used for XSL-FO table conversion*/
   StringBuilder _cellBuffer;
   /** used for XSL-FO table conversion*/
-  List _cells;
+  List<String> _cells;
   /** used for XSL-FO table conversion*/
-  List _table;
+  List<TableRow> _table;
 
   /** document's header and footer information*/
   byte[] _plcfHdd;
@@ -106,12 +106,12 @@ public final class WordDocument {
   private POIFSFileSystem filesystem;
 
   //used internally
-  private static int HEADER_EVEN_INDEX = 0;
-  private static int HEADER_ODD_INDEX = 1;
-  private static int FOOTER_EVEN_INDEX = 2;
-  private static int FOOTER_ODD_INDEX = 3;
-  private static int HEADER_FIRST_INDEX = 4;
-  private static int FOOTER_FIRST_INDEX = 5;
+  private static final int HEADER_EVEN_INDEX = 0;
+  private static final int HEADER_ODD_INDEX = 1;
+  private static final int FOOTER_EVEN_INDEX = 2;
+  private static final int FOOTER_ODD_INDEX = 3;
+  private static final int HEADER_FIRST_INDEX = 4;
+  private static final int FOOTER_FIRST_INDEX = 5;
 
   /**
    *  right now this function takes one parameter: a Word file, and outputs an
@@ -154,7 +154,7 @@ public final class WordDocument {
   {
     int textStart = Utils.convertBytesToInt(_header, 0x18);
     int textEnd = Utils.convertBytesToInt(_header, 0x1c);
-    ArrayList textPieces = findProperties(textStart, textEnd, _text.root);
+    List<PropertyNode> textPieces = findProperties(textStart, textEnd, _text.root);
     int size = textPieces.size();
 
     for(int x = 0; x < size; x++)
@@ -205,7 +205,7 @@ public final class WordDocument {
         readFIB();
 
         //get the SEPS for the main document text
-        ArrayList sections = findProperties(_fcMin, _fcMin + _ccpText, _sectionTable.root);
+        List<PropertyNode> sections = findProperties(_fcMin, _fcMin + _ccpText, _sectionTable.root);
 
         //iterate through sections, paragraphs, and character runs doing what
         //you will with the data.
@@ -689,9 +689,9 @@ public final class WordDocument {
 
   private int calculateHeaderHeight(int start, int end, int pageWidth)
   {
-    ArrayList paragraphs = findProperties(start, end, _paragraphTable.root);
+    List<PropertyNode> paragraphs = findProperties(start, end, _paragraphTable.root);
     int size = paragraphs.size();
-    ArrayList lineHeights = new ArrayList();
+    List<Integer> lineHeights = new ArrayList<>();
     //StyleContext context = StyleContext.getDefaultStyleContext();
 
     for(int x = 0; x < size; x++)
@@ -703,7 +703,7 @@ public final class WordDocument {
       int lineWidth = 0;
       int maxHeight = 0;
 
-      ArrayList textRuns = findProperties(parStart, parEnd, _characterTable.root);
+      List<PropertyNode> textRuns = findProperties(parStart, parEnd, _characterTable.root);
       int charSize = textRuns.size();
 
       //StringBuilder lineBuffer = new StringBuilder();
@@ -723,7 +723,7 @@ public final class WordDocument {
         int charStart = Math.max(parStart, charNode.getStart());
         int charEnd = Math.min(parEnd, charNode.getEnd());
 
-        ArrayList text = findProperties(charStart, charEnd, _text.root);
+        List<PropertyNode> text = findProperties(charStart, charEnd, _text.root);
 
         int textSize = text.size();
         StringBuilder buf = new StringBuilder();
@@ -872,7 +872,7 @@ public final class WordDocument {
   {
 
     BTreeSet.BTreeNode root = paragraphTable.root;
-    ArrayList pars = findProperties(start, end, root);
+    List<PropertyNode> pars = findProperties(start, end, root);
     //root = characterTable.root;
     int size = pars.size();
 
@@ -923,7 +923,7 @@ public final class WordDocument {
       {
         if(_table == null)
         {
-          _table = new ArrayList();
+          _table = new ArrayList<>();
         }
         TAP tap = (TAP)StyleSheet.uncompressProperty(papx, new TAP(), _styleSheet);
         TableRow nextRow = new TableRow(_cells, tap);
@@ -958,7 +958,7 @@ public final class WordDocument {
 
     addParagraphProperties(pap, blockBuffer);
 
-    ArrayList charRuns = findProperties(Math.max(currentNode.getStart(), start),
+    List<PropertyNode> charRuns = findProperties(Math.max(currentNode.getStart(), start),
                                      Math.min(currentNode.getEnd(), end),
                                      _characterTable.root);
     int len = charRuns.size();
@@ -1016,7 +1016,7 @@ public final class WordDocument {
 
       int charStart = Math.max(charNode.getStart(), currentNode.getStart());
       int charEnd = Math.min(charNode.getEnd(), currentNode.getEnd());
-      ArrayList textRuns = findProperties(charStart, charEnd, _text.root);
+      List<PropertyNode> textRuns = findProperties(charStart, charEnd, _text.root);
       int textRunLen = textRuns.size();
       for(int y = 0; y < textRunLen; y++)
       {
@@ -1044,7 +1044,7 @@ public final class WordDocument {
   {
     addParagraphProperties(pap, blockBuffer);
 
-    ArrayList charRuns = findProperties(Math.max(currentNode.getStart(), start),
+    List<PropertyNode> charRuns = findProperties(Math.max(currentNode.getStart(), start),
                                      Math.min(currentNode.getEnd(), end),
                                      _characterTable.root);
     int len = charRuns.size();
@@ -1059,7 +1059,7 @@ public final class WordDocument {
 
       int charStart = Math.max(charNode.getStart(), currentNode.getStart());
       int charEnd = Math.min(charNode.getEnd(), currentNode.getEnd());
-      ArrayList textRuns = findProperties(charStart, charEnd, _text.root);
+      List<PropertyNode> textRuns = findProperties(charStart, charEnd, _text.root);
       int textRunLen = textRuns.size();
       for(int y = 0; y < textRunLen; y++)
       {
@@ -1105,7 +1105,7 @@ public final class WordDocument {
 
       if(_cells == null)
       {
-        _cells = new ArrayList();
+        _cells = new ArrayList<>();
       }
       closeLine(_cellBuffer);
       closeBlock(_cellBuffer);
@@ -1292,9 +1292,9 @@ public final class WordDocument {
   /**
    * finds all chpx's that are between start and end
    */
-  private ArrayList findProperties(int start, int end, BTreeSet.BTreeNode root)
+  private List<PropertyNode> findProperties(int start, int end, BTreeSet.BTreeNode root)
   {
-    ArrayList results = new ArrayList();
+    List<PropertyNode> results = new ArrayList<>();
     BTreeSet.Entry[] entries = root._entries;
 
     for(int x = 0; x < entries.length; x++)
@@ -1313,7 +1313,7 @@ public final class WordDocument {
             {
               if(child != null)
               {
-                ArrayList beforeItems = findProperties(start, end, child);
+                final List<PropertyNode> beforeItems = findProperties(start, end, child);
                 results.addAll(beforeItems);
               }
               results.add(xNode);
@@ -1328,7 +1328,7 @@ public final class WordDocument {
           {
             if(child != null)
             {
-              ArrayList beforeItems = findProperties(start, end, child);
+              final List<PropertyNode> beforeItems = findProperties(start, end, child);
               results.addAll(beforeItems);
             }
             break;
@@ -1336,7 +1336,7 @@ public final class WordDocument {
         }
         else if(child != null)
         {
-          ArrayList afterItems = findProperties(start, end, child);
+          List<PropertyNode> afterItems = findProperties(start, end, child);
           results.addAll(afterItems);
         }
       }
@@ -1371,9 +1371,9 @@ public final class WordDocument {
   {
     buf.append("</fo:block>\r\n");
   }
-  private ArrayList findPAPProperties(int start, int end, BTreeSet.BTreeNode root)
+  private List<PapxNode> findPAPProperties(int start, int end, BTreeSet.BTreeNode root)
   {
-    ArrayList results = new ArrayList();
+    List<PapxNode> results = new ArrayList<>();
     BTreeSet.Entry[] entries = root._entries;
 
     for(int x = 0; x < entries.length; x++)
@@ -1391,7 +1391,7 @@ public final class WordDocument {
             {
               if(child != null)
               {
-                ArrayList beforeItems = findPAPProperties(start, end, child);
+                List<PapxNode> beforeItems = findPAPProperties(start, end, child);
                 results.addAll(beforeItems);
               }
               results.add(papxNode);
@@ -1401,7 +1401,7 @@ public final class WordDocument {
           {
             if(child != null)
             {
-              ArrayList beforeItems = findPAPProperties(start, end, child);
+              List<PapxNode> beforeItems = findPAPProperties(start, end, child);
               results.addAll(beforeItems);
             }
             break;
@@ -1409,7 +1409,7 @@ public final class WordDocument {
         }
         else if(child != null)
         {
-          ArrayList afterItems = findPAPProperties(start, end, child);
+          List<PapxNode> afterItems = findPAPProperties(start, end, child);
           results.addAll(afterItems);
         }
       }
@@ -1761,7 +1761,7 @@ public final class WordDocument {
       for(int x = 0; x < size; x++)
       {
         StringBuilder rowBuffer = tableBodyBuffer;
-        TableRow row = (TableRow)_table.get(x);
+        TableRow row = _table.get(x);
         TAP tap = row.getTAP();
         List<String> cells = row.getCells();
 

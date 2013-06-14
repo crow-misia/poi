@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import org.apache.poi.hwpf.model.io.HWPFOutputStream;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;

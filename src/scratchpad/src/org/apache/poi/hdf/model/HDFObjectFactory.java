@@ -28,7 +28,6 @@ import org.apache.poi.hdf.model.hdftypes.*;
 import org.apache.poi.hdf.model.util.ParsingState;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**

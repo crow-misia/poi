@@ -55,9 +55,9 @@ public final class EntryUtils
         else
         {
             DocumentEntry dentry = (DocumentEntry) entry;
-            DocumentInputStream dstream = new DocumentInputStream( dentry );
-            target.createDocument( dentry.getName(), dstream );
-            dstream.close();
+            try (final DocumentInputStream dstream = new DocumentInputStream( dentry )) {
+                target.createDocument( dentry.getName(), dstream );
+            }
         }
     }
 
