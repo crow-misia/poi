@@ -21,7 +21,6 @@ package org.apache.poi.hssf.usermodel;
 import org.apache.poi.ddf.EscherChildAnchorRecord;
 import org.apache.poi.ddf.EscherClientAnchorRecord;
 import org.apache.poi.ddf.EscherContainerRecord;
-import org.apache.poi.ddf.EscherRecord;
 import org.apache.poi.ss.usermodel.Anchor;
 
 /**

@@ -23,7 +23,6 @@ import org.apache.poi.hdgf.chunks.ChunkFactory.CommandDefinition;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
-import org.apache.poi.util.StringUtil;
 
 /**
  * Base of all chunks, which hold data, flags etc

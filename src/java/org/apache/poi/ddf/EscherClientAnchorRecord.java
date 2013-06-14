@@ -21,8 +21,6 @@ import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 
-import java.io.ByteArrayOutputStream;
-
 /**
  * The escher client anchor specifies which rows and cells the shape is bound to as well as
  * the offsets within those cells.  Each cell is 1024 units wide by 256 units long regardless

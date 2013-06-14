@@ -30,7 +30,6 @@ import org.apache.poi.ss.formula.ptg.RefPtg;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndian;
 
 /**

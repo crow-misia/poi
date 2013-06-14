@@ -17,7 +17,6 @@
 
 package org.apache.poi.hpsf.basic;
 
-import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;

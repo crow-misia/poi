@@ -22,8 +22,6 @@ import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 
-import java.io.ByteArrayOutputStream;
-
 /**
  * The EscherClientDataRecord is used to store client specific data about the position of a
  * shape within a container.

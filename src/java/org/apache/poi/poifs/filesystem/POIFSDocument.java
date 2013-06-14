@@ -37,7 +37,6 @@ import org.apache.poi.poifs.storage.DocumentBlock;
 import org.apache.poi.poifs.storage.ListManagedBlock;
 import org.apache.poi.poifs.storage.RawDataBlock;
 import org.apache.poi.poifs.storage.SmallDocumentBlock;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.HexDump;
 
@@ -212,7 +211,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	/**
 	 * @return array of SmallDocumentBlocks; may be empty, cannot be null
 	 */
-	public BlockWritable[] getSmallBlocks() {
+	public SmallDocumentBlock[] getSmallBlocks() {
 		return _small_store.getBlocks();
 	}
 
@@ -377,7 +376,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	 *		 store
 	 */
 	public Iterator getViewableIterator() {
-		return Collections.EMPTY_LIST.iterator();
+		return Collections.emptyIterator();
 	}
 
 	/**

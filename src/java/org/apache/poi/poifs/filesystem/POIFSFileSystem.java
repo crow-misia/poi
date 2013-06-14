@@ -48,6 +48,7 @@ import org.apache.poi.poifs.storage.HeaderBlockWriter;
 import org.apache.poi.poifs.storage.RawDataBlockList;
 import org.apache.poi.poifs.storage.SmallBlockTableReader;
 import org.apache.poi.poifs.storage.SmallBlockTableWriter;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.CloseIgnoringInputStream;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.LongField;
@@ -551,7 +552,7 @@ public class POIFSFileSystem
         {
             return (( POIFSViewable ) getRoot()).getViewableArray();
         }
-        return new Object[ 0 ];
+        return ArrayUtil.EMPTY_OBJECT_ARRAY;
     }
 
     /**

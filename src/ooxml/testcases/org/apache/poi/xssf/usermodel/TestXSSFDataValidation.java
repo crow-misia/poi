@@ -16,7 +16,6 @@
 ==================================================================== */
 package org.apache.poi.xssf.usermodel;
 
-import java.io.FileOutputStream;
 import java.math.BigDecimal;
 import java.util.List;
 

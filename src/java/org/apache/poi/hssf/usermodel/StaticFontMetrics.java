@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.poi.util.Closeables;
+
 /**
  * Allows the user to lookup the font metrics for a particular font without
  * actually having the font on the system. The font details are loaded as a
@@ -83,12 +85,7 @@ final class StaticFontMetrics {
 			} catch (IOException e) {
 				throw new RuntimeException("Could not load font metrics: " + e.getMessage());
 			} finally {
-				if (metricsIn != null) {
-					try {
-						metricsIn.close();
-					} catch (IOException ignore) {
-					}
-				}
+				Closeables.close(metricsIn);
 			}
 		}
 

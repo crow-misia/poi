@@ -18,6 +18,8 @@
 package org.apache.poi.hwpf.model.types;
 
 
+import java.util.Arrays;
+
 import org.apache.poi.hwpf.usermodel.*;
 import org.apache.poi.util.*;
 
@@ -258,9 +260,9 @@ public abstract class TAPAbstractType
         builder.append("         .fAdjusted                = ").append(isFAdjusted()).append('\n');
         builder.append("         .viewFlags_unused2        = ").append(getViewFlags_unused2()).append('\n');
         builder.append("    .rgdxaCenter          = ");
-        builder.append(" (").append(getRgdxaCenter()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getRgdxaCenter())).append(" )\n");
         builder.append("    .rgdxaCenterPrint     = ");
-        builder.append(" (").append(getRgdxaCenterPrint()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getRgdxaCenterPrint())).append(" )\n");
         builder.append("    .shdTable             = ");
         builder.append(" (").append(getShdTable()).append(" )\n");
         builder.append("    .brcBottom            = ");
@@ -340,9 +342,9 @@ public abstract class TAPAbstractType
         builder.append("    .ftsCellSpacingOuterRight = ");
         builder.append(" (").append(getFtsCellSpacingOuterRight()).append(" )\n");
         builder.append("    .rgtc                 = ");
-        builder.append(" (").append(getRgtc()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getRgtc())).append(" )\n");
         builder.append("    .rgshd                = ");
-        builder.append(" (").append(getRgshd()).append(" )\n");
+        builder.append(" (").append(Arrays.toString(getRgshd())).append(" )\n");
         builder.append("    .fPropRMark           = ");
         builder.append(" (").append(getFPropRMark()).append(" )\n");
         builder.append("    .fHasOldProps         = ");

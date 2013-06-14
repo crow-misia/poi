@@ -19,7 +19,6 @@ package org.apache.poi.poifs.filesystem;
 
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 
 import junit.framework.TestCase;

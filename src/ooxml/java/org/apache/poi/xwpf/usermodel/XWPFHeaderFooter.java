@@ -448,7 +448,7 @@ public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBo
 
     }
 
-    public void readHdrFtr(){
+    public final void readHdrFtr(){
         bodyElements = new ArrayList<>();
         paragraphs = new ArrayList<>();
         tables= new ArrayList<>();
@@ -495,10 +495,7 @@ public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBo
         if(table == null){
             return null;
         }
-        XWPFTableRow tableRow = table.getRow(row);
-        if(row == null){
-            return null;
-        }
+        final XWPFTableRow tableRow = table.getRow(row);
         return tableRow.getTableCell(cell);
     }
 

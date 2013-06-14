@@ -26,7 +26,7 @@ package org.apache.poi.util;
  * @author Andrew C. Oliver (acoliver at apache dot org)
  */
 
-public class BitField
+public final class BitField
 {
     private final int _mask;
     private final int _shift_count;

@@ -126,7 +126,7 @@ public class XWPFTableRow {
      * who belongs to this row
      * @return a list of {@link XWPFTableCell} 
      */
-    public List<XWPFTableCell> getTableCells(){
+    public final List<XWPFTableCell> getTableCells(){
 	if(tableCells == null){
             List<XWPFTableCell> cells = new ArrayList<>();
 	    for (CTTc tableCell : ctRow.getTcList()) {

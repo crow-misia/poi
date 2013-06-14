@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class DrawingManager2
 {
     EscherDggRecord dgg;
-    List drawingGroups = new ArrayList( );
+    List<EscherDgRecord> drawingGroups = new ArrayList<>();
 
 
     public DrawingManager2( EscherDggRecord dgg )
@@ -129,7 +129,7 @@ public class DrawingManager2
 
     EscherDgRecord getDrawingGroup(int drawingGroupId)
     {
-        return (EscherDgRecord) drawingGroups.get(drawingGroupId-1);
+        return drawingGroups.get(drawingGroupId-1);
     }
 
     boolean drawingGroupExists( short dgId )
@@ -146,8 +146,7 @@ public class DrawingManager2
     int findFreeSPIDBlock()
     {
         int max = dgg.getShapeIdMax();
-        int next = ( ( max / 1024 ) + 1 ) * 1024;
-        return next;
+        return ( ( max / 1024 ) + 1 ) * 1024;
     }
 
     public EscherDggRecord getDgg()

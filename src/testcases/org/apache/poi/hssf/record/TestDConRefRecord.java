@@ -23,7 +23,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import junit.framework.TestCase;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndianOutputStream;
 
 /**

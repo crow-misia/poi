@@ -25,7 +25,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.poi.hslf.util.MutableByteArrayOutputStream;
 import org.apache.poi.util.ArrayUtil;
-import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.LittleEndian;
 
 /**

@@ -114,17 +114,17 @@ public final class BTreeSet extends AbstractSet
         return new Iterator();
     }
 
-    public static ArrayList findProperties(int start, int end, BTreeSet.BTreeNode root)
+    public static List<PropertyNode> findProperties(int start, int end, BTreeSet.BTreeNode root)
     {
-      ArrayList results = new ArrayList();
+      List<PropertyNode> results = new ArrayList<>();
       BTreeSet.Entry[] entries = root.entries;
 
-      for(int x = 0; x < entries.length; x++)
+      for(final Entry entry : entries)
       {
-        if(entries[x] != null)
+        if(entry != null)
         {
-          BTreeSet.BTreeNode child = entries[x].child;
-          PropertyNode xNode = (PropertyNode)entries[x].element;
+          BTreeSet.BTreeNode child = entry.child;
+          PropertyNode xNode = (PropertyNode)entry.element;
           if(xNode != null)
           {
             int xStart = xNode.getStart();
@@ -135,7 +135,7 @@ public final class BTreeSet extends AbstractSet
               {
                 if(child != null)
                 {
-                  ArrayList beforeItems = findProperties(start, end, child);
+                  List<PropertyNode> beforeItems = findProperties(start, end, child);
                   results.addAll(beforeItems);
                 }
                 results.add(xNode);
@@ -150,7 +150,7 @@ public final class BTreeSet extends AbstractSet
             {
               if(child != null)
               {
-                ArrayList beforeItems = findProperties(start, end, child);
+                List<PropertyNode> beforeItems = findProperties(start, end, child);
                 results.addAll(beforeItems);
               }
               break;
@@ -158,7 +158,7 @@ public final class BTreeSet extends AbstractSet
           }
           else if(child != null)
           {
-            ArrayList afterItems = findProperties(start, end, child);
+            List<PropertyNode> afterItems = findProperties(start, end, child);
             results.addAll(afterItems);
           }
         }
@@ -195,7 +195,7 @@ public final class BTreeSet extends AbstractSet
     private class Iterator implements java.util.Iterator
     {
         private int index = 0;
-        private Stack parentIndex = new Stack(); // Contains all parentIndicies for currentNode
+        private Stack<Integer> parentIndex = new Stack<>(); // Contains all parentIndicies for currentNode
         private Object lastReturned = null;
         private Object next;
         private BTreeNode currentNode;

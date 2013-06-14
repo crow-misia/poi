@@ -528,4 +528,15 @@ public abstract class Property implements Child, POIFSViewable {
         buffer.append("Property: \"").append(getName()).append("\"");
         return buffer.toString();
     }
+
+    public static final Property NULL = new Property() {
+        protected void preWrite()
+        {
+        }
+
+        public boolean isDirectory()
+        {
+            return false;
+        }
+    };
 }

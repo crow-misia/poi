@@ -20,7 +20,6 @@ package org.apache.poi.ss.formula.ptg;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.LittleEndianByteArrayOutputStream;
 import org.apache.poi.util.LittleEndianInput;
 import org.apache.poi.util.LittleEndianOutput;

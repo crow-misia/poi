@@ -107,6 +107,7 @@ public final class CharacterRun
    *
    * @return TYPE_CHARACTER
    */
+  @SuppressWarnings("deprecation")
   public int type()
   {
     return TYPE_CHARACTER;

@@ -52,11 +52,10 @@ import org.apache.poi.poifs.storage.HeaderBlock;
 import org.apache.poi.poifs.storage.HeaderBlockConstants;
 import org.apache.poi.poifs.storage.HeaderBlockWriter;
 import org.apache.poi.poifs.storage.BATBlock.BATBlockAndIndex;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.CloseIgnoringInputStream;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.LongField;
-import org.apache.poi.util.POILogFactory;
-import org.apache.poi.util.POILogger;
 
 /**
  * This is the main class of the POIFS system; it manages the entire
@@ -803,7 +802,7 @@ public class NPOIFSFileSystem extends BlockStore
         {
             return (( POIFSViewable ) getRoot()).getViewableArray();
         }
-        return new Object[ 0 ];
+        return ArrayUtil.EMPTY_OBJECT_ARRAY;
     }
 
     /**

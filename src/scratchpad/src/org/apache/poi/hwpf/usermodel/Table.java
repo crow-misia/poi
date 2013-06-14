@@ -84,6 +84,7 @@ public final class Table extends Range
         _rowsFound = false;
     }
 
+    @SuppressWarnings("deprecation")
     public int type()
     {
         return TYPE_TABLE;

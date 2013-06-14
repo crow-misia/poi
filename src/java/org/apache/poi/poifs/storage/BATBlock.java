@@ -34,13 +34,15 @@ import org.apache.poi.util.LittleEndian;
  * @author Marc Johnson (mjohnson at apache dot org)
  */
 public final class BATBlock extends BigBlock {
+    static final BATBlock[] EMPTY_ARRAY = new BATBlock[0];
+
     /**
      * For a regular fat block, these are 128 / 1024 
      *  next sector values.
      * For a XFat (DIFat) block, these are 127 / 1023
      *  next sector values, then a chaining value.
      */
-    private int[] _values;
+    private final int[] _values;
     
     /**
      * Does this BATBlock have any free sectors in it?
@@ -81,9 +83,7 @@ public final class BATBlock extends BigBlock {
                      final int start_index, final int end_index)
     {
         this(bigBlockSize);
-        for (int k = start_index; k < end_index; k++) {
-           _values[k - start_index] = entries[k];
-        }
+        System.arraycopy(entries, start_index, _values, 0, end_index - start_index);
         
         // Do we have any free sectors?
         if(end_index - start_index == _values.length) {
@@ -93,8 +93,8 @@ public final class BATBlock extends BigBlock {
     
     private void recomputeFree() {
        boolean hasFree = false;
-       for(int k=0; k<_values.length; k++) {
-          if(_values[k] == POIFSConstants.UNUSED_BLOCK) {
+       for(final int v : _values) {
+          if(v == POIFSConstants.UNUSED_BLOCK) {
              hasFree = true;
              break;
           }
@@ -113,7 +113,7 @@ public final class BATBlock extends BigBlock {
        
        // Fill it
        byte[] buffer = new byte[LittleEndian.INT_SIZE];
-       for(int i=0; i<block._values.length; i++) {
+       for(int i=0, n= block._values.length; i<n; i++) {
           data.get(buffer);
           block._values[i] = LittleEndian.getInt(buffer);
        }
@@ -150,7 +150,7 @@ public final class BATBlock extends BigBlock {
         int        remaining   = entries.length;
 
         int _entries_per_block = bigBlockSize.getBATEntriesPerBlock();
-        for (int j = 0; j < entries.length; j += _entries_per_block)
+        for (int j = 0, n = entries.length; j < n; j += _entries_per_block)
         {
             blocks[ index++ ] = new BATBlock(bigBlockSize, entries, j,
                                              (remaining > _entries_per_block)
@@ -370,8 +370,8 @@ public final class BATBlock extends BigBlock {
        
        // Fill in the values
        int offset = 0;
-       for(int i=0; i<_values.length; i++) {
-          LittleEndian.putInt(data, offset, _values[i]);
+       for(final int v : _values) {
+          LittleEndian.putInt(data, offset, v);
           offset += LittleEndian.INT_SIZE;
        }
        

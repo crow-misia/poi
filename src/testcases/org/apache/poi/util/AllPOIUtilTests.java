@@ -27,7 +27,6 @@ public final class AllPOIUtilTests {
     public static Test suite() {
         TestSuite result = new TestSuite(AllPOIUtilTests.class.getName());
         result.addTestSuite(TestArrayUtil.class);
-        result.addTestSuite(TestBinaryTree.class);
         result.addTestSuite(TestBitField.class);
         result.addTestSuite(TestByteField.class);
         result.addTestSuite(TestHexDump.class);

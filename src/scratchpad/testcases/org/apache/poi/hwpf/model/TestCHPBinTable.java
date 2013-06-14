@@ -18,7 +18,6 @@
 package org.apache.poi.hwpf.model;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;

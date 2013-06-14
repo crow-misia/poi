@@ -37,7 +37,6 @@ import org.apache.poi.hssf.record.aggregates.WorksheetProtectionBlock;
 import org.apache.poi.hssf.util.PaneInformation;
 import org.apache.poi.ss.formula.FormulaShifter;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -895,11 +894,7 @@ public final class InternalSheet {
      * creates the WSBoolRecord and sets its values to defaults
      */
     private static WSBoolRecord createWSBool() {
-        WSBoolRecord retval = new WSBoolRecord();
-
-        retval.setWSBool1(( byte ) 0x4);
-        retval.setWSBool2(( byte ) 0xffffffc1);
-        return retval;
+        return new WSBoolRecord((byte) 0x04, (byte) 0xffffffc1);
     }
 
 

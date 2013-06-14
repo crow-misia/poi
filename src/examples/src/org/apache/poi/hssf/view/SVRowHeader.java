@@ -37,7 +37,7 @@ public class SVRowHeader extends JList {
    *  that are present in the sheet.
    *
    */
-  private class SVRowHeaderModel extends AbstractListModel {
+  private class SVRowHeaderModel extends AbstractListModel<String> {
     private HSSFSheet sheet;
 
     public SVRowHeaderModel(HSSFSheet sheet) {
@@ -47,7 +47,7 @@ public class SVRowHeader extends JList {
     public int getSize() {
     	return sheet.getLastRowNum() + 1;
     }
-    public Object getElementAt(int index) {
+    public String getElementAt(int index) {
       return Integer.toString(index+1);
     }
   }
@@ -87,7 +87,7 @@ public class SVRowHeader extends JList {
   }
 
   public SVRowHeader(HSSFSheet sheet, JTable table, int extraHeight) {
-    ListModel lm = new SVRowHeaderModel(sheet);
+    SVRowHeaderModel lm = new SVRowHeaderModel(sheet);
     this.setModel(lm);
 
     setFixedCellWidth(50);
