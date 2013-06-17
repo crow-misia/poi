@@ -60,17 +60,6 @@ public final class Word6Extractor extends POIOLE2TextExtractor {
         this( fs.getRoot() );
     }
 
-    /**
-     * @deprecated Use {@link #Word6Extractor(DirectoryNode)} instead
-     */
-    @Deprecated
-    @SuppressWarnings( "unused" )
-    public Word6Extractor( DirectoryNode dir, POIFSFileSystem fs )
-            throws IOException
-    {
-        this( dir );
-    }
-
     public Word6Extractor( DirectoryNode dir ) throws IOException
     {
         this( new HWPFOldDocument( dir ) );

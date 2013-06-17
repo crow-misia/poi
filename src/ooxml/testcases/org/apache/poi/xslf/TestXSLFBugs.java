@@ -32,7 +32,6 @@ import org.apache.poi.xslf.usermodel.XSLFSlideLayout;
 
 public class TestXSLFBugs extends POITestCase {
 
-    @SuppressWarnings("deprecation")
     public void test51187() throws Exception {
        XMLSlideShow ss = XSLFTestDataSamples.openSampleDocument("51187.pptx");
        

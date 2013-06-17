@@ -110,10 +110,7 @@ public class HWPFOldDocument extends HWPFDocumentCore {
                 _mainStream, papTableOffset, papTableSize,
                 _fib.getFibBase().getFcMin(), tpt
         );
-        _st = new OldSectionTable(
-                _mainStream, sedTableOffset, sedTableSize,
-                _fib.getFibBase().getFcMin(), tpt
-        );
+        _st = new OldSectionTable(_mainStream, sedTableOffset, sedTableSize);
 
         /*
          * in this mode we preserving PAPX/CHPX structure from file, so text may

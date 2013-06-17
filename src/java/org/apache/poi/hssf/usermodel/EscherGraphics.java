@@ -434,7 +434,6 @@ public class EscherGraphics
         return null;
     }
 
-    @SuppressWarnings("deprecation")
     public Rectangle getClipRect()
     {
         return getClipBounds();

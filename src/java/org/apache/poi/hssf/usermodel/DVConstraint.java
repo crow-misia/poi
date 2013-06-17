@@ -33,7 +33,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
  * 
  * @author Josh Micich
  */
-public class DVConstraint implements DataValidationConstraint {
+public final class DVConstraint implements DataValidationConstraint {
 	/* package */ public static final class FormulaPair {
 
 		private final Ptg[] _formula1;
@@ -224,7 +224,7 @@ public class DVConstraint implements DataValidationConstraint {
 			return Double.valueOf(numberStr);
 		} catch (NumberFormatException e) {
 			throw new RuntimeException("The supplied text '" + numberStr 
-					+ "' could not be parsed as a number");
+					+ "' could not be parsed as a number", e);
 		}
 	}
 

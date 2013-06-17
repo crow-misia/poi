@@ -110,8 +110,7 @@ public final class HyperlinkRecord extends StandardRecord {
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-			byte[] buf = baos.toByteArray();
-			return new LittleEndianByteArrayInputStream(buf).readLong();
+			return new LittleEndianByteArrayInputStream(baos.toByteArray()).readLong();
 		}
 
 		public String formatAsString() {

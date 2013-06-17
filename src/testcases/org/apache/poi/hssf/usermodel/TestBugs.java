@@ -1060,7 +1060,6 @@ public final class TestBugs extends BaseTestBugzillaIssues {
         confirmCachedValue("70164", nc2);
         confirmCachedValue("90210", nc3);
 
-        @SuppressWarnings("deprecation")
         CellValueRecordInterface[] cvrs = TestValueRecordsAggregate.getValueRecords(ns.getSheet().getCellValueIterator());
         for (int i = 0, n = cvrs.length; i < n; i++) {
             CellValueRecordInterface cvr = cvrs[i];

@@ -379,7 +379,7 @@ public class EscherBlipWMFRecord
         }
         catch ( IOException e )
         {
-            throw new RecordFormatException( e.toString() );
+            throw new RecordFormatException( e );
         }
     }
 

@@ -1035,7 +1035,6 @@ public abstract class AbstractWordConverter
         }
     }
 
-    @SuppressWarnings( "unused" )
     protected boolean processOle2( HWPFDocument wordDocument, Element block,
             Entry entry ) throws Exception
     {

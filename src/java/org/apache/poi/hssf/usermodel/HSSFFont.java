@@ -337,8 +337,7 @@ public final class HSSFFont implements Font {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((font == null) ? 0 : font.hashCode());
-		result = prime * result + index;
-		return result;
+		return prime * result + index;
 	}
 
 	public boolean equals(Object obj) {
