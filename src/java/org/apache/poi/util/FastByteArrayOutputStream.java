@@ -82,6 +82,10 @@ public final class FastByteArrayOutputStream extends OutputStream {
         return pos;
     }
 
+    public void arraycopy(final int o, final byte[] d, final int s, final int l) {
+        System.arraycopy(this.buf, o, d, s, l);
+    }
+
     public ByteArrayInputStream toInputStream() {
         return new ByteArrayInputStream(buf, 0, pos);
     }
@@ -95,5 +99,4 @@ public final class FastByteArrayOutputStream extends OutputStream {
             buf = Arrays.copyOf(buf, Math.max(sz, 2 * buf.length));
         }
     }
-    
 }
