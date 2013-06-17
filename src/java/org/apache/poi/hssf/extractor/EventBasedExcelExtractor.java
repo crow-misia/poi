@@ -64,16 +64,6 @@ public class EventBasedExcelExtractor extends POIOLE2TextExtractor {
 	boolean _includeSheetNames = true;
 	boolean _formulasNotResults = false;
 
-    /**
-     * @deprecated Use {@link #EventBasedExcelExtractor(DirectoryNode)} instead
-     */
-    @Deprecated
-    @SuppressWarnings( "unused" )
-    public EventBasedExcelExtractor( DirectoryNode dir, POIFSFileSystem fs )
-    {
-        this( dir );
-    }
-
     public EventBasedExcelExtractor( DirectoryNode dir )
     {
         super( null );

@@ -116,13 +116,13 @@ public final class Chunk {
 		// Loop over the definitions, building the commands
 		//  and getting their values
 		ArrayList<Command> commands = new ArrayList<>();
-		for(int i=0; i<commandDefinitions.length; i++) {
-			int type = commandDefinitions[i].getType();
-			int offset = commandDefinitions[i].getOffset();
+		for(final CommandDefinition cd : commandDefinitions) {
+			int type = cd.getType();
+			int offset = cd.getOffset();
 
 			// Handle virtual commands
 			if(type == 10) {
-				name = commandDefinitions[i].getName();
+				name = cd.getName();
 				continue;
 			} else if(type == 18) {
 				continue;
@@ -132,9 +132,9 @@ public final class Chunk {
 			// Build the appropriate command for the type
 			Command command;
 			if(type == 11 || type == 21) {
-				command = new BlockOffsetCommand(commandDefinitions[i]);
+				command = new BlockOffsetCommand(cd);
 			} else {
-				command = new Command(commandDefinitions[i]);
+				command = new Command(cd);
 			}
 
 			// Bizarely, many of the offsets are from the start of the
@@ -252,7 +252,7 @@ public final class Chunk {
 	 */
 	public static class Command {
 		protected Object value;
-		private CommandDefinition definition;
+		private final CommandDefinition definition;
 
 		private Command(CommandDefinition definition, Object value) {
 			this.definition = definition;
@@ -280,12 +280,10 @@ public final class Chunk {
 	 *  a block
 	 */
 	public static class BlockOffsetCommand extends Command {
-		private int offset;
 		private BlockOffsetCommand(CommandDefinition definition) {
 			super(definition, null);
 		}
 		private void setOffset(int offset) {
-			this.offset = offset;
 			value = Integer.valueOf(offset);
 		}
 	}

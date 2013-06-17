@@ -56,19 +56,6 @@ public class PAPBinTable
   {
   }
 
-    /**
-     * @deprecated Use
-     *             {@link #PAPBinTable(byte[], byte[], byte[], int, int, CharIndexTranslator)}
-     *             instead
-     */
-    @SuppressWarnings( "unused" )
-    public PAPBinTable( byte[] documentStream, byte[] tableStream,
-            byte[] dataStream, int offset, int size, int fcMin,
-            TextPieceTable tpt )
-    {
-        this( documentStream, tableStream, dataStream, offset, size, tpt );
-    }
-
     public PAPBinTable( byte[] documentStream, byte[] tableStream,
             byte[] dataStream, int offset, int size,
             CharIndexTranslator charIndexTranslator )

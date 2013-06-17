@@ -58,21 +58,6 @@ public final class CHPFormattedDiskPage extends FormattedDiskPage
     /**
      * This constructs a CHPFormattedDiskPage from a raw fkp (512 byte array
      * read from a Word file).
-     * 
-     * @deprecated Use
-     *             {@link #CHPFormattedDiskPage(byte[], int, CharIndexTranslator)}
-     *             instead
-     */
-    @SuppressWarnings( "unused" )
-    public CHPFormattedDiskPage( byte[] documentStream, int offset, int fcMin,
-            TextPieceTable tpt )
-    {
-        this( documentStream, offset, tpt );
-    }
-
-    /**
-     * This constructs a CHPFormattedDiskPage from a raw fkp (512 byte array
-     * read from a Word file).
      */
     public CHPFormattedDiskPage( byte[] documentStream, int offset,
             CharIndexTranslator translator )
@@ -140,16 +125,6 @@ public final class CHPFormattedDiskPage extends FormattedDiskPage
 
         System.arraycopy(_fkp, _offset + ++chpxOffset, chpx, 0, size);
         return chpx;
-    }
-
-    /**
-     * @deprecated Use {@link #toByteArray(CharIndexTranslator)} instead
-     */
-    @Deprecated
-    @SuppressWarnings( "unused" )
-    protected byte[] toByteArray(CharIndexTranslator translator, int fcMin)
-    {
-        return toByteArray( translator );
     }
 
     protected byte[] toByteArray( CharIndexTranslator translator )

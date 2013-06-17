@@ -65,17 +65,6 @@ public final class WordExtractor extends POIOLE2TextExtractor
         this( new HWPFDocument( fs ) );
     }
 
-    /**
-     * @deprecated Use {@link #WordExtractor(DirectoryNode)} instead
-     */
-    @Deprecated
-    @SuppressWarnings( "unused" )
-    public WordExtractor( DirectoryNode dir, POIFSFileSystem fs )
-            throws IOException
-    {
-        this( dir );
-    }
-
     public WordExtractor( DirectoryNode dir ) throws IOException
     {
         this( new HWPFDocument( dir ) );

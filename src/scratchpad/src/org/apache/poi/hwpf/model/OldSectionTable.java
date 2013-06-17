@@ -34,17 +34,6 @@ import org.apache.poi.util.LittleEndian;
 @Internal
 public final class OldSectionTable extends SectionTable
 {
-    /**
-     * @deprecated Use {@link #OldSectionTable(byte[],int,int)} instead
-     */
-    @Deprecated
-    @SuppressWarnings( "unused" )
-    public OldSectionTable( byte[] documentStream, int offset, int size,
-            int fcMin, TextPieceTable tpt )
-    {
-        this( documentStream, offset, size );
-    }
-
     public OldSectionTable( byte[] documentStream, int offset, int size )
     {
     PlexOfCps sedPlex = new PlexOfCps( documentStream, offset, size, 12 );

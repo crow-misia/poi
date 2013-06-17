@@ -588,8 +588,10 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      * @return index of the sheet (0 based). <tt>-1</tt> if not found
      */
     public int getSheetIndex(org.apache.poi.ss.usermodel.Sheet sheet) {
-        for(int i=0; i<_sheets.size(); i++) {
-            if(_sheets.get(i) == sheet) {
+        int i = 0;
+        for(final HSSFSheet s : _sheets) {
+            i++;
+            if(s == sheet) {
                 return i;
             }
         }
@@ -783,7 +785,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
 
             if (sheetname.equalsIgnoreCase(name))
             {
-                retval = (HSSFSheet) _sheets.get(k);
+                retval = _sheets.get(k);
             }
         }
         return retval;

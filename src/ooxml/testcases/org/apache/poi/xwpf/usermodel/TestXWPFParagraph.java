@@ -340,6 +340,6 @@ public final class TestXWPFParagraph extends TestCase {
        r.getCTR().getDrawingArray(0).getInlineArray(0);
        r.getCTR().getDrawingArray(0).getInlineArray(0).getGraphic();
        r.getCTR().getDrawingArray(0).getInlineArray(0).getGraphic().getGraphicData();
-       PicDocument pd = new PicDocumentImpl(null);
+       new PicDocumentImpl(null);
     }
 }
