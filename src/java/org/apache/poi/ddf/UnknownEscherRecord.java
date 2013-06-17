@@ -18,6 +18,7 @@
 package org.apache.poi.ddf;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.poi.util.ArrayUtil;
@@ -70,8 +71,8 @@ public final class UnknownEscherRecord extends EscherRecord {
             return bytesWritten;
         }
 
-        thedata = new byte[bytesRemaining];
-        System.arraycopy( data, offset + 8, thedata, 0, bytesRemaining );
+        final int r = bytesRemaining + 8;
+        thedata = Arrays.copyOfRange(data, offset + 8, offset + r);
         return bytesRemaining + 8;
     }
 
@@ -159,6 +160,6 @@ public final class UnknownEscherRecord extends EscherRecord {
     }
 
     public void addChildRecord(EscherRecord childRecord) {
-        getChildRecords().add( childRecord );
+        _childRecords.add( childRecord );
     }
 }

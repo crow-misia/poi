@@ -18,6 +18,7 @@
 package org.apache.poi.hssf.record.aggregates;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.hssf.model.RecordStream;
@@ -33,18 +34,18 @@ import org.apache.poi.ss.formula.FormulaShifter;
  */
 public final class ConditionalFormattingTable extends RecordAggregate {
 
-	private final List _cfHeaders;
+	private final List<CFRecordsAggregate> _cfHeaders;
 
 	/**
 	 * Creates an empty ConditionalFormattingTable
 	 */
 	public ConditionalFormattingTable() {
-		_cfHeaders = new ArrayList();
+		_cfHeaders = new ArrayList<>();
 	}
 
 	public ConditionalFormattingTable(RecordStream rs) {
 
-		List temp = new ArrayList();
+		List<CFRecordsAggregate> temp = new ArrayList<>();
 		while (rs.peekNextClass() == CFHeaderRecord.class) {
 			temp.add(CFRecordsAggregate.createCFAggregate(rs));
 		}
@@ -52,8 +53,7 @@ public final class ConditionalFormattingTable extends RecordAggregate {
 	}
 
 	public void visitContainedRecords(RecordVisitor rv) {
-		for (int i = 0; i < _cfHeaders.size(); i++) {
-			CFRecordsAggregate subAgg = (CFRecordsAggregate) _cfHeaders.get(i);
+		for (final CFRecordsAggregate subAgg : _cfHeaders) {
 			subAgg.visitContainedRecords(rv);
 		}
 	}
@@ -72,7 +72,7 @@ public final class ConditionalFormattingTable extends RecordAggregate {
 
 	public CFRecordsAggregate get(int index) {
 		checkIndex(index);
-		return (CFRecordsAggregate) _cfHeaders.get(index);
+		return _cfHeaders.get(index);
 	}
 
 	public void remove(int index) {
@@ -88,12 +88,12 @@ public final class ConditionalFormattingTable extends RecordAggregate {
 	}
 
 	public void updateFormulasAfterCellShift(FormulaShifter shifter, int externSheetIndex) {
-		for (int i = 0; i < _cfHeaders.size(); i++) {
-			CFRecordsAggregate subAgg = (CFRecordsAggregate) _cfHeaders.get(i);
+		final Iterator<CFRecordsAggregate> it = _cfHeaders.iterator();
+		while (it.hasNext()) {
+			final CFRecordsAggregate subAgg = it.next();
 			boolean shouldKeep = subAgg.updateFormulasAfterCellShift(shifter, externSheetIndex);
 			if (!shouldKeep) {
-				_cfHeaders.remove(i);
-				i--;
+				it.remove();
 			}
 		}
 	}

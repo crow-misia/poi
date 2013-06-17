@@ -199,36 +199,39 @@ public class DirectoryProperty extends Property implements Parent { // TODO - fi
      */
     protected void preWrite()
     {
-        if (_children.size() > 0)
+        final int size = _children.size();
+        if (size > 0)
         {
-            Property[] children = _children.toArray(new Property[ 0 ]);
+            final Property[] children = _children.toArray(new Property[size]);
 
             Arrays.sort(children, new PropertyComparator());
-            int midpoint = children.length / 2;
+            int midpoint = size / 2;
 
             setChildProperty(children[ midpoint ].getIndex());
-            children[ 0 ].setPreviousChild(null);
-            children[ 0 ].setNextChild(null);
-            for (int j = 1; j < midpoint; j++)
+            
+            Property prev = null;
+            for (int j = 0; j < midpoint; j++)
             {
-                children[ j ].setPreviousChild(children[ j - 1 ]);
-                children[ j ].setNextChild(null);
+                final Property cur = children[ j ];
+                cur.setPreviousChild(prev);
+                cur.setNextChild(null);
+                prev = cur;
             }
             if (midpoint != 0)
             {
                 children[ midpoint ]
                     .setPreviousChild(children[ midpoint - 1 ]);
             }
-            if (midpoint != (children.length - 1))
+            if (midpoint != (size - 1))
             {
                 children[ midpoint ].setNextChild(children[ midpoint + 1 ]);
-                for (int j = midpoint + 1; j < children.length - 1; j++)
+                for (int j = midpoint + 1; j < size - 1; j++)
                 {
                     children[ j ].setPreviousChild(null);
                     children[ j ].setNextChild(children[ j + 1 ]);
                 }
-                children[ children.length - 1 ].setPreviousChild(null);
-                children[ children.length - 1 ].setNextChild(null);
+                children[ size - 1 ].setPreviousChild(null);
+                children[ size - 1 ].setNextChild(null);
             }
             else
             {

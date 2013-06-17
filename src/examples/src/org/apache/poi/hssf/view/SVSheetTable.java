@@ -163,7 +163,7 @@ public class SVSheetTable extends JTable {
       Row row = sheet.getRow(i - sheet.getFirstRowNum());
       if (row != null) {
         short h = row.getHeight();
-        int height = Math.round(Math.max(1, h / (res / 70 * 20) + 3));
+        int height = Math.round(Math.max(1.0f, h / (res / 70.0f * 20.0f) + 3));
         System.out.printf("%d: %d (%d @ %d)%n", i, height, h, res);
         setRowHeight(i, height);
       }

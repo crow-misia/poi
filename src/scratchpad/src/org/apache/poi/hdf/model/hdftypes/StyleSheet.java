@@ -382,12 +382,12 @@ public final class StyleSheet implements HDFType {
                   newCHP.setHps(Math.max(newCHP.getHps() + (cInc * 2), 2));
                }
                byte hpsPos = (byte)((param & 0xff0000) >>> 8);
-               if(hpsPos != 0x80)
+               if(hpsPos != (byte) 0x80)
                {
                   newCHP.setHpsPos(hpsPos);
                }
                boolean fAdjust = (param & 0x0100) > 0;
-               if(fAdjust && hpsPos != 128 && hpsPos != 0 && oldCHP.getHpsPos() == 0)
+               if(fAdjust && hpsPos != (byte) 0x80 && hpsPos != 0 && oldCHP.getHpsPos() == 0)
                {
                   newCHP.setHps(Math.max(newCHP.getHps() + (-2), 2));
                }

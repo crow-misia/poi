@@ -606,6 +606,7 @@ public class XWPFTable implements IBodyElement, ISDTContents {
         return part.getPartType();
     }
 
+<<<<<<< HEAD
     /**
      * returns the XWPFRow which belongs to the CTRow row
      * if this row is not existing in the table null will be returned
@@ -617,3 +618,17 @@ public class XWPFTable implements IBodyElement, ISDTContents {
         return null;
     }
 }
+=======
+	/**
+	 * returns the XWPFRow which belongs to the CTRow row
+	 * if this row is not existing in the table null will be returned
+	 */
+	public XWPFTableRow getRow(CTRow row) {
+		final List<XWPFTableRow> rows = getRows();
+		for (final XWPFTableRow r : rows) {
+			if(r.getCtRow()== row) return r; 
+		}
+		return null;
+	}
+}// end class
+>>>>>>> 計算の精度が落ちている箇所を修正。文字列の置換バグ修正

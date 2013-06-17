@@ -401,7 +401,7 @@ public final class TestBugs extends TestCase {
        for(Slide slide : ppt.getSlides()) {
           for(TextRun run : slide.getTextRuns()) {
              String text = run.getRawText();
-             text.replace("{txtTot}", "With \u0123\u1234\u5678 unicode");
+             text = text.replace("{txtTot}", "With \u0123\u1234\u5678 unicode");
              run.setRawText(text);
           }
        }

@@ -318,12 +318,12 @@ public final class StyleSheet {
                   newCHP._hps = Math.max(newCHP._hps + (cInc * 2), 2);
                }
                byte hpsPos = (byte)((param & 0xff0000) >>> 8);
-               if(hpsPos != 0x80)
+               if(hpsPos != (byte) 0x80)
                {
                   newCHP._hpsPos = hpsPos;
                }
                boolean fAdjust = (param & 0x0100) > 0;
-               if(fAdjust && hpsPos != 128 && hpsPos != 0 && oldCHP._hpsPos == 0)
+               if(fAdjust && hpsPos != (byte) 0x80 && hpsPos != 0 && oldCHP._hpsPos == 0)
                {
                   newCHP._hps = Math.max(newCHP._hps + (-2), 2);
                }
