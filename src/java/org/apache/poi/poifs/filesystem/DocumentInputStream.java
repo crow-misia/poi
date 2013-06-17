@@ -91,7 +91,6 @@ public class DocumentInputStream extends InputStream implements LittleEndianInpu
 
 	public void close() {
 	   delegate.close();
-	   delegate = null;
 	}
 
 	public void mark(int ignoredReadlimit) {

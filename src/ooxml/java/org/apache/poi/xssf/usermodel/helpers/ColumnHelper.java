@@ -48,14 +48,13 @@ public class ColumnHelper {
         this.newCols = CTCols.Factory.newInstance();
         final List<CTCols> colsArray = worksheet.getColsList();
         final int n = colsArray.size();
-        int i;
-        for (i = 0; i < n; i++) {
-            final List<CTCol> colArray = colsArray.get(i).getColList();
+        for (final CTCols cols : colsArray) {
+            final List<CTCol> colArray = cols.getColList();
             for (CTCol col : colArray) {
                 newCols = addCleanColIntoCols(newCols, col);
             }
         }
-        for (int y = i - 1; y >= 0; y--) {
+        for (int y = n - 1; y >= 0; y--) {
             worksheet.removeCols(y);
         }
         worksheet.addNewCols();

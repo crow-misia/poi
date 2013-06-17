@@ -246,7 +246,7 @@ public class TestWriteWellKnown extends TestCase {
         final int    P_CHAR_COUNT = ++nr;
         final String P_COMMENTS = "Comments";
         final Date   P_CREATE_DATE_TIME = new Date(time1);
-        final long   P_EDIT_TIME = ++nr * 1000 * 10;
+        final long   P_EDIT_TIME = ++nr * 10000L; // 1000 * 10
         final String P_KEYWORDS = "Keywords";
         final String P_LAST_AUTHOR = "LastAuthor";
         final Date   P_LAST_PRINTED = new Date(time2);
