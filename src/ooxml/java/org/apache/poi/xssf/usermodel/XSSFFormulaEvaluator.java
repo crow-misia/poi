@@ -17,17 +17,10 @@
 
 package org.apache.poi.xssf.usermodel;
 
-import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
+import org.apache.poi.ss.formula.EvaluationCell;
 import org.apache.poi.ss.formula.IStabilityClassifier;
-import org.apache.poi.ss.formula.WorkbookEvaluator;
-import org.apache.poi.ss.formula.eval.BoolEval;
-import org.apache.poi.ss.formula.eval.ErrorEval;
-import org.apache.poi.ss.formula.eval.NumberEval;
-import org.apache.poi.ss.formula.eval.StringEval;
-import org.apache.poi.ss.formula.eval.ValueEval;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -41,17 +34,27 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @author Amol S. Deshmukh &lt; amolweb at ya hoo dot com &gt;
  * @author Josh Micich
  */
-public class XSSFFormulaEvaluator implements FormulaEvaluator {
+public final class XSSFFormulaEvaluator extends FormulaEvaluator {
 
-	private WorkbookEvaluator _bookEvaluator;
-	private XSSFWorkbook _book;
+	private final XSSFWorkbook _book;
 
 	public XSSFFormulaEvaluator(XSSFWorkbook workbook) {
 		this(workbook, null, null);
 	}
+
 	private XSSFFormulaEvaluator(XSSFWorkbook workbook, IStabilityClassifier stabilityClassifier, UDFFinder udfFinder) {
-		_bookEvaluator = new WorkbookEvaluator(XSSFEvaluationWorkbook.create(workbook), stabilityClassifier, udfFinder);
-      _book = workbook;
+		super(XSSFEvaluationWorkbook.create(workbook), workbook.getCreationHelper(), stabilityClassifier, udfFinder);
+		_book = workbook;
+	}
+
+	@Override
+	protected EvaluationCell getEvaluationCell(final Cell cell) {
+		return new XSSFEvaluationCell((XSSFCell) cell);
+	}
+
+	@Override
+	protected Workbook getWorkbook() {
+		return this._book;
 	}
 
 	/**
@@ -62,154 +65,6 @@ public class XSSFFormulaEvaluator implements FormulaEvaluator {
 	 */
 	public static XSSFFormulaEvaluator create(XSSFWorkbook workbook, IStabilityClassifier stabilityClassifier, UDFFinder udfFinder) {
 		return new XSSFFormulaEvaluator(workbook, stabilityClassifier, udfFinder);
-	}
-
-
-	/**
-	 * Should be called whenever there are major changes (e.g. moving sheets) to input cells
-	 * in the evaluated workbook.
-	 * Failure to call this method after changing cell values will cause incorrect behaviour
-	 * of the evaluate~ methods of this class
-	 */
-	public void clearAllCachedResultValues() {
-		_bookEvaluator.clearAllCachedResultValues();
-	}
-	public void notifySetFormula(Cell cell) {
-		_bookEvaluator.notifyUpdateCell(new XSSFEvaluationCell((XSSFCell)cell));
-	}
-	public void notifyDeleteCell(Cell cell) {
-		_bookEvaluator.notifyDeleteCell(new XSSFEvaluationCell((XSSFCell)cell));
-	}
-    public void notifyUpdateCell(Cell cell) {
-        _bookEvaluator.notifyUpdateCell(new XSSFEvaluationCell((XSSFCell)cell));
-    }
-
-	/**
-	 * If cell contains a formula, the formula is evaluated and returned,
-	 * else the CellValue simply copies the appropriate cell value from
-	 * the cell and also its cell type. This method should be preferred over
-	 * evaluateInCell() when the call should not modify the contents of the
-	 * original cell.
-	 * @param cell
-	 */
-	public CellValue evaluate(Cell cell) {
-		if (cell == null) {
-			return null;
-		}
-
-		switch (cell.getCellType()) {
-			case XSSFCell.CELL_TYPE_BOOLEAN:
-				return CellValue.valueOf(cell.getBooleanCellValue());
-			case XSSFCell.CELL_TYPE_ERROR:
-				return CellValue.getError(cell.getErrorCellValue());
-			case XSSFCell.CELL_TYPE_FORMULA:
-				return evaluateFormulaCellValue(cell);
-			case XSSFCell.CELL_TYPE_NUMERIC:
-				return new CellValue(cell.getNumericCellValue());
-			case XSSFCell.CELL_TYPE_STRING:
-				return new CellValue(cell.getRichStringCellValue().getString());
-            case XSSFCell.CELL_TYPE_BLANK:
-                return null;
-		}
-		throw new IllegalStateException("Bad cell type (" + cell.getCellType() + ")");
-	}
-
-
-	/**
-	 * If cell contains formula, it evaluates the formula,
-	 *  and saves the result of the formula. The cell
-	 *  remains as a formula cell.
-	 * Else if cell does not contain formula, this method leaves
-	 *  the cell unchanged.
-	 * Note that the type of the formula result is returned,
-	 *  so you know what kind of value is also stored with
-	 *  the formula.
-	 * <pre>
-	 * int evaluatedCellType = evaluator.evaluateFormulaCell(cell);
-	 * </pre>
-	 * Be aware that your cell will hold both the formula,
-	 *  and the result. If you want the cell replaced with
-	 *  the result of the formula, use {@link #evaluate(org.apache.poi.ss.usermodel.Cell)} }
-	 * @param cell The cell to evaluate
-	 * @return The type of the formula result (the cell's type remains as HSSFCell.CELL_TYPE_FORMULA however)
-	 */
-	public int evaluateFormulaCell(Cell cell) {
-		if (cell == null || cell.getCellType() != XSSFCell.CELL_TYPE_FORMULA) {
-			return -1;
-		}
-		CellValue cv = evaluateFormulaCellValue(cell);
-		// cell remains a formula cell, but the cached value is changed
-		setCellValue(cell, cv);
-		return cv.getCellType();
-	}
-
-	/**
-	 * If cell contains formula, it evaluates the formula, and
-	 *  puts the formula result back into the cell, in place
-	 *  of the old formula.
-	 * Else if cell does not contain formula, this method leaves
-	 *  the cell unchanged.
-	 * Note that the same instance of HSSFCell is returned to
-	 * allow chained calls like:
-	 * <pre>
-	 * int evaluatedCellType = evaluator.evaluateInCell(cell).getCellType();
-	 * </pre>
-	 * Be aware that your cell value will be changed to hold the
-	 *  result of the formula. If you simply want the formula
-	 *  value computed for you, use {@link #evaluateFormulaCell(org.apache.poi.ss.usermodel.Cell)} }
-	 * @param cell
-	 */
-	public XSSFCell evaluateInCell(Cell cell) {
-		if (cell == null) {
-			return null;
-		}
-		XSSFCell result = (XSSFCell) cell;
-		if (cell.getCellType() == XSSFCell.CELL_TYPE_FORMULA) {
-			CellValue cv = evaluateFormulaCellValue(cell);
-			setCellType(cell, cv); // cell will no longer be a formula cell
-			setCellValue(cell, cv);
-		}
-		return result;
-	}
-	private static void setCellType(Cell cell, CellValue cv) {
-		int cellType = cv.getCellType();
-		switch (cellType) {
-			case XSSFCell.CELL_TYPE_BOOLEAN:
-			case XSSFCell.CELL_TYPE_ERROR:
-			case XSSFCell.CELL_TYPE_NUMERIC:
-			case XSSFCell.CELL_TYPE_STRING:
-				cell.setCellType(cellType);
-				return;
-			case XSSFCell.CELL_TYPE_BLANK:
-				// never happens - blanks eventually get translated to zero
-			case XSSFCell.CELL_TYPE_FORMULA:
-				// this will never happen, we have already evaluated the formula
-		}
-		throw new IllegalStateException("Unexpected cell value type (" + cellType + ")");
-	}
-
-	private static void setCellValue(Cell cell, CellValue cv) {
-		int cellType = cv.getCellType();
-		switch (cellType) {
-			case XSSFCell.CELL_TYPE_BOOLEAN:
-				cell.setCellValue(cv.getBooleanValue());
-				break;
-			case XSSFCell.CELL_TYPE_ERROR:
-				cell.setCellErrorValue(cv.getErrorValue());
-				break;
-			case XSSFCell.CELL_TYPE_NUMERIC:
-				cell.setCellValue(cv.getNumberValue());
-				break;
-			case XSSFCell.CELL_TYPE_STRING:
-				cell.setCellValue(new XSSFRichTextString(cv.getStringValue()));
-				break;
-			case XSSFCell.CELL_TYPE_BLANK:
-				// never happens - blanks eventually get translated to zero
-			case XSSFCell.CELL_TYPE_FORMULA:
-				// this will never happen, we have already evaluated the formula
-			default:
-				throw new IllegalStateException("Unexpected cell value type (" + cellType + ")");
-		}
 	}
 
 	/**
@@ -224,54 +79,7 @@ public class XSSFFormulaEvaluator implements FormulaEvaluator {
 	 *  cells, and calling evaluateFormulaCell on each one.
 	 */
 	public static void evaluateAllFormulaCells(XSSFWorkbook wb) {
-	   HSSFFormulaEvaluator.evaluateAllFormulaCells((Workbook)wb);
+		FormulaEvaluator.evaluateAllFormulaCells(wb);
 	}
-   /**
-    * Loops over all cells in all sheets of the supplied
-    *  workbook.
-    * For cells that contain formulas, their formulas are
-    *  evaluated, and the results are saved. These cells
-    *  remain as formula cells.
-    * For cells that do not contain formulas, no changes
-    *  are made.
-    * This is a helpful wrapper around looping over all
-    *  cells, and calling evaluateFormulaCell on each one.
-    */
-   public void evaluateAll() {
-      HSSFFormulaEvaluator.evaluateAllFormulaCells(_book);
-   }
-
-	/**
-	 * Returns a CellValue wrapper around the supplied ValueEval instance.
-	 */
-	private CellValue evaluateFormulaCellValue(Cell cell) {
-        if(!(cell instanceof XSSFCell)){
-            throw new IllegalArgumentException("Unexpected type of cell: " + cell.getClass() + "." +
-                    " Only XSSFCells can be evaluated.");
-        }
-
-		ValueEval eval = _bookEvaluator.evaluate(new XSSFEvaluationCell((XSSFCell) cell));
-		if (eval instanceof NumberEval) {
-			NumberEval ne = (NumberEval) eval;
-			return new CellValue(ne.getNumberValue());
-		}
-		if (eval instanceof BoolEval) {
-			BoolEval be = (BoolEval) eval;
-			return CellValue.valueOf(be.getBooleanValue());
-		}
-		if (eval instanceof StringEval) {
-			StringEval ne = (StringEval) eval;
-			return new CellValue(ne.getStringValue());
-		}
-		if (eval instanceof ErrorEval) {
-			return CellValue.getError(((ErrorEval)eval).getErrorCode());
-		}
-		throw new RuntimeException("Unexpected eval class (" + eval.getClass().getName() + ")");
-	}
-	
-    /** {@inheritDoc} */
-    public void setDebugEvaluationOutputForNextEval(boolean value){
-        _bookEvaluator.setDebugEvaluationOutputForNextEval(value);
-    }
 
 }
