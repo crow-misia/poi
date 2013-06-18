@@ -49,12 +49,11 @@ public abstract class HSSFAnchor implements Anchor {
     public static HSSFAnchor createAnchorFromEscher(EscherContainerRecord container){
         if (null != container.getChildById(EscherChildAnchorRecord.RECORD_ID)){
             return new HSSFChildAnchor((EscherChildAnchorRecord) container.getChildById(EscherChildAnchorRecord.RECORD_ID));
-        } else {
-            if (null != container.getChildById(EscherClientAnchorRecord.RECORD_ID)){
-                return new HSSFClientAnchor((EscherClientAnchorRecord) container.getChildById(EscherClientAnchorRecord.RECORD_ID));
-            }
-            return null;
         }
+        if (null != container.getChildById(EscherClientAnchorRecord.RECORD_ID)){
+            return new HSSFClientAnchor((EscherClientAnchorRecord) container.getChildById(EscherClientAnchorRecord.RECORD_ID));
+        }
+        return null;
     }
 
     protected abstract void createEscherAnchor();
