@@ -40,7 +40,7 @@ import org.apache.poi.util.Closeables;
  */
 final class StaticFontMetrics {
 	/** The font metrics property file we're using */
-	private static Properties fontMetricsProps;
+	private static final Properties fontMetricsProps = new Properties();
 	/** Our cache of font details we've already looked up */
 	private static final Map<String, FontDetails> fontDetailsMap = new ConcurrentHashMap<>();
 
@@ -54,11 +54,9 @@ final class StaticFontMetrics {
 	public static FontDetails getFontDetails(Font font) {
 		// If we haven't already identified out font metrics file,
 		// figure out which one to use and load it
-		if (fontMetricsProps == null) {
+		if (fontMetricsProps.isEmpty()) {
 			InputStream metricsIn = null;
 			try {
-				fontMetricsProps = new Properties();
-
 				// Check to see if the font metric file was specified
 				// as a system property
 				String propFileName = null;
@@ -92,24 +90,25 @@ final class StaticFontMetrics {
 		// Grab the base name of the font they've asked about
 		String fontName = font.getName();
 
-		// Some fonts support plain/bold/italic/bolditalic variants
-		// Others have different font instances for bold etc
-		// (eg font.dialog.plain.* vs font.Californian FB Bold.*)
-		String fontStyle = "";
-		if (font.isPlain())
-			fontStyle += "plain";
-		if (font.isBold())
-			fontStyle += "bold";
-		if (font.isItalic())
-			fontStyle += "italic";
-
 		// Do we have a definition for this font with just the name?
 		// If not, check with the font style added
-		if (fontMetricsProps.get(FontDetails.buildFontHeightProperty(fontName)) == null
-				&& fontMetricsProps.get(FontDetails.buildFontHeightProperty(fontName + "."
-						+ fontStyle)) != null) {
-			// Need to add on the style to the font name
-			fontName += "." + fontStyle;
+		if (fontMetricsProps.get(FontDetails.buildFontHeightProperty(fontName)) == null) {
+			// Some fonts support plain/bold/italic/bolditalic variants
+			// Others have different font instances for bold etc
+			// (eg font.dialog.plain.* vs font.Californian FB Bold.*)
+			StringBuilder fontStyle = new StringBuilder(fontName).append('.');
+			if (font.isPlain())
+				fontStyle.append("plain");
+			if (font.isBold())
+				fontStyle.append("bold");
+			if (font.isItalic())
+				fontStyle.append("italic");
+
+			final String tmp = fontStyle.toString();
+			if (fontMetricsProps.get(FontDetails.buildFontHeightProperty(tmp)) != null) {
+				// Need to add on the style to the font name
+				fontName = tmp;
+			}
 		}
 
 		// Get the details on this font

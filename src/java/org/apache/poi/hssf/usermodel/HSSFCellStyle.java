@@ -36,10 +36,9 @@ import org.apache.poi.ss.usermodel.Font;
  * @see org.apache.poi.hssf.usermodel.HSSFCell#setCellStyle(HSSFCellStyle)
  */
 public final class HSSFCellStyle implements CellStyle {
-    private ExtendedFormatRecord _format                     = null;
-    private short                _index                      = 0;
-    private InternalWorkbook             _workbook                   = null;
-
+    private final ExtendedFormatRecord _format;
+    private final short                _index;
+    private final InternalWorkbook     _workbook;
 
     /** Creates new HSSFCellStyle why would you want to do this?? */
     protected HSSFCellStyle(short index, ExtendedFormatRecord rec, HSSFWorkbook workbook)
@@ -117,10 +116,13 @@ public final class HSSFCellStyle implements CellStyle {
      * @return the format string or "General" if not found
      */
     public String getDataFormatString(org.apache.poi.ss.usermodel.Workbook workbook) {
-    	HSSFDataFormat format = new HSSFDataFormat( ((HSSFWorkbook)workbook).getWorkbook() );
+        final int idx = getDataFormat();
+        if (idx == -1) {
+            return "General";
+        }
+        final HSSFDataFormat format = new HSSFDataFormat( ((HSSFWorkbook)workbook).getWorkbook() );
 
-        int idx = getDataFormat();
-        return idx == -1 ? "General" : format.getFormat(getDataFormat());
+        return format.getFormat(getDataFormat());
     }
     /**
      * Get the contents of the format string, by looking up

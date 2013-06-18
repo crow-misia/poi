@@ -205,9 +205,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
 
     private static String getWorkbookDirEntryName(DirectoryNode directory) {
 
-        String[] potentialNames = WORKBOOK_DIR_ENTRY_NAMES;
-        for (int i = 0; i < potentialNames.length; i++) {
-            String wbName = potentialNames[i];
+        for (final String wbName : WORKBOOK_DIR_ENTRY_NAMES) {
             try {
                 directory.getEntry(wbName);
                 return wbName;
@@ -431,7 +429,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     }
 
     private void validateSheetIndex(int index) {
-        int lastSheetIx = _sheets.size() - 1;
+        final int lastSheetIx = _sheets.size() - 1;
         if (index < 0 || index > lastSheetIx) {
             String range = "(0.." +    lastSheetIx + ")";
             if (lastSheetIx == -1) {
@@ -590,10 +588,10 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     public int getSheetIndex(org.apache.poi.ss.usermodel.Sheet sheet) {
         int i = 0;
         for(final HSSFSheet s : _sheets) {
-            i++;
             if(s == sheet) {
                 return i;
             }
+            i++;
         }
         return -1;
     }
@@ -765,7 +763,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     public HSSFSheet getSheetAt(int index)
     {
         validateSheetIndex(index);
-        return (HSSFSheet) _sheets.get(index);
+        return _sheets.get(index);
     }
 
     /**
@@ -949,9 +947,8 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
       int index = findExistingBuiltinNameRecordIdx(sheetIndex, builtinCode);
       if (index < 0) {
         return null;
-      } else {
-        return names.get(index);
       }
+      return names.get(index);
     }
 
     
@@ -962,7 +959,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
 
     public HSSFFont createFont()
     {
-        FontRecord font = workbook.createNewFont();
+        workbook.createNewFont();
         short fontindex = (short) (getNumberOfFonts() - 1);
 
         if (fontindex > 3)
@@ -985,7 +982,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
                              String name, boolean italic, boolean strikeout,
                              short typeOffset, byte underline)
     {
-        for (short i=0; i<=getNumberOfFonts(); i++) {
+        for (short i=0, n = getNumberOfFonts(); i<=n; i++) {
             // Remember - there is no 4!
             if(i == 4) continue;
 
@@ -1029,7 +1026,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         HSSFFont retval = fonts.get(sIdx);
 
         if (retval == null) {
-            FontRecord font = workbook.getFontRecordAt(idx);
+            final FontRecord font = workbook.getFontRecordAt(idx);
             retval = new HSSFFont(idx, font);
             fonts.put(sIdx, retval);
         }
@@ -1083,9 +1080,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
     public HSSFCellStyle getCellStyleAt(short idx)
     {
         ExtendedFormatRecord xfr = workbook.getExFormatAt(idx);
-        HSSFCellStyle style = new HSSFCellStyle(idx, xfr, this);
-
-        return style;
+        return new HSSFCellStyle(idx, xfr, this);
     }
 
     /**
@@ -1233,7 +1228,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         if (nameIndex < 0) {
             return null;
         }
-        return (HSSFName) names.get(nameIndex);
+        return names.get(nameIndex);
     }
 
     public HSSFName getNameAt(int nameIndex) {
@@ -1245,7 +1240,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
             throw new IllegalArgumentException("Specified name index " + nameIndex
                     + " is outside the allowable range (0.." + (nNames-1) + ").");
         }
-        return (HSSFName) names.get(nameIndex);
+        return names.get(nameIndex);
     }
 
     public NameRecord getNameRecord(int nameIndex) {
@@ -1257,9 +1252,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      * @return named range name
      */
     public String getNameName(int index){
-        String result = getNameAt(index).getNameName();
-
-        return result;
+        return getNameAt(index).getNameName();
     }
 
     /**
@@ -1357,12 +1350,12 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
 
     public int getNameIndex(String name) {
 
-        for (int k = 0; k < names.size(); k++) {
-            String nameName = getNameName(k);
-
-            if (nameName.equalsIgnoreCase(name)) {
+        int k = 0;
+        for (final HSSFName n : names) {
+            if (n.getNameName().equalsIgnoreCase(name)) {
                 return k;
             }
+            k++;
         }
         return -1;
     }
@@ -1378,10 +1371,12 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      *         not found
      */
     int getNameIndex(HSSFName name) {
-      for (int k = 0; k < names.size(); k++) {
-        if (name == names.get(k)) {
+      int k = 0;
+      for (final HSSFName n : names) {
+        if (name == n) {
             return k;
         }
+        k++;
       }
       return -1;
     }

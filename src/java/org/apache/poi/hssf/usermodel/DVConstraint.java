@@ -36,20 +36,13 @@ import org.apache.poi.ss.usermodel.DateUtil;
 public final class DVConstraint implements DataValidationConstraint {
 	/* package */ public static final class FormulaPair {
 
-		private final Ptg[] _formula1;
-		private final Ptg[] _formula2;
+		public final Ptg[] _formula1;
+		public final Ptg[] _formula2;
 
 		public FormulaPair(Ptg[] formula1, Ptg[] formula2) {
 			_formula1 = formula1;
 			_formula2 = formula2;
 		}
-		public Ptg[] getFormula1() {
-			return _formula1;
-		}
-		public Ptg[] getFormula2() {
-			return _formula2;
-		}
-		
 	}
 	
 	private final int _validationType;
