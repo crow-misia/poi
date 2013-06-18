@@ -202,7 +202,7 @@ public final class HSSFDataValidation implements DataValidation {
 				_constraint.getValidationType()==ValidationType.LIST && _constraint.getExplicitListValues()!=null,
 				_showPromptBox, _prompt_title, _prompt_text,
 				_showErrorBox, _error_title, _error_text,
-				fp.getFormula1(), fp.getFormula2(),
+				fp._formula1, fp._formula2,
 				_regions);
 	}
 }
