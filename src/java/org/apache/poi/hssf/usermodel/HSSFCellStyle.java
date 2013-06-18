@@ -854,10 +854,8 @@ public final class HSSFCellStyle implements CellStyle {
 
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((_format == null) ? 0 : _format.hashCode());
-		result = prime * result + _index;
-		return result;
+		int result = prime + ((_format == null) ? 0 : _format.hashCode());
+		return prime * result + _index;
 	}
 
 	public boolean equals(Object obj) {

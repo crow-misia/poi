@@ -19,9 +19,9 @@ package org.apache.poi.hssf.usermodel;
 
 import org.apache.poi.ss.usermodel.CreationHelper;
 
-public class HSSFCreationHelper implements CreationHelper {
-	private HSSFWorkbook workbook;
-	private HSSFDataFormat dataFormat;
+public final class HSSFCreationHelper implements CreationHelper {
+	private final HSSFWorkbook workbook;
+	private final HSSFDataFormat dataFormat;
 
 	HSSFCreationHelper(HSSFWorkbook wb) {
 		workbook = wb;

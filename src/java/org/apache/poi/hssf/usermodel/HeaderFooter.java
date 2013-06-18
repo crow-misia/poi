@@ -50,33 +50,40 @@ outer:
 				break;
 			}
 			int pos = text.length();
+			int t;
 			switch (text.charAt(1)) {
 			case 'L':
-				if (text.indexOf("&C") >= 0) {
-					pos = Math.min(pos, text.indexOf("&C"));
+				t = text.indexOf("&C");
+				if (t >= 0) {
+					pos = Math.min(pos, t);
 				}
-				if (text.indexOf("&R") >= 0) {
-					pos = Math.min(pos, text.indexOf("&R"));
+				t = text.indexOf("&R");
+				if (t >= 0) {
+					pos = Math.min(pos, t);
 				}
 				_left = text.substring(2, pos);
 				text = text.substring(pos);
 				break;
 			case 'C':
-				if (text.indexOf("&L") >= 0) {
-					pos = Math.min(pos, text.indexOf("&L"));
+				t = text.indexOf("&L");
+				if (t >= 0) {
+					pos = Math.min(pos, t);
 				}
-				if (text.indexOf("&R") >= 0) {
-					pos = Math.min(pos, text.indexOf("&R"));
+				t = text.indexOf("&R");
+				if (t >= 0) {
+					pos = Math.min(pos, t);
 				}
 				_center = text.substring(2, pos);
 				text = text.substring(pos);
 				break;
 			case 'R':
-				if (text.indexOf("&C") >= 0) {
-					pos = Math.min(pos, text.indexOf("&C"));
+				t = text.indexOf("&C");
+				if (t >= 0) {
+					pos = Math.min(pos, t);
 				}
-				if (text.indexOf("&L") >= 0) {
-					pos = Math.min(pos, text.indexOf("&L"));
+				t = text.indexOf("&L");
+				if (t >= 0) {
+					pos = Math.min(pos, t);
 				}
 				_right = text.substring(2, pos);
 				text = text.substring(pos);
