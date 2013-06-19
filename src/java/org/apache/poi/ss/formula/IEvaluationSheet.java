@@ -15,36 +15,23 @@
    limitations under the License.
 ==================================================================== */
 
-package org.apache.poi.hssf.usermodel;
+package org.apache.poi.ss.formula;
 
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationSheet;
+import org.apache.poi.ss.usermodel.Sheet;
 
 /**
- * HSSF wrapper for a sheet under evaluation
+ * Abstracts a sheet for the purpose of formula evaluation.<br/>
+ * 
+ * For POI internal use only
  * 
  * @author Josh Micich
  */
-final class HSSFEvaluationSheet implements EvaluationSheet {
+public interface IEvaluationSheet {
 
-	private final HSSFSheet _hs;
+	/**
+	 * @return <code>null</code> if there is no cell at the specified coordinates
+	 */
+	IEvaluationCell getCell(int rowIndex, int columnIndex);
 
-	public HSSFEvaluationSheet(HSSFSheet hs) {
-		_hs = hs;
-	}
-
-	public HSSFSheet getHSSFSheet() {
-		return _hs;
-	}
-	public EvaluationCell getCell(int rowIndex, int columnIndex) {
-		HSSFRow row = _hs.getRow(rowIndex);
-		if (row == null) {
-			return null;
-		}
-		HSSFCell cell = row.getCell(columnIndex);
-		if (cell == null) {
-			return null;
-		}
-		return new HSSFEvaluationCell(cell, this);
-	}
+	Sheet getSheet();
 }

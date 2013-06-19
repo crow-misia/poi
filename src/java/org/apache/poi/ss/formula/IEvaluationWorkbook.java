@@ -29,19 +29,19 @@ import org.apache.poi.ss.formula.udf.UDFFinder;
  *
  * @author Josh Micich
  */
-public interface EvaluationWorkbook {
+public interface IEvaluationWorkbook {
 	String getSheetName(int sheetIndex);
 	/**
 	 * @return -1 if the specified sheet is from a different book
 	 */
-	int getSheetIndex(EvaluationSheet sheet);
+	int getSheetIndex(IEvaluationSheet sheet);
 	/**
 	 * Finds a sheet index by case insensitive name.
 	 * @return the index of the sheet matching the specified name.  -1 if not found
 	 */
 	int getSheetIndex(String sheetName);
 
-	EvaluationSheet getSheet(int sheetIndex);
+	IEvaluationSheet getSheet(int sheetIndex);
 
 	/**
 	 * @return <code>null</code> if externSheetIndex refers to a sheet inside the current workbook
@@ -52,7 +52,7 @@ public interface EvaluationWorkbook {
 	EvaluationName getName(NamePtg namePtg);
     EvaluationName getName(String name, int sheetIndex);
 	String resolveNameXText(NameXPtg ptg);
-	Ptg[] getFormulaTokens(EvaluationCell cell);
+	Ptg[] getFormulaTokens(IEvaluationCell cell);
     UDFFinder getUDFFinder();
 
 	class ExternalSheet {

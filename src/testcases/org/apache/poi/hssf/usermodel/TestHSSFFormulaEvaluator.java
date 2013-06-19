@@ -24,7 +24,7 @@ import org.apache.poi.hssf.HSSFITestDataProvider;
 import org.apache.poi.hssf.record.NameRecord;
 import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.ss.formula.EvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationCell;
 import org.apache.poi.ss.formula.EvaluationListener;
 import org.apache.poi.ss.formula.WorkbookEvaluator;
 import org.apache.poi.ss.formula.WorkbookEvaluatorTestHelper;
@@ -132,7 +132,7 @@ public final class TestHSSFFormulaEvaluator extends BaseTestFormulaEvaluator {
 		public EvalCountListener() {
 			_evalCount = 0;
 		}
-		public void onStartEvaluate(EvaluationCell cell, ICacheEntry entry) {
+		public void onStartEvaluate(IEvaluationCell cell, ICacheEntry entry) {
 			_evalCount++;
 		}
 		public int getEvalCount() {

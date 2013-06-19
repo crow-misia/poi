@@ -18,7 +18,6 @@
 package org.apache.poi.ss.formula;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -52,22 +51,21 @@ final class FormulaCellCache {
 	/**
 	 * @return <code>null</code> if not found
 	 */
-	public FormulaCellCacheEntry get(EvaluationCell cell) {
+	public FormulaCellCacheEntry get(IEvaluationCell cell) {
 		return _formulaEntriesByCell.get(cell.getIdentityKey());
 	}
 
-	public void put(EvaluationCell cell, FormulaCellCacheEntry entry) {
+	public void put(IEvaluationCell cell, FormulaCellCacheEntry entry) {
 		_formulaEntriesByCell.put(cell.getIdentityKey(), entry);
 	}
 
-	public FormulaCellCacheEntry remove(EvaluationCell cell) {
+	public FormulaCellCacheEntry remove(IEvaluationCell cell) {
 		return _formulaEntriesByCell.remove(cell.getIdentityKey());
 	}
 
 	public void applyOperation(IEntryOperation operation) {
-		Iterator<FormulaCellCacheEntry> i = _formulaEntriesByCell.values().iterator();
-		while (i.hasNext()) {
-			operation.processEntry(i.next());
+		for (final FormulaCellCacheEntry e : _formulaEntriesByCell.values()) {
+			operation.processEntry(e);
 		}
 	}
 }

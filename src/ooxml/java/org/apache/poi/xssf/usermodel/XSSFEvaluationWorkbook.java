@@ -22,16 +22,19 @@ import org.apache.poi.ss.formula.ptg.NamePtg;
 import org.apache.poi.ss.formula.ptg.NameXPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.SpreadsheetVersion;
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.EvaluationSheet;
-import org.apache.poi.ss.formula.EvaluationWorkbook;
+import org.apache.poi.ss.formula.IEvaluationCell;
+import org.apache.poi.ss.formula.EvaluationName;
+import org.apache.poi.ss.formula.IEvaluationSheet;
+import org.apache.poi.ss.formula.IEvaluationWorkbook;
 import org.apache.poi.ss.formula.FormulaParser;
 import org.apache.poi.ss.formula.FormulaParsingWorkbook;
 import org.apache.poi.ss.formula.FormulaRenderingWorkbook;
 import org.apache.poi.ss.formula.FormulaType;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.formula.udf.IndexedUDFFinder;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName;
 
 /**
@@ -39,7 +42,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName;
  *
  * @author Josh Micich
  */
-public final class XSSFEvaluationWorkbook implements FormulaRenderingWorkbook, EvaluationWorkbook, FormulaParsingWorkbook {
+public final class XSSFEvaluationWorkbook implements FormulaRenderingWorkbook, IEvaluationWorkbook, FormulaParsingWorkbook {
 
 	private final XSSFWorkbook _uBook;
 
@@ -79,7 +82,7 @@ public final class XSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 	}
 
 	public EvaluationName getName(String name, int sheetIndex) {
-		for (int i = 0; i < _uBook.getNumberOfNames(); i++) {
+		for (int i = 0, n = _uBook.getNumberOfNames(); i < n; i++) {
 			XSSFName nm = _uBook.getNameAt(i);
 			String nameText = nm.getNameName();
 			if (name.equalsIgnoreCase(nameText) && nm.getSheetIndex() == sheetIndex) {
@@ -89,8 +92,8 @@ public final class XSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 		return sheetIndex == -1 ? null : getName(name, -1);
 	}
 
-	public int getSheetIndex(EvaluationSheet evalSheet) {
-		XSSFSheet sheet = ((XSSFEvaluationSheet)evalSheet).getXSSFSheet();
+	public int getSheetIndex(IEvaluationSheet evalSheet) {
+		Sheet sheet = evalSheet.getSheet();
 		return _uBook.getSheetIndex(sheet);
 	}
 
@@ -115,8 +118,8 @@ public final class XSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
         return udfFinder.getFunctionName(idx);
     }
 
-	public EvaluationSheet getSheet(int sheetIndex) {
-		return new XSSFEvaluationSheet(_uBook.getSheetAt(sheetIndex));
+	public IEvaluationSheet getSheet(int sheetIndex) {
+		return new EvaluationSheet(_uBook.getSheetAt(sheetIndex));
 	}
 
 	public ExternalSheet getExternalSheet(int externSheetIndex) {
@@ -142,15 +145,15 @@ public final class XSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 		int ix = namePtg.getIndex();
 		return new Name(_uBook.getNameAt(ix), ix, this);
 	}
-	public Ptg[] getFormulaTokens(EvaluationCell evalCell) {
-		XSSFCell cell = ((XSSFEvaluationCell)evalCell).getXSSFCell();
-		XSSFEvaluationWorkbook frBook = XSSFEvaluationWorkbook.create(_uBook);
+	public Ptg[] getFormulaTokens(IEvaluationCell evalCell) {
+		final Cell cell = evalCell.getCell();
+		final XSSFEvaluationWorkbook frBook = XSSFEvaluationWorkbook.create(_uBook);
 		return FormulaParser.parse(cell.getCellFormula(), frBook, FormulaType.CELL, _uBook.getSheetIndex(cell.getSheet()));
 	}
 
-    public UDFFinder getUDFFinder(){
-        return _uBook.getUDFFinder();
-    }
+	public UDFFinder getUDFFinder(){
+		return _uBook.getUDFFinder();
+	}
 
 	private static final class Name implements EvaluationName {
 

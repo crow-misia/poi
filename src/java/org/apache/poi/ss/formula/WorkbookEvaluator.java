@@ -76,13 +76,13 @@ public final class WorkbookEvaluator {
 	
 	private static final POILogger LOG = POILogFactory.getLogger(WorkbookEvaluator.class);
 
-    private final EvaluationWorkbook _workbook;
+    private final IEvaluationWorkbook _workbook;
 	private EvaluationCache _cache;
 	/** part of cache entry key (useful when evaluating multiple workbooks) */
 	private int _workbookIx;
 
 	private final IEvaluationListener _evaluationListener;
-	private final Map<EvaluationSheet, Integer> _sheetIndexesBySheet;
+	private final Map<IEvaluationSheet, Integer> _sheetIndexesBySheet;
 	private final Map<String, Integer> _sheetIndexesByName;
 	private CollaboratingWorkbooksEnvironment _collaboratingWorkbookEnvironment;
 	private final IStabilityClassifier _stabilityClassifier;
@@ -93,10 +93,10 @@ public final class WorkbookEvaluator {
 	/**
 	 * @param udfFinder pass <code>null</code> for default (AnalysisToolPak only)
 	 */
-	public WorkbookEvaluator(EvaluationWorkbook workbook, IStabilityClassifier stabilityClassifier, UDFFinder udfFinder) {
+	public WorkbookEvaluator(IEvaluationWorkbook workbook, IStabilityClassifier stabilityClassifier, UDFFinder udfFinder) {
 		this (workbook, null, stabilityClassifier, udfFinder);
 	}
-	/* package */ WorkbookEvaluator(EvaluationWorkbook workbook, IEvaluationListener evaluationListener,
+	/* package */ WorkbookEvaluator(IEvaluationWorkbook workbook, IEvaluationListener evaluationListener,
 			IStabilityClassifier stabilityClassifier, UDFFinder udfFinder) {
 		_workbook = workbook;
 		_evaluationListener = evaluationListener;
@@ -122,11 +122,11 @@ public final class WorkbookEvaluator {
 		return _workbook.getSheetName(sheetIndex);
 	}
 
-	/* package */ EvaluationSheet getSheet(int sheetIndex) {
+	/* package */ IEvaluationSheet getSheet(int sheetIndex) {
 		return _workbook.getSheet(sheetIndex);
 	}
 	
-	/* package */ EvaluationWorkbook getWorkbook() {
+	/* package */ IEvaluationWorkbook getWorkbook() {
 		return _workbook;
 	}
 
@@ -199,7 +199,7 @@ public final class WorkbookEvaluator {
 	 * Should be called to tell the cell value cache that the specified (value or formula) cell
 	 * has changed.
 	 */
-	public void notifyUpdateCell(EvaluationCell cell) {
+	public void notifyUpdateCell(IEvaluationCell cell) {
 		int sheetIndex = getSheetIndex(cell.getSheet());
 		_cache.notifyUpdateCell(_workbookIx, sheetIndex, cell);
 	}
@@ -207,12 +207,12 @@ public final class WorkbookEvaluator {
 	 * Should be called to tell the cell value cache that the specified cell has just been
 	 * deleted.
 	 */
-	public void notifyDeleteCell(EvaluationCell cell) {
+	public void notifyDeleteCell(IEvaluationCell cell) {
 		int sheetIndex = getSheetIndex(cell.getSheet());
 		_cache.notifyDeleteCell(_workbookIx, sheetIndex, cell);
 	}
 	
-	private int getSheetIndex(EvaluationSheet sheet) {
+	private int getSheetIndex(IEvaluationSheet sheet) {
 		Integer result = _sheetIndexesBySheet.get(sheet);
 		if (result == null) {
 			int sheetIndex = _workbook.getSheetIndex(sheet);
@@ -225,7 +225,7 @@ public final class WorkbookEvaluator {
 		return result.intValue();
 	}
 
-	public ValueEval evaluate(EvaluationCell srcCell) {
+	public ValueEval evaluate(IEvaluationCell srcCell) {
 		int sheetIndex = getSheetIndex(srcCell.getSheet());
 		return evaluateAny(srcCell, sheetIndex, srcCell.getRowIndex(), srcCell.getColumnIndex(), new EvaluationTracker(_cache));
 	}
@@ -255,7 +255,7 @@ public final class WorkbookEvaluator {
 	/**
 	 * @return never <code>null</code>, never {@link BlankEval}
 	 */
-	private ValueEval evaluateAny(EvaluationCell srcCell, int sheetIndex,
+	private ValueEval evaluateAny(IEvaluationCell srcCell, int sheetIndex,
 				int rowIndex, int columnIndex, EvaluationTracker tracker) {
 
 		// avoid tracking dependencies to cells that have constant definition
@@ -366,7 +366,7 @@ public final class WorkbookEvaluator {
 	 * @param cell may be <code>null</code>
 	 * @return {@link BlankEval} if cell is <code>null</code> or blank, never <code>null</code>
 	 */
-	/* package */ static ValueEval getValueFromNonFormulaCell(EvaluationCell cell) {
+	/* package */ static ValueEval getValueFromNonFormulaCell(IEvaluationCell cell) {
 		if (cell == null) {
 			return BlankEval.instance;
 		}
@@ -695,10 +695,10 @@ public final class WorkbookEvaluator {
 	/**
 	 * Used by the lazy ref evals whenever they need to get the value of a contained cell.
 	 */
-	/* package */ ValueEval evaluateReference(EvaluationSheet sheet, int sheetIndex, int rowIndex,
+	/* package */ ValueEval evaluateReference(IEvaluationSheet sheet, int sheetIndex, int rowIndex,
 			int columnIndex, EvaluationTracker tracker) {
 
-		EvaluationCell cell = sheet.getCell(rowIndex, columnIndex);
+		IEvaluationCell cell = sheet.getCell(rowIndex, columnIndex);
 		return evaluateAny(cell, sheetIndex, rowIndex, columnIndex, tracker);
 	}
 	public FreeRefFunction findUserDefinedFunction(String functionName) {

@@ -25,15 +25,18 @@ import org.apache.poi.ss.formula.ptg.NamePtg;
 import org.apache.poi.ss.formula.ptg.NameXPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.SpreadsheetVersion;
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationName;
 import org.apache.poi.ss.formula.EvaluationSheet;
-import org.apache.poi.ss.formula.EvaluationWorkbook;
+import org.apache.poi.ss.formula.IEvaluationCell;
+import org.apache.poi.ss.formula.EvaluationName;
+import org.apache.poi.ss.formula.IEvaluationSheet;
+import org.apache.poi.ss.formula.IEvaluationWorkbook;
 import org.apache.poi.ss.formula.FormulaParseException;
 import org.apache.poi.ss.formula.FormulaParsingWorkbook;
 import org.apache.poi.ss.formula.FormulaRenderingWorkbook;
 import org.apache.poi.ss.formula.FormulaType;
 import org.apache.poi.ss.formula.udf.UDFFinder;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 
@@ -42,7 +45,7 @@ import org.apache.poi.util.POILogger;
  *
  * @author Josh Micich
  */
-public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, EvaluationWorkbook, FormulaParsingWorkbook {
+public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, IEvaluationWorkbook, FormulaParsingWorkbook {
 	private static final POILogger logger = POILogFactory.getLogger(HSSFEvaluationWorkbook.class);
 	private final HSSFWorkbook _uBook;
 	private final InternalWorkbook _iBook;
@@ -68,7 +71,7 @@ public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 	}
 
 	public NameXPtg getNameXPtg(String name) {
-        return _iBook.getNameXPtg(name, _uBook.getUDFFinder());
+		return _iBook.getNameXPtg(name, _uBook.getUDFFinder());
 	}
 
 	/**
@@ -79,7 +82,7 @@ public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 	 * The sheet index is required to resolve sheet-level names. <code>-1</code> means workbook-global names
 	  */
 	public EvaluationName getName(String name, int sheetIndex) {
-		for(int i=0; i < _iBook.getNumNames(); i++) {
+		for(int i=0, n=_iBook.getNumNames(); i < n; i++) {
 			NameRecord nr = _iBook.getNameRecord(i);
 			if (nr.getSheetNumber() == sheetIndex+1 && name.equalsIgnoreCase(nr.getNameText())) {
 				return new Name(nr, i);
@@ -88,8 +91,8 @@ public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 		return sheetIndex == -1 ? null : getName(name, -1);
 	}
 
-	public int getSheetIndex(EvaluationSheet evalSheet) {
-		HSSFSheet sheet = ((HSSFEvaluationSheet)evalSheet).getHSSFSheet();
+	public int getSheetIndex(IEvaluationSheet evalSheet) {
+		Sheet sheet = evalSheet.getSheet();
 		return _uBook.getSheetIndex(sheet);
 	}
 	public int getSheetIndex(String sheetName) {
@@ -100,8 +103,8 @@ public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 		return _uBook.getSheetName(sheetIndex);
 	}
 
-	public EvaluationSheet getSheet(int sheetIndex) {
-		return new HSSFEvaluationSheet(_uBook.getSheetAt(sheetIndex));
+	public IEvaluationSheet getSheet(int sheetIndex) {
+		return new EvaluationSheet(_uBook.getSheetAt(sheetIndex));
 	}
 	public int convertFromExternSheetIndex(int externSheetIndex) {
 		return _iBook.getSheetIndexFromExternSheetIndex(externSheetIndex);
@@ -129,8 +132,8 @@ public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 		int ix = namePtg.getIndex();
 		return new Name(_iBook.getNameRecord(ix), ix);
 	}
-	public Ptg[] getFormulaTokens(EvaluationCell evalCell) {
-		HSSFCell cell = ((HSSFEvaluationCell)evalCell).getHSSFCell();
+	public Ptg[] getFormulaTokens(IEvaluationCell evalCell) {
+		final Cell cell = evalCell.getCell();
 		if (false) {
 			// re-parsing the formula text also works, but is a waste of time
 			// It is useful from time to time to run all unit tests with this code
@@ -144,12 +147,12 @@ public final class HSSFEvaluationWorkbook implements FormulaRenderingWorkbook, E
 				logger.log( POILogger.ERROR, e.getMessage());
 			}
 		}
-		FormulaRecordAggregate fra = (FormulaRecordAggregate) cell.getCellValueRecord();
+		final FormulaRecordAggregate fra = (FormulaRecordAggregate) ((HSSFCell) cell).getCellValueRecord();
 		return fra.getFormulaTokens();
 	}
-    public UDFFinder getUDFFinder(){
-        return _uBook.getUDFFinder();
-    }
+	public UDFFinder getUDFFinder(){
+		return _uBook.getUDFFinder();
+	}
 
 	private static final class Name implements EvaluationName {
 

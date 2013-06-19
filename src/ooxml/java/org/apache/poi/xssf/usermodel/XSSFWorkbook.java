@@ -1665,19 +1665,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
 		}
 	}
 
-    /**
-     *
-     * Returns the locator of user-defined functions.
-     * <p>
-     * The default instance extends the built-in functions with the Excel Analysis Tool Pack.
-     * To set / evaluate custom functions you need to register them as follows:
-     *
-     *
-     *
-     * </p>
-     * @return wrapped instance of UDFFinder that allows seeking functions both by index and name
-     */
-    /*package*/ UDFFinder getUDFFinder() {
+    public UDFFinder getUDFFinder() {
         return _udfFinder;
     }
 

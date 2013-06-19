@@ -1062,5 +1062,8 @@ public class SXSSFWorkbook implements Workbook
         return _wb.getForceFormulaRecalculation();
     }
 
+    public UDFFinder getUDFFinder() {
+        return _wb.getUDFFinder();
+    }
 //end of interface implementation
 }

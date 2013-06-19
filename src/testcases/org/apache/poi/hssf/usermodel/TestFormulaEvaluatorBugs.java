@@ -33,7 +33,7 @@ import org.apache.poi.ss.formula.ptg.FuncVarPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.formula.eval.ErrorEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.ss.formula.EvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationCell;
 import org.apache.poi.ss.formula.EvaluationListener;
 import org.apache.poi.ss.formula.WorkbookEvaluator;
 import org.apache.poi.ss.formula.WorkbookEvaluatorTestHelper;
@@ -353,7 +353,7 @@ public final class TestFormulaEvaluatorBugs extends TestCase {
 		public void onCacheHit(int sheetIndex, int srcRowNum, int srcColNum, ValueEval result) {
 			_countCacheHits++;
 		}
-		public void onStartEvaluate(EvaluationCell cell, ICacheEntry entry) {
+		public void onStartEvaluate(IEvaluationCell cell, ICacheEntry entry) {
 			_countCacheMisses++;
 		}
 	}

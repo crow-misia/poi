@@ -47,10 +47,9 @@ final class FormulaCellCacheEntry extends CellCacheEntry {
 	}
 	
 	public boolean isInputSensitive() {
-		if (_sensitiveInputCells != null) {
-			if (_sensitiveInputCells.length > 0 ) {
-				return true;
-			}
+		if (_sensitiveInputCells != null &&
+			_sensitiveInputCells.length > 0 ) {
+			return true;
 		}
 		return _usedBlankCellGroup == null ? false : !_usedBlankCellGroup.isEmpty();
 	}
@@ -65,8 +64,8 @@ final class FormulaCellCacheEntry extends CellCacheEntry {
 	public void clearFormulaEntry() {
 		CellCacheEntry[] usedCells = _sensitiveInputCells;
 		if (usedCells != null) {
-			for (int i = usedCells.length-1; i>=0; i--) {
-				usedCells[i].clearConsumingCell(this);
+			for (final CellCacheEntry e : usedCells) {
+				e.clearConsumingCell(this);
 			}
 		}
 		_sensitiveInputCells = null;
@@ -76,31 +75,26 @@ final class FormulaCellCacheEntry extends CellCacheEntry {
 	private void changeConsumingCells(CellCacheEntry[] usedCells) {
 
 		CellCacheEntry[] prevUsedCells = _sensitiveInputCells;
-		int nUsed = usedCells.length;
-		for (int i = 0; i < nUsed; i++) {
-			usedCells[i].addConsumingCell(this);
+		for (final CellCacheEntry e : usedCells) {
+			e.addConsumingCell(this);
 		}
-		if (prevUsedCells == null) {
+		if (prevUsedCells == null || prevUsedCells.length < 1) {
 			return;
 		}
-		int nPrevUsed = prevUsedCells.length;
-		if (nPrevUsed < 1) {
-			return;
-		}
+		final int nUsed = usedCells.length;
 		Set<CellCacheEntry> usedSet;
 		if (nUsed < 1) {
 			usedSet = Collections.emptySet();
 		} else {
-			usedSet = new HashSet<>(nUsed * 3 / 2);
-			for (int i = 0; i < nUsed; i++) {
-				usedSet.add(usedCells[i]);
+			usedSet = new HashSet<>((int) (nUsed * 3.0 / 2));
+			for (final CellCacheEntry e : usedCells) {
+				usedSet.add(e);
 			}
 		}
-		for (int i = 0; i < nPrevUsed; i++) {
-			CellCacheEntry prevUsed = prevUsedCells[i];
-			if (!usedSet.contains(prevUsed)) {
+		for (final CellCacheEntry e : prevUsedCells) {
+			if (!usedSet.contains(e)) {
 				// previously was used by cellLoc, but not anymore
-				prevUsed.clearConsumingCell(this);
+				e.clearConsumingCell(this);
 			}
 		}
 	}

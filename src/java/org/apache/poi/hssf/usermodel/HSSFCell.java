@@ -629,13 +629,12 @@ public class HSSFCell implements Cell {
     }
 
     private static RuntimeException typeMismatch(int expectedTypeCode, int actualTypeCode, boolean isFormulaCell) {
-        String msg = "Cannot get a "
+        return new IllegalStateException("Cannot get a "
             + getCellTypeName(expectedTypeCode) + " value from a "
-            + getCellTypeName(actualTypeCode) + " " + (isFormulaCell ? "formula " : "") + "cell";
-        return new IllegalStateException(msg);
+            + getCellTypeName(actualTypeCode) + " " + (isFormulaCell ? "formula " : "") + "cell");
     }
     private static void checkFormulaCachedValueType(int expectedTypeCode, FormulaRecord fr) {
-        int cachedValueType = fr.getCachedResultType();
+        final int cachedValueType = fr.getCachedResultType();
         if (cachedValueType != expectedTypeCode) {
             throw typeMismatch(expectedTypeCode, cachedValueType, true);
         }

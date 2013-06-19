@@ -85,15 +85,14 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
         return 8 + getPropertiesSize();
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends EscherProperty> T lookup( int propId )
     {
         for ( EscherProperty prop : properties )
         {
             if ( prop.getPropertyNumber() == propId )
             {
-                @SuppressWarnings( "unchecked" )
-                final T result = (T) prop;
-                return result;
+                return (T) prop;
             }
         }
         return null;
@@ -129,8 +128,8 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
         {
             public int compare( EscherProperty p1, EscherProperty p2 )
             {
-                short s1 = p1.getPropertyNumber();
-                short s2 = p2.getPropertyNumber();
+                final short s1 = p1.getPropertyNumber();
+                final short s2 = p2.getPropertyNumber();
                 return s1 < s2 ? -1 : s1 == s2 ? 0 : 1;
             }
         } );
@@ -143,9 +142,8 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
      * @param value the property to set.
      */
     public void setEscherProperty(EscherProperty value){
-        for ( Iterator<EscherProperty> iterator =
-                      properties.iterator(); iterator.hasNext(); ) {
-            EscherProperty prop = iterator.next();
+        for (final Iterator<EscherProperty> iterator = properties.iterator(); iterator.hasNext(); ) {
+            final EscherProperty prop = iterator.next();
             if (prop.getId() == value.getId()){
                 iterator.remove();
             }
@@ -155,8 +153,8 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
     }
 
     public void removeEscherProperty(int num){
-        for ( Iterator<EscherProperty> iterator = getEscherProperties().iterator(); iterator.hasNext(); ) {
-            EscherProperty prop = iterator.next();
+        for (final Iterator<EscherProperty> iterator = getEscherProperties().iterator(); iterator.hasNext(); ) {
+            final EscherProperty prop = iterator.next();
             if (prop.getPropertyNumber() == num){
                 iterator.remove();
             }

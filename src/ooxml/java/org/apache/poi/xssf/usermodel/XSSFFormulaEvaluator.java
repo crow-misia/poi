@@ -18,6 +18,7 @@
 package org.apache.poi.xssf.usermodel;
 
 import org.apache.poi.ss.formula.EvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationCell;
 import org.apache.poi.ss.formula.IStabilityClassifier;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.AbstractFormulaEvaluator;
@@ -48,9 +49,9 @@ public final class XSSFFormulaEvaluator extends AbstractFormulaEvaluator {
 	}
 
 	@Override
-	protected EvaluationCell getEvaluationCell(final Cell cell) {
+	protected IEvaluationCell getEvaluationCell(final Cell cell) {
 		if (cell instanceof XSSFCell) {
-			return new XSSFEvaluationCell((XSSFCell) cell);
+			return new EvaluationCell(cell);
 		}
 		throw new IllegalArgumentException("Unexpected type of cell: " + cell.getClass() + "." +
 				" Only XSSFCells can be evaluated.");

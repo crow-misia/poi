@@ -15,36 +15,35 @@
    limitations under the License.
 ==================================================================== */
 
-package org.apache.poi.xssf.usermodel;
+package org.apache.poi.ss.formula;
 
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationSheet;
+import org.apache.poi.ss.usermodel.Cell;
 
 /**
- * XSSF wrapper for a sheet under evaluation
+ * Abstracts a cell for the purpose of formula evaluation.  This interface represents both formula
+ * and non-formula cells.<br/>
+ * 
+ * For POI internal use only
  * 
  * @author Josh Micich
  */
-final class XSSFEvaluationSheet implements EvaluationSheet {
+public interface IEvaluationCell {
+	/**
+	 * @return an Object that identifies the underlying cell,
+     * suitable for use as a key in a {@link java.util.HashMap}
+	 */
+	Object getIdentityKey();
 
-	private final XSSFSheet _xs;
+	Cell getCell();
+	IEvaluationSheet getSheet();
+	int getRowIndex();
+	int getColumnIndex();
+	int getCellType();
 
-	public XSSFEvaluationSheet(XSSFSheet sheet) {
-		_xs = sheet;
-	}
+	double getNumericCellValue();
+	String getStringCellValue();
+	boolean getBooleanCellValue();
+	int getErrorCellValue();
 
-	public XSSFSheet getXSSFSheet() {
-		return _xs;
-	}
-	public EvaluationCell getCell(int rowIndex, int columnIndex) {
-		XSSFRow row = _xs.getRow(rowIndex);
-		if (row == null) {
-			return null;
-		}
-		XSSFCell cell = row.getCell(columnIndex);
-		if (cell == null) {
-			return null;
-		}
-		return new XSSFEvaluationCell(cell, this);
-	}
+	int getCachedFormulaResultType();
 }

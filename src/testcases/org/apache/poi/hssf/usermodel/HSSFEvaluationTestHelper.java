@@ -18,6 +18,7 @@
 package org.apache.poi.hssf.usermodel;
 
 import org.apache.poi.ss.formula.EvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationCell;
 
 /**
  * Raises visibility of some internal functionality for test purposes 
@@ -26,8 +27,8 @@ import org.apache.poi.ss.formula.EvaluationCell;
  */
 public final class HSSFEvaluationTestHelper {
 
-	public static EvaluationCell wrapCell(HSSFCell cell) {
-		return new HSSFEvaluationCell(cell);
+	public static IEvaluationCell wrapCell(HSSFCell cell) {
+		return new EvaluationCell(cell);
 	}
 
 }

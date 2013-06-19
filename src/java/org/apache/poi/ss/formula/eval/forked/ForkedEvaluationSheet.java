@@ -21,9 +21,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationSheet;
-import org.apache.poi.ss.formula.EvaluationWorkbook;
+import org.apache.poi.ss.formula.IEvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationSheet;
+import org.apache.poi.ss.formula.IEvaluationWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -37,20 +37,24 @@ import org.apache.poi.ss.util.CellReference;
  *
  * @author Josh Micich
  */
-final class ForkedEvaluationSheet implements EvaluationSheet {
+final class ForkedEvaluationSheet implements IEvaluationSheet {
 
-	private final EvaluationSheet _masterSheet;
+	private final IEvaluationSheet _masterSheet;
 	/**
 	 * Only cells which have been split are put in this map.  (This has been done to conserve memory).
 	 */
 	private final Map<RowColKey, ForkedEvaluationCell> _sharedCellsByRowCol;
 
-	public ForkedEvaluationSheet(EvaluationSheet masterSheet) {
+	public ForkedEvaluationSheet(IEvaluationSheet masterSheet) {
 		_masterSheet = masterSheet;
 		_sharedCellsByRowCol = new HashMap<>();
 	}
 
-	public EvaluationCell getCell(int rowIndex, int columnIndex) {
+	public Sheet getSheet() {
+		return _masterSheet.getSheet();
+	}
+
+	public IEvaluationCell getCell(int rowIndex, int columnIndex) {
 		RowColKey key = new RowColKey(rowIndex, columnIndex);
 
 		ForkedEvaluationCell result = _sharedCellsByRowCol.get(key);
@@ -65,7 +69,7 @@ final class ForkedEvaluationSheet implements EvaluationSheet {
 
 		ForkedEvaluationCell result = _sharedCellsByRowCol.get(key);
 		if (result == null) {
-			EvaluationCell mcell = _masterSheet.getCell(rowIndex, columnIndex);
+			IEvaluationCell mcell = _masterSheet.getCell(rowIndex, columnIndex);
 			if (mcell == null) {
 				CellReference cr = new CellReference(rowIndex, columnIndex);
 				throw new UnsupportedOperationException("Underlying cell '"
@@ -97,7 +101,7 @@ final class ForkedEvaluationSheet implements EvaluationSheet {
 		}
 	}
 
-	public int getSheetIndex(EvaluationWorkbook mewb) {
+	public int getSheetIndex(IEvaluationWorkbook mewb) {
 		return mewb.getSheetIndex(_masterSheet);
 	}
 

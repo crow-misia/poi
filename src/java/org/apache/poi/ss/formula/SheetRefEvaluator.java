@@ -32,7 +32,7 @@ final class SheetRefEvaluator {
 	private final WorkbookEvaluator _bookEvaluator;
 	private final EvaluationTracker _tracker;
 	private final int _sheetIndex;
-	private EvaluationSheet _sheet;
+	private IEvaluationSheet _sheet;
 
 	public SheetRefEvaluator(WorkbookEvaluator bookEvaluator, EvaluationTracker tracker, int sheetIndex) {
 		if (sheetIndex < 0) {
@@ -51,7 +51,7 @@ final class SheetRefEvaluator {
 		return _bookEvaluator.evaluateReference(getSheet(), _sheetIndex, rowIndex, columnIndex, _tracker);
 	}
 
-	private EvaluationSheet getSheet() {
+	private IEvaluationSheet getSheet() {
 		if (_sheet == null) {
 			_sheet = _bookEvaluator.getSheet(_sheetIndex);
 		}
@@ -64,9 +64,9 @@ final class SheetRefEvaluator {
      */
     public boolean isSubTotal(int rowIndex, int columnIndex){
         boolean subtotal = false;
-        EvaluationCell cell = getSheet().getCell(rowIndex, columnIndex);
+        IEvaluationCell cell = getSheet().getCell(rowIndex, columnIndex);
         if(cell != null && cell.getCellType() == Cell.CELL_TYPE_FORMULA){
-            EvaluationWorkbook wb = _bookEvaluator.getWorkbook();
+            IEvaluationWorkbook wb = _bookEvaluator.getWorkbook();
             for(Ptg ptg : wb.getFormulaTokens(cell)){
                 if(ptg instanceof FuncVarPtg){
                     FuncVarPtg f = (FuncVarPtg)ptg;

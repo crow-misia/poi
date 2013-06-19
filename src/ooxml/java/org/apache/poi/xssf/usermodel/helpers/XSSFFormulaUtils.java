@@ -19,7 +19,7 @@
 
 package org.apache.poi.xssf.usermodel.helpers;
 
-import org.apache.poi.ss.formula.EvaluationWorkbook.ExternalSheet;
+import org.apache.poi.ss.formula.IEvaluationWorkbook.ExternalSheet;
 import org.apache.poi.ss.formula.FormulaParser;
 import org.apache.poi.ss.formula.FormulaRenderer;
 import org.apache.poi.ss.formula.FormulaRenderingWorkbook;

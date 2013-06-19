@@ -25,8 +25,8 @@ import org.apache.poi.ss.formula.eval.*;
 import org.apache.poi.ss.formula.functions.FreeRefFunction;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.formula.CollaboratingWorkbooksEnvironment.WorkbookNotFoundException;
-import org.apache.poi.ss.formula.EvaluationWorkbook.ExternalName;
-import org.apache.poi.ss.formula.EvaluationWorkbook.ExternalSheet;
+import org.apache.poi.ss.formula.IEvaluationWorkbook.ExternalName;
+import org.apache.poi.ss.formula.IEvaluationWorkbook.ExternalSheet;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.ss.util.CellReference.NameType;
 
@@ -40,14 +40,14 @@ import org.apache.poi.ss.util.CellReference.NameType;
  */
 public final class OperationEvaluationContext {
 	public static final FreeRefFunction UDF = UserDefinedFunction.instance;
-	private final EvaluationWorkbook _workbook;
+	private final IEvaluationWorkbook _workbook;
 	private final int _sheetIndex;
 	private final int _rowIndex;
 	private final int _columnIndex;
 	private final EvaluationTracker _tracker;
 	private final WorkbookEvaluator _bookEvaluator;
 
-	public OperationEvaluationContext(WorkbookEvaluator bookEvaluator, EvaluationWorkbook workbook, int sheetIndex, int srcRowNum,
+	public OperationEvaluationContext(WorkbookEvaluator bookEvaluator, IEvaluationWorkbook workbook, int sheetIndex, int srcRowNum,
 			int srcColNum, EvaluationTracker tracker) {
 		_bookEvaluator = bookEvaluator;
 		_workbook = workbook;
@@ -57,7 +57,7 @@ public final class OperationEvaluationContext {
 		_tracker = tracker;
 	}
 
-	public EvaluationWorkbook getWorkbook() {
+	public IEvaluationWorkbook getWorkbook() {
 		return _workbook;
 	}
 

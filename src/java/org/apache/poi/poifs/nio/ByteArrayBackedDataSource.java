@@ -24,7 +24,7 @@ import java.nio.ByteBuffer;
 /**
  * A POIFS {@link DataSource} backed by a byte array.
  */
-public class ByteArrayBackedDataSource extends DataSource {
+public final class ByteArrayBackedDataSource implements DataSource {
    private byte[] buffer;
    private long size;
    
@@ -74,7 +74,7 @@ public class ByteArrayBackedDataSource extends DataSource {
          difference = 4096;
       }
 
-      byte[] nb = new byte[(int)(difference+buffer.length)];
+      final byte[] nb = new byte[(int)(difference+buffer.length)];
       System.arraycopy(buffer, 0, nb, 0, (int)size);
       buffer = nb;
    }
