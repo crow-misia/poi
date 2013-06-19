@@ -20,8 +20,8 @@ package org.apache.poi.xssf.usermodel;
 import org.apache.poi.ss.formula.EvaluationCell;
 import org.apache.poi.ss.formula.IStabilityClassifier;
 import org.apache.poi.ss.formula.udf.UDFFinder;
+import org.apache.poi.ss.usermodel.AbstractFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Workbook;
 
 /**
@@ -34,7 +34,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @author Amol S. Deshmukh &lt; amolweb at ya hoo dot com &gt;
  * @author Josh Micich
  */
-public final class XSSFFormulaEvaluator extends FormulaEvaluator {
+public final class XSSFFormulaEvaluator extends AbstractFormulaEvaluator {
 
 	private final XSSFWorkbook _book;
 
@@ -49,7 +49,11 @@ public final class XSSFFormulaEvaluator extends FormulaEvaluator {
 
 	@Override
 	protected EvaluationCell getEvaluationCell(final Cell cell) {
-		return new XSSFEvaluationCell((XSSFCell) cell);
+		if (cell instanceof XSSFCell) {
+			return new XSSFEvaluationCell((XSSFCell) cell);
+		}
+		throw new IllegalArgumentException("Unexpected type of cell: " + cell.getClass() + "." +
+				" Only XSSFCells can be evaluated.");
 	}
 
 	@Override
@@ -79,7 +83,7 @@ public final class XSSFFormulaEvaluator extends FormulaEvaluator {
 	 *  cells, and calling evaluateFormulaCell on each one.
 	 */
 	public static void evaluateAllFormulaCells(XSSFWorkbook wb) {
-		FormulaEvaluator.evaluateAllFormulaCells(wb);
+		AbstractFormulaEvaluator.evaluateAllFormulaCells(wb);
 	}
 
 }
