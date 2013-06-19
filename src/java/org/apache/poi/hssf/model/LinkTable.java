@@ -207,7 +207,7 @@ final class LinkTable {
 		// collect zero or more DEFINEDNAMEs id=0x18,
 		//  with their comments if present
 		while(true) {
-		  Class nextClass = rs.peekNextClass();
+		  Class<?> nextClass = rs.peekNextClass();
 		  if (nextClass == NameRecord.class) {
 		    NameRecord nr = (NameRecord)rs.getNext();
 		    _definedNames.add(nr);

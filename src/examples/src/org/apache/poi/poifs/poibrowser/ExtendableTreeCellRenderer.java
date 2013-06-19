@@ -128,7 +128,7 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
     /**
      * <p>Find the renderer for the specified class.</p>
      */
-    protected TreeCellRenderer findRenderer(final Class c)
+    protected TreeCellRenderer findRenderer(final Class<?> c)
     {
         final TreeCellRenderer r = (TreeCellRenderer) renderers.get(c);
         if (r != null)
@@ -136,7 +136,7 @@ public class ExtendableTreeCellRenderer implements TreeCellRenderer
             return r;
 
         /* The class has no renderer, try the superclass, if any. */
-        final Class superclass = c.getSuperclass();
+        final Class<?> superclass = c.getSuperclass();
         if (superclass != null) {
             return findRenderer(superclass);
         }

@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.apache.poi.ss.usermodel.DataValidation;
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
+import org.apache.poi.ss.usermodel.DataValidationConstraint.OperatorType;
 import org.apache.poi.ss.usermodel.DataValidationConstraint.ValidationType;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellRangeAddressList;
@@ -35,9 +36,9 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.STDataValidationOpera
  *
  */
 public final class XSSFDataValidation implements DataValidation {
-	private CTDataValidation ctDdataValidation;
-	private XSSFDataValidationConstraint validationConstraint;
-	private CellRangeAddressList regions;
+	private final CTDataValidation ctDdataValidation;
+	private final XSSFDataValidationConstraint validationConstraint;
+	private final CellRangeAddressList regions;
 
     static final Map<Integer,STDataValidationOperator.Enum> operatorTypeMappings = new HashMap<>();
 	static final Map<STDataValidationOperator.Enum,Integer> operatorTypeReverseMappings = new HashMap<>();
@@ -45,21 +46,21 @@ public final class XSSFDataValidation implements DataValidation {
 	static final Map<STDataValidationType.Enum,Integer> validationTypeReverseMappings = new HashMap<>();
     static final Map<Integer,STDataValidationErrorStyle.Enum> errorStyleMappings = new HashMap<>();
     static {
-		errorStyleMappings.put(DataValidation.ErrorStyle.INFO, STDataValidationErrorStyle.INFORMATION);
-		errorStyleMappings.put(DataValidation.ErrorStyle.STOP, STDataValidationErrorStyle.STOP);
-		errorStyleMappings.put(DataValidation.ErrorStyle.WARNING, STDataValidationErrorStyle.WARNING);
+		errorStyleMappings.put(ErrorStyle.INFO, STDataValidationErrorStyle.INFORMATION);
+		errorStyleMappings.put(ErrorStyle.STOP, STDataValidationErrorStyle.STOP);
+		errorStyleMappings.put(ErrorStyle.WARNING, STDataValidationErrorStyle.WARNING);
     }
 	
     
 	static {
-		operatorTypeMappings.put(DataValidationConstraint.OperatorType.BETWEEN,STDataValidationOperator.BETWEEN);
-		operatorTypeMappings.put(DataValidationConstraint.OperatorType.NOT_BETWEEN,STDataValidationOperator.NOT_BETWEEN);
-		operatorTypeMappings.put(DataValidationConstraint.OperatorType.EQUAL,STDataValidationOperator.EQUAL);
-		operatorTypeMappings.put(DataValidationConstraint.OperatorType.NOT_EQUAL,STDataValidationOperator.NOT_EQUAL);
-		operatorTypeMappings.put(DataValidationConstraint.OperatorType.GREATER_THAN,STDataValidationOperator.GREATER_THAN);    	
-		operatorTypeMappings.put(DataValidationConstraint.OperatorType.GREATER_OR_EQUAL,STDataValidationOperator.GREATER_THAN_OR_EQUAL);
-		operatorTypeMappings.put(DataValidationConstraint.OperatorType.LESS_THAN,STDataValidationOperator.LESS_THAN);    	
-		operatorTypeMappings.put(DataValidationConstraint.OperatorType.LESS_OR_EQUAL,STDataValidationOperator.LESS_THAN_OR_EQUAL);
+		operatorTypeMappings.put(OperatorType.BETWEEN,STDataValidationOperator.BETWEEN);
+		operatorTypeMappings.put(OperatorType.NOT_BETWEEN,STDataValidationOperator.NOT_BETWEEN);
+		operatorTypeMappings.put(OperatorType.EQUAL,STDataValidationOperator.EQUAL);
+		operatorTypeMappings.put(OperatorType.NOT_EQUAL,STDataValidationOperator.NOT_EQUAL);
+		operatorTypeMappings.put(OperatorType.GREATER_THAN,STDataValidationOperator.GREATER_THAN);    	
+		operatorTypeMappings.put(OperatorType.GREATER_OR_EQUAL,STDataValidationOperator.GREATER_THAN_OR_EQUAL);
+		operatorTypeMappings.put(OperatorType.LESS_THAN,STDataValidationOperator.LESS_THAN);    	
+		operatorTypeMappings.put(OperatorType.LESS_OR_EQUAL,STDataValidationOperator.LESS_THAN_OR_EQUAL);
 		
 		for( Map.Entry<Integer,STDataValidationOperator.Enum> entry : operatorTypeMappings.entrySet() ) {
 			operatorTypeReverseMappings.put(entry.getValue(),entry.getKey());
@@ -67,14 +68,14 @@ public final class XSSFDataValidation implements DataValidation {
 	}
 
 	static {
-		validationTypeMappings.put(DataValidationConstraint.ValidationType.FORMULA,STDataValidationType.CUSTOM);
-		validationTypeMappings.put(DataValidationConstraint.ValidationType.DATE,STDataValidationType.DATE);
-		validationTypeMappings.put(DataValidationConstraint.ValidationType.DECIMAL,STDataValidationType.DECIMAL);    	
-		validationTypeMappings.put(DataValidationConstraint.ValidationType.LIST,STDataValidationType.LIST); 
-		validationTypeMappings.put(DataValidationConstraint.ValidationType.ANY,STDataValidationType.NONE);
-		validationTypeMappings.put(DataValidationConstraint.ValidationType.TEXT_LENGTH,STDataValidationType.TEXT_LENGTH);
-		validationTypeMappings.put(DataValidationConstraint.ValidationType.TIME,STDataValidationType.TIME);  
-		validationTypeMappings.put(DataValidationConstraint.ValidationType.INTEGER,STDataValidationType.WHOLE);
+		validationTypeMappings.put(ValidationType.FORMULA,STDataValidationType.CUSTOM);
+		validationTypeMappings.put(ValidationType.DATE,STDataValidationType.DATE);
+		validationTypeMappings.put(ValidationType.DECIMAL,STDataValidationType.DECIMAL);    	
+		validationTypeMappings.put(ValidationType.LIST,STDataValidationType.LIST); 
+		validationTypeMappings.put(ValidationType.ANY,STDataValidationType.NONE);
+		validationTypeMappings.put(ValidationType.TEXT_LENGTH,STDataValidationType.TEXT_LENGTH);
+		validationTypeMappings.put(ValidationType.TIME,STDataValidationType.TIME);  
+		validationTypeMappings.put(ValidationType.INTEGER,STDataValidationType.WHOLE);
 		
 		for( Map.Entry<Integer,STDataValidationType.Enum> entry : validationTypeMappings.entrySet() ) {
 			validationTypeReverseMappings.put(entry.getValue(),entry.getKey());

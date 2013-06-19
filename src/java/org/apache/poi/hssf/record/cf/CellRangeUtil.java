@@ -199,7 +199,7 @@ public final class CellRangeUtil
 	 */
 	private static CellRangeAddress[] sliceUp(CellRangeAddress crA, CellRangeAddress crB) {
 		
-		List temp = new ArrayList();
+		List<CellRangeAddress> temp = new ArrayList<>();
 		
 		// Chop up range horizontally and vertically
 		temp.add(crB);
@@ -227,12 +227,10 @@ public final class CellRangeUtil
 		return toArray(temp);
 	}
 
-	private static List cutHorizontally(int cutRow, List input) {
+	private static List<CellRangeAddress> cutHorizontally(int cutRow, List<CellRangeAddress> input) {
 		
-		List result = new ArrayList();
-		CellRangeAddress[] crs = toArray(input);
-		for (int i = 0; i < crs.length; i++) {
-			CellRangeAddress cr = crs[i];
+		List<CellRangeAddress> result = new ArrayList<>();
+		for (final CellRangeAddress cr : input) {
 			if(cr.getFirstRow() < cutRow && cutRow < cr.getLastRow()) {
 				result.add(new CellRangeAddress(cr.getFirstRow(), cutRow, cr.getFirstColumn(), cr.getLastColumn()));
 				result.add(new CellRangeAddress(cutRow+1, cr.getLastRow(), cr.getFirstColumn(), cr.getLastColumn()));
@@ -242,12 +240,10 @@ public final class CellRangeUtil
 		}
 		return result;
 	}
-	private static List cutVertically(int cutColumn, List input) {
+	private static List<CellRangeAddress> cutVertically(int cutColumn, List<CellRangeAddress> input) {
 		
-		List result = new ArrayList();
-		CellRangeAddress[] crs = toArray(input);
-		for (int i = 0; i < crs.length; i++) {
-			CellRangeAddress cr = crs[i];
+		List<CellRangeAddress> result = new ArrayList<>();
+		for (final CellRangeAddress cr : input) {
 			if(cr.getFirstColumn() < cutColumn && cutColumn < cr.getLastColumn()) {
 				result.add(new CellRangeAddress(cr.getFirstRow(), cr.getLastRow(), cr.getFirstColumn(), cutColumn));
 				result.add(new CellRangeAddress(cr.getFirstRow(), cr.getLastRow(), cutColumn+1, cr.getLastColumn()));
@@ -259,7 +255,7 @@ public final class CellRangeUtil
 	}
 
 
-	private static CellRangeAddress[] toArray(List temp) {
+	private static CellRangeAddress[] toArray(List<CellRangeAddress> temp) {
 		CellRangeAddress[] result = new CellRangeAddress[temp.size()];
 		temp.toArray(result);
 		return result;

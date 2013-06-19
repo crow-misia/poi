@@ -26,6 +26,7 @@ import javax.swing.table.*;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.ss.usermodel.Cell;
 
 /**
  * Sheet Viewer Table Model - The model for the Sheet Viewer just overrides things.
@@ -69,7 +70,7 @@ public class SVTableModel extends AbstractTableModel {
     return st.getLastRowNum() + 1;
   }
 
-  public Class getColumnClass(int c) {
+  public Class<? extends Cell> getColumnClass(int c) {
 	return HSSFCell.class;
   }
 
