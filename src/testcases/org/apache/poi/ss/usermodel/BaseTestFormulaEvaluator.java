@@ -23,7 +23,7 @@ import junit.framework.TestCase;
 import org.apache.poi.ss.ITestDataProvider;
 
 /**
- * Common superclass for testing implementatiosn of{@link FormulaEvaluator}
+ * Common superclass for testing implementatiosn of{@link IFormulaEvaluator}
  *
  * @author Yegor Kozlov
  */
@@ -51,7 +51,7 @@ public abstract class BaseTestFormulaEvaluator extends TestCase {
         c2.setCellFormula("10/2");
         assertEquals(0.0, c2.getNumericCellValue(), 0.0);
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         fe.evaluateFormulaCell(c1);
         fe.evaluateFormulaCell(c2);
@@ -89,7 +89,7 @@ public abstract class BaseTestFormulaEvaluator extends TestCase {
 
 
         // Evaluate and test
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         fe.evaluateFormulaCell(c1);
         fe.evaluateFormulaCell(c2);
@@ -107,7 +107,7 @@ public abstract class BaseTestFormulaEvaluator extends TestCase {
 
         Sheet sheet = wb.getSheetAt(0);
 
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
         Cell cell;
 
         cell = sheet.getRow(1).getCell(0);
@@ -155,7 +155,7 @@ public abstract class BaseTestFormulaEvaluator extends TestCase {
         row.createCell(1).setCellFormula("sales_1");
         row.createCell(2).setCellFormula("sales_1*3");
 
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
         assertEquals(3.0, evaluator.evaluate(sh1.getRow(0).getCell(1)).getNumberValue(), 0.0);
         assertEquals(6.0, evaluator.evaluate(sh1.getRow(0).getCell(2)).getNumberValue(), 0.0);
 
@@ -189,14 +189,14 @@ public abstract class BaseTestFormulaEvaluator extends TestCase {
         setValue(sheet, 3, 6, 100.0);
 
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
         assertEquals(26.0, fe.evaluate(cell0).getNumberValue(), 0.0);
         assertEquals(56.0, fe.evaluate(cell1).getNumberValue(), 0.0);
     }
     
     public void testRepeatedEvaluation() {
        Workbook wb = _testDataProvider.createWorkbook();
-       FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+       IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
        Sheet sheet = wb.createSheet("Sheet1");
        Row r = sheet.createRow(0);
        Cell c = r.createCell(0, Cell.CELL_TYPE_FORMULA);
@@ -241,12 +241,12 @@ public abstract class BaseTestFormulaEvaluator extends TestCase {
     }
 
     /**
-     * {@link FormulaEvaluator#evaluate(org.apache.poi.ss.usermodel.Cell)} should behave the same whether the cell
+     * {@link IFormulaEvaluator#evaluate(org.apache.poi.ss.usermodel.Cell)} should behave the same whether the cell
      * is <code>null</code> or blank.
      */
     public void testEvaluateBlank() {
         Workbook wb = _testDataProvider.createWorkbook();
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
         assertNull(fe.evaluate(null));
         Sheet sheet = wb.createSheet("Sheet1");
         Cell cell = sheet.createRow(0).createCell(0);
@@ -264,7 +264,7 @@ public abstract class BaseTestFormulaEvaluator extends TestCase {
         Cell cellA1 = row.createCell(0);
         Cell cellB1 = row.createCell(1);
         cellB1.setCellFormula("A1+1");
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         cellA1.setCellErrorValue((byte)ErrorConstants.ERROR_NAME);
         fe.evaluateFormulaCell(cellB1);
@@ -294,7 +294,7 @@ public abstract class BaseTestFormulaEvaluator extends TestCase {
         cellC1.setCellFormula("roundup(a1,2)");
         Cell cellD1 = row.createCell(3);
         cellD1.setCellFormula("rounddown(a1,2)");
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         assertEquals(2162.62, fe.evaluateInCell(cellB1).getNumericCellValue(), 0.0);
         assertEquals(2162.62, fe.evaluateInCell(cellC1).getNumericCellValue(), 0.0);

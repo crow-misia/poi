@@ -39,6 +39,10 @@ public final class ImageUtils {
 
     public static final int PIXEL_DPI = 96;
 
+    private ImageUtils() {
+        // no instances of this class
+    }
+
     /**
      * Return the dimension of this image
      *
@@ -97,7 +101,7 @@ public final class ImageUtils {
      * {96, 96} is the default.
      */
     public static int[] getResolution(ImageReader r) throws IOException {
-        int hdpi=96, vdpi=96;
+        int hdpi=PIXEL_DPI, vdpi=PIXEL_DPI;
         double mm2inch = 25.4;
 
         Element node = (Element)r.getImageMetadata(0).getAsTree("javax_imageio_1.0");

@@ -20,7 +20,7 @@ import junit.framework.TestCase;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -74,7 +74,7 @@ public class TestIfError extends TestCase {
         
         double accuracy = 1E-9;
 
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
         assertEquals("Checks that the cell is numeric",
         		Cell.CELL_TYPE_NUMERIC, evaluator.evaluate(cell1).getCellType());

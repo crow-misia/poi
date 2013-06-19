@@ -25,7 +25,7 @@ import org.apache.poi.ss.formula.functions.FreeRefFunction;
 import org.apache.poi.ss.formula.udf.DefaultUDFFinder;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -108,7 +108,7 @@ public class BaseTestExternalFunctions extends TestCase {
         cell3.setCellFormula("MYFUNC2(\"C1\")&\"-\"&A2");  //where A2 is defined above
         assertEquals("MYFUNC2(\"C1\")&\"-\"&A2", cell3.getCellFormula());
 
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
         assertEquals(2.0, evaluator.evaluate(cell1).getNumberValue());
         assertEquals("B1abc", evaluator.evaluate(cell2).getStringValue());
         assertEquals("C1abc2-B1abc", evaluator.evaluate(cell3).getStringValue());
@@ -122,7 +122,7 @@ public class BaseTestExternalFunctions extends TestCase {
      */
     public void baseTestInvokeATP(String testFile){
         Workbook wb = _testDataProvider.openSampleWorkbook(testFile);
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sh  = wb.getSheetAt(0);
         // these two are not imlemented in r

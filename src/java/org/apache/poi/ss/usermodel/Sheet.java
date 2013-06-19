@@ -317,7 +317,7 @@ public interface Sheet extends Iterable<Row> {
      * when the workbook is opened.
      *
      *  <p>
-     *  Calculating the formula values with {@link FormulaEvaluator} is the
+     *  Calculating the formula values with {@link IFormulaEvaluator} is the
      *  recommended solution, but this may be used for certain cases where
      *  evaluation in POI is not possible.
      *  </p>

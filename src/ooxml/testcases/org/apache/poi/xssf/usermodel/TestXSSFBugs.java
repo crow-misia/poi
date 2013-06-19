@@ -39,7 +39,7 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.FormulaError;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Name;
 import org.apache.poi.ss.usermodel.Row;
@@ -383,7 +383,7 @@ public final class TestXSSFBugs extends BaseTestBugzillaIssues {
           Cell cfs = r.createCell(3, Cell.CELL_TYPE_FORMULA);
           cfs.setCellFormula("B1");
           
-          FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+          IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
           assertEquals(Cell.CELL_TYPE_NUMERIC, fe.evaluate(cfn).getCellType());
           assertEquals(Cell.CELL_TYPE_STRING, fe.evaluate(cfs).getCellType());
           fe.evaluateFormulaCell(cfn);
@@ -442,7 +442,7 @@ public final class TestXSSFBugs extends BaseTestBugzillaIssues {
     public void test49783() throws Exception {
         Workbook wb =  XSSFTestDataSamples.openSampleWorkbook("49783.xlsx");
         Sheet sheet = wb.getSheetAt(0);
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
         Cell cell;
 
         cell = sheet.getRow(0).getCell(0);
@@ -611,7 +611,7 @@ public final class TestXSSFBugs extends BaseTestBugzillaIssues {
 
     public void test49156() throws Exception {
         Workbook wb = XSSFTestDataSamples.openSampleWorkbook("49156.xlsx");
-        FormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sheet = wb.getSheetAt(0);
         for(Row row : sheet){
@@ -634,7 +634,7 @@ public final class TestXSSFBugs extends BaseTestBugzillaIssues {
        assertEquals("SUM(\n1,2\n)", c.getCellFormula());
        assertEquals(3.0, c.getNumericCellValue());
        
-       FormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
+       IFormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
        formulaEvaluator.evaluateFormulaCell(c);
        
        assertEquals("SUM(\n1,2\n)", c.getCellFormula());
@@ -1324,7 +1324,7 @@ public final class TestXSSFBugs extends BaseTestBugzillaIssues {
      */
     public void test5301(){
         Workbook workbook = XSSFTestDataSamples.openSampleWorkbook("53101.xlsx");
-        FormulaEvaluator evaluator =
+        IFormulaEvaluator evaluator =
                 workbook.getCreationHelper().createFormulaEvaluator();
         // A1: SUM(B1: IZ1)
         double a1Value =

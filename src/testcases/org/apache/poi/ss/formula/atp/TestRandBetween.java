@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.ss.formula.eval.ErrorEval;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -34,7 +34,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class TestRandBetween extends TestCase {
 
 	private Workbook wb;
-	private FormulaEvaluator evaluator;
+	private IFormulaEvaluator evaluator;
 	private Cell bottomValueCell;
 	private Cell topValueCell;
 	private Cell formulaCell;

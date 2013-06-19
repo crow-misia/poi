@@ -104,10 +104,9 @@ public class HSSFComment extends HSSFTextbox implements Comment {
         c.setAutoline(true);
 
         NoteStructureSubRecord u = new NoteStructureSubRecord();
-        EndSubRecord e = new EndSubRecord();
         obj.addSubRecord(c);
         obj.addSubRecord(u);
-        obj.addSubRecord(e);
+        obj.addSubRecord(EndSubRecord.INSTANCE);
         return obj;
     }
 

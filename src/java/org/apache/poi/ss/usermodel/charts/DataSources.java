@@ -106,7 +106,7 @@ public final class DataSources {
         private final Sheet sheet;
         private final CellRangeAddress cellRangeAddress;
         private final int numOfCells;
-        private FormulaEvaluator evaluator;
+        private IFormulaEvaluator evaluator;
 
         protected AbstractCellRangeDataSource(Sheet sheet, CellRangeAddress cellRangeAddress) {
             this.sheet = sheet;

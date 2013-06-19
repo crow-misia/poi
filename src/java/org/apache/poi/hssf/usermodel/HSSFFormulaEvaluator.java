@@ -23,7 +23,7 @@ import org.apache.poi.ss.formula.IEvaluationCell;
 import org.apache.poi.ss.formula.IStabilityClassifier;
 import org.apache.poi.ss.formula.WorkbookEvaluator;
 import org.apache.poi.ss.formula.udf.UDFFinder;
-import org.apache.poi.ss.usermodel.AbstractFormulaEvaluator;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -37,7 +37,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @author Amol S. Deshmukh &lt; amolweb at ya hoo dot com &gt;
  * @author Josh Micich
  */
-public final class HSSFFormulaEvaluator extends AbstractFormulaEvaluator {
+public final class HSSFFormulaEvaluator extends FormulaEvaluator {
 
 	private final HSSFWorkbook _book;
 
@@ -101,6 +101,6 @@ public final class HSSFFormulaEvaluator extends AbstractFormulaEvaluator {
 	 *  cells, and calling evaluateFormulaCell on each one.
 	 */
 	public static void evaluateAllFormulaCells(HSSFWorkbook wb) {
-		AbstractFormulaEvaluator.evaluateAllFormulaCells(wb);
+		FormulaEvaluator.evaluateAllFormulaCells(wb);
 	}
 }

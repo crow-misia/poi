@@ -137,10 +137,9 @@ public class HSSFSimpleShape extends HSSFShape
         c.setPrintable(true);
         c.setAutofill(true);
         c.setAutoline(true);
-        EndSubRecord e = new EndSubRecord();
 
         obj.addSubRecord(c);
-        obj.addSubRecord(e);
+        obj.addSubRecord(EndSubRecord.INSTANCE);
         return obj;
     }
 

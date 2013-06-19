@@ -730,7 +730,7 @@ public class TestEvaluationCache extends TestCase {
 
 
         //calculate
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
         evaluator.evaluateFormulaCell(summaryCell);
     }
 
@@ -770,7 +770,7 @@ public class TestEvaluationCache extends TestCase {
 
 
         //calculate
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
         evaluator.evaluateFormulaCell(summaryCell);
         assertEquals(8394753.0, summaryCell.getNumericCellValue());
     }

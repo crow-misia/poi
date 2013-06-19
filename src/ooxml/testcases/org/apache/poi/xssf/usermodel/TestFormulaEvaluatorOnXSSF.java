@@ -29,7 +29,7 @@ import org.apache.poi.ss.formula.eval.TestFormulasFromSpreadsheet;
 import org.apache.poi.ss.formula.functions.TestMathX;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.openxml4j.opc.OPCPackage;
@@ -199,7 +199,7 @@ public final class TestFormulaEvaluatorOnXSSF extends TestCase {
 	 */
 	private void processFunctionGroup(int startRowIndex, String testFocusFunctionName) {
  
-		FormulaEvaluator evaluator = new XSSFFormulaEvaluator(workbook);
+		IFormulaEvaluator evaluator = new XSSFFormulaEvaluator(workbook);
 
 		int rowIndex = startRowIndex;
 		while (true) {
@@ -240,7 +240,7 @@ public final class TestFormulaEvaluatorOnXSSF extends TestCase {
 	 * @return a constant from the local Result class denoting whether there were any evaluation
 	 * cases, and whether they all succeeded.
 	 */
-	private int processFunctionRow(FormulaEvaluator evaluator, String targetFunctionName, 
+	private int processFunctionRow(IFormulaEvaluator evaluator, String targetFunctionName, 
 			Row formulasRow, Row expectedValuesRow) {
 		
 		int result = Result.NO_EVALUATIONS_FOUND; // so far

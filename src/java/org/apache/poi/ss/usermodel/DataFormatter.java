@@ -775,7 +775,7 @@ public class DataFormatter {
      * </p>
      * <p>When passed a null or blank cell, this method will return an empty
      * String (""). Formula cells will be evaluated using the given
-     * {@link FormulaEvaluator} if the evaluator is non-null. If the
+     * {@link IFormulaEvaluator} if the evaluator is non-null. If the
      * evaluator is null, then the formula String will be returned. The caller
      * is responsible for setting the currentRow on the evaluator
      *</p>
@@ -784,7 +784,7 @@ public class DataFormatter {
      * @param evaluator The FormulaEvaluator (can be null)
      * @return a string value of the cell
      */
-    public String formatCellValue(Cell cell, FormulaEvaluator evaluator) {
+    public String formatCellValue(Cell cell, IFormulaEvaluator evaluator) {
         
         if (cell == null) {
             return "";

@@ -518,7 +518,7 @@ public abstract class BaseTestWorkbook extends TestCase {
         assertEquals("sale_4", sale_4.getNameName());
         assertEquals("'To be renamed'!$A$3", sale_4.getRefersToFormula());
 
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
         Cell cell0 = sh1.getRow(0).getCell(0);
         Cell cell1 = sh1.getRow(1).getCell(0);
@@ -583,7 +583,7 @@ public abstract class BaseTestWorkbook extends TestCase {
     public void changeSheetNameWithSharedFormulas(String sampleFile){
         Workbook wb = _testDataProvider.openSampleWorkbook(sampleFile);
 
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sheet = wb.getSheetAt(0);
 

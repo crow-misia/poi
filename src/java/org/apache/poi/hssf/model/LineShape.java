@@ -104,10 +104,8 @@ public class LineShape
     /**
      * Creates the low level OBJ record for this shape.
      */
-    private ObjRecord createObjRecord(HSSFShape hssfShape, int shapeId)
+    private ObjRecord createObjRecord(HSSFShape shape, int shapeId)
     {
-        HSSFShape shape = hssfShape;
-
         ObjRecord obj = new ObjRecord();
         CommonObjectDataSubRecord c = new CommonObjectDataSubRecord();
         c.setObjectType((short) ((HSSFSimpleShape)shape).getShapeType());
@@ -116,10 +114,9 @@ public class LineShape
         c.setPrintable(true);
         c.setAutofill(true);
         c.setAutoline(true);
-        EndSubRecord e = new EndSubRecord();
 
         obj.addSubRecord(c);
-        obj.addSubRecord(e);
+        obj.addSubRecord(EndSubRecord.INSTANCE);
 
         return obj;
     }

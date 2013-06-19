@@ -36,7 +36,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.util.CellReference;
 
 /**
@@ -390,7 +390,7 @@ public final class TestCountFuncs extends TestCase {
 		final int EVAL_COL = 3;
 		
         HSSFWorkbook workbook = HSSFTestDataSamples.openSampleWorkbook("51498.xls");
-		FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+		IFormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
 		HSSFSheet sheet = workbook.getSheetAt(0);
 
 		// numeric criteria

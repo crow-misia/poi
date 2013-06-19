@@ -65,16 +65,13 @@ public final class HSSFConditionalFormattingRule implements ConditionalFormattin
 			cfRuleRecord.setFontFormatting(fontFormatting);
 			return new HSSFFontFormatting(cfRuleRecord);
 		}
-		else if( create )
+		if( create )
 		{
 			fontFormatting = new FontFormatting();
 			cfRuleRecord.setFontFormatting(fontFormatting);
 			return new HSSFFontFormatting(cfRuleRecord);
 		}
-		else
-		{
-			return null;
-		}
+		return null;
 	}
 
 	/**
@@ -102,16 +99,13 @@ public final class HSSFConditionalFormattingRule implements ConditionalFormattin
 			cfRuleRecord.setBorderFormatting(borderFormatting);
 			return new HSSFBorderFormatting(cfRuleRecord);
 		}
-		else if( create )
+		if( create )
 		{
 			borderFormatting = new BorderFormatting();
 			cfRuleRecord.setBorderFormatting(borderFormatting);
 			return new HSSFBorderFormatting(cfRuleRecord);
 		}
-		else
-		{
-			return null;
-		}
+		return null;
 	}
 	/**
 	 * @return - border formatting object  if defined,  <code>null</code> otherwise
@@ -138,16 +132,13 @@ public final class HSSFConditionalFormattingRule implements ConditionalFormattin
 			cfRuleRecord.setPatternFormatting(patternFormatting);
 			return new HSSFPatternFormatting(cfRuleRecord);
 		}
-		else if( create )
+		if( create )
 		{
 			patternFormatting = new PatternFormatting();
 			cfRuleRecord.setPatternFormatting(patternFormatting);
 			return new HSSFPatternFormatting(cfRuleRecord);
 		}
-		else
-		{
-			return null;
-		}
+		return null;
 	}
 
 	/**

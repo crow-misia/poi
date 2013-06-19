@@ -41,7 +41,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.ErrorConstants;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Name;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -218,7 +218,7 @@ public class TestWorkbookEvaluator extends TestCase {
 		Workbook wb = new HSSFWorkbook();
 		Cell cell = wb.createSheet("Sheet1").createRow(0).createCell(0);
 		cell.setCellFormula("D2:D5"); // IF(TRUE,D2:D5,D2) or  OFFSET(D2:D5,0,0) would work too
-		FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+		IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 		CellValue cv;
 		try {
 			cv = fe.evaluate(cell);
@@ -274,7 +274,7 @@ public class TestWorkbookEvaluator extends TestCase {
     row2.createCell(2).setCellFormula("SUM(aSet)");
     row3.createCell(2).setCellFormula("aConstant+aFormula+SUM(aSet)");
 
-    FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+    IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
     assertEquals(3.14, fe.evaluate(row0.getCell(2)).getNumberValue());
     assertEquals(10.0, fe.evaluate(row1.getCell(2)).getNumberValue());
     assertEquals(15.0, fe.evaluate(row2.getCell(2)).getNumberValue());

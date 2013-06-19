@@ -24,7 +24,7 @@ import org.apache.poi.ss.formula.eval.ErrorEval;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 
 /**
  * Tests for the INDIRECT() function.</p>
@@ -166,7 +166,7 @@ public final class TestIndirect extends TestCase {
 		confirm(feA, cellA, "INDIRECT(\"'[Figures for January]Sheet1'!A11\")", 50); // points to cellB
 	}
 
-	private static void confirm(FormulaEvaluator fe, Cell cell, String formula,
+	private static void confirm(IFormulaEvaluator fe, Cell cell, String formula,
 			double expectedResult) {
 		fe.clearAllCachedResultValues();
 		cell.setCellFormula(formula);
@@ -176,7 +176,7 @@ public final class TestIndirect extends TestCase {
 		}
 		assertEquals(expectedResult, cv.getNumberValue(), 0.0);
 	}
-	private static void confirm(FormulaEvaluator fe, Cell cell, String formula,
+	private static void confirm(IFormulaEvaluator fe, Cell cell, String formula,
 			ErrorEval expectedResult) {
 		fe.clearAllCachedResultValues();
 		cell.setCellFormula(formula);

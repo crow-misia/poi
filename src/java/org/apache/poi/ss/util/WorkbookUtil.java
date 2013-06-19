@@ -23,8 +23,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 /**
  * Helper methods for when working with Usermodel Workbooks
  */
-public class WorkbookUtil {
-	
+public final class WorkbookUtil {
+	private WorkbookUtil() {
+		// no instances of this class
+	}
+
 	/**
 	 * Creates a valid sheet name, which is conform to the rules.
 	 * In any case, the result safely can be used for 
