@@ -45,6 +45,7 @@ import org.apache.poi.openxml4j.util.ZipInputStreamZipEntrySource;
 import org.apache.poi.util.Closeables;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Physical zip package.
@@ -319,7 +320,7 @@ public final class ZipPackage extends OPCPackage {
 
 		// Save the content
 		if (this.originalPackagePath != null
-				&& !"".equals(this.originalPackagePath)) {
+				&& StringUtil.isNotBlank(this.originalPackagePath)) {
 			File targetFile = new File(this.originalPackagePath);
 			if (targetFile.exists()) {
 				// Case of a package previously open
@@ -413,10 +414,10 @@ public final class ZipPackage extends OPCPackage {
 		ZipOutputStream zos = null;
 
 		try {
-			if (!(outputStream instanceof ZipOutputStream))
-				zos = new ZipOutputStream(outputStream);
-			else
+			if (outputStream instanceof ZipOutputStream)
 				zos = (ZipOutputStream) outputStream;
+			else
+				zos = new ZipOutputStream(outputStream);
 
 			// If the core properties part does not exist in the part list,
 			// we save it as well
