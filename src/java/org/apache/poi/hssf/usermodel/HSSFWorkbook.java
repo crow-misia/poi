@@ -1679,14 +1679,7 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
         return new HSSFCreationHelper(this);
     }
 
-    /**
-     *
-     * Returns the locator of user-defined functions.
-     * The default instance extends the built-in functions with the Analysis Tool Pack
-     *
-     * @return the locator of user-defined functions
-     */
-    /*package*/ UDFFinder getUDFFinder(){
+    public UDFFinder getUDFFinder(){
         return _udfFinder;
     }
 

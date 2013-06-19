@@ -23,8 +23,8 @@ import org.apache.poi.ss.formula.eval.ErrorEval;
 import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationSheet;
+import org.apache.poi.ss.formula.IEvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationSheet;
 import org.apache.poi.ss.usermodel.Cell;
 
 /**
@@ -33,18 +33,18 @@ import org.apache.poi.ss.usermodel.Cell;
  *
  * @author Josh Micich
  */
-final class ForkedEvaluationCell implements EvaluationCell {
+final class ForkedEvaluationCell implements IEvaluationCell {
 
-	private final EvaluationSheet _sheet;
+	private final IEvaluationSheet _sheet;
 	/** corresponding cell from master workbook */
-	private final EvaluationCell _masterCell;
+	private final IEvaluationCell _masterCell;
 	private boolean _booleanValue;
 	private int _cellType;
 	private int _errorValue;
 	private double _numberValue;
 	private String _stringValue;
 
-	public ForkedEvaluationCell(ForkedEvaluationSheet sheet, EvaluationCell masterCell) {
+	public ForkedEvaluationCell(ForkedEvaluationSheet sheet, IEvaluationCell masterCell) {
 		_sheet = sheet;
 		_masterCell = masterCell;
 		// start with value blank, but expect construction to be immediately
@@ -119,7 +119,10 @@ final class ForkedEvaluationCell implements EvaluationCell {
 		checkCellType(Cell.CELL_TYPE_STRING);
 		return _stringValue;
 	}
-	public EvaluationSheet getSheet() {
+	public Cell getCell() {
+		return _masterCell.getCell();
+	}
+	public IEvaluationSheet getSheet() {
 		return _sheet;
 	}
 	public int getRowIndex() {

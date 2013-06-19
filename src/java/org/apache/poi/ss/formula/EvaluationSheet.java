@@ -17,17 +17,37 @@
 
 package org.apache.poi.ss.formula;
 
+import org.apache.poi.ss.formula.IEvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationSheet;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+
 /**
- * Abstracts a sheet for the purpose of formula evaluation.<br/>
- * 
- * For POI internal use only
+ * HSSF wrapper for a sheet under evaluation
  * 
  * @author Josh Micich
  */
-public interface EvaluationSheet {
+public final class EvaluationSheet implements IEvaluationSheet {
 
-	/**
-	 * @return <code>null</code> if there is no cell at the specified coordinates
-	 */
-	EvaluationCell getCell(int rowIndex, int columnIndex);
+	private final Sheet _hs;
+
+	public EvaluationSheet(Sheet hs) {
+		_hs = hs;
+	}
+
+	public Sheet getSheet() {
+		return _hs;
+	}
+	public IEvaluationCell getCell(int rowIndex, int columnIndex) {
+		Row row = _hs.getRow(rowIndex);
+		if (row == null) {
+			return null;
+		}
+		Cell cell = row.getCell(columnIndex);
+		if (cell == null) {
+			return null;
+		}
+		return new EvaluationCell(cell, this);
+	}
 }

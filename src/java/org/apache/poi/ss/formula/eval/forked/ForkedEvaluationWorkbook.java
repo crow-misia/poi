@@ -23,10 +23,10 @@ import java.util.Map;
 import org.apache.poi.ss.formula.ptg.NamePtg;
 import org.apache.poi.ss.formula.ptg.NameXPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
-import org.apache.poi.ss.formula.EvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationCell;
 import org.apache.poi.ss.formula.EvaluationName;
-import org.apache.poi.ss.formula.EvaluationSheet;
-import org.apache.poi.ss.formula.EvaluationWorkbook;
+import org.apache.poi.ss.formula.IEvaluationSheet;
+import org.apache.poi.ss.formula.IEvaluationWorkbook;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -37,12 +37,12 @@ import org.apache.poi.ss.usermodel.Workbook;
  *
  * @author Josh Micich
  */
-final class ForkedEvaluationWorkbook implements EvaluationWorkbook {
+final class ForkedEvaluationWorkbook implements IEvaluationWorkbook {
 
-	private final EvaluationWorkbook _masterBook;
+	private final IEvaluationWorkbook _masterBook;
 	private final Map<String, ForkedEvaluationSheet> _sharedSheetsByName;
 
-	public ForkedEvaluationWorkbook(EvaluationWorkbook master) {
+	public ForkedEvaluationWorkbook(IEvaluationWorkbook master) {
 		_masterBook = master;
 		_sharedSheetsByName = new HashMap<>();
 	}
@@ -53,7 +53,7 @@ final class ForkedEvaluationWorkbook implements EvaluationWorkbook {
 		return sheet.getOrCreateUpdatableCell(rowIndex, columnIndex);
 	}
 
-	public EvaluationCell getEvaluationCell(String sheetName, int rowIndex, int columnIndex) {
+	public IEvaluationCell getEvaluationCell(String sheetName, int rowIndex, int columnIndex) {
 		ForkedEvaluationSheet sheet = getSharedSheet(sheetName);
 		return sheet.getCell(rowIndex, columnIndex);
 	}
@@ -91,7 +91,7 @@ final class ForkedEvaluationWorkbook implements EvaluationWorkbook {
 		return _masterBook.getExternalSheet(externSheetIndex);
 	}
 
-	public Ptg[] getFormulaTokens(EvaluationCell cell) {
+	public Ptg[] getFormulaTokens(IEvaluationCell cell) {
 		if (cell instanceof ForkedEvaluationCell) {
 			// doesn't happen yet because formulas cannot be modified from the master workbook
 			throw new RuntimeException("Updated formulas not supported yet");
@@ -107,7 +107,7 @@ final class ForkedEvaluationWorkbook implements EvaluationWorkbook {
         return _masterBook.getName(name, sheetIndex);
     }
 
-	public EvaluationSheet getSheet(int sheetIndex) {
+	public IEvaluationSheet getSheet(int sheetIndex) {
 		return getSharedSheet(getSheetName(sheetIndex));
 	}
 	
@@ -115,7 +115,7 @@ final class ForkedEvaluationWorkbook implements EvaluationWorkbook {
 	   return _masterBook.getExternalName(externSheetIndex, externNameIndex);
 	}
 
-	public int getSheetIndex(EvaluationSheet sheet) {
+	public int getSheetIndex(IEvaluationSheet sheet) {
 		if (sheet instanceof ForkedEvaluationSheet) {
 			ForkedEvaluationSheet mes = (ForkedEvaluationSheet) sheet;
 			return mes.getSheetIndex(_masterBook);

@@ -19,7 +19,7 @@ package org.apache.poi.ss.formula;
 
 import org.apache.poi.ss.formula.ptg.NamePtg;
 import org.apache.poi.ss.formula.ptg.NameXPtg;
-import org.apache.poi.ss.formula.EvaluationWorkbook.ExternalSheet;
+import org.apache.poi.ss.formula.IEvaluationWorkbook.ExternalSheet;
 
 /**
  * Abstracts a workbook for the purpose of converting formula to text.<br/>

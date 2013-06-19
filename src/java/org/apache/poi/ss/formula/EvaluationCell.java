@@ -17,30 +17,60 @@
 
 package org.apache.poi.ss.formula;
 
+import org.apache.poi.ss.formula.IEvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationSheet;
+import org.apache.poi.ss.usermodel.Cell;
 /**
- * Abstracts a cell for the purpose of formula evaluation.  This interface represents both formula
- * and non-formula cells.<br/>
- * 
- * For POI internal use only
+ * HSSF wrapper for a cell under evaluation
  * 
  * @author Josh Micich
  */
-public interface EvaluationCell {
-	/**
-	 * @return an Object that identifies the underlying cell,
-     * suitable for use as a key in a {@link java.util.HashMap}
-	 */
-	Object getIdentityKey();
+public final class EvaluationCell implements IEvaluationCell {
 
-	EvaluationSheet getSheet();
-	int getRowIndex();
-	int getColumnIndex();
-	int getCellType();
+	private final IEvaluationSheet _evalSheet;
+	private final Cell _cell;
 
-	double getNumericCellValue();
-	String getStringCellValue();
-	boolean getBooleanCellValue();
-	int getErrorCellValue();
+	public EvaluationCell(Cell cell, IEvaluationSheet evalSheet) {
+		_cell = cell;
+		_evalSheet = evalSheet;
+	}
+	public EvaluationCell(Cell cell) {
+		this(cell, new EvaluationSheet(cell.getSheet()));
+	}
+	public Object getIdentityKey() {
+		// save memory by just using the cell itself as the identity key
+		// Note - this assumes HSSFCell has not overridden hashCode and equals
+		return _cell;
+	}
 
-	int getCachedFormulaResultType();
+	public Cell getCell() {
+		return _cell;
+	}
+	public boolean getBooleanCellValue() {
+		return _cell.getBooleanCellValue();
+	}
+	public int getCellType() {
+		return _cell.getCellType();
+	}
+	public int getColumnIndex() {
+		return _cell.getColumnIndex();
+	}
+	public int getErrorCellValue() {
+		return _cell.getErrorCellValue();
+	}
+	public double getNumericCellValue() {
+		return _cell.getNumericCellValue();
+	}
+	public int getRowIndex() {
+		return _cell.getRowIndex();
+	}
+	public IEvaluationSheet getSheet() {
+		return _evalSheet;
+	}
+	public String getStringCellValue() {
+		return _cell.getRichStringCellValue().getString();
+	}
+	public int getCachedFormulaResultType() {
+		return _cell.getCachedFormulaResultType();
+	}
 }

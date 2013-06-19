@@ -17,6 +17,7 @@
 
 package org.apache.poi.poifs.nio;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
@@ -24,12 +25,10 @@ import java.nio.ByteBuffer;
 /**
  * Common definition of how we read and write bytes
  */
-public abstract class DataSource {
-   public abstract ByteBuffer read(int length, long position) throws IOException;
-   public abstract void write(ByteBuffer src, long position) throws IOException;
-   public abstract long size() throws IOException;
-   /** Close the underlying stream */
-   public abstract void close() throws IOException;
+public interface DataSource extends Closeable {
+   ByteBuffer read(int length, long position) throws IOException;
+   void write(ByteBuffer src, long position) throws IOException;
+   long size() throws IOException;
    /** Copies the contents to the specified OutputStream */
-   public abstract void copyTo(OutputStream stream) throws IOException;
+   void copyTo(OutputStream stream) throws IOException;
 }

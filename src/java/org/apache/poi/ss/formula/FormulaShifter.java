@@ -128,37 +128,36 @@ public final class FormulaShifter {
 	 */
 	private Ptg adjustPtgDueToRowMove(Ptg ptg, int currentExternSheetIx) {
 		if(ptg instanceof RefPtg) {
-			if (currentExternSheetIx != _externSheetIndex) {
-				// local refs on other sheets are unaffected
-				return null;
+			if (currentExternSheetIx == _externSheetIndex) {
+				return rowMoveRefPtg((RefPtg)ptg);
 			}
-			RefPtg rptg = (RefPtg)ptg;
-			return rowMoveRefPtg(rptg);
+			// local refs on other sheets are unaffected
+			return null;
 		}
 		if(ptg instanceof Ref3DPtg) {
 			Ref3DPtg rptg = (Ref3DPtg)ptg;
-			if (_externSheetIndex != rptg.getExternSheetIndex()) {
-				// only move 3D refs that refer to the sheet with cells being moved
-				// (currentExternSheetIx is irrelevant)
-				return null;
+			if (_externSheetIndex == rptg.getExternSheetIndex()) {
+				return rowMoveRefPtg(rptg);
 			}
-			return rowMoveRefPtg(rptg);
+			// only move 3D refs that refer to the sheet with cells being moved
+			// (currentExternSheetIx is irrelevant)
+			return null;
 		}
 		if(ptg instanceof Area2DPtgBase) {
-			if (currentExternSheetIx != _externSheetIndex) {
-				// local refs on other sheets are unaffected
-				return ptg;
+			if (currentExternSheetIx == _externSheetIndex) {
+				return rowMoveAreaPtg((Area2DPtgBase)ptg);
 			}
-			return rowMoveAreaPtg((Area2DPtgBase)ptg);
+			// local refs on other sheets are unaffected
+			return ptg;
 		}
 		if(ptg instanceof Area3DPtg) {
 			Area3DPtg aptg = (Area3DPtg)ptg;
-			if (_externSheetIndex != aptg.getExternSheetIndex()) {
-				// only move 3D refs that refer to the sheet with cells being moved
-				// (currentExternSheetIx is irrelevant)
-				return null;
+			if (_externSheetIndex == aptg.getExternSheetIndex()) {
+				return rowMoveAreaPtg(aptg);
 			}
-			return rowMoveAreaPtg(aptg);
+			// only move 3D refs that refer to the sheet with cells being moved
+			// (currentExternSheetIx is irrelevant)
+			return null;
 		}
 		return null;
 	}

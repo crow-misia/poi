@@ -48,7 +48,7 @@ final class EvaluationCache {
 		_formulaCellCache = new FormulaCellCache();
 	}
 
-	public void notifyUpdateCell(int bookIndex, int sheetIndex, EvaluationCell cell) {
+	public void notifyUpdateCell(int bookIndex, int sheetIndex, IEvaluationCell cell) {
 		FormulaCellCacheEntry fcce = _formulaCellCache.get(cell);
 
 		int rowIndex = cell.getRowIndex();
@@ -175,7 +175,7 @@ final class EvaluationCache {
 		throw new IllegalStateException("Unexpected value class (" + cls.getName() + ")");
 	}
 
-	public FormulaCellCacheEntry getOrCreateFormulaCellEntry(EvaluationCell cell) {
+	public FormulaCellCacheEntry getOrCreateFormulaCellEntry(IEvaluationCell cell) {
 		FormulaCellCacheEntry result = _formulaCellCache.get(cell);
 		if (result == null) {
 
@@ -195,7 +195,7 @@ final class EvaluationCache {
 		_plainCellCache.clear();
 		_formulaCellCache.clear();
 	}
-	public void notifyDeleteCell(int bookIndex, int sheetIndex, EvaluationCell cell) {
+	public void notifyDeleteCell(int bookIndex, int sheetIndex, IEvaluationCell cell) {
 
 		if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
 			FormulaCellCacheEntry fcce = _formulaCellCache.remove(cell);

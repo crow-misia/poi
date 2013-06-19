@@ -19,6 +19,7 @@ package org.apache.poi.hssf.usermodel;
 
 import org.apache.poi.ss.formula.CollaboratingWorkbooksEnvironment;
 import org.apache.poi.ss.formula.EvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationCell;
 import org.apache.poi.ss.formula.IStabilityClassifier;
 import org.apache.poi.ss.formula.WorkbookEvaluator;
 import org.apache.poi.ss.formula.udf.UDFFinder;
@@ -53,8 +54,8 @@ public final class HSSFFormulaEvaluator extends AbstractFormulaEvaluator {
 	}
 
 	@Override
-	protected EvaluationCell getEvaluationCell(final Cell cell) {
-		return new HSSFEvaluationCell((HSSFCell) cell);
+	protected IEvaluationCell getEvaluationCell(final Cell cell) {
+		return new EvaluationCell(cell);
 	}
 
 	@Override

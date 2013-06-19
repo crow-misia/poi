@@ -18,7 +18,7 @@
 package org.apache.poi.ss.formula.ptg;
 
 import org.apache.poi.ss.formula.FormulaRenderingWorkbook;
-import org.apache.poi.ss.formula.EvaluationWorkbook.ExternalSheet;
+import org.apache.poi.ss.formula.IEvaluationWorkbook.ExternalSheet;
 import org.apache.poi.ss.formula.SheetNameFormatter;
 
 /**

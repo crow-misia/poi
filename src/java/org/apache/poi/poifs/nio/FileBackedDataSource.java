@@ -32,11 +32,11 @@ import org.apache.poi.util.IOUtils;
 /**
  * A POIFS {@link DataSource} backed by a File
  */
-public class FileBackedDataSource extends DataSource {
-   private FileChannel channel;
+public final class FileBackedDataSource implements DataSource {
+   private final FileChannel channel;
    
    public FileBackedDataSource(File file) throws FileNotFoundException {
-      if(!file.exists()) {
+      if (!file.exists()) {
          throw new FileNotFoundException(file.toString());
       }
       this.channel = (new RandomAccessFile(file, "r")).getChannel();

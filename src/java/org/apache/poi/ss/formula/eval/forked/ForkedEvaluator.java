@@ -26,8 +26,8 @@ import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.hssf.usermodel.HSSFEvaluationWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.formula.CollaboratingWorkbooksEnvironment;
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationWorkbook;
+import org.apache.poi.ss.formula.IEvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationWorkbook;
 import org.apache.poi.ss.formula.IStabilityClassifier;
 import org.apache.poi.ss.formula.WorkbookEvaluator;
 import org.apache.poi.ss.usermodel.Cell;
@@ -48,11 +48,11 @@ public final class ForkedEvaluator {
 	private WorkbookEvaluator _evaluator;
 	private ForkedEvaluationWorkbook _sewb;
 
-	private ForkedEvaluator(EvaluationWorkbook masterWorkbook, IStabilityClassifier stabilityClassifier, UDFFinder udfFinder) {
+	private ForkedEvaluator(IEvaluationWorkbook masterWorkbook, IStabilityClassifier stabilityClassifier, UDFFinder udfFinder) {
 		_sewb = new ForkedEvaluationWorkbook(masterWorkbook);
 		_evaluator = new WorkbookEvaluator(_sewb, stabilityClassifier, udfFinder);
 	}
-	private static EvaluationWorkbook createEvaluationWorkbook(Workbook wb) {
+	private static IEvaluationWorkbook createEvaluationWorkbook(Workbook wb) {
 		if (wb instanceof HSSFWorkbook) {
 			return HSSFEvaluationWorkbook.create((HSSFWorkbook) wb);
 		}
@@ -104,7 +104,7 @@ public final class ForkedEvaluator {
 	 * @return <code>null</code> if the supplied cell is <code>null</code> or blank
 	 */
 	public ValueEval evaluate(String sheetName, int rowIndex, int columnIndex) {
-		EvaluationCell cell = _sewb.getEvaluationCell(sheetName, rowIndex, columnIndex);
+		IEvaluationCell cell = _sewb.getEvaluationCell(sheetName, rowIndex, columnIndex);
 
 		switch (cell.getCellType()) {
 			case Cell.CELL_TYPE_BOOLEAN:

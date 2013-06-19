@@ -60,17 +60,17 @@ public class TestEvaluationCache extends TestCase {
 
 	private static final class FormulaCellCacheEntryComparer implements Comparator<ICacheEntry> {
 
-		private final Map<ICacheEntry,EvaluationCell> _formulaCellsByCacheEntry;
+		private final Map<ICacheEntry,IEvaluationCell> _formulaCellsByCacheEntry;
 
-		public FormulaCellCacheEntryComparer(Map<ICacheEntry,EvaluationCell> formulaCellsByCacheEntry) {
+		public FormulaCellCacheEntryComparer(Map<ICacheEntry,IEvaluationCell> formulaCellsByCacheEntry) {
 			_formulaCellsByCacheEntry = formulaCellsByCacheEntry;
 		}
-		private EvaluationCell getCell(ICacheEntry a) {
+		private IEvaluationCell getCell(ICacheEntry a) {
 			return _formulaCellsByCacheEntry.get(a);
 		}
 		public int compare(ICacheEntry oa, ICacheEntry ob) {
-			EvaluationCell a = getCell(oa);
-			EvaluationCell b = getCell(ob);
+			IEvaluationCell a = getCell(oa);
+			IEvaluationCell b = getCell(ob);
 			int cmp;
 			cmp = a.getRowIndex() - b.getRowIndex();
 			if (cmp != 0) {
@@ -91,7 +91,7 @@ public class TestEvaluationCache extends TestCase {
 
 		private final List<String> _logList;
 		private final HSSFWorkbook _book;
-		private Map<ICacheEntry,EvaluationCell> _formulaCellsByCacheEntry;
+		private Map<ICacheEntry,IEvaluationCell> _formulaCellsByCacheEntry;
 		private Map<ICacheEntry,Loc> _plainCellLocsByCacheEntry;
 
 		public EvalListener(HSSFWorkbook wb) {
@@ -108,19 +108,19 @@ public class TestEvaluationCache extends TestCase {
 			_plainCellLocsByCacheEntry.put(entry, loc);
 			log("value", rowIndex, columnIndex, entry.getValue());
 		}
-		public void onStartEvaluate(EvaluationCell cell, ICacheEntry entry) {
+		public void onStartEvaluate(IEvaluationCell cell, ICacheEntry entry) {
 			_formulaCellsByCacheEntry.put(entry, cell);
 			HSSFCell hc = _book.getSheetAt(0).getRow(cell.getRowIndex()).getCell(cell.getColumnIndex());
 			log("start", cell.getRowIndex(), cell.getColumnIndex(), FormulaExtractor.getPtgs(hc));
 		}
 		public void onEndEvaluate(ICacheEntry entry, ValueEval result) {
-			EvaluationCell cell = _formulaCellsByCacheEntry.get(entry);
+			IEvaluationCell cell = _formulaCellsByCacheEntry.get(entry);
 			log("end", cell.getRowIndex(), cell.getColumnIndex(), result);
 		}
 		public void onClearCachedValue(ICacheEntry entry) {
 			int rowIndex;
 			int columnIndex;
-			EvaluationCell cell = _formulaCellsByCacheEntry.get(entry);
+			IEvaluationCell cell = _formulaCellsByCacheEntry.get(entry);
 			if (cell == null) {
 				Loc loc = _plainCellLocsByCacheEntry.get(entry);
 				if (loc == null) {
@@ -138,12 +138,12 @@ public class TestEvaluationCache extends TestCase {
 			Arrays.sort(entries, new FormulaCellCacheEntryComparer(_formulaCellsByCacheEntry));
 		}
 		public void onClearDependentCachedValue(ICacheEntry entry, int depth) {
-			EvaluationCell cell = _formulaCellsByCacheEntry.get(entry);
+			IEvaluationCell cell = _formulaCellsByCacheEntry.get(entry);
 			log("clear" + depth, cell.getRowIndex(), cell.getColumnIndex(), entry.getValue());
 		}
 
 		public void onChangeFromBlankValue(int sheetIndex, int rowIndex, int columnIndex,
-				EvaluationCell cell, ICacheEntry entry) {
+				IEvaluationCell cell, ICacheEntry entry) {
 			log("changeFromBlank", rowIndex, columnIndex, entry.getValue());
 			if (entry.getValue() == null) { // hack to tell the difference between formula and plain value
 				// perhaps the API could be improved: onChangeFromBlankToValue, onChangeFromBlankToFormula
@@ -218,7 +218,7 @@ public class TestEvaluationCache extends TestCase {
 			_sheet = _wb.createSheet("Sheet1");
 		}
 
-		private static EvaluationCell wrapCell(HSSFCell cell) {
+		private static IEvaluationCell wrapCell(HSSFCell cell) {
 			return HSSFEvaluationTestHelper.wrapCell(cell);
 		}
 

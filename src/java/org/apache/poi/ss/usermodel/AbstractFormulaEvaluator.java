@@ -17,8 +17,8 @@
 
 package org.apache.poi.ss.usermodel;
 
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationWorkbook;
+import org.apache.poi.ss.formula.IEvaluationCell;
+import org.apache.poi.ss.formula.IEvaluationWorkbook;
 import org.apache.poi.ss.formula.IStabilityClassifier;
 import org.apache.poi.ss.formula.WorkbookEvaluator;
 import org.apache.poi.ss.formula.eval.BoolEval;
@@ -43,12 +43,12 @@ public abstract class AbstractFormulaEvaluator implements FormulaEvaluator {
     protected final WorkbookEvaluator _bookEvaluator;
     private final CreationHelper _helper;
 
-    public AbstractFormulaEvaluator(final EvaluationWorkbook workbook, final CreationHelper helper, final IStabilityClassifier stabilityClassifier, final UDFFinder udfFinder) {
+    public AbstractFormulaEvaluator(final IEvaluationWorkbook workbook, final CreationHelper helper, final IStabilityClassifier stabilityClassifier, final UDFFinder udfFinder) {
         this._bookEvaluator = new WorkbookEvaluator(workbook, stabilityClassifier, udfFinder);
         this._helper = helper;
     }
 
-    protected abstract EvaluationCell getEvaluationCell(final Cell cell);
+    protected abstract IEvaluationCell getEvaluationCell(final Cell cell);
     protected abstract Workbook getWorkbook();
 
     /**
@@ -198,8 +198,8 @@ public abstract class AbstractFormulaEvaluator implements FormulaEvaluator {
         }
         if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
             final CellValue cv = evaluateFormulaCellValue(cell);
-            setCellType(cell, cv); // cell will no longer be a formula cell
             setCellValue(cell, cv);
+            setCellType(cell, cv); // cell will no longer be a formula cell
         }
         return cell;
     }

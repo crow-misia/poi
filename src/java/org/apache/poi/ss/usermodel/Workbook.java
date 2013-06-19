@@ -625,4 +625,14 @@ public interface Workbook {
      */
     boolean getForceFormulaRecalculation();
 
+    /**
+    *
+    * Returns the locator of user-defined functions.
+    * <p>
+    * The default instance extends the built-in functions with the Excel Analysis Tool Pack.
+    * To set / evaluate custom functions you need to register them as follows:
+    * </p>
+    * @return wrapped instance of UDFFinder that allows seeking functions both by index and name
+    */
+   UDFFinder getUDFFinder();
 }

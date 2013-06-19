@@ -33,7 +33,7 @@ public abstract class EvaluationListener implements IEvaluationListener {
 	public void onReadPlainValue(int sheetIndex, int rowIndex, int columnIndex, ICacheEntry entry) {
 		// do nothing
 	}
-	public void onStartEvaluate(EvaluationCell cell, ICacheEntry entry) {
+	public void onStartEvaluate(IEvaluationCell cell, ICacheEntry entry) {
 		// do nothing
 	}
 	public void onEndEvaluate(ICacheEntry entry, ValueEval result) {
@@ -46,7 +46,7 @@ public abstract class EvaluationListener implements IEvaluationListener {
 		// do nothing
 	}
 	public void onChangeFromBlankValue(int sheetIndex, int rowIndex, int columnIndex,
-			EvaluationCell cell, ICacheEntry entry) {
+			IEvaluationCell cell, ICacheEntry entry) {
 		// do nothing
 	}
 	public void sortDependentCachedValues(ICacheEntry[] entries) {
