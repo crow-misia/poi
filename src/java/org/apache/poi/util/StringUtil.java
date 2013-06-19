@@ -381,7 +381,19 @@ public final class StringUtil {
 		return true;
 	}
 
-	/**
+	public static boolean isNotBlank(final String s) {
+		if (s != null) {
+			final char[] a = s.toCharArray();
+			for (final char c : a) {
+				if (c != '\u0020') {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+   /**
     * An Iterator over an array of Strings.
     */
    public static class StringsIterator implements Iterator<String> {

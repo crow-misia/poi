@@ -396,7 +396,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 		try {
 			l.writeLock().lock();
 			if (this.originalPackagePath != null
-					&& !"".equals(this.originalPackagePath.trim())) {
+					&& StringUtil.isBlank(this.originalPackagePath)) {
 				File targetFile = new File(this.originalPackagePath);
 				if (!targetFile.exists()
 						|| !(this.originalPackagePath
