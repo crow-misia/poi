@@ -115,10 +115,9 @@ public class HSSFShapeGroup extends HSSFShape implements HSSFShapeContainer {
         cmo.setAutofill(true);
         cmo.setAutoline(true);
         GroupMarkerSubRecord gmo = new GroupMarkerSubRecord();
-        EndSubRecord end = new EndSubRecord();
         obj.addSubRecord(cmo);
         obj.addSubRecord(gmo);
-        obj.addSubRecord(end);
+        obj.addSubRecord(EndSubRecord.INSTANCE);
         return obj;
     }
 

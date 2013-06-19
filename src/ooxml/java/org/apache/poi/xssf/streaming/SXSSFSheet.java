@@ -786,7 +786,7 @@ public class SXSSFSheet implements Sheet, Cloneable
     /**
      * Control if Excel should be asked to recalculate all formulas when the
      *  workbook is opened, via the "sheetCalcPr fullCalcOnLoad" option.
-     *  Calculating the formula values with {@link org.apache.poi.ss.usermodel.FormulaEvaluator} is the
+     *  Calculating the formula values with {@link org.apache.poi.ss.usermodel.IFormulaEvaluator} is the
      *  recommended solution, but this may be used for certain cases where
      *  evaluation in POI is not possible.
      */

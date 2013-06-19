@@ -50,7 +50,7 @@ public class TestMRound extends TestCase {
 
         double accuracy = 1E-9;
 
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
         assertEquals("Rounds 10 to a nearest multiple of 3 (9)",
                 9.0, evaluator.evaluate(cell1).getNumberValue(), accuracy);

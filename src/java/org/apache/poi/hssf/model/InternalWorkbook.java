@@ -214,8 +214,9 @@ public final class InternalWorkbook {
         List<Record> records = new ArrayList<>(recs.size() / 3);
         retval.records.setRecords(records);
 
+        final int n = recs.size();
         int k;
-        for (k = 0; k < recs.size(); k++) {
+        for (k = 0; k < n; k++) {
             Record rec = recs.get(k);
 
             if (rec.getSid() == EOFRecord.sid) {
@@ -334,7 +335,7 @@ public final class InternalWorkbook {
 
         // Look for other interesting values that
         //  follow the EOFRecord
-        for ( ; k < recs.size(); k++) {
+        for ( ; k < n; k++) {
             Record rec = recs.get(k);
             switch (rec.getSid()) {
                 case HyperlinkRecord.sid:
@@ -405,14 +406,14 @@ public final class InternalWorkbook {
         }
 
         for (int k = 0; k < 21; k++) {
-            records.add(retval.createExtendedFormat(k));
+            records.add(InternalWorkbook.createExtendedFormat(k));
             retval.numxfs++;
         }
         retval.records.setXfpos( records.size() - 1 );
         for (int k = 0; k < 6; k++) {
-            records.add(retval.createStyle(k));
+            records.add(InternalWorkbook.createStyle(k));
         }
-        records.add(retval.createUseSelFS());
+        records.add(InternalWorkbook.createUseSelFS());
 
         int nBoundSheets = 1; // now just do 1
         for (int k = 0; k < nBoundSheets; k++) {
@@ -422,13 +423,13 @@ public final class InternalWorkbook {
             retval.boundsheets.add(bsr);
             retval.records.setBspos(records.size() - 1);
         }
-        records.add( retval.createCountry() );
+        records.add( InternalWorkbook.createCountry() );
         for ( int k = 0; k < nBoundSheets; k++ ) {
             retval.getOrCreateLinkTable().checkExternSheet(k);
         }
         retval.sst = new SSTRecord();
         records.add(retval.sst);
-        records.add(retval.createExtendedSST());
+        records.add(InternalWorkbook.createExtendedSST());
 
         records.add(EOFRecord.instance);
         if (log.check( POILogger.DEBUG ))

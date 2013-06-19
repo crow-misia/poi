@@ -23,7 +23,7 @@ import junit.framework.TestCase;
 import org.apache.poi.ss.examples.formula.CalculateMortgageFunction;
 import org.apache.poi.ss.excelant.util.ExcelAntEvaluationResult;
 import org.apache.poi.ss.formula.udf.UDFFinder;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class TestExcelAntWorkbookUtil extends TestCase {
@@ -81,7 +81,7 @@ public class TestExcelAntWorkbookUtil extends TestCase {
 		final ExcelAntWorkbookUtil fixture = new ExcelAntWorkbookUtil( 
                 mortgageCalculatorFileName ) ;
 		
-		FormulaEvaluator evaluator = fixture.getEvaluator( 
+		IFormulaEvaluator evaluator = fixture.getEvaluator( 
 				                                  mortgageCalculatorFileName ) ;
 		
 		assertNotNull( evaluator ) ;

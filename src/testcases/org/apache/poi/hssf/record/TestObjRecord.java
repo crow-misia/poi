@@ -89,8 +89,7 @@ public final class TestObjRecord extends TestCase {
         ftCmo.setAutofill( true );
         ftCmo.setAutoline( true );
         record.addSubRecord(ftCmo);
-        EndSubRecord ftEnd = new EndSubRecord();
-        record.addSubRecord(ftEnd);
+        record.addSubRecord(EndSubRecord.INSTANCE);
 
         //serialize and read again
         byte [] recordBytes = record.serialize();

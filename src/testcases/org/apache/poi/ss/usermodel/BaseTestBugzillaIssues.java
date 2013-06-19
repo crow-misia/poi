@@ -264,7 +264,7 @@ public abstract class BaseTestBugzillaIssues extends TestCase {
         Cell  s2E4 = s2r3.createCell(4);
         s2E4.setCellFormula("SUM(s3!B2:C3)");
 
-        FormulaEvaluator eva = xlw.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator eva = xlw.getCreationHelper().createFormulaEvaluator();
         double d = eva.evaluate(s2E4).getNumberValue();
 
         assertEquals(d, (311+312+321+322), 0.0000001);

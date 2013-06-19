@@ -17,10 +17,10 @@
 
 package org.apache.poi.ss.formula.eval;
 
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 
 /**
- * An exception thrown by implementors of {@link FormulaEvaluator} when attempting to evaluate
+ * An exception thrown by implementors of {@link IFormulaEvaluator} when attempting to evaluate
  * a formula which requires features that POI does not (yet) support.
  *
  * @author Josh Micich

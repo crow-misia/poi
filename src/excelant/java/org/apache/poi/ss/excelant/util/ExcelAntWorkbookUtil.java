@@ -37,7 +37,7 @@ import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.ErrorConstants;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -165,8 +165,8 @@ public final class ExcelAntWorkbookUtil extends Typedef {
      * @param excelFileName
      * @return
      */
-    protected FormulaEvaluator getEvaluator( String excelFileName ) {
-        FormulaEvaluator evaluator ;
+    protected IFormulaEvaluator getEvaluator( String excelFileName ) {
+        IFormulaEvaluator evaluator ;
         if (excelFileName.endsWith(".xlsx")) {
             if( xlsMacroList != null && xlsMacroList.size() > 0 ) {
                 evaluator = XSSFFormulaEvaluator.create( (XSSFWorkbook) workbook,
@@ -287,7 +287,7 @@ public final class ExcelAntWorkbookUtil extends Typedef {
 
         Cell cell = getCell(cellName);
 
-        FormulaEvaluator evaluator = getEvaluator( excelFileName );
+        IFormulaEvaluator evaluator = getEvaluator( excelFileName );
 
 
         CellValue resultOfEval = evaluator.evaluate(cell);

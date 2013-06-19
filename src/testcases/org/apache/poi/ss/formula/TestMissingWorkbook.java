@@ -23,7 +23,7 @@ import junit.framework.TestCase;
 import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 
 import java.io.IOException;
 
@@ -45,7 +45,7 @@ public class TestMissingWorkbook extends TestCase {
 	}
 
 	public void testMissingWorkbookMissing() throws IOException {
-		FormulaEvaluator evaluator = mainWorkbook.getCreationHelper().createFormulaEvaluator();
+		IFormulaEvaluator evaluator = mainWorkbook.getCreationHelper().createFormulaEvaluator();
 		
 		HSSFSheet lSheet = mainWorkbook.getSheetAt(0);
 		HSSFRow lARow = lSheet.getRow(0);

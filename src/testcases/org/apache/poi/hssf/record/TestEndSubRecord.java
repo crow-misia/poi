@@ -39,7 +39,7 @@ public final class TestEndSubRecord extends TestCase {
 
     public void testStore()
     {
-        EndSubRecord record = new EndSubRecord();
+        EndSubRecord record = EndSubRecord.INSTANCE;
 
         byte [] recordBytes = record.serialize();
         assertEquals(recordBytes.length - 4, data.length);

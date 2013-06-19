@@ -28,12 +28,13 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class EndSubRecord extends SubRecord {
-    public final static short sid = 0x0000; // Note - zero sid is somewhat unusual (compared to plain Records)
+    public static final EndSubRecord INSTANCE = new EndSubRecord();
+    public static final short sid = 0x0000; // Note - zero sid is somewhat unusual (compared to plain Records)
     private static final int ENCODED_SIZE = 0;
 
-    public EndSubRecord()
+    private EndSubRecord()
     {
-
+    	// no data fields
     }
 
     /**
@@ -76,8 +77,6 @@ public final class EndSubRecord extends SubRecord {
     }
 
     public Object clone() {
-        EndSubRecord rec = new EndSubRecord();
-    
-        return rec;
+        return INSTANCE;
     }
 }

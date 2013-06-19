@@ -33,7 +33,7 @@ public final class TestXSSFFormulaEvaluation extends BaseTestFormulaEvaluator {
 
     public void testSharedFormulas_evaluateInCell(){
         XSSFWorkbook wb = (XSSFWorkbook)_testDataProvider.openSampleWorkbook("49872.xlsx");
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
         XSSFSheet sheet = wb.getSheetAt(0);
 
         double result = 3.0;

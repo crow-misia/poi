@@ -38,7 +38,7 @@ public abstract class BaseTestSheetAutosizeColumn extends TestCase {
 
     // TODO should we have this stuff in the FormulaEvaluator?
     private void evaluateWorkbook(Workbook workbook){
-        FormulaEvaluator eval = workbook.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator eval = workbook.getCreationHelper().createFormulaEvaluator();
         for(int i=0; i < workbook.getNumberOfSheets(); i++) {
             Sheet sheet = workbook.getSheetAt(i);
             for (Row r : sheet) {

@@ -345,7 +345,7 @@ public abstract class BaseTestCell extends TestCase {
 
 	/**
 	 * Test for a bug observed around svn r886733 when using
-	 * {@link FormulaEvaluator#evaluateInCell(Cell)} with a
+	 * {@link IFormulaEvaluator#evaluateInCell(Cell)} with a
 	 * string result type.
 	 */
 	public void testConvertStringFormulaCell() {
@@ -355,7 +355,7 @@ public abstract class BaseTestCell extends TestCase {
 		// default cached formula result is numeric zero
 		assertEquals(0.0, cellA1.getNumericCellValue(), 0.0);
 
-		FormulaEvaluator fe = cellA1.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator();
+		IFormulaEvaluator fe = cellA1.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator();
 
 		fe.evaluateFormulaCell(cellA1);
 		assertEquals("abc", cellA1.getStringCellValue());
@@ -372,7 +372,7 @@ public abstract class BaseTestCell extends TestCase {
 	 */
 	public void testSetTypeStringOnFormulaCell() {
 		Cell cellA1 = createACell();
-		FormulaEvaluator fe = cellA1.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator();
+		IFormulaEvaluator fe = cellA1.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator();
 
 		cellA1.setCellFormula("\"DEF\"");
 		fe.clearAllCachedResultValues();

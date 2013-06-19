@@ -31,7 +31,7 @@ import java.util.List;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.IFormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -137,7 +137,7 @@ public class ToCSV {
     private int maxRowWidth = 0;
     private int formattingConvention = 0;
     private DataFormatter formatter = null;
-    private FormulaEvaluator evaluator = null;
+    private IFormulaEvaluator evaluator = null;
     private String separator = null;
 
     private static final String CSV_FILE_EXTENSION = ".csv";

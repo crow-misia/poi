@@ -35,16 +35,16 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder;
  */
 public class XSSFConditionalFormattingRule implements ConditionalFormattingRule {
     private final CTCfRule _cfRule;
-    private XSSFSheet _sh;
+    private final XSSFWorkbook _wb;
 
-    /*package*/ XSSFConditionalFormattingRule(XSSFSheet sh){
+    /*package*/ XSSFConditionalFormattingRule(XSSFWorkbook wb){
         _cfRule = CTCfRule.Factory.newInstance();
-        _sh = sh;
+        _wb = wb;
     }
 
-    /*package*/ XSSFConditionalFormattingRule(XSSFSheet sh, CTCfRule cfRule){
+    /*package*/ XSSFConditionalFormattingRule(XSSFWorkbook wb, CTCfRule cfRule){
         _cfRule = cfRule;
-        _sh = sh;
+        _wb = wb;
     }
 
     /*package*/  CTCfRule getCTCfRule(){
@@ -52,7 +52,7 @@ public class XSSFConditionalFormattingRule implements ConditionalFormattingRule 
     }
 
     /*package*/  CTDxf getDxf(boolean create){
-        StylesTable styles = _sh.getWorkbook().getStylesSource();
+        StylesTable styles = _wb.getStylesSource();
         CTDxf dxf = null;
         if(styles._getDXfsSize() > 0 && _cfRule.isSetDxfId()){
             int dxfId = (int)_cfRule.getDxfId();
@@ -103,10 +103,10 @@ public class XSSFConditionalFormattingRule implements ConditionalFormattingRule 
     public XSSFFontFormatting createFontFormatting(){
         CTDxf dxf = getDxf(true);
         CTFont font;
-        if(!dxf.isSetFont()) {
-            font = dxf.addNewFont();
-        } else {
+        if(dxf.isSetFont()) {
             font = dxf.getFont();
+        } else {
+            font = dxf.addNewFont();
         }
 
         return new XSSFFontFormatting(font);
@@ -131,10 +131,10 @@ public class XSSFConditionalFormattingRule implements ConditionalFormattingRule 
     public XSSFPatternFormatting createPatternFormatting(){
         CTDxf dxf = getDxf(true);
         CTFill fill;
-        if(!dxf.isSetFill()) {
-            fill = dxf.addNewFill();
-        } else {
+        if(dxf.isSetFill()) {
             fill = dxf.getFill();
+        } else {
+            fill = dxf.addNewFill();
         }
 
         return new XSSFPatternFormatting(fill);

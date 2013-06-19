@@ -54,7 +54,7 @@ public final class SheetUtil {
      *
      *  See Bugzilla #50021
      */
-    private static final FormulaEvaluator dummyEvaluator = new FormulaEvaluator(){
+    private static final IFormulaEvaluator dummyEvaluator = new IFormulaEvaluator(){
         public void clearAllCachedResultValues(){}
         public void notifySetFormula(Cell cell) {}
         public void notifyDeleteCell(Cell cell) {}
@@ -77,7 +77,7 @@ public final class SheetUtil {
     private static final FontRenderContext fontRenderContext = new FontRenderContext(null, true, true);
 
     private SheetUtil() {
-        // nop.
+        // no instances of this class
     }
 
     /**

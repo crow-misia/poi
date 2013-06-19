@@ -64,7 +64,7 @@ public class UserDefinedFunctionExample {
             // register the user-defined function in the workbook
             workbook.addToolPack(udfToolpack);
 
-            FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+            IFormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
 
             CellReference cr = new CellReference( args[1] ) ;
             String sheetName = cr.getSheetName() ;

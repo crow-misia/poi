@@ -29,18 +29,17 @@ import java.util.ArrayList;
 /**
  * @author Yegor Kozlov
  */
-public class XSSFConditionalFormatting implements ConditionalFormatting {
+public final class XSSFConditionalFormatting implements ConditionalFormatting {
     private final CTConditionalFormatting _cf;
-    private final XSSFSheet _sh;
+    private final XSSFWorkbook _wb;
 
-    /*package*/ XSSFConditionalFormatting(XSSFSheet sh){
-        _cf = CTConditionalFormatting.Factory.newInstance();
-        _sh = sh;
+    /*package*/ XSSFConditionalFormatting(XSSFWorkbook wb){
+        this(wb, CTConditionalFormatting.Factory.newInstance());
     }
 
-    /*package*/ XSSFConditionalFormatting(XSSFSheet sh, CTConditionalFormatting cf){
+    /*package*/ XSSFConditionalFormatting(XSSFWorkbook wb, CTConditionalFormatting cf){
         _cf = cf;
-        _sh = sh;
+        _wb = wb;
     }
 
     /*package*/  CTConditionalFormatting getCTConditionalFormatting(){
@@ -89,7 +88,7 @@ public class XSSFConditionalFormatting implements ConditionalFormatting {
       * @return the Conditional Formatting rule at position idx.
       */
      public XSSFConditionalFormattingRule getRule(int idx){
-         return new XSSFConditionalFormattingRule(_sh, _cf.getCfRuleArray(idx));
+         return new XSSFConditionalFormattingRule(_wb, _cf.getCfRuleArray(idx));
      }
 
      /**

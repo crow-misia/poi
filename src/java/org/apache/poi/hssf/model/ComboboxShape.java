@@ -61,12 +61,10 @@ public class ComboboxShape
 
         LbsDataSubRecord l = LbsDataSubRecord.newAutoFilterInstance();
 
-        EndSubRecord e = new EndSubRecord();
-
         obj.addSubRecord(c);
         obj.addSubRecord(f);
         obj.addSubRecord(l);
-        obj.addSubRecord(e);
+        obj.addSubRecord(EndSubRecord.INSTANCE);
 
         return obj;
     }

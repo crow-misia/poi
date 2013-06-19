@@ -21,7 +21,7 @@ import org.apache.poi.ss.formula.EvaluationCell;
 import org.apache.poi.ss.formula.IEvaluationCell;
 import org.apache.poi.ss.formula.IStabilityClassifier;
 import org.apache.poi.ss.formula.udf.UDFFinder;
-import org.apache.poi.ss.usermodel.AbstractFormulaEvaluator;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 
@@ -35,7 +35,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @author Amol S. Deshmukh &lt; amolweb at ya hoo dot com &gt;
  * @author Josh Micich
  */
-public final class XSSFFormulaEvaluator extends AbstractFormulaEvaluator {
+public final class XSSFFormulaEvaluator extends FormulaEvaluator {
 
 	private final XSSFWorkbook _book;
 
@@ -84,7 +84,7 @@ public final class XSSFFormulaEvaluator extends AbstractFormulaEvaluator {
 	 *  cells, and calling evaluateFormulaCell on each one.
 	 */
 	public static void evaluateAllFormulaCells(XSSFWorkbook wb) {
-		AbstractFormulaEvaluator.evaluateAllFormulaCells(wb);
+		FormulaEvaluator.evaluateAllFormulaCells(wb);
 	}
 
 }

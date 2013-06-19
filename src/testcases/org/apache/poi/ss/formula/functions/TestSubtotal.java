@@ -78,7 +78,7 @@ public final class TestSubtotal extends TestCase {
 
         Workbook wb = new HSSFWorkbook();
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sh = wb.createSheet();
         Cell a1 = sh.createRow(1).createCell(1);
@@ -107,7 +107,7 @@ public final class TestSubtotal extends TestCase {
 
         Workbook wb = new HSSFWorkbook();
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sh = wb.createSheet();
         Cell a1 = sh.createRow(1).createCell(1);
@@ -136,7 +136,7 @@ public final class TestSubtotal extends TestCase {
 
         Workbook wb = new HSSFWorkbook();
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sh = wb.createSheet();
         Cell a1 = sh.createRow(1).createCell(1);
@@ -165,7 +165,7 @@ public final class TestSubtotal extends TestCase {
 
         Workbook wb = new HSSFWorkbook();
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sh = wb.createSheet();
         Cell a1 = sh.createRow(1).createCell(1);
@@ -194,7 +194,7 @@ public final class TestSubtotal extends TestCase {
 
         Workbook wb = new HSSFWorkbook();
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sh = wb.createSheet();
         Cell a1 = sh.createRow(1).createCell(1);
@@ -223,7 +223,7 @@ public final class TestSubtotal extends TestCase {
 
         Workbook wb = new HSSFWorkbook();
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sh = wb.createSheet();
         Cell a1 = sh.createRow(1).createCell(1);
@@ -252,7 +252,7 @@ public final class TestSubtotal extends TestCase {
 
         Workbook wb = new HSSFWorkbook();
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
 
         Sheet sh = wb.createSheet();
         Cell a1 = sh.createRow(1).createCell(1);
@@ -287,13 +287,13 @@ public final class TestSubtotal extends TestCase {
         Cell a3 = sh.createRow(3).createCell(1);
         a3.setCellFormula("SUBTOTAL(9,B2:B3)");
 
-        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
         fe.evaluateAll();
         assertEquals(1.0, a2.getNumericCellValue());
         assertEquals(1.0, a3.getNumericCellValue());
     }
 
-    private static void confirmExpectedResult(FormulaEvaluator evaluator, String msg, Cell cell, double expected) {
+    private static void confirmExpectedResult(IFormulaEvaluator evaluator, String msg, Cell cell, double expected) {
 
         CellValue value = evaluator.evaluate(cell);
         if (value.getErrorValue() != 0)
@@ -304,7 +304,7 @@ public final class TestSubtotal extends TestCase {
     public void testFunctionsFromTestSpreadsheet() {
         HSSFWorkbook workbook = HSSFTestDataSamples.openSampleWorkbook("SubtotalsNested.xls");
         HSSFSheet sheet = workbook.getSheetAt(0);
-        FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
 
         assertEquals("B2", 10.0, sheet.getRow(1).getCell(1).getNumericCellValue());
         assertEquals("B3", 20.0, sheet.getRow(2).getCell(1).getNumericCellValue());

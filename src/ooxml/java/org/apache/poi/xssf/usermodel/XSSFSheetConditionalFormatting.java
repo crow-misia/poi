@@ -73,7 +73,7 @@ public class XSSFSheetConditionalFormatting implements SheetConditionalFormattin
             String formula1,
             String formula2) {
 
-        XSSFConditionalFormattingRule rule = new XSSFConditionalFormattingRule(_sheet);
+        XSSFConditionalFormattingRule rule = new XSSFConditionalFormattingRule(_sheet.getWorkbook());
         CTCfRule cfRule = rule.getCTCfRule();
         cfRule.addFormula(formula1);
         if(formula2 != null) cfRule.addFormula(formula2);
@@ -108,7 +108,7 @@ public class XSSFSheetConditionalFormatting implements SheetConditionalFormattin
      * @param formula - formula for the valued, compared with the cell
      */
     public XSSFConditionalFormattingRule createConditionalFormattingRule(String formula) {
-        XSSFConditionalFormattingRule rule = new XSSFConditionalFormattingRule(_sheet);
+        XSSFConditionalFormattingRule rule = new XSSFConditionalFormattingRule(_sheet.getWorkbook());
         CTCfRule cfRule = rule.getCTCfRule();
         cfRule.addFormula(formula);
         cfRule.setType(STCfType.EXPRESSION);
@@ -204,7 +204,7 @@ public class XSSFSheetConditionalFormatting implements SheetConditionalFormattin
     public XSSFConditionalFormatting getConditionalFormattingAt(int index) {
         checkIndex(index);
         CTConditionalFormatting cf = _sheet.getCTWorksheet().getConditionalFormattingArray(index);
-        return new XSSFConditionalFormatting(_sheet, cf);
+        return new XSSFConditionalFormatting(_sheet.getWorkbook(), cf);
     }
 
     /**
