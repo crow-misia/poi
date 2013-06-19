@@ -17,17 +17,6 @@
 
 package org.apache.poi.ss.usermodel;
 
-import org.apache.poi.ss.formula.EvaluationCell;
-import org.apache.poi.ss.formula.EvaluationWorkbook;
-import org.apache.poi.ss.formula.IStabilityClassifier;
-import org.apache.poi.ss.formula.WorkbookEvaluator;
-import org.apache.poi.ss.formula.eval.BoolEval;
-import org.apache.poi.ss.formula.eval.ErrorEval;
-import org.apache.poi.ss.formula.eval.NumberEval;
-import org.apache.poi.ss.formula.eval.StringEval;
-import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.ss.formula.udf.UDFFinder;
-
 /**
  * Evaluates formula cells.<p/>
  * 
@@ -37,45 +26,27 @@ import org.apache.poi.ss.formula.udf.UDFFinder;
  * 
  * @author Amol S. Deshmukh &lt; amolweb at ya hoo dot com &gt;
  * @author Josh Micich
- * @author Zenichi Amano
  */
-public abstract class FormulaEvaluator {
-    protected final WorkbookEvaluator _bookEvaluator;
-    private final CreationHelper _helper;
-
-    public FormulaEvaluator(final EvaluationWorkbook workbook, final CreationHelper helper, final IStabilityClassifier stabilityClassifier, final UDFFinder udfFinder) {
-        this._bookEvaluator = new WorkbookEvaluator(workbook, stabilityClassifier, udfFinder);
-        this._helper = helper;
-    }
-
-    protected abstract EvaluationCell getEvaluationCell(final Cell cell);
-    protected abstract Workbook getWorkbook();
+public interface FormulaEvaluator {
 
     /**
      * Should be called whenever there are changes to input cells in the evaluated workbook.
      * Failure to call this method after changing cell values will cause incorrect behaviour
      * of the evaluate~ methods of this class
      */
-    public final void clearAllCachedResultValues() {
-        _bookEvaluator.clearAllCachedResultValues();
-    }
-
-    /**
-     * Should be called to tell the cell value cache that the specified (value or formula) cell 
-     * has changed.
-     * Failure to call this method after changing cell values will cause incorrect behaviour
-     * of the evaluate~ methods of this class
-     */
-    public final void notifySetFormula(final Cell cell) {
-        _bookEvaluator.notifyUpdateCell(getEvaluationCell(cell));
-    }
-    /**
-     * Should be called to tell the cell value cache that the specified cell has just become a
-     * formula cell, or the formula text has changed 
-     */
-    public final void notifyDeleteCell(final Cell cell) {
-        _bookEvaluator.notifyDeleteCell(getEvaluationCell(cell));
-    }
+    void clearAllCachedResultValues();
+	/**
+	 * Should be called to tell the cell value cache that the specified (value or formula) cell 
+	 * has changed.
+	 * Failure to call this method after changing cell values will cause incorrect behaviour
+	 * of the evaluate~ methods of this class
+	 */
+    void notifySetFormula(Cell cell);
+	/**
+	 * Should be called to tell the cell value cache that the specified cell has just become a
+	 * formula cell, or the formula text has changed 
+	 */
+    void notifyDeleteCell(Cell cell);
 
     /**
      * Should be called to tell the cell value cache that the specified (value or formula) cell
@@ -83,9 +54,7 @@ public abstract class FormulaEvaluator {
      * Failure to call this method after changing cell values will cause incorrect behaviour
      * of the evaluate~ methods of this class
      */
-    public final void notifyUpdateCell(final Cell cell) {
-        _bookEvaluator.notifyUpdateCell(getEvaluationCell(cell));
-    }
+    void notifyUpdateCell(Cell cell);
 
     /**
     * Loops over all cells in all sheets of the associated workbook.
@@ -95,29 +64,8 @@ public abstract class FormulaEvaluator {
     * This is a helpful wrapper around looping over all cells, and 
     *  calling evaluateFormulaCell on each one.
      */
-    public final void evaluateAll() {
-        evaluateAllFormulaCells(getWorkbook(), this);
-    }
+    void evaluateAll();
     
-    public static void evaluateAllFormulaCells(final Workbook wb) {
-        final FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
-        evaluateAllFormulaCells(wb, evaluator);
-    }
-
-    private static void evaluateAllFormulaCells(final Workbook wb, final FormulaEvaluator evaluator) {
-        for(int i=0, n=wb.getNumberOfSheets(); i < n; i++) {
-            Sheet sheet = wb.getSheetAt(i);
-
-            for(final Row r : sheet) {
-                for (final Cell c : r) {
-                    if (c.getCellType() == Cell.CELL_TYPE_FORMULA) {
-                        evaluator.evaluateFormulaCell(c);
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * If cell contains a formula, the formula is evaluated and returned,
      * else the CellValue simply copies the appropriate cell value from
@@ -126,27 +74,8 @@ public abstract class FormulaEvaluator {
      * original cell.
      * @param cell
      */
-    public final CellValue evaluate(final Cell cell) {
-        if (cell == null) {
-            return null;
-        }
+    CellValue evaluate(Cell cell);
 
-        switch (cell.getCellType()) {
-            case Cell.CELL_TYPE_BOOLEAN:
-                return CellValue.valueOf(cell.getBooleanCellValue());
-            case Cell.CELL_TYPE_ERROR:
-                return CellValue.getError(cell.getErrorCellValue());
-            case Cell.CELL_TYPE_FORMULA:
-                return evaluateFormulaCellValue(cell);
-            case Cell.CELL_TYPE_NUMERIC:
-                return new CellValue(cell.getNumericCellValue());
-            case Cell.CELL_TYPE_STRING:
-                return new CellValue(cell.getRichStringCellValue().getString());
-            case Cell.CELL_TYPE_BLANK:
-                return null;
-        }
-        throw new IllegalStateException("Bad cell type (" + cell.getCellType() + ")");
-    }
 
     /**
      * If cell contains formula, it evaluates the formula,
@@ -166,15 +95,7 @@ public abstract class FormulaEvaluator {
      * @param cell The cell to evaluate
      * @return The type of the formula result (the cell's type remains as Cell.CELL_TYPE_FORMULA however)
      */
-    public final int evaluateFormulaCell(Cell cell) {
-        if (cell == null || cell.getCellType() != Cell.CELL_TYPE_FORMULA) {
-            return -1;
-        }
-        final CellValue cv = evaluateFormulaCellValue(cell);
-        // cell remains a formula cell, but the cached value is changed
-        setCellValue(cell, cv);
-        return cv.getCellType();
-    }
+    int evaluateFormulaCell(Cell cell);
 
     /**
      * If cell contains formula, it evaluates the formula, and
@@ -192,110 +113,16 @@ public abstract class FormulaEvaluator {
      *  value computed for you, use {@link #evaluateFormulaCell(Cell)}
      * @param cell
      */
-    public final Cell evaluateInCell(final Cell cell) {
-        if (cell == null) {
-            return null;
-        }
-        if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
-            final CellValue cv = evaluateFormulaCellValue(cell);
-            setCellType(cell, cv); // cell will no longer be a formula cell
-            setCellValue(cell, cv);
-        }
-        return cell;
-    }
-
-    /**
-     * Whether to ignore missing references to external workbooks and
-     * use cached formula results in the main workbook instead.
-     * <p>
-     * In some cases exetrnal workbooks referenced by formulas in the main workbook are not avaiable.
-     * With this method you can control how POI handles such missing references:
-     * <ul>
-     *     <li>by default ignoreMissingWorkbooks=false and POI throws {@link org.apache.poi.ss.formula.CollaboratingWorkbooksEnvironment.WorkbookNotFoundException}
-     *     if an external reference cannot be resolved</li>
-     *     <li>if ignoreMissingWorkbooks=true then POI uses cached formula result
-     *     that already exists in the main workbook</li>
-     * </ul>
-     *
-     * @param ignore whether to ignore missing references to external workbooks
-     */
-    public final void setIgnoreMissingWorkbooks(final boolean ignore){
-        _bookEvaluator.setIgnoreMissingWorkbooks(ignore);
-    }
+    Cell evaluateInCell(Cell cell);
 
     /**
      * Perform detailed output of formula evaluation for next evaluation only?
      * Is for developer use only (also developers using POI for their XLS files).
      * Log-Level WARN is for basic info, INFO for detailed information. These quite
      * high levels are used because you have to explicitly enable this specific logging.
-     
+	 
      * @param value whether to perform detailed output
      */
-    public final void setDebugEvaluationOutputForNextEval(final boolean value) {
-        _bookEvaluator.setDebugEvaluationOutputForNextEval(value);
-    }
-
-    /**
-     * Returns a CellValue wrapper around the supplied ValueEval instance.
-     */
-    private CellValue evaluateFormulaCellValue(final Cell cell) {
-        final ValueEval eval = _bookEvaluator.evaluate(getEvaluationCell(cell));
-        if (eval instanceof NumberEval) {
-            final NumberEval ne = (NumberEval) eval;
-            return new CellValue(ne.getNumberValue());
-        }
-        if (eval instanceof BoolEval) {
-            final BoolEval be = (BoolEval) eval;
-            return CellValue.valueOf(be.getBooleanValue());
-        }
-        if (eval instanceof StringEval) {
-            final StringEval ne = (StringEval) eval;
-            return new CellValue(ne.getStringValue());
-        }
-        if (eval instanceof ErrorEval) {
-            return CellValue.getError(((ErrorEval)eval).getErrorCode());
-        }
-        throw new RuntimeException("Unexpected eval class (" + eval.getClass().getName() + ")");
-    }
-
-    private static void setCellType(final Cell cell, final CellValue cv) {
-        int cellType = cv.getCellType();
-        switch (cellType) {
-            case Cell.CELL_TYPE_BOOLEAN:
-            case Cell.CELL_TYPE_ERROR:
-            case Cell.CELL_TYPE_NUMERIC:
-            case Cell.CELL_TYPE_STRING:
-                cell.setCellType(cellType);
-                return;
-            case Cell.CELL_TYPE_BLANK:
-                // never happens - blanks eventually get translated to zero
-            case Cell.CELL_TYPE_FORMULA:
-                // this will never happen, we have already evaluated the formula
-        }
-        throw new IllegalStateException("Unexpected cell value type (" + cellType + ")");
-    }
-
-    private void setCellValue(final Cell cell, final CellValue cv) {
-        final int cellType = cv.getCellType();
-        switch (cellType) {
-            case Cell.CELL_TYPE_BOOLEAN:
-                cell.setCellValue(cv.getBooleanValue());
-                break;
-            case Cell.CELL_TYPE_ERROR:
-                cell.setCellErrorValue(cv.getErrorValue());
-                break;
-            case Cell.CELL_TYPE_NUMERIC:
-                cell.setCellValue(cv.getNumberValue());
-                break;
-            case Cell.CELL_TYPE_STRING:
-                cell.setCellValue(_helper.createRichTextString(cv.getStringValue()));
-                break;
-            case Cell.CELL_TYPE_BLANK:
-                // never happens - blanks eventually get translated to zero
-            case Cell.CELL_TYPE_FORMULA:
-                // this will never happen, we have already evaluated the formula
-            default:
-                throw new IllegalStateException("Unexpected cell value type (" + cellType + ")");
-        }
-    }
+    void setDebugEvaluationOutputForNextEval(boolean value);
+	
 }

@@ -31,7 +31,7 @@ import java.awt.geom.AffineTransform;
  *
  * @author Yegor Kozlov
  */
-public class SheetUtil {
+public final class SheetUtil {
 
     /**
      * Excel measures columns in units of 1/256th of a character width
@@ -75,6 +75,10 @@ public class SheetUtil {
      * drawing context to measure text
      */
     private static final FontRenderContext fontRenderContext = new FontRenderContext(null, true, true);
+
+    private SheetUtil() {
+        // nop.
+    }
 
     /**
      * Compute width of a single cell

@@ -18,6 +18,7 @@ package org.apache.poi.hssf.usermodel;
 
 import java.util.HashSet;
 
+import org.apache.poi.hssf.model.InternalWorkbook;
 import org.apache.poi.hssf.record.ExtendedFormatRecord;
 import org.apache.poi.hssf.record.FontRecord;
 import org.apache.poi.hssf.record.common.UnicodeString;
@@ -36,7 +37,11 @@ import org.apache.poi.ss.usermodel.Row;
  * However, sometimes this is too hard / tricky to do, which
  *  is where the use of this class comes in.
  */
-public class HSSFOptimiser {
+public final class HSSFOptimiser {
+	private HSSFOptimiser() {
+		// nop.
+	}
+
 	/**
 	 * Goes through the Workbook, optimising the fonts by
 	 *  removing duplicate ones.
@@ -50,22 +55,24 @@ public class HSSFOptimiser {
 	public static void optimiseFonts(HSSFWorkbook workbook) {
 		// Where each font has ended up, and if we need to
 		//  delete the record for it. Start off with no change
-		short[] newPos = 
-			new short[workbook.getWorkbook().getNumberOfFontRecords()+1];
-		boolean[] zapRecords = new boolean[newPos.length];
-		for(int i=0; i<newPos.length; i++) {
+		final InternalWorkbook iwk = workbook.getWorkbook();
+
+		final int n = iwk.getNumberOfFontRecords()+1;
+		final short[] newPos = new short[n];
+		final boolean[] zapRecords = new boolean[n];
+		for(int i=0; i<n; i++) {
 			newPos[i] = (short)i;
 			zapRecords[i] = false;
 		}
 		
 		// Get each font record, so we can do deletes
 		//  without getting confused
-		FontRecord[] frecs = new FontRecord[newPos.length]; 
-		for(int i=0; i<newPos.length; i++) {
+		FontRecord[] frecs = new FontRecord[n]; 
+		for(int i=0; i<n; i++) {
 			// There is no 4!
 			if(i == 4) continue;
 			
-			frecs[i] = workbook.getWorkbook().getFontRecordAt(i);
+			frecs[i] = iwk.getFontRecordAt(i);
 		}
 		
 		// Loop over each font, seeing if it is the same
@@ -73,14 +80,14 @@ public class HSSFOptimiser {
 		//  later duplicate copy to the earlier one, and 
 		//  mark the later one as needing deleting
 		// Note - don't change built in fonts (those before 5)
-		for(int i=5; i<newPos.length; i++) {
+		for(int i=5; i<n; i++) {
 			// Check this one for being a duplicate
 			//  of an earlier one
 			int earlierDuplicate = -1;
 			for(int j=0; j<i && earlierDuplicate == -1; j++) {
 				if(j == 4) continue;
 				
-				FontRecord frCheck = workbook.getWorkbook().getFontRecordAt(j);
+				FontRecord frCheck = iwk.getFontRecordAt(j);
 				if(frCheck.sameProperties(frecs[i])) {
 					earlierDuplicate = j;
 				}
@@ -97,7 +104,7 @@ public class HSSFOptimiser {
 		//  deletes that have occurred between
 		//  the start and them
 		// Only need to worry about user fonts
-		for(int i=5; i<newPos.length; i++) {
+		for(int i=5; i<n; i++) {
 			// Find the number deleted to that
 			//  point, and adjust
 			short preDeletePos = newPos[i];
@@ -111,7 +118,7 @@ public class HSSFOptimiser {
 		}
 		
 		// Zap the un-needed user font records
-		for(int i=5; i<newPos.length; i++) {
+		for(int i=5; i<n; i++) {
 			if(zapRecords[i]) {
 				workbook.getWorkbook().removeFontRecord(
 						frecs[i]
@@ -125,8 +132,8 @@ public class HSSFOptimiser {
 		
 		// Update the cell styles to point at the 
 		//  new locations of the fonts
-		for(int i=0; i<workbook.getWorkbook().getNumExFormats(); i++) {
-			ExtendedFormatRecord xfr = workbook.getWorkbook().getExFormatAt(i);
+		for(int i=0; i<iwk.getNumExFormats(); i++) {
+			ExtendedFormatRecord xfr = iwk.getExFormatAt(i);
 			xfr.setFontIndex(
 					newPos[ xfr.getFontIndex() ]
 			);
@@ -140,7 +147,7 @@ public class HSSFOptimiser {
 		for(int sheetNum=0; sheetNum<workbook.getNumberOfSheets(); sheetNum++) {
 			HSSFSheet s = workbook.getSheetAt(sheetNum);
 			for (Row row : s) {
-			   for (Cell cell : row) {
+				for (Cell cell : row) {
 					if(cell.getCellType() == Cell.CELL_TYPE_STRING) {
 						HSSFRichTextString rtr = (HSSFRichTextString)cell.getRichStringCellValue();
 						UnicodeString u = rtr.getRawUnicodeString();
@@ -148,7 +155,7 @@ public class HSSFOptimiser {
 						// Have we done this string already?
 						if(! doneUnicodeStrings.contains(u)) {
 							// Update for each new position
-							for(short i=5; i<newPos.length; i++) {
+							for(short i=5; i<n; i++) {
 								if(i != newPos[i]) {
 									u.swapFontUse(i, newPos[i]);
 								}
@@ -173,21 +180,23 @@ public class HSSFOptimiser {
 	public static void optimiseCellStyles(HSSFWorkbook workbook) {
 		// Where each style has ended up, and if we need to
 		//  delete the record for it. Start off with no change
-		short[] newPos = 
-			new short[workbook.getWorkbook().getNumExFormats()];
-		boolean[] isUsed = new boolean[newPos.length];
-		boolean[] zapRecords = new boolean[newPos.length];
-		for(int i=0; i<newPos.length; i++) {
-         isUsed[i] = false;
+		final InternalWorkbook iwk = workbook.getWorkbook();
+		
+		final int n = iwk.getNumExFormats();
+		final short[] newPos = new short[n];
+		final boolean[] isUsed = new boolean[n];
+		final boolean[] zapRecords = new boolean[n];
+		for(int i=0; i<n; i++) {
+			isUsed[i] = false;
 			newPos[i] = (short)i;
 			zapRecords[i] = false;
 		}
 		
 		// Get each style record, so we can do deletes
 		//  without getting confused
-		ExtendedFormatRecord[] xfrs = new ExtendedFormatRecord[newPos.length]; 
-		for(int i=0; i<newPos.length; i++) {
-			xfrs[i] = workbook.getWorkbook().getExFormatAt(i);
+		ExtendedFormatRecord[] xfrs = new ExtendedFormatRecord[n]; 
+		for(int i=0; i<n; i++) {
+			xfrs[i] = iwk.getExFormatAt(i);
 		}
 		
 		// Loop over each style, seeing if it is the same
@@ -195,12 +204,12 @@ public class HSSFOptimiser {
 		//  later duplicate copy to the earlier one, and 
 		//  mark the later one as needing deleting
 		// Only work on user added ones, which come after 20
-		for(int i=21; i<newPos.length; i++) {
+		for(int i=21; i<n; i++) {
 			// Check this one for being a duplicate
 			//  of an earlier one
 			int earlierDuplicate = -1;
 			for(int j=0; j<i && earlierDuplicate == -1; j++) {
-				ExtendedFormatRecord xfCheck = workbook.getWorkbook().getExFormatAt(j);
+				ExtendedFormatRecord xfCheck = iwk.getExFormatAt(j);
 				if(xfCheck.equals(xfrs[i])) {
 					earlierDuplicate = j;
 				}
@@ -226,7 +235,7 @@ public class HSSFOptimiser {
          }
       }
       // Mark any that aren't used as needing zapping
-      for (int i=21; i<isUsed.length; i++) {
+      for (int i=21; i<n; i++) {
          if (! isUsed[i]) {
             // Un-used style, can be removed
             zapRecords[i] = true;
@@ -238,7 +247,7 @@ public class HSSFOptimiser {
 		//  deletes that have occurred between
 		//  the start and them
 		// Only work on user added ones, which come after 20
-		for(int i=21; i<newPos.length; i++) {
+		for(int i=21; i<n; i++) {
 			// Find the number deleted to that
 			//  point, and adjust
 			short preDeletePos = newPos[i];
@@ -254,11 +263,11 @@ public class HSSFOptimiser {
 		// Zap the un-needed user style records
         // removing by index, because removing by object may delete
         // styles we did not intend to (the ones that _were_ duplicated and not the duplicates)
-        int max = newPos.length;
+        int max = n;
         int removed = 0; // to adjust index after deletion
         for(int i=21; i<max; i++) {
             if(zapRecords[i + removed]) {
-                workbook.getWorkbook().removeExFormatRecord(i);
+            	iwk.removeExFormatRecord(i);
                 i--;
                 max--;
                 removed++;

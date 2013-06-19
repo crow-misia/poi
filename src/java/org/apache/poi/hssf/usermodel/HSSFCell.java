@@ -293,12 +293,12 @@ public class HSSFCell implements Cell {
             case CELL_TYPE_FORMULA :
                 FormulaRecordAggregate frec;
 
-                if (cellType != _cellType) {
-                    frec = _sheet.getSheet().getRowsAggregate().createFormula(row, col);
-                } else {
+                if (cellType == _cellType) {
                     frec = (FormulaRecordAggregate) _record;
                     frec.setRow(row);
                     frec.setColumn(col);
+                } else {
+                    frec = _sheet.getSheet().getRowsAggregate().createFormula(row, col);
                 }
                 if (setValue)
                 {
@@ -311,13 +311,13 @@ public class HSSFCell implements Cell {
             case CELL_TYPE_NUMERIC :
                 NumberRecord nrec = null;
 
-                if (cellType != _cellType)
+                if (cellType == _cellType)
                 {
-                    nrec = new NumberRecord();
+                    nrec = ( NumberRecord ) _record;
                 }
                 else
                 {
-                    nrec = ( NumberRecord ) _record;
+                    nrec = new NumberRecord();
                 }
                 nrec.setColumn(col);
                 if (setValue)
@@ -354,13 +354,13 @@ public class HSSFCell implements Cell {
             case CELL_TYPE_BLANK :
                 BlankRecord brec = null;
 
-                if (cellType != _cellType)
+                if (cellType == _cellType)
                 {
-                    brec = new BlankRecord();
+                    brec = ( BlankRecord ) _record;
                 }
                 else
                 {
-                    brec = ( BlankRecord ) _record;
+                    brec = new BlankRecord();
                 }
                 brec.setColumn(col);
 
@@ -373,13 +373,13 @@ public class HSSFCell implements Cell {
             case CELL_TYPE_BOOLEAN :
                 BoolErrRecord boolRec = null;
 
-                if (cellType != _cellType)
+                if (cellType == _cellType)
                 {
-                    boolRec = new BoolErrRecord();
+                    boolRec = ( BoolErrRecord ) _record;
                 }
                 else
                 {
-                    boolRec = ( BoolErrRecord ) _record;
+                    boolRec = new BoolErrRecord();
                 }
                 boolRec.setColumn(col);
                 if (setValue)
@@ -394,13 +394,13 @@ public class HSSFCell implements Cell {
             case CELL_TYPE_ERROR :
                 BoolErrRecord errRec = null;
 
-                if (cellType != _cellType)
+                if (cellType == _cellType)
                 {
-                    errRec = new BoolErrRecord();
+                    errRec = ( BoolErrRecord ) _record;
                 }
                 else
                 {
-                    errRec = ( BoolErrRecord ) _record;
+                    errRec = new BoolErrRecord();
                 }
                 errRec.setColumn(col);
                 if (setValue)
