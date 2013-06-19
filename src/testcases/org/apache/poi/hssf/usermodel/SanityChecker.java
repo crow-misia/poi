@@ -35,11 +35,11 @@ public class SanityChecker
 {
     static class CheckRecord
     {
-        Class record;
+        Class<?> record;
         char occurance;  // 1 = one time, M = 1..many times, * = 0..many, 0 = optional
         private boolean together;
 
-        public CheckRecord( Class record, char occurance )
+        public CheckRecord( Class<?> record, char occurance )
         {
             this(record, occurance, true);
         }
@@ -49,14 +49,14 @@ public class SanityChecker
          * @param occurance     The occurance 1 = occurs once, M = occurs many times
          * @param together
          */
-        public CheckRecord(Class record, char occurance, boolean together)
+        public CheckRecord(Class<?> record, char occurance, boolean together)
         {
             this.record = record;
             this.occurance = occurance;
             this.together = together;
         }
 
-        public Class getRecord()
+        public Class<?> getRecord()
         {
             return record;
         }
@@ -86,7 +86,7 @@ public class SanityChecker
             return occurance == '*' || occurance == 'M';
         }
 
-        public int match( List records, int recordIdx )
+        public int match( List<? extends Record> records, int recordIdx )
         {
             int firstRecord = findFirstRecord(records, getRecord(), recordIdx);
             if (isRequired())
@@ -96,7 +96,7 @@ public class SanityChecker
             return matchOptional( firstRecord, records, recordIdx );
         }
 
-        private int matchOptional( int firstRecord, List records, int recordIdx )
+        private int matchOptional( int firstRecord, List<? extends Record> records, int recordIdx )
         {
             if (firstRecord == -1)
             {
@@ -106,7 +106,7 @@ public class SanityChecker
             return matchOneOrMany( records, firstRecord );
         }
 
-        private int matchRequired( int firstRecord, List records, int recordIdx )
+        private int matchRequired( int firstRecord, List<? extends Record> records, int recordIdx )
         {
             if (firstRecord == -1)
             {
@@ -116,7 +116,7 @@ public class SanityChecker
             return matchOneOrMany( records, firstRecord );
         }
 
-        private int matchOneOrMany( List records, int recordIdx )
+        private int matchOneOrMany( List<? extends Record> records, int recordIdx )
         {
             if (isZeroOrOne())
             {
