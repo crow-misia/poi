@@ -662,10 +662,10 @@ public class DataFormatter {
      *  supplied Date and format
      */
     private String performDateFormatting(Date d, Format dateFormat) {
-       if(dateFormat != null) {
-          return dateFormat.format(d);
-      }
-      return d.toString();
+        if(dateFormat == null) {
+            return d.toString();
+        }
+        return dateFormat.format(d);
     }
 
     /**

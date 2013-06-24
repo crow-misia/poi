@@ -35,8 +35,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet;
  */
 public class ColumnHelper {
 
-    private CTWorksheet worksheet;
-    private CTCols newCols;
+    private final CTWorksheet worksheet;
 
     public ColumnHelper(CTWorksheet worksheet) {
         super();
@@ -45,12 +44,11 @@ public class ColumnHelper {
     }
 
     public void cleanColumns() {
-        this.newCols = CTCols.Factory.newInstance();
+        CTCols newCols = CTCols.Factory.newInstance();
         final List<CTCols> colsArray = worksheet.getColsList();
         final int n = colsArray.size();
         for (final CTCols cols : colsArray) {
-            final List<CTCol> colArray = cols.getColList();
-            for (CTCol col : colArray) {
+            for (CTCol col : cols.getColList()) {
                 newCols = addCleanColIntoCols(newCols, col);
             }
         }
@@ -88,20 +86,19 @@ public class ColumnHelper {
      */
     public CTCol getColumn1Based(long index1, boolean splitColumns) {
         CTCols colsArray = worksheet.getColsArray(0);
-		for (int i = 0; i < colsArray.sizeOfColArray(); i++) {
-            CTCol colArray = colsArray.getColArray(i);
-			if (colArray.getMin() <= index1 && colArray.getMax() >= index1) {
+		for (final CTCol col : colsArray.getColList()) {
+			if (col.getMin() <= index1 && col.getMax() >= index1) {
 				if (splitColumns) {
-					if (colArray.getMin() < index1) {
-						insertCol(colsArray, colArray.getMin(), (index1 - 1), new CTCol[]{colArray});
+					if (col.getMin() < index1) {
+						insertCol(colsArray, col.getMin(), (index1 - 1), new CTCol[]{col});
 					}
-					if (colArray.getMax() > index1) {
-						insertCol(colsArray, (index1 + 1), colArray.getMax(), new CTCol[]{colArray});
+					if (col.getMax() > index1) {
+						insertCol(colsArray, (index1 + 1), col.getMax(), new CTCol[]{col});
 					}
-					colArray.setMin(index1);
-					colArray.setMax(index1);
+					col.setMin(index1);
+					col.setMax(index1);
 				}
-                return colArray;
+                return col;
             }
         }
         return null;
@@ -122,40 +119,38 @@ public class ColumnHelper {
             // overlapping types
             if (overlappingType == NumericRanges.OVERLAPS_1_MINOR) {
                 ithCol.setMax(overlappingRange[0] - 1);
-                CTCol rangeCol = insertCol(cols, overlappingRange[0],
+                insertCol(cols, overlappingRange[0],
                         overlappingRange[1], new CTCol[] { ithCol, col });
-                i++;
-                CTCol newCol = insertCol(cols, (overlappingRange[1] + 1), col
+                insertCol(cols, (overlappingRange[1] + 1), col
                         .getMax(), new CTCol[] { col });
-                i++;
+                i += 2;
             } else if (overlappingType == NumericRanges.OVERLAPS_2_MINOR) {
                 ithCol.setMin(overlappingRange[1] + 1);
-                CTCol rangeCol = insertCol(cols, overlappingRange[0],
+                insertCol(cols, overlappingRange[0],
                         overlappingRange[1], new CTCol[] { ithCol, col });
-                i++;
-                CTCol newCol = insertCol(cols, col.getMin(),
+                insertCol(cols, col.getMin(),
                         (overlappingRange[0] - 1), new CTCol[] { col });
-                i++;
+                i += 2;
             } else if (overlappingType == NumericRanges.OVERLAPS_2_WRAPS) {
                 setColumnAttributes(col, ithCol);
                 if (col.getMin() != ithCol.getMin()) {
-                    CTCol newColBefore = insertCol(cols, col.getMin(), (ithCol
+                    insertCol(cols, col.getMin(), (ithCol
                             .getMin() - 1), new CTCol[] { col });
                     i++;
                 }
                 if (col.getMax() != ithCol.getMax()) {
-                    CTCol newColAfter = insertCol(cols, (ithCol.getMax() + 1),
+                    insertCol(cols, (ithCol.getMax() + 1),
                             col.getMax(), new CTCol[] { col });
                     i++;
                 }
             } else if (overlappingType == NumericRanges.OVERLAPS_1_WRAPS) {
                 if (col.getMin() != ithCol.getMin()) {
-                    CTCol newColBefore = insertCol(cols, ithCol.getMin(), (col
+                    insertCol(cols, ithCol.getMin(), (col
                             .getMin() - 1), new CTCol[] { ithCol });
                     i++;
                 }
                 if (col.getMax() != ithCol.getMax()) {
-                    CTCol newColAfter = insertCol(cols, (col.getMax() + 1),
+                    insertCol(cols, (col.getMax() + 1),
                             ithCol.getMax(), new CTCol[] { ithCol });
                     i++;
                 }
@@ -168,7 +163,7 @@ public class ColumnHelper {
             }
         }
         if (!colOverlaps) {
-            CTCol newCol = cloneCol(cols, col);
+            cloneCol(cols, col);
         }
         sortColumns(cols);
         return cols;
@@ -178,7 +173,7 @@ public class ColumnHelper {
      * Insert a new CTCol at position 0 into cols, setting min=min, max=max and
      * copying all the colsWithAttributes array cols attributes into newCol
      */
-    private CTCol insertCol(CTCols cols, long min, long max,            
+    private CTCol insertCol(CTCols cols, long min, long max,
         CTCol[] colsWithAttributes) {
         if(!columnExists(cols,min,max)){
                 CTCol newCol = cols.insertNewCol(0);
@@ -200,8 +195,8 @@ public class ColumnHelper {
     	return columnExists1Based(cols, index+1);
     }
     private boolean columnExists1Based(CTCols cols, long index1) {
-        for (int i = 0; i < cols.sizeOfColArray(); i++) {
-            if (cols.getColArray(i).getMin() == index1) {
+        for (final CTCol col : cols.getColList()) {
+            if (col.getMin() == index1) {
                 return true;
             }
         }
@@ -271,8 +266,8 @@ public class ColumnHelper {
 	}
 
 	private boolean columnExists(CTCols cols, long min, long max) {
-	    for (int i = 0; i < cols.sizeOfColArray(); i++) {
-	        if (cols.getColArray(i).getMin() == min && cols.getColArray(i).getMax() == max) {
+	    for (final CTCol t : cols.getColList()) {
+	        if (t.getMin() == min && t.getMax() == max) {
 	            return true;
 	        }
 	    }
@@ -280,10 +275,12 @@ public class ColumnHelper {
 	}
 	
 	public int getIndexOfColumn(CTCols cols, CTCol col) {
-	    for (int i = 0; i < cols.sizeOfColArray(); i++) {
-	        if (cols.getColArray(i).getMin() == col.getMin() && cols.getColArray(i).getMax() == col.getMax()) {
+		int i = 0;
+	    for (final CTCol t : cols.getColList()) {
+	        if (t.getMin() == col.getMin() && t.getMax() == col.getMax()) {
 	            return i;
 	        }
+	        i++;
 	    }
 	    return -1;
 	}
