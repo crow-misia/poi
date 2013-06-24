@@ -340,11 +340,9 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
         double width = SheetUtil.getColumnWidth(this, column, useMergedCells);
 
         if (width != -1) {
-            width *= 256;
-            int maxColumnWidth = 255*256; // The maximum column width for an individual cell is 255 characters
-            if (width > maxColumnWidth) {
-                width = maxColumnWidth;
-            }
+            // The maximum column width for an individual cell is 255 characters
+            width = Math.min(width * 256, 255 * 256);
+
             setColumnWidth(column, (int)(width));
             columnHelper.setColBestFit(column, true);
         }
@@ -514,10 +512,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
     public XSSFRow createRow(int rownum) {
         CTRow ctRow;
         XSSFRow prev = _rows.get(rownum);
-        if(prev != null){
-            ctRow = prev.getCTRow();
-            ctRow.set(CTRow.Factory.newInstance());
-        } else {
+        if(prev == null){
         	if(_rows.isEmpty() || rownum > _rows.lastKey()) {
         		// we can append the new row at the end
         		ctRow = worksheet.getSheetData().addNewRow();
@@ -527,6 +522,9 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
         		int idx = _rows.headMap(rownum).size();
         		ctRow = worksheet.getSheetData().insertNewRow(idx);
         	}
+        } else {
+            ctRow = prev.getCTRow();
+            ctRow.set(CTRow.Factory.newInstance());
         }
         XSSFRow r = new XSSFRow(ctRow, this);
         r.setRowNum(rownum);

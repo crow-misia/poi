@@ -324,10 +324,11 @@ public final class DateUtil {
              // The code above was reworked as suggested in bug 48425:
              // simple loop is more efficient than consecutive regexp replacements.
         }*/
-        StringBuilder sb = new StringBuilder(fs.length());
-        for (int i = 0; i < fs.length(); i++) {
+        final int l = fs.length();
+        StringBuilder sb = new StringBuilder(l);
+        for (int i = 0; i < l; i++) {
             char c = fs.charAt(i);
-            if (i < fs.length() - 1) {
+            if (i < l - 1) {
                 char nc = fs.charAt(i + 1);
                 if (c == '\\') {
                     switch (nc) {

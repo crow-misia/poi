@@ -97,15 +97,16 @@ public final class SheetUtil {
         int column = cell.getColumnIndex();
 
         int colspan = 1;
-        for (int i = 0 ; i < sheet.getNumMergedRegions(); i++) {
+        for (int i = 0, n = sheet.getNumMergedRegions(); i < n; i++) {
             CellRangeAddress region = sheet.getMergedRegion(i);
             if (containsCell(region, row.getRowNum(), column)) {
-                if (!useMergedCells) {
+                if (useMergedCells) {
+                    cell = row.getCell(region.getFirstColumn());
+                    colspan = 1 + region.getLastColumn() - region.getFirstColumn();
+                } else {
                     // If we're not using merged cells, skip this one and move on to the next.
                     return -1;
                 }
-                cell = row.getCell(region.getFirstColumn());
-                colspan = 1 + region.getLastColumn() - region.getFirstColumn();
             }
         }
 
@@ -135,7 +136,9 @@ public final class SheetUtil {
                 }
 
                 layout = new TextLayout(str.getIterator(), fontRenderContext);
-                if(style.getRotation() != 0){
+                if(style.getRotation() == 0){
+                    width = Math.max(width, ((layout.getBounds().getWidth() / colspan) / defaultCharWidth) + cell.getCellStyle().getIndention());
+                } else {
                     /*
                      * Transform the text using a scale so that it's height is increased by a multiple of the leading,
                      * and then rotate the text before computing the bounds. The scale results in some whitespace around
@@ -144,12 +147,8 @@ public final class SheetUtil {
                      */
                     AffineTransform trans = new AffineTransform();
                     trans.concatenate(AffineTransform.getRotateInstance(style.getRotation()*2.0*Math.PI/360.0));
-                    trans.concatenate(
-                    AffineTransform.getScaleInstance(1, fontHeightMultiple)
-                    );
+                    trans.concatenate(AffineTransform.getScaleInstance(1, fontHeightMultiple));
                     width = Math.max(width, ((layout.getOutline(trans).getBounds().getWidth() / colspan) / defaultCharWidth) + cell.getCellStyle().getIndention());
-                } else {
-                    width = Math.max(width, ((layout.getBounds().getWidth() / colspan) / defaultCharWidth) + cell.getCellStyle().getIndention());
                 }
             }
         } else {
@@ -159,10 +158,10 @@ public final class SheetUtil {
                 try {
                     sval = formatter.formatCellValue(cell, dummyEvaluator);
                 } catch (Exception e) {
-                    sval = String.valueOf(cell.getNumericCellValue());
+                    sval = Double.toString(cell.getNumericCellValue());
                 }
             } else if (cellType == Cell.CELL_TYPE_BOOLEAN) {
-                sval = String.valueOf(cell.getBooleanCellValue()).toUpperCase();
+                sval = Boolean.toString(cell.getBooleanCellValue()).toUpperCase();
             }
             if(sval != null) {
                 String txt = sval + defaultChar;
@@ -170,7 +169,9 @@ public final class SheetUtil {
                 copyAttributes(font, str, 0, txt.length());
 
                 layout = new TextLayout(str.getIterator(), fontRenderContext);
-                if(style.getRotation() != 0){
+                if(style.getRotation() == 0){
+                    width = Math.max(width, ((layout.getBounds().getWidth() / colspan) / defaultCharWidth) + cell.getCellStyle().getIndention());
+                } else {
                     /*
                      * Transform the text using a scale so that it's height is increased by a multiple of the leading,
                      * and then rotate the text before computing the bounds. The scale results in some whitespace around
@@ -179,12 +180,8 @@ public final class SheetUtil {
                      */
                     AffineTransform trans = new AffineTransform();
                     trans.concatenate(AffineTransform.getRotateInstance(style.getRotation()*2.0*Math.PI/360.0));
-                    trans.concatenate(
-                    AffineTransform.getScaleInstance(1, fontHeightMultiple)
-                    );
+                    trans.concatenate(AffineTransform.getScaleInstance(1, fontHeightMultiple));
                     width = Math.max(width, ((layout.getOutline(trans).getBounds().getWidth() / colspan) / defaultCharWidth) + cell.getCellStyle().getIndention());
-                } else {
-                    width = Math.max(width, ((layout.getBounds().getWidth() / colspan) / defaultCharWidth) + cell.getCellStyle().getIndention());
                 }
             }
         }
@@ -213,8 +210,8 @@ public final class SheetUtil {
         int defaultCharWidth = (int)layout.getAdvance();
 
         double width = -1;
-        for (Row row : sheet) {
-            Cell cell = row.getCell(column);
+        for (final Row row : sheet) {
+            final Cell cell = row.getCell(column);
 
             if (cell == null) {
                 continue;
