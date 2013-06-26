@@ -89,8 +89,8 @@ public class TestXWPFWordExtractor extends TestCase {
         // Check number of paragraphs
         int ps = 0;
         char[] t = text.toCharArray();
-        for (int i = 0; i < t.length; i++) {
-            if (t[i] == '\n') {
+        for (final char c : t) {
+            if (c == '\n') {
                 ps++;
             }
         }

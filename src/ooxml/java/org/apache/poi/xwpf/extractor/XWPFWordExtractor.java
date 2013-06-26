@@ -25,6 +25,7 @@ import org.apache.poi.POIXMLException;
 import org.apache.poi.POIXMLTextExtractor;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.util.StringUtil;
 import org.apache.poi.xwpf.model.XWPFCommentsDecorator;
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.IBodyElement;
@@ -75,14 +76,15 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
 	public static void main(String[] args) throws Exception {
 		if(args.length < 1) {
 			System.err.println("Use:");
-			System.err.println("  HXFWordExtractor <filename.docx>");
+			System.err.println("  XWPFWordExtractor <filename.docx>");
 			System.exit(1);
 		}
-		POIXMLTextExtractor extractor = 
+		try (final POIXMLTextExtractor extractor = 
 			new XWPFWordExtractor(POIXMLDocument.openPackage(
 					args[0]
-			));
-		System.out.println(extractor.getText());
+			))) {
+			System.out.println(extractor.getText());
+		}
 	}
 	
 	public String getText() {
