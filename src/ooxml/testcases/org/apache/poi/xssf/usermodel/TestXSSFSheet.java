@@ -19,8 +19,12 @@ package org.apache.poi.xssf.usermodel;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.attribute.FileAttribute;
 import java.util.List;
 
 import org.apache.poi.hssf.HSSFTestDataSamples;
@@ -149,7 +153,7 @@ public final class TestXSSFSheet extends BaseTestSheet {
         assertNull(drawing);
         assertNull(clonedDrawing);
         
-        workbook.write(new FileOutputStream("d:/temp/a.xlsx"));
+        workbook.write(new FileOutputStream(Files.createTempFile("CloneSheetWithDrawingInHeader", ".xlsx", new FileAttribute[0]).toFile()));
     }
 
     public void testGetAllHeadersFooters() {
