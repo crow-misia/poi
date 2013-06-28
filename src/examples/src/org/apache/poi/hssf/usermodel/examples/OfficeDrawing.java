@@ -173,11 +173,8 @@ public class OfficeDrawing {
         int pictureIndex;
 
         try (final FileInputStream fis = new FileInputStream(path);
-             final ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-            int c;
-            while ( (c = fis.read()) != -1)
-                bos.write( c );
-            pictureIndex = wb.addPicture( bos.toByteArray(), HSSFWorkbook.PICTURE_TYPE_PNG );
+             final BufferedInputStream bis = new BufferedInputStream(fis)) {
+            pictureIndex = wb.addPicture(bis, HSSFWorkbook.PICTURE_TYPE_PNG );
         }
         return pictureIndex;
     }

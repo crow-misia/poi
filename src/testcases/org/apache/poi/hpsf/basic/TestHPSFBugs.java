@@ -126,9 +126,9 @@ public final class TestHPSFBugs extends TestCase {
        
        // Write out and read back, should still be valid
        POIDocument doc = new HPSFPropertiesOnlyDocument(fs);
-       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+       FastByteArrayOutputStream baos = new FastByteArrayOutputStream();
        doc.write(baos);
-       ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+       ByteArrayInputStream bais = baos.toInputStream();
        doc = new HPSFPropertiesOnlyDocument(new POIFSFileSystem(bais));
        
        // Check properties are still there

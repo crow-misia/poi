@@ -359,7 +359,6 @@ public abstract class HSSFShape implements Shape {
             LittleEndian.putInt(property.getPropertyValue(), bos);
             return LittleEndian.getShort(bos.toByteArray(), 2);
         } catch (IOException e) {
-            e.printStackTrace();
             return 0;
         }
     }
