@@ -45,7 +45,7 @@ public final class DateConstants {
     public static final ThreadLocal<SimpleDateFormat> yyyyMMddTHHmmssZ = createInstance("yyyy-MM-dd'T'HH:mm:ss'Z'", true);
     public static final ThreadLocal<SimpleDateFormat> yyyyMMddTHHmmssSSSZ = createInstance("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", true);
     public static final ThreadLocal<SimpleDateFormat> EdMMMyyyyHHmmssZ = createInstance("E, d MMM yyyy HH:mm:ss Z", true);
-    public static final ThreadLocal<SimpleDateFormat> EdMMMyyyyHHmmss = createInstance("E, d MMM yyyy HH:mm:ss", false);
+    public static final ThreadLocal<SimpleDateFormat> EdMMMyyyyHHmmss = createInstance("E, d MMM yyyy HH:mm:ss", true);
     public static final ThreadLocal<SimpleDateFormat> yyyyMMddHHmmssSSS = createInstance("yyyy-MM-dd HH:mm:ss.SSS", false);
     public static final ThreadLocal<SimpleDateFormat> yyyyMMddHHmmss = createInstance("yyyy-MM-dd HH:mm:ss", false);
 

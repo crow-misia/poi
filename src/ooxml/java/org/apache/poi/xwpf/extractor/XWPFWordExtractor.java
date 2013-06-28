@@ -106,7 +106,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
 		return text.toString();
 	}
 
-   public void appendBodyElementText(StringBuffer text, IBodyElement e){
+   public void appendBodyElementText(StringBuilder text, IBodyElement e){
       if (e instanceof XWPFParagraph){
           appendParagraphText(text, (XWPFParagraph)e);
       } else if (e instanceof XWPFTable){
@@ -116,7 +116,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
       }
    }
    
-   public void appendParagraphText(StringBuffer text, XWPFParagraph paragraph){
+   public void appendParagraphText(StringBuilder text, XWPFParagraph paragraph){
       try {
           CTSectPr ctSectPr = null;
           if (paragraph.getCTP().getPPr()!=null) {
@@ -164,7 +164,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
      
    }
 
-   private void appendTableText(StringBuffer text, XWPFTable table){
+   private void appendTableText(StringBuilder text, XWPFTable table){
       //this works recursively to pull embedded tables from tables
       for (XWPFTableRow row : table.getRows()){
           List<XWPFTableCell> cells = row.getTableCells();

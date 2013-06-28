@@ -64,8 +64,7 @@ public final class TestFixedSizedProperties extends POITestCase {
       this.fsMessageSucceeds = new POIFSFileSystem(new FileInputStream(samples.getFile(messageSucceeds)));
       this.fsMessageFails = new POIFSFileSystem(new FileInputStream(samples.getFile(messageFails)));
       
-      messageDateFormat = new SimpleDateFormat("E, d MMM yyyy HH:mm:ss");
-      messageDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+      messageDateFormat = DateConstants.EdMMMyyyyHHmmss.get();
    }
    
    /**
