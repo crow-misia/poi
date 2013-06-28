@@ -27,7 +27,6 @@ import junit.framework.TestCase;
 import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.FractionFormat;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -49,7 +48,7 @@ public final class TestFractionFormat extends TestCase {
         Workbook wb = HSSFTestDataSamples.openSampleWorkbook("54686_fraction_formats.xls");
         Sheet sheet = wb.getSheetAt(0);
         DataFormatter formatter = new DataFormatter();
-        FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
+        IFormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 
         // Skip over the header row
         String truthLine = reader.readLine();

@@ -82,12 +82,12 @@ public final class FastByteArrayOutputStream extends OutputStream {
         return pos;
     }
 
-    public void arraycopy(final int o, final byte[] d, final int s, final int l) {
-        System.arraycopy(this.buf, o, d, s, l);
-    }
-
     public ByteArrayInputStream toInputStream() {
         return new ByteArrayInputStream(buf, 0, pos);
+    }
+
+    public byte[] getRawArray() {
+        return this.buf;
     }
 
     public void arraycopy(final int pos, final byte[] dest, final int destPos, final int length) {

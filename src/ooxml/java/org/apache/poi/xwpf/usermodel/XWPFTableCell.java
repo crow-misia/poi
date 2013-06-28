@@ -238,14 +238,13 @@ public class XWPFTableCell implements IBody {
      * @return the cell alignment enum value
      */
     public XWPFVertAlign getVerticalAlignment() {
-	XWPFVertAlign vAlign = null;
-	CTTcPr tcpr = ctTc.getTcPr();
-	if (ctTc != null) {
+        XWPFVertAlign vAlign = null;
+        if (ctTc != null) {
             CTTcPr tcpr = ctTc.getTcPr();
-	    CTVerticalJc va = tcpr.getVAlign();
-	    vAlign = stVertAlignTypeMap.get(va.getVal().intValue());
-	}
-	return vAlign;
+            CTVerticalJc va = tcpr.getVAlign();
+            vAlign = stVertAlignTypeMap.get(va.getVal().intValue());
+        }
+        return vAlign;
     }
 
     /**
