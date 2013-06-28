@@ -18,10 +18,9 @@
 
 package org.apache.poi.hssf.usermodel.examples;
 
-import java.io.File;
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -250,7 +249,6 @@ public class AddDimensionedImage {
             String imageFile, double reqImageWidthMM, double reqImageHeightMM,
             int resizeBehaviour) throws FileNotFoundException, IOException,
                                                      IllegalArgumentException  {
-        HSSFRow row = null;
         HSSFClientAnchor anchor = null;
         HSSFPatriarch patriarch = null;
         ClientAnchorDetail rowClientAnchorDetail = null;
@@ -299,11 +297,14 @@ public class AddDimensionedImage {
         // however.
         //int index = sheet.getWorkbook().addPicture(this.imageToBytes(imageFile),
         //            HSSFWorkbook.PICTURE_TYPE_JPEG);
-        int index = sheet.getWorkbook().addPicture(this.imageToBytes(imageFile), HSSFWorkbook.PICTURE_TYPE_PNG);
+        try (final FileInputStream fis = new FileInputStream(imageFile);
+             final BufferedInputStream bis = new BufferedInputStream(fis)) {
+            int index = sheet.getWorkbook().addPicture(bis, HSSFWorkbook.PICTURE_TYPE_PNG);
 
-        // Get the drawing patriarch and create the picture.
-        patriarch = sheet.createDrawingPatriarch();
-        patriarch.createPicture(anchor, index);
+            // Get the drawing patriarch and create the picture.
+            patriarch = sheet.createDrawingPatriarch();
+            patriarch.createPicture(anchor, index);
+        }
     }
 
     /**
@@ -654,37 +655,6 @@ public class AddDimensionedImage {
     }
 
     /**
-     * Loads - reads in and converts into an array of byte(s) - an image from
-     * a named file.
-     *
-     * Note: this method should be modified so that the type of the image may
-     * also be passed to it. Currently, it assumes that all images are
-     * JPG/JPEG(s).
-     *
-     * @param imageFilename A String that encapsulates the path to and name
-     *                      of the file that contains the image which is to be
-     *                      'loaded'.
-     * @return An array of type byte that contains the raw data of the named
-     *         image.
-     * @throws java.io.FileNotFoundException Thrown if it was not possible to
-     *                                       open the specified file.
-     * @throws java.io.IOException Thrown if reading the file failed or was
-     *                             interrupted.
-     */
-    private byte[] imageToBytes(String imageFilename) throws IOException {
-        File imageFile = new File(imageFilename);
-
-        int read = 0;
-        try (final FileInputStream fis = new FileInputStream(imageFile);
-             final ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-            while((read = fis.read()) != -1) {
-                bos.write(read);
-            }
-            return(bos.toByteArray());
-        }
-    }
-
-    /**
      * The main entry point to the program. It contains code that demonstrates
      * one way to use the program.
      *
@@ -706,7 +676,6 @@ public class AddDimensionedImage {
     public static void main(String[] args) {
         String imageFile = null;
         String outputFile = null;
-        FileInputStream fis = null;
         FileOutputStream fos = null;
         HSSFWorkbook workbook = null;
         HSSFSheet sheet = null;

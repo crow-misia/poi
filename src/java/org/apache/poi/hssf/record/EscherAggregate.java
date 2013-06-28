@@ -36,6 +36,7 @@ import org.apache.poi.ddf.EscherSerializationListener;
 import org.apache.poi.ddf.EscherSpRecord;
 import org.apache.poi.ddf.EscherSpgrRecord;
 import org.apache.poi.ddf.EscherTextboxRecord;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
 import org.apache.poi.util.list.IntArrayList;
@@ -86,7 +87,6 @@ import org.apache.poi.util.list.IntArrayList;
 
 public final class EscherAggregate extends AbstractEscherHolderRecord {
     public static final short sid = 9876; // not a real sid - dummy value
-    private static final POILogger log = POILogFactory.getLogger(EscherAggregate.class);
 
     public static final short ST_MIN = (short) 0;
     public static final short ST_NOT_PRIMATIVE = ST_MIN;
@@ -390,7 +390,7 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
         };
 
         // Create one big buffer
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        FastByteArrayOutputStream buffer = new FastByteArrayOutputStream();
         EscherAggregate agg = new EscherAggregate(false);
         int loc = locFirstDrawingRecord;
         while (loc + 1 < records.size()
@@ -414,8 +414,9 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
         // Decode the shapes
         // agg.escherRecords = new ArrayList();
         int pos = 0;
-        while (pos < buffer.size()) {
-            final byte[] data = buffer.toByteArray();
+        final byte[] data = buffer.getRawArray();
+        final int size = buffer.size();
+        while (pos < size) {
             EscherRecord r = recordFactory.createRecord(data, pos);
             int bytesRead = r.fillFields(data, pos, recordFactory);
             agg.addEscherRecord(r);

@@ -49,10 +49,9 @@ public class XWPFSDT implements IBodyElement, IRunBody, ISDTContents, IRunElemen
        } else {
           title = "";
        }
-       @SuppressWarnings("deprecation")
-       CTString[] array = pr.getTagArray();
-       if (array != null && array.length > 0){
-          tag = array[0].getVal();
+       final List<CTString> array = pr.getTagList();
+       if (array != null && !array.isEmpty()){
+          tag = array.get(0).getVal();
        } else {
           tag = "";
        }
@@ -68,10 +67,9 @@ public class XWPFSDT implements IBodyElement, IRunBody, ISDTContents, IRunElemen
       } else {
          title = "";
       }
-      @SuppressWarnings("deprecation")
-      CTString[] array = pr.getTagArray();
-      if (array != null && array.length > 0){
-         tag = array[0].getVal();
+      final List<CTString> array = pr.getTagList();
+      if (array != null && !array.isEmpty()){
+         tag = array.get(0).getVal();
       } else {
          tag = "";
       }

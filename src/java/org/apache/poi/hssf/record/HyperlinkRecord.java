@@ -22,6 +22,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
 import org.apache.poi.util.LittleEndianByteArrayInputStream;
@@ -104,13 +105,12 @@ public final class HyperlinkRecord extends StandardRecord {
 
 		public long getD4() {
 			//
-			ByteArrayOutputStream baos = new ByteArrayOutputStream(8);
-			try {
+			try (final FastByteArrayOutputStream baos = new FastByteArrayOutputStream(8)) {
 				new DataOutputStream(baos).writeLong(_d4);
+				return new LittleEndianByteArrayInputStream(baos.getRawArray(), 0, baos.size()).readLong();
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-			return new LittleEndianByteArrayInputStream(baos.toByteArray()).readLong();
 		}
 
 		public String formatAsString() {
