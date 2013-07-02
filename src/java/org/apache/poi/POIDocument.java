@@ -18,6 +18,7 @@
 package org.apache.poi;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -34,7 +35,6 @@ import org.apache.poi.poifs.filesystem.Entry;
 import org.apache.poi.poifs.filesystem.EntryUtils;
 import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.util.FastByteArrayOutputStream;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -213,11 +213,11 @@ public abstract class POIDocument {
     protected void writePropertySet(String name, PropertySet set, POIFSFileSystem outFS) throws IOException {
         try {
             MutablePropertySet mSet = new MutablePropertySet(set);
-            FastByteArrayOutputStream bOut = new FastByteArrayOutputStream();
+            ByteArrayOutputStream bOut = new ByteArrayOutputStream();
 
             mSet.write(bOut);
             byte[] data = bOut.toByteArray();
-            ByteArrayInputStream bIn = bOut.toInputStream();
+            ByteArrayInputStream bIn = new ByteArrayInputStream(data);
             outFS.createDocument(bIn,name);
 
             logger.log(POILogger.INFO, "Wrote property set " + name + " of size " + bOut.size());

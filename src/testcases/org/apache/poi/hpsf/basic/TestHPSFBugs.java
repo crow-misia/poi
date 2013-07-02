@@ -18,6 +18,7 @@
 package org.apache.poi.hpsf.basic;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
 import junit.framework.TestCase;
