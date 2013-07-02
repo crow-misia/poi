@@ -35,7 +35,7 @@ public class FontMetricsDumper
         for (final Font f : allFonts) {
             final String fontName = f.getFontName();
 
-            Font font = new Font(fontName, Font.BOLD, 10);
+            Font font = f.deriveFont(Font.BOLD, 10);
             FontMetrics fontMetrics = Toolkit.getDefaultToolkit().getFontMetrics(font);
             int fontHeight = fontMetrics.getHeight();
 
@@ -70,14 +70,8 @@ public class FontMetricsDumper
             props.setProperty("font." + fontName + ".widths", widths.toString());
         }
 
-        FileOutputStream fileOut = new FileOutputStream("font_metrics.properties");
-        try
-        {
+        try (FileOutputStream fileOut = new FileOutputStream("font_metrics.properties")) {
             props.store(fileOut, "Font Metrics");
-        }
-        finally
-        {
-            fileOut.close();
         }
     }
 }
