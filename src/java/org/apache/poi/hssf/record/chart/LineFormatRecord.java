@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class LineFormatRecord extends StandardRecord {
-    public final static short sid = 0x1007;
+    public static final short sid = 0x1007;
 
     private static final BitField auto      = BitFieldFactory.getInstance(0x1);
     private static final BitField drawTicks = BitFieldFactory.getInstance(0x4);
@@ -38,20 +38,20 @@ public final class LineFormatRecord extends StandardRecord {
 
     private  int        field_1_lineColor;
     private  short      field_2_linePattern;
-    public final static short       LINE_PATTERN_SOLID             = 0;
-    public final static short       LINE_PATTERN_DASH              = 1;
-    public final static short       LINE_PATTERN_DOT               = 2;
-    public final static short       LINE_PATTERN_DASH_DOT          = 3;
-    public final static short       LINE_PATTERN_DASH_DOT_DOT      = 4;
-    public final static short       LINE_PATTERN_NONE              = 5;
-    public final static short       LINE_PATTERN_DARK_GRAY_PATTERN = 6;
-    public final static short       LINE_PATTERN_MEDIUM_GRAY_PATTERN = 7;
-    public final static short       LINE_PATTERN_LIGHT_GRAY_PATTERN = 8;
+    public static final short       LINE_PATTERN_SOLID             = 0;
+    public static final short       LINE_PATTERN_DASH              = 1;
+    public static final short       LINE_PATTERN_DOT               = 2;
+    public static final short       LINE_PATTERN_DASH_DOT          = 3;
+    public static final short       LINE_PATTERN_DASH_DOT_DOT      = 4;
+    public static final short       LINE_PATTERN_NONE              = 5;
+    public static final short       LINE_PATTERN_DARK_GRAY_PATTERN = 6;
+    public static final short       LINE_PATTERN_MEDIUM_GRAY_PATTERN = 7;
+    public static final short       LINE_PATTERN_LIGHT_GRAY_PATTERN = 8;
     private  short      field_3_weight;
-    public final static short       WEIGHT_HAIRLINE                = -1;
-    public final static short       WEIGHT_NARROW                  = 0;
-    public final static short       WEIGHT_MEDIUM                  = 1;
-    public final static short       WEIGHT_WIDE                    = 2;
+    public static final short       WEIGHT_HAIRLINE                = -1;
+    public static final short       WEIGHT_NARROW                  = 0;
+    public static final short       WEIGHT_MEDIUM                  = 1;
+    public static final short       WEIGHT_WIDE                    = 2;
     private  short      field_4_format;
     private  short      field_5_colourPaletteIndex;
 

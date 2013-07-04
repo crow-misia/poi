@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache.org)
  */
 public final class SeriesToChartGroupRecord extends StandardRecord {
-    public final static short      sid                             = 0x1045;
+    public static final short      sid                             = 0x1045;
     private  short      field_1_chartGroupIndex;
 
 

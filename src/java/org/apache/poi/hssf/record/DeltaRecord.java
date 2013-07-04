@@ -27,8 +27,8 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class DeltaRecord extends StandardRecord {
-    public final static short sid = 0x0010;
-    public final static double DEFAULT_VALUE = 0.0010;   // should be .001
+    public static final short sid = 0x0010;
+    public static final double DEFAULT_VALUE = 0.0010;   // should be .001
 
     // a double is an IEEE 8-byte float...damn IEEE and their goofy standards an
     // ambiguous numeric identifiers

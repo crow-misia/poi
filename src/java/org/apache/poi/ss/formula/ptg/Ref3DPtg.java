@@ -32,7 +32,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class Ref3DPtg extends RefPtgBase implements WorkbookDependentFormula, ExternSheetReferenceToken {
-    public final static byte sid  = 0x3a;
+    public static final byte sid  = 0x3a;
 
     private final static int  SIZE = 7; // 6 + 1 for Ptg
     private int             field_1_index_extern_sheet;

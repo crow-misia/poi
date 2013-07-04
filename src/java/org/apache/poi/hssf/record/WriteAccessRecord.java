@@ -36,7 +36,7 @@ import org.apache.poi.util.StringUtil;
  * @author Andrew C. Oliver (acoliver at apache dot org)
  */
 public final class WriteAccessRecord extends StandardRecord {
-	public final static short sid = 0x005C;
+	public static final short sid = 0x005C;
 
 	private static final byte PAD_CHAR = (byte) ' ';
 	private static final int DATA_SIZE = 112;

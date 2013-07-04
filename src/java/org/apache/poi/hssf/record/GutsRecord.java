@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class GutsRecord
     extends StandardRecord
 {
-    public final static short sid = 0x80;
+    public static final short sid = 0x80;
     private short             field_1_left_row_gutter;   // size of the row gutter to the left of the rows
     private short             field_2_top_col_gutter;    // size of the column gutter above the columns
     private short             field_3_row_level_max;     // maximum outline level for row gutters

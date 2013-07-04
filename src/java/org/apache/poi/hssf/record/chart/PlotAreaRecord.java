@@ -27,7 +27,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache.org)
  */
 public final class PlotAreaRecord extends StandardRecord {
-    public final static short      sid                             = 0x1035;
+    public static final short      sid                             = 0x1035;
 
 
     public PlotAreaRecord()

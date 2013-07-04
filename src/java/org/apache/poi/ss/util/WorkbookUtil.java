@@ -47,7 +47,7 @@ public final class WorkbookUtil {
 	 *        allowed to be null
 	 * @return a valid string, "empty" if to short, "null" if null         
 	 */
-	public final static String createSafeSheetName(final String nameProposal) {
+	public static final String createSafeSheetName(final String nameProposal) {
 		return createSafeSheetName(nameProposal, ' ');
 	}
 
@@ -70,7 +70,7 @@ public final class WorkbookUtil {
      * @param replaceChar the char to replace invalid characters.
      * @return a valid string, "empty" if to short, "null" if null
      */
-    public final static String createSafeSheetName(final String nameProposal, char replaceChar) {
+    public static final String createSafeSheetName(final String nameProposal, char replaceChar) {
         if (nameProposal == null) {
             return "null";
         }

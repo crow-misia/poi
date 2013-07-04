@@ -27,7 +27,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache.org)
  */
 public final class SCLRecord extends StandardRecord {
-    public final static short      sid                             = 0x00A0;
+    public static final short      sid                             = 0x00A0;
     private  short      field_1_numerator;
     private  short      field_2_denominator;
 

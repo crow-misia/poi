@@ -44,13 +44,13 @@ public final class PackagePropertiesPart extends PackagePart implements
 	private static final ThreadLocal<SimpleDateFormat> DATE_FORMAT = DateConstants.yyyyMMddTHHmmssZ;
 	private static final ThreadLocal<SimpleDateFormat> DATE2_FORMAT = DateConstants.yyyyMMddTHHmmssSSSZ;
 
-	public final static String NAMESPACE_DC_URI = "http://purl.org/dc/elements/1.1/";
+	public static final String NAMESPACE_DC_URI = "http://purl.org/dc/elements/1.1/";
 
-	public final static String NAMESPACE_CP_URI = "http://schemas.openxmlformats.org/package/2006/metadata/core-properties";
+	public static final String NAMESPACE_CP_URI = "http://schemas.openxmlformats.org/package/2006/metadata/core-properties";
 
-	public final static String NAMESPACE_DCTERMS_URI = "http://purl.org/dc/terms/";
+	public static final String NAMESPACE_DCTERMS_URI = "http://purl.org/dc/terms/";
 
-	public final static String NAMESPACE_XSI_URI = "http://www.w3.org/2001/XMLSchema-instance";
+	public static final String NAMESPACE_XSI_URI = "http://www.w3.org/2001/XMLSchema-instance";
 
 	/**
 	 * Constructor.

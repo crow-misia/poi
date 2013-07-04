@@ -31,7 +31,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @version 2.0-pre
  */
 public final class WindowOneRecord extends StandardRecord {
-    public final static short     sid = 0x3d;
+    public static final short     sid = 0x3d;
 
     // our variable names stolen from old TV sets.
     private short                 field_1_h_hold;                  // horizontal position

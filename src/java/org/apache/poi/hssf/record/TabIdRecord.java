@@ -29,7 +29,7 @@ import org.apache.poi.util.LittleEndianOutput;
  *
  */
 public final class TabIdRecord extends StandardRecord {
-    public final static short sid = 0x013D;
+    public static final short sid = 0x013D;
 
     public short[] _tabids;
 

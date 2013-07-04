@@ -29,7 +29,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class GroupMarkerSubRecord extends SubRecord {
-    public final static short sid = 0x0006;
+    public static final short sid = 0x0006;
 
     private byte[] reserved;    // would really love to know what goes in here.
 

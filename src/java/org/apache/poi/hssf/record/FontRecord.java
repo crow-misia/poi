@@ -31,15 +31,15 @@ import org.apache.poi.util.StringUtil;
  * @author Andrew C. Oliver (acoliver at apache dot org)
  */
 public final class FontRecord extends StandardRecord {
-	public final static short     sid                 = 0x0031;                                                 // docs are wrong (0x231 Microsoft Support site article Q184647)
-	public final static short     SS_NONE             = 0;
-	public final static short     SS_SUPER            = 1;
-	public final static short     SS_SUB              = 2;
-	public final static byte      U_NONE              = 0;
-	public final static byte      U_SINGLE            = 1;
-	public final static byte      U_DOUBLE            = 2;
-	public final static byte      U_SINGLE_ACCOUNTING = 0x21;
-	public final static byte      U_DOUBLE_ACCOUNTING = 0x22;
+	public static final short     sid                 = 0x0031;                                                 // docs are wrong (0x231 Microsoft Support site article Q184647)
+	public static final short     SS_NONE             = 0;
+	public static final short     SS_SUPER            = 1;
+	public static final short     SS_SUB              = 2;
+	public static final byte      U_NONE              = 0;
+	public static final byte      U_SINGLE            = 1;
+	public static final byte      U_DOUBLE            = 2;
+	public static final byte      U_SINGLE_ACCOUNTING = 0x21;
+	public static final byte      U_DOUBLE_ACCOUNTING = 0x22;
 	private short                 field_1_font_height;        // in units of .05 of a point
 	private short                 field_2_attributes;
 

@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class ValueRangeRecord extends StandardRecord {
-    public final static short sid = 0x101f;
+    public static final short sid = 0x101f;
     
     private static final BitField automaticMinimum           = BitFieldFactory.getInstance(0x0001);
     private static final BitField automaticMaximum           = BitFieldFactory.getInstance(0x0002);

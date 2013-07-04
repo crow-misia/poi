@@ -32,7 +32,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Yegor Kozlov
  */
 public final class NoteStructureSubRecord extends SubRecord {
-    public final static short sid = 0x0D;
+    public static final short sid = 0x0D;
     private static final int ENCODED_SIZE = 22;
 
     private byte[] reserved;

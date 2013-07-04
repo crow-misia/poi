@@ -35,7 +35,7 @@ public final class SupBookRecord extends StandardRecord {
 
     private final static POILogger logger = POILogFactory.getLogger(SupBookRecord.class);
 	
-    public final static short sid = 0x01AE;
+    public static final short sid = 0x01AE;
 
     private static final short SMALL_RECORD_SIZE = 4;
     private static final short TAG_INTERNAL_REFERENCES = 0x0401;

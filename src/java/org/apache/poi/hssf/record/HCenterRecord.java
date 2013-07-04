@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @version 2.0-pre
  */
 public final class HCenterRecord extends StandardRecord {
-    public final static short sid = 0x0083;
+    public static final short sid = 0x0083;
     private short             field_1_hcenter;
 
     public HCenterRecord()

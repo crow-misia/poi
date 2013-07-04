@@ -25,7 +25,7 @@ import org.apache.poi.util.*;
  * @author Shawn Laubach (slaubach at apache dot org)
  */
 public final class TopMarginRecord extends StandardRecord implements Margin {
-    public final static short sid = 0x28;
+    public static final short sid = 0x28;
     private double field_1_margin;
 
     public TopMarginRecord()    {    }

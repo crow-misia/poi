@@ -33,7 +33,7 @@ import org.apache.poi.util.StringUtil;
  * @author Andrew Shirley (aks at corefiling.co.uk)
  */
 public final class NameCommentRecord extends StandardRecord {
-  public final static short sid = 0x0894;
+  public static final short sid = 0x0894;
 
   private final short field_1_record_type;
   private final short field_2_frt_cell_ref_flag;

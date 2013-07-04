@@ -31,7 +31,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class AutoFilterInfoRecord
     extends StandardRecord
 {
-    public final static short sid = 0x9D;
+    public static final short sid = 0x9D;
     /**
      * Number of AutoFilter drop-down arrows on the sheet
      */

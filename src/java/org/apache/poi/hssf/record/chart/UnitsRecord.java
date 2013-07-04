@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class UnitsRecord extends StandardRecord {
-    public final static short      sid                             = 0x1001;
+    public static final short      sid                             = 0x1001;
     private  short      field_1_units;
 
 

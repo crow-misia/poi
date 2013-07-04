@@ -35,7 +35,7 @@ import org.apache.poi.util.HexDump;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class TextObjectRecord extends ContinuableRecord {
-	public final static short sid = 0x01B6;
+	public static final short sid = 0x01B6;
 
 	private static final int FORMAT_RUN_ENCODED_SIZE = 8; // 2 shorts and 4 bytes reserved
 
@@ -43,19 +43,19 @@ public final class TextObjectRecord extends ContinuableRecord {
 	private static final BitField VerticalTextAlignment = BitFieldFactory.getInstance(0x0070);
 	private static final BitField textLocked = BitFieldFactory.getInstance(0x0200);
 
-	public final static short HORIZONTAL_TEXT_ALIGNMENT_LEFT_ALIGNED = 1;
-	public final static short HORIZONTAL_TEXT_ALIGNMENT_CENTERED = 2;
-	public final static short HORIZONTAL_TEXT_ALIGNMENT_RIGHT_ALIGNED = 3;
-	public final static short HORIZONTAL_TEXT_ALIGNMENT_JUSTIFIED = 4;
-	public final static short VERTICAL_TEXT_ALIGNMENT_TOP = 1;
-	public final static short VERTICAL_TEXT_ALIGNMENT_CENTER = 2;
-	public final static short VERTICAL_TEXT_ALIGNMENT_BOTTOM = 3;
-	public final static short VERTICAL_TEXT_ALIGNMENT_JUSTIFY = 4;
+	public static final short HORIZONTAL_TEXT_ALIGNMENT_LEFT_ALIGNED = 1;
+	public static final short HORIZONTAL_TEXT_ALIGNMENT_CENTERED = 2;
+	public static final short HORIZONTAL_TEXT_ALIGNMENT_RIGHT_ALIGNED = 3;
+	public static final short HORIZONTAL_TEXT_ALIGNMENT_JUSTIFIED = 4;
+	public static final short VERTICAL_TEXT_ALIGNMENT_TOP = 1;
+	public static final short VERTICAL_TEXT_ALIGNMENT_CENTER = 2;
+	public static final short VERTICAL_TEXT_ALIGNMENT_BOTTOM = 3;
+	public static final short VERTICAL_TEXT_ALIGNMENT_JUSTIFY = 4;
 
-	public final static short TEXT_ORIENTATION_NONE = 0;
-	public final static short TEXT_ORIENTATION_TOP_TO_BOTTOM = 1;
-	public final static short TEXT_ORIENTATION_ROT_RIGHT = 2;
-	public final static short TEXT_ORIENTATION_ROT_LEFT = 3;
+	public static final short TEXT_ORIENTATION_NONE = 0;
+	public static final short TEXT_ORIENTATION_TOP_TO_BOTTOM = 1;
+	public static final short TEXT_ORIENTATION_ROT_RIGHT = 2;
+	public static final short TEXT_ORIENTATION_ROT_LEFT = 3;
 
 	private int field_1_options;
 	private int field_2_textOrientation;

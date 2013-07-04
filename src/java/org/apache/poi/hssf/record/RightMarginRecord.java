@@ -25,7 +25,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Shawn Laubach (slaubach at apache dot org)
  */
 public final class RightMarginRecord extends StandardRecord implements Margin {
-    public final static short sid = 0x27;
+    public static final short sid = 0x27;
     private double field_1_margin;
 
     public RightMarginRecord()    {    }

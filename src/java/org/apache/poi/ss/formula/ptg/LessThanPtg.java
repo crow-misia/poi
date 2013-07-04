@@ -25,7 +25,7 @@ package org.apache.poi.ss.formula.ptg;
  */
 public final class LessThanPtg extends ValueOperatorPtg {
     /** the sid for the less than operator as hex */
-    public final static byte sid  = 0x09;    
+    public static final byte sid  = 0x09;    
 
     /** identifier for LESS THAN char */
     private final static String LESSTHAN = "<";

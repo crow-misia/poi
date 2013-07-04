@@ -28,10 +28,10 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class AxisParentRecord extends StandardRecord {
-    public final static short      sid                             = 0x1041;
+    public static final short      sid                             = 0x1041;
     private  short      field_1_axisType;
-    public final static short       AXIS_TYPE_MAIN                 = 0;
-    public final static short       AXIS_TYPE_SECONDARY            = 1;
+    public static final short       AXIS_TYPE_MAIN                 = 0;
+    public static final short       AXIS_TYPE_SECONDARY            = 1;
     private  int        field_2_x;
     private  int        field_3_y;
     private  int        field_4_width;

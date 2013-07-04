@@ -27,7 +27,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public final class UserSViewEnd extends StandardRecord {
 
-    public final static short sid = 0x01AB;
+    public static final short sid = 0x01AB;
 	private byte[] _rawData;
 
     public UserSViewEnd(byte[] data) {

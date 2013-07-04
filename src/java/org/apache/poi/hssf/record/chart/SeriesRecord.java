@@ -28,24 +28,24 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class SeriesRecord extends StandardRecord {
-    public final static short      sid                             = 0x1003;
+    public static final short      sid                             = 0x1003;
     private  short      field_1_categoryDataType;
-    public final static short       CATEGORY_DATA_TYPE_DATES       = 0;
-    public final static short       CATEGORY_DATA_TYPE_NUMERIC     = 1;
-    public final static short       CATEGORY_DATA_TYPE_SEQUENCE    = 2;
-    public final static short       CATEGORY_DATA_TYPE_TEXT        = 3;
+    public static final short       CATEGORY_DATA_TYPE_DATES       = 0;
+    public static final short       CATEGORY_DATA_TYPE_NUMERIC     = 1;
+    public static final short       CATEGORY_DATA_TYPE_SEQUENCE    = 2;
+    public static final short       CATEGORY_DATA_TYPE_TEXT        = 3;
     private  short      field_2_valuesDataType;
-    public final static short       VALUES_DATA_TYPE_DATES         = 0;
-    public final static short       VALUES_DATA_TYPE_NUMERIC       = 1;
-    public final static short       VALUES_DATA_TYPE_SEQUENCE      = 2;
-    public final static short       VALUES_DATA_TYPE_TEXT          = 3;
+    public static final short       VALUES_DATA_TYPE_DATES         = 0;
+    public static final short       VALUES_DATA_TYPE_NUMERIC       = 1;
+    public static final short       VALUES_DATA_TYPE_SEQUENCE      = 2;
+    public static final short       VALUES_DATA_TYPE_TEXT          = 3;
     private  short      field_3_numCategories;
     private  short      field_4_numValues;
     private  short      field_5_bubbleSeriesType;
-    public final static short       BUBBLE_SERIES_TYPE_DATES       = 0;
-    public final static short       BUBBLE_SERIES_TYPE_NUMERIC     = 1;
-    public final static short       BUBBLE_SERIES_TYPE_SEQUENCE    = 2;
-    public final static short       BUBBLE_SERIES_TYPE_TEXT        = 3;
+    public static final short       BUBBLE_SERIES_TYPE_DATES       = 0;
+    public static final short       BUBBLE_SERIES_TYPE_NUMERIC     = 1;
+    public static final short       BUBBLE_SERIES_TYPE_SEQUENCE    = 2;
+    public static final short       BUBBLE_SERIES_TYPE_TEXT        = 3;
     private  short      field_6_numBubbleValues;
 
 

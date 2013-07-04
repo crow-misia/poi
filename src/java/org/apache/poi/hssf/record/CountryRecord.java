@@ -34,7 +34,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class CountryRecord
     extends StandardRecord
 {
-    public final static short sid = 0x8c;
+    public static final short sid = 0x8c;
 
     // 1 for US
     private short             field_1_default_country;

@@ -33,13 +33,13 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class FnGroupCountRecord
     extends StandardRecord
 {
-    public final static short sid   = 0x9c;
+    public static final short sid   = 0x9c;
 
     /**
      * suggested default (14 dec)
      */
 
-    public final static short COUNT = 14;
+    public static final short COUNT = 14;
     private short             field_1_count;
 
     public FnGroupCountRecord()

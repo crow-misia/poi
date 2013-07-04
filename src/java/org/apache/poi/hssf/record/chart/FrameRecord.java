@@ -30,14 +30,14 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class FrameRecord extends StandardRecord {
-    public final static short sid  = 0x1032;
+    public static final short sid  = 0x1032;
 
     private static final BitField autoSize     = BitFieldFactory.getInstance(0x1);
     private static final BitField autoPosition = BitFieldFactory.getInstance(0x2);
 
     private  short      field_1_borderType;
-    public final static short       BORDER_TYPE_REGULAR            = 0;
-    public final static short       BORDER_TYPE_SHADOW             = 1;
+    public static final short       BORDER_TYPE_REGULAR            = 0;
+    public static final short       BORDER_TYPE_SHADOW             = 1;
     private  short      field_2_options;
 
 

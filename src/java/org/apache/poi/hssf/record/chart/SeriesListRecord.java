@@ -34,7 +34,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class SeriesListRecord extends StandardRecord {
-    public final static short sid = 0x1016;
+    public static final short sid = 0x1016;
     private  short[]    field_1_seriesNumbers;
 
     public SeriesListRecord(short[] seriesNumbers) {

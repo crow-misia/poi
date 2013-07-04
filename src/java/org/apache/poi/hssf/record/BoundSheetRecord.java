@@ -38,7 +38,7 @@ import org.apache.poi.ss.util.WorkbookUtil;
  * @author Sergei Kozello (sergeikozello at mail.ru)
  */
 public final class BoundSheetRecord extends StandardRecord {
-	public final static short sid = 0x0085;
+	public static final short sid = 0x0085;
 
 	private static final BitField hiddenFlag = BitFieldFactory.getInstance(0x01);
 	private static final BitField veryHiddenFlag = BitFieldFactory.getInstance(0x02);

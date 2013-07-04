@@ -36,25 +36,25 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class CalcModeRecord
     extends StandardRecord
 {
-    public final static short sid                     = 0xD;
+    public static final short sid                     = 0xD;
 
     /**
      * manually calculate formulas (0)
      */
 
-    public final static short MANUAL                  = 0;
+    public static final short MANUAL                  = 0;
 
     /**
      * automatically calculate formulas (1)
      */
 
-    public final static short AUTOMATIC               = 1;
+    public static final short AUTOMATIC               = 1;
 
     /**
      * automatically calculate formulas except for tables (-1)
      */
 
-    public final static short AUTOMATIC_EXCEPT_TABLES = -1;
+    public static final short AUTOMATIC_EXCEPT_TABLES = -1;
     private short             field_1_calcmode;
 
     public CalcModeRecord()

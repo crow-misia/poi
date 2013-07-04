@@ -23,7 +23,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Daniel Noll (daniel at nuix dot com dot au)
  */
 public final class IntersectionPtg extends OperationPtg {
-	public final static byte sid = 0x0f;
+	public static final byte sid = 0x0f;
 
 	public static final OperationPtg instance = new IntersectionPtg();
 

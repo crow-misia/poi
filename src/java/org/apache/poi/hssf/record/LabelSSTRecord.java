@@ -29,7 +29,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class LabelSSTRecord extends CellRecord {
-    public final static short sid = 0xfd;
+    public static final short sid = 0xfd;
     private int field_4_sst_index;
 
     public LabelSSTRecord() {

@@ -30,7 +30,7 @@ import org.apache.poi.util.list.IntArrayList;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public class IndexRecord extends StandardRecord {
-    public final static short sid = 0x020B;
+    public static final short sid = 0x020B;
     private int                field_2_first_row;       // first row on the sheet
     private int                field_3_last_row_add1;   // last row
     private int                field_4_zero;            // supposed to be zero

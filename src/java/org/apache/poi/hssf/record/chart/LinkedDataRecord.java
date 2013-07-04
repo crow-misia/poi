@@ -32,20 +32,20 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class LinkedDataRecord extends StandardRecord {
-    public final static short sid  = 0x1051;
+    public static final short sid  = 0x1051;
 
     private static final BitField customNumberFormat= BitFieldFactory.getInstance(0x1);
 
     private  byte       field_1_linkType;
-    public final static byte        LINK_TYPE_TITLE_OR_TEXT        = 0;
-    public final static byte        LINK_TYPE_VALUES               = 1;
-    public final static byte        LINK_TYPE_CATEGORIES           = 2;
+    public static final byte        LINK_TYPE_TITLE_OR_TEXT        = 0;
+    public static final byte        LINK_TYPE_VALUES               = 1;
+    public static final byte        LINK_TYPE_CATEGORIES           = 2;
     private  byte       field_2_referenceType;
-    public final static byte        REFERENCE_TYPE_DEFAULT_CATEGORIES = 0;
-    public final static byte        REFERENCE_TYPE_DIRECT          = 1;
-    public final static byte        REFERENCE_TYPE_WORKSHEET       = 2;
-    public final static byte        REFERENCE_TYPE_NOT_USED        = 3;
-    public final static byte        REFERENCE_TYPE_ERROR_REPORTED  = 4;
+    public static final byte        REFERENCE_TYPE_DEFAULT_CATEGORIES = 0;
+    public static final byte        REFERENCE_TYPE_DIRECT          = 1;
+    public static final byte        REFERENCE_TYPE_WORKSHEET       = 2;
+    public static final byte        REFERENCE_TYPE_NOT_USED        = 3;
+    public static final byte        REFERENCE_TYPE_ERROR_REPORTED  = 4;
     private  short      field_3_options;
     private  short      field_4_indexNumberFmtRecord;
     private  Formula field_5_formulaOfLink;

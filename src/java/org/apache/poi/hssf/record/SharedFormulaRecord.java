@@ -37,7 +37,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Danny Mui at apache dot org
  */
 public final class SharedFormulaRecord extends SharedValueRecordBase {
-    public final static short   sid = 0x04BC;
+    public static final short   sid = 0x04BC;
 
     private int field_5_reserved;
     private Formula field_7_parsed_expr;

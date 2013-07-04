@@ -36,7 +36,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public final class TblPtg extends ControlPtg {
     private final static int  SIZE = 5;
-    public final static short sid  = 0x02;
+    public static final short sid  = 0x02;
     /** The row number of the upper left corner */
     private final int field_1_first_row;
     /** The column number of the upper left corner */

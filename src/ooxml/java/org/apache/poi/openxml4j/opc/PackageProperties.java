@@ -33,12 +33,12 @@ public interface PackageProperties {
 	/**
 	 * Dublin Core Terms URI.
 	 */
-	public final static String NAMESPACE_DCTERMS = "http://purl.org/dc/terms/";
+	public static final String NAMESPACE_DCTERMS = "http://purl.org/dc/terms/";
 	
 	/**
 	 * Dublin Core namespace URI.
 	 */
-	public final static String NAMESPACE_DC = "http://purl.org/dc/elements/1.1/";
+	public static final String NAMESPACE_DC = "http://purl.org/dc/elements/1.1/";
 
 	/* Getters and setters */
 

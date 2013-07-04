@@ -27,16 +27,16 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class PaneRecord extends StandardRecord {
-    public final static short      sid                             = 0x41;
+    public static final short      sid                             = 0x41;
     private  short      field_1_x;
     private  short      field_2_y;
     private  short      field_3_topRow;
     private  short      field_4_leftColumn;
     private  short      field_5_activePane;
-    public final static short       ACTIVE_PANE_LOWER_RIGHT        = 0;
-    public final static short       ACTIVE_PANE_UPPER_RIGHT        = 1;
-    public final static short       ACTIVE_PANE_LOWER_LEFT         = 2;
-    public final static short       ACTIVE_PANE_UPPER_LEFT         = 3;
+    public static final short       ACTIVE_PANE_LOWER_RIGHT        = 0;
+    public static final short       ACTIVE_PANE_UPPER_RIGHT        = 1;
+    public static final short       ACTIVE_PANE_LOWER_LEFT         = 2;
+    public static final short       ACTIVE_PANE_UPPER_LEFT         = 3;
 
 
     public PaneRecord()

@@ -51,7 +51,7 @@ public final class FeatHdrRecord extends StandardRecord  {
 	public static final int SHAREDFEATURES_ISFLIST       = 0x05;
 
 	
-	public final static short sid = 0x0867;
+	public static final short sid = 0x0867;
 
 	private FtrHeader futureHeader;
 	private int isf_sharedFeatureType; // See SHAREDFEATURES_

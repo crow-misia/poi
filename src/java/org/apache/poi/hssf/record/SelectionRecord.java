@@ -32,7 +32,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class SelectionRecord extends StandardRecord {
-    public final static short sid = 0x001D;
+    public static final short sid = 0x001D;
     private byte        field_1_pane;
     private int         field_2_row_active_cell;
     private int         field_3_col_active_cell;

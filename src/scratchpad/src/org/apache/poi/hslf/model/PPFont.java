@@ -32,52 +32,52 @@ public final class PPFont {
     /**
      * ANSI character set
      */
-    public final static byte ANSI_CHARSET = 0;
+    public static final byte ANSI_CHARSET = 0;
 
     /**
      * Default character set.
      */
-    public final static byte DEFAULT_CHARSET = 1;
+    public static final byte DEFAULT_CHARSET = 1;
 
     /**
      * Symbol character set
      */
-    public final static byte SYMBOL_CHARSET = 2;
+    public static final byte SYMBOL_CHARSET = 2;
 
 
     /**
      * Constants for the pitch and family of the font.
      * The two low-order bits specify the pitch of the font and can be one of the following values
      */
-    public final static byte DEFAULT_PITCH  = 0;
-    public final static byte FIXED_PITCH    = 1;
-    public final static byte VARIABLE_PITCH = 2;
+    public static final byte DEFAULT_PITCH  = 0;
+    public static final byte FIXED_PITCH    = 1;
+    public static final byte VARIABLE_PITCH = 2;
 
     /**
      * Don't care or don't know.
      */
-    public final static byte FF_DONTCARE    = 0;
+    public static final byte FF_DONTCARE    = 0;
     /**
      * Fonts with variable stroke width (proportional) and with serifs. Times New Roman is an example.
      */
-    public final static byte FF_ROMAN       = 16;
+    public static final byte FF_ROMAN       = 16;
     /**
      * Fonts with variable stroke width (proportional) and without serifs. Arial is an example.
      */
-    public final static byte FF_SWISS       = 32;
+    public static final byte FF_SWISS       = 32;
     /**
      * Fonts designed to look like handwriting. Script and Cursive are examples.
      */
-    public final static byte FF_SCRIPT      = 64;
+    public static final byte FF_SCRIPT      = 64;
     /**
      * Fonts with constant stroke width (monospace), with or without serifs.
      * Monospace fonts are usually modern. CourierNew is an example
      */
-    public final static byte FF_MODERN      = 48;
+    public static final byte FF_MODERN      = 48;
     /**
      * Novelty fonts. Old English is an example
      */
-    public final static byte FF_DECORATIVE  = 80;
+    public static final byte FF_DECORATIVE  = 80;
 
 
     protected int charset;

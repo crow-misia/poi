@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Yegor Kozlov
  */
 public final class FtCblsSubRecord extends SubRecord {
-    public final static short sid = 0x0C;
+    public static final short sid = 0x0C;
     private static final int ENCODED_SIZE = 20;
 
     private byte[] reserved;

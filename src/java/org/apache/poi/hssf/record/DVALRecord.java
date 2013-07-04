@@ -26,7 +26,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Dragos Buleandra (dragos.buleandra@trade2b.ro)
  */
 public final class DVALRecord extends StandardRecord {
-	public final static short sid = 0x01B2;
+	public static final short sid = 0x01B2;
 
 	/** Options of the DVAL */
 	private short field_1_options;

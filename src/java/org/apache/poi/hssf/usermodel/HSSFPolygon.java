@@ -29,7 +29,7 @@ import org.apache.poi.util.POILogger;
  */
 public class HSSFPolygon  extends HSSFSimpleShape {
 	private static final POILogger logger = POILogFactory.getLogger(HSSFPolygon.class);
-    public final static short OBJECT_TYPE_MICROSOFT_OFFICE_DRAWING = 0x1E;
+    public static final short OBJECT_TYPE_MICROSOFT_OFFICE_DRAWING = 0x1E;
 
     public HSSFPolygon(EscherContainerRecord spContainer, ObjRecord objRecord, TextObjectRecord _textObjectRecord) {
         super(spContainer, objRecord, _textObjectRecord);

@@ -30,7 +30,7 @@ import org.apache.poi.util.StringUtil;
  * @author Shawn M. Laubach (slaubach at apache dot org)
  */
 public final class FormatRecord extends StandardRecord {
-    public final static short sid = 0x041E;
+    public static final short sid = 0x041E;
 
     private final int field_1_index_code;
     private final boolean field_3_hasMultibyte;

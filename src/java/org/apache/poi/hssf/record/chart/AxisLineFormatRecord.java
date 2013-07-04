@@ -28,12 +28,12 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class AxisLineFormatRecord extends StandardRecord {
-    public final static short      sid                             = 0x1021;
+    public static final short      sid                             = 0x1021;
     private  short      field_1_axisType;
-    public final static short       AXIS_TYPE_AXIS_LINE            = 0;
-    public final static short       AXIS_TYPE_MAJOR_GRID_LINE      = 1;
-    public final static short       AXIS_TYPE_MINOR_GRID_LINE      = 2;
-    public final static short       AXIS_TYPE_WALLS_OR_FLOOR       = 3;
+    public static final short       AXIS_TYPE_AXIS_LINE            = 0;
+    public static final short       AXIS_TYPE_MAJOR_GRID_LINE      = 1;
+    public static final short       AXIS_TYPE_MINOR_GRID_LINE      = 2;
+    public static final short       AXIS_TYPE_WALLS_OR_FLOOR       = 3;
 
 
     public AxisLineFormatRecord()

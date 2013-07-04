@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public class ExternSheetRecord extends StandardRecord {
 
-    public final static short sid = 0x0017;
+    public static final short sid = 0x0017;
 	private List<RefSubRecord> _list;
 	
 	private static final class RefSubRecord {

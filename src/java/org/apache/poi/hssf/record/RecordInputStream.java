@@ -35,7 +35,7 @@ import org.apache.poi.util.LittleEndianInputStream;
  */
 public final class RecordInputStream implements LittleEndianInput {
 	/** Maximum size of a single record (minus the 4 byte header) without a continue*/
-	public final static short MAX_RECORD_DATA_SIZE = 8224;
+	public static final short MAX_RECORD_DATA_SIZE = 8224;
 	private static final int INVALID_SID_VALUE = -1;
 	/**
 	 * When {@link #_currentDataLength} has this value, it means that the previous BIFF record is

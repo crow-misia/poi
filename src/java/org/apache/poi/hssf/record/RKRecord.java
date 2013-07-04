@@ -37,11 +37,11 @@ import org.apache.poi.util.LittleEndianOutput;
  * @see org.apache.poi.hssf.record.NumberRecord
  */
 public final class RKRecord extends CellRecord {
-    public final static short sid                      = 0x027E;
-    public final static short RK_IEEE_NUMBER           = 0;
-    public final static short RK_IEEE_NUMBER_TIMES_100 = 1;
-    public final static short RK_INTEGER               = 2;
-    public final static short RK_INTEGER_TIMES_100     = 3;
+    public static final short sid                      = 0x027E;
+    public static final short RK_IEEE_NUMBER           = 0;
+    public static final short RK_IEEE_NUMBER_TIMES_100 = 1;
+    public static final short RK_INTEGER               = 2;
+    public static final short RK_INTEGER_TIMES_100     = 3;
     private int field_4_rk_number;
 
     private RKRecord() {

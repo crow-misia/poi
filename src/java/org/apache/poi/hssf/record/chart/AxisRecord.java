@@ -28,11 +28,11 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class AxisRecord extends StandardRecord {
-    public final static short      sid                             = 0x101d;
+    public static final short      sid                             = 0x101d;
     private  short      field_1_axisType;
-    public final static short       AXIS_TYPE_CATEGORY_OR_X_AXIS   = 0;
-    public final static short       AXIS_TYPE_VALUE_AXIS           = 1;
-    public final static short       AXIS_TYPE_SERIES_AXIS          = 2;
+    public static final short       AXIS_TYPE_CATEGORY_OR_X_AXIS   = 0;
+    public static final short       AXIS_TYPE_VALUE_AXIS           = 1;
+    public static final short       AXIS_TYPE_SERIES_AXIS          = 2;
     private  int        field_2_reserved1;
     private  int        field_3_reserved2;
     private  int        field_4_reserved3;

@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class PlotGrowthRecord extends StandardRecord {
-    public final static short      sid                             = 0x1064;
+    public static final short      sid                             = 0x1064;
     private  int        field_1_horizontalScale;
     private  int        field_2_verticalScale;
 

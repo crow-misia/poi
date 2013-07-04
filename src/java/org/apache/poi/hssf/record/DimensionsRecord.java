@@ -34,7 +34,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class DimensionsRecord
     extends StandardRecord
 {
-    public final static short sid = 0x200;
+    public static final short sid = 0x200;
     private int               field_1_first_row;
     private int               field_2_last_row;   // plus 1
     private short             field_3_first_col;

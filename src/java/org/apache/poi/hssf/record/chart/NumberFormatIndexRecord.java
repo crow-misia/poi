@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class NumberFormatIndexRecord extends StandardRecord {
-    public final static short      sid                             = 0x104E;
+    public static final short      sid                             = 0x104E;
     private  short      field_1_formatIndex;
 
 

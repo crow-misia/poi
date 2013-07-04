@@ -24,8 +24,8 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Daniel Noll (daniel at nuix dot com dot au)
  */
 public final class RangePtg  extends OperationPtg {
-    public final static int  SIZE = 1;
-    public final static byte sid  = 0x11;
+    public static final int  SIZE = 1;
+    public static final byte sid  = 0x11;
 
     public static final OperationPtg instance = new RangePtg();
 

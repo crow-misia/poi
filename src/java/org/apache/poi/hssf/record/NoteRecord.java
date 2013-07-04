@@ -26,17 +26,17 @@ import org.apache.poi.util.StringUtil;
  * @author Yegor Kozlov
  */
 public final class NoteRecord extends StandardRecord {
-	public final static short sid = 0x001C;
+	public static final short sid = 0x001C;
 
 	/**
 	 * Flag indicating that the comment is hidden (default)
 	 */
-	public final static short NOTE_HIDDEN = 0x0;
+	public static final short NOTE_HIDDEN = 0x0;
 
 	/**
 	 * Flag indicating that the comment is visible
 	 */
-	public final static short NOTE_VISIBLE = 0x2;
+	public static final short NOTE_VISIBLE = 0x2;
 
 	public static final NoteRecord[] EMPTY_ARRAY = new NoteRecord[0];
 

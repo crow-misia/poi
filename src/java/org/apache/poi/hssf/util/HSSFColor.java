@@ -52,7 +52,7 @@ public class HSSFColor implements Color {
      *
      * @return a Map containing all colours keyed by <tt>Integer</tt> excel-style palette indexes
      */
-    public final static Map<Integer,HSSFColor> getIndexHash() {
+    public static final Map<Integer,HSSFColor> getIndexHash() {
         if(indexHash == null) {
            indexHash = Collections.unmodifiableMap( createColorsByIndexMap() );
         }
@@ -65,7 +65,7 @@ public class HSSFColor implements Color {
      *  the table, then call {@link #getIndexHash()} which returns a
      *  statically cached imuatable map of colours.
      */
-    public final static Map<Integer,HSSFColor> getMutableIndexHash() {
+    public static final Map<Integer,HSSFColor> getMutableIndexHash() {
        return createColorsByIndexMap();
     }
 
@@ -148,7 +148,7 @@ public class HSSFColor implements Color {
      *
      * @return a hashtable containing all colors keyed by String gnumeric-like triplets
      */
-    public final static Map<String,HSSFColor> getTripletHash()
+    public static final Map<String,HSSFColor> getTripletHash()
     {
         return createColorsByHexStringMap();
     }
@@ -206,15 +206,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class BLACK
+    public static final class BLACK
         extends HSSFColor
     {
-        public final static short   index     = 0x8;
-        public final static short[] triplet   =
+        public static final short   index     = 0x8;
+        public static final short[] triplet   =
         {
             0, 0, 0
         };
-        public final static String  hexString = "0:0:0";
+        public static final String  hexString = "0:0:0";
 
         public short getIndex()
         {
@@ -237,15 +237,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class BROWN
+    public static final class BROWN
         extends HSSFColor
     {
-        public final static short   index     = 0x3c;
-        public final static short[] triplet   =
+        public static final short   index     = 0x3c;
+        public static final short[] triplet   =
         {
             153, 51, 0
         };
-        public final static String  hexString = "9999:3333:0";
+        public static final String  hexString = "9999:3333:0";
 
         public short getIndex()
         {
@@ -271,12 +271,12 @@ public class HSSFColor implements Color {
     public static class OLIVE_GREEN
         extends HSSFColor
     {
-        public final static short   index     = 0x3b;
-        public final static short[] triplet   =
+        public static final short   index     = 0x3b;
+        public static final short[] triplet   =
         {
             51, 51, 0
         };
-        public final static String  hexString = "3333:3333:0";
+        public static final String  hexString = "3333:3333:0";
 
         public short getIndex()
         {
@@ -299,15 +299,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class DARK_GREEN
+    public static final class DARK_GREEN
         extends HSSFColor
     {
-        public final static short   index     = 0x3a;
-        public final static short[] triplet   =
+        public static final short   index     = 0x3a;
+        public static final short[] triplet   =
         {
             0, 51, 0
         };
-        public final static String  hexString = "0:3333:0";
+        public static final String  hexString = "0:3333:0";
 
         public short getIndex()
         {
@@ -330,15 +330,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class DARK_TEAL
+    public static final class DARK_TEAL
         extends HSSFColor
     {
-        public final static short   index     = 0x38;
-        public final static short[] triplet   =
+        public static final short   index     = 0x38;
+        public static final short[] triplet   =
         {
             0, 51, 102
         };
-        public final static String  hexString = "0:3333:6666";
+        public static final String  hexString = "0:3333:6666";
 
         public short getIndex()
         {
@@ -361,16 +361,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class DARK_BLUE
+    public static final class DARK_BLUE
         extends HSSFColor
     {
-        public final static short   index     = 0x12;
-        public final static short   index2    = 0x20;
-        public final static short[] triplet   =
+        public static final short   index     = 0x12;
+        public static final short   index2    = 0x20;
+        public static final short[] triplet   =
         {
             0, 0, 128
         };
-        public final static String  hexString = "0:0:8080";
+        public static final String  hexString = "0:0:8080";
 
         public short getIndex()
         {
@@ -393,15 +393,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class INDIGO
+    public static final class INDIGO
         extends HSSFColor
     {
-        public final static short   index     = 0x3e;
-        public final static short[] triplet   =
+        public static final short   index     = 0x3e;
+        public static final short[] triplet   =
         {
             51, 51, 153
         };
-        public final static String  hexString = "3333:3333:9999";
+        public static final String  hexString = "3333:3333:9999";
 
         public short getIndex()
         {
@@ -424,15 +424,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class GREY_80_PERCENT
+    public static final class GREY_80_PERCENT
         extends HSSFColor
     {
-        public final static short   index     = 0x3f;
-        public final static short[] triplet   =
+        public static final short   index     = 0x3f;
+        public static final short[] triplet   =
         {
             51, 51, 51
         };
-        public final static String  hexString = "3333:3333:3333";
+        public static final String  hexString = "3333:3333:3333";
 
         public short getIndex()
         {
@@ -455,16 +455,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class DARK_RED
+    public static final class DARK_RED
         extends HSSFColor
     {
-        public final static short   index     = 0x10;
-        public final static short   index2    = 0x25;
-        public final static short[] triplet   =
+        public static final short   index     = 0x10;
+        public static final short   index2    = 0x25;
+        public static final short[] triplet   =
         {
             128, 0, 0
         };
-        public final static String  hexString = "8080:0:0";
+        public static final String  hexString = "8080:0:0";
 
         public short getIndex()
         {
@@ -487,15 +487,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class ORANGE
+    public static final class ORANGE
         extends HSSFColor
     {
-        public final static short   index     = 0x35;
-        public final static short[] triplet   =
+        public static final short   index     = 0x35;
+        public static final short[] triplet   =
         {
             255, 102, 0
         };
-        public final static String  hexString = "FFFF:6666:0";
+        public static final String  hexString = "FFFF:6666:0";
 
         public short getIndex()
         {
@@ -518,15 +518,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class DARK_YELLOW
+    public static final class DARK_YELLOW
         extends HSSFColor
     {
-        public final static short   index     = 0x13;
-        public final static short[] triplet   =
+        public static final short   index     = 0x13;
+        public static final short[] triplet   =
         {
             128, 128, 0
         };
-        public final static String  hexString = "8080:8080:0";
+        public static final String  hexString = "8080:8080:0";
 
         public short getIndex()
         {
@@ -549,15 +549,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class GREEN
+    public static final class GREEN
         extends HSSFColor
     {
-        public final static short   index     = 0x11;
-        public final static short[] triplet   =
+        public static final short   index     = 0x11;
+        public static final short[] triplet   =
         {
             0, 128, 0
         };
-        public final static String  hexString = "0:8080:0";
+        public static final String  hexString = "0:8080:0";
 
         public short getIndex()
         {
@@ -580,16 +580,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class TEAL
+    public static final class TEAL
         extends HSSFColor
     {
-        public final static short   index     = 0x15;
-        public final static short   index2    = 0x26;
-        public final static short[] triplet   =
+        public static final short   index     = 0x15;
+        public static final short   index2    = 0x26;
+        public static final short[] triplet   =
         {
             0, 128, 128
         };
-        public final static String  hexString = "0:8080:8080";
+        public static final String  hexString = "0:8080:8080";
 
         public short getIndex()
         {
@@ -612,16 +612,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class BLUE
+    public static final class BLUE
         extends HSSFColor
     {
-        public final static short   index     = 0xc;
-        public final static short   index2    = 0x27;
-        public final static short[] triplet   =
+        public static final short   index     = 0xc;
+        public static final short   index2    = 0x27;
+        public static final short[] triplet   =
         {
             0, 0, 255
         };
-        public final static String  hexString = "0:0:FFFF";
+        public static final String  hexString = "0:0:FFFF";
 
         public short getIndex()
         {
@@ -644,15 +644,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class BLUE_GREY
+    public static final class BLUE_GREY
         extends HSSFColor
     {
-        public final static short   index     = 0x36;
-        public final static short[] triplet   =
+        public static final short   index     = 0x36;
+        public static final short[] triplet   =
         {
             102, 102, 153
         };
-        public final static String  hexString = "6666:6666:9999";
+        public static final String  hexString = "6666:6666:9999";
 
         public short getIndex()
         {
@@ -675,15 +675,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class GREY_50_PERCENT
+    public static final class GREY_50_PERCENT
         extends HSSFColor
     {
-        public final static short   index     = 0x17;
-        public final static short[] triplet   =
+        public static final short   index     = 0x17;
+        public static final short[] triplet   =
         {
             128, 128, 128
         };
-        public final static String  hexString = "8080:8080:8080";
+        public static final String  hexString = "8080:8080:8080";
 
         public short getIndex()
         {
@@ -706,15 +706,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class RED
+    public static final class RED
         extends HSSFColor
     {
-        public final static short   index     = 0xa;
-        public final static short[] triplet   =
+        public static final short   index     = 0xa;
+        public static final short[] triplet   =
         {
             255, 0, 0
         };
-        public final static String  hexString = "FFFF:0:0";
+        public static final String  hexString = "FFFF:0:0";
 
         public short getIndex()
         {
@@ -737,15 +737,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class LIGHT_ORANGE
+    public static final class LIGHT_ORANGE
         extends HSSFColor
     {
-        public final static short   index     = 0x34;
-        public final static short[] triplet   =
+        public static final short   index     = 0x34;
+        public static final short[] triplet   =
         {
             255, 153, 0
         };
-        public final static String  hexString = "FFFF:9999:0";
+        public static final String  hexString = "FFFF:9999:0";
 
         public short getIndex()
         {
@@ -768,15 +768,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class LIME
+    public static final class LIME
         extends HSSFColor
     {
-        public final static short   index     = 0x32;
-        public final static short[] triplet   =
+        public static final short   index     = 0x32;
+        public static final short[] triplet   =
         {
             153, 204, 0
         };
-        public final static String  hexString = "9999:CCCC:0";
+        public static final String  hexString = "9999:CCCC:0";
 
         public short getIndex()
         {
@@ -799,15 +799,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class SEA_GREEN
+    public static final class SEA_GREEN
         extends HSSFColor
     {
-        public final static short   index     = 0x39;
-        public final static short[] triplet   =
+        public static final short   index     = 0x39;
+        public static final short[] triplet   =
         {
             51, 153, 102
         };
-        public final static String  hexString = "3333:9999:6666";
+        public static final String  hexString = "3333:9999:6666";
 
         public short getIndex()
         {
@@ -830,15 +830,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class AQUA
+    public static final class AQUA
         extends HSSFColor
     {
-        public final static short   index     = 0x31;
-        public final static short[] triplet   =
+        public static final short   index     = 0x31;
+        public static final short[] triplet   =
         {
             51, 204, 204
         };
-        public final static String  hexString = "3333:CCCC:CCCC";
+        public static final String  hexString = "3333:CCCC:CCCC";
 
         public short getIndex()
         {
@@ -861,15 +861,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class LIGHT_BLUE
+    public static final class LIGHT_BLUE
         extends HSSFColor
     {
-        public final static short   index     = 0x30;
-        public final static short[] triplet   =
+        public static final short   index     = 0x30;
+        public static final short[] triplet   =
         {
             51, 102, 255
         };
-        public final static String  hexString = "3333:6666:FFFF";
+        public static final String  hexString = "3333:6666:FFFF";
 
         public short getIndex()
         {
@@ -892,16 +892,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class VIOLET
+    public static final class VIOLET
         extends HSSFColor
     {
-        public final static short   index     = 0x14;
-        public final static short   index2    = 0x24;
-        public final static short[] triplet   =
+        public static final short   index     = 0x14;
+        public static final short   index2    = 0x24;
+        public static final short[] triplet   =
         {
             128, 0, 128
         };
-        public final static String  hexString = "8080:0:8080";
+        public static final String  hexString = "8080:0:8080";
 
         public short getIndex()
         {
@@ -924,15 +924,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class GREY_40_PERCENT
+    public static final class GREY_40_PERCENT
         extends HSSFColor
     {
-        public final static short   index     = 0x37;
-        public final static short[] triplet   =
+        public static final short   index     = 0x37;
+        public static final short[] triplet   =
         {
             150, 150, 150
         };
-        public final static String  hexString = "9696:9696:9696";
+        public static final String  hexString = "9696:9696:9696";
 
         public short getIndex()
         {
@@ -955,16 +955,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class PINK
+    public static final class PINK
         extends HSSFColor
     {
-        public final static short   index     = 0xe;
-        public final static short   index2    = 0x21;
-        public final static short[] triplet   =
+        public static final short   index     = 0xe;
+        public static final short   index2    = 0x21;
+        public static final short[] triplet   =
         {
             255, 0, 255
         };
-        public final static String  hexString = "FFFF:0:FFFF";
+        public static final String  hexString = "FFFF:0:FFFF";
 
         public short getIndex()
         {
@@ -987,15 +987,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class GOLD
+    public static final class GOLD
         extends HSSFColor
     {
-        public final static short   index     = 0x33;
-        public final static short[] triplet   =
+        public static final short   index     = 0x33;
+        public static final short[] triplet   =
         {
             255, 204, 0
         };
-        public final static String  hexString = "FFFF:CCCC:0";
+        public static final String  hexString = "FFFF:CCCC:0";
 
         public short getIndex()
         {
@@ -1018,16 +1018,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class YELLOW
+    public static final class YELLOW
         extends HSSFColor
     {
-        public final static short   index     = 0xd;
-        public final static short   index2    = 0x22;
-        public final static short[] triplet   =
+        public static final short   index     = 0xd;
+        public static final short   index2    = 0x22;
+        public static final short[] triplet   =
         {
             255, 255, 0
         };
-        public final static String  hexString = "FFFF:FFFF:0";
+        public static final String  hexString = "FFFF:FFFF:0";
 
         public short getIndex()
         {
@@ -1050,16 +1050,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class BRIGHT_GREEN
+    public static final class BRIGHT_GREEN
         extends HSSFColor
     {
-        public final static short   index     = 0xb;
-        public final static short   index2    = 0x23;
-        public final static short[] triplet   =
+        public static final short   index     = 0xb;
+        public static final short   index2    = 0x23;
+        public static final short[] triplet   =
         {
             0, 255, 0
         };
-        public final static String  hexString = "0:FFFF:0";
+        public static final String  hexString = "0:FFFF:0";
 
         public short getIndex()
         {
@@ -1082,16 +1082,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class TURQUOISE
+    public static final class TURQUOISE
         extends HSSFColor
     {
-        public final static short   index     = 0xf;
-        public final static short   index2    = 0x23;
-        public final static short[] triplet   =
+        public static final short   index     = 0xf;
+        public static final short   index2    = 0x23;
+        public static final short[] triplet   =
         {
             0, 255, 255
         };
-        public final static String  hexString = "0:FFFF:FFFF";
+        public static final String  hexString = "0:FFFF:FFFF";
 
         public short getIndex()
         {
@@ -1114,15 +1114,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class SKY_BLUE
+    public static final class SKY_BLUE
         extends HSSFColor
     {
-        public final static short   index     = 0x28;
-        public final static short[] triplet   =
+        public static final short   index     = 0x28;
+        public static final short[] triplet   =
         {
             0, 204, 255
         };
-        public final static String  hexString = "0:CCCC:FFFF";
+        public static final String  hexString = "0:CCCC:FFFF";
 
         public short getIndex()
         {
@@ -1145,16 +1145,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class PLUM
+    public static final class PLUM
         extends HSSFColor
     {
-        public final static short   index     = 0x3d;
-        public final static short   index2    = 0x19;
-        public final static short[] triplet   =
+        public static final short   index     = 0x3d;
+        public static final short   index2    = 0x19;
+        public static final short[] triplet   =
         {
             153, 51, 102
         };
-        public final static String  hexString = "9999:3333:6666";
+        public static final String  hexString = "9999:3333:6666";
 
         public short getIndex()
         {
@@ -1177,15 +1177,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class GREY_25_PERCENT
+    public static final class GREY_25_PERCENT
         extends HSSFColor
     {
-        public final static short   index     = 0x16;
-        public final static short[] triplet   =
+        public static final short   index     = 0x16;
+        public static final short[] triplet   =
         {
             192, 192, 192
         };
-        public final static String  hexString = "C0C0:C0C0:C0C0";
+        public static final String  hexString = "C0C0:C0C0:C0C0";
 
         public short getIndex()
         {
@@ -1208,15 +1208,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class ROSE
+    public static final class ROSE
         extends HSSFColor
     {
-        public final static short   index     = 0x2d;
-        public final static short[] triplet   =
+        public static final short   index     = 0x2d;
+        public static final short[] triplet   =
         {
             255, 153, 204
         };
-        public final static String  hexString = "FFFF:9999:CCCC";
+        public static final String  hexString = "FFFF:9999:CCCC";
 
         public short getIndex()
         {
@@ -1239,15 +1239,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class TAN
+    public static final class TAN
         extends HSSFColor
     {
-        public final static short   index     = 0x2f;
-        public final static short[] triplet   =
+        public static final short   index     = 0x2f;
+        public static final short[] triplet   =
         {
             255, 204, 153
         };
-        public final static String  hexString = "FFFF:CCCC:9999";
+        public static final String  hexString = "FFFF:CCCC:9999";
 
         public short getIndex()
         {
@@ -1270,15 +1270,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class LIGHT_YELLOW
+    public static final class LIGHT_YELLOW
         extends HSSFColor
     {
-        public final static short   index     = 0x2b;
-        public final static short[] triplet   =
+        public static final short   index     = 0x2b;
+        public static final short[] triplet   =
         {
             255, 255, 153
         };
-        public final static String  hexString = "FFFF:FFFF:9999";
+        public static final String  hexString = "FFFF:FFFF:9999";
 
         public short getIndex()
         {
@@ -1301,15 +1301,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class LIGHT_GREEN
+    public static final class LIGHT_GREEN
         extends HSSFColor
     {
-        public final static short   index     = 0x2a;
-        public final static short[] triplet   =
+        public static final short   index     = 0x2a;
+        public static final short[] triplet   =
         {
             204, 255, 204
         };
-        public final static String  hexString = "CCCC:FFFF:CCCC";
+        public static final String  hexString = "CCCC:FFFF:CCCC";
 
         public short getIndex()
         {
@@ -1332,16 +1332,16 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class LIGHT_TURQUOISE
+    public static final class LIGHT_TURQUOISE
         extends HSSFColor
     {
-        public final static short   index     = 0x29;
-        public final static short   index2    = 0x1b;
-        public final static short[] triplet   =
+        public static final short   index     = 0x29;
+        public static final short   index2    = 0x1b;
+        public static final short[] triplet   =
         {
             204, 255, 255
         };
-        public final static String  hexString = "CCCC:FFFF:FFFF";
+        public static final String  hexString = "CCCC:FFFF:FFFF";
 
         public short getIndex()
         {
@@ -1364,15 +1364,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class PALE_BLUE
+    public static final class PALE_BLUE
         extends HSSFColor
     {
-        public final static short   index     = 0x2c;
-        public final static short[] triplet   =
+        public static final short   index     = 0x2c;
+        public static final short[] triplet   =
         {
             153, 204, 255
         };
-        public final static String  hexString = "9999:CCCC:FFFF";
+        public static final String  hexString = "9999:CCCC:FFFF";
 
         public short getIndex()
         {
@@ -1395,15 +1395,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class LAVENDER
+    public static final class LAVENDER
         extends HSSFColor
     {
-        public final static short   index     = 0x2e;
-        public final static short[] triplet   =
+        public static final short   index     = 0x2e;
+        public static final short[] triplet   =
         {
             204, 153, 255
         };
-        public final static String  hexString = "CCCC:9999:FFFF";
+        public static final String  hexString = "CCCC:9999:FFFF";
 
         public short getIndex()
         {
@@ -1426,15 +1426,15 @@ public class HSSFColor implements Color {
      *
      */
 
-    public final static class WHITE
+    public static final class WHITE
         extends HSSFColor
     {
-        public final static short   index     = 0x9;
-        public final static short[] triplet   =
+        public static final short   index     = 0x9;
+        public static final short[] triplet   =
         {
             255, 255, 255
         };
-        public final static String  hexString = "FFFF:FFFF:FFFF";
+        public static final String  hexString = "FFFF:FFFF:FFFF";
 
         public short getIndex()
         {
@@ -1455,15 +1455,15 @@ public class HSSFColor implements Color {
     /**
      * Class CORNFLOWER_BLUE
      */
-    public final static class CORNFLOWER_BLUE
+    public static final class CORNFLOWER_BLUE
         extends HSSFColor
     {
-        public final static short   index     = 0x18;
-        public final static short[] triplet   =
+        public static final short   index     = 0x18;
+        public static final short[] triplet   =
         {
             153, 153, 255
         };
-        public final static String  hexString = "9999:9999:FFFF";
+        public static final String  hexString = "9999:9999:FFFF";
 
         public short getIndex()
         {
@@ -1485,15 +1485,15 @@ public class HSSFColor implements Color {
     /**
      * Class LEMON_CHIFFON
      */
-    public final static class LEMON_CHIFFON
+    public static final class LEMON_CHIFFON
         extends HSSFColor
     {
-        public final static short   index     = 0x1a;
-        public final static short[] triplet   =
+        public static final short   index     = 0x1a;
+        public static final short[] triplet   =
         {
             255, 255, 204
         };
-        public final static String  hexString = "FFFF:FFFF:CCCC";
+        public static final String  hexString = "FFFF:FFFF:CCCC";
 
         public short getIndex()
         {
@@ -1514,15 +1514,15 @@ public class HSSFColor implements Color {
     /**
      * Class MAROON
      */
-    public final static class MAROON
+    public static final class MAROON
         extends HSSFColor
     {
-        public final static short   index     = 0x19;
-        public final static short[] triplet   =
+        public static final short   index     = 0x19;
+        public static final short[] triplet   =
         {
             127, 0, 0
         };
-        public final static String  hexString = "8000:0:0";
+        public static final String  hexString = "8000:0:0";
 
         public short getIndex()
         {
@@ -1543,15 +1543,15 @@ public class HSSFColor implements Color {
     /**
      * Class ORCHID
      */
-    public final static class ORCHID
+    public static final class ORCHID
         extends HSSFColor
     {
-        public final static short   index     = 0x1c;
-        public final static short[] triplet   =
+        public static final short   index     = 0x1c;
+        public static final short[] triplet   =
         {
             102, 0, 102
         };
-        public final static String  hexString = "6666:0:6666";
+        public static final String  hexString = "6666:0:6666";
 
         public short getIndex()
         {
@@ -1572,15 +1572,15 @@ public class HSSFColor implements Color {
     /**
      * Class CORAL
      */
-    public final static class CORAL
+    public static final class CORAL
         extends HSSFColor
     {
-        public final static short   index     = 0x1d;
-        public final static short[] triplet   =
+        public static final short   index     = 0x1d;
+        public static final short[] triplet   =
         {
             255, 128, 128
         };
-        public final static String  hexString = "FFFF:8080:8080";
+        public static final String  hexString = "FFFF:8080:8080";
 
         public short getIndex()
         {
@@ -1601,15 +1601,15 @@ public class HSSFColor implements Color {
     /**
      * Class ROYAL_BLUE
      */
-    public final static class ROYAL_BLUE
+    public static final class ROYAL_BLUE
         extends HSSFColor
     {
-        public final static short   index     = 0x1e;
-        public final static short[] triplet   =
+        public static final short   index     = 0x1e;
+        public static final short[] triplet   =
         {
             0, 102, 204
         };
-        public final static String  hexString = "0:6666:CCCC";
+        public static final String  hexString = "0:6666:CCCC";
 
         public short getIndex()
         {
@@ -1630,15 +1630,15 @@ public class HSSFColor implements Color {
     /**
      * Class LIGHT_CORNFLOWER_BLUE
      */
-    public final static class LIGHT_CORNFLOWER_BLUE
+    public static final class LIGHT_CORNFLOWER_BLUE
         extends HSSFColor
     {
-        public final static short   index     = 0x1f;
-        public final static short[] triplet   =
+        public static final short   index     = 0x1f;
+        public static final short[] triplet   =
         {
             204, 204, 255
         };
-        public final static String  hexString = "CCCC:CCCC:FFFF";
+        public static final String  hexString = "CCCC:CCCC:FFFF";
 
         public short getIndex()
         {
@@ -1664,11 +1664,11 @@ public class HSSFColor implements Color {
      * @author Jason
      *
      */
-    public final static class AUTOMATIC extends HSSFColor
+    public static final class AUTOMATIC extends HSSFColor
     {
         private static HSSFColor instance = new AUTOMATIC();
 
-        public final static short   index     = 0x40;
+        public static final short   index     = 0x40;
 
         public short getIndex()
         {

@@ -26,7 +26,7 @@ package org.apache.poi.hssf.record;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class HeaderRecord extends HeaderFooterBase {
-	public final static short sid = 0x0014;
+	public static final short sid = 0x0014;
 
 	public HeaderRecord(String text) {
 		super(text);

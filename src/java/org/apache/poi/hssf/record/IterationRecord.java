@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class IterationRecord extends StandardRecord {
-    public final static short sid = 0x0011;
+    public static final short sid = 0x0011;
 
     private static final BitField iterationOn = BitFieldFactory.getInstance(0x0001);
 

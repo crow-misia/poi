@@ -29,7 +29,7 @@ import org.apache.poi.util.StringUtil;
  */
 public final class FileSharingRecord extends StandardRecord {
 
-    public final static short sid = 0x005B;
+    public static final short sid = 0x005B;
     private short             field_1_readonly;
     private short             field_2_password;
     private byte              field_3_username_unicode_options;
