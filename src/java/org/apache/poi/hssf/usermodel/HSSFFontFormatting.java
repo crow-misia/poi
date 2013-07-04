@@ -30,15 +30,15 @@ public final class HSSFFontFormatting implements org.apache.poi.ss.usermodel.Fon
 {
 
 	/** Underline type - None */
-	public final static byte U_NONE              = FontFormatting.U_NONE;
+	public static final byte U_NONE              = FontFormatting.U_NONE;
 	/** Underline type - Single */
-	public final static byte U_SINGLE            = FontFormatting.U_SINGLE;
+	public static final byte U_SINGLE            = FontFormatting.U_SINGLE;
 	/** Underline type - Double */
-	public final static byte U_DOUBLE            = FontFormatting.U_DOUBLE;
+	public static final byte U_DOUBLE            = FontFormatting.U_DOUBLE;
 	/**  Underline type - Single Accounting */
-	public final static byte U_SINGLE_ACCOUNTING = FontFormatting.U_SINGLE_ACCOUNTING;
+	public static final byte U_SINGLE_ACCOUNTING = FontFormatting.U_SINGLE_ACCOUNTING;
 	/** Underline type - Double Accounting */
-	public final static byte U_DOUBLE_ACCOUNTING = FontFormatting.U_DOUBLE_ACCOUNTING;
+	public static final byte U_DOUBLE_ACCOUNTING = FontFormatting.U_DOUBLE_ACCOUNTING;
 
 	private final FontFormatting fontFormatting;
 	

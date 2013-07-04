@@ -37,28 +37,28 @@ public abstract class SEPAbstractType
 
     protected byte field_1_bkc;
     /** No break */
-    /**/public final static byte BKC_NO_BREAK = 0;
+    /**/public static final byte BKC_NO_BREAK = 0;
     /** New column */
-    /**/public final static byte BKC_NEW_COLUMN = 1;
+    /**/public static final byte BKC_NEW_COLUMN = 1;
     /** New page */
-    /**/public final static byte BKC_NEW_PAGE = 2;
+    /**/public static final byte BKC_NEW_PAGE = 2;
     /** Even page */
-    /**/public final static byte BKC_EVEN_PAGE = 3;
+    /**/public static final byte BKC_EVEN_PAGE = 3;
     /** Odd page */
-    /**/public final static byte BKC_ODD_PAGE = 4;
+    /**/public static final byte BKC_ODD_PAGE = 4;
     protected boolean field_2_fTitlePage;
     protected boolean field_3_fAutoPgn;
     protected byte field_4_nfcPgn;
     /** Arabic */
-    /**/public final static byte NFCPGN_ARABIC = 0;
+    /**/public static final byte NFCPGN_ARABIC = 0;
     /** Roman (upper case) */
-    /**/public final static byte NFCPGN_ROMAN_UPPER_CASE = 1;
+    /**/public static final byte NFCPGN_ROMAN_UPPER_CASE = 1;
     /** Roman (lower case) */
-    /**/public final static byte NFCPGN_ROMAN_LOWER_CASE = 2;
+    /**/public static final byte NFCPGN_ROMAN_LOWER_CASE = 2;
     /** Letter (upper case) */
-    /**/public final static byte NFCPGN_LETTER_UPPER_CASE = 3;
+    /**/public static final byte NFCPGN_LETTER_UPPER_CASE = 3;
     /** Letter (lower case) */
-    /**/public final static byte NFCPGN_LETTER_LOWER_CASE = 4;
+    /**/public static final byte NFCPGN_LETTER_LOWER_CASE = 4;
     protected boolean field_5_fUnlocked;
     protected byte field_6_cnsPgn;
     protected boolean field_7_fPgnRestart;
@@ -86,8 +86,8 @@ public abstract class SEPAbstractType
     protected int field_29_clm;
     protected int field_30_unused2;
     protected boolean field_31_dmOrientPage;
-    /**/public final static boolean DMORIENTPAGE_LANDSCAPE = false;
-    /**/public final static boolean DMORIENTPAGE_PORTRAIT = true;
+    /**/public static final boolean DMORIENTPAGE_LANDSCAPE = false;
+    /**/public static final boolean DMORIENTPAGE_PORTRAIT = true;
     protected byte field_32_iHeadingPgn;
     protected int field_33_pgnStart;
     protected int field_34_lnnMin;

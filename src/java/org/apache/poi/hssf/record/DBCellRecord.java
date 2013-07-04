@@ -28,8 +28,8 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height
  */
 public final class DBCellRecord extends StandardRecord {
-    public final static short sid = 0x00D7;
-    public final static int BLOCK_SIZE = 32;
+    public static final short sid = 0x00D7;
+    public static final int BLOCK_SIZE = 32;
     
     public static final class Builder {
         private short[] _cellOffsets;

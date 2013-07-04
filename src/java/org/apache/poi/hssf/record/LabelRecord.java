@@ -33,7 +33,7 @@ import org.apache.poi.util.POILogger;
 public final class LabelRecord extends Record implements CellValueRecordInterface {
     private final static POILogger logger = POILogFactory.getLogger(LabelRecord.class);
 
-    public final static short sid = 0x0204;
+    public static final short sid = 0x0204;
 
     private int               field_1_row;
     private short             field_2_column;

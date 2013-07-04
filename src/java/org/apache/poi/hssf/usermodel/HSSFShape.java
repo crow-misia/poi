@@ -73,8 +73,8 @@ public abstract class HSSFShape implements Shape {
     private final ObjRecord _objRecord;
     private final EscherOptRecord _optRecord;
     
-    public final static int NO_FILLHITTEST_TRUE = 0x00110000;
-    public final static int NO_FILLHITTEST_FALSE = 0x00010000;
+    public static final int NO_FILLHITTEST_TRUE = 0x00110000;
+    public static final int NO_FILLHITTEST_FALSE = 0x00010000;
 
     /**
      * creates shapes from existing file

@@ -30,7 +30,7 @@ import org.apache.poi.util.StringUtil;
  */
 public final class StringRecord extends ContinuableRecord {
 
-	public final static short sid = 0x0207;
+	public static final short sid = 0x0207;
 
 	private boolean _is16bitUnicode;
 	private String _text;

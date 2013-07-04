@@ -29,7 +29,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @see BlankRecord
  */
 public final class MulBlankRecord extends StandardRecord {
-	public final static short sid = 0x00BE;
+	public static final short sid = 0x00BE;
 
 	private final int _row;
 	private final int _firstCol;

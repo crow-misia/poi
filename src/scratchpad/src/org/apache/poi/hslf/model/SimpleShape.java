@@ -41,7 +41,7 @@ import org.apache.poi.util.LittleEndian;
  */
 public abstract class SimpleShape extends Shape {
 
-    public final static double DEFAULT_LINE_WIDTH = 0.75;
+    public static final double DEFAULT_LINE_WIDTH = 0.75;
 
     /**
      * Records stored in EscherClientDataRecord

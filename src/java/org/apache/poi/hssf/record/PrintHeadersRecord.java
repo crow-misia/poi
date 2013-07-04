@@ -34,7 +34,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class PrintHeadersRecord
     extends StandardRecord
 {
-    public final static short sid = 0x2a;
+    public static final short sid = 0x2a;
     private short             field_1_print_headers;
 
     public PrintHeadersRecord()

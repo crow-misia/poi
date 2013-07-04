@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author josh micich
  */
 public final class CRNRecord extends StandardRecord {
-	public final static short sid = 0x005A;
+	public static final short sid = 0x005A;
 
 	private int	 field_1_last_column_index;
 	private int	 field_2_first_column_index;

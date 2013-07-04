@@ -26,7 +26,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public final class FuncVarPtg extends AbstractFunctionPtg{
 
-    public final static byte sid  = 0x22;
+    public static final byte sid  = 0x22;
     private final static int  SIZE = 4;
 
     /**

@@ -37,7 +37,7 @@ import org.apache.poi.util.StringUtil;
  * @author Josh Micich
  */
 public final class DVRecord extends StandardRecord {
-	public final static short sid = 0x01BE;
+	public static final short sid = 0x01BE;
 	
 	/** the unicode string used for error/prompt title/text when not present */
 	private static final UnicodeString NULL_TEXT_STRING = new UnicodeString("\0");

@@ -34,7 +34,7 @@ import java.util.ArrayList;
  * @author Jason Height (jheight at apache dot org)
  */
 public final class ExtSSTRecord extends ContinuableRecord {
-    public final static short sid = 0x00FF;
+    public static final short sid = 0x00FF;
     public static final int DEFAULT_BUCKET_SIZE = 8;
     //Can't seem to find this documented but from the biffviewer it is clear that
     //Excel only records the indexes for the first 128 buckets.

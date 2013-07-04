@@ -27,13 +27,13 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache dot org)
  */
 public final class InterfaceHdrRecord extends StandardRecord {
-    public final static short sid = 0x00E1;
+    public static final short sid = 0x00E1;
     private final int _codepage;
 
     /**
      * suggested (and probably correct) default
      */
-    public final static int CODEPAGE = 0x04B0;
+    public static final int CODEPAGE = 0x04B0;
 
     public InterfaceHdrRecord(int codePage) {
         _codepage = codePage;

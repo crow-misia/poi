@@ -27,7 +27,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author aviks
  */
 public final class NameXPtg extends OperandPtg implements WorkbookDependentFormula {
-	public final static short sid = 0x39;
+	public static final short sid = 0x39;
 	private final static int SIZE = 7;
 
 	/** index to REF entry in externsheet record */

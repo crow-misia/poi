@@ -29,7 +29,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 
 public final class VCenterRecord extends StandardRecord {
-    public final static short sid = 0x84;
+    public static final short sid = 0x84;
     private int field_1_vcenter;
 
     public VCenterRecord()

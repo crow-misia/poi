@@ -27,7 +27,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Daniel Noll (daniel at nuix dot com dot au)
  */
 public final class AreaErrPtg extends OperandPtg {
-	public final static byte sid = 0x2B;
+	public static final byte sid = 0x2B;
 	private final int unused1;
 	private final int unused2;
 

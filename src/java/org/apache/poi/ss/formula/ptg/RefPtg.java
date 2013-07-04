@@ -26,7 +26,7 @@ import org.apache.poi.util.LittleEndianInput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class RefPtg extends Ref2DPtgBase {
-	public final static byte sid = 0x24;
+	public static final byte sid = 0x24;
 
 	/**
 	 * Takes in a String representation of a cell reference and fills out the

@@ -29,11 +29,11 @@ import org.apache.poi.util.LittleEndianOutput;
  *
  */
 public final class PaletteRecord extends StandardRecord {
-    public final static short sid = 0x0092;
+    public static final short sid = 0x0092;
     /** The standard size of an XLS palette */
-    public final static byte STANDARD_PALETTE_SIZE = (byte) 56;
+    public static final byte STANDARD_PALETTE_SIZE = (byte) 56;
     /** The byte index of the first color */
-    public final static short FIRST_COLOR_INDEX = (short) 0x8;
+    public static final short FIRST_COLOR_INDEX = (short) 0x8;
 
     private final List<PColor>  _colors;
 

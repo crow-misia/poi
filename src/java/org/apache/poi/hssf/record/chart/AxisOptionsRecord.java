@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver(acoliver at apache.org)
  */
 public final class AxisOptionsRecord extends StandardRecord {
-    public final static short sid = 0x1062;
+    public static final short sid = 0x1062;
 
     private static final BitField defaultMinimum      = BitFieldFactory.getInstance(0x01);
     private static final BitField defaultMaximum      = BitFieldFactory.getInstance(0x02);

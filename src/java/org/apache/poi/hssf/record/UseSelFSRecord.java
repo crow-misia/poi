@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache dot org)
  */
 public final class UseSelFSRecord extends StandardRecord {
-    public final static short sid   = 0x0160;
+    public static final short sid   = 0x0160;
 
     private static final BitField useNaturalLanguageFormulasFlag = BitFieldFactory.getInstance(0x0001);
 

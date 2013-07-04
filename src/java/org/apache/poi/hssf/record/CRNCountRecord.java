@@ -26,7 +26,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Josh Micich
  */
 public final class CRNCountRecord extends StandardRecord {
-	public final static short sid = 0x59;
+	public static final short sid = 0x59;
 
 	private static final short DATA_SIZE = 4;
 

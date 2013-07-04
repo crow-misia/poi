@@ -35,7 +35,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class ScenarioProtectRecord
     extends StandardRecord
 {
-    public final static short sid = 0xdd;
+    public static final short sid = 0xdd;
     private short             field_1_protect;
 
     public ScenarioProtectRecord()

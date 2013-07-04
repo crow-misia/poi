@@ -42,64 +42,64 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class ExtendedFormatRecord
     extends StandardRecord
 {
-    public final static short     sid                 = 0xE0;
+    public static final short     sid                 = 0xE0;
 
     // null constant
-    public final static short     NULL                = (short)0xfff0;
+    public static final short     NULL                = (short)0xfff0;
 
     // xf type
-    public final static short     XF_STYLE            = 1;
-    public final static short     XF_CELL             = 0;
+    public static final short     XF_STYLE            = 1;
+    public static final short     XF_CELL             = 0;
 
     // borders
-    public final static short     NONE                = 0x0;
-    public final static short     THIN                = 0x1;
-    public final static short     MEDIUM              = 0x2;
-    public final static short     DASHED              = 0x3;
-    public final static short     DOTTED              = 0x4;
-    public final static short     THICK               = 0x5;
-    public final static short     DOUBLE              = 0x6;
-    public final static short     HAIR                = 0x7;
-    public final static short     MEDIUM_DASHED       = 0x8;
-    public final static short     DASH_DOT            = 0x9;
-    public final static short     MEDIUM_DASH_DOT     = 0xA;
-    public final static short     DASH_DOT_DOT        = 0xB;
-    public final static short     MEDIUM_DASH_DOT_DOT = 0xC;
-    public final static short     SLANTED_DASH_DOT    = 0xD;
+    public static final short     NONE                = 0x0;
+    public static final short     THIN                = 0x1;
+    public static final short     MEDIUM              = 0x2;
+    public static final short     DASHED              = 0x3;
+    public static final short     DOTTED              = 0x4;
+    public static final short     THICK               = 0x5;
+    public static final short     DOUBLE              = 0x6;
+    public static final short     HAIR                = 0x7;
+    public static final short     MEDIUM_DASHED       = 0x8;
+    public static final short     DASH_DOT            = 0x9;
+    public static final short     MEDIUM_DASH_DOT     = 0xA;
+    public static final short     DASH_DOT_DOT        = 0xB;
+    public static final short     MEDIUM_DASH_DOT_DOT = 0xC;
+    public static final short     SLANTED_DASH_DOT    = 0xD;
 
     // alignment
-    public final static short     GENERAL             = 0x0;
-    public final static short     LEFT                = 0x1;
-    public final static short     CENTER              = 0x2;
-    public final static short     RIGHT               = 0x3;
-    public final static short     FILL                = 0x4;
-    public final static short     JUSTIFY             = 0x5;
-    public final static short     CENTER_SELECTION    = 0x6;
+    public static final short     GENERAL             = 0x0;
+    public static final short     LEFT                = 0x1;
+    public static final short     CENTER              = 0x2;
+    public static final short     RIGHT               = 0x3;
+    public static final short     FILL                = 0x4;
+    public static final short     JUSTIFY             = 0x5;
+    public static final short     CENTER_SELECTION    = 0x6;
 
     // vertical alignment
-    public final static short     VERTICAL_TOP        = 0x0;
-    public final static short     VERTICAL_CENTER     = 0x1;
-    public final static short     VERTICAL_BOTTOM     = 0x2;
-    public final static short     VERTICAL_JUSTIFY    = 0x3;
+    public static final short     VERTICAL_TOP        = 0x0;
+    public static final short     VERTICAL_CENTER     = 0x1;
+    public static final short     VERTICAL_BOTTOM     = 0x2;
+    public static final short     VERTICAL_JUSTIFY    = 0x3;
 
     // fill
-    public final static short     NO_FILL             = 0  ;
-    public final static short     SOLID_FILL          = 1  ;
-    public final static short     FINE_DOTS           = 2  ;
-    public final static short     ALT_BARS            = 3  ;
-    public final static short     SPARSE_DOTS         = 4  ;
-    public final static short     THICK_HORZ_BANDS    = 5  ;
-    public final static short     THICK_VERT_BANDS    = 6  ;
-    public final static short     THICK_BACKWARD_DIAG = 7  ;
-    public final static short     THICK_FORWARD_DIAG  = 8  ;
-    public final static short     BIG_SPOTS           = 9  ;
-    public final static short     BRICKS              = 10 ;
-    public final static short     THIN_HORZ_BANDS     = 11 ;
-    public final static short     THIN_VERT_BANDS     = 12 ;
-    public final static short     THIN_BACKWARD_DIAG  = 13 ;
-    public final static short     THIN_FORWARD_DIAG   = 14 ;
-    public final static short     SQUARES             = 15 ;
-    public final static short     DIAMONDS            = 16 ;
+    public static final short     NO_FILL             = 0  ;
+    public static final short     SOLID_FILL          = 1  ;
+    public static final short     FINE_DOTS           = 2  ;
+    public static final short     ALT_BARS            = 3  ;
+    public static final short     SPARSE_DOTS         = 4  ;
+    public static final short     THICK_HORZ_BANDS    = 5  ;
+    public static final short     THICK_VERT_BANDS    = 6  ;
+    public static final short     THICK_BACKWARD_DIAG = 7  ;
+    public static final short     THICK_FORWARD_DIAG  = 8  ;
+    public static final short     BIG_SPOTS           = 9  ;
+    public static final short     BRICKS              = 10 ;
+    public static final short     THIN_HORZ_BANDS     = 11 ;
+    public static final short     THIN_VERT_BANDS     = 12 ;
+    public static final short     THIN_BACKWARD_DIAG  = 13 ;
+    public static final short     THIN_FORWARD_DIAG   = 14 ;
+    public static final short     SQUARES             = 15 ;
+    public static final short     DIAMONDS            = 16 ;
 
     // fields in BOTH style and Cell XF records
     private short                 field_1_font_index;             // not bit-mapped

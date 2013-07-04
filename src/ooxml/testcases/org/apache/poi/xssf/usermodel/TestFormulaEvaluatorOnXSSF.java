@@ -60,7 +60,7 @@ public final class TestFormulaEvaluatorOnXSSF extends TestCase {
 		/**
 		 * Name of the test spreadsheet (found in the standard test data folder)
 		 */
-		public final static String FILENAME = "FormulaEvalTestData_Copy.xlsx";
+		public static final String FILENAME = "FormulaEvalTestData_Copy.xlsx";
         /**
          * Row (zero-based) in the test spreadsheet where the operator examples start.
          */

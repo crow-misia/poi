@@ -38,7 +38,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class CalcCountRecord
     extends StandardRecord
 {
-    public final static short sid = 0xC;
+    public static final short sid = 0xC;
     private short             field_1_iterations;
 
     public CalcCountRecord()

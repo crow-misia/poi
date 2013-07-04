@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class DateWindow1904Record
     extends StandardRecord
 {
-    public final static short sid = 0x22;
+    public static final short sid = 0x22;
     private short             field_1_window;
 
     public DateWindow1904Record()

@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class TextRecord extends StandardRecord {
-    public final static short      sid                             = 0x1025;
+    public static final short      sid                             = 0x1025;
     
     private static final BitField dataLabelPlacement            = BitFieldFactory.getInstance(0x000F);
     private static final BitField autoColor                     = BitFieldFactory.getInstance(0x0001);
@@ -50,41 +50,41 @@ public final class TextRecord extends StandardRecord {
     
     
     private  byte       field_1_horizontalAlignment;
-    public final static byte        HORIZONTAL_ALIGNMENT_LEFT      = 1;
-    public final static byte        HORIZONTAL_ALIGNMENT_CENTER    = 2;
-    public final static byte        HORIZONTAL_ALIGNMENT_BOTTOM    = 3;
-    public final static byte        HORIZONTAL_ALIGNMENT_JUSTIFY   = 4;
+    public static final byte        HORIZONTAL_ALIGNMENT_LEFT      = 1;
+    public static final byte        HORIZONTAL_ALIGNMENT_CENTER    = 2;
+    public static final byte        HORIZONTAL_ALIGNMENT_BOTTOM    = 3;
+    public static final byte        HORIZONTAL_ALIGNMENT_JUSTIFY   = 4;
     private  byte       field_2_verticalAlignment;
-    public final static byte        VERTICAL_ALIGNMENT_TOP         = 1;
-    public final static byte        VERTICAL_ALIGNMENT_CENTER      = 2;
-    public final static byte        VERTICAL_ALIGNMENT_BOTTOM      = 3;
-    public final static byte        VERTICAL_ALIGNMENT_JUSTIFY     = 4;
+    public static final byte        VERTICAL_ALIGNMENT_TOP         = 1;
+    public static final byte        VERTICAL_ALIGNMENT_CENTER      = 2;
+    public static final byte        VERTICAL_ALIGNMENT_BOTTOM      = 3;
+    public static final byte        VERTICAL_ALIGNMENT_JUSTIFY     = 4;
     private  short      field_3_displayMode;
-    public final static short       DISPLAY_MODE_TRANSPARENT       = 1;
-    public final static short       DISPLAY_MODE_OPAQUE            = 2;
+    public static final short       DISPLAY_MODE_TRANSPARENT       = 1;
+    public static final short       DISPLAY_MODE_OPAQUE            = 2;
     private  int        field_4_rgbColor;
     private  int        field_5_x;
     private  int        field_6_y;
     private  int        field_7_width;
     private  int        field_8_height;
     private  short      field_9_options1;
-    public final static short  ROTATION_NONE                  = 0;
-    public final static short  ROTATION_TOP_TO_BOTTOM         = 1;
-    public final static short  ROTATION_ROTATED_90_DEGREES    = 2;
-    public final static short  ROTATION_ROTATED_90_DEGREES_CLOCKWISE = 3;
+    public static final short  ROTATION_NONE                  = 0;
+    public static final short  ROTATION_TOP_TO_BOTTOM         = 1;
+    public static final short  ROTATION_ROTATED_90_DEGREES    = 2;
+    public static final short  ROTATION_ROTATED_90_DEGREES_CLOCKWISE = 3;
     private  short      field_10_indexOfColorValue;
     private  short      field_11_options2;
-    public final static short  DATA_LABEL_PLACEMENT_CHART_DEPENDENT = 0;
-    public final static short  DATA_LABEL_PLACEMENT_OUTSIDE   = 1;
-    public final static short  DATA_LABEL_PLACEMENT_INSIDE    = 2;
-    public final static short  DATA_LABEL_PLACEMENT_CENTER    = 3;
-    public final static short  DATA_LABEL_PLACEMENT_AXIS      = 4;
-    public final static short  DATA_LABEL_PLACEMENT_ABOVE     = 5;
-    public final static short  DATA_LABEL_PLACEMENT_BELOW     = 6;
-    public final static short  DATA_LABEL_PLACEMENT_LEFT      = 7;
-    public final static short  DATA_LABEL_PLACEMENT_RIGHT     = 8;
-    public final static short  DATA_LABEL_PLACEMENT_AUTO      = 9;
-    public final static short  DATA_LABEL_PLACEMENT_USER_MOVED = 10;
+    public static final short  DATA_LABEL_PLACEMENT_CHART_DEPENDENT = 0;
+    public static final short  DATA_LABEL_PLACEMENT_OUTSIDE   = 1;
+    public static final short  DATA_LABEL_PLACEMENT_INSIDE    = 2;
+    public static final short  DATA_LABEL_PLACEMENT_CENTER    = 3;
+    public static final short  DATA_LABEL_PLACEMENT_AXIS      = 4;
+    public static final short  DATA_LABEL_PLACEMENT_ABOVE     = 5;
+    public static final short  DATA_LABEL_PLACEMENT_BELOW     = 6;
+    public static final short  DATA_LABEL_PLACEMENT_LEFT      = 7;
+    public static final short  DATA_LABEL_PLACEMENT_RIGHT     = 8;
+    public static final short  DATA_LABEL_PLACEMENT_AUTO      = 9;
+    public static final short  DATA_LABEL_PLACEMENT_USER_MOVED = 10;
     private  short      field_12_textRotation;
 
 

@@ -31,7 +31,7 @@ public final class HeaderFooterRecord extends StandardRecord {
 
     private static final byte[] BLANK_GUID = new byte[16];
 
-    public final static short sid = 0x089C;
+    public static final short sid = 0x089C;
 	private byte[] _rawData;
 
     public HeaderFooterRecord(byte[] data) {

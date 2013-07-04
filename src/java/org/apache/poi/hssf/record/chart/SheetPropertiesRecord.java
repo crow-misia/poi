@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class SheetPropertiesRecord extends StandardRecord {
-    public final static short sid = 0x1044;
+    public static final short sid = 0x1044;
     
     private static final BitField chartTypeManuallyFormatted = BitFieldFactory.getInstance(0x01);
     private static final BitField plotVisibleOnly            = BitFieldFactory.getInstance(0x02);
@@ -43,9 +43,9 @@ public final class SheetPropertiesRecord extends StandardRecord {
     
     private int field_1_flags;
     private int field_2_empty;
-    public final static byte        EMPTY_NOT_PLOTTED              = 0;
-    public final static byte        EMPTY_ZERO                     = 1;
-    public final static byte        EMPTY_INTERPOLATED             = 2;
+    public static final byte        EMPTY_NOT_PLOTTED              = 0;
+    public static final byte        EMPTY_ZERO                     = 1;
+    public static final byte        EMPTY_INTERPOLATED             = 2;
 
 
     public SheetPropertiesRecord() {

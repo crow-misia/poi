@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class BoolErrRecord extends CellRecord {
-	public final static short sid = 0x0205;
+	public static final short sid = 0x0205;
 	private int _value;
 	/**
 	 * If <code>true</code>, this record represents an error cell value, otherwise this record represents a boolean cell value

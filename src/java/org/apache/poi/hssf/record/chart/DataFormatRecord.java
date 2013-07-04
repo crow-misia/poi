@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class DataFormatRecord extends StandardRecord {
-    public final static short sid = 0x1006;
+    public static final short sid = 0x1006;
 
     private static final BitField useExcel4Colors = BitFieldFactory.getInstance(0x1);
 

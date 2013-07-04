@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @version 2.0-pre
  */
 public final class WindowTwoRecord extends StandardRecord {
-    public final static short sid = 0x023E;
+    public static final short sid = 0x023E;
 
     // bitfields
     private static final BitField displayFormulas         = BitFieldFactory.getInstance(0x01);

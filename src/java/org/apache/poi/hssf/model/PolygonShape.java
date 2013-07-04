@@ -32,7 +32,7 @@ import org.apache.poi.util.LittleEndian;
 public class PolygonShape
         extends AbstractShape
 {
-    public final static short       OBJECT_TYPE_MICROSOFT_OFFICE_DRAWING = 30;
+    public static final short       OBJECT_TYPE_MICROSOFT_OFFICE_DRAWING = 30;
 
     private EscherContainerRecord spContainer;
     private ObjRecord objRecord;

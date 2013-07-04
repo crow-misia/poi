@@ -36,7 +36,7 @@ public final class HSSFFont implements Font {
      * Arial font
      */
 
-    public final static String FONT_ARIAL = "Arial";
+    public static final String FONT_ARIAL = "Arial";
 
 
     private FontRecord         font;

@@ -28,11 +28,11 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class DefaultDataLabelTextPropertiesRecord extends StandardRecord {
-    public final static short      sid                             = 0x1024;
+    public static final short      sid                             = 0x1024;
     private  short      field_1_categoryDataType;
-    public final static short       CATEGORY_DATA_TYPE_SHOW_LABELS_CHARACTERISTIC = 0;
-    public final static short       CATEGORY_DATA_TYPE_VALUE_AND_PERCENTAGE_CHARACTERISTIC = 1;
-    public final static short       CATEGORY_DATA_TYPE_ALL_TEXT_CHARACTERISTIC = 2;
+    public static final short       CATEGORY_DATA_TYPE_SHOW_LABELS_CHARACTERISTIC = 0;
+    public static final short       CATEGORY_DATA_TYPE_VALUE_AND_PERCENTAGE_CHARACTERISTIC = 1;
+    public static final short       CATEGORY_DATA_TYPE_ALL_TEXT_CHARACTERISTIC = 2;
 
 
     public DefaultDataLabelTextPropertiesRecord()

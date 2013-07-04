@@ -40,7 +40,7 @@ import org.apache.poi.util.Configurator;
 public final class HSSFRow implements Row {
 
     // used for collections
-    public final static int INITIAL_CAPACITY = Configurator.getIntValue("HSSFRow.ColInitialCapacity", 5);
+    public static final int INITIAL_CAPACITY = Configurator.getIntValue("HSSFRow.ColInitialCapacity", 5);
 
     private int rowNum;
     private HSSFCell[] cells;

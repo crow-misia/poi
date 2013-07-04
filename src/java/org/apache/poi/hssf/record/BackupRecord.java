@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class BackupRecord
     extends StandardRecord
 {
-    public final static short sid = 0x40;
+    public static final short sid = 0x40;
     private short             field_1_backup;   // = 0;
 
     public BackupRecord()

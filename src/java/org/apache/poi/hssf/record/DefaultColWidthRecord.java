@@ -29,13 +29,13 @@ import org.apache.poi.util.LittleEndianOutput;
  * @version 2.0-pre
  */
 public final class DefaultColWidthRecord extends StandardRecord {
-    public final static short sid = 0x0055;
+    public static final short sid = 0x0055;
     private int             field_1_col_width;
 
     /**
      *  The default column width is 8 characters
      */
-    public final static int DEFAULT_COLUMN_WIDTH = 0x0008;
+    public static final int DEFAULT_COLUMN_WIDTH = 0x0008;
 
     public DefaultColWidthRecord()
     {

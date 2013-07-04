@@ -23,7 +23,7 @@ package org.apache.poi.ss.formula.ptg;
  * @author  Cameron Riley (criley at ekmail.com)
  */
 public final class GreaterThanPtg extends ValueOperatorPtg {
-    public final static byte sid  = 0x0D;    
+    public static final byte sid  = 0x0D;    
     private final static String GREATERTHAN = ">";
 
     public static final ValueOperatorPtg instance = new GreaterThanPtg();

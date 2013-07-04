@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class PrintGridlinesRecord
     extends StandardRecord
 {
-    public final static short sid = 0x2b;
+    public static final short sid = 0x2b;
     private short             field_1_print_gridlines;
 
     public PrintGridlinesRecord()

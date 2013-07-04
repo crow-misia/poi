@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class FontBasisRecord extends StandardRecord {
-    public final static short      sid                             = 0x1060;
+    public static final short      sid                             = 0x1060;
     private  short      field_1_xBasis;
     private  short      field_2_yBasis;
     private  short      field_3_heightBasis;

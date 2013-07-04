@@ -33,9 +33,9 @@ import org.apache.poi.hssf.util.*;
 public class SVTableUtils {
   private final static Map<Integer,HSSFColor> colors = HSSFColor.getIndexHash();
   /**  Description of the Field */
-  public final static Color black = getAWTColor(new HSSFColor.BLACK());
+  public static final Color black = getAWTColor(new HSSFColor.BLACK());
   /**  Description of the Field */
-  public final static Color white = getAWTColor(new HSSFColor.WHITE());
+  public static final Color white = getAWTColor(new HSSFColor.WHITE());
   /**  Description of the Field */
   public static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);
 
@@ -71,7 +71,7 @@ public class SVTableUtils {
    * @param  deflt  Description of the Parameter
    * @return        The aWTColor value
    */
-  public final static Color getAWTColor(int index, Color deflt) {
+  public static final Color getAWTColor(int index, Color deflt) {
     HSSFColor clr = (HSSFColor) colors.get(Integer.valueOf(index));
     if (clr == null) {
       return deflt;
@@ -86,7 +86,7 @@ public class SVTableUtils {
    * @param  clr  Description of the Parameter
    * @return      The aWTColor value
    */
-  public final static Color getAWTColor(HSSFColor clr) {
+  public static final Color getAWTColor(HSSFColor clr) {
     short[] rgb = clr.getTriplet();
     return new Color(rgb[0], rgb[1], rgb[2]);
   }

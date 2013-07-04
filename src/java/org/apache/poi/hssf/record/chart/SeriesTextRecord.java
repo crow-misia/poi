@@ -30,7 +30,7 @@ import org.apache.poi.util.StringUtil;
  * @author Andrew C. Oliver (acoliver at apache.org)
  */
 public final class SeriesTextRecord extends StandardRecord {
-	public final static short sid = 0x100D;
+	public static final short sid = 0x100D;
 
 	/** the actual text cannot be longer than 255 characters */
 	private static final int MAX_LEN = 0xFF;

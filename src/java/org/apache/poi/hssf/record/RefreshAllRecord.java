@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache dot org)
  */
 public final class RefreshAllRecord extends StandardRecord {
-    public final static short sid = 0x01B7;
+    public static final short sid = 0x01B7;
 
     private static final BitField refreshFlag = BitFieldFactory.getInstance(0x0001);
 

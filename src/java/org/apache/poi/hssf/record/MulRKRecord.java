@@ -31,7 +31,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @version 2.0-pre
  */
 public final class MulRKRecord extends StandardRecord {
-	public final static short sid = 0x00BD;
+	public static final short sid = 0x00BD;
 
 	private int	 field_1_row;
 	private short   field_2_first_col;

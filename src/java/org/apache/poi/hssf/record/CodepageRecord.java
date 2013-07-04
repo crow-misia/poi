@@ -32,7 +32,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class CodepageRecord
     extends StandardRecord
 {
-    public final static short sid = 0x42;
+    public static final short sid = 0x42;
     private short             field_1_codepage;   // = 0;
 
     /**
@@ -41,7 +41,7 @@ public final class CodepageRecord
      * for)
      */
 
-    public final static short CODEPAGE = ( short ) 0x4b0;
+    public static final short CODEPAGE = ( short ) 0x4b0;
 
     public CodepageRecord()
     {

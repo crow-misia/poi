@@ -27,7 +27,7 @@ package org.apache.poi.hssf.record;
  *
  */
 public final class FooterRecord extends HeaderFooterBase {
-	public final static short sid = 0x0015;
+	public static final short sid = 0x0015;
 
 	public FooterRecord(String text) {
 		super(text);

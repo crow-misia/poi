@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class CategorySeriesAxisRecord extends StandardRecord {
-    public final static short sid = 0x1020;
+    public static final short sid = 0x1020;
 
     private static final BitField valueAxisCrossing = BitFieldFactory.getInstance(0x1);
     private static final BitField crossesFarRight   = BitFieldFactory.getInstance(0x2);

@@ -27,7 +27,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Daniel Noll (daniel at nuix dot com dot au)
  */
 public final class MemErrPtg extends OperandPtg {
-	public final static short sid = 0x27;
+	public static final short sid = 0x27;
 	private final static int SIZE = 7;
 	private int field_1_reserved;
 	private short field_2_subex_len;

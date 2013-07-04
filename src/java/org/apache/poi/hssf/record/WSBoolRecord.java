@@ -31,7 +31,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class WSBoolRecord extends StandardRecord {
-    public final static short     sid = 0x0081;
+    public static final short     sid = 0x0081;
     private byte                  field_1_wsbool;         // crappy names are because this is really one big short field (2byte)
     private byte                  field_2_wsbool;         // but the docs inconsistently use it as 2 separate bytes
 

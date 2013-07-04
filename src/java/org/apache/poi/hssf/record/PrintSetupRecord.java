@@ -32,7 +32,7 @@ import org.apache.poi.util.BitFieldFactory;
  * @version 2.0-pre
  */
 public final class PrintSetupRecord extends StandardRecord {
-    public final static short     sid = 0x00A1;
+    public static final short     sid = 0x00A1;
     /** Constants for this are held in {@link PrintSetup} */
     private short                 field_1_paper_size;
     private short                 field_2_scale;

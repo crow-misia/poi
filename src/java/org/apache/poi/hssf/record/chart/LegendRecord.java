@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache.org)
  */
 public final class LegendRecord extends StandardRecord {
-    public final static short sid = 0x1015;
+    public static final short sid = 0x1015;
 
     private static final BitField autoPosition     = BitFieldFactory.getInstance(0x01);
     private static final BitField autoSeries       = BitFieldFactory.getInstance(0x02);
@@ -44,16 +44,16 @@ public final class LegendRecord extends StandardRecord {
     private  int        field_3_xSize;
     private  int        field_4_ySize;
     private  byte       field_5_type;
-    public final static byte        TYPE_BOTTOM                    = 0;
-    public final static byte        TYPE_CORNER                    = 1;
-    public final static byte        TYPE_TOP                       = 2;
-    public final static byte        TYPE_RIGHT                     = 3;
-    public final static byte        TYPE_LEFT                      = 4;
-    public final static byte        TYPE_UNDOCKED                  = 7;
+    public static final byte        TYPE_BOTTOM                    = 0;
+    public static final byte        TYPE_CORNER                    = 1;
+    public static final byte        TYPE_TOP                       = 2;
+    public static final byte        TYPE_RIGHT                     = 3;
+    public static final byte        TYPE_LEFT                      = 4;
+    public static final byte        TYPE_UNDOCKED                  = 7;
     private  byte       field_6_spacing;
-    public final static byte        SPACING_CLOSE                  = 0;
-    public final static byte        SPACING_MEDIUM                 = 1;
-    public final static byte        SPACING_OPEN                   = 2;
+    public static final byte        SPACING_CLOSE                  = 0;
+    public static final byte        SPACING_MEDIUM                 = 1;
+    public static final byte        SPACING_OPEN                   = 2;
     private  short      field_7_options;
 
 

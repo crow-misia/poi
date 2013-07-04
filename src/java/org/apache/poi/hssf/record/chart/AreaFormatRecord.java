@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class AreaFormatRecord extends StandardRecord {
-    public final static short sid = 0x100A;
+    public static final short sid = 0x100A;
     
     private static final BitField automatic = BitFieldFactory.getInstance(0x1);
     private static final BitField invert    = BitFieldFactory.getInstance(0x2);

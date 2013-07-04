@@ -31,7 +31,7 @@ import org.apache.poi.util.StringUtil;
  * @author aviks : string fixes for UserDefined Style
  */
 public final class StyleRecord extends StandardRecord {
-	public final static short sid = 0x0293;
+	public static final short sid = 0x0293;
 
 	private static final BitField styleIndexMask = BitFieldFactory.getInstance(0x0FFF);
 	private static final BitField isBuiltinFlag  = BitFieldFactory.getInstance(0x8000);

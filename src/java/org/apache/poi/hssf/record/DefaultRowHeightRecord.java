@@ -34,7 +34,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class DefaultRowHeightRecord
     extends StandardRecord
 {
-    public final static short sid = 0x225;
+    public static final short sid = 0x225;
     private short             field_1_option_flags;
     private short             field_2_row_height;
 

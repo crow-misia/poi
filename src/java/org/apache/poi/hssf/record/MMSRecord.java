@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class MMSRecord
     extends StandardRecord
 {
-    public final static short sid = 0xC1;
+    public static final short sid = 0xC1;
     private byte              field_1_addMenuCount;   // = 0;
     private byte              field_2_delMenuCount;   // = 0;
 

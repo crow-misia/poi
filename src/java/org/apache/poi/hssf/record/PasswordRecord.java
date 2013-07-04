@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  *
  */
 public final class PasswordRecord extends StandardRecord {
-    public final static short sid = 0x0013;
+    public static final short sid = 0x0013;
     private int field_1_password;   // not sure why this is only 2 bytes, but it is... go figure
 
     public PasswordRecord(int password) {

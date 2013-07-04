@@ -41,7 +41,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class ChartRecord extends StandardRecord {
-    public final static short sid = 0x1002;
+    public static final short sid = 0x1002;
     private int field_1_x;
     private int field_2_y;
     private int field_3_width;

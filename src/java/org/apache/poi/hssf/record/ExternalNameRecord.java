@@ -30,7 +30,7 @@ import org.apache.poi.util.StringUtil;
  */
 public final class ExternalNameRecord extends StandardRecord {
 
-	public final static short sid = 0x0023; // as per BIFF8. (some old versions used 0x223)
+	public static final short sid = 0x0023; // as per BIFF8. (some old versions used 0x223)
 
 	private static final int OPT_BUILTIN_NAME          = 0x0001;
 	private static final int OPT_AUTOMATIC_LINK        = 0x0002; // m$ doc calls this fWantAdvise

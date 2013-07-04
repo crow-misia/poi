@@ -28,13 +28,13 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache.org)
  */
 public final class ObjectLinkRecord extends StandardRecord {
-    public final static short      sid                             = 0x1027;
+    public static final short      sid                             = 0x1027;
     private  short      field_1_anchorId;
-    public final static short       ANCHOR_ID_CHART_TITLE          = 1;
-    public final static short       ANCHOR_ID_Y_AXIS               = 2;
-    public final static short       ANCHOR_ID_X_AXIS               = 3;
-    public final static short       ANCHOR_ID_SERIES_OR_POINT      = 4;
-    public final static short       ANCHOR_ID_Z_AXIS               = 7;
+    public static final short       ANCHOR_ID_CHART_TITLE          = 1;
+    public static final short       ANCHOR_ID_Y_AXIS               = 2;
+    public static final short       ANCHOR_ID_X_AXIS               = 3;
+    public static final short       ANCHOR_ID_SERIES_OR_POINT      = 4;
+    public static final short       ANCHOR_ID_Z_AXIS               = 7;
     private  short      field_2_link1;
     private  short      field_3_link2;
 

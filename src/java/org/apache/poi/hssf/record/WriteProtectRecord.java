@@ -26,7 +26,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @version 3.0-pre
  */
 public final class WriteProtectRecord extends StandardRecord {
-    public final static short sid = 0x86;
+    public static final short sid = 0x86;
 
     public WriteProtectRecord()
     {

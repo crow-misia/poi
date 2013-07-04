@@ -32,10 +32,10 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class HideObjRecord
     extends StandardRecord
 {
-    public final static short sid               = 0x8d;
-    public final static short HIDE_ALL          = 2;
-    public final static short SHOW_PLACEHOLDERS = 1;
-    public final static short SHOW_ALL          = 0;
+    public static final short sid               = 0x8d;
+    public static final short HIDE_ALL          = 2;
+    public static final short SHOW_PLACEHOLDERS = 1;
+    public static final short SHOW_ALL          = 0;
     private short             field_1_hide_obj;
 
     public HideObjRecord()

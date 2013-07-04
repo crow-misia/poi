@@ -72,7 +72,7 @@ import org.openxmlformats.schemas.drawingml.x2006.main.STPathShadeType;
  */
 @Internal
 class RenderableShape {
-    public final static Color NO_PAINT = new Color(0xFF, 0xFF, 0xFF, 0);
+    public static final Color NO_PAINT = new Color(0xFF, 0xFF, 0xFF, 0);
 
     private XSLFSimpleShape _shape;
 

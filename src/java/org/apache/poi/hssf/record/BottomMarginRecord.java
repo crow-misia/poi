@@ -28,7 +28,7 @@ import org.apache.poi.util.*;
  * @author Shawn Laubach (slaubach at apache dot org)
  */
 public final class BottomMarginRecord extends StandardRecord implements Margin {
-    public final static short sid = 0x29;
+    public static final short sid = 0x29;
     private double field_1_margin;
 
     public BottomMarginRecord()

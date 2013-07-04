@@ -35,33 +35,33 @@ import org.apache.poi.util.*;
  * @author Petr Udalau - added method setFunction(boolean)
  */
 public final class NameRecord extends ContinuableRecord {
-    public final static short sid = 0x0018;
+    public static final short sid = 0x0018;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_CONSOLIDATE_AREA      = 1;
+	public static final byte  BUILTIN_CONSOLIDATE_AREA      = 1;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_AUTO_OPEN             = 2;
+	public static final byte  BUILTIN_AUTO_OPEN             = 2;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_AUTO_CLOSE            = 3;
+	public static final byte  BUILTIN_AUTO_CLOSE            = 3;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_DATABASE              = 4;
+	public static final byte  BUILTIN_DATABASE              = 4;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_CRITERIA              = 5;
+	public static final byte  BUILTIN_CRITERIA              = 5;
 
-	public final static byte  BUILTIN_PRINT_AREA            = 6;
-	public final static byte  BUILTIN_PRINT_TITLE           = 7;
+	public static final byte  BUILTIN_PRINT_AREA            = 6;
+	public static final byte  BUILTIN_PRINT_TITLE           = 7;
 
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_RECORDER              = 8;
+	public static final byte  BUILTIN_RECORDER              = 8;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_DATA_FORM             = 9;
+	public static final byte  BUILTIN_DATA_FORM             = 9;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_AUTO_ACTIVATE         = 10;
+	public static final byte  BUILTIN_AUTO_ACTIVATE         = 10;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_AUTO_DEACTIVATE       = 11;
+	public static final byte  BUILTIN_AUTO_DEACTIVATE       = 11;
 	/**Included for completeness sake, not implemented */
-	public final static byte  BUILTIN_SHEET_TITLE           = 12;
+	public static final byte  BUILTIN_SHEET_TITLE           = 12;
 
-	public final static byte  BUILTIN_FILTER_DB             = 13;
+	public static final byte  BUILTIN_FILTER_DB             = 13;
 
 	private static final class Option {
 		public static final int OPT_HIDDEN_NAME =   0x0001;

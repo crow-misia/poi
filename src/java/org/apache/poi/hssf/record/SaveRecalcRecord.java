@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class SaveRecalcRecord
     extends StandardRecord
 {
-    public final static short sid = 0x5f;
+    public static final short sid = 0x5f;
     private short             field_1_recalc;
 
     public SaveRecalcRecord()

@@ -33,7 +33,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class BookBoolRecord
     extends StandardRecord
 {
-    public final static short sid = 0xDA;
+    public static final short sid = 0xDA;
     private short             field_1_save_link_values;
 
     public BookBoolRecord()

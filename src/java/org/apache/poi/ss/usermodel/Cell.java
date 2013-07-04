@@ -43,42 +43,42 @@ public interface Cell {
      * @see #setCellType(int)
      * @see #getCellType()
      */
-    public final static int CELL_TYPE_NUMERIC = 0;
+    public static final int CELL_TYPE_NUMERIC = 0;
 
     /**
      * String Cell type (1)
      * @see #setCellType(int)
      * @see #getCellType()
      */
-    public final static int CELL_TYPE_STRING = 1;
+    public static final int CELL_TYPE_STRING = 1;
 
     /**
      * Formula Cell type (2)
      * @see #setCellType(int)
      * @see #getCellType()
      */
-    public final static int CELL_TYPE_FORMULA = 2;
+    public static final int CELL_TYPE_FORMULA = 2;
 
     /**
      * Blank Cell type (3)
      * @see #setCellType(int)
      * @see #getCellType()
      */
-    public final static int CELL_TYPE_BLANK = 3;
+    public static final int CELL_TYPE_BLANK = 3;
 
     /**
      * Boolean Cell type (4)
      * @see #setCellType(int)
      * @see #getCellType()
      */
-    public final static int CELL_TYPE_BOOLEAN = 4;
+    public static final int CELL_TYPE_BOOLEAN = 4;
 
     /**
      * Error Cell type (5)
      * @see #setCellType(int)
      * @see #getCellType()
      */
-    public final static int CELL_TYPE_ERROR = 5;
+    public static final int CELL_TYPE_ERROR = 5;
 
     /**
      * Returns column index of this cell

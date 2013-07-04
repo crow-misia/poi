@@ -33,23 +33,23 @@ public final class BOFRecord extends StandardRecord {
     /**
      * for BIFF8 files the BOF is 0x809.  For earlier versions it was 0x09 or 0x(biffversion)09
      */
-    public final static short sid = 0x809;
+    public static final short sid = 0x809;
 
     /** suggested default (0x0600 - BIFF8) */
-    public final static int VERSION             = 0x0600;
+    public static final int VERSION             = 0x0600;
     /** suggested default 0x10d3 */
-    public final static int BUILD               = 0x10d3;
+    public static final int BUILD               = 0x10d3;
     /** suggested default  0x07CC (1996) */
-    public final static int BUILD_YEAR          = 0x07CC;   // 1996
+    public static final int BUILD_YEAR          = 0x07CC;   // 1996
     /** suggested default for a normal sheet (0x41) */
-    public final static int HISTORY_MASK        = 0x41;
+    public static final int HISTORY_MASK        = 0x41;
 
-    public final static int TYPE_WORKBOOK       = 0x05;
-    public final static int TYPE_VB_MODULE      = 0x06;
-    public final static int TYPE_WORKSHEET      = 0x10;
-    public final static int TYPE_CHART          = 0x20;
-    public final static int TYPE_EXCEL_4_MACRO  = 0x40;
-    public final static int TYPE_WORKSPACE_FILE = 0x100;
+    public static final int TYPE_WORKBOOK       = 0x05;
+    public static final int TYPE_VB_MODULE      = 0x06;
+    public static final int TYPE_WORKSHEET      = 0x10;
+    public static final int TYPE_CHART          = 0x20;
+    public static final int TYPE_EXCEL_4_MACRO  = 0x40;
+    public static final int TYPE_WORKSPACE_FILE = 0x100;
 
     private int field_1_version;
     private int field_2_type;

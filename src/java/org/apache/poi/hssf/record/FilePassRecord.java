@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Jason Height (jheight at chariot dot net dot au)
  */
 public final class FilePassRecord extends StandardRecord {
-	public final static short sid = 0x002F;
+	public static final short sid = 0x002F;
 	private int _encryptionType;
 	private int _encryptionInfo;
 	private int _minorVersionNo;

@@ -34,7 +34,7 @@ import org.apache.poi.util.LittleEndianInputStream;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class ObjRecord extends Record {
-	public final static short sid = 0x005D;
+	public static final short sid = 0x005D;
 
 	private static final int NORMAL_PAD_ALIGNMENT = 2;
 	private static int MAX_PAD_ALIGNMENT = 4;

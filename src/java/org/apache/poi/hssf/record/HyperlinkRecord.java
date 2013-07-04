@@ -41,7 +41,7 @@ import org.apache.poi.util.StringUtil;
  * @author      Yegor Kozlov (yegor at apache dot org)
  */
 public final class HyperlinkRecord extends StandardRecord {
-    public final static short sid = 0x01B8;
+    public static final short sid = 0x01B8;
     private static final POILogger logger = POILogFactory.getLogger(HyperlinkRecord.class);
 
     static final class GUID {

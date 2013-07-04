@@ -62,7 +62,7 @@ public final class TestFormulasFromSpreadsheet extends TestCase {
 		/**
 		 * Name of the test spreadsheet (found in the standard test data folder)
 		 */
-		public final static String FILENAME = "FormulaEvalTestData.xls";
+		public static final String FILENAME = "FormulaEvalTestData.xls";
 		/**
 		 * Row (zero-based) in the test spreadsheet where the operator examples start.
 		 */

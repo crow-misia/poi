@@ -54,7 +54,7 @@ public abstract class BaseTestFunctionsFromSpreadsheet extends TestCase {
 
 
         /** Name of the first sheet in the spreadsheet (contains comments) */
-        public final static String README_SHEET_NAME = "Read Me";
+        public static final String README_SHEET_NAME = "Read Me";
 
         /** Row (zero-based) in each sheet where the evaluation cases start.   */
         public static final int START_TEST_CASES_ROW_INDEX = 4; // Row '5'

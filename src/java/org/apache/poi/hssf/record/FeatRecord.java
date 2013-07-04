@@ -35,7 +35,7 @@ import org.apache.poi.util.POILogger;
  */
 public final class FeatRecord extends StandardRecord  {
 	private static final POILogger logger = POILogFactory.getLogger(FeatRecord.class);
-	public final static short sid = 0x0868;
+	public static final short sid = 0x0868;
 	
 	private FtrHeader futureHeader;
 	

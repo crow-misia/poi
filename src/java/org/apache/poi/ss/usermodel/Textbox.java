@@ -19,7 +19,7 @@ package org.apache.poi.ss.usermodel;
 
 public interface Textbox {
 
-    public final static short OBJECT_TYPE_TEXT = 6;
+    public static final short OBJECT_TYPE_TEXT = 6;
 
     /**
      * @return  the rich text string for this textbox.

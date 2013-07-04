@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache.org)
  */
 public final class SeriesIndexRecord extends StandardRecord {
-    public final static short      sid                             = 0x1065;
+    public static final short      sid                             = 0x1065;
     private  short      field_1_index;
 
 

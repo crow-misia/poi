@@ -50,7 +50,7 @@ public final class FontFormatting
 	private static final int RAW_DATA_SIZE = 118;
 
 
-	public final static int  FONT_CELL_HEIGHT_PRESERVED   = 0xFFFFFFFF;
+	public static final int  FONT_CELL_HEIGHT_PRESERVED   = 0xFFFFFFFF;
 
 	// FONT OPTIONS MASKS
 	private static final BitField posture       = BitFieldFactory.getInstance(0x00000002);

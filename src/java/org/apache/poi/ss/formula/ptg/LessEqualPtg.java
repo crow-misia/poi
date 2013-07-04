@@ -27,7 +27,7 @@ package org.apache.poi.ss.formula.ptg;
  * @author fred at stsci dot edu
  */
 public final class LessEqualPtg extends ValueOperatorPtg {
-    public final static byte sid = 0x0a;
+    public static final byte sid = 0x0a;
 
     public static final ValueOperatorPtg instance = new LessEqualPtg();
 

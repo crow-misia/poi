@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Olivier Leprince
  */
 public final class UncalcedRecord extends StandardRecord  {
-	public final static short sid = 0x005E;
+	public static final short sid = 0x005E;
 
     private short _reserved;
 

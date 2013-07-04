@@ -29,7 +29,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Andrew C. Oliver (acoliver at apache dot org)
  */
 public final class ProtectionRev4Record extends StandardRecord {
-    public final static short sid = 0x01AF;
+    public static final short sid = 0x01AF;
 
     private static final BitField protectedFlag = BitFieldFactory.getInstance(0x0001);
 

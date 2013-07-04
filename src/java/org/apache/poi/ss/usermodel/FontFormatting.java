@@ -28,22 +28,22 @@ package org.apache.poi.ss.usermodel;
  */
 public interface FontFormatting {
     /** Escapement type - None */
-    public final static short SS_NONE  = 0;
+    public static final short SS_NONE  = 0;
     /** Escapement type - Superscript */
-    public final static short SS_SUPER = 1;
+    public static final short SS_SUPER = 1;
     /** Escapement type - Subscript */
-    public final static short SS_SUB   = 2;
+    public static final short SS_SUB   = 2;
 
     /** Underline type - None */
-    public final static byte U_NONE              = 0;
+    public static final byte U_NONE              = 0;
     /** Underline type - Single */
-    public final static byte U_SINGLE            = 1;
+    public static final byte U_SINGLE            = 1;
     /** Underline type - Double */
-    public final static byte U_DOUBLE            = 2;
+    public static final byte U_DOUBLE            = 2;
     /**  Underline type - Single Accounting */
-    public final static byte U_SINGLE_ACCOUNTING = 0x21;
+    public static final byte U_SINGLE_ACCOUNTING = 0x21;
     /** Underline type - Double Accounting */
-    public final static byte U_DOUBLE_ACCOUNTING = 0x22;
+    public static final byte U_DOUBLE_ACCOUNTING = 0x22;
 
     /**
      * get the type of super or subscript for the font

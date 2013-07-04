@@ -36,13 +36,13 @@ public abstract class HRESIAbstractType
 {
 
     protected byte field_1_hres;
-    /**/public final static byte HRES_NO = 0;
-    /**/public final static byte HRES_NORMAL = 1;
-    /**/public final static byte HRES_ADD_LETTER_BEFORE = 2;
-    /**/public final static byte HRES_CHANGE_LETTER_BEFORE = 3;
-    /**/public final static byte HRES_DELETE_LETTER_BEFORE = 4;
-    /**/public final static byte HRES_CHANGE_LETTER_AFTER = 5;
-    /**/public final static byte HRES_DELETE_BEFORE_CHANGE_BEFORE = 6;
+    /**/public static final byte HRES_NO = 0;
+    /**/public static final byte HRES_NORMAL = 1;
+    /**/public static final byte HRES_ADD_LETTER_BEFORE = 2;
+    /**/public static final byte HRES_CHANGE_LETTER_BEFORE = 3;
+    /**/public static final byte HRES_DELETE_LETTER_BEFORE = 4;
+    /**/public static final byte HRES_CHANGE_LETTER_AFTER = 5;
+    /**/public static final byte HRES_DELETE_BEFORE_CHANGE_BEFORE = 6;
     protected byte field_2_chHres;
 
     protected HRESIAbstractType()

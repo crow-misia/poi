@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class BarRecord extends StandardRecord {
-    public final static short sid = 0x1017;
+    public static final short sid = 0x1017;
 
     private static final BitField   horizontal          = BitFieldFactory.getInstance(0x1);
     private static final BitField   stacked             = BitFieldFactory.getInstance(0x2);

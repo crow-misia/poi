@@ -30,7 +30,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class DatRecord extends StandardRecord {
-    public final static short sid = 0x1063;
+    public static final short sid = 0x1063;
 
     private static final BitField horizontalBorder = BitFieldFactory.getInstance(0x1);
     private static final BitField verticalBorder   = BitFieldFactory.getInstance(0x2);
