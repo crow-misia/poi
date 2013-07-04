@@ -72,11 +72,11 @@ public final class EventBridge implements HDFLowLevelParsingListener
   BTreeSet _hdrCharacterRuns = new BTreeSet();
 
   int _sectionCounter = 1;
-  ArrayList _hdrs = new ArrayList();
+  final List<HeaderFooter[]> _hdrs = new ArrayList<>();
 
   private boolean _holdParagraph = false;
   private int _endHoldIndex = -1;
-  private ArrayList _onHold;
+  private final List<PropertyNode> _onHold = new ArrayList<>();
 
   public EventBridge(HDFParsingListener listener)
   {
@@ -120,7 +120,7 @@ public final class EventBridge implements HDFLowLevelParsingListener
   {
     for (int x = 1; x < _sectionCounter; x++)
     {
-      HeaderFooter[] hdrArray = (HeaderFooter[])_hdrs.get(x-1);
+      HeaderFooter[] hdrArray = _hdrs.get(x-1);
       HeaderFooter hf = null;
 
       if (!hdrArray[HeaderFooter.HEADER_EVEN - 1].isEmpty())
@@ -211,7 +211,7 @@ public final class EventBridge implements HDFLowLevelParsingListener
         _holdParagraph = false;
         _endHoldIndex = -1;
         flushHeldParagraph();
-        _onHold = new ArrayList();
+        _onHold.clear();
       }
     }
 
