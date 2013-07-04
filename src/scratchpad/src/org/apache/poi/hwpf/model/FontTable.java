@@ -43,7 +43,6 @@ public final class FontTable
 
   // added extra facilitator members
   private int lcbSttbfffn;// count of bytes in sttbfffn
-  private int fcSttbfffn;// table stream offset for sttbfffn
 
   // FFN structure containing strings of font names
   private Ffn[] _fontNames = null;
@@ -52,19 +51,20 @@ public final class FontTable
   public FontTable(byte[] buf, int offset, int lcbSttbfffn)
   {
     this.lcbSttbfffn = lcbSttbfffn;
-    this.fcSttbfffn = offset;
 
-    _stringCount = LittleEndian.getShort(buf, offset);
-    offset += LittleEndian.SHORT_SIZE;
-    _extraDataSz = LittleEndian.getShort(buf, offset);
-    offset += LittleEndian.SHORT_SIZE;
+    int fcSttbfffn = offset;
+
+    _stringCount = LittleEndian.getShort(buf, fcSttbfffn);
+    fcSttbfffn += LittleEndian.SHORT_SIZE;
+    _extraDataSz = LittleEndian.getShort(buf, fcSttbfffn);
+    fcSttbfffn += LittleEndian.SHORT_SIZE;
 
     _fontNames = new Ffn[_stringCount]; //Ffn corresponds to a Pascal style String in STTBF.
 
     for(int i = 0;i<_stringCount; i++)
     {
-      _fontNames[i] = new Ffn(buf,offset);
-      offset += _fontNames[i].getSize();
+      _fontNames[i] = new Ffn(buf, fcSttbfffn);
+      fcSttbfffn += _fontNames[i].getSize();
     }
   }
 
@@ -114,13 +114,6 @@ public final class FontTable
   {
     this._stringCount = stringCount;
   }
-
-    @Deprecated
-    public void writeTo( HWPFFileSystem sys ) throws IOException
-    {
-        HWPFOutputStream tableStream = sys.getStream( "1Table" );
-        writeTo( tableStream );
-    }
 
     public void writeTo( HWPFOutputStream tableStream ) throws IOException
     {

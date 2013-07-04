@@ -18,7 +18,6 @@
 package org.apache.poi.hssf.record;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ddf.DefaultEscherRecordFactory;
@@ -46,8 +45,8 @@ public abstract class AbstractEscherHolderRecord extends Record {
         }
     }
 
-    private List<EscherRecord> escherRecords;
-    private LazilyConcatenatedByteArray rawDataContainer = new LazilyConcatenatedByteArray();
+    private final List<EscherRecord> escherRecords;
+    private final LazilyConcatenatedByteArray rawDataContainer = new LazilyConcatenatedByteArray();
 
     public AbstractEscherHolderRecord()
     {
@@ -60,7 +59,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
         if ( DESERIALISE )
         {
             byte[] data = in.readRemainder();
-            convertToEscherRecords( 0, data.length, data );
+            convertToEscherRecords(data);
         }
         else
         {
@@ -70,16 +69,17 @@ public abstract class AbstractEscherHolderRecord extends Record {
 
     protected void convertRawBytesToEscherRecords() {
         byte[] rawData = getRawData();
-    	convertToEscherRecords(0, rawData.length, rawData);
+        convertToEscherRecords(rawData);
     }
-    private void convertToEscherRecords( int offset, int size, byte[] data )
+    private void convertToEscherRecords(final byte[] data)
     {
-         escherRecords.clear();
+        escherRecords.clear();
         EscherRecordFactory recordFactory = new DefaultEscherRecordFactory();
-        int pos = offset;
-        while ( pos < offset + size )
+        int pos = 0;
+        final int size = data.length;
+        while ( pos < size )
         {
-            EscherRecord r = recordFactory.createRecord(data, pos);
+            final EscherRecord r = recordFactory.createRecord(data, pos);
             int bytesRead = r.fillFields(data, pos, recordFactory );
             escherRecords.add(r);
             pos += bytesRead;
@@ -121,9 +121,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
         LittleEndian.putShort(data, 2 + offset, (short)(getRecordSize() - 4));
 
         int pos = offset + 4;
-        for ( Iterator<EscherRecord> iterator = escherRecords.iterator(); iterator.hasNext(); )
-        {
-            EscherRecord r = iterator.next();
+        for (final EscherRecord r : escherRecords) {
             pos += r.serialize( pos, data, NullEscherSerializationListener.INSTANCE );
         }
         return getRecordSize();
@@ -136,9 +134,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
             return rawData.length;
         }
         int size = 0;
-        for ( Iterator<EscherRecord> iterator = escherRecords.iterator(); iterator.hasNext(); )
-        {
-            EscherRecord r = iterator.next();
+        for (final EscherRecord r : escherRecords) {
             size += r.getRecordSize();
         }
         return size;
@@ -179,10 +175,9 @@ public abstract class AbstractEscherHolderRecord extends Record {
      *  then return that.
      */
     public EscherContainerRecord getEscherContainer() {
-    	for(Iterator<EscherRecord> it = escherRecords.iterator(); it.hasNext();) {
-    		EscherRecord er = it.next();
-    		if(er instanceof EscherContainerRecord) {
-    			return (EscherContainerRecord)er;
+    	for(final EscherRecord r : escherRecords) {
+    		if(r instanceof EscherContainerRecord) {
+    			return (EscherContainerRecord)r;
     		}
     	}
     	return null;
@@ -198,16 +193,14 @@ public abstract class AbstractEscherHolderRecord extends Record {
     }
     private EscherRecord findFirstWithId(short id, List<EscherRecord> records) {
     	// Check at our level
-    	for(Iterator<EscherRecord> it = records.iterator(); it.hasNext();) {
-    		EscherRecord r = it.next();
+    	for(final EscherRecord r : records) {
     		if(r.getRecordId() == id) {
     			return r;
     		}
     	}
 
     	// Then check our children in turn
-    	for(Iterator<EscherRecord> it = records.iterator(); it.hasNext();) {
-    		EscherRecord r = it.next();
+    	for(final EscherRecord r : records) {
     		if(r.isContainerRecord()) {
     			EscherRecord found = findFirstWithId(id, r.getChildRecords());
     			if(found != null) {
@@ -223,7 +216,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
 
     public EscherRecord getEscherRecord(int index)
     {
-        return (EscherRecord) escherRecords.get(index);
+        return escherRecords.get(index);
     }
 
     /**
@@ -256,9 +249,8 @@ public abstract class AbstractEscherHolderRecord extends Record {
      */
     public void decode()
     {
-        if (null == escherRecords || escherRecords.isEmpty()){
-            byte[] rawData = getRawData();
-            convertToEscherRecords(0, rawData.length, rawData );
+        if (escherRecords.isEmpty()){
+            convertToEscherRecords(getRawData());
         }
     }
 }

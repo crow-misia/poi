@@ -117,25 +117,26 @@ public final class PlexOfCps
 
     public byte[] toByteArray()
     {
-        int size = _props.size();
-        int cpBufSize = ( ( size + 1 ) * LittleEndian.INT_SIZE );
-        int structBufSize = +( _cbStruct * size );
-        int bufSize = cpBufSize + structBufSize;
+        final int size = _props.size();
+        final int cbStruct = _cbStruct;
+        int startOffset = 0;
+        int cpBufOffset = ( ( size + 1 ) * LittleEndian.INT_SIZE );
 
-        byte[] buf = new byte[bufSize];
+        byte[] buf = new byte[cpBufOffset + (cbStruct * size)];
 
         GenericPropertyNode node = null;
-        for ( int x = 0; x < size; x++ )
+        for (int x = 0; x < size; x++)
         {
             node = _props.get( x );
 
             // put the starting offset of the property into the plcf.
-            LittleEndian.putInt( buf, ( LittleEndian.INT_SIZE * x ),
-                    node.getStart() );
+            LittleEndian.putInt( buf, startOffset, node.getStart() );
 
             // put the struct into the plcf
-            System.arraycopy( node.getBytes(), 0, buf, cpBufSize
-                    + ( x * _cbStruct ), _cbStruct );
+            System.arraycopy( node.getBytes(), 0, buf, cpBufOffset, cbStruct );
+
+            cpBufOffset += cbStruct;
+            startOffset += LittleEndian.INT_SIZE;
         }
         // put the ending offset of the last property into the plcf.
         LittleEndian.putInt( buf, LittleEndian.INT_SIZE * size, node.getEnd() );

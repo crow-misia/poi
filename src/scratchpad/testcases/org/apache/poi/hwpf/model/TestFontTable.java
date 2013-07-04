@@ -40,8 +40,8 @@ public final class TestFontTable
 
     HWPFFileSystem fileSys = new HWPFFileSystem();
 
-    _fontTable.writeTo(fileSys);
     HWPFOutputStream  tableOut = fileSys.getStream("1Table");
+    _fontTable.writeTo(tableOut);
 
 
     byte[] newTableStream = tableOut.toByteArray();
