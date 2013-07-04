@@ -17,7 +17,6 @@
 package org.apache.poi;
 
 import java.io.Closeable;
-import java.io.IOException;
 
 /**
  * Common Parent for Text Extractors
@@ -64,15 +63,4 @@ public abstract class POITextExtractor implements Closeable {
 	 *  metadata / properties, such as author and title.
 	 */
 	public abstract POITextExtractor getMetadataTextExtractor();
-	
-	/**
-	 * Allows to free resources of the Extractor as soon as
-	 * it is not needed any more. This may include closing
-	 * open file handles and freeing memory.
-	 * 
-	 * The Extractor cannot be used after close has been called.
-	 */
-	public void close() throws IOException {
-		// nothing to do in abstract class, derived classes may perform actions.
-	}
 }

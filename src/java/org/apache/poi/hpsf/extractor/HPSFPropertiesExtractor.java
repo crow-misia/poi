@@ -20,6 +20,7 @@ package org.apache.poi.hpsf.extractor;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.codec.Charsets;
 import org.apache.poi.POIDocument;
 import org.apache.poi.POITextExtractor;
 import org.apache.poi.hpsf.CustomProperties;
@@ -128,11 +129,15 @@ public class HPSFPropertiesExtractor extends POITextExtractor {
         }
     }
 
+    @Override
+    public void close() throws IOException { }
+
     public static void main(String[] args) throws IOException {
         for (String file : args) {
-            HPSFPropertiesExtractor ext = new HPSFPropertiesExtractor(
-                    new NPOIFSFileSystem(new File(file)));
-            System.out.println(ext.getText());
+            try (final HPSFPropertiesExtractor ext = new HPSFPropertiesExtractor(
+                    new NPOIFSFileSystem(new File(file)))) {
+                System.out.println(ext.getText());
+            }
         }
     }
 }

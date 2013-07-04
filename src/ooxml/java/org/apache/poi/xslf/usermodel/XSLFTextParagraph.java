@@ -895,7 +895,7 @@ public class XSLFTextParagraph implements Iterable<XSLFTextRun>{
         for (;;) {
             int startIndex = measurer.getPosition();
 
-            double wrappingWidth = getWrappingWidth(_lines.size() == 0, graphics) + 1; // add a pixel to compensate rounding errors
+            double wrappingWidth = getWrappingWidth(_lines.isEmpty(), graphics) + 1; // add a pixel to compensate rounding errors
             // shape width can be smaller that the sum of insets (this was proved by a test file)
             if(wrappingWidth < 0) wrappingWidth = 1;
 

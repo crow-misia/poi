@@ -130,9 +130,9 @@ public class DocumentNode
      * back end store
      */
 
-    public Iterator getViewableIterator()
+    public Iterator<?> getViewableIterator()
     {
-        List components = new ArrayList();
+        final List<Object> components = new ArrayList<>(2);
 
         components.add(getProperty());
         components.add(_document);

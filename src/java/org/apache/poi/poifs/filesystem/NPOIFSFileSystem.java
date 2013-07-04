@@ -301,7 +301,7 @@ public class NPOIFSFileSystem extends BlockStore
             }
             // else not success? Try block did not complete normally
             // just print stack trace and leave original ex to be thrown
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -522,7 +522,7 @@ public class NPOIFSFileSystem extends BlockStore
              offset++;
              
              // Chain it
-             if(_xbat_blocks.size() == 0) {
+             if(_xbat_blocks.isEmpty()) {
                 _header.setXBATStart(offset);
              } else {
                 _xbat_blocks.get(_xbat_blocks.size()-1).setValueAt(
@@ -813,13 +813,13 @@ public class NPOIFSFileSystem extends BlockStore
      * back end store
      */
 
-    public Iterator getViewableIterator()
+    public Iterator<?> getViewableIterator()
     {
-        if (!preferArray())
+        if (preferArray())
         {
-            return (( POIFSViewable ) getRoot()).getViewableIterator();
+            return Collections.emptyIterator();
         }
-        return Collections.EMPTY_LIST.iterator();
+        return (( POIFSViewable ) getRoot()).getViewableIterator();
     }
 
     /**

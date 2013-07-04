@@ -87,6 +87,5 @@ public abstract class POIXMLTextExtractor extends POITextExtractor {
 				pkg.close();
 			}
 		}
-		super.close();
 	}
 }

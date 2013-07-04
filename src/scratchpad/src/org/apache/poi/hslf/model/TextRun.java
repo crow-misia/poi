@@ -115,10 +115,10 @@ public final class TextRun
         buildRichTextRuns(pStyles, cStyles, runRawText);
 	}
 
-	public void buildRichTextRuns(LinkedList pStyles, LinkedList cStyles, String runRawText){
+	public void buildRichTextRuns(LinkedList<TextPropCollection> pStyles, LinkedList<TextPropCollection>cStyles, String runRawText){
 
         // Handle case of no current style, with a default
-        if(pStyles.size() == 0 || cStyles.size() == 0) {
+        if(pStyles.isEmpty() || cStyles.isEmpty()) {
             _rtRuns = new RichTextRun[1];
             _rtRuns[0] = new RichTextRun(this, 0, runRawText.length());
         } else {

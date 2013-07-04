@@ -126,4 +126,7 @@ public final class Word6Extractor extends POIOLE2TextExtractor {
             return text.toString();
         }
     }
+
+    @Override
+    public void close() throws IOException { }
 }

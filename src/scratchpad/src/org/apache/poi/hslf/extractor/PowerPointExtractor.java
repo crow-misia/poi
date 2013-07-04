@@ -123,14 +123,6 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
       this(new HSLFSlideShow(dir));
    }
 
-   /**
-    * @deprecated Use {@link #PowerPointExtractor(DirectoryNode)} instead
-    */
-   @Deprecated
-	public PowerPointExtractor(DirectoryNode dir, POIFSFileSystem fs) throws IOException {
-		this(new HSLFSlideShow(dir, fs));
-	}
-
 	/**
 	 * Creates a PowerPointExtractor, from a HSLFSlideShow
 	 *
@@ -305,6 +297,9 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
 
 		return ret.toString();
 	}
+
+    @Override
+    public void close() throws IOException { }
 
     private void textRunsToText(StringBuilder ret, TextRun[] runs) {
         if (runs==null) {

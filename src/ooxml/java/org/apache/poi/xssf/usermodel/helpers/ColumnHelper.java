@@ -33,7 +33,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet;
  * Note - within POI, we use 0 based column indexes, but
  *  the column definitions in the XML are 1 based!
  */
-public class ColumnHelper {
+public final class ColumnHelper {
 
     private final CTWorksheet worksheet;
 
@@ -61,7 +61,7 @@ public class ColumnHelper {
 
     public static void sortColumns(CTCols newCols) {
         final List<CTCol> colArray = newCols.getColList();
-        Collections.sort(colArray, new CTColComparator());
+        Collections.sort(colArray, CTColComparator.INSTANCE);
         newCols.setColArray(colArray.toArray(new CTCol[colArray.size()]));
     }
 

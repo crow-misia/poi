@@ -51,11 +51,11 @@ public final class RecordStream {
 	}
 
 	public Record getNext() {
-		if(!hasNext()) {
-			throw new RuntimeException("Attempt to read past end of record stream");
+		if(hasNext()) {
+			_countRead ++;
+			return (Record) _list.get(_nextIndex++);
 		}
-		_countRead ++;
-		return (Record) _list.get(_nextIndex++);
+		throw new RuntimeException("Attempt to read past end of record stream");
 	}
 
 	/**

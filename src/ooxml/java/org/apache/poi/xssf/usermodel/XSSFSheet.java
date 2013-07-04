@@ -738,7 +738,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      * @return the number of the first logical row on the sheet, zero based
      */
     public int getFirstRowNum() {
-        return _rows.size() == 0 ? 0 : _rows.firstKey();
+        return _rows.isEmpty() ? 0 : _rows.firstKey();
     }
 
     /**
@@ -851,7 +851,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
     }
 
     public int getLastRowNum() {
-        return _rows.size() == 0 ? 0 : _rows.lastKey();
+        return _rows.isEmpty() ? 0 : _rows.lastKey();
     }
 
     public short getLeftCol() {

@@ -60,9 +60,9 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
  * http://svn.apache.org/repos/asf/poi/trunk/src/examples/src/org/apache/poi/hssf/eventusermodel/examples/XLS2CSVmra.java</link>
  */
 public class EventBasedExcelExtractor extends POIOLE2TextExtractor {
-   private DirectoryNode _dir;
-	boolean _includeSheetNames = true;
-	boolean _formulasNotResults = false;
+    private final DirectoryNode _dir;
+    boolean _includeSheetNames = true;
+    boolean _formulasNotResults = false;
 
     public EventBasedExcelExtractor( DirectoryNode dir )
     {
@@ -74,184 +74,177 @@ public class EventBasedExcelExtractor extends POIOLE2TextExtractor {
       this(fs.getRoot());
    }
 
-   /**
-    * Return the underlying POIFS FileSystem of
-    *  this document.
-    *
-    * @deprecated Use {@link #getRoot()} instead
-    */
-   public POIFSFileSystem getFileSystem() {
-      return _dir.getFileSystem();
-   }
-
-	/**
-	 * Would return the document information metadata for the document,
-	 *  if we supported it
-	 */
-	public DocumentSummaryInformation getDocSummaryInformation() {
-		throw new IllegalStateException("Metadata extraction not supported in streaming mode, please use ExcelExtractor");
-	}
-	/**
-	 * Would return the summary information metadata for the document,
-	 *  if we supported it
-	 */
-	public SummaryInformation getSummaryInformation() {
-		throw new IllegalStateException("Metadata extraction not supported in streaming mode, please use ExcelExtractor");
-	}
+    /**
+     * Would return the document information metadata for the document,
+     *  if we supported it
+     */
+    public DocumentSummaryInformation getDocSummaryInformation() {
+        throw new IllegalStateException("Metadata extraction not supported in streaming mode, please use ExcelExtractor");
+    }
+    /**
+     * Would return the summary information metadata for the document,
+     *  if we supported it
+     */
+    public SummaryInformation getSummaryInformation() {
+        throw new IllegalStateException("Metadata extraction not supported in streaming mode, please use ExcelExtractor");
+    }
 
 
-	/**
-	 * Should sheet names be included? Default is true
-	 */
-	public void setIncludeSheetNames(boolean includeSheetNames) {
-		_includeSheetNames = includeSheetNames;
-	}
-	/**
-	 * Should we return the formula itself, and not
-	 *  the result it produces? Default is false
-	 */
-	public void setFormulasNotResults(boolean formulasNotResults) {
-		_formulasNotResults = formulasNotResults;
-	}
+    /**
+     * Should sheet names be included? Default is true
+     */
+    public void setIncludeSheetNames(boolean includeSheetNames) {
+        _includeSheetNames = includeSheetNames;
+    }
+    /**
+     * Should we return the formula itself, and not
+     *  the result it produces? Default is false
+     */
+    public void setFormulasNotResults(boolean formulasNotResults) {
+        _formulasNotResults = formulasNotResults;
+    }
 
 
-	/**
-	 * Retreives the text contents of the file
-	 */
-	public String getText() {
-		String text = null;
-		try {
-			TextListener tl = triggerExtraction();
+    /**
+     * Retreives the text contents of the file
+     */
+    public String getText() {
+        String text = null;
+        try {
+            TextListener tl = triggerExtraction();
 
-			text = tl._text.toString();
-			if(! text.endsWith("\n")) {
-				text = text + "\n";
-			}
-		} catch(IOException e) {
-			throw new RuntimeException(e);
-		}
+            text = tl._text.toString();
+            if(! text.endsWith("\n")) {
+                text = text + "\n";
+            }
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
 
-		return text;
-	}
+        return text;
+    }
 
-	private TextListener triggerExtraction() throws IOException {
-		TextListener tl = new TextListener();
-		FormatTrackingHSSFListener ft = new FormatTrackingHSSFListener(tl);
-		tl._ft = ft;
+    @Override
+    public void close() throws IOException { }
 
-		// Register and process
-		HSSFEventFactory factory = new HSSFEventFactory();
-		HSSFRequest request = new HSSFRequest();
-		request.addListenerForAllRecords(ft);
+    private TextListener triggerExtraction() throws IOException {
+        TextListener tl = new TextListener();
+        FormatTrackingHSSFListener ft = new FormatTrackingHSSFListener(tl);
+        tl._ft = ft;
 
-		factory.processWorkbookEvents(request, _dir);
+        // Register and process
+        HSSFEventFactory factory = new HSSFEventFactory();
+        HSSFRequest request = new HSSFRequest();
+        request.addListenerForAllRecords(ft);
 
-		return tl;
-	}
+        factory.processWorkbookEvents(request, _dir);
 
-	private class TextListener implements HSSFListener {
-		FormatTrackingHSSFListener _ft;
-		private SSTRecord sstRecord;
+        return tl;
+    }
 
-		private final List<String> sheetNames;
-		final StringBuilder _text = new StringBuilder();
-		private int sheetNum = -1;
-		private int rowNum;
+    private class TextListener implements HSSFListener {
+        FormatTrackingHSSFListener _ft;
+        private SSTRecord sstRecord;
 
-		private boolean outputNextStringValue = false;
-		private int nextRow = -1;
+        private final List<String> sheetNames;
+        final StringBuilder _text = new StringBuilder();
+        private int sheetNum = -1;
+        private int rowNum;
 
-		public TextListener() {
-			sheetNames = new ArrayList<>();
-		}
-		public void processRecord(Record record) {
-			String thisText = null;
-			int thisRow = -1;
+        private boolean outputNextStringValue = false;
+        private int nextRow = -1;
 
-			switch(record.getSid()) {
-			case BoundSheetRecord.sid:
-				BoundSheetRecord sr = (BoundSheetRecord)record;
-				sheetNames.add(sr.getSheetname());
-				break;
-			case BOFRecord.sid:
-				BOFRecord bof = (BOFRecord)record;
-				if(bof.getType() == BOFRecord.TYPE_WORKSHEET) {
-					sheetNum++;
-					rowNum = -1;
+        public TextListener() {
+            sheetNames = new ArrayList<>();
+        }
+        public void processRecord(Record record) {
+            String thisText = null;
+            int thisRow = -1;
 
-					if(_includeSheetNames) {
-						if(_text.length() > 0) _text.append("\n");
-						_text.append(sheetNames.get(sheetNum));
-					}
-				}
-				break;
-			case SSTRecord.sid:
-				sstRecord = (SSTRecord)record;
-				break;
+            switch(record.getSid()) {
+            case BoundSheetRecord.sid:
+                BoundSheetRecord sr = (BoundSheetRecord)record;
+                sheetNames.add(sr.getSheetname());
+                break;
+            case BOFRecord.sid:
+                BOFRecord bof = (BOFRecord)record;
+                if(bof.getType() == BOFRecord.TYPE_WORKSHEET) {
+                    sheetNum++;
+                    rowNum = -1;
 
-			case FormulaRecord.sid:
-				FormulaRecord frec = (FormulaRecord) record;
-				thisRow = frec.getRow();
+                    if(_includeSheetNames) {
+                        if(_text.length() > 0) _text.append("\n");
+                        _text.append(sheetNames.get(sheetNum));
+                    }
+                }
+                break;
+            case SSTRecord.sid:
+                sstRecord = (SSTRecord)record;
+                break;
 
-				if(_formulasNotResults) {
-					thisText = HSSFFormulaParser.toFormulaString((HSSFWorkbook)null, frec.getParsedExpression());
-				} else {
-					if(frec.hasCachedResultString()) {
-						// Formula result is a string
-						// This is stored in the next record
-						outputNextStringValue = true;
-						nextRow = frec.getRow();
-					} else {
-						thisText = _ft.formatNumberDateCell(frec);
-					}
-				}
-				break;
-			case StringRecord.sid:
-				if(outputNextStringValue) {
-					// String for formula
-					StringRecord srec = (StringRecord)record;
-					thisText = srec.getString();
-					thisRow = nextRow;
-					outputNextStringValue = false;
-				}
-				break;
-			case LabelRecord.sid:
-				LabelRecord lrec = (LabelRecord) record;
-				thisRow = lrec.getRow();
-				thisText = lrec.getValue();
-				break;
-			case LabelSSTRecord.sid:
-				LabelSSTRecord lsrec = (LabelSSTRecord) record;
-				thisRow = lsrec.getRow();
-				if(sstRecord == null) {
-					throw new IllegalStateException("No SST record found");
-				}
-				thisText = sstRecord.getString(lsrec.getSSTIndex()).toString();
-				break;
-			case NoteRecord.sid:
-				NoteRecord nrec = (NoteRecord) record;
-				thisRow = nrec.getRow();
-				// TODO: Find object to match nrec.getShapeId()
-				break;
-			case NumberRecord.sid:
-				NumberRecord numrec = (NumberRecord) record;
-				thisRow = numrec.getRow();
-				thisText = _ft.formatNumberDateCell(numrec);
-				break;
-			default:
-				break;
-			}
+            case FormulaRecord.sid:
+                FormulaRecord frec = (FormulaRecord) record;
+                thisRow = frec.getRow();
 
-			if(thisText != null) {
-				if(thisRow != rowNum) {
-					rowNum = thisRow;
-					if(_text.length() > 0)
-						_text.append("\n");
-				} else {
-					_text.append("\t");
-				}
-				_text.append(thisText);
-			}
-		}
-	}
+                if(_formulasNotResults) {
+                    thisText = HSSFFormulaParser.toFormulaString((HSSFWorkbook)null, frec.getParsedExpression());
+                } else {
+                    if(frec.hasCachedResultString()) {
+                        // Formula result is a string
+                        // This is stored in the next record
+                        outputNextStringValue = true;
+                        nextRow = frec.getRow();
+                    } else {
+                        thisText = _ft.formatNumberDateCell(frec);
+                    }
+                }
+                break;
+            case StringRecord.sid:
+                if(outputNextStringValue) {
+                    // String for formula
+                    StringRecord srec = (StringRecord)record;
+                    thisText = srec.getString();
+                    thisRow = nextRow;
+                    outputNextStringValue = false;
+                }
+                break;
+            case LabelRecord.sid:
+                LabelRecord lrec = (LabelRecord) record;
+                thisRow = lrec.getRow();
+                thisText = lrec.getValue();
+                break;
+            case LabelSSTRecord.sid:
+                LabelSSTRecord lsrec = (LabelSSTRecord) record;
+                thisRow = lsrec.getRow();
+                if(sstRecord == null) {
+                    throw new IllegalStateException("No SST record found");
+                }
+                thisText = sstRecord.getString(lsrec.getSSTIndex()).toString();
+                break;
+            case NoteRecord.sid:
+                NoteRecord nrec = (NoteRecord) record;
+                thisRow = nrec.getRow();
+                // TODO: Find object to match nrec.getShapeId()
+                break;
+            case NumberRecord.sid:
+                NumberRecord numrec = (NumberRecord) record;
+                thisRow = numrec.getRow();
+                thisText = _ft.formatNumberDateCell(numrec);
+                break;
+            default:
+                break;
+            }
+
+            if(thisText != null) {
+                if(thisRow != rowNum) {
+                    rowNum = thisRow;
+                    if(_text.length() > 0)
+                        _text.append("\n");
+                } else {
+                    _text.append("\t");
+                }
+                _text.append(thisText);
+            }
+        }
+    }
 }

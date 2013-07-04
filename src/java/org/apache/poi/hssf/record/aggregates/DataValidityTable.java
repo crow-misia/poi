@@ -37,11 +37,11 @@ public final class DataValidityTable extends RecordAggregate {
 	 * The list of data validations for the current sheet.
 	 * Note - this may be empty (contrary to OOO documentation)
 	 */
-	private final List _validationList;
+	private final List<Record> _validationList;
 
 	public DataValidityTable(RecordStream rs) {
 		_headerRec = (DVALRecord) rs.getNext();
-		List temp = new ArrayList();
+		List<Record> temp = new ArrayList<>();
 		while (rs.peekNextClass() == DVRecord.class) {
 			temp.add(rs.getNext());
 		}
@@ -50,7 +50,7 @@ public final class DataValidityTable extends RecordAggregate {
 
 	public DataValidityTable() {
 		_headerRec = new DVALRecord();
-		_validationList = new ArrayList();
+		_validationList = new ArrayList<>();
 	}
 
 	public void visitContainedRecords(RecordVisitor rv) {
@@ -58,8 +58,8 @@ public final class DataValidityTable extends RecordAggregate {
 			return;
 		}
 		rv.visitRecord(_headerRec);
-		for (int i = 0; i < _validationList.size(); i++) {
-			rv.visitRecord((Record) _validationList.get(i));
+		for (final Record r : _validationList) {
+			rv.visitRecord(r);
 		}
 	}
 

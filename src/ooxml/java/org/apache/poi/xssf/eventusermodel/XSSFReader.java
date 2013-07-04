@@ -75,7 +75,7 @@ public class XSSFReader {
      */
     public SharedStringsTable getSharedStringsTable() throws IOException, InvalidFormatException {
         List<PackagePart> parts = pkg.getPartsByContentType( XSSFRelation.SHARED_STRINGS.getContentType());
-        return parts.size() == 0 ? null : new SharedStringsTable(parts.get(0), null);
+        return parts.isEmpty() ? null : new SharedStringsTable(parts.get(0), null);
     }
 
     /**
@@ -84,7 +84,7 @@ public class XSSFReader {
      */
     public StylesTable getStylesTable() throws IOException, InvalidFormatException {
         List<PackagePart> parts = pkg.getPartsByContentType( XSSFRelation.STYLES.getContentType());
-        if(parts.size() == 0) return null;
+        if(parts.isEmpty()) return null;
         
         // Create the Styles Table, and associate the Themes if present
         StylesTable styles = new StylesTable(parts.get(0), null);

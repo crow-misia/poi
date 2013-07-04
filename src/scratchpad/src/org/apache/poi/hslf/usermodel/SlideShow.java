@@ -614,7 +614,7 @@ public final class SlideShow {
 				nt.remove(_slides[i].getNotesSheet());
 			}
 		}
-		if (sa.size() == 0) {
+		if (sa.isEmpty()) {
 			_documentRecord.removeSlideListWithText(slwt);
 		} else {
 			slwt.setSlideAtomsSets(sa.toArray(new SlideAtomsSet[sa.size()]));
@@ -638,7 +638,7 @@ public final class SlideShow {
 							records.addAll(Arrays.asList(ns.getSlideRecords()));
 					}
 				}
-				if (na.size() == 0) {
+				if (na.isEmpty()) {
 					_documentRecord.removeSlideListWithText(nslwt);
 				} else {
 					nslwt.setSlideAtomsSets(na.toArray(new SlideAtomsSet[na.size()]));

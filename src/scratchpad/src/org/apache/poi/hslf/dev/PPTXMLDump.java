@@ -21,6 +21,7 @@ import org.apache.poi.util.LittleEndian;
 import org.apache.poi.hslf.record.RecordTypes;
 import org.apache.poi.poifs.filesystem.*;
 import java.io.*;
+import java.util.Arrays;
 
 /**
  * Utility class which dumps raw contents of a ppt file into XML format
@@ -144,12 +145,9 @@ public final class PPTXMLDump {
     public void dumpPictures(byte[] data, int padding) throws IOException {
         int pos = 0;
         while (pos < data.length) {
-            byte[] header = new byte[PICT_HEADER_SIZE];
-
-            System.arraycopy(data, pos, header, 0, header.length);
-            int size = LittleEndian.getInt(header, 4) - 17;
-            byte[] pictdata = new byte[size];
-            System.arraycopy(data, pos + PICT_HEADER_SIZE, pictdata, 0, pictdata.length);
+            final byte[] header = Arrays.copyOf(data, PICT_HEADER_SIZE);
+            final int size = LittleEndian.getInt(header, 4) - 17;
+            final int offset = pos + PICT_HEADER_SIZE;
             pos += PICT_HEADER_SIZE + size;
 
             padding++;
@@ -159,7 +157,7 @@ public final class PPTXMLDump {
             dump(out, header, 0, header.length, padding, true);
             write(out, "</header>" + CR, padding);
             write(out, "<imgdata>" + CR, padding);
-            dump(out, pictdata, 0, Math.min(pictdata.length, 100), padding, true);
+            dump(out, data, offset, Math.min(size, 100), padding, true);
             write(out, "</imgdata>" + CR, padding);
             padding--;
             write(out, "</picture>" + CR, padding);

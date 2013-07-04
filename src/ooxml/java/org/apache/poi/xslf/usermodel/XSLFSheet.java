@@ -177,7 +177,7 @@ public abstract class XSLFSheet extends POIXMLDocumentPart implements XSLFShapeC
         List<PackagePart>  pics = getPackagePart().getPackage()
                 .getPartsByName(Pattern.compile("/ppt/media/image" + (pictureIndex + 1) + ".*?"));
 
-        if(pics.size() == 0) {
+        if(pics.isEmpty()) {
             throw new IllegalArgumentException("Picture with index=" + pictureIndex + " was not found");
         }
 
