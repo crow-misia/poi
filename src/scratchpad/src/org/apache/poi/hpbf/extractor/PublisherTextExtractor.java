@@ -53,69 +53,67 @@ public final class PublisherTextExtractor extends POIOLE2TextExtractor {
    public PublisherTextExtractor(InputStream is) throws IOException {
       this(new POIFSFileSystem(is));
    }
-   @Deprecated
-   public PublisherTextExtractor(DirectoryNode dir, POIFSFileSystem fs) throws IOException {
-      this(new HPBFDocument(dir, fs));
-   }
 
-	/**
-	 * Should a call to getText() return hyperlinks inline
-	 *  with the text?
-	 * Default is no
-	 */
-	public void setHyperlinksByDefault(boolean hyperlinksByDefault) {
-		this.hyperlinksByDefault = hyperlinksByDefault;
-	}
+    /**
+     * Should a call to getText() return hyperlinks inline
+     *  with the text?
+     * Default is no
+     */
+    public void setHyperlinksByDefault(boolean hyperlinksByDefault) {
+        this.hyperlinksByDefault = hyperlinksByDefault;
+    }
 
 
-	public String getText() {
-		StringBuilder text = new StringBuilder();
+    public String getText() {
+        StringBuilder text = new StringBuilder();
 
-		// Get the text from the Quill Contents
-		QCBit[] bits = doc.getQuillContents().getBits();
-		for(int i=0; i<bits.length; i++) {
-			if(bits[i] != null && bits[i] instanceof QCTextBit) {
-				QCTextBit t = (QCTextBit)bits[i];
-				text.append( t.getText().replace('\r', '\n') );
-			}
-		}
+        // Get the text from the Quill Contents
+        QCBit[] bits = doc.getQuillContents().getBits();
+        for(int i=0; i<bits.length; i++) {
+            if(bits[i] != null && bits[i] instanceof QCTextBit) {
+                QCTextBit t = (QCTextBit)bits[i];
+                text.append( t.getText().replace('\r', '\n') );
+            }
+        }
 
-		// If requested, add in the hyperlinks
-		// Ideally, we'd do these inline, but the hyperlink
-		//  positions are relative to the text area the
-		//  hyperlink is in, and we have yet to figure out
-		//  how to tie that together.
-		if(hyperlinksByDefault) {
-			for(int i=0; i<bits.length; i++) {
-				if(bits[i] != null && bits[i] instanceof Type12) {
-					Type12 hyperlinks = (Type12)bits[i];
-					for(int j=0; j<hyperlinks.getNumberOfHyperlinks(); j++) {
-						text.append("<");
-						text.append(hyperlinks.getHyperlink(j));
-						text.append(">\n");
-					}
-				}
-			}
-		}
+        // If requested, add in the hyperlinks
+        // Ideally, we'd do these inline, but the hyperlink
+        //  positions are relative to the text area the
+        //  hyperlink is in, and we have yet to figure out
+        //  how to tie that together.
+        if(hyperlinksByDefault) {
+            for(int i=0; i<bits.length; i++) {
+                if(bits[i] != null && bits[i] instanceof Type12) {
+                    Type12 hyperlinks = (Type12)bits[i];
+                    for(int j=0; j<hyperlinks.getNumberOfHyperlinks(); j++) {
+                        text.append("<");
+                        text.append(hyperlinks.getHyperlink(j));
+                        text.append(">\n");
+                    }
+                }
+            }
+        }
 
-		// Get more text
-		// TODO
+        // Get more text
+        // TODO
 
-		return text.toString();
-	}
+        return text.toString();
+    }
 
+    @Override
+    public void close() throws IOException { }
 
-	public static void main(String[] args) throws Exception {
-		if(args.length == 0) {
-			System.err.println("Use:");
-			System.err.println("  PublisherTextExtractor <file.pub>");
-		}
+    public static void main(String[] args) throws Exception {
+        if(args.length == 0) {
+            System.err.println("Use:");
+            System.err.println("  PublisherTextExtractor <file.pub>");
+        }
 
-		for(int i=0; i<args.length; i++) {
-			PublisherTextExtractor te = new PublisherTextExtractor(
-					new FileInputStream(args[i])
-			);
-			System.out.println(te.getText());
-		}
-	}
+        for(int i=0; i<args.length; i++) {
+            PublisherTextExtractor te = new PublisherTextExtractor(
+                    new FileInputStream(args[i])
+            );
+            System.out.println(te.getText());
+        }
+    }
 }

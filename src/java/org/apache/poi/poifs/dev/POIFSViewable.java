@@ -44,8 +44,7 @@ public interface POIFSViewable
      *
      * @return an array of Object; may not be null, but may be empty
      */
-
-    public Object [] getViewableArray();
+    Object[] getViewableArray();
     
     /**
      * Get an Iterator of objects, some of which may implement
@@ -54,7 +53,7 @@ public interface POIFSViewable
      * @return an Iterator; may not be null, but may have an empty
      * back end store
      */
-    public Iterator getViewableIterator();
+    Iterator<?> getViewableIterator();
 
     /**
      * Give viewers a hint as to whether to call getViewableArray or
@@ -63,8 +62,7 @@ public interface POIFSViewable
      * @return true if a viewer should call getViewableArray, false if
      *         a viewer should call getViewableIterator
      */
-
-    public boolean preferArray();
+    boolean preferArray();
 
     /**
      * Provides a short description of the object, to be used when a
@@ -72,7 +70,6 @@ public interface POIFSViewable
      *
      * @return short description
      */
-
-    public String getShortDescription();
+    String getShortDescription();
 }   // end public interface POIFSViewable
 

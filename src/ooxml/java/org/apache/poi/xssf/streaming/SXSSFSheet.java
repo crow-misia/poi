@@ -201,7 +201,7 @@ public class SXSSFSheet implements Sheet, Cloneable
     {
         if(_writer.getNumberOfFlushedRows() > 0)
             return _writer.getLowestIndexOfFlushedRows();
-        return _rows.size() == 0 ? 0 : _rows.firstKey();
+        return _rows.isEmpty() ? 0 : _rows.firstKey();
     }
 
     /**
@@ -211,7 +211,7 @@ public class SXSSFSheet implements Sheet, Cloneable
      */
     public int getLastRowNum()
     {
-        return _rows.size() == 0 ? 0 : _rows.lastKey();
+        return _rows.isEmpty() ? 0 : _rows.lastKey();
     }
 
     /**

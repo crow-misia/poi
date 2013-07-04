@@ -228,7 +228,7 @@ public class PAPBinTable
                 lastPapxIndex = oldPapxSortedByEndPos.size() - 1;
             }
 
-            if ( papxs.size() == 0 )
+            if ( papxs.isEmpty() )
             {
                 logger.log( POILogger.WARN, "Paragraph [",
                         Integer.valueOf( startInclusive ), "; ",

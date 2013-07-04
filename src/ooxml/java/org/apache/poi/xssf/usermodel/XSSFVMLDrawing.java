@@ -147,9 +147,10 @@ public final class XSSFVMLDrawing extends POIXMLDocumentPart {
         rootCursor.toNextToken();
         rootCursor.beginElement("xml");
 
-        for(int i=0; i < _items.size(); i++){
-            XmlCursor xc = _items.get(i).newCursor();
-            rootCursor.beginElement(_qnames.get(i));
+        int i = 0;
+        for(final XmlObject xo : _items) {
+            XmlCursor xc = xo.newCursor();
+            rootCursor.beginElement(_qnames.get(i++));
             while(xc.toNextToken() == XmlCursor.TokenType.ATTR) {
                 Node anode = xc.getDomNode();
                 rootCursor.insertAttributeWithValue(anode.getLocalName(), anode.getNamespaceURI(), anode.getNodeValue());

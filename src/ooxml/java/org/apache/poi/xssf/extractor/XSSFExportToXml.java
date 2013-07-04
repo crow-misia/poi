@@ -75,9 +75,9 @@ import org.xml.sax.SAXException;
  * <li> no &lt;substitutionGroup&gt; in complex type/element declaration </li>
  * </ul>
  */
-public class XSSFExportToXml implements Comparator<String>{
+public final class XSSFExportToXml implements Comparator<String>{
 
-    private XSSFMap map;
+    private final XSSFMap map;
 
     /**
      * Creates a new exporter and sets the mapping to be used when generating the XML output document
@@ -106,9 +106,7 @@ public class XSSFExportToXml implements Comparator<String>{
 
         DocumentBuilderFactory dbfac = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = dbfac.newDocumentBuilder();
-        Document doc = docBuilder.newDocument();
-
-        return doc;
+        return docBuilder.newDocument();
     }
 
     /**
@@ -311,8 +309,11 @@ public class XSSFExportToXml implements Comparator<String>{
             String axisName = removeNamespace(xpathTokens[i]);
 
 
-            if (!axisName.startsWith("@")) {
+            if (axisName.startsWith("@")) {
+                Node attribute = createAttribute(doc, currentNode, axisName);
 
+                currentNode = attribute;
+            } else {
                 NodeList list =currentNode.getChildNodes();
 
                 Node selectedNode = null;
@@ -324,12 +325,6 @@ public class XSSFExportToXml implements Comparator<String>{
                     selectedNode = createElement(doc, currentNode, axisName);
                 }
                 currentNode = selectedNode;
-            } else {
-
-
-                Node attribute = createAttribute(doc, currentNode, axisName);
-
-                currentNode = attribute;
             }
         }
         return currentNode;
@@ -359,7 +354,7 @@ public class XSSFExportToXml implements Comparator<String>{
 
     private Node selectNode(String axisName, NodeList list) {
         Node selectedNode = null;
-        for(int j=0;j<list.getLength();j++) {
+        for(int j=0, n=list.getLength();j<n;j++) {
             Node node = list.item(j);
             if (node.getNodeName().equals(axisName)) {
                 selectedNode=node;
@@ -431,7 +426,7 @@ public class XSSFExportToXml implements Comparator<String>{
         NodeList list  = complexType.getChildNodes();
         int indexOf = -1;
 
-        for(int i=0; i< list.getLength();i++) {
+        for(int i=0, n=list.getLength(); i < n;i++) {
             Node node = list.item(i);
             if (node instanceof Element) {
                 if (node.getLocalName().equals("element")) {
@@ -458,7 +453,7 @@ public class XSSFExportToXml implements Comparator<String>{
 
 
 
-        for(int i=0; i< list.getLength();i++) {
+        for(int i=0, n=list.getLength(); i < n;i++) {
             Node node = list.item(i);
             if ( node instanceof Element) {
                 if (node.getLocalName().equals("element")) {
@@ -474,9 +469,9 @@ public class XSSFExportToXml implements Comparator<String>{
             }
         }
         // Note: we expect that all the complex types are defined at root level
-        if (!"".equals(complexTypeName)) {
+        if (StringUtil.isNotEmpty(complexTypeName)) {
             NodeList  complexTypeList  = xmlSchema.getChildNodes();
-            for(int i=0; i< complexTypeList.getLength();i++) {
+            for(int i=0, n=complexTypeList.getLength(); i < n;i++) {
                 Node node = list.item(i);
                 if ( node instanceof Element) {
                     if (node.getLocalName().equals("complexType")) {
@@ -484,7 +479,7 @@ public class XSSFExportToXml implements Comparator<String>{
                         if (nameAttribute.getNodeValue().equals(complexTypeName)) {
 
                             NodeList complexTypeChildList  =node.getChildNodes();
-                            for(int j=0; j<complexTypeChildList.getLength();j++) {
+                            for(int j=0, m=complexTypeChildList.getLength(); j < m;j++) {
                                 Node sequence = complexTypeChildList.item(j);
 
                                 if ( sequence instanceof Element) {

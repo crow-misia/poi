@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.apache.poi.hsmf.datatypes.MAPIProperty;
+import org.apache.poi.util.HexDump;
 
 /**
  * Lists the different MAPI types
@@ -53,8 +54,7 @@ public class TypesLister {
    }
    private void list(List<MAPIProperty> list, PrintStream out) {
       for(MAPIProperty attr : list) {
-         String id = Integer.toHexString(attr.id);
-         while(id.length() < 4) { id = "0"+id; }
+         String id = HexDump.toHex((short) attr.id);
          
          int typeId = attr.usualType.getId();
          String typeIdStr = Integer.toString(typeId);

@@ -48,7 +48,7 @@ public class DirectoryNode
     // Map of Entry instances, keyed by their names
     private Map<String,Entry> _byname;
     // Our list of entries, kept sorted to preserve order
-    private ArrayList<Entry> _entries;
+    private List<Entry> _entries;
 
    // Only one of these two will exist
     // the POIFSFileSystem we belong to
@@ -525,17 +525,13 @@ public class DirectoryNode
      * @return an Iterator; may not be null, but may have an empty
      * back end store
      */
-    @SuppressWarnings("unchecked")
-    public Iterator getViewableIterator()
+    public Iterator<?> getViewableIterator()
     {
-        List components = new ArrayList();
+        List<Object> components = new ArrayList<>(_entries.size() + 1);
 
         components.add(getProperty());
-        Iterator<Entry> iter = _entries.iterator();
-        while (iter.hasNext())
-        {
-            components.add(iter.next());
-        }
+        components.addAll(_entries);
+
         return components.iterator();
     }
 

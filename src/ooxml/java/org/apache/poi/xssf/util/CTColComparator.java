@@ -21,7 +21,12 @@ import java.util.Comparator;
 
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol;
 
-public class CTColComparator implements Comparator<CTCol>{
+public final class CTColComparator implements Comparator<CTCol> {
+    public static final CTColComparator INSTANCE = new CTColComparator();
+
+    private CTColComparator() {
+        // nop.
+    }
 
     public int compare(CTCol o1, CTCol o2) {
         if (o1.getMin() < o2.getMin()) {
@@ -40,7 +45,4 @@ public class CTColComparator implements Comparator<CTCol>{
             return 0;
         }
     }
-    
-    
-    
 }

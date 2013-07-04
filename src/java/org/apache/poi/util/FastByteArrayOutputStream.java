@@ -73,11 +73,6 @@ public final class FastByteArrayOutputStream extends OutputStream {
         pos = newPos;
     }
 
-    @Override
-    public void close() {
-        // do nothing
-    }
-
     public int size() {
         return pos;
     }

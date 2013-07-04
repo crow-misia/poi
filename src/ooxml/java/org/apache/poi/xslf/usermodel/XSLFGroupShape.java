@@ -239,7 +239,7 @@ public class XSLFGroupShape extends XSLFShape implements XSLFShapeContainer {
         List<PackagePart>  pics = _sheet.getPackagePart().getPackage()
                 .getPartsByName(Pattern.compile("/ppt/media/image" + (pictureIndex + 1) + ".*?"));
 
-        if(pics.size() == 0) {
+        if(pics.isEmpty()) {
             throw new IllegalArgumentException("Picture with index=" + pictureIndex + " was not found");
         }
 

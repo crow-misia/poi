@@ -356,7 +356,7 @@ public final class TestExtractor extends POITestCase {
        
        // Open directly 
        for(DirectoryNode dir : files) {
-          PowerPointExtractor extractor = new PowerPointExtractor(dir, null);
+          PowerPointExtractor extractor = new PowerPointExtractor(dir);
           assertEquals(expectText, extractor.getText());
        }
 

@@ -698,7 +698,7 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
         wrapper.sheet = sheet;
         sheet.setId(wrapper.getPackageRelationship().getId());
         sheet.setSheetId(sheetNumber);
-        if(sheets.size() == 0) wrapper.setSelected(true);
+        if(sheets.isEmpty()) wrapper.setSelected(true);
         sheets.add(wrapper);
         return wrapper;
     }

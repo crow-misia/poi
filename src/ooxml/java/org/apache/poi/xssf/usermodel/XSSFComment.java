@@ -27,9 +27,9 @@ import schemasMicrosoftComVml.CTShape;
 import java.math.BigInteger;
 
 public class XSSFComment implements Comment {
-	
-	private final CTComment _comment;
-	private final CommentsTable _comments;
+    
+    private final CTComment _comment;
+    private final CommentsTable _comments;
     private final CTShape _vmlShape;
 
     /**
@@ -38,22 +38,22 @@ public class XSSFComment implements Comment {
     private XSSFRichTextString _str;
 
     /**
-	 * Creates a new XSSFComment, associated with a given
-	 *  low level comment object.
-	 */
-	public XSSFComment(CommentsTable comments, CTComment comment, CTShape vmlShape) {
-		_comment = comment;
-		_comments = comments;
+     * Creates a new XSSFComment, associated with a given
+     *  low level comment object.
+     */
+    public XSSFComment(CommentsTable comments, CTComment comment, CTShape vmlShape) {
+        _comment = comment;
+        _comments = comments;
         _vmlShape = vmlShape;
-	}
+    }
 
     /**
      *
      * @return Name of the original comment author. Default value is blank.
      */
     public String getAuthor() {
-		return _comments.getAuthor((int) _comment.getAuthorId());
-	}
+        return _comments.getAuthor((int) _comment.getAuthorId());
+    }
 
     /**
      * Name of the original comment author. Default value is blank.
@@ -69,16 +69,16 @@ public class XSSFComment implements Comment {
     /**
      * @return the 0-based column of the cell that the comment is associated with.
      */
-	public int getColumn() {
-		return new CellReference(_comment.getRef()).getCol();
-	}
+    public int getColumn() {
+        return new CellReference(_comment.getRef()).getCol();
+    }
 
     /**
      * @return the 0-based row index of the cell that the comment is associated with.
      */
-	public int getRow() {
-		return new CellReference(_comment.getRef()).getRow();
-	}
+    public int getRow() {
+        return new CellReference(_comment.getRef()).getRow();
+    }
 
     /**
      * @return whether the comment is visible
@@ -89,8 +89,8 @@ public class XSSFComment implements Comment {
             String style = _vmlShape.getStyle();
             visible = style != null && style.indexOf("visibility:visible") != -1;
         }
-		return visible;
-	}
+        return visible;
+    }
 
     /**
      * @param visible whether the comment is visible
@@ -117,60 +117,61 @@ public class XSSFComment implements Comment {
         _comments.referenceUpdated(oldRef, _comment);
         
         if(_vmlShape != null) {
-           _vmlShape.getClientDataArray(0).setColumnArray(
+            _vmlShape.getClientDataArray(0).setColumnArray(
                  new BigInteger[] { new BigInteger(String.valueOf(col)) }
-           );
-           
-           // There is a very odd xmlbeans bug when changing the column
-           //  arrays which can lead to corrupt pointer
-           // This call seems to fix them again... See bug #50795
-           _vmlShape.getClientDataList().toString();
+            );
+
+            // There is a very odd xmlbeans bug when changing the column
+            //  arrays which can lead to corrupt pointer
+            // This call seems to fix them again... See bug #50795
+            // _vmlShape.getClientDataList().toString();
         }
-	}
+    }
 
     /**
      * Set the row of the cell that contains the comment
      *
      * @param row the 0-based row of the cell that contains the comment
      */
-	public void setRow(int row) {
-	   String oldRef = _comment.getRef();
-	   
-		String newRef =
-			(new CellReference(row, getColumn())).formatAsString();
-		_comment.setRef(newRef);
-      _comments.referenceUpdated(oldRef, _comment);
+    public void setRow(int row) {
+        String oldRef = _comment.getRef();
+
+        String newRef =
+            (new CellReference(row, getColumn())).formatAsString();
+        _comment.setRef(newRef);
+        _comments.referenceUpdated(oldRef, _comment);
       
         if(_vmlShape != null) _vmlShape.getClientDataArray(0).setRowArray(0, new BigInteger(String.valueOf(row)));
     }
-	
+    
     /**
      * @return the rich text string of the comment
      */
-	public XSSFRichTextString getString() {
-		if(_str == null) {
+    public XSSFRichTextString getString() {
+        if(_str == null) {
             CTRst rst = _comment.getText();
-            if(rst != null) _str = new XSSFRichTextString(_comment.getText());
+            if(rst != null) _str = new XSSFRichTextString(rst);
         }
         return _str;
-	}
+    }
 
     /**
      * Sets the rich text string used by this comment.
      *
      * @param string  the XSSFRichTextString used by this object.
      */
-	public void setString(RichTextString string) {
-        if(!(string instanceof XSSFRichTextString)){
-            throw new IllegalArgumentException("Only XSSFRichTextString argument is supported");
+    public void setString(RichTextString string) {
+        if(string instanceof XSSFRichTextString){
+            _str = (XSSFRichTextString)string;
+            _comment.setText(_str.getCTRst());
+            return;
         }
-        _str = (XSSFRichTextString)string;
-        _comment.setText(_str.getCTRst());
-	}
-	
-	public void setString(String string) {
-		setString(new XSSFRichTextString(string));
-	}
+        throw new IllegalArgumentException("Only XSSFRichTextString argument is supported");
+    }
+    
+    public void setString(String string) {
+        setString(new XSSFRichTextString(string));
+    }
 
     /**
      * @return the xml bean holding this comment's properties

@@ -160,7 +160,10 @@ public class OutlookTextExtactor extends POIOLE2TextExtractor {
       
       return s.toString();
    }
-   
+
+   @Override
+   public void close() throws IOException { }
+
    /**
     * Takes a Display focused string, eg "Nick; Jim" and an iterator
     *  of emails, and does its best to return something like

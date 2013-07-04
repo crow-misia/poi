@@ -27,7 +27,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol;
 public final class TestCTColComparator extends TestCase {
 
     public void testCompare() {
-        CTColComparator comparator = new CTColComparator();
+        CTColComparator comparator = CTColComparator.INSTANCE;
         CTCol o1 = CTCol.Factory.newInstance();
         o1.setMin(1);
         o1.setMax(10);
@@ -45,7 +45,7 @@ public final class TestCTColComparator extends TestCase {
     }
 
     public void testArraysSort() {
-        CTColComparator comparator = new CTColComparator();
+        CTColComparator comparator = CTColComparator.INSTANCE;
         CTCol o1 = CTCol.Factory.newInstance();
         o1.setMin(1);
         o1.setMax(10);

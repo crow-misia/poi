@@ -320,4 +320,7 @@ public final class WordExtractor extends POIOLE2TextExtractor
     {
         return Range.stripFields( text );
     }
+
+    @Override
+    public void close() throws IOException { }
 }

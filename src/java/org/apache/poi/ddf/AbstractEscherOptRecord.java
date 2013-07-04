@@ -124,15 +124,7 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
      */
     public void sortProperties()
     {
-        Collections.sort( properties, new Comparator<EscherProperty>()
-        {
-            public int compare( EscherProperty p1, EscherProperty p2 )
-            {
-                final short s1 = p1.getPropertyNumber();
-                final short s2 = p2.getPropertyNumber();
-                return s1 < s2 ? -1 : s1 == s2 ? 0 : 1;
-            }
-        } );
+        Collections.sort( properties, PROPERTY_COMPARATOR );
     }
 
     /**
@@ -209,4 +201,12 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
         builder.append(tab).append("</").append(getClass().getSimpleName()).append(">\n");
         return builder.toString();
     }
+
+    private static final Comparator<EscherProperty> PROPERTY_COMPARATOR = new Comparator<EscherProperty>() {
+        public int compare( EscherProperty p1, EscherProperty p2 ) {
+            final short s1 = p1.getPropertyNumber();
+            final short s2 = p2.getPropertyNumber();
+            return s1 < s2 ? -1 : s1 == s2 ? 0 : 1;
+        }
+    };
 }

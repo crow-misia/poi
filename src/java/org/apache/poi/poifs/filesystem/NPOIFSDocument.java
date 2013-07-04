@@ -39,7 +39,6 @@ import org.apache.poi.util.IOUtils;
 public final class NPOIFSDocument implements POIFSViewable {
    private DocumentProperty _property;
 
-   private NPOIFSFileSystem _filesystem;
    private NPOIFSStream _stream;
    private int _block_size;
 	
@@ -50,14 +49,14 @@ public final class NPOIFSDocument implements POIFSViewable {
       throws IOException
    {
       this._property = property;
-      this._filesystem = filesystem;
 
       if(property.getSize() < POIFSConstants.BIG_BLOCK_MINIMUM_DOCUMENT_SIZE) {
-         _stream = new NPOIFSStream(_filesystem.getMiniStore(), property.getStartBlock());
-         _block_size = _filesystem.getMiniStore().getBlockStoreBlockSize();
+          final NPOIFSMiniStore miniStore = filesystem.getMiniStore();
+         _stream = new NPOIFSStream(miniStore, property.getStartBlock());
+         _block_size = miniStore.getBlockStoreBlockSize();
       } else {
-         _stream = new NPOIFSStream(_filesystem, property.getStartBlock());
-         _block_size = _filesystem.getBlockStoreBlockSize();
+         _stream = new NPOIFSStream(filesystem, property.getStartBlock());
+         _block_size = filesystem.getBlockStoreBlockSize();
       }
    }
 
@@ -70,8 +69,6 @@ public final class NPOIFSDocument implements POIFSViewable {
    public NPOIFSDocument(String name, NPOIFSFileSystem filesystem, InputStream stream) 
       throws IOException 
    {
-      this._filesystem = filesystem;
-
       // Buffer the contents into memory. This is a bit icky...
       // TODO Replace with a buffer up to the mini stream size, then streaming write
       byte[] contents;
@@ -88,10 +85,10 @@ public final class NPOIFSDocument implements POIFSViewable {
       // Do we need to store as a mini stream or a full one?
       if(contents.length <= POIFSConstants.BIG_BLOCK_MINIMUM_DOCUMENT_SIZE) {
          _stream = new NPOIFSStream(filesystem.getMiniStore());
-         _block_size = _filesystem.getMiniStore().getBlockStoreBlockSize();
+         _block_size = filesystem.getMiniStore().getBlockStoreBlockSize();
       } else {
          _stream = new NPOIFSStream(filesystem);
-         _block_size = _filesystem.getBlockStoreBlockSize();
+         _block_size = filesystem.getBlockStoreBlockSize();
       }
 
       // Store it
@@ -154,7 +151,7 @@ public final class NPOIFSDocument implements POIFSViewable {
     * @return an Iterator; may not be null, but may have an empty back end
     *		 store
     */
-   public Iterator getViewableIterator() {
+   public Iterator<?> getViewableIterator() {
       return Collections.emptyIterator();
    }
 

@@ -228,7 +228,7 @@ public class XSSFRow implements Row, Comparable<XSSFRow> {
      *  or -1 if the row does not contain any cells.
      */
     public short getFirstCellNum() {
-    	return (short)(_cells.size() == 0 ? -1 : _cells.firstKey());
+    	return (short)(_cells.isEmpty() ? -1 : _cells.firstKey());
     }
 
     /**
@@ -251,7 +251,7 @@ public class XSSFRow implements Row, Comparable<XSSFRow> {
      *   or -1 if the row does not contain any cells.
      */
     public short getLastCellNum() {
-    	return (short)(_cells.size() == 0 ? -1 : (_cells.lastKey() + 1));
+    	return (short)(_cells.isEmpty() ? -1 : (_cells.lastKey() + 1));
     }
 
     /**

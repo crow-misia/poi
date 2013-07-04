@@ -80,7 +80,8 @@ public class PPTX2PNG {
         int height = (int) (pgsize.height * scale);
 
         XSLFSlide[] slide = ppt.getSlides();
-        for (int i = 0; i < slide.length; i++) {
+        final int num = slide.length;
+        for (int i = 0; i < num; i++) {
             if (slidenum != -1 && slidenum != (i + 1)) continue;
 
             String title = slide[i].getTitle();
@@ -106,9 +107,9 @@ public class PPTX2PNG {
             // save the result
             int sep = file.lastIndexOf(".");
             String fname = file.substring(0, sep == -1 ? file.length() : sep) + "-" + (i + 1) +".png";
-            FileOutputStream out = new FileOutputStream(fname);
-            ImageIO.write(img, "png", out);
-            out.close();
+            try (final FileOutputStream out = new FileOutputStream(fname)) {
+                ImageIO.write(img, "png", out);
+            }
         }
         System.out.println("Done");
     }

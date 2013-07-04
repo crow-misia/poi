@@ -424,18 +424,7 @@ public final class MutableSection extends Section
         }
 
         /* Sort the property list by their property IDs: */
-        Collections.sort(preprops, new Comparator<Property>()
-            {
-                public int compare(final Property p1, final Property p2)
-                {
-                    if (p1.getID() < p2.getID())
-                        return -1;
-                    else if (p1.getID() == p2.getID())
-                        return 0;
-                    else
-                        return 1;
-                }
-            });
+        Collections.sort(preprops, PROPERTY_COMPARATOR);
 
         /* Write the properties and the property list into their respective
          * streams: */
@@ -695,4 +684,15 @@ public final class MutableSection extends Section
         setProperty(PropertyIDMap.PID_CODEPAGE, Variant.VT_I2,
                 Integer.valueOf(codepage));
     }
+
+    private static final Comparator<Property> PROPERTY_COMPARATOR = new Comparator<Property>() {
+        public int compare(final Property p1, final Property p2) {
+            if (p1.getID() < p2.getID())
+                return -1;
+            if (p1.getID() == p2.getID())
+                return 0;
+            return 1;
+        }
+    };
+
 }
