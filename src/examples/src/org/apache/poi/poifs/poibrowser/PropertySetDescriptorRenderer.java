@@ -159,10 +159,10 @@ public class PropertySetDescriptorRenderer extends DocumentDescriptorRenderer
                 b.append(' ');
                 b.append("0x" + Codec.hexEncode(b2, 4, b2.length - 4));
             }
-            else if (value != null)
-                b.append(value.toString());
-            else
+            else if (value == null)
                 b.append("null");
+            else
+                b.append(value.toString());
         }
         return b.toString();
     }
