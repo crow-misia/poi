@@ -118,13 +118,11 @@ public final class EscherContainerRecord extends EscherRecord {
     }
 
     public int getRecordSize() {
-        int childRecordsSize = 0;
-        Iterator<EscherRecord> iterator = _childRecords.iterator();
-        while (iterator.hasNext()) {
-            EscherRecord r = iterator.next();
+        int childRecordsSize = 8;
+        for (final EscherRecord r : _childRecords) {
             childRecordsSize += r.getRecordSize();
         }
-        return 8 + childRecordsSize;
+        return childRecordsSize;
     }
 
     /**
@@ -132,9 +130,7 @@ public final class EscherContainerRecord extends EscherRecord {
      *  given recordId?
      */
     public boolean hasChildOfType(short recordId) {
-        Iterator<EscherRecord> iterator = _childRecords.iterator();
-        while (iterator.hasNext()) {
-            EscherRecord r = iterator.next();
+        for (final EscherRecord r : _childRecords) {
             if(r.getRecordId() == recordId) {
                 return true;
             }
@@ -168,10 +164,10 @@ public final class EscherContainerRecord extends EscherRecord {
             return _index < _list.size();
         }
         public EscherRecord next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
+            if (hasNext()) {
+                return _list.get(_index++);
             }
-            return _list.get(_index++);
+            throw new NoSuchElementException();
         }
         public void remove() {
             throw new UnsupportedOperationException();
@@ -200,10 +196,8 @@ public final class EscherContainerRecord extends EscherRecord {
      *   2 or 3)
      */
     public List<EscherContainerRecord> getChildContainers() {
-        List<EscherContainerRecord> containers = new ArrayList<>();
-        Iterator<EscherRecord> iterator = _childRecords.iterator();
-        while (iterator.hasNext()) {
-            EscherRecord r = iterator.next();
+        final List<EscherContainerRecord> containers = new ArrayList<>();
+        for (final EscherRecord r : _childRecords) {
             if(r instanceof EscherContainerRecord) {
                 containers.add((EscherContainerRecord) r);
             }
@@ -232,10 +226,8 @@ public final class EscherContainerRecord extends EscherRecord {
 
     public void display(PrintWriter w, int indent) {
         super.display(w, indent);
-        for (Iterator<EscherRecord> iterator = _childRecords.iterator(); iterator.hasNext();)
-        {
-            EscherRecord escherRecord = iterator.next();
-            escherRecord.display(w, indent + 1);
+        for (final EscherRecord r : _childRecords) {
+            r.display(w, indent + 1);
         }
     }
 
@@ -244,7 +236,7 @@ public final class EscherContainerRecord extends EscherRecord {
     }
 
     public void addChildBefore(EscherRecord record, int insertBeforeRecordId) {
-        for (int i = 0; i < _childRecords.size(); i++) {
+        for (int i = 0, n = _childRecords.size(); i < n; i++) {
             EscherRecord rec = _childRecords.get(i);
             if(rec.getRecordId() == insertBeforeRecordId){
                 _childRecords.add(i++, record);
@@ -263,12 +255,9 @@ public final class EscherContainerRecord extends EscherRecord {
             children.append( "  children: " + nl );
 
             int count = 0;
-            for ( Iterator<EscherRecord> iterator = _childRecords.iterator(); iterator
-                    .hasNext(); )
-            {
-                EscherRecord record = iterator.next();
-                children.append( "   Child " + count + ":" + nl );
-                String childResult = String.valueOf( record );
+            for (final EscherRecord r : _childRecords) {
+                children.append( "   Child " ).append ( count ).append( ':' ).append( nl );
+                String childResult = String.valueOf( r );
                 childResult = childResult.replaceAll( "\n", "\n    " );
                 children.append( "    " );
                 children.append( childResult );

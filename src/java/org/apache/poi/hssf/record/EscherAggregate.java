@@ -390,7 +390,7 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
         };
 
         // Create one big buffer
-        FastByteArrayOutputStream buffer = new FastByteArrayOutputStream();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         EscherAggregate agg = new EscherAggregate(false);
         int loc = locFirstDrawingRecord;
         while (loc + 1 < records.size()
@@ -414,7 +414,7 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
         // Decode the shapes
         // agg.escherRecords = new ArrayList();
         int pos = 0;
-        final byte[] data = buffer.getRawArray();
+        final byte[] data = buffer.toByteArray();
         final int size = buffer.size();
         while (pos < size) {
             EscherRecord r = recordFactory.createRecord(data, pos);
@@ -580,7 +580,7 @@ public final class EscherAggregate extends AbstractEscherHolderRecord {
      */
     private int getEscherRecordSize(List<EscherRecord> records) {
         int size = 0;
-        for (EscherRecord record : records){
+        for (final EscherRecord record : records){
             size += record.getRecordSize();
         }
         return size;
