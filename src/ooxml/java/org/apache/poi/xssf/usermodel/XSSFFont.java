@@ -44,7 +44,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.STVerticalAlignRun;
  *
  * @author Gisella Bronzetti
  */
-public class XSSFFont implements Font {
+public final class XSSFFont implements Font {
 
     /**
      * By default, Microsoft Office Excel 2007 uses the Calibry font in font size 11
@@ -61,7 +61,7 @@ public class XSSFFont implements Font {
     public static final short DEFAULT_FONT_COLOR = IndexedColors.BLACK.getIndex();
 
     private ThemesTable _themes;
-    private CTFont _ctFont;
+    private final CTFont _ctFont;
     private short _index;
 
     /**
@@ -149,15 +149,14 @@ public class XSSFFont implements Font {
      */
     public XSSFColor getXSSFColor() {
         CTColor ctColor = _ctFont.sizeOfColorArray() == 0 ? null : _ctFont.getColorArray(0);
-        if(ctColor != null) {
-           XSSFColor color = new XSSFColor(ctColor);
-           if(_themes != null) {
-              _themes.inheritFromThemeAsRequired(color);
-           }
-           return color;
-        } else {
-           return null;
+        if(ctColor == null) {
+            return null;
         }
+        XSSFColor color = new XSSFColor(ctColor);
+        if(_themes != null) {
+            _themes.inheritFromThemeAsRequired(color);
+        }
+        return color;
     }
 
 

@@ -175,19 +175,18 @@ public final class TestUnfixedBugs extends TestCase {
 		{
 			Font font = wb.getFontAt((short)0);
 			if(font instanceof XSSFFont) {
-				XSSFFont xfont = (XSSFFont) wb.getFontAt((short)0);
+				XSSFFont xfont = (XSSFFont) font;
 				CTFontImpl ctFont = (CTFontImpl) xfont.getCTFont();
 				assertEquals(0, ctFont.sizeOfBArray());
 			}
 		}
 
-		FileOutputStream fileOutStream = new FileOutputStream(outFile);
-		wb.write(fileOutStream);
-		fileOutStream.close();
+		try (final FileOutputStream fileOutStream = new FileOutputStream(outFile)) {
+			wb.write(fileOutStream);
+		}
 		//System.out.println("File \""+outFile.getName()+"\" has been saved successfully");
 
-		FileInputStream is = new FileInputStream(outFile);
-		try {
+		try (final FileInputStream is = new FileInputStream(outFile)) {
 			final Workbook newWB;
 			if(wb instanceof XSSFWorkbook) {
 				newWB = new XSSFWorkbook(is);
@@ -199,8 +198,6 @@ public final class TestUnfixedBugs extends TestCase {
 				throw new IllegalStateException("Unknown workbook: " + wb);
 			}
 			assertNotNull(newWB.getSheet("test"));
-		} finally {
-			is.close();
 		}
 	}
 }
