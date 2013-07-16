@@ -26,7 +26,7 @@ import org.apache.poi.util.Beta;
 @Beta
 public class XSSFChartDataFactory implements ChartDataFactory {
 
-	private static XSSFChartDataFactory instance;
+	private static final XSSFChartDataFactory instance = new XSSFChartDataFactory();
 
 	private XSSFChartDataFactory() {
 		super();
@@ -43,9 +43,6 @@ public class XSSFChartDataFactory implements ChartDataFactory {
 	 * @return factory instance
 	 */
 	public static XSSFChartDataFactory getInstance() {
-		if (instance == null) {
-			instance = new XSSFChartDataFactory();
-		}
 		return instance;
 	}
 

@@ -19,31 +19,34 @@ package org.apache.poi.xssf.util;
 
 public final class NumericRanges {
 
-    public static int NO_OVERLAPS = -1;
-    public static int OVERLAPS_1_MINOR = 0;
-    public static int OVERLAPS_2_MINOR = 1;
-    public static int OVERLAPS_1_WRAPS = 2;
-    public static int OVERLAPS_2_WRAPS = 3;
+    public static final int NO_OVERLAPS = -1;
+    public static final int OVERLAPS_1_MINOR = 0;
+    public static final int OVERLAPS_2_MINOR = 1;
+    public static final int OVERLAPS_1_WRAPS = 2;
+    public static final int OVERLAPS_2_WRAPS = 3;
     
     private NumericRanges() {
         // nop.
     }
     
     public static long[] getOverlappingRange(long[] range1, long[] range2) {
-        int overlappingType = getOverlappingType(range1, range2);
-        if (overlappingType == OVERLAPS_1_MINOR) {
+        final int overlappingType = getOverlappingType(range1, range2);
+        switch (overlappingType) {
+        case OVERLAPS_1_MINOR:
             return new long[]{range2[0], range1[1]};
-        }
-        else if (overlappingType == OVERLAPS_2_MINOR) {
+
+        case OVERLAPS_2_MINOR:
             return new long[]{range1[0], range2[1]};
-        }
-        else if (overlappingType == OVERLAPS_2_WRAPS) {
+
+        case OVERLAPS_2_WRAPS:
             return range1;
-        }
-        else if (overlappingType == OVERLAPS_1_WRAPS) {
+
+        case OVERLAPS_1_WRAPS:
             return range2;
+
+        default:
+            return new long[]{-1, -1};
         }
-        return new long[]{-1, -1};
     }
     
     public static int getOverlappingType(long[] range1, long[] range2) {
@@ -54,13 +57,13 @@ public final class NumericRanges {
         if (min1 >= min2 && max1 <= max2) {
             return OVERLAPS_2_WRAPS;
         }
-        else if (min2 >= min1 && max2 <= max1) {
+        if (min2 >= min1 && max2 <= max1) {
             return OVERLAPS_1_WRAPS;
         }
-        else if ((min2 >= min1 && min2 <= max1) && max2 >= max1) {
+        if ((min2 >= min1 && min2 <= max1) && max2 >= max1) {
             return OVERLAPS_1_MINOR;
         }
-        else if ((min1 >= min2 && min1 <= max2)  && max1 >= max2) {
+        if ((min1 >= min2 && min1 <= max2)  && max1 >= max2) {
             return OVERLAPS_2_MINOR;
         }
         return NO_OVERLAPS;

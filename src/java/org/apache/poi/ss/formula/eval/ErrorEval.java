@@ -17,6 +17,7 @@
 
 package org.apache.poi.ss.formula.eval;
 
+import static org.apache.poi.ss.usermodel.ErrorConstants.*;
 import org.apache.poi.ss.usermodel.ErrorConstants;
 
 /**
@@ -25,23 +26,20 @@ import org.apache.poi.ss.usermodel.ErrorConstants;
  */
 public final class ErrorEval implements ValueEval {
 
-    // convenient access to namespace
-    private static final ErrorConstants EC = null;
-
     /** <b>#NULL!</b>  - Intersection of two cell ranges is empty */
-    public static final ErrorEval NULL_INTERSECTION = new ErrorEval(EC.ERROR_NULL);
+    public static final ErrorEval NULL_INTERSECTION = new ErrorEval(ERROR_NULL);
     /** <b>#DIV/0!</b> - Division by zero */
-    public static final ErrorEval DIV_ZERO = new ErrorEval(EC.ERROR_DIV_0);
+    public static final ErrorEval DIV_ZERO = new ErrorEval(ERROR_DIV_0);
     /** <b>#VALUE!</b> - Wrong type of operand */
-    public static final ErrorEval VALUE_INVALID = new ErrorEval(EC.ERROR_VALUE);
+    public static final ErrorEval VALUE_INVALID = new ErrorEval(ERROR_VALUE);
     /** <b>#REF!</b> - Illegal or deleted cell reference */
-    public static final ErrorEval REF_INVALID = new ErrorEval(EC.ERROR_REF);
+    public static final ErrorEval REF_INVALID = new ErrorEval(ERROR_REF);
     /** <b>#NAME?</b> - Wrong function or range name */
-    public static final ErrorEval NAME_INVALID = new ErrorEval(EC.ERROR_NAME);
+    public static final ErrorEval NAME_INVALID = new ErrorEval(ERROR_NAME);
     /** <b>#NUM!</b> - Value range overflow */
-    public static final ErrorEval NUM_ERROR = new ErrorEval(EC.ERROR_NUM);
+    public static final ErrorEval NUM_ERROR = new ErrorEval(ERROR_NUM);
     /** <b>#N/A</b> - Argument or function not available */
-    public static final ErrorEval NA = new ErrorEval(EC.ERROR_NA);
+    public static final ErrorEval NA = new ErrorEval(ERROR_NA);
 
 
     // POI internal error codes

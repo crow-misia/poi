@@ -29,7 +29,7 @@ public final class XSLFRelation extends POIXMLRelation {
    /**
     * A map to lookup POIXMLRelation by its relation type
     */
-   private final static Map<String, XSLFRelation> _table = new HashMap<>();
+   private static final Map<String, XSLFRelation> _table = new HashMap<>();
    
    public static final XSLFRelation MAIN = new XSLFRelation(
            "application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml",

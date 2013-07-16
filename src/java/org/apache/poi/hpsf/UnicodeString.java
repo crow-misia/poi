@@ -25,7 +25,7 @@ import org.apache.poi.util.StringUtil;
 
 @Internal
 class UnicodeString {
-    private final static POILogger logger = 
+    private static final POILogger logger = 
             POILogFactory.getLogger( UnicodeString.class );
 
     private byte[] _value;

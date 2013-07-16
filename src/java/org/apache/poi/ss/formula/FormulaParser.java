@@ -121,9 +121,9 @@ public final class FormulaParser {
 
 	private ParseNode _rootNode;
 
-	private final static char TAB = '\t'; // HSSF + XSSF
-	private final static char CR = '\r';  // Normally just XSSF
-	private final static char LF = '\n';  // Normally just XSSF
+	private static final char TAB = '\t'; // HSSF + XSSF
+	private static final char CR = '\r';  // Normally just XSSF
+	private static final char LF = '\n';  // Normally just XSSF
 
 	/**
 	 * Lookahead Character.

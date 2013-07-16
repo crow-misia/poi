@@ -26,7 +26,7 @@ package org.apache.poi.ss.formula.ptg;
 public final class AddPtg extends ValueOperatorPtg {
     public static final byte sid  = 0x03;
     
-    private final static String ADD = "+";
+    private static final String ADD = "+";
 
     public static final ValueOperatorPtg instance = new AddPtg();
 

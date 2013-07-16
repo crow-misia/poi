@@ -24,7 +24,7 @@ import org.apache.poi.util.POILogger;
 @Internal
 class VariantBool
 {
-    private final static POILogger logger = POILogFactory
+    private static final POILogger logger = POILogFactory
             .getLogger( VariantBool.class );
 
     static final int SIZE = 2;

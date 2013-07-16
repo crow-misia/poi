@@ -92,6 +92,7 @@ public class XSSFRow implements Row, Comparable<XSSFRow> {
      *
      * @return an iterator over cells in this row.
      */
+    @SuppressWarnings("unchecked")
     public Iterator<Cell> cellIterator() {
         return (Iterator<Cell>)(Iterator<? extends Cell>)_cells.values().iterator();
     }

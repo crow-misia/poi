@@ -33,11 +33,11 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.STDataValidationType;
  * @author <a href="rjankiraman@emptoris.com">Radhakrishnan J</a>
  *
  */
-public class XSSFDataValidationHelper implements DataValidationHelper {
-	private XSSFSheet xssfSheet;
+public final class XSSFDataValidationHelper implements DataValidationHelper {
+	private final XSSFSheet xssfSheet;
 	
     
-    public XSSFDataValidationHelper(XSSFSheet xssfSheet) {
+    XSSFDataValidationHelper(XSSFSheet xssfSheet) {
 		super();
 		this.xssfSheet = xssfSheet;
 	}

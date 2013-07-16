@@ -602,7 +602,6 @@ public final class HSSFWorkbook extends POIDocument implements org.apache.poi.ss
      *
      * @return HSSFSheet representing the new sheet.
      */
-
     public HSSFSheet createSheet()
     {
         HSSFSheet sheet = new HSSFSheet(this);

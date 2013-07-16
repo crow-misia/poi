@@ -27,7 +27,7 @@ import org.apache.poi.util.LittleEndianOutput;
 public final class FuncVarPtg extends AbstractFunctionPtg{
 
     public static final byte sid  = 0x22;
-    private final static int  SIZE = 4;
+    private static final int  SIZE = 4;
 
     /**
      * Single instance of this token for 'sum() taking a single argument'

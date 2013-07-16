@@ -59,7 +59,7 @@ public final class ContentType {
 	/**
 	 * Media type compiled pattern for parameters.
 	 */
-	private final static Pattern patternMediaType;
+	private static final Pattern patternMediaType;
 
 	static {
 		/*

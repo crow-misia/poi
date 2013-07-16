@@ -27,7 +27,7 @@ import org.openxmlformats.schemas.drawingml.x2006.chart.*;
  *
  * @author Roman Kashitsyn
  */
-class XSSFChartUtil {
+final class XSSFChartUtil {
 
     private XSSFChartUtil() {}
 

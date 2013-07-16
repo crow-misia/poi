@@ -29,7 +29,7 @@ import org.apache.poi.util.Internal;
  */
 public final class XSSFCellFill {
 
-    private CTFill _fill;
+    private final  CTFill _fill;
 
     /**
      * Creates a CellFill from the supplied parts

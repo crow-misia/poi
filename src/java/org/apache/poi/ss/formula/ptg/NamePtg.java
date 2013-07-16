@@ -29,7 +29,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public final class NamePtg extends OperandPtg implements WorkbookDependentFormula {
 	public static final short sid = 0x23;
-	private final static int SIZE = 5;
+	private static final int SIZE = 5;
 	/** one-based index to defined name record */
 	private int field_1_label_index;
 	private short field_2_zero; // reserved must be 0

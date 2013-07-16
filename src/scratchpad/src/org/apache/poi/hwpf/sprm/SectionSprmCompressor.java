@@ -28,7 +28,7 @@ import org.apache.poi.util.LittleEndian;
 @Internal
 public final class SectionSprmCompressor
 {
-  private final static SectionProperties DEFAULT_SEP = new SectionProperties();
+  private static final SectionProperties DEFAULT_SEP = new SectionProperties();
   public SectionSprmCompressor()
   {
   }

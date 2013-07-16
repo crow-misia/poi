@@ -24,7 +24,7 @@ import org.apache.poi.ss.usermodel.AutoFilter;
  * @author Yegor Kozlov
  */
 public final class XSSFAutoFilter implements AutoFilter {
-    private XSSFSheet _sheet;
+    private final XSSFSheet _sheet;
 
     XSSFAutoFilter(XSSFSheet sheet){
         _sheet = sheet;

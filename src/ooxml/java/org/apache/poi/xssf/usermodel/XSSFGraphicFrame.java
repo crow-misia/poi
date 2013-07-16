@@ -37,8 +37,8 @@ public final class XSSFGraphicFrame extends XSSFShape {
 
 	private static CTGraphicalObjectFrame prototype = null;
 
-	private CTGraphicalObjectFrame graphicFrame;
-	private XSSFDrawing drawing;
+	private final CTGraphicalObjectFrame graphicFrame;
+	private final XSSFDrawing drawing;
 	private XSSFClientAnchor anchor;
 
 	/**

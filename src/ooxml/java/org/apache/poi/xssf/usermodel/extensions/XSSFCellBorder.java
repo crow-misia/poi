@@ -30,7 +30,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.STBorderStyle;
  * for cells in the workbook.
  * Color is optional.
  */
-public class XSSFCellBorder {
+public final class XSSFCellBorder {
     private ThemesTable _theme;
     private CTBorder border;
 

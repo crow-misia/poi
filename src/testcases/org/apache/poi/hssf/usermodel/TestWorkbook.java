@@ -32,7 +32,6 @@ import org.apache.poi.hssf.record.Record;
 import org.apache.poi.hssf.record.aggregates.RecordAggregate.RecordVisitor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.Region;
 import org.apache.poi.util.TempFile;
 
 /**
@@ -591,8 +590,8 @@ public final class TestWorkbook extends TestCase {
                 c.setCellValue(new HSSFRichTextString("TEST"));
             }
         }
-        s.addMergedRegion(new Region(0, (short)0, 10, (short)10));
-        s.addMergedRegion(new Region(30, (short)5, 40, (short)15));
+        s.addMergedRegion(new CellRangeAddress(0, 10, 0, 10));
+        s.addMergedRegion(new CellRangeAddress(30, 40, 5, 15));
         sanityChecker.checkHSSFWorkbook(wb);
         wb = HSSFTestDataSamples.writeOutAndReadBack(wb);
 

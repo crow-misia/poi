@@ -25,7 +25,7 @@ package org.apache.poi.ss.formula.ptg;
 public final class ConcatPtg extends ValueOperatorPtg {
     public static final byte sid  = 0x08;
     
-    private final static String CONCAT = "&";
+    private static final String CONCAT = "&";
     
     public static final ValueOperatorPtg instance = new ConcatPtg();
 

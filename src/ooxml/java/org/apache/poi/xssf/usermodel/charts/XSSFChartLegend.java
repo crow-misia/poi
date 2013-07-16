@@ -37,7 +37,7 @@ public final class XSSFChartLegend implements ChartLegend {
 	/**
 	 * Underlaying CTLagend bean
 	 */
-	private CTLegend legend;
+	private final CTLegend legend;
 
 	/**
 	 * Create a new SpreadsheetML chart legend

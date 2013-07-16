@@ -26,7 +26,7 @@ public final class PercentPtg extends ValueOperatorPtg {
     public static final int  SIZE = 1;
     public static final byte sid  = 0x14;
     
-    private final static String PERCENT = "%";
+    private static final String PERCENT = "%";
 
     public static final ValueOperatorPtg instance = new PercentPtg();
 

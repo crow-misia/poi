@@ -25,7 +25,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public final class MemAreaPtg extends OperandPtg {
 	public static final short sid = 0x26;
-	private final static int SIZE = 7;
+	private static final int SIZE = 7;
 	private final int field_1_reserved;
 	private final int field_2_subex_len;
 

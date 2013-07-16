@@ -27,9 +27,9 @@ import org.apache.poi.util.Internal;
 /**
  * Cell settings avaiable in the Format/Alignment tab
  */
-public class XSSFCellAlignment {
+public final class XSSFCellAlignment {
 
-    private CTCellAlignment cellAlignement;
+    private final CTCellAlignment cellAlignement;
 
     /**
      * Creates a Cell Alignment from the supplied XML definition

@@ -41,7 +41,7 @@ import org.openxmlformats.schemas.drawingml.x2006.chart.STCrosses;
 @Beta
 public abstract class XSSFChartAxis implements ChartAxis {
 
-	protected XSSFChart chart;
+	protected final XSSFChart chart;
 
 	private static final double MIN_LOG_BASE = 2.0;
 	private static final double MAX_LOG_BASE = 1000.0;
@@ -86,10 +86,10 @@ public abstract class XSSFChartAxis implements ChartAxis {
 
 	public double getLogBase() {
 		CTLogBase logBase = getCTScaling().getLogBase();
-		if (logBase != null) {
-			return logBase.getVal();
+		if (logBase == null) {
+			return 0.0;
 		}
-		return 0.0;
+		return logBase.getVal();
 	}
 
 	public boolean isSetMinimum() {
@@ -131,9 +131,8 @@ public abstract class XSSFChartAxis implements ChartAxis {
 		CTScaling scaling = getCTScaling();
 		if (scaling.isSetMax()) {
 			return scaling.getMax().getVal();
-		} else {
-			return 0.0;
 		}
+		return 0.0;
 	}
 
 	public AxisOrientation getOrientation() {

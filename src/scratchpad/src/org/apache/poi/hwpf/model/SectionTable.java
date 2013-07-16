@@ -36,7 +36,7 @@ import org.apache.poi.util.POILogger;
 @Internal
 public class SectionTable
 {
-  private final static POILogger _logger = POILogFactory.getLogger(SectionTable.class);
+  private static final POILogger _logger = POILogFactory.getLogger(SectionTable.class);
   private static final int SED_SIZE = 12;
 
   protected ArrayList<SEPX> _sections = new ArrayList<>();

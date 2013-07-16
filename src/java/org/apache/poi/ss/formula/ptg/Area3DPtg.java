@@ -34,7 +34,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public final class Area3DPtg extends AreaPtgBase implements WorkbookDependentFormula, ExternSheetReferenceToken {
 	public static final byte sid = 0x3b;
-	private final static int SIZE = 11; // 10 + 1 for Ptg
+	private static final int SIZE = 11; // 10 + 1 for Ptg
 
 	private int field_1_index_extern_sheet;
 

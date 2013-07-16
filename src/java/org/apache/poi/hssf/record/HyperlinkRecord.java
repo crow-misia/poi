@@ -211,9 +211,9 @@ public final class HyperlinkRecord extends StandardRecord {
      final static GUID URL_MONIKER = GUID.parse("79EAC9E0-BAF9-11CE-8C82-00AA004BA90B");
      final static GUID FILE_MONIKER = GUID.parse("00000303-0000-0000-C000-000000000046");
     /** expected Tail of a URL link */
-    private final static byte[] URL_TAIL  = HexRead.readFromString("79 58 81 F4  3B 1D 7F 48   AF 2C 82 5D  C4 85 27 63   00 00 00 00  A5 AB 00 00"); 
+    private static final byte[] URL_TAIL  = HexRead.readFromString("79 58 81 F4  3B 1D 7F 48   AF 2C 82 5D  C4 85 27 63   00 00 00 00  A5 AB 00 00"); 
     /** expected Tail of a file link */
-    private final static byte[] FILE_TAIL = HexRead.readFromString("FF FF AD DE  00 00 00 00   00 00 00 00  00 00 00 00   00 00 00 00  00 00 00 00");
+    private static final byte[] FILE_TAIL = HexRead.readFromString("FF FF AD DE  00 00 00 00   00 00 00 00  00 00 00 00   00 00 00 00  00 00 00 00");
 
     private static final int TAIL_SIZE = FILE_TAIL.length;
 

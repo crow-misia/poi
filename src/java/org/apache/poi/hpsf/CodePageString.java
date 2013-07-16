@@ -30,7 +30,7 @@ import org.apache.poi.util.POILogger;
 @Internal
 final class CodePageString
 {
-    private final static POILogger logger = POILogFactory
+    private static final POILogger logger = POILogFactory
             .getLogger( CodePageString.class );
 
     private byte[] _value;

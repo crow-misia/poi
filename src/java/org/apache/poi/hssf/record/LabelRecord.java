@@ -31,7 +31,7 @@ import org.apache.poi.util.POILogger;
  * @see org.apache.poi.hssf.record.LabelSSTRecord
  */
 public final class LabelRecord extends Record implements CellValueRecordInterface {
-    private final static POILogger logger = POILogFactory.getLogger(LabelRecord.class);
+    private static final POILogger logger = POILogFactory.getLogger(LabelRecord.class);
 
     public static final short sid = 0x0204;
 

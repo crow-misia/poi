@@ -47,9 +47,9 @@ public abstract class AreaPtgBase extends OperandPtg implements AreaI {
 	/** zero based, unsigned 8 bit */
 	private int             field_4_last_column;
 
-	private final static BitField   rowRelative = BitFieldFactory.getInstance(0x8000);
-	private final static BitField   colRelative = BitFieldFactory.getInstance(0x4000);
-	private final static BitField   columnMask      = BitFieldFactory.getInstance(0x3FFF);
+	private static final BitField   rowRelative = BitFieldFactory.getInstance(0x8000);
+	private static final BitField   colRelative = BitFieldFactory.getInstance(0x4000);
+	private static final BitField   columnMask      = BitFieldFactory.getInstance(0x3FFF);
 
 	protected AreaPtgBase() {
 		// do nothing

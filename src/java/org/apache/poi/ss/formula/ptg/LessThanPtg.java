@@ -28,7 +28,7 @@ public final class LessThanPtg extends ValueOperatorPtg {
     public static final byte sid  = 0x09;    
 
     /** identifier for LESS THAN char */
-    private final static String LESSTHAN = "<";
+    private static final String LESSTHAN = "<";
 
     public static final ValueOperatorPtg instance = new LessThanPtg();
 

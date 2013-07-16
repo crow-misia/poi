@@ -24,7 +24,7 @@ package org.apache.poi.ss.formula.ptg;
  */
 public final class GreaterThanPtg extends ValueOperatorPtg {
     public static final byte sid  = 0x0D;    
-    private final static String GREATERTHAN = ">";
+    private static final String GREATERTHAN = ">";
 
     public static final ValueOperatorPtg instance = new GreaterThanPtg();
 

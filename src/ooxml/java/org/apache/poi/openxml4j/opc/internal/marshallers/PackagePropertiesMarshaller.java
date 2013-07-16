@@ -36,16 +36,16 @@ import org.apache.poi.openxml4j.opc.internal.PartMarshaller;
  */
 public class PackagePropertiesMarshaller implements PartMarshaller {
 
-	private final static Namespace namespaceDC = new Namespace("dc",
+	private static final Namespace namespaceDC = new Namespace("dc",
 			PackagePropertiesPart.NAMESPACE_DC_URI);
 
-	private final static Namespace namespaceCoreProperties = new Namespace("",
+	private static final Namespace namespaceCoreProperties = new Namespace("",
 			PackagePropertiesPart.NAMESPACE_CP_URI);
 
-	private final static Namespace namespaceDcTerms = new Namespace("dcterms",
+	private static final Namespace namespaceDcTerms = new Namespace("dcterms",
 			PackagePropertiesPart.NAMESPACE_DCTERMS_URI);
 
-	private final static Namespace namespaceXSI = new Namespace("xsi",
+	private static final Namespace namespaceXSI = new Namespace("xsi",
 			PackagePropertiesPart.NAMESPACE_XSI_URI);
 
 	protected static final String KEYWORD_CATEGORY = "category";

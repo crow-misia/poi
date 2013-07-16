@@ -36,12 +36,12 @@ import java.util.List;
  * @author Roman Kashitsyn
  */
 @Beta
-public class XSSFScatterChartData implements ScatterChartData {
+public final class XSSFScatterChartData implements ScatterChartData {
 
     /**
      * List of all data series.
      */
-    private List<Serie> series;
+    private final List<Serie> series;
 
     public XSSFScatterChartData() {
         series = new ArrayList<>();

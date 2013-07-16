@@ -51,7 +51,7 @@ public abstract class POIDocument {
     protected DirectoryNode directory;
 
     /** For our own logging use */
-    private final static POILogger logger = POILogFactory.getLogger(POIDocument.class);
+    private static final POILogger logger = POILogFactory.getLogger(POIDocument.class);
 
     /* Have the property streams been read yet? (Only done on-demand) */
     private boolean initialized = false;

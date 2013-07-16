@@ -33,7 +33,7 @@ import org.apache.poi.util.StringUtil;
  */
 public final class SupBookRecord extends StandardRecord {
 
-    private final static POILogger logger = POILogFactory.getLogger(SupBookRecord.class);
+    private static final POILogger logger = POILogFactory.getLogger(SupBookRecord.class);
 	
     public static final short sid = 0x01AE;
 

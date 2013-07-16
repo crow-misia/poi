@@ -22,13 +22,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.Charsets;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.util.ArrayUtil;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Converts the text meta-data file into a <tt>FunctionMetadataRegistry</tt>
@@ -50,7 +53,7 @@ final class FunctionMetadataReader {
 		// except in these cases
 		"LOG10", "ATAN2", "DAYS360", "SUMXMY2", "SUMX2MY2", "SUMX2PY2",
 	};
-	private static final Set DIGIT_ENDING_FUNCTION_NAMES_SET = new HashSet(Arrays.asList(DIGIT_ENDING_FUNCTION_NAMES));
+	private static final Set<String> DIGIT_ENDING_FUNCTION_NAMES_SET = new HashSet<>(Arrays.asList(DIGIT_ENDING_FUNCTION_NAMES));
 
 	public static FunctionMetadataRegistry createRegistry() {
 		InputStream is = FunctionMetadataReader.class.getResourceAsStream(METADATA_FILE_NAME);
@@ -58,15 +61,9 @@ final class FunctionMetadataReader {
 			throw new RuntimeException("resource '" + METADATA_FILE_NAME + "' not found");
 		}
 
-		BufferedReader br;
-		try {
-			br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
-		} catch(UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
-		FunctionDataBuilder fdb = new FunctionDataBuilder(400);
 
-		try {
+		FunctionDataBuilder fdb = new FunctionDataBuilder(400);
+		try (final BufferedReader br = new BufferedReader(new InputStreamReader(is, Charsets.UTF_8))) {
 			while (true) {
 				String line = br.readLine();
 				if (line == null) {
@@ -75,13 +72,11 @@ final class FunctionMetadataReader {
 				if (line.length() < 1 || line.charAt(0) == '#') {
 					continue;
 				}
-				String trimLine = line.trim();
-				if (trimLine.length() < 1) {
+				if (StringUtil.isBlank(line)) {
 					continue;
 				}
 				processLine(fdb, line);
 			}
-			br.close();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

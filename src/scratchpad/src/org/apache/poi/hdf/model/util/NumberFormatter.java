@@ -26,12 +26,12 @@ package org.apache.poi.hdf.model.util;
 @Deprecated
 public final class NumberFormatter
 {
-  private final static int ARABIC = 0;
-  private final static int UPPER_ROMAN = 1;
-  private final static int LOWER_ROMAN = 2;
-  private final static int UPPER_LETTER = 3;
-  private final static int LOWER_LETTER = 4;
-  private final static int ORDINAL = 5;
+  private static final int ARABIC = 0;
+  private static final int UPPER_ROMAN = 1;
+  private static final int LOWER_ROMAN = 2;
+  private static final int UPPER_LETTER = 3;
+  private static final int LOWER_LETTER = 4;
+  private static final int ORDINAL = 5;
 
   private static String[] _arabic = new String[] {"1", "2", "3", "4", "5", "6",
                                                   "7", "8", "9", "10", "11", "12",

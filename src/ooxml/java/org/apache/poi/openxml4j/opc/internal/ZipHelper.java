@@ -36,7 +36,7 @@ public final class ZipHelper {
 	 * Forward slash use to convert part name between OPC and zip item naming
 	 * conventions.
 	 */
-	private final static String FORWARD_SLASH = "/";
+	private static final String FORWARD_SLASH = "/";
 
 	/**
 	 * Buffer to read data from file. Use big buffer to improve performaces. the

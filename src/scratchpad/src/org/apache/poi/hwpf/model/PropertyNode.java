@@ -65,7 +65,7 @@ public abstract class PropertyNode<T extends PropertyNode<T>>  implements Compar
         }
     }
 
-  private final static POILogger _logger = POILogFactory.getLogger(PropertyNode.class);
+  private static final POILogger _logger = POILogFactory.getLogger(PropertyNode.class);
   protected Object _buf;
   /** The start, in characters */
   private int _cpStart;

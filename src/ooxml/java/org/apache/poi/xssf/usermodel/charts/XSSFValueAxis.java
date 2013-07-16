@@ -40,7 +40,7 @@ import org.openxmlformats.schemas.drawingml.x2006.chart.STTickLblPos;
  * @author Roman Kashitsyn
  */
 @Beta
-public class XSSFValueAxis extends XSSFChartAxis implements ValueAxis {
+public final class XSSFValueAxis extends XSSFChartAxis implements ValueAxis {
 
 	private CTValAx ctValAx;
 

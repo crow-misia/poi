@@ -48,6 +48,7 @@ import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.ss.util.SSCellRange;
 import org.apache.poi.ss.util.SheetUtil;
+import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.POILogFactory;
@@ -583,7 +584,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      */
     public int[] getColumnBreaks() {
         if (!worksheet.isSetColBreaks() || worksheet.getColBreaks().sizeOfBrkArray() == 0) {
-            return new int[0];
+            return ArrayUtil.EMPTY_INT_ARRAY;
         }
 
         final List<CTBreak> brkArray = worksheet.getColBreaks().getBrkList();
@@ -1015,14 +1016,14 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      */
     public void protectSheet(String password) {
         	
-    	if(password != null) {
+    	if(password == null) {
+    		worksheet.unsetSheetProtection();
+    	} else {
     		CTSheetProtection sheetProtection = worksheet.addNewSheetProtection();
     		sheetProtection.xsetPassword(stringToExcelPassword(password));
     		sheetProtection.setSheet(true);
     		sheetProtection.setScenarios(true);
     		sheetProtection.setObjects(true);
-    	} else {
-    		worksheet.unsetSheetProtection();
     	}
     }
 
@@ -1058,7 +1059,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      */
     public int[] getRowBreaks() {
         if (!worksheet.isSetRowBreaks() || worksheet.getRowBreaks().sizeOfBrkArray() == 0) {
-            return new int[0];
+            return ArrayUtil.EMPTY_INT_ARRAY;
         }
 
         final List<CTBreak> brkArray = worksheet.getRowBreaks().getBrkList();
@@ -1252,8 +1253,8 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      */
     public boolean isColumnBroken(int column) {
         int[] colBreaks = getColumnBreaks();
-        for (int i = 0 ; i < colBreaks.length ; i++) {
-            if (colBreaks[i] == column) {
+        for (final int b : colBreaks) {
+            if (b == column) {
                 return true;
             }
         }
@@ -1363,8 +1364,8 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      */
     public boolean isRowBroken(int row) {
         int[] rowBreaks = getRowBreaks();
-        for (int i = 0 ; i < rowBreaks.length ; i++) {
-            if (rowBreaks[i] == row) {
+        for (final int b : rowBreaks) {
+            if (b == row) {
                 return true;
             }
         }
@@ -1448,7 +1449,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
             throw new IllegalArgumentException("Specified row does not belong to this sheet");
         }
         // collect cells into a temporary array to avoid ConcurrentModificationException
-        ArrayList<XSSFCell> cellsToDelete = new ArrayList<>();
+        ArrayList<XSSFCell> cellsToDelete = new ArrayList<>(row.getPhysicalNumberOfCells());
         for(Cell cell : row) cellsToDelete.add((XSSFCell)cell);
 
         for(XSSFCell cell : cellsToDelete) row.removeCell(cell);
@@ -1531,6 +1532,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      * be the third row if say for instance the second row is undefined.
      * Call getRowNum() on each row if you care which one it is.
      */
+    @SuppressWarnings("unchecked")
     public Iterator<Row> rowIterator() {
         return (Iterator<Row>)(Iterator<? extends Row>) _rows.values().iterator();
     }
@@ -3079,8 +3081,8 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
     			List<String> sqref = ctDataValidation.getSqref();
     			for (String stRef : sqref) {
     				String[] regions = stRef.split(" ");
-    				for (int i = 0; i < regions.length; i++) {
-						String[] parts = regions[i].split(":");
+    				for (final String region : regions) {
+						String[] parts = region.split(":");
 						CellReference begin = new CellReference(parts[0]);
 						CellReference end = parts.length > 1 ? new CellReference(parts[1]) : begin;
 						CellRangeAddress cellRangeAddress = new CellRangeAddress(begin.getRow(), end.getRow(), begin.getCol(), end.getCol());
@@ -3157,10 +3159,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
      * Returns any tables associated with this Sheet
      */
     public List<XSSFTable> getTables() {
-       List<XSSFTable> tableList = new ArrayList<>(
-             tables.values()
-       );
-       return tableList;
+       return new ArrayList<>(tables.values());
     }
 
     public XSSFSheetConditionalFormatting getSheetConditionalFormatting(){

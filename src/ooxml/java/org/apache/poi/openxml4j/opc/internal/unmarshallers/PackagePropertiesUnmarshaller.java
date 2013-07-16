@@ -46,19 +46,19 @@ import org.apache.poi.openxml4j.opc.internal.ZipHelper;
  */
 public final class PackagePropertiesUnmarshaller implements PartUnmarshaller {
 
-	private final static Namespace namespaceDC = new Namespace("dc",
+	private static final Namespace namespaceDC = new Namespace("dc",
 			PackageProperties.NAMESPACE_DC);
 
-	private final static Namespace namespaceCP = new Namespace("cp",
+	private static final Namespace namespaceCP = new Namespace("cp",
 			PackageNamespaces.CORE_PROPERTIES);
 
-	private final static Namespace namespaceDcTerms = new Namespace("dcterms",
+	private static final Namespace namespaceDcTerms = new Namespace("dcterms",
 			PackageProperties.NAMESPACE_DCTERMS);
 
-	private final static Namespace namespaceXML = new Namespace("xml",
+	private static final Namespace namespaceXML = new Namespace("xml",
 			"http://www.w3.org/XML/1998/namespace");
 
-	private final static Namespace namespaceXSI = new Namespace("xsi",
+	private static final Namespace namespaceXSI = new Namespace("xsi",
 			"http://www.w3.org/2001/XMLSchema-instance");
 
 	protected static final String KEYWORD_CATEGORY = "category";

@@ -60,10 +60,10 @@ public final class FunctionEval {
 		Function[] retval = new Function[368];
 
 		retval[0] = new Count();
-		retval[ID.IF] = new IfFunc();
+		retval[1] = new IfFunc();
 		retval[2] = LogicalFunction.ISNA;
 		retval[3] = LogicalFunction.ISERROR;
-		retval[ID.SUM] = AggregateFunction.SUM;
+		retval[4] = AggregateFunction.SUM;
 		retval[5] = AggregateFunction.AVERAGE;
 		retval[6] = AggregateFunction.MIN;
 		retval[7] = AggregateFunction.MAX;
@@ -109,7 +109,7 @@ public final class FunctionEval {
 		retval[58] = FinanceFunction.NPER;
 		retval[59] = FinanceFunction.PMT;
 
-      retval[60] = new Rate();
+		retval[60] = new Rate();
 		retval[62] = new Irr();
 		retval[63] = NumericFunction.RAND;
 		retval[64] = new Match();
@@ -127,14 +127,13 @@ public final class FunctionEval {
 
 		retval[76] = new Rows();
 		retval[77] = new Columns();
-		retval[82] = TextFunction.SEARCH;
-		retval[ID.OFFSET] = new Offset();
+		retval[78] = new Offset();
 		retval[82] = TextFunction.SEARCH;
 
 		retval[97] = NumericFunction.ATAN2;
 		retval[98] = NumericFunction.ASIN;
 		retval[99] = NumericFunction.ACOS;
-		retval[ID.CHOOSE] = new Choose();
+		retval[100] = new Choose();
 		retval[101] = new Hlookup();
 		retval[102] = new Vlookup();
 
@@ -142,7 +141,7 @@ public final class FunctionEval {
 
 		retval[109] = NumericFunction.LOG;
 
-        retval[111] = TextFunction.CHAR;
+		retval[111] = TextFunction.CHAR;
 		retval[112] = TextFunction.LOWER;
 		retval[113] = TextFunction.UPPER;
 
@@ -152,7 +151,7 @@ public final class FunctionEval {
 		retval[118] = TextFunction.TRIM;
 		retval[119] = new Replace();
 		retval[120] = new Substitute();
-        retval[121] = new Code();
+		retval[121] = new Code();
 
 		retval[124] = TextFunction.FIND;
 
@@ -161,17 +160,17 @@ public final class FunctionEval {
 		retval[129] = LogicalFunction.ISBLANK;
 		retval[130] = new T();
 
-		retval[ID.INDIRECT] = null; // Indirect.evaluate has different signature
-        retval[162] = TextFunction.CLEAN;  //Aniket Banerjee    
-        retval[167] = new IPMT();
-        retval[168] = new PPMT();
+		retval[148] = null; // Indirect.evaluate has different signature
+		retval[162] = TextFunction.CLEAN;  //Aniket Banerjee    
+		retval[167] = new IPMT();
+		retval[168] = new PPMT();
 		retval[169] = new Counta();
 
 		retval[183] = AggregateFunction.PRODUCT;
 		retval[184] = NumericFunction.FACT;
 
 		retval[190] = LogicalFunction.ISNONTEXT;
-        retval[194] = AggregateFunction.VARP;
+		retval[194] = AggregateFunction.VARP;
 		retval[197] = NumericFunction.TRUNC;
 		retval[198] = LogicalFunction.ISLOGICAL;
 
@@ -187,9 +186,9 @@ public final class FunctionEval {
 		retval[213] = NumericFunction.ROUNDDOWN;
 		retval[214] = TextFunction.ASC;
 		retval[215] = TextFunction.JIS;
-        retval[216] = new Rank();
-        retval[219] = new Address();  //Aniket Banerjee
-        retval[220] = new Days360();
+		retval[216] = new Rank();
+		retval[219] = new Address();  //Aniket Banerjee
+		retval[220] = new Days360();
 		retval[221] = new Today();
 
 		retval[227] = AggregateFunction.MEDIAN;
@@ -201,7 +200,7 @@ public final class FunctionEval {
 		retval[233] = NumericFunction.ACOSH;
 		retval[234] = NumericFunction.ATANH;
 
-		retval[ID.EXTERNAL_FUNC] = null; // ExternalFunction is a FreeREfFunction
+		retval[255] = null; // ExternalFunction is a FreeREfFunction
 
 		retval[261] = new Errortype();
 
@@ -217,7 +216,7 @@ public final class FunctionEval {
 
 		retval[298] = new Odd();
 
-        retval[300] = NumericFunction.POISSON;
+		retval[300] = NumericFunction.POISSON;
 
 		retval[303] = new Sumxmy2();
 		retval[304] = new Sumx2my2();
@@ -336,7 +335,7 @@ public final class FunctionEval {
      */
     public static Collection<String> getNotSupportedFunctionNames(){
         Collection<String> lst = new TreeSet<>();
-        for(int i = 0; i < functions.length; i++){
+        for(int i = 0, n = functions.length; i < n; i++){
             Function func = functions[i];
             if(func != null && (func instanceof NotImplementedFunction)){
                 FunctionMetadata metaData = FunctionMetadataRegistry.getFunctionByIndex(i);

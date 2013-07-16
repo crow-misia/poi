@@ -136,7 +136,7 @@ public final class InternalWorkbook {
      * constant used to set the "codepage" wherever "codepage" is set in records
      * (which is duplicated in more than one record)
      */
-    private final static short CODEPAGE = 0x04B0;
+    private static final short CODEPAGE = 0x04B0;
 
     /**
      * this contains the Worksheet record objects

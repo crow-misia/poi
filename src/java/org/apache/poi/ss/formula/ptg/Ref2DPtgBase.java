@@ -25,7 +25,7 @@ import org.apache.poi.util.LittleEndianOutput;
  * @author Josh Micich
  */
 abstract class Ref2DPtgBase extends RefPtgBase {
-	private final static int SIZE = 5;
+	private static final int SIZE = 5;
 
 
 	protected Ref2DPtgBase(int row, int column, boolean isRowRelative, boolean isColumnRelative) {

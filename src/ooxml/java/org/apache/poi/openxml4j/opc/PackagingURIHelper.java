@@ -36,7 +36,7 @@ import org.apache.poi.util.StringUtil;
  * @version 0.1
  */
 public final class PackagingURIHelper {
-    private final static POILogger _logger = POILogFactory.getLogger(PackagingURIHelper.class);
+    private static final POILogger _logger = POILogFactory.getLogger(PackagingURIHelper.class);
 
 	/**
 	 * Package root URI.
@@ -768,7 +768,7 @@ public final class PackagingURIHelper {
         return sb.toString();
     }
 
-    private final static char[] hexDigits = {
+    private static final char[] hexDigits = {
         '0', '1', '2', '3', '4', '5', '6', '7',
         '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
     };

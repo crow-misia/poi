@@ -36,6 +36,7 @@ import org.apache.poi.util.TempFile;
 import org.apache.poi.xssf.SXSSFITestDataProvider;
 import org.apache.poi.xssf.XSSFTestDataSamples;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.impl.CTFontImpl;
 
 /**
@@ -176,7 +177,7 @@ public final class TestUnfixedBugs extends TestCase {
 			Font font = wb.getFontAt((short)0);
 			if(font instanceof XSSFFont) {
 				XSSFFont xfont = (XSSFFont) font;
-				CTFontImpl ctFont = (CTFontImpl) xfont.getCTFont();
+				CTFont ctFont = xfont.getCTFont();
 				assertEquals(0, ctFont.sizeOfBArray());
 			}
 		}

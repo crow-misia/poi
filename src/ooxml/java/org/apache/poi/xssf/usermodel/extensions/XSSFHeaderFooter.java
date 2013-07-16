@@ -121,8 +121,8 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTHeaderFooter;
  *
  */
 public abstract class XSSFHeaderFooter implements HeaderFooter {
-	private HeaderFooterHelper helper;
-	private CTHeaderFooter headerFooter;
+	private final HeaderFooterHelper helper;
+	private final CTHeaderFooter headerFooter;
 
 	private boolean stripFields = false;
 

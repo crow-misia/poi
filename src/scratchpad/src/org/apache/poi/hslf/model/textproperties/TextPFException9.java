@@ -42,9 +42,9 @@ public class TextPFException9 {
 	private final Short bulletBlipRef;
 	private final Short fBulletHasAutoNumber;
 	private final TextAutoNumberSchemeEnum autoNumberScheme;
-	private final static TextAutoNumberSchemeEnum DEFAULT_AUTONUMBER_SHEME = TextAutoNumberSchemeEnum.ANM_ArabicPeriod;
+	private static final TextAutoNumberSchemeEnum DEFAULT_AUTONUMBER_SHEME = TextAutoNumberSchemeEnum.ANM_ArabicPeriod;
 	private final Short autoNumberStartNumber;
-	private final static Short DEFAULT_START_NUMBER = Short.valueOf((short)1);
+	private static final Short DEFAULT_START_NUMBER = Short.valueOf((short)1);
 	private final int recordLength;
 	public TextPFException9(final byte[] source, final int startIndex) {
 		//this.mask1 = source[startIndex];

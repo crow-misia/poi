@@ -32,7 +32,7 @@ import org.apache.poi.util.LittleEndianOutput;
  */
 public final class AttrPtg extends ControlPtg {
     public static final byte sid  = 0x19;
-    private final static int  SIZE = 4;
+    private static final int  SIZE = 4;
     private final byte _options;
     private final short _data;
 

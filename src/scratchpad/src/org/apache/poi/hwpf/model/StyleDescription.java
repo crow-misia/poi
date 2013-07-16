@@ -38,10 +38,10 @@ public final class StyleDescription implements HDFType
 
     private static final POILogger logger = POILogFactory.getLogger( StyleDescription.class );
     
-  private final static int PARAGRAPH_STYLE = 1;
-  private final static int CHARACTER_STYLE = 2;
-  private final static int TABLE_STYLE = 3;
-  private final static int NUMBERING_STYLE = 4;
+  private static final int PARAGRAPH_STYLE = 1;
+  private static final int CHARACTER_STYLE = 2;
+  private static final int TABLE_STYLE = 3;
+  private static final int NUMBERING_STYLE = 4;
 
   private int _baseLength;
   private StdfBase _stdfBase;

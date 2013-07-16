@@ -71,7 +71,7 @@ public abstract class FFDataBaseAbstractType
     /**   Specifies that the textbox value is the current time. */
     /*  */public static final byte ITYPETXT_CURTIME = 0;
     /**   Specifies that the textbox value is calculated from an expression. The expression is given by FFData.xstzTextDef. */
-    /*  */protected final static byte ITYPETXT_CALC = 0;
+    /*  */protected static final byte ITYPETXT_CALC = 0;
     /**/private static final BitField fRecalc = new BitField(0x4000);
     /**/private static final BitField fHasListBox = new BitField(0x8000);
     protected int field_3_cch;

@@ -44,7 +44,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellRangeAddressList;
-import org.apache.poi.ss.util.Region;
 import org.apache.poi.util.TempFile;
 
 /**
@@ -102,12 +101,10 @@ public final class TestHSSFSheet extends BaseTestSheet {
         VCenterRecord record = s.getSheet().getPageSettings().getVCenter();
 
         assertFalse(record.getVCenter());
-        assertFalse(s.getVerticallyCenter(true));
-        assertFalse(s.getVerticallyCenter(false));
+        assertFalse(s.getVerticallyCenter());
         s.setVerticallyCenter(true);
         assertTrue(record.getVCenter());
-        assertTrue(s.getVerticallyCenter(true));
-        assertTrue(s.getVerticallyCenter(false));
+        assertTrue(s.getVerticallyCenter());
 
         // wb.write(new FileOutputStream("c:\\test.xls"));
     }
