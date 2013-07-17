@@ -75,17 +75,17 @@ public abstract class ContentTypeManager {
 	/**
 	 * Reference to the package using this content type manager.
 	 */
-	protected OPCPackage container;
+	protected final OPCPackage container;
 
 	/**
 	 * Default content type tree. <Extension, ContentType>
 	 */
-	private TreeMap<String, String> defaultContentType;
+	private final TreeMap<String, String> defaultContentType;
 
 	/**
 	 * Override content type tree.
 	 */
-	private TreeMap<PackagePartName, String> overrideContentType;
+	private final TreeMap<PackagePartName, String> overrideContentType;
 
 	/**
 	 * Constructor. Parses the content of the specified input stream.
@@ -100,13 +100,9 @@ public abstract class ContentTypeManager {
 			throws InvalidFormatException {
 		this.container = pkg;
 		this.defaultContentType = new TreeMap<>();
+		this.overrideContentType = new TreeMap<>();
 		if (in != null) {
-			try {
-				parseContentTypesFile(in);
-			} catch (InvalidFormatException e) {
-				throw new InvalidFormatException(
-						"Can't read content types part !");
-			}
+			parseContentTypesFile(in);
 		}
 	}
 
@@ -168,8 +164,6 @@ public abstract class ContentTypeManager {
 	 */
 	private void addOverrideContentType(PackagePartName partName,
 			String contentType) {
-		if (overrideContentType == null)
-			overrideContentType = new TreeMap<>();
 		overrideContentType.put(partName, contentType);
 	}
 
@@ -212,10 +206,9 @@ public abstract class ContentTypeManager {
 			throw new IllegalArgumentException("partName");
 
 		/* Override content type */
-		if (this.overrideContentType != null
-				&& (this.overrideContentType.get(partName) != null)) {
+		String contentType = this.overrideContentType.remove(partName);
+		if (contentType != null) {
 			// Remove the override definition for the specified part.
-			this.overrideContentType.remove(partName);
 			return;
 		}
 
@@ -276,8 +269,8 @@ public abstract class ContentTypeManager {
 		if (contentType == null)
 			throw new IllegalArgumentException("contentType");
 
-		return (this.defaultContentType.values().contains(contentType) || (this.overrideContentType != null && this.overrideContentType
-				.values().contains(contentType)));
+		return this.defaultContentType.values().contains(contentType) ||
+				this.overrideContentType.values().contains(contentType);
 	}
 
 	/**
@@ -323,9 +316,10 @@ public abstract class ContentTypeManager {
 		if (partName == null)
 			throw new IllegalArgumentException("partName");
 
-		if ((this.overrideContentType != null)
-				&& this.overrideContentType.containsKey(partName))
-			return this.overrideContentType.get(partName);
+		String contentType = this.overrideContentType.get(partName);
+		if (contentType != null) {
+			return contentType;
+		}
 
 		String extension = partName.getExtension().toLowerCase();
 		if (this.defaultContentType.containsKey(extension))
@@ -350,8 +344,7 @@ public abstract class ContentTypeManager {
 	 */
 	public void clearAll() {
 		this.defaultContentType.clear();
-		if (this.overrideContentType != null)
-			this.overrideContentType.clear();
+		clearOverrideContentTypes();
 	}
 
 	/**
@@ -359,8 +352,7 @@ public abstract class ContentTypeManager {
 	 *
 	 */
 	public void clearOverrideContentTypes() {
-		if (this.overrideContentType != null)
-			this.overrideContentType.clear();
+		this.overrideContentType.clear();
 	}
 
 	/**
@@ -370,6 +362,7 @@ public abstract class ContentTypeManager {
 	 *             Throws if the content type doesn't exist or the XML format is
 	 *             invalid.
 	 */
+	@SuppressWarnings("unchecked")
 	private void parseContentTypesFile(InputStream in)
 			throws InvalidFormatException {
 		try {
@@ -377,11 +370,11 @@ public abstract class ContentTypeManager {
 			Document xmlContentTypetDoc = xmlReader.read(in);
 
 			// Default content types
-			List defaultTypes = xmlContentTypetDoc.getRootElement().elements(
+			List<Element> defaultTypes = xmlContentTypetDoc.getRootElement().elements(
 					DEFAULT_TAG_NAME);
-			Iterator elementIteratorDefault = defaultTypes.iterator();
+			Iterator<Element> elementIteratorDefault = defaultTypes.iterator();
 			while (elementIteratorDefault.hasNext()) {
-				Element element = (Element) elementIteratorDefault.next();
+				Element element = elementIteratorDefault.next();
 				String extension = element.attribute(EXTENSION_ATTRIBUTE_NAME)
 						.getValue();
 				String contentType = element.attribute(
@@ -390,11 +383,11 @@ public abstract class ContentTypeManager {
 			}
 
 			// Overriden content types
-			List overrideTypes = xmlContentTypetDoc.getRootElement().elements(
+			List<Element> overrideTypes = xmlContentTypetDoc.getRootElement().elements(
 					OVERRIDE_TAG_NAME);
-			Iterator elementIteratorOverride = overrideTypes.iterator();
+			Iterator<Element> elementIteratorOverride = overrideTypes.iterator();
 			while (elementIteratorOverride.hasNext()) {
-				Element element = (Element) elementIteratorOverride.next();
+				Element element = elementIteratorOverride.next();
 				URI uri = new URI(element.attribute(PART_NAME_ATTRIBUTE_NAME)
 						.getValue());
 				PackagePartName partName = PackagingURIHelper
@@ -403,9 +396,7 @@ public abstract class ContentTypeManager {
 						CONTENT_TYPE_ATTRIBUTE_NAME).getValue();
 				addOverrideContentType(partName, contentType);
 			}
-		} catch (URISyntaxException urie) {
-			throw new InvalidFormatException(urie.getMessage());
-		} catch (DocumentException e) {
+		} catch (URISyntaxException | DocumentException e) {
 			throw new InvalidFormatException(e.getMessage());
 		}
 	}
@@ -427,16 +418,13 @@ public abstract class ContentTypeManager {
 				.addElement(new QName(TYPES_TAG_NAME, dfNs));
 
 		// Adding default types
-		for (Entry<String, String> entry : defaultContentType.entrySet()) {
+		for (final Entry<String, String> entry : defaultContentType.entrySet()) {
 			appendDefaultType(typesElem, entry);
 		}
 
 		// Adding specific types if any exist
-		if (overrideContentType != null) {
-			for (Entry<PackagePartName, String> entry : overrideContentType
-					.entrySet()) {
-				appendSpecificTypes(typesElem, entry);
-			}
+		for (final Entry<PackagePartName, String> entry : overrideContentType.entrySet()) {
+			appendSpecificTypes(typesElem, entry);
 		}
 		xmlOutDoc.normalize();
 

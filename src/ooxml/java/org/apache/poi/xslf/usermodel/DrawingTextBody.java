@@ -30,10 +30,11 @@ public class DrawingTextBody {
     }
 
     public DrawingParagraph[] getParagraphs() {
-        List<CTTextParagraph> paragraphs = textBody.getPList();
-        DrawingParagraph[] o = new DrawingParagraph[paragraphs.size()];
+        final List<CTTextParagraph> paragraphs = textBody.getPList();
+        final int n = paragraphs.size();
+        final DrawingParagraph[] o = new DrawingParagraph[n];
 
-        for (int i=0; i<o.length; i++) {
+        for (int i=0; i<n; i++) {
             o[i] = new DrawingParagraph(paragraphs.get(i));
         }
 

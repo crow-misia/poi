@@ -43,6 +43,7 @@ import java.util.zip.ZipEntry;
 import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.util.IOUtils;
 
 /**
  * Streaming version of XSSFWorkbook implementing the "BigGridDemo" strategy.
@@ -287,7 +288,7 @@ public class SXSSFWorkbook implements Workbook
                     XSSFSheet xSheet=getSheetFromZipEntryName(ze.getName());
                     if(xSheet == null)
                     {
-                        copyStream(is, zos);
+                        IOUtils.copy(is, zos);
                     }
                     else
                     {
@@ -299,13 +300,6 @@ public class SXSSFWorkbook implements Workbook
                     }
                 }
             }
-        }
-    }
-    private static void copyStream(InputStream in, OutputStream out) throws IOException {
-        byte[] chunk = new byte[1024];
-        int count;
-        while ((count = in.read(chunk)) >=0 ) {
-          out.write(chunk,0,count);
         }
     }
     private static void copyStreamAndInjectWorksheet(InputStream in, OutputStream out, InputStream worksheetData) throws IOException {
@@ -399,7 +393,7 @@ public class SXSSFWorkbook implements Workbook
         	outWriter.flush();
         }
 //Copy the worksheet data to "out".
-        copyStream(worksheetData,out);
+        IOUtils.copy(worksheetData,out);
         outWriter.write("</sheetData>");
         outWriter.flush();
 //Copy the rest of "in" to "out".

@@ -17,6 +17,7 @@
 
 package org.apache.poi.openxml4j.opc;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -34,7 +35,7 @@ import org.apache.poi.openxml4j.opc.internal.ContentType;
  * @author Julien Chable
  * @version 0.9
  */
-public abstract class PackagePart implements RelationshipSource {
+public abstract class PackagePart implements RelationshipSource, Closeable {
 
 	/**
 	 * This part's container.
@@ -677,12 +678,6 @@ public abstract class PackagePart implements RelationshipSource {
 	 *             Throws if the content format is invalid.
 	 */
 	public abstract boolean load(InputStream ios) throws InvalidFormatException;
-
-	/**
-	 * Close this part : flush this part, close the input stream and output
-	 * stream. After this method call, the part must be available for packaging.
-	 */
-	public abstract void close();
 
 	/**
 	 * Flush the content of this part. If the input stream and/or output stream

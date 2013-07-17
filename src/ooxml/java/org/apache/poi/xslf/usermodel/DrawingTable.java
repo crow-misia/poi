@@ -30,10 +30,11 @@ public class DrawingTable {
     }
 
     public DrawingTableRow[] getRows() {
-        List<CTTableRow> ctTableRows = table.getTrList();
-        DrawingTableRow[] o = new DrawingTableRow[ctTableRows.size()];
+        final List<CTTableRow> ctTableRows = table.getTrList();
+        final int n = ctTableRows.size();
+        final DrawingTableRow[] o = new DrawingTableRow[n];
 
-        for (int i=0; i<o.length; i++) {
+        for (int i=0; i<n; i++) {
             o[i] = new DrawingTableRow(ctTableRows.get(i));
         }
 

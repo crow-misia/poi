@@ -23,6 +23,7 @@ import java.awt.*;
 import java.awt.font.TextLayout;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
+import java.text.CharacterIterator;
 
 /**
  * a renderable text fragment
@@ -75,10 +76,10 @@ class TextFragment {
         if(_str == null) return "";
 
         AttributedCharacterIterator it = _str.getIterator();
-         StringBuilder buf = new StringBuilder();
-         for (char c = it.first(); c != it.DONE; c = it.next()) {
-             buf.append(c);
-         }
+        StringBuilder buf = new StringBuilder();
+        for (char c = it.first(); c != CharacterIterator.DONE; c = it.next()) {
+            buf.append(c);
+        }
         return buf.toString();
     }
 
