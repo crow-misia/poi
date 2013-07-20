@@ -20,6 +20,7 @@ package org.apache.poi;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,8 +108,8 @@ public final class TestPOIXMLDocument extends TestCase {
 
         assertEquals(pkg1.getRelationships().size(), pkg2.getRelationships().size());
 
-        List<PackagePart> l1 = pkg1.getParts();
-        List<PackagePart> l2 = pkg2.getParts();
+        List<PackagePart> l1 = new ArrayList<>(pkg1.getParts());
+        List<PackagePart> l2 = new ArrayList<>(pkg2.getParts());
 
         assertEquals(l1.size(), l2.size());
         for (int i=0; i < l1.size(); i++){

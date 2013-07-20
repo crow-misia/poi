@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,7 @@ import org.apache.poi.openxml4j.opc.internal.marshallers.ZipPackagePropertiesMar
 import org.apache.poi.openxml4j.opc.internal.unmarshallers.PackagePropertiesUnmarshaller;
 import org.apache.poi.openxml4j.opc.internal.unmarshallers.UnmarshallContext;
 import org.apache.poi.openxml4j.util.Nullable;
+import org.apache.poi.util.Closeables;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.POILogger;
 import org.apache.poi.util.POILogFactory;
@@ -398,17 +400,17 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 			if (this.originalPackagePath != null
 					&& StringUtil.isNotBlank(this.originalPackagePath)) {
 				File targetFile = new File(this.originalPackagePath);
-				if (!targetFile.exists()
-						|| !(this.originalPackagePath
+				if (targetFile.exists()
+						&& (this.originalPackagePath
 								.equalsIgnoreCase(targetFile.getAbsolutePath()))) {
+					closeImpl();
+				} else {
 					// Case of a package created from scratch
 					save(targetFile);
-				} else {
-					closeImpl();
 				}
 			} else if (this.output != null) {
 				save(this.output);
-				output.close();
+				Closeables.close(output);
 			}
 		} finally {
 			l.writeLock().unlock();
@@ -547,7 +549,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 				return null;
 			}
 		}
-		return getPartImpl(partName);
+		return partList.get(partName);
 	}
 
 	/**
@@ -636,7 +638,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 *
 	 * @return All this package's parts.
 	 */
-	public List<PackagePart> getParts() throws InvalidFormatException {
+	public Collection<PackagePart> getParts() throws InvalidFormatException {
 		throwExceptionIfWriteOnly();
 
 		// If the part list is null, we parse the package to retrieve all parts.
@@ -706,7 +708,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 				}
 			}
 		}
-		return new ArrayList<>(partList.values());
+		return partList.values();
 	}
 
 	/**
@@ -1458,15 +1460,6 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 */
 	protected abstract void saveImpl(OutputStream outputStream)
 			throws IOException;
-
-	/**
-	 * Get the package part mapped to the specified URI.
-	 *
-	 * @param partName
-	 *            The URI of the part to retrieve.
-	 * @return The package part located by the specified URI, else <b>null</b>.
-	 */
-	protected abstract PackagePart getPartImpl(PackagePartName partName);
 
 	/**
 	 * Get all parts link to the package.

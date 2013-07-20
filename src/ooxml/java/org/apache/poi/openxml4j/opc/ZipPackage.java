@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -161,20 +162,25 @@ public final class ZipPackage extends OPCPackage {
 
 		if (this.zipArchive == null) {
 			return this.partList.values().toArray(
-					new PackagePart[this.partList.values().size()]);
+					new PackagePart[this.partList.size()]);
 		}
+
+		try {
+			return getPartsImplInternal();
+		} catch (InvalidOperationException | IOException e) {
+			throw new InvalidFormatException(e.getMessage());
+		}
+	}
+
+	private PackagePart[] getPartsImplInternal() throws IOException, InvalidFormatException, InvalidOperationException {
 		// First we need to parse the content type part
 		Enumeration<? extends ZipEntry> entries = this.zipArchive.getEntries();
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
 			if (entry.getName().equalsIgnoreCase(
 					ContentTypeManager.CONTENT_TYPES_PART_NAME)) {
-				try {
-					this.contentTypeManager = new ZipContentTypeManager(
-							getZipArchive().getInputStream(entry), this);
-				} catch (IOException e) {
-					throw new InvalidFormatException(e.getMessage());
-				}
+				this.contentTypeManager = new ZipContentTypeManager(
+						getZipArchive().getInputStream(entry), this);
 				break;
 			}
 		}
@@ -197,13 +203,9 @@ public final class ZipPackage extends OPCPackage {
 
 			// Only proceed for Relationships at this stage
 			String contentType = contentTypeManager.getContentType(partName);
-			if (contentType != null && contentType.equals(ContentTypes.RELATIONSHIPS_PART)) {
-				try {
-					partList.put(partName, new ZipPackagePart(this, entry,
-						partName, contentType));
-				} catch (InvalidOperationException e) {
-					throw new InvalidFormatException(e.getMessage());
-				}
+			if (ContentTypes.RELATIONSHIPS_PART.equals(contentType)) {
+				partList.put(partName, new ZipPackagePart(this, entry,
+					partName, contentType));
 			}
 		}
 
@@ -214,23 +216,19 @@ public final class ZipPackage extends OPCPackage {
 			PackagePartName partName = buildPartName(entry);
 			if(partName == null) continue;
 
-			String contentType = contentTypeManager
-					.getContentType(partName);
-			if (contentType != null && contentType.equals(ContentTypes.RELATIONSHIPS_PART)) {
-				// Already handled
-			}
-			else if (contentType != null) {
-				try {
-					partList.put(partName, new ZipPackagePart(this, entry,
-							partName, contentType));
-				} catch (InvalidOperationException e) {
-					throw new InvalidFormatException(e.getMessage());
-				}
-			} else {
+			String contentType = contentTypeManager.getContentType(partName);
+			if (contentType == null) {
 				throw new InvalidFormatException(
 						"The part "
 								+ partName.getURI().getPath()
 								+ " does not have any content type ! Rule: Package require content types when retrieving a part from a package. [M.1.14]");
+			}
+			if (ContentTypes.RELATIONSHIPS_PART.equals(contentType)) {
+				// Already handled
+			}
+			else {
+				partList.put(partName, new ZipPackagePart(this, entry,
+						partName, contentType));
 			}
 		}
 
@@ -325,9 +323,7 @@ public final class ZipPackage extends OPCPackage {
 			if (targetFile.exists()) {
 				// Case of a package previously open
 
-				File tempFile = File.createTempFile(
-						generateTempFileName(FileHelper
-								.getDirectory(targetFile)), ".tmp");
+				File tempFile = File.createTempFile("OpenXML4J", ".tmp");
 
 				// Save the final package to a temporary file
 				try {
@@ -356,46 +352,12 @@ public final class ZipPackage extends OPCPackage {
 	}
 
 	/**
-	 * Create a unique identifier to be use as a temp file name.
-	 *
-	 * @return A unique identifier use to be use as a temp file name.
-	 */
-	private synchronized String generateTempFileName(File directory) {
-		File tmpFilename;
-		do {
-			tmpFilename = new File(directory.getAbsoluteFile() + File.separator
-					+ "OpenXML4J" + System.nanoTime());
-		} while (tmpFilename.exists());
-		return FileHelper.getFilename(tmpFilename.getAbsoluteFile());
-	}
-
-	/**
 	 * Close the package without saving the document. Discard all the changes
 	 * made to this package.
 	 */
 	@Override
 	protected void revertImpl() {
-		try {
-			if (this.zipArchive != null)
-				this.zipArchive.close();
-		} catch (IOException e) {
-			// Do nothing, user dont have to know
-		}
-	}
-
-	/**
-	 * Implement the getPart() method to retrieve a part from its URI in the
-	 * current package
-	 *
-	 *
-	 * @see #getPart(PackageRelationship)
-	 */
-	@Override
-	protected PackagePart getPartImpl(PackagePartName partName) {
-		if (partList.containsKey(partName)) {
-			return partList.get(partName);
-		}
-		return null;
+		Closeables.close(this.zipArchive);
 	}
 
 	/**
@@ -463,7 +425,14 @@ public final class ZipPackage extends OPCPackage {
 								.getPartName().getName()) + "'");
 				PartMarshaller marshaller = partMarshallers
 						.get(part._contentType);
-				if (marshaller != null) {
+				if (marshaller == null) {
+					if (!defaultPartMarshaller.marshall(part, zos))
+						throw new OpenXML4JException(
+								"The part "
+										+ part.getPartName().getURI()
+										+ " fail to be saved in the stream with marshaller "
+										+ defaultPartMarshaller);
+				} else {
 					if (!marshaller.marshall(part, zos)) {
 						throw new OpenXML4JException(
 								"The part "
@@ -471,20 +440,14 @@ public final class ZipPackage extends OPCPackage {
 										+ " fail to be saved in the stream with marshaller "
 										+ marshaller);
 					}
-				} else {
-					if (!defaultPartMarshaller.marshall(part, zos))
-						throw new OpenXML4JException(
-								"The part "
-										+ part.getPartName().getURI()
-										+ " fail to be saved in the stream with marshaller "
-										+ defaultPartMarshaller);
 				}
 			}
-			zos.close();
 		} catch (Exception e) {
             throw new OpenXML4JRuntimeException(
                     "Fail to save: an error occurs while saving the package : "
 							+ e.getMessage(), e);
+		} finally {
+			Closeables.close(zos);
 		}
 	}
 
