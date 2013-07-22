@@ -438,7 +438,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 */
 	public void addThumbnail(String path) throws IOException {
 		// Check parameter
-		if ("".equals(path))
+		if (StringUtil.isEmpty(path))
 			throw new IllegalArgumentException("path");
 
 		// Get the filename from the path

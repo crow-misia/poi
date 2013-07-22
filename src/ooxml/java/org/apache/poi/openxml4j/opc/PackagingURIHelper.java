@@ -151,6 +151,8 @@ public final class PackagingURIHelper {
 
     private static final Pattern missingAuthPattern = Pattern.compile("\\w+://");
 
+    private PackagingURIHelper() { }
+
 	/**
 	 * Gets the URI for the package root.
 	 *

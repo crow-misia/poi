@@ -18,7 +18,6 @@
 package org.apache.poi.hssf.usermodel.examples;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.util.WorkbookUtil;
 
 import java.io.IOException;
@@ -32,12 +31,12 @@ import java.io.FileOutputStream;
 public class NewSheet {
     public static void main(String[] args) throws IOException {
         HSSFWorkbook wb = new HSSFWorkbook();
-        HSSFSheet sheet1 = wb.createSheet("new sheet");
-        HSSFSheet sheet2 = wb.createSheet(); // create with default name
+        wb.createSheet("new sheet");
+        wb.createSheet(); // create with default name
         final String name = "second sheet";
         wb.setSheetName(1, WorkbookUtil.createSafeSheetName(name)); // setting sheet name later
-        FileOutputStream fileOut = new FileOutputStream("workbook.xls");
-        wb.write(fileOut);
-        fileOut.close();
+        try (final FileOutputStream fileOut = new FileOutputStream("workbook.xls")) {
+            wb.write(fileOut);
+        }
     }
 }

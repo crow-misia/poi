@@ -30,6 +30,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
 import org.apache.poi.hssf.usermodel.HSSFPatriarch;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.util.Closeables;
 
 
 /**
@@ -695,28 +696,14 @@ public class AddDimensionedImage {
             fos = new FileOutputStream(outputFile);
             workbook.write(fos);
         }
-        catch(FileNotFoundException fnfEx) {
-            System.out.println("Caught an: " + fnfEx.getClass().getName());
-            System.out.println("Message: " + fnfEx.getMessage());
+        catch(IOException e) {
+            System.out.println("Caught an: " + e.getClass().getName());
+            System.out.println("Message: " + e.getMessage());
             System.out.println("Stacktrace follows...........");
-            fnfEx.printStackTrace(System.out);
-        }
-        catch(IOException ioEx) {
-            System.out.println("Caught an: " + ioEx.getClass().getName());
-            System.out.println("Message: " + ioEx.getMessage());
-            System.out.println("Stacktrace follows...........");
-            ioEx.printStackTrace(System.out);
+            e.printStackTrace(System.out);
         }
         finally {
-            if(fos != null) {
-                try {
-                    fos.close();
-                    fos = null;
-                }
-                catch(IOException ioEx) {
-                    // I G N O R E
-                }
-            }
+            Closeables.close(fos);
         }
     }
 
