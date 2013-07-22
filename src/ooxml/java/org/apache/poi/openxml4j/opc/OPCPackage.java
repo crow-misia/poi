@@ -206,7 +206,7 @@ public abstract class OPCPackage implements RelationshipSource, Closeable {
 	 */
 	public static OPCPackage open(String path, PackageAccess access)
 			throws InvalidFormatException {
-		if (path == null || "".equals(path.trim())
+		if (StringUtil.isBlank(path)
 				|| (new File(path).exists() && new File(path).isDirectory()))
 			throw new IllegalArgumentException("path");
 

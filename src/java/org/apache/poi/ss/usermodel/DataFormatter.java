@@ -995,10 +995,10 @@ public class DataFormatter {
             seg2 = result.substring(Math.max(0, len - 7), len - 4);
             seg1 = result.substring(Math.max(0, len - 10), Math.max(0, len - 7));
 
-            if(seg1 != null && seg1.trim().length() > 0) {
+            if(StringUtil.isNotBlank(seg1)) {
                 sb.append('(').append(seg1).append(") ");
             }
-            if(seg2 != null && seg2.trim().length() > 0) {
+            if(StringUtil.isNotBlank(seg2)) {
                 sb.append(seg2).append('-');
             }
             sb.append(seg3);

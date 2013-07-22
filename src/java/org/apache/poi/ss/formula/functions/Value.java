@@ -22,6 +22,7 @@ import org.apache.poi.ss.formula.eval.EvaluationException;
 import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.ValueEval;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Implementation for Excel VALUE() function.<p/>
@@ -124,7 +125,7 @@ public final class Value extends Fixed1ArgFunction {
 			switch (ch) {
 				case ' ':
 					String remainingText = strText.substring(i);
-					if (remainingText.trim().length() > 0) {
+					if (StringUtil.isNotBlank(remainingText)) {
 						// intervening spaces not allowed once the digits start
 						return null;
 					}

@@ -28,6 +28,8 @@ import java.util.List;
  * @author Glen Stampoultzis
  */
 public final class EscherPropertyFactory {
+    private EscherPropertyFactory() { }
+
     /**
      * Create new properties from a byte array.
      *
@@ -35,7 +37,7 @@ public final class EscherPropertyFactory {
      * @param offset            The starting offset into the byte array
      * @return                  The new properties
      */
-    public List<EscherProperty> createProperties(byte[] data, int offset, short numProperties) {
+    public static List<EscherProperty> createProperties(byte[] data, int offset, short numProperties) {
         List<EscherProperty> results = new ArrayList<>(numProperties);
 
         int pos = offset;
@@ -75,14 +77,12 @@ public final class EscherPropertyFactory {
 
         // Get complex data
         for (final EscherProperty p : results) {
-            if (p instanceof EscherComplexProperty) {
-                if (p instanceof EscherArrayProperty) {
-                    pos += ((EscherArrayProperty)p).setArrayData(data, pos);
-                } else {
-                    byte[] complexData = ((EscherComplexProperty)p).getComplexData();
-                    System.arraycopy(data, pos, complexData, 0, complexData.length);
-                    pos += complexData.length;
-                }
+            if (p instanceof EscherArrayProperty) {
+                pos += ((EscherArrayProperty)p).setArrayData(data, pos);
+            } else if (p instanceof EscherComplexProperty) {
+                byte[] complexData = ((EscherComplexProperty)p).getComplexData();
+                System.arraycopy(data, pos, complexData, 0, complexData.length);
+                pos += complexData.length;
             }
         }
         return results;

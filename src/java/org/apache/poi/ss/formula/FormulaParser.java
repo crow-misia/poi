@@ -30,6 +30,7 @@ import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.ss.util.CellReference.NameType;
+import org.apache.poi.util.StringUtil;
 
 /**
  * This class parses a formula string into a List of tokens in RPN order.
@@ -208,7 +209,7 @@ public final class FormulaParser {
 	private RuntimeException expected(String s) {
 		String msg;
 
-		if (look == '=' && _formulaString.substring(0, _pointer-1).trim().length() < 1) {
+		if (look == '=' && StringUtil.isBlank(_formulaString.substring(0, _pointer-1))) {
 			msg = "The specified formula '" + _formulaString
 				+ "' starts with an equals sign which is not allowed.";
 		} else {

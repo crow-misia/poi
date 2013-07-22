@@ -40,8 +40,7 @@ public class TestEscherPropertyFactory extends TestCase
                 "01 02 03 "
                 ;
         byte[] data = HexRead.readFromString( dataStr );
-        EscherPropertyFactory f = new EscherPropertyFactory();
-        List props = f.createProperties( data, 0, (short)3 );
+        List<EscherProperty> props = EscherPropertyFactory.createProperties( data, 0, (short)3 );
         EscherComplexProperty p1 = (EscherComplexProperty) props.get( 0 );
         assertEquals( (short)0xC141, p1.getId() );
         assertEquals( "[01, 02, 03]", HexDump.toHex( p1.getComplexData() ) );

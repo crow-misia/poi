@@ -19,6 +19,7 @@ package org.apache.poi.xssf.usermodel;
 import java.util.Arrays;
 
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
+import org.apache.poi.util.StringUtil;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.STDataValidationType;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.STDataValidationOperator.Enum;
 
@@ -179,7 +180,7 @@ public class XSSFDataValidationConstraint implements DataValidationConstraint {
 	}
 
 	protected boolean isFormulaEmpty(String formula1) {
-		return formula1 == null || formula1.trim().length()==0;
+		return StringUtil.isBlank(formula1);
 	}
 	
 	public String prettyPrint() {

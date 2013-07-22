@@ -49,8 +49,7 @@ public final class ShapeFactory {
         EscherRecord opt = Shape.getEscherChild((EscherContainerRecord)spContainer.getChild(0), (short)0xF122);
         if(opt != null){
             try {
-                EscherPropertyFactory f = new EscherPropertyFactory();
-                List props = f.createProperties( opt.serialize(), 8, opt.getInstance() );
+                List<EscherProperty> props = EscherPropertyFactory.createProperties( opt.serialize(), 8, opt.getInstance() );
                 EscherSimpleProperty p = (EscherSimpleProperty)props.get(0);
                 if(p.getPropertyNumber() == 0x39F && p.getPropertyValue() == 1){
                     group = new Table(spContainer, parent);

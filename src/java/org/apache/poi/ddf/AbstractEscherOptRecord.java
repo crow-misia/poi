@@ -47,8 +47,7 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
         short propertiesCount = readInstance( data, offset );
         int pos = offset + 8;
 
-        EscherPropertyFactory f = new EscherPropertyFactory();
-        properties = f.createProperties( data, pos, propertiesCount );
+        properties = EscherPropertyFactory.createProperties( data, pos, propertiesCount );
         return bytesRemaining + 8;
     }
 

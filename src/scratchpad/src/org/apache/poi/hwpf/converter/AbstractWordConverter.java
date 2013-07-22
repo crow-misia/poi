@@ -627,7 +627,7 @@ public abstract class AbstractWordConverter
                 }
             }
 
-            haveAnyText |= text.trim().length() != 0;
+            haveAnyText |= StringUtil.isNotBlank(text);
         }
 
         return haveAnyText;

@@ -462,7 +462,7 @@ public class WordToFoConverter extends AbstractWordConverter
             Text textNode = foDocumentFacade.createText( bulletText );
             inline.appendChild( textNode );
 
-            haveAnyText |= bulletText.trim().length() != 0;
+            haveAnyText |= StringUtil.isNotBlank(bulletText);
         }
 
         haveAnyText = processCharacters( hwpfDocument, currentTableLevel,
