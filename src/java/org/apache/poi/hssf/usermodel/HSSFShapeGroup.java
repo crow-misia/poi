@@ -306,8 +306,7 @@ public class HSSFShapeGroup extends HSSFShape implements HSSFShapeContainer {
      */
     public int countOfAllChildren() {
         int count = shapes.size();
-        for (Iterator iterator = shapes.iterator(); iterator.hasNext(); ) {
-            HSSFShape shape = (HSSFShape) iterator.next();
+        for (final HSSFShape shape : shapes) {
             count += shape.countOfAllChildren();
         }
         return count;

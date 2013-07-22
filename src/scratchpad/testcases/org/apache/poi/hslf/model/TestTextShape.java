@@ -22,6 +22,8 @@ import junit.framework.TestCase;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hslf.usermodel.SlideShow;
 import org.apache.poi.hslf.record.TextHeaderAtom;
@@ -73,17 +75,17 @@ public final class TestTextShape extends TestCase {
     public void testRead() throws IOException {
         SlideShow ppt = new SlideShow(_slTests.openResourceAsStream("text_shapes.ppt"));
 
-        ArrayList lst1 = new ArrayList();
+        List<String> lst1 = new ArrayList<>();
         Slide slide = ppt.getSlides()[0];
         Shape[] shape = slide.getShapes();
-        for (int i = 0; i < shape.length; i++) {
-            assertTrue("Expected TextShape but found " + shape[i].getClass().getName(), shape[i] instanceof TextShape);
-            TextShape tx = (TextShape)shape[i];
+        for (final Shape s : shape) {
+            assertTrue("Expected TextShape but found " + s.getClass().getName(), s instanceof TextShape);
+            TextShape tx = (TextShape)s;
             TextRun run = tx.getTextRun();
             assertNotNull(run);
             int runType = run.getRunType();
 
-            int type = shape[i].getShapeType();
+            int type = s.getShapeType();
             switch (type){
                 case ShapeTypes.TextBox:
                     assertEquals("Text in a TextBox", run.getText());
@@ -104,16 +106,16 @@ public final class TestTextShape extends TestCase {
                     assertEquals("RoundRectangle", run.getText());
                     break;
                 default:
-                    fail("Unexpected shape: " + shape[i].getShapeName());
+                    fail("Unexpected shape: " + s.getShapeName());
 
             }
             lst1.add(run.getText());
         }
 
-        ArrayList lst2 = new ArrayList();
+        List<String> lst2 = new ArrayList<>();
         TextRun[] run = slide.getTextRuns();
-        for (int i = 0; i < run.length; i++) {
-            lst2.add(run[i].getText());
+        for (final TextRun t : run) {
+            lst2.add(t.getText());
         }
 
         assertTrue(lst1.containsAll(lst2));
@@ -160,11 +162,11 @@ public final class TestTextShape extends TestCase {
 
         Slide slide = ppt.getSlides()[0];
 
-        HashMap map = new HashMap();
+        Map<String, TextShape> map = new HashMap<>();
         Shape[] shape = slide.getShapes();
-        for (int i = 0; i < shape.length; i++) {
-            if(shape[i] instanceof TextShape){
-                TextShape tx = (TextShape)shape[i];
+        for (final Shape s : shape) {
+            if(s instanceof TextShape){
+                TextShape tx = (TextShape)s;
                 map.put(tx.getText(), tx);
             }
         }

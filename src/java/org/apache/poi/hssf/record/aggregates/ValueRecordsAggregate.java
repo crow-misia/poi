@@ -287,8 +287,7 @@ public final class ValueRecordsAggregate implements Iterable<CellValueRecordInte
 			if (rowCells == null) {
 				continue;
 			}
-			for (int j = 0; j < rowCells.length; j++) {
-				CellValueRecordInterface cell = rowCells[j];
+			for (final CellValueRecordInterface cell : rowCells) {
 				if (cell instanceof FormulaRecordAggregate) {
                     FormulaRecordAggregate fra = (FormulaRecordAggregate)cell;
                     Ptg[] ptgs = fra.getFormulaTokens(); // needs clone() inside this getter?

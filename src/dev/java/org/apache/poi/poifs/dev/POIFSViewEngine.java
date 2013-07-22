@@ -47,12 +47,12 @@ public class POIFSViewEngine
      * @return a List of Strings holding the content
      */
 
-    public static List inspectViewable(final Object viewable,
-                                       final boolean drilldown,
-                                       final int indentLevel,
-                                       final String indentString)
+    public static List<String> inspectViewable(final Object viewable,
+                                               final boolean drilldown,
+                                               final int indentLevel,
+                                               final String indentString)
     {
-        List objects = new ArrayList();
+        List<String> objects = new ArrayList<>();
 
         if (viewable instanceof POIFSViewable)
         {
@@ -66,16 +66,16 @@ public class POIFSViewEngine
                 {
                     Object[] data = inspected.getViewableArray();
 
-                    for (int j = 0; j < data.length; j++)
+                    for (final Object d : data)
                     {
-                        objects.addAll(inspectViewable(data[ j ], drilldown,
+                        objects.addAll(inspectViewable(d, drilldown,
                                                        indentLevel + 1,
                                                        indentString));
                     }
                 }
                 else
                 {
-                    Iterator iter = inspected.getViewableIterator();
+                    Iterator<?> iter = inspected.getViewableIterator();
 
                     while (iter.hasNext())
                     {

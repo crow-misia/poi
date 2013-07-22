@@ -17,9 +17,9 @@
 
 package org.apache.poi.hssf.dev;
 
-import org.apache.poi.hssf.usermodel.HSSFPatriarch;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -38,24 +38,24 @@ public class ReSave {
             if(arg.equals("-dg")) initDrawing = true;
             else {
                 System.out.print("reading " + arg + "...");
-                HSSFWorkbook wb;
+                Workbook wb;
                 try (final FileInputStream is = new FileInputStream(arg)) {
                     wb = new HSSFWorkbook(is);
                 }
                 System.out.println("done");
 
                 for(int i = 0, n = wb.getNumberOfSheets(); i < n; i++){
-                    HSSFSheet sheet = wb.getSheetAt(i);
+                    Sheet sheet = wb.getSheetAt(i);
                     if(initDrawing) {
-                        HSSFPatriarch dg = sheet.getDrawingPatriarch();
+                        sheet.createDrawingPatriarch();
                     }
                 }
 
                 String outputFile = arg.replace(".xls", "-saved.xls");
                 System.out.print("saving to " + outputFile + "...");
-                FileOutputStream out = new FileOutputStream(outputFile);
-                wb.write(out);
-                out.close();
+                try (final FileOutputStream out = new FileOutputStream(outputFile)) {
+                    wb.write(out);
+                }
                 System.out.println("done");
             }
         }

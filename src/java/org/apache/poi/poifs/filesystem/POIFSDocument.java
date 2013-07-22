@@ -49,7 +49,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	private DocumentProperty _property;
 	private int _size;
 	
-   private final POIFSBigBlockSize _bigBigBlockSize;
+	private final POIFSBigBlockSize _bigBigBlockSize;
 
 	// one of these stores will be valid
 	private SmallBlockStore  _small_store;
@@ -346,8 +346,10 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 			} else if (_small_store.isValid()) {
 				blocks = _small_store.getBlocks();
 			}
-			if (blocks != null) {
-				for (int k = 0; k < blocks.length; k++) {
+			if (blocks == null) {
+				result = "<NO DATA>";
+			} else {
+				for (int k = 0, n = blocks.length; k < n; k++) {
 					blocks[k].writeBlocks(output);
 				}
 				byte[] data = output.toByteArray();
@@ -359,8 +361,6 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 					data = tmp;
 				}
 				result = HexDump.dump(data, 0, 0, "<NO DATA>");
-			} else {
-				result = "<NO DATA>";
 			}
 		} catch (IOException e) {
 			result = e.getMessage();
@@ -375,7 +375,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	 * @return an Iterator; may not be null, but may have an empty back end
 	 *		 store
 	 */
-	public Iterator getViewableIterator() {
+	public Iterator<?> getViewableIterator() {
 		return Collections.emptyIterator();
 	}
 

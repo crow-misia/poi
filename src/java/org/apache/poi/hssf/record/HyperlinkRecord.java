@@ -17,7 +17,6 @@
 
 package org.apache.poi.hssf.record;
 
-import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 

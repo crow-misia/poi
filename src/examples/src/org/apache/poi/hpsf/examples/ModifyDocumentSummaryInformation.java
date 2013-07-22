@@ -102,21 +102,23 @@ public class ModifyDocumentSummaryInformation {
         File poiFilesystem = new File(args[0]);
 
         /* Open the POI filesystem. */
-        InputStream is = new FileInputStream(poiFilesystem);
-        POIFSFileSystem poifs = new POIFSFileSystem(is);
-        is.close();
+        POIFSFileSystem poifs;
+        DirectoryEntry dir;
+        try (final InputStream is = new FileInputStream(poiFilesystem)) {
+            poifs = new POIFSFileSystem(is);
+            dir = poifs.getRoot();
+        }
 
         /* Read the summary information. */
-        DirectoryEntry dir = poifs.getRoot();
         SummaryInformation si;
         try
         {
             DocumentEntry siEntry = (DocumentEntry)
                 dir.getEntry(SummaryInformation.DEFAULT_STREAM_NAME);
-            DocumentInputStream dis = new DocumentInputStream(siEntry);
-            PropertySet ps = new PropertySet(dis);
-            dis.close();
-            si = new SummaryInformation(ps);
+            try (final DocumentInputStream dis = new DocumentInputStream(siEntry)) {
+                PropertySet ps = new PropertySet(dis);
+                si = new SummaryInformation(ps);
+            }
         }
         catch (FileNotFoundException ex)
         {
@@ -141,10 +143,10 @@ public class ModifyDocumentSummaryInformation {
         {
             DocumentEntry dsiEntry = (DocumentEntry)
                 dir.getEntry(DocumentSummaryInformation.DEFAULT_STREAM_NAME);
-            DocumentInputStream dis = new DocumentInputStream(dsiEntry);
-            PropertySet ps = new PropertySet(dis);
-            dis.close();
-            dsi = new DocumentSummaryInformation(ps);
+            try (final DocumentInputStream dis = new DocumentInputStream(dsiEntry)) {
+                PropertySet ps = new PropertySet(dis);
+                dsi = new DocumentSummaryInformation(ps);
+            }
         }
         catch (FileNotFoundException ex)
         {
@@ -187,8 +189,8 @@ public class ModifyDocumentSummaryInformation {
         /* Write the POI filesystem back to the original file. Please note that
          * in production code you should never write directly to the origin
          * file! In case of a writing error everything would be lost. */
-        OutputStream out = new FileOutputStream(poiFilesystem);
-        poifs.writeFilesystem(out);
-        out.close();
+        try (final OutputStream out = new FileOutputStream(poiFilesystem)) {
+            poifs.writeFilesystem(out);
+        }
     }
 }

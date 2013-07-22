@@ -24,12 +24,14 @@ import org.apache.poi.hslf.HSLFSlideShow;
 import org.apache.poi.ddf.*;
 import org.apache.poi.POIDataSamples;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Test drawing shapes via Graphics2D
@@ -207,17 +209,17 @@ public final class TestShapes extends TestCase {
         SlideShow ppt = new SlideShow(_slTests.openResourceAsStream(filename));
         Slide[] sl = ppt.getSlides();
         for (int k = 0; k < sl.length; k++) {
-            ArrayList lst1 = new ArrayList();
+            List<String> lst1 = new ArrayList<>();
             TextRun[] txt = sl[k].getTextRuns();
-            for (int i = 0; i < txt.length; i++) {
-                lst1.add(txt[i].getText());
+            for (final TextRun t : txt) {
+                lst1.add(t.getText());
             }
 
-            ArrayList lst2 = new ArrayList();
+            List<String> lst2 = new ArrayList<>();
             Shape[] sh = sl[k].getShapes();
-            for (int i = 0; i < sh.length; i++) {
-                if (sh[i] instanceof TextShape){
-                    TextShape tbox = (TextShape)sh[i];
+            for (final Shape s : sh) {
+                if (s instanceof TextShape){
+                    TextShape tbox = (TextShape)s;
                     lst2.add(tbox.getText());
                 }
             }

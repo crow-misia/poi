@@ -131,7 +131,7 @@ final class Util {
                                          final String[] poiFiles)
         throws FileNotFoundException, IOException
     {
-        final List files = new ArrayList();
+        final List<POIFile> files = new ArrayList<>();
         POIFSReader r = new POIFSReader();
         POIFSReaderListener pfl = new POIFSReaderListener()
         {
@@ -146,7 +146,6 @@ final class Util {
                     final ByteArrayOutputStream out =
                         new ByteArrayOutputStream();
                     Util.copy(in, out);
-                    out.close();
                     f.setBytes(out.toByteArray());
                     files.add(f);
                 }
@@ -195,7 +194,7 @@ final class Util {
     public static POIFile[] readPropertySets(final File poiFs)
         throws FileNotFoundException, IOException
     {
-        final List files = new ArrayList(7);
+        final List<POIFile> files = new ArrayList<>(7);
         final POIFSReader r = new POIFSReader();
         POIFSReaderListener pfl = new POIFSReaderListener()
         {
@@ -230,9 +229,10 @@ final class Util {
 
         /* Read the POI filesystem. */
         r.read(new FileInputStream(poiFs));
-        POIFile[] result = new POIFile[files.size()];
-        for (int i = 0; i < result.length; i++)
-            result[i] = (POIFile) files.get(i);
+        final int n = files.size();
+        POIFile[] result = new POIFile[n];
+        for (int i = 0; i < n; i++)
+            result[i] = files.get(i);
         return result;
     }
 
@@ -244,13 +244,12 @@ final class Util {
     public static void printSystemProperties()
     {
         final Properties p = System.getProperties();
-        final List names = new LinkedList();
-        for (Iterator i = p.keySet().iterator(); i.hasNext();)
-            names.add(i.next());
+        final List<String> names = new LinkedList<>();
+        for (Iterator<?> i = p.keySet().iterator(); i.hasNext();)
+            names.add((String) i.next());
         Collections.sort(names);
-        for (final Iterator i = names.iterator(); i.hasNext();)
+        for (final String name : names)
         {
-            String name = (String) i.next();
             String value = (String) p.get(name);
             System.out.println(name + ": " + value);
         }

@@ -42,7 +42,7 @@ import org.apache.poi.util.ArrayUtil;
  */
 public class DirectoryNode
     extends EntryNode
-    implements DirectoryEntry, POIFSViewable, Iterable<Entry>
+    implements DirectoryEntry, POIFSViewable
 {
 
     // Map of Entry instances, keyed by their names
@@ -192,13 +192,12 @@ public class DirectoryNode
             final Entry document)
         throws IOException
     {
-        if (!document.isDocumentEntry()) {
-            throw new IOException("Entry '" + document.getName()
-                                  + "' is not a DocumentEntry");
+        if (document.isDocumentEntry()) {
+            return new DocumentInputStream((DocumentEntry)document);
         }
 
-        DocumentEntry entry = (DocumentEntry)document;
-        return new DocumentInputStream(entry);
+        throw new IOException("Entry '" + document.getName()
+                + "' is not a DocumentEntry");
     }
 
     /**
@@ -290,13 +289,13 @@ public class DirectoryNode
         if (rval)
         {
             _entries.remove(entry);
-        	   _byname.remove(entry.getName());
+            _byname.remove(entry.getName());
 
-        	   if(_ofilesystem != null) {
-               _ofilesystem.remove(entry);
-        	   } else {
-        	      _nfilesystem.remove(entry);
-        	   }
+            if(_ofilesystem != null) {
+                _ofilesystem.remove(entry);
+            } else {
+                _nfilesystem.remove(entry);
+            }
         }
         return rval;
     }
@@ -395,11 +394,10 @@ public class DirectoryNode
                                         final InputStream stream)
         throws IOException
     {
-        if(_nfilesystem != null) {
-           return createDocument(new NPOIFSDocument(name, _nfilesystem, stream));
-        } else {
-           return createDocument(new POIFSDocument(name, stream));
+        if(_nfilesystem == null) {
+            return createDocument(new POIFSDocument(name, stream));
         }
+        return createDocument(new NPOIFSDocument(name, _nfilesystem, stream));
     }
 
     /**
@@ -437,12 +435,12 @@ public class DirectoryNode
         DirectoryNode rval;
         DirectoryProperty property = new DirectoryProperty(name);
 
-        if(_ofilesystem != null) {
-           rval = new DirectoryNode(property, _ofilesystem, this);
-           _ofilesystem.addDirectory(property);
+        if(_ofilesystem == null) {
+            rval = new DirectoryNode(property, _nfilesystem, this);
+            _nfilesystem.addDirectory(property);
         } else {
-           rval = new DirectoryNode(property, _nfilesystem, this);
-           _nfilesystem.addDirectory(property);
+            rval = new DirectoryNode(property, _ofilesystem, this);
+            _ofilesystem.addDirectory(property);
         }
 
         (( DirectoryProperty ) getProperty()).addChild(property);
@@ -513,7 +511,7 @@ public class DirectoryNode
      * @return an array of Object; may not be null, but may be empty
      */
 
-    public Object [] getViewableArray()
+    public Object[] getViewableArray()
     {
         return ArrayUtil.EMPTY_OBJECT_ARRAY;
     }

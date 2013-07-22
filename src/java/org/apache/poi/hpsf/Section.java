@@ -209,10 +209,9 @@ public class Section
         /* Pass 1: Read the property list. */
         int pass1Offset = o1;
         final List<PropertyListEntry> propertyList = new ArrayList<>(propertyCount);
-        PropertyListEntry ple;
         for (int i = 0; i < propertyCount; i++)
         {
-            ple = new PropertyListEntry();
+            PropertyListEntry ple = new PropertyListEntry();
 
             /* Read the property ID. */
             ple.id = (int) LittleEndian.getUInt(src, pass1Offset);
@@ -238,17 +237,13 @@ public class Section
         }
         if (propertyCount > 0)
         {
-            ple = propertyList.get(propertyCount - 1);
+            PropertyListEntry ple = propertyList.get(propertyCount - 1);
             ple.length = size - ple.offset;
         }
 
         /* Look for the codepage. */
         int codepage = -1;
-        for (final Iterator<PropertyListEntry> i = propertyList.iterator();
-             codepage == -1 && i.hasNext();)
-        {
-            ple = i.next();
-
+        for (final PropertyListEntry ple : propertyList) {
             /* Read the codepage if the property ID is 1. */
             if (ple.id == PropertyIDMap.PID_CODEPAGE)
             {
@@ -266,14 +261,14 @@ public class Section
                 /* Read the codepage number. */
                 codepage = LittleEndian.getUShort(src, o);
             }
+            if (codepage != -1) break;
         }
 
         /* Pass 2: Read all properties - including the codepage property,
          * if available. */
         int i1 = 0;
-        for (final Iterator<PropertyListEntry> i = propertyList.iterator(); i.hasNext();)
+        for (final PropertyListEntry ple : propertyList)
         {
-            ple = i.next();
             Property p = new Property(ple.id, src,
                     this.offset + ple.offset,
                     ple.length, codepage);
@@ -285,7 +280,7 @@ public class Section
         /*
          * Extract the dictionary (if available).
          */
-        dictionary = (Map) getProperty(0);
+        dictionary = (Map<Long, String>) getProperty(PropertyIDMap.PID_DICTIONARY);
     }
 
 
@@ -348,9 +343,9 @@ public class Section
     public Object getProperty(final long id)
     {
         wasNull = false;
-        for (int i = 0; i < properties.length; i++)
-            if (id == properties[i].getID())
-                return properties[i].getValue();
+        for (final Property p : properties)
+            if (id == p.getID())
+                return p.getValue();
         wasNull = true;
         return null;
     }

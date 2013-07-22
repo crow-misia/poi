@@ -311,7 +311,7 @@ public class POIFSFileSystem
 
         // create a list of BATManaged objects: the documents plus the
         // property table and the small block table
-        final List<BlockWritable> bm_objects = new ArrayList<>(_documents.size() + 3);
+        final List<BATManaged> bm_objects = new ArrayList<>(_documents.size() + 3);
 
         bm_objects.addAll(_documents);
         bm_objects.add(_property_table);
@@ -320,11 +320,8 @@ public class POIFSFileSystem
 
         // walk the list, allocating space for each and assigning each
         // a starting block number
-        Iterator<BlockWritable> iter = bm_objects.iterator();
-
-        while (iter.hasNext())
+        for (final BATManaged bmo : bm_objects)
         {
-            BATManaged bmo         = ( BATManaged ) iter.next();
             int        block_count = bmo.countBlocks();
 
             if (block_count != 0)
@@ -379,11 +376,8 @@ public class POIFSFileSystem
         }
 
         // now, write everything out
-        iter = writers.iterator();
-        while (iter.hasNext())
+        for (final BlockWritable writer : writers)
         {
-            BlockWritable writer = ( BlockWritable ) iter.next();
-
             writer.writeBlocks(stream);
         }
     }

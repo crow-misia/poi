@@ -32,26 +32,6 @@ import java.util.TreeSet;
  */
 public final class FunctionEval {
 	/**
-	 * Some function IDs that require special treatment
-	 */
-	private static final class FunctionID {
-		/** 1 */
-		public static final int IF = FunctionMetadataRegistry.FUNCTION_INDEX_IF;
-		/** 4 */
-		public static final int SUM = FunctionMetadataRegistry.FUNCTION_INDEX_SUM;
-		/** 78 */
-		public static final int OFFSET = FunctionMetadataRegistry.FUNCTION_INDEX_OFFSET;
-		/** 100 */
-		public static final int CHOOSE = FunctionMetadataRegistry.FUNCTION_INDEX_CHOOSE;
-		/** 148 */
-		public static final int INDIRECT = FunctionMetadataRegistry.FUNCTION_INDEX_INDIRECT;
-		/** 255 */
-		public static final int EXTERNAL_FUNC = FunctionMetadataRegistry.FUNCTION_INDEX_EXTERNAL;
-	}
-	// convenient access to namespace
-	private static final FunctionID ID = null;
-
-	/**
 	 * Array elements corresponding to unimplemented functions are <code>null</code>
 	 */
 	protected static final Function[] functions = produceFunctions();
@@ -268,8 +248,8 @@ public final class FunctionEval {
 	public static Function getBasicFunction(int functionIndex) {
 		// check for 'free ref' functions first
 		switch (functionIndex) {
-			case FunctionID.INDIRECT:
-			case FunctionID.EXTERNAL_FUNC:
+			case FunctionMetadataRegistry.FUNCTION_INDEX_INDIRECT:
+			case FunctionMetadataRegistry.FUNCTION_INDEX_EXTERNAL:
 				return null;
 		}
 		// else - must be plain function

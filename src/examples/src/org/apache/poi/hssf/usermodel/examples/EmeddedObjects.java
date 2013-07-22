@@ -53,8 +53,8 @@ public class EmeddedObjects {
                 if(obj.hasDirectoryEntry()){
                     // The DirectoryEntry is a DocumentNode. Examine its entries to find out what it is
                     DirectoryNode dn = (DirectoryNode) obj.getDirectory();
-                    for (Iterator entries = dn.getEntries(); entries.hasNext();) {
-                        Entry entry = (Entry) entries.next();
+                    for (Iterator<Entry> entries = dn.getEntries(); entries.hasNext();) {
+                        Entry entry = entries.next();
                         //System.out.println(oleName + "." + entry.getName());
                     }
                 } else {

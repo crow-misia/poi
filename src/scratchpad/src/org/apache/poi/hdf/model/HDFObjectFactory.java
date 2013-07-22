@@ -115,9 +115,9 @@ public final class HDFObjectFactory {
         this(istream, null);
     }
 
-    public static List getTypes(InputStream istream) throws IOException
+    public static List<FileInformationBlock> getTypes(InputStream istream) throws IOException
     {
-        List results = new ArrayList(1);
+        List<FileInformationBlock> results = new ArrayList<>(1);
 
         //do Ole stuff
         POIFSFileSystem filesystem = new POIFSFileSystem(istream);

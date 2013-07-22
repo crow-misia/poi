@@ -16,6 +16,8 @@
 ==================================================================== */
 package org.apache.poi.xssf.usermodel;
 
+import java.util.Arrays;
+
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Color;
 import org.apache.poi.util.Internal;
@@ -171,11 +173,9 @@ public class XSSFColor implements Color {
         byte[] rgb = ctColor.getRgb();
         if (rgb != null) {
             if(rgb.length == 4) {
-               byte[] tmp = new byte[3];
-               System.arraycopy(rgb, 1, tmp, 0, 3);
-               rgb = tmp;
+               rgb = Arrays.copyOfRange(rgb, 1, 4);
             }
-            for (int i = 0; i < rgb.length; i++){
+            for (int i = 0, n = rgb.length; i < n; i++){
                 rgb[i] = applyTint(rgb[i] & 0xFF, ctColor.getTint());
             }
         }

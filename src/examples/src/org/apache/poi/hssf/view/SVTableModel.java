@@ -20,13 +20,13 @@
 
 package org.apache.poi.hssf.view;
 
-import java.util.Iterator;
 import javax.swing.table.*;
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  * Sheet Viewer Table Model - The model for the Sheet Viewer just overrides things.
@@ -44,10 +44,8 @@ public class SVTableModel extends AbstractTableModel {
 
   public SVTableModel(HSSFSheet st) {
     this.st = st;
-    Iterator i = st.rowIterator();
 
-    while (i.hasNext()) {
-      HSSFRow row = (HSSFRow)i.next();
+    for (final Row row : st) {
       if (maxcol < (row.getLastCellNum()+1)) {
          this.maxcol = row.getLastCellNum();
       }

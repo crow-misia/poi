@@ -19,7 +19,6 @@ package org.apache.poi.hwpf.model;
 
 import java.io.IOException;
 
-import org.apache.poi.hwpf.model.io.HWPFFileSystem;
 import org.apache.poi.hwpf.model.io.HWPFOutputStream;
 import org.apache.poi.util.Internal;
 import org.apache.poi.util.LittleEndian;

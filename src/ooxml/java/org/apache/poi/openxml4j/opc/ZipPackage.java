@@ -83,12 +83,8 @@ public final class ZipPackage extends OPCPackage {
 	 */
 	ZipPackage(InputStream in, PackageAccess access) throws IOException {
 		super(access);
-		ZipInputStream zis = null;
-		try {
-			zis = new ZipInputStream(in);
+		try (final ZipInputStream zis = new ZipInputStream(in)) {
 			this.zipArchive = new ZipInputStreamZipEntrySource(zis);
-		} finally {
-			Closeables.close(zis);
 		}
 	}
 
@@ -103,18 +99,7 @@ public final class ZipPackage extends OPCPackage {
     *             If the content type part parsing encounters an error.
     */
    ZipPackage(String path, PackageAccess access) {
-      super(access);
-
-      ZipFile zipFile = null;
-
-      try {
-         zipFile = ZipHelper.openZipFile(path);
-      } catch (IOException e) {
-         throw new InvalidOperationException(
-               "Can't open the specified file: '" + path + "'", e);
-      }
-
-      this.zipArchive = new ZipFileZipEntrySource(zipFile);
+      this(new File(path), access);
    }
 
    /**

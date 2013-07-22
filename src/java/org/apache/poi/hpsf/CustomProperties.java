@@ -57,7 +57,7 @@ import org.apache.poi.hpsf.wellknown.PropertyIDMap;
  *         href="mailto:klute@rainer-klute.de">&lt;klute@rainer-klute.de&gt;</a>
  */
 @SuppressWarnings("serial")
-public class CustomProperties extends HashMap<Object,CustomProperty>
+public final class CustomProperties extends HashMap<Long, CustomProperty>
 {
 
     /**
@@ -126,12 +126,12 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      * @return If the was already a property with the same name, the
      * @throws ClassCastException
      */
-    private Object put(final CustomProperty customProperty) throws ClassCastException
+    private CustomProperty put(final CustomProperty customProperty) throws ClassCastException
     {
         final String name = customProperty.getName();
 
         /* Check whether a property with this name is in the map already. */
-        final Long oldId = (Long) dictionaryNameToID.get(name);
+        final Long oldId = dictionaryNameToID.get(name);
         if (oldId != null)
             customProperty.setID(oldId.longValue());
         else
@@ -157,7 +157,7 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      *
      * @see java.util.HashSet#remove(java.lang.Object)
      */
-    public Object remove(final String name)
+    public CustomProperty remove(final String name)
     {
         final Long id = (Long) dictionaryNameToID.get(name);
         if (id == null)
@@ -175,7 +175,7 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      * @return the property that was stored under the specified name before, or
      *         <code>null</code> if there was no such property before.
      */
-    public Object put(final String name, final String value)
+    public CustomProperty put(final String name, final String value)
     {
         final MutableProperty p = new MutableProperty();
         p.setID(-1);
@@ -193,7 +193,7 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      * @return the property that was stored under the specified name before, or
      *         <code>null</code> if there was no such property before.
      */
-    public Object put(final String name, final Long value)
+    public CustomProperty put(final String name, final Long value)
     {
         final MutableProperty p = new MutableProperty();
         p.setID(-1);
@@ -211,7 +211,7 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      * @return the property that was stored under the specified name before, or
      *         <code>null</code> if there was no such property before.
      */
-    public Object put(final String name, final Double value)
+    public CustomProperty put(final String name, final Double value)
     {
         final MutableProperty p = new MutableProperty();
         p.setID(-1);
@@ -229,7 +229,7 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      * @return the property that was stored under the specified name before, or
      *         <code>null</code> if there was no such property before.
      */
-    public Object put(final String name, final Integer value)
+    public CustomProperty put(final String name, final Integer value)
     {
         final MutableProperty p = new MutableProperty();
         p.setID(-1);
@@ -247,7 +247,7 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      * @return the property that was stored under the specified name before, or
      *         <code>null</code> if there was no such property before.
      */
-    public Object put(final String name, final Boolean value)
+    public CustomProperty put(final String name, final Boolean value)
     {
         final MutableProperty p = new MutableProperty();
         p.setID(-1);
@@ -267,9 +267,9 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      */
     public Object get(final String name)
     {
-        final Long id = (Long) dictionaryNameToID.get(name);
-        final CustomProperty cp = (CustomProperty) super.get(id);
-        return cp != null ? cp.getValue() : null;
+        final Long id = dictionaryNameToID.get(name);
+        final CustomProperty cp = super.get(id);
+        return cp == null ? null : cp.getValue();
     }
 
 
@@ -282,7 +282,7 @@ public class CustomProperties extends HashMap<Object,CustomProperty>
      * @return the property that was stored under the specified name before, or
      *         <code>null</code> if there was no such property before.
      */
-    public Object put(final String name, final Date value)
+    public CustomProperty put(final String name, final Date value)
     {
         final MutableProperty p = new MutableProperty();
         p.setID(-1);

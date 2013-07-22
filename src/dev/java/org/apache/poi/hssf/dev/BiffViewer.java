@@ -355,6 +355,7 @@ public final class BiffViewer {
 		}
 	}
 	private static final class CommandParseException extends Exception {
+		private static final long serialVersionUID = 1L;
 		public CommandParseException(String msg) {
 			super(msg);
 		}

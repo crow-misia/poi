@@ -18,7 +18,6 @@
 package org.apache.poi.hssf.usermodel;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;

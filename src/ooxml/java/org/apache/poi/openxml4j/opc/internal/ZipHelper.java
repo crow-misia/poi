@@ -129,14 +129,8 @@ public final class ZipHelper {
 	 * @return A zip URI without any leading slashes.
 	 */
 	public static URI getZipURIFromOPCName(String opcItemName) {
-		if (opcItemName == null)
-			throw new IllegalArgumentException("opcItemName");
-
-		String retVal = opcItemName;
-		while (retVal.startsWith(FORWARD_SLASH))
-			retVal = retVal.substring(1);
 		try {
-			return new URI(retVal);
+			return new URI(getZipItemNameFromOPCName(opcItemName));
 		} catch (URISyntaxException e) {
 			return null;
 		}
@@ -156,21 +150,4 @@ public final class ZipHelper {
 
       return new ZipFile(file);
    }
-
-	/**
-	 * Retrieve and open a zip file with the specified path.
-	 *
-	 * @param path
-	 *            The file path.
-	 * @return The zip archive freshly open.
-	 */
-	public static ZipFile openZipFile(String path) throws IOException {
-		File f = new File(path);
-
-		if (!f.exists()) {
-			return null;
-		}
-
-		return new ZipFile(f);
-	}
 }

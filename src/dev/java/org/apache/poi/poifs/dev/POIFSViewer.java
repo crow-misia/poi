@@ -76,13 +76,12 @@ public class POIFSViewer
         {
             POIFSViewable fs      =
                 new POIFSFileSystem(new FileInputStream(filename));
-            List          strings = POIFSViewEngine.inspectViewable(fs, true,
+            List<String>  strings = POIFSViewEngine.inspectViewable(fs, true,
                                         0, "  ");
-            Iterator      iter    = strings.iterator();
 
-            while (iter.hasNext())
+            for (final String s : strings)
             {
-                System.out.print(iter.next());
+                System.out.print(s);
             }
         }
         catch (IOException e)

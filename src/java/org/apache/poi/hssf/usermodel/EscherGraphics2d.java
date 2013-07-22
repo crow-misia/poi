@@ -91,7 +91,7 @@ public final class EscherGraphics2d extends Graphics2D {
         setColor(Color.black);
     }
 
-    public void addRenderingHints(Map map)
+    public void addRenderingHints(Map<?, ?> map)
     {
         getG2D().addRenderingHints(map);
     }
@@ -129,8 +129,7 @@ public final class EscherGraphics2d extends Graphics2D {
 
     public Graphics create()
     {
-        EscherGraphics2d g2d = new EscherGraphics2d(_escherGraphics);
-        return g2d;
+        return new EscherGraphics2d(_escherGraphics);
     }
 
     public void dispose()
@@ -516,7 +515,7 @@ public final class EscherGraphics2d extends Graphics2D {
         getG2D().setRenderingHint(key, obj);
     }
 
-    public void setRenderingHints(Map map)
+    public void setRenderingHints(Map<?, ?> map)
     {
         getG2D().setRenderingHints(map);
     }

@@ -39,7 +39,7 @@ import org.apache.poi.ss.usermodel.Color;
  * @author  Brian Sanders (bsanders at risklabs dot com) - full default color palette
  */
 public class HSSFColor implements Color {
-    private static Map<Integer,HSSFColor> indexHash; 
+    private static final Map<Integer,HSSFColor> indexHash = Collections.unmodifiableMap( createColorsByIndexMap() );
 
     /** Creates a new instance of HSSFColor */
     public HSSFColor()
@@ -53,10 +53,6 @@ public class HSSFColor implements Color {
      * @return a Map containing all colours keyed by <tt>Integer</tt> excel-style palette indexes
      */
     public static final Map<Integer,HSSFColor> getIndexHash() {
-        if(indexHash == null) {
-           indexHash = Collections.unmodifiableMap( createColorsByIndexMap() );
-        }
-
         return indexHash;
     }
     /**
@@ -75,8 +71,8 @@ public class HSSFColor implements Color {
 
         for (final HSSFColor color : colors) {
             Integer index1 = Integer.valueOf(color.getIndex());
-            if (result.containsKey(index1)) {
-                HSSFColor prevColor = (HSSFColor)result.get(index1);
+            HSSFColor prevColor = result.get(index1);
+            if (prevColor != null) {
                 throw new RuntimeException("Dup color index (" + index1
                         + ") for colors (" + prevColor.getClass().getName()
                         + "),(" + color.getClass().getName() + ")");
@@ -90,8 +86,8 @@ public class HSSFColor implements Color {
                 // most colors don't have a second index
                 continue;
             }
-            if (result.containsKey(index2)) {
-                if (false) { // Many of the second indexes clash
+            if (false) { // Many of the second indexes clash
+                if (result.containsKey(index2)) {
                     HSSFColor prevColor = (HSSFColor)result.get(index2);
                     throw new RuntimeException("Dup color index (" + index2
                             + ") for colors (" + prevColor.getClass().getName()
@@ -159,8 +155,8 @@ public class HSSFColor implements Color {
 
         for (final HSSFColor color : colors) {
             String hexString = color.getHexString();
-            if (result.containsKey(hexString)) {
-            	HSSFColor other = (HSSFColor)result.get(hexString);
+            HSSFColor other = result.get(hexString);
+            if (other != null) {
                 throw new RuntimeException(
                 		"Dup color hexString (" + hexString
                         + ") for color (" + color.getClass().getName() + ") - "

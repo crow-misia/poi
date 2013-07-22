@@ -98,10 +98,10 @@ public final class CellRangeUtil
 
         List<CellRangeAddress> lst = new ArrayList<>();
         for(CellRangeAddress cr : cellRanges) lst.add(cr);
-        List temp = mergeCellRanges(lst);
+        List<CellRangeAddress> temp = mergeCellRanges(lst);
 		return toArray(temp);
 	}
-	private static List mergeCellRanges(List cellRangeList)
+	private static List<CellRangeAddress> mergeCellRanges(List<CellRangeAddress> cellRangeList)
 	{
 
 		while(cellRangeList.size() > 1)
@@ -110,10 +110,10 @@ public final class CellRangeUtil
 			
 			for( int i=0; i<cellRangeList.size(); i++)
 			{
-				CellRangeAddress range1 = (CellRangeAddress)cellRangeList.get(i);
+				CellRangeAddress range1 = cellRangeList.get(i);
 				for( int j=i+1; j<cellRangeList.size(); j++)
 				{
-					CellRangeAddress range2 = (CellRangeAddress)cellRangeList.get(j);
+					CellRangeAddress range2 = cellRangeList.get(j);
 					
 					CellRangeAddress[] mergeResult = mergeRanges(range1, range2);
 					if(mergeResult == null) {

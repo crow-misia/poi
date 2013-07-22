@@ -149,10 +149,10 @@ public final class Table extends ShapeGroup {
 
     protected void initTable(){
         Shape[] sh = getShapes();
-        Arrays.sort(sh, new Comparator(){
-            public int compare( Object o1, Object o2 ) {
-                Rectangle anchor1 = ((Shape)o1).getAnchor();
-                Rectangle anchor2 = ((Shape)o2).getAnchor();
+        Arrays.sort(sh, new Comparator<Shape>(){
+            public int compare( Shape o1, Shape o2 ) {
+                Rectangle anchor1 = o1.getAnchor();
+                Rectangle anchor2 = o2.getAnchor();
                 int delta = anchor1.y - anchor2.y;
                 if(delta == 0) delta = anchor1.x - anchor2.x;
                 return delta;
@@ -160,25 +160,26 @@ public final class Table extends ShapeGroup {
         });
         int y0 = -1;
         int maxrowlen = 0;
-        ArrayList lst = new ArrayList();
-        ArrayList row = null;
-        for (int i = 0; i < sh.length; i++) {
-            if(sh[i] instanceof TextShape){
-                Rectangle anchor = sh[i].getAnchor();
+        List<List<TextShape>> lst = new ArrayList<>();
+        List<TextShape> row = null;
+        for (final Shape s : sh) {
+            if(s instanceof TextShape){
+                Rectangle anchor = s.getAnchor();
                 if(anchor.y != y0){
                     y0 = anchor.y;
-                    row = new ArrayList();
+                    row = new ArrayList<>();
                     lst.add(row);
                 }
-                row.add(sh[i]);
+                row.add((TextShape) s);
                 maxrowlen = Math.max(maxrowlen, row.size());
             }
         }
-        cells = new TableCell[lst.size()][maxrowlen];
-        for (int i = 0; i < lst.size(); i++) {
-            row = (ArrayList)lst.get(i);
-            for (int j = 0; j < row.size(); j++) {
-                TextShape tx = (TextShape)row.get(j);
+        final int n = lst.size();
+        cells = new TableCell[n][maxrowlen];
+        for (int i = 0; i < n; i++) {
+            row = lst.get(i);
+            for (int j = 0, m = row.size(); j < m; j++) {
+                TextShape tx = row.get(j);
                 cells[i][j] = new TableCell(tx.getSpContainer(), getParent());
                 cells[i][j].setSheet(tx.getSheet());
             }

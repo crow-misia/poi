@@ -65,12 +65,12 @@ public class EventWorkbookBuilder {
 	 */
 	public static InternalWorkbook createStubWorkbook(ExternSheetRecord[] externs,
 			BoundSheetRecord[] bounds, SSTRecord sst) {
-		List wbRecords = new ArrayList();
+		List<Record> wbRecords = new ArrayList<>();
 
 		// Core Workbook records go first
 		if(bounds != null) {
-			for(int i=0; i<bounds.length; i++) {
-				wbRecords.add(bounds[i]);
+			for(final BoundSheetRecord b : bounds) {
+				wbRecords.add(b);
 			}
 		}
 		if(sst != null) {
@@ -82,8 +82,8 @@ public class EventWorkbookBuilder {
 		if(externs != null) {
 			wbRecords.add(SupBookRecord.createInternalReferences(
 					(short)externs.length));
-			for(int i=0; i<externs.length; i++) {
-				wbRecords.add(externs[i]);
+			for(final ExternSheetRecord e : externs) {
+				wbRecords.add(e);
 			}
 		}
 
@@ -114,8 +114,8 @@ public class EventWorkbookBuilder {
 	 */
 	public static class SheetRecordCollectingListener implements HSSFListener {
 		private HSSFListener childListener;
-		private List boundSheetRecords = new ArrayList();
-		private List externSheetRecords = new ArrayList();
+		private List<BoundSheetRecord> boundSheetRecords = new ArrayList<>();
+		private List<ExternSheetRecord> externSheetRecords = new ArrayList<>();
 		private SSTRecord sstRecord = null;
 
 		public SheetRecordCollectingListener(HSSFListener childListener) {
@@ -124,14 +124,10 @@ public class EventWorkbookBuilder {
 
 
 		public BoundSheetRecord[] getBoundSheetRecords() {
-			return (BoundSheetRecord[])boundSheetRecords.toArray(
-					new BoundSheetRecord[boundSheetRecords.size()]
-			);
+			return boundSheetRecords.toArray(new BoundSheetRecord[boundSheetRecords.size()]);
 		}
 		public ExternSheetRecord[] getExternSheetRecords() {
-			return (ExternSheetRecord[])externSheetRecords.toArray(
-					new ExternSheetRecord[externSheetRecords.size()]
-			);
+			return externSheetRecords.toArray(new ExternSheetRecord[externSheetRecords.size()]);
 		}
 		public SSTRecord getSSTRecord() {
 			return sstRecord;
@@ -166,10 +162,10 @@ public class EventWorkbookBuilder {
 		 */
 		public void processRecordInternally(Record record) {
 			if(record instanceof BoundSheetRecord) {
-				boundSheetRecords.add(record);
+				boundSheetRecords.add((BoundSheetRecord) record);
 			}
 			else if(record instanceof ExternSheetRecord) {
-				externSheetRecords.add(record);
+				externSheetRecords.add((ExternSheetRecord) record);
 			}
 			else if(record instanceof SSTRecord) {
 				sstRecord = (SSTRecord)record;

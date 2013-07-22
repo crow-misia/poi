@@ -32,13 +32,13 @@ import org.apache.poi.ss.util.CellRangeAddressList;
 public final class MergedCellsTable extends RecordAggregate {
 	private static int MAX_MERGED_REGIONS = 1027; // enforced by the 8224 byte limit
 
-	private final List _mergedRegions;
+	private final List<CellRangeAddress> _mergedRegions;
 
 	/**
 	 * Creates an empty aggregate
 	 */
 	public MergedCellsTable() {
-		_mergedRegions = new ArrayList();
+		_mergedRegions = new ArrayList<>();
 	}
 
 	/**
@@ -46,13 +46,12 @@ public final class MergedCellsTable extends RecordAggregate {
 	 * @param rs
 	 */
 	public void read(RecordStream rs) {
-		List temp = _mergedRegions;
+		List<CellRangeAddress> temp = _mergedRegions;
 		while (rs.peekNextClass() == MergeCellsRecord.class) {
 			MergeCellsRecord mcr = (MergeCellsRecord) rs.getNext();
 			int nRegions = mcr.getNumAreas();
 			for (int i = 0; i < nRegions; i++) {
-				CellRangeAddress cra = mcr.getAreaAt(i);
-				temp.add(cra);
+				temp.add(mcr.getAreaAt(i));
 			}
 		}
 	}

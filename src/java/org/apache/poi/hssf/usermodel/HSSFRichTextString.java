@@ -151,10 +151,10 @@ public final class HSSFRichTextString implements Comparable<HSSFRichTextString>,
 
         //Need to clear the current formatting between the startIndex and endIndex
         _string = cloneStringIfRequired();
-        Iterator formatting = _string.formatIterator();
+        Iterator<UnicodeString.FormatRun> formatting = _string.formatIterator();
         if (formatting != null) {
           while (formatting.hasNext()) {
-            UnicodeString.FormatRun r = (UnicodeString.FormatRun)formatting.next();
+            UnicodeString.FormatRun r = formatting.next();
             if ((r.getCharacterPos() >= startIndex) && (r.getCharacterPos() < endIndex))
               formatting.remove();
           }

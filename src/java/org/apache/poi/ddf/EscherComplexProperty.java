@@ -135,12 +135,11 @@ public class EscherComplexProperty extends EscherProperty {
     }
 
     public String toXml(String tab){
-        String dataStr = HexDump.toHex( _complexData, 32);
         StringBuilder builder = new StringBuilder();
         builder.append(tab).append("<").append(getClass().getSimpleName()).append(" id=\"0x").append(HexDump.toHex(getId()))
                 .append("\" name=\"").append(getName()).append("\" blipId=\"")
                 .append(isBlipId()).append("\">\n");
-        //builder.append("\t").append(tab).append(dataStr);
+        //builder.append("\t").append(tab).append(HexDump.toHex( _complexData, 32));
         builder.append(tab).append("</").append(getClass().getSimpleName()).append(">\n");
         return builder.toString();
     }

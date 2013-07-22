@@ -498,7 +498,7 @@ public abstract class Property implements Child, POIFSViewable {
      * @return an Iterator; may not be null, but may have an empty
      * back end store
      */
-    public Iterator getViewableIterator()
+    public Iterator<?> getViewableIterator()
     {
         return Collections.emptyIterator();
     }

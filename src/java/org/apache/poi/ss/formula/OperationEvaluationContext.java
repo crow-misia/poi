@@ -166,6 +166,8 @@ public final class OperationEvaluationContext {
                     throw new RuntimeException("Specified name '" + refStrPart1 + "' is not a range as expected.");
                 }
                 return _bookEvaluator.evaluateNameFormula(nm.getNameDefinition(), this);
+            default:
+                break;
 		}
 		if (refStrPart2 == null) {
 			// no ':'
@@ -187,6 +189,8 @@ public final class OperationEvaluationContext {
 			case NAMED_RANGE:
 				throw new RuntimeException("Cannot evaluate '" + refStrPart1
 						+ "'. Indirect evaluation of defined names not supported yet");
+			default:
+				break;
 		}
 
 		if (part2refType != part1refType) {

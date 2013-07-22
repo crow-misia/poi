@@ -123,6 +123,13 @@ public final class TableRecord extends SharedValueRecordBase {
 		field_5_flags = oneOrTwoVar.setBoolean(field_5_flags, flag);
 	}
 
+	public boolean isCalcOnOpen() {
+		return calcOnOpen.isSet(field_5_flags);
+	}
+	public void setCalcOnOpen(boolean flag) {
+		field_5_flags = calcOnOpen.setBoolean(field_5_flags, flag);
+	}
+
 	public boolean isColDeleted() {
 		return colDeleted.isSet(field_5_flags);
 	}

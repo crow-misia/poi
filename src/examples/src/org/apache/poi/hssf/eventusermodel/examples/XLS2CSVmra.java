@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.hssf.eventusermodel.FormatTrackingHSSFListener;
 import org.apache.poi.hssf.eventusermodel.HSSFEventFactory;
@@ -75,7 +76,7 @@ public class XLS2CSVmra implements HSSFListener {
 	/** So we known which sheet we're on */
 	private int sheetIndex = -1;
 	private BoundSheetRecord[] orderedBSRs;
-	private ArrayList boundSheetRecords = new ArrayList();
+	private List<BoundSheetRecord> boundSheetRecords = new ArrayList<>();
 
 	// For handling formulas with string results
 	private int nextRow;
@@ -140,7 +141,7 @@ public class XLS2CSVmra implements HSSFListener {
 		switch (record.getSid())
 		{
 		case BoundSheetRecord.sid:
-			boundSheetRecords.add(record);
+			boundSheetRecords.add((BoundSheetRecord) record);
 			break;
 		case BOFRecord.sid:
 			BOFRecord br = (BOFRecord)record;
@@ -209,7 +210,7 @@ public class XLS2CSVmra implements HSSFListener {
 		case StringRecord.sid:
 			if(outputNextStringRecord) {
 				// String for formula
-				StringRecord srec = (StringRecord)record;
+				StringRecord srec = (StringRecord) record;
 				thisStr = srec.getString();
 				thisRow = nextRow;
 				thisColumn = nextColumn;

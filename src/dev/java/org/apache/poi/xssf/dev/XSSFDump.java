@@ -17,6 +17,7 @@
 
 package org.apache.poi.xssf.dev;
 
+import org.apache.poi.util.IOUtils;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
 
@@ -46,9 +47,9 @@ public final class XSSFDump {
         File root = new File(zipname.substring(0, sep));
         root.mkdir();
 
-        Enumeration en = zip.entries();
+        Enumeration<? extends ZipEntry> en = zip.entries();
         while(en.hasMoreElements()){
-            ZipEntry entry = (ZipEntry)en.nextElement();
+            ZipEntry entry = en.nextElement();
             String name = entry.getName();
             int idx = name.lastIndexOf('/');
             if(idx != -1){
@@ -57,30 +58,23 @@ public final class XSSFDump {
             }
 
             File f = new File(root, entry.getName());
-            FileOutputStream out = new FileOutputStream(f);
+            try (final FileOutputStream out = new FileOutputStream(f)) {
 
-            if(entry.getName().endsWith(".xml") || entry.getName().endsWith(".vml") || entry.getName().endsWith(".rels")){
-                try {
-                    XmlObject xml = XmlObject.Factory.parse(zip.getInputStream(entry));
-                    XmlOptions options = new XmlOptions();
-                    options.setSavePrettyPrint();
-                    xml.save(out, options);
-                } catch (Exception e){
-                    System.err.println("Failed to parse " + entry.getName() + ", dumping raw content");
-                    dump(zip.getInputStream(entry), out);
+                if(entry.getName().endsWith(".xml") || entry.getName().endsWith(".vml") || entry.getName().endsWith(".rels")){
+                    try {
+                        XmlObject xml = XmlObject.Factory.parse(zip.getInputStream(entry));
+                        XmlOptions options = new XmlOptions();
+                        options.setSavePrettyPrint();
+                        xml.save(out, options);
+                    } catch (Exception e){
+                        System.err.println("Failed to parse " + entry.getName() + ", dumping raw content");
+                        IOUtils.copy(zip.getInputStream(entry), out);
+                    }
+                } else {
+                    IOUtils.copy(zip.getInputStream(entry), out);
                 }
-            } else {
-                dump(zip.getInputStream(entry), out);
             }
-            out.close();
 
         }
-    }
-
-    protected static void dump(InputStream is, OutputStream out) throws IOException{
-        int pos;
-        byte[] chunk = new byte[2048];
-        while((pos = is.read(chunk)) > 0) out.write(chunk, 0, pos);
-
     }
 }
