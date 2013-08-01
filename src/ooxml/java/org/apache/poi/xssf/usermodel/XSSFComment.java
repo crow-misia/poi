@@ -118,7 +118,7 @@ public class XSSFComment implements Comment {
         
         if(_vmlShape != null) {
             _vmlShape.getClientDataArray(0).setColumnArray(
-                 new BigInteger[] { new BigInteger(String.valueOf(col)) }
+                 new BigInteger[] { BigInteger.valueOf(col) }
             );
 
             // There is a very odd xmlbeans bug when changing the column
@@ -141,7 +141,7 @@ public class XSSFComment implements Comment {
         _comment.setRef(newRef);
         _comments.referenceUpdated(oldRef, _comment);
       
-        if(_vmlShape != null) _vmlShape.getClientDataArray(0).setRowArray(0, new BigInteger(String.valueOf(row)));
+        if(_vmlShape != null) _vmlShape.getClientDataArray(0).setRowArray(0, BigInteger.valueOf(row));
     }
     
     /**

@@ -29,7 +29,7 @@ public class TestXWPFNumbering extends TestCase {
 	public void testCompareAbstractNum() throws IOException{
 		XWPFDocument doc = XWPFTestDataSamples.openSampleDocument("Numbering.docx");
 		XWPFNumbering numbering = doc.getNumbering();
-		BigInteger numId = BigInteger.valueOf(1);
+		BigInteger numId = BigInteger.ONE;
 		assertTrue(numbering.numExist(numId));
 		XWPFNum num = numbering.getNum(numId);
 		BigInteger abstrNumId = num.getCTNum().getAbstractNumId().getVal();
@@ -39,8 +39,8 @@ public class TestXWPFNumbering extends TestCase {
 	}
 
 	public void testAddNumberingToDoc() throws IOException{
-		BigInteger abstractNumId = BigInteger.valueOf(1);
-		BigInteger numId = BigInteger.valueOf(1);
+		BigInteger abstractNumId = BigInteger.ONE;
+		BigInteger numId = BigInteger.ONE;
 
 		XWPFDocument docOut = new XWPFDocument();
 		XWPFNumbering numbering = docOut.createNumbering();
@@ -58,9 +58,9 @@ public class TestXWPFNumbering extends TestCase {
 
 	public void testGetNumIlvl() throws IOException{
 		XWPFDocument doc = XWPFTestDataSamples.openSampleDocument("Numbering.docx");
-		BigInteger numIlvl = BigInteger.valueOf(0);
+		BigInteger numIlvl = BigInteger.ZERO;
 		assertEquals(numIlvl, doc.getParagraphs().get(0).getNumIlvl());
-		numIlvl = BigInteger.valueOf(1);
+		numIlvl = BigInteger.ONE;
       assertEquals(numIlvl, doc.getParagraphs().get(5).getNumIlvl());
 	}
 

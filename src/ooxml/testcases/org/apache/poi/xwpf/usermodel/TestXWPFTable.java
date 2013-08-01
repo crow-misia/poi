@@ -115,7 +115,7 @@ public class TestXWPFTable extends TestCase {
         XWPFDocument doc = new XWPFDocument();
         
         CTTbl table = CTTbl.Factory.newInstance();
-        table.addNewTblPr().addNewTblW().setW(new BigInteger("1000"));
+        table.addNewTblPr().addNewTblW().setW(BigInteger.valueOf(1000));
 
         XWPFTable xtab = new XWPFTable(table, doc);
 

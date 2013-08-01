@@ -33,7 +33,7 @@ public class TestXWPFFootnotes extends TestCase {
 	public void testAddFootnotesToDocument() throws IOException{
 		XWPFDocument docOut = new XWPFDocument();
 
-		BigInteger noteId = BigInteger.valueOf(1);
+		BigInteger noteId = BigInteger.ONE;
 
 		XWPFFootnotes footnotes = docOut.createFootnotes();
 		CTFtnEdn ctNote = CTFtnEdn.Factory.newInstance();

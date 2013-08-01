@@ -95,7 +95,7 @@ public class XWPFTableRow {
     public void setHeight(int height) {
 	CTTrPr properties = getTrPr();
 	CTHeight h = properties.sizeOfTrHeightArray() == 0 ? properties.addNewTrHeight() : properties.getTrHeightArray(0);
-	h.setVal(new BigInteger("" + height));
+	h.setVal(BigInteger.valueOf(height));
     }
 
     /**

@@ -114,8 +114,8 @@ public class TestXSSFVMLDrawing extends TestCase {
 
         CTShape sh_d1 = vml.newCommentShape();
         assertEquals("_x0000_s1027", sh_d1.getId());
-        sh_d1.getClientDataArray(0).setRowArray(0, new BigInteger("0"));
-        sh_d1.getClientDataArray(0).setColumnArray(0, new BigInteger("3"));
+        sh_d1.getClientDataArray(0).setRowArray(0, BigInteger.ZERO);
+        sh_d1.getClientDataArray(0).setColumnArray(0, BigInteger.valueOf(3));
         assertSame(sh_d1, vml.findCommentShape(0, 3));
 
         //newly created drawing
@@ -124,8 +124,8 @@ public class TestXSSFVMLDrawing extends TestCase {
 
         sh_a1 = newVml.newCommentShape();
         assertEquals("_x0000_s1025", sh_a1.getId());
-        sh_a1.getClientDataArray(0).setRowArray(0, new BigInteger("0"));
-        sh_a1.getClientDataArray(0).setColumnArray(0, new BigInteger("1"));
+        sh_a1.getClientDataArray(0).setRowArray(0, BigInteger.ZERO);
+        sh_a1.getClientDataArray(0).setColumnArray(0, BigInteger.ONE);
         assertSame(sh_a1, newVml.findCommentShape(0, 1));
     }
 

@@ -143,7 +143,7 @@ public final class TestXWPFParagraph extends TestCase {
         assertEquals(-1, p.getSpacingAfter());
 
         CTSpacing spacing = ppr.addNewSpacing();
-        spacing.setAfter(new BigInteger("10"));
+        spacing.setAfter(BigInteger.TEN);
         assertEquals(10, p.getSpacingAfter());
 
         p.setSpacingAfter(100);
@@ -179,7 +179,7 @@ public final class TestXWPFParagraph extends TestCase {
         assertEquals(-1, p.getIndentationLeft());
 
         CTInd ind = ppr.addNewInd();
-        ind.setLeft(new BigInteger("10"));
+        ind.setLeft(BigInteger.TEN);
         assertEquals(10, p.getIndentationLeft());
 
         p.setIndentationLeft(100);
@@ -250,7 +250,7 @@ public final class TestXWPFParagraph extends TestCase {
         XWPFDocument doc = new XWPFDocument();
         XWPFParagraph p = doc.createParagraph();
 
-        p.setNumID(new BigInteger("10"));
+        p.setNumID(BigInteger.TEN);
         assertEquals("10", p.getNumID().toString());
     }
     

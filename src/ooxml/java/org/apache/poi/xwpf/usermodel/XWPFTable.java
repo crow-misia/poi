@@ -128,7 +128,7 @@ public class XWPFTable implements IBodyElement, ISDTContents {
         table.addNewTr().addNewTc().addNewP();
 
         CTTblPr tblpro = table.addNewTblPr();
-        tblpro.addNewTblW().setW(new BigInteger("0"));
+        tblpro.addNewTblW().setW(BigInteger.ZERO);
         tblpro.getTblW().setType(STTblWidth.AUTO);
 
         // layout
@@ -145,7 +145,7 @@ public class XWPFTable implements IBodyElement, ISDTContents {
 
         /*
          * CTTblGrid tblgrid=table.addNewTblGrid();
-         * tblgrid.addNewGridCol().setW(new BigInteger("2000"));
+         * tblgrid.addNewGridCol().setW(BigInteger.valueOf(2000));
          */
         getRows();
     }
@@ -215,7 +215,7 @@ public class XWPFTable implements IBodyElement, ISDTContents {
     public void setWidth(int width) {
         CTTblPr tblPr = getTrPr();
         CTTblWidth tblWidth = tblPr.isSetTblW() ? tblPr.getTblW() : tblPr.addNewTblW();
-        tblWidth.setW(new BigInteger("" + width));
+        tblWidth.setW(BigInteger.valueOf(width));
     }
 
     /**

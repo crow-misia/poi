@@ -514,7 +514,7 @@ public class XWPFRun implements ISDTContents, IRunElement{
      */
     public int getFontSize() {
         CTRPr pr = run.getRPr();
-        return (pr != null && pr.isSetSz()) ? pr.getSz().getVal().divide(new BigInteger("2")).intValue() : -1;
+        return (pr != null && pr.isSetSz()) ? pr.getSz().getVal().divide(BigInteger.valueOf(2)).intValue() : -1;
     }
 
     /**
@@ -530,10 +530,10 @@ public class XWPFRun implements ISDTContents, IRunElement{
      * @param size
      */
     public void setFontSize(int size) {
-        BigInteger bint=new BigInteger(""+size);
+        BigInteger bint = BigInteger.valueOf(size);
         CTRPr pr = run.isSetRPr() ? run.getRPr() : run.addNewRPr();
         CTHpsMeasure ctSize = pr.isSetSz() ? pr.getSz() : pr.addNewSz();
-        ctSize.setVal(bint.multiply(new BigInteger("2")));
+        ctSize.setVal(bint.multiply(BigInteger.valueOf(2)));
     }
 
     /**
@@ -573,7 +573,7 @@ public class XWPFRun implements ISDTContents, IRunElement{
      * @param val
      */
     public void setTextPosition(int val) {
-        BigInteger bint=new BigInteger(""+val);
+        BigInteger bint = BigInteger.valueOf(val);
         CTRPr pr = run.isSetRPr() ? run.getRPr() : run.addNewRPr();
         CTSignedHpsMeasure position = pr.isSetPosition() ? pr.getPosition() : pr.addNewPosition();
         position.setVal(bint);

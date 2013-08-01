@@ -141,7 +141,7 @@ public class TestXWPFRun extends TestCase {
 
     public void testSetGetFontSize() {
         CTRPr rpr = ctRun.addNewRPr();
-        rpr.addNewSz().setVal(new BigInteger("14"));
+        rpr.addNewSz().setVal(BigInteger.valueOf(14));
 
         XWPFRun run = new XWPFRun(ctRun, p);
         assertEquals(7, run.getFontSize());
@@ -153,7 +153,7 @@ public class TestXWPFRun extends TestCase {
 
     public void testSetGetTextForegroundBackground() {
         CTRPr rpr = ctRun.addNewRPr();
-        rpr.addNewPosition().setVal(new BigInteger("4000"));
+        rpr.addNewPosition().setVal(BigInteger.valueOf(4000));
 
         XWPFRun run = new XWPFRun(ctRun, p);
         assertEquals(4000, run.getTextPosition());
