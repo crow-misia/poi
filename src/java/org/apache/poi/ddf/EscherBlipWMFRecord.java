@@ -345,18 +345,18 @@ public class EscherBlipWMFRecord
         final String extraData = HexDump.dump( this.field_12_data, 0, 0, "No Data" );
         StringBuilder builder = new StringBuilder();
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()), HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
-                .append(tab).append("\t").append("<SecondaryUID>0x").append(HexDump.toHex(field_1_secondaryUID)).append("</SecondaryUID>\n")
-                .append(tab).append("\t").append("<CacheOfSize>").append(field_2_cacheOfSize).append("</CacheOfSize>\n")
-                .append(tab).append("\t").append("<BoundaryTop>").append(field_3_boundaryTop).append("</BoundaryTop>\n")
-                .append(tab).append("\t").append("<BoundaryLeft>").append(field_4_boundaryLeft).append("</BoundaryLeft>\n")
-                .append(tab).append("\t").append("<BoundaryWidth>").append(field_5_boundaryWidth).append("</BoundaryWidth>\n")
-                .append(tab).append("\t").append("<BoundaryHeight>").append(field_6_boundaryHeight).append("</BoundaryHeight>\n")
-                .append(tab).append("\t").append("<X>").append(field_7_width).append("</X>\n")
-                .append(tab).append("\t").append("<Y>").append(field_8_height).append("</Y>\n")
-                .append(tab).append("\t").append("<CacheOfSavedSize>").append(field_9_cacheOfSavedSize).append("</CacheOfSavedSize>\n")
-                .append(tab).append("\t").append("<CompressionFlag>").append(field_10_compressionFlag).append("</CompressionFlag>\n")
-                .append(tab).append("\t").append("<Filter>").append(field_11_filter).append("</Filter>\n")
-                .append(tab).append("\t").append("<Data>").append(extraData).append("</Data>\n");
+                .append(tab).append("\t<SecondaryUID>0x").append(HexDump.toHex(field_1_secondaryUID)).append("</SecondaryUID>\n")
+                .append(tab).append("\t<CacheOfSize>").append(field_2_cacheOfSize).append("</CacheOfSize>\n")
+                .append(tab).append("\t<BoundaryTop>").append(field_3_boundaryTop).append("</BoundaryTop>\n")
+                .append(tab).append("\t<BoundaryLeft>").append(field_4_boundaryLeft).append("</BoundaryLeft>\n")
+                .append(tab).append("\t<BoundaryWidth>").append(field_5_boundaryWidth).append("</BoundaryWidth>\n")
+                .append(tab).append("\t<BoundaryHeight>").append(field_6_boundaryHeight).append("</BoundaryHeight>\n")
+                .append(tab).append("\t<X>").append(field_7_width).append("</X>\n")
+                .append(tab).append("\t<Y>").append(field_8_height).append("</Y>\n")
+                .append(tab).append("\t<CacheOfSavedSize>").append(field_9_cacheOfSavedSize).append("</CacheOfSavedSize>\n")
+                .append(tab).append("\t<CompressionFlag>").append(field_10_compressionFlag).append("</CompressionFlag>\n")
+                .append(tab).append("\t<Filter>").append(field_11_filter).append("</Filter>\n")
+                .append(tab).append("\t<Data>").append(extraData).append("</Data>\n");
         builder.append(tab).append("</").append(getClass().getSimpleName()).append(">\n");
         return builder.toString();
     }

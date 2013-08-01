@@ -79,8 +79,7 @@ public abstract class EscherRecord {
     {
         _options = LittleEndian.getShort( data, offset );
         _recordId = LittleEndian.getShort( data, offset + 2 );
-        int remainingBytes = LittleEndian.getInt( data, offset + 4 );
-        return remainingBytes;
+        return LittleEndian.getInt( data, offset + 4 );
     }
 
     /**

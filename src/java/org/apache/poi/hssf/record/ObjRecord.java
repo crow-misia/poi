@@ -218,8 +218,7 @@ public final class ObjRecord extends Record {
 	public Object clone() {
 		ObjRecord rec = new ObjRecord();
 
-		for (int i = 0; i < subrecords.size(); i++) {
-			SubRecord record = subrecords.get(i);
+		for (final SubRecord record : subrecords) {
 			rec.addSubRecord((SubRecord) record.clone());
 		}
 		return rec;

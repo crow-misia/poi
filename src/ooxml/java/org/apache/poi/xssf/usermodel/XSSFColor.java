@@ -26,9 +26,9 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTColor;
 /**
  * Represents a color in SpreadsheetML
  */
-public class XSSFColor implements Color {
+public final class XSSFColor implements Color {
 	
-	private CTColor ctColor;
+	private final CTColor ctColor;
 
     /**
      * Create an instance of XSSFColor from the supplied XML bean
@@ -91,16 +91,15 @@ public class XSSFColor implements Color {
 	      // Excel doesn't appear to get these wrong
 	      // Nothing to change
 	      return rgb;
-	   } else {
-         // Excel gets black and white the wrong way around, so switch them 
-         if (rgb[0] == 0 && rgb[1] == 0 && rgb[2] == 0) {
-            rgb = new byte[] {-1, -1, -1};
-         }
-         else if (rgb[0] == -1 && rgb[1] == -1 && rgb[2] == -1) {
-            rgb = new byte[] {0, 0, 0};
-         }
-         return rgb;
 	   }
+       // Excel gets black and white the wrong way around, so switch them 
+       if (rgb[0] == 0 && rgb[1] == 0 && rgb[2] == 0) {
+          rgb = new byte[] {-1, -1, -1};
+       }
+       else if (rgb[0] == -1 && rgb[1] == -1 && rgb[2] == -1) {
+          rgb = new byte[] {0, 0, 0};
+       }
+       return rgb;
 	}
 
    /**
@@ -116,9 +115,8 @@ public class XSSFColor implements Color {
          byte[] tmp = new byte[3];
          System.arraycopy(rgb, 1, tmp, 0, 3);
          return tmp;
-      } else {
-         return rgb;
       }
+      return rgb;
    }
 
    /**
@@ -134,9 +132,8 @@ public class XSSFColor implements Color {
          tmp[0] = -1;
          System.arraycopy(rgb, 0, tmp, 1, 3);
          return tmp;
-      } else {
-         return rgb;
       }
+      return rgb;
    }
    
    private byte[] getRGBOrARGB() {

@@ -20,6 +20,8 @@ package org.apache.poi.hssf.record;
 import java.util.Iterator;
 import java.util.Map;
 import junit.framework.TestCase;
+
+import org.apache.poi.hssf.usermodel.HSSFObjectData;
 import org.apache.poi.hssf.util.HSSFColor;
 
 /**
@@ -36,12 +38,11 @@ public final class TestPaletteRecord extends TestCase {
         PaletteRecord palette = new PaletteRecord();
 
         //make sure all the HSSFColor constants match
-        Map colors = HSSFColor.getIndexHash();
-        Iterator indexes = colors.keySet().iterator();
-        while (indexes.hasNext())
+        Map<Integer, HSSFColor> colors = HSSFColor.getIndexHash();
+        for (final Map.Entry<Integer, HSSFColor> entry : colors.entrySet())
         {
-            Integer index = (Integer) indexes.next();
-            HSSFColor c = (HSSFColor) colors.get(index);
+            Integer index = entry.getKey();
+            HSSFColor c = entry.getValue();
             short[] rgbTriplet = c.getTriplet();
             byte[] paletteTriplet = palette.getColor(index.shortValue());
             String msg = "Expected HSSFColor constant to match PaletteRecord at index 0x"

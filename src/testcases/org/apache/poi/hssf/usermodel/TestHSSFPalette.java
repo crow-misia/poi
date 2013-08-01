@@ -18,7 +18,6 @@
 package org.apache.poi.hssf.usermodel;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -268,13 +267,12 @@ public final class TestHSSFPalette extends TestCase {
     }
 
     private void compareToDefaults(ColorComparator c) {
-        Map colors = HSSFColor.getIndexHash();
-        Iterator it = colors.keySet().iterator();
-        while (it.hasNext())
+        Map<Integer, HSSFColor> colors = HSSFColor.getIndexHash();
+        for (final Map.Entry<Integer, HSSFColor> entry : colors.entrySet())
         {
-            Number index = (Number) it.next();
-            HSSFColor expectedColor = (HSSFColor) colors.get(index);
-            HSSFColor paletteColor = _hssfPalette.getColor(index.shortValue());
+            Integer index = entry.getKey();
+            HSSFColor expectedColor = entry.getValue();
+            HSSFColor paletteColor = _hssfPalette.getColor(index.intValue());
             c.compare(expectedColor, paletteColor);
         }
     }

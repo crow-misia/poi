@@ -38,7 +38,7 @@ import org.apache.poi.ss.usermodel.Color;
  * @author  Andrew C. Oliver (acoliver at apache dot org)
  * @author  Brian Sanders (bsanders at risklabs dot com) - full default color palette
  */
-public class HSSFColor implements Color {
+public abstract class HSSFColor implements Color {
     private static final Map<Integer,HSSFColor> indexHash = Collections.unmodifiableMap( createColorsByIndexMap() );
 
     /** Creates a new instance of HSSFColor */
@@ -171,31 +171,19 @@ public class HSSFColor implements Color {
     /**
      * @return index to the standard palette
      */
-
-    public short getIndex()
-    {
-        return BLACK.index;
-    }
+    public abstract short getIndex();
 
     /**
      * @return  triplet representation like that in Excel
      */
-
-    public short[] getTriplet()
-    {
-        return BLACK.triplet;
-    }
+    public abstract short[] getTriplet();
 
     // its a hack but its a good hack
 
     /**
      * @return a hex string exactly like a gnumeric triplet
      */
-
-    public String getHexString()
-    {
-        return BLACK.hexString;
-    }
+    public abstract String getHexString();
 
     /**
      * Class BLACK

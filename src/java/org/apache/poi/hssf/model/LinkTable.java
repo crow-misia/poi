@@ -177,7 +177,7 @@ final class LinkTable {
 	private final int _recordCount;
 	private final WorkbookRecordList _workbookRecordList; // TODO - would be nice to remove this
 
-	public LinkTable(List inputList, int startIndex, WorkbookRecordList workbookRecordList, Map<String, NameCommentRecord> commentRecords) {
+	public LinkTable(List<Record> inputList, int startIndex, WorkbookRecordList workbookRecordList, Map<String, NameCommentRecord> commentRecords) {
 
 		_workbookRecordList = workbookRecordList;
 		RecordStream rs = new RecordStream(inputList, startIndex);
@@ -282,9 +282,7 @@ final class LinkTable {
 	 */
 	public NameRecord getSpecificBuiltinRecord(byte builtInCode, int sheetNumber) {
 
-		Iterator iterator = _definedNames.iterator();
-		while (iterator.hasNext()) {
-			NameRecord record = ( NameRecord ) iterator.next();
+		for (final NameRecord record : _definedNames) {
 
 			//print areas are one based
 			if (record.getBuiltInName() == builtInCode && record.getSheetNumber() == sheetNumber) {
@@ -374,7 +372,7 @@ final class LinkTable {
 	public int getExternalSheetIndex(String workbookName, String sheetName) {
 		SupBookRecord ebrTarget = null;
 		int externalBookIndex = -1;
-		for (int i=0; i<_externalBookBlocks.length; i++) {
+		for (int i=0, n=_externalBookBlocks.length; i < n; i++) {
 			SupBookRecord ebr = _externalBookBlocks[i].getExternalBookRecord();
 			if (!ebr.isExternalReferences()) {
 				continue;
@@ -399,7 +397,7 @@ final class LinkTable {
 	}
 
 	private static int getSheetIndex(String[] sheetNames, String sheetName) {
-		for (int i = 0; i < sheetNames.length; i++) {
+		for (int i = 0, n = sheetNames.length; i < n; i++) {
 			if (sheetNames[i].equals(sheetName)) {
 				return i;
 			}
@@ -425,7 +423,7 @@ final class LinkTable {
 
 	public int checkExternSheet(int sheetIndex) {
 		int thisWbIndex = -1; // this is probably always zero
-		for (int i=0; i<_externalBookBlocks.length; i++) {
+		for (int i=0, n=_externalBookBlocks.length; i < n; i++) {
 			SupBookRecord ebr = _externalBookBlocks[i].getExternalBookRecord();
 			if (ebr.isInternalReferences()) {
 				thisWbIndex = i;
@@ -451,8 +449,7 @@ final class LinkTable {
 	 */
 	private int findFirstRecordLocBySid(short sid) {
 		int index = 0;
-		for (Iterator iterator = _workbookRecordList.iterator(); iterator.hasNext(); ) {
-			Record record = ( Record ) iterator.next();
+		for (final Record record : _workbookRecordList) {
 
 			if (record.getSid() == sid) {
 				return index;
@@ -473,7 +470,7 @@ final class LinkTable {
 
 	public NameXPtg getNameXPtg(String name) {
 		// first find any external book block that contains the name:
-		for (int i = 0; i < _externalBookBlocks.length; i++) {
+		for (int i = 0, n = _externalBookBlocks.length; i < n; i++) {
 			int definedNameIndex = _externalBookBlocks[i].getIndexOfName(name);
 			if (definedNameIndex < 0) {
 				continue;
@@ -497,8 +494,10 @@ final class LinkTable {
         int extBlockIndex = -1;
         ExternalBookBlock extBlock = null;
 
+        final int n = _externalBookBlocks.length;
+
         // find ExternalBlock for Add-In functions and remember its index
-        for (int i = 0; i < _externalBookBlocks.length; i++) {
+        for (int i = 0; i < n; i++) {
             SupBookRecord ebr = _externalBookBlocks[i].getExternalBookRecord();
             if (ebr.isAddInFunctions()) {
                 extBlock = _externalBookBlocks[i];
@@ -510,8 +509,8 @@ final class LinkTable {
         if (extBlock == null) {
             extBlock = new ExternalBookBlock();
 
-            ExternalBookBlock[] tmp = new ExternalBookBlock[_externalBookBlocks.length + 1];
-            System.arraycopy(_externalBookBlocks, 0, tmp, 0, _externalBookBlocks.length);
+            ExternalBookBlock[] tmp = new ExternalBookBlock[n + 1];
+            System.arraycopy(_externalBookBlocks, 0, tmp, 0, n);
             tmp[tmp.length - 1] = extBlock;
             _externalBookBlocks = tmp;
 
