@@ -300,9 +300,6 @@ public final class WSBoolRecord extends StandardRecord {
     }
 
     public Object clone() {
-      WSBoolRecord rec = new WSBoolRecord();
-      rec.field_1_wsbool = field_1_wsbool;
-      rec.field_2_wsbool = field_2_wsbool;
-      return rec;
+      return new WSBoolRecord(field_1_wsbool, field_2_wsbool);
     }
 }

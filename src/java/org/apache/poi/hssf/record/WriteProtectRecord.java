@@ -41,11 +41,7 @@ public final class WriteProtectRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
-
-        buffer.append("[WRITEPROTECT]\n");
-        buffer.append("[/WRITEPROTECT]\n");
-        return buffer.toString();
+        return "[WRITEPROTECT]\n[/WRITEPROTECT]\n";
     }
 
     public void serialize(LittleEndianOutput out) {

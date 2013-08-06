@@ -352,9 +352,9 @@ public class Variant
      * <p>Maps the numbers denoting the variant types to their corresponding
      * variant type names.</p>
      */
-    private static Map numberToName;
+    private static final Map<Long, String> numberToName;
 
-    private static Map numberToLength;
+    private static final Map<Long, Integer> numberToLength;
 
     /**
      * <p>Denotes a variant type with a length that is unknown to HPSF yet.</p>
@@ -490,8 +490,8 @@ public class Variant
      */
     public static String getVariantName(final long variantType)
     {
-        final String name = (String) numberToName.get(Long.valueOf(variantType));
-        return name != null ? name : "unknown variant type";
+        final String name = numberToName.get(Long.valueOf(variantType));
+        return name == null ? "unknown variant type" : name;
     }
 
     /**
@@ -505,11 +505,8 @@ public class Variant
      */
     public static int getVariantLength(final long variantType)
     {
-        final Long key = Long.valueOf((int) variantType);
-        final Long length = (Long) numberToLength.get(key);
-        if (length == null)
-            return -2;
-        return length.intValue();
+        final Integer length = numberToLength.get(Long.valueOf(variantType));
+        return length == null ? -2 : length.intValue();
     }
 
 }

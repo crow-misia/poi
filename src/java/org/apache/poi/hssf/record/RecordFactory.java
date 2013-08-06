@@ -313,8 +313,9 @@ public final class RecordFactory {
 	 * Converts a {@link MulRKRecord} into an equivalent array of {@link NumberRecord}s
 	 */
 	public static NumberRecord[] convertRKRecords(MulRKRecord mrk) {
-		NumberRecord[] mulRecs = new NumberRecord[mrk.getNumColumns()];
-		for (int k = 0; k < mrk.getNumColumns(); k++) {
+		final int n = mrk.getNumColumns();
+		final NumberRecord[] mulRecs = new NumberRecord[n];
+		for (int k = 0; k < n; k++) {
 			NumberRecord nr = new NumberRecord();
 
 			nr.setColumn((short) (k + mrk.getFirstColumn()));
@@ -330,8 +331,9 @@ public final class RecordFactory {
 	 * Converts a {@link MulBlankRecord} into an equivalent array of {@link BlankRecord}s
 	 */
 	public static BlankRecord[] convertBlankRecords(MulBlankRecord mbk) {
-		BlankRecord[] mulRecs = new BlankRecord[mbk.getNumColumns()];
-		for (int k = 0; k < mbk.getNumColumns(); k++) {
+		final int n = mbk.getNumColumns();
+		BlankRecord[] mulRecs = new BlankRecord[n];
+		for (int k = 0; k < n; k++) {
 			BlankRecord br = new BlankRecord();
 
 			br.setColumn((short) (k + mbk.getFirstColumn()));
@@ -371,9 +373,7 @@ public final class RecordFactory {
 		Map<Integer, I_RecordCreator> result = new HashMap<>();
 		Set<Class<?>> uniqueRecClasses = new HashSet<>(records.length * 3 / 2);
 
-		for (int i = 0; i < records.length; i++) {
-
-			Class<? extends Record> recClass = records[ i ];
+		for (final Class<? extends Record> recClass : records) {
 			if(!Record.class.isAssignableFrom(recClass)) {
 				throw new RuntimeException("Invalid record sub-class (" + recClass.getName() + ")");
 			}

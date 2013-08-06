@@ -78,9 +78,15 @@ public class SectionIDMap extends HashMap {
      * <p>The default section ID map. It maps section format IDs to
      * {@link PropertyIDMap}s.</p>
      */
-    private static SectionIDMap defaultMap;
-
-
+    private static final SectionIDMap defaultMap;
+    static {
+        final SectionIDMap m = new SectionIDMap();
+        m.put(SUMMARY_INFORMATION_ID,
+              PropertyIDMap.getSummaryInformationProperties());
+        m.put(DOCUMENT_SUMMARY_INFORMATION_ID[0],
+              PropertyIDMap.getDocumentSummaryInformationProperties());
+        defaultMap = m;
+    }
 
     /**
      * <p>Returns the singleton instance of the default {@link
@@ -90,15 +96,6 @@ public class SectionIDMap extends HashMap {
      */
     public static SectionIDMap getInstance()
     {
-        if (defaultMap == null)
-        {
-            final SectionIDMap m = new SectionIDMap();
-            m.put(SUMMARY_INFORMATION_ID,
-                  PropertyIDMap.getSummaryInformationProperties());
-            m.put(DOCUMENT_SUMMARY_INFORMATION_ID[0],
-                  PropertyIDMap.getDocumentSummaryInformationProperties());
-            defaultMap = m;
-        }
         return defaultMap;
     }
 

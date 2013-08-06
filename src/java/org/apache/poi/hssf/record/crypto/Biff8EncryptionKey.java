@@ -39,8 +39,8 @@ public final class Biff8EncryptionKey {
 	public static Biff8EncryptionKey create(byte[] docId) {
 		return new Biff8EncryptionKey(createKeyDigest("VelvetSweatshop", docId));
 	}
-	public static Biff8EncryptionKey create(String password, byte[] docIdData) {
-		return new Biff8EncryptionKey(createKeyDigest(password, docIdData));
+	public static Biff8EncryptionKey create(String password, byte[] docId) {
+		return new Biff8EncryptionKey(createKeyDigest(password, docId));
 	}
 
 	Biff8EncryptionKey(byte[] keyDigest) {
