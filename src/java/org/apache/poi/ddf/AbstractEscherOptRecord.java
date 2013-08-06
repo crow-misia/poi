@@ -134,21 +134,21 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
      * @param value the property to set.
      */
     public void setEscherProperty(EscherProperty value){
-        final List<EscherProperty> p = properties;
-        for (int i = p.size() - 1; i >= 0; i--) {
-            final EscherProperty prop = p.get(i);
+        for (final Iterator<EscherProperty> it = getEscherProperties().iterator(); it.hasNext(); ) {
+            final EscherProperty prop = it.next();
             if (prop.getId() == value.getId()){
-                p.set(i, value);
+                it.remove();
             }
         }
+        addEscherProperty(value);
         sortProperties();
     }
 
     public void removeEscherProperty(int num){
-        for (final Iterator<EscherProperty> iterator = getEscherProperties().iterator(); iterator.hasNext(); ) {
-            final EscherProperty prop = iterator.next();
+        for (final Iterator<EscherProperty> it = getEscherProperties().iterator(); it.hasNext(); ) {
+            final EscherProperty prop = it.next();
             if (prop.getPropertyNumber() == num){
-                iterator.remove();
+                it.remove();
             }
         }
     }
@@ -184,7 +184,7 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
 
         for ( EscherProperty property : properties )
         {
-            stringBuilder.append( "    " + property.toString() + nl );
+            stringBuilder.append( "    " ).append( property.toString() ).append( nl );
         }
 
         return stringBuilder.toString();
