@@ -55,29 +55,25 @@ public final class DataFormatRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[DATAFORMAT]\n");
-        buffer.append("    .pointNumber          = ")
-            .append("0x").append(HexDump.toHex(  getPointNumber ()))
-            .append(" (").append( getPointNumber() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .seriesIndex          = ")
-            .append("0x").append(HexDump.toHex(  getSeriesIndex ()))
-            .append(" (").append( getSeriesIndex() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .seriesNumber         = ")
-            .append("0x").append(HexDump.toHex(  getSeriesNumber ()))
-            .append(" (").append( getSeriesNumber() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .formatFlags          = ")
-            .append("0x").append(HexDump.toHex(  getFormatFlags ()))
-            .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("         .useExcel4Colors          = ").append(isUseExcel4Colors()).append('\n'); 
+        buf.append("[DATAFORMAT]\n");
+        buf.append("    .pointNumber          = 0x")
+            .append(HexDump.toHex(  getPointNumber ()))
+            .append(" (").append( getPointNumber() ).append(" )\n");
+        buf.append("    .seriesIndex          = 0x")
+            .append(HexDump.toHex(  getSeriesIndex ()))
+            .append(" (").append( getSeriesIndex() ).append(" )\n");
+        buf.append("    .seriesNumber         = 0x")
+            .append(HexDump.toHex(  getSeriesNumber ()))
+            .append(" (").append( getSeriesNumber() ).append(" )\n");
+        buf.append("    .formatFlags          = 0x")
+            .append(HexDump.toHex(  getFormatFlags ()))
+            .append(" (").append( getFormatFlags() ).append(" )\n");
+        buf.append("         .useExcel4Colors          = ").append(isUseExcel4Colors()).append('\n'); 
 
-        buffer.append("[/DATAFORMAT]\n");
-        return buffer.toString();
+        buf.append("[/DATAFORMAT]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

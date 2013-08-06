@@ -37,6 +37,9 @@ import org.apache.poi.hssf.record.RecordInputStream;
  *@author     Toshiaki Kamoshida (kamoshida.toshiaki at future dot co dot jp)
  */
 public final class StringUtil {
+	public static final String NEWLINE = System.lineSeparator();
+	public static final char[] NEWLINE_CHARS = NEWLINE.toCharArray();
+
 	private StringUtil() {
 		// no instances of this class
 	}
@@ -397,13 +400,13 @@ public final class StringUtil {
     * An Iterator over an array of Strings.
     */
    public static class StringsIterator implements Iterator<String> {
-      private String[] strings;
+      private final String[] strings;
       private int position = 0;
       public StringsIterator(String[] strings) {
-         if(strings != null) {
-            this.strings = strings;
+         if(strings == null) {
+             this.strings = ArrayUtil.EMPTY_STRING_ARRAY;
          } else {
-            this.strings = ArrayUtil.EMPTY_STRING_ARRAY;
+             this.strings = strings;
          }
       }
 

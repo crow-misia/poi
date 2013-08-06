@@ -55,26 +55,21 @@ public final class FontBasisRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[FBI]\n");
-        buffer.append("    .xBasis               = ")
-            .append("0x").append(HexDump.toHex(  getXBasis ()))
-            .append(" (").append( getXBasis() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .yBasis               = ")
-            .append("0x").append(HexDump.toHex(  getYBasis ()))
-            .append(" (").append( getYBasis() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .heightBasis          = ")
-            .append("0x").append(HexDump.toHex(  getHeightBasis ()))
-            .append(" (").append( getHeightBasis() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .scale                = ")
-            .append("0x").append(HexDump.toHex(  getScale ()))
-            .append(" (").append( getScale() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .indexToFontTable     = ")
-            .append("0x").append(HexDump.toHex(  getIndexToFontTable ()))
-            .append(" (").append( getIndexToFontTable() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .xBasis               = 0x")
+            .append(HexDump.toHex(  getXBasis ()))
+            .append(" (").append( getXBasis() ).append(" )\n");
+        buffer.append("    .yBasis               = 0x")
+            .append(HexDump.toHex(  getYBasis ()))
+            .append(" (").append( getYBasis() ).append(" )\n");
+        buffer.append("    .heightBasis          = 0x")
+            .append(HexDump.toHex(  getHeightBasis ()))
+            .append(" (").append( getHeightBasis() ).append(" )\n");
+        buffer.append("    .scale                = 0x")
+            .append(HexDump.toHex(  getScale ()))
+            .append(" (").append( getScale() ).append(" )\n");
+        buffer.append("    .indexToFontTable     = 0x")
+            .append(HexDump.toHex(  getIndexToFontTable ()))
+            .append(" (").append( getIndexToFontTable() ).append(" )\n");
 
         buffer.append("[/FBI]\n");
         return buffer.toString();

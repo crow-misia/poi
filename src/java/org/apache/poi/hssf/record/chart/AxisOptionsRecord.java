@@ -75,42 +75,33 @@ public final class AxisOptionsRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[AXCEXT]\n");
-        buffer.append("    .minimumCategory      = ")
-            .append("0x").append(HexDump.toHex(  getMinimumCategory ()))
-            .append(" (").append( getMinimumCategory() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .maximumCategory      = ")
-            .append("0x").append(HexDump.toHex(  getMaximumCategory ()))
-            .append(" (").append( getMaximumCategory() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .majorUnitValue       = ")
-            .append("0x").append(HexDump.toHex(  getMajorUnitValue ()))
-            .append(" (").append( getMajorUnitValue() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .majorUnit            = ")
-            .append("0x").append(HexDump.toHex(  getMajorUnit ()))
-            .append(" (").append( getMajorUnit() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .minorUnitValue       = ")
-            .append("0x").append(HexDump.toHex(  getMinorUnitValue ()))
-            .append(" (").append( getMinorUnitValue() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .minorUnit            = ")
-            .append("0x").append(HexDump.toHex(  getMinorUnit ()))
-            .append(" (").append( getMinorUnit() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .baseUnit             = ")
-            .append("0x").append(HexDump.toHex(  getBaseUnit ()))
-            .append(" (").append( getBaseUnit() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .crossingPoint        = ")
-            .append("0x").append(HexDump.toHex(  getCrossingPoint ()))
-            .append(" (").append( getCrossingPoint() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .options              = ")
-            .append("0x").append(HexDump.toHex(  getOptions ()))
-            .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .minimumCategory      = 0x")
+            .append(HexDump.toHex(  getMinimumCategory ()))
+            .append(" (").append( getMinimumCategory() ).append(" )\n");
+        buffer.append("    .maximumCategory      = 0x")
+            .append(HexDump.toHex(  getMaximumCategory ()))
+            .append(" (").append( getMaximumCategory() ).append(" )\n");
+        buffer.append("    .majorUnitValue       = 0x")
+            .append(HexDump.toHex(  getMajorUnitValue ()))
+            .append(" (").append( getMajorUnitValue() ).append(" )\n");
+        buffer.append("    .majorUnit            = 0x")
+            .append(HexDump.toHex(  getMajorUnit ()))
+            .append(" (").append( getMajorUnit() ).append(" )\n");
+        buffer.append("    .minorUnitValue       = 0x")
+            .append(HexDump.toHex(  getMinorUnitValue ()))
+            .append(" (").append( getMinorUnitValue() ).append(" )\n");
+        buffer.append("    .minorUnit            = 0x")
+            .append(HexDump.toHex(  getMinorUnit ()))
+            .append(" (").append( getMinorUnit() ).append(" )\n");
+        buffer.append("    .baseUnit             = 0x")
+            .append(HexDump.toHex(  getBaseUnit ()))
+            .append(" (").append( getBaseUnit() ).append(" )\n");
+        buffer.append("    .crossingPoint        = 0x")
+            .append(HexDump.toHex(  getCrossingPoint ()))
+            .append(" (").append( getCrossingPoint() ).append(" )\n");
+        buffer.append("    .options              = 0x")
+            .append(HexDump.toHex(  getOptions ()))
+            .append(" (").append( getOptions() ).append(" )\n");
         buffer.append("         .defaultMinimum           = ").append(isDefaultMinimum()).append('\n'); 
         buffer.append("         .defaultMaximum           = ").append(isDefaultMaximum()).append('\n'); 
         buffer.append("         .defaultMajor             = ").append(isDefaultMajor()).append('\n'); 

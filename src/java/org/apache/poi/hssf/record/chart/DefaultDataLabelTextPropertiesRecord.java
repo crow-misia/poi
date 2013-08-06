@@ -50,10 +50,9 @@ public final class DefaultDataLabelTextPropertiesRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[DEFAULTTEXT]\n");
-        buffer.append("    .categoryDataType     = ")
-            .append("0x").append(HexDump.toHex(  getCategoryDataType ()))
-            .append(" (").append( getCategoryDataType() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .categoryDataType     = 0x")
+            .append(HexDump.toHex(  getCategoryDataType ()))
+            .append(" (").append( getCategoryDataType() ).append(" )\n");
 
         buffer.append("[/DEFAULTTEXT]\n");
         return buffer.toString();

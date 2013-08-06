@@ -475,7 +475,7 @@ public class XSSFRichTextString implements RichTextString {
     static String utfDecode(String value){
         if(value == null) return null;
         
-        StringBuilder buf = new StringBuilder();
+        StringBuilder buf = new StringBuilder(value.length());
         Matcher m = utfPtrn.matcher(value);
         int idx = 0;
         while(m.find()) {
@@ -485,7 +485,7 @@ public class XSSFRichTextString implements RichTextString {
             }
 
             String code = m.group(1);
-            int icode = Integer.decode("0x" + code);
+            int icode = Integer.parseInt(code, 16);
             buf.append((char)icode);
 
             idx = m.end();
@@ -498,7 +498,7 @@ public class XSSFRichTextString implements RichTextString {
             // delete format runs that fit between startIndex and endIndex
             // runs intersecting startIndex and endIndex remain
             int runStartIdx = 0;
-            for (Iterator<Integer> it = formats.keySet().iterator(); it.hasNext();) {
+            for (final Iterator<Integer> it = formats.keySet().iterator(); it.hasNext();) {
                 int runEndIdx = it.next();
                 if (runStartIdx >= startIndex && runEndIdx < endIndex) {
                    it.remove();

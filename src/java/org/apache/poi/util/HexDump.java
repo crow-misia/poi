@@ -27,7 +27,7 @@ import java.text.DecimalFormat;
  * @author Glen Stampoultzis  (glens at apache.org)
  */
 public final class HexDump {
-    static final String EOL = System.lineSeparator();
+    public static final String EOL = StringUtil.NEWLINE;
     private static final char _hexcodes[] = "0123456789ABCDEF".toCharArray();
     private static final int _shifts[]   =
     {

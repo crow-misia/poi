@@ -53,22 +53,21 @@ public final class SeriesLabelsRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[ATTACHEDLABEL]\n");
-        buffer.append("    .formatFlags          = ")
-            .append("0x").append(HexDump.toHex(  getFormatFlags ()))
-            .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("         .showActual               = ").append(isShowActual()).append('\n'); 
-        buffer.append("         .showPercent              = ").append(isShowPercent()).append('\n'); 
-        buffer.append("         .labelAsPercentage        = ").append(isLabelAsPercentage()).append('\n'); 
-        buffer.append("         .smoothedLine             = ").append(isSmoothedLine()).append('\n'); 
-        buffer.append("         .showLabel                = ").append(isShowLabel()).append('\n'); 
-        buffer.append("         .showBubbleSizes          = ").append(isShowBubbleSizes()).append('\n'); 
+        buf.append("[ATTACHEDLABEL]\n");
+        buf.append("    .formatFlags          = 0x")
+            .append(HexDump.toHex(  getFormatFlags ()))
+            .append(" (").append( getFormatFlags() ).append(" )\n");
+        buf.append("         .showActual               = ").append(isShowActual()).append('\n'); 
+        buf.append("         .showPercent              = ").append(isShowPercent()).append('\n'); 
+        buf.append("         .labelAsPercentage        = ").append(isLabelAsPercentage()).append('\n'); 
+        buf.append("         .smoothedLine             = ").append(isSmoothedLine()).append('\n'); 
+        buf.append("         .showLabel                = ").append(isShowLabel()).append('\n'); 
+        buf.append("         .showBubbleSizes          = ").append(isShowBubbleSizes()).append('\n'); 
 
-        buffer.append("[/ATTACHEDLABEL]\n");
-        return buffer.toString();
+        buf.append("[/ATTACHEDLABEL]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

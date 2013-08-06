@@ -22,6 +22,7 @@ import junit.framework.TestCase;
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
+import org.apache.poi.util.StringUtil;
 
 public class TestEscherClientDataRecord extends TestCase
 {
@@ -51,9 +52,9 @@ public class TestEscherClientDataRecord extends TestCase
     }
 
     public void testToString() {
-        final String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
-        String expected = "org.apache.poi.ddf.EscherClientDataRecord:" + nl +
+        final String expected = "org.apache.poi.ddf.EscherClientDataRecord:" + nl +
                 "  RecordId: 0xF011" + nl +
                 "  Version: 0x0002" + nl +
                 "  Instance: 0x0000" + nl +

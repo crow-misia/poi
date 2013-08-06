@@ -19,6 +19,7 @@ package org.apache.poi.ddf;
 
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Together the the EscherOptRecord this record defines some of the basic
@@ -104,7 +105,7 @@ public class EscherSpRecord
      */
     public String toString()
     {
-        final String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
         return getClass().getName() + ":" + nl +
                 "  RecordId: 0x" + HexDump.toHex(RECORD_ID) + nl +

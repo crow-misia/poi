@@ -44,16 +44,15 @@ public final class AxisUsedRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[AXISUSED]\n");
-        buffer.append("    .numAxis              = ")
-            .append("0x").append(HexDump.toHex(  getNumAxis ()))
-            .append(" (").append( getNumAxis() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buf.append("[AXISUSED]\n");
+        buf.append("    .numAxis              = 0x")
+            .append(HexDump.toHex(  getNumAxis ()))
+            .append(" (").append( getNumAxis() ).append(" )\n");
 
-        buffer.append("[/AXISUSED]\n");
-        return buffer.toString();
+        buf.append("[/AXISUSED]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

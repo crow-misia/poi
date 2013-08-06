@@ -44,16 +44,15 @@ public final class SeriesIndexRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[SINDEX]\n");
-        buffer.append("    .index                = ")
-            .append("0x").append(HexDump.toHex(  getIndex ()))
-            .append(" (").append( getIndex() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buf.append("[SINDEX]\n");
+        buf.append("    .index                = 0x")
+            .append(HexDump.toHex(  getIndex ()))
+            .append(" (").append( getIndex() ).append(" )\n");
 
-        buffer.append("[/SINDEX]\n");
-        return buffer.toString();
+        buf.append("[/SINDEX]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

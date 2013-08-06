@@ -21,6 +21,7 @@ import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.RecordFormatException;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Holds data from the parent application. Most commonly used to store
@@ -113,7 +114,7 @@ public class EscherTextboxRecord extends EscherRecord
 
     public String toString()
     {
-        final String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
         return getClass().getName() + ":" + nl +
                 "  isContainer: " + isContainerRecord() + nl +

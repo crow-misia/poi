@@ -20,9 +20,11 @@ package org.apache.poi.ddf;
 import java.util.List;
 
 import junit.framework.TestCase;
+
 import org.apache.poi.POIDataSamples;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Tests for {@link EscherContainerRecord}
@@ -73,7 +75,7 @@ public final class TestEscherContainerRecord extends TestCase {
 		EscherContainerRecord r = new EscherContainerRecord();
 		r.setRecordId(EscherContainerRecord.SP_CONTAINER);
 		r.setOptions((short) 0x000F);
-		final String nl = System.lineSeparator();
+		final String nl = StringUtil.NEWLINE;
 		assertEquals("org.apache.poi.ddf.EscherContainerRecord (SpContainer):" + nl +
 				"  isContainer: true" + nl +
                 "  version: 0x000F" + nl +

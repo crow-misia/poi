@@ -76,29 +76,24 @@ public final class LineFormatRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[LINEFORMAT]\n");
-        buffer.append("    .lineColor            = ")
-            .append("0x").append(HexDump.toHex(  getLineColor ()))
-            .append(" (").append( getLineColor() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .linePattern          = ")
-            .append("0x").append(HexDump.toHex(  getLinePattern ()))
-            .append(" (").append( getLinePattern() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .weight               = ")
-            .append("0x").append(HexDump.toHex(  getWeight ()))
-            .append(" (").append( getWeight() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .format               = ")
-            .append("0x").append(HexDump.toHex(  getFormat ()))
-            .append(" (").append( getFormat() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .lineColor            = 0x")
+            .append(HexDump.toHex(  getLineColor ()))
+            .append(" (").append( getLineColor() ).append(" )\n");
+        buffer.append("    .linePattern          = 0x")
+            .append(HexDump.toHex(  getLinePattern ()))
+            .append(" (").append( getLinePattern() ).append(" )\n");
+        buffer.append("    .weight               = 0x")
+            .append(HexDump.toHex(  getWeight ()))
+            .append(" (").append( getWeight() ).append(" )\n");
+        buffer.append("    .format               = 0x")
+            .append(HexDump.toHex(  getFormat ()))
+            .append(" (").append( getFormat() ).append(" )\n");
         buffer.append("         .auto                     = ").append(isAuto()).append('\n'); 
         buffer.append("         .drawTicks                = ").append(isDrawTicks()).append('\n'); 
         buffer.append("         .unknown                  = ").append(isUnknown()).append('\n'); 
-        buffer.append("    .colourPaletteIndex   = ")
-            .append("0x").append(HexDump.toHex(  getColourPaletteIndex ()))
-            .append(" (").append( getColourPaletteIndex() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .colourPaletteIndex   = 0x")
+            .append(HexDump.toHex(  getColourPaletteIndex ()))
+            .append(" (").append( getColourPaletteIndex() ).append(" )\n");
 
         buffer.append("[/LINEFORMAT]\n");
         return buffer.toString();

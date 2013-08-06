@@ -58,26 +58,21 @@ public final class PaneRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[PANE]\n");
-        buffer.append("    .x                    = ")
-            .append("0x").append(HexDump.toHex(  getX ()))
-            .append(" (").append( getX() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .y                    = ")
-            .append("0x").append(HexDump.toHex(  getY ()))
-            .append(" (").append( getY() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .topRow               = ")
-            .append("0x").append(HexDump.toHex(  getTopRow ()))
-            .append(" (").append( getTopRow() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .leftColumn           = ")
-            .append("0x").append(HexDump.toHex(  getLeftColumn ()))
-            .append(" (").append( getLeftColumn() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .activePane           = ")
-            .append("0x").append(HexDump.toHex(  getActivePane ()))
-            .append(" (").append( getActivePane() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .x                    = 0x")
+            .append(HexDump.toHex(  getX ()))
+            .append(" (").append( getX() ).append(" )\n");
+        buffer.append("    .y                    = 0x")
+            .append(HexDump.toHex(  getY ()))
+            .append(" (").append( getY() ).append(" )\n");
+        buffer.append("    .topRow               = 0x")
+            .append(HexDump.toHex(  getTopRow ()))
+            .append(" (").append( getTopRow() ).append(" )\n");
+        buffer.append("    .leftColumn           = 0x")
+            .append(HexDump.toHex(  getLeftColumn ()))
+            .append(" (").append( getLeftColumn() ).append(" )\n");
+        buffer.append("    .activePane           = 0x")
+            .append(HexDump.toHex(  getActivePane ()))
+            .append(" (").append( getActivePane() ).append(" )\n");
 
         buffer.append("[/PANE]\n");
         return buffer.toString();

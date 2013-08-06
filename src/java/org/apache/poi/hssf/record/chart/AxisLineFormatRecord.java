@@ -51,10 +51,9 @@ public final class AxisLineFormatRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[AXISLINEFORMAT]\n");
-        buffer.append("    .axisType             = ")
-            .append("0x").append(HexDump.toHex(  getAxisType ()))
-            .append(" (").append( getAxisType() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .axisType             = 0x")
+            .append(HexDump.toHex(  getAxisType ()))
+            .append(" (").append( getAxisType() ).append(" )\n");
 
         buffer.append("[/AXISLINEFORMAT]\n");
         return buffer.toString();

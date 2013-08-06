@@ -57,14 +57,12 @@ public final class FrameRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[FRAME]\n");
-        buffer.append("    .borderType           = ")
-            .append("0x").append(HexDump.toHex(  getBorderType ()))
-            .append(" (").append( getBorderType() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .options              = ")
-            .append("0x").append(HexDump.toHex(  getOptions ()))
-            .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .borderType           = 0x")
+            .append(HexDump.toHex(  getBorderType ()))
+            .append(" (").append( getBorderType() ).append(" )\n");
+        buffer.append("    .options              = 0x")
+            .append(HexDump.toHex(  getOptions ()))
+            .append(" (").append( getOptions() ).append(" )\n");
         buffer.append("         .autoSize                 = ").append(isAutoSize()).append('\n'); 
         buffer.append("         .autoPosition             = ").append(isAutoPosition()).append('\n'); 
 

@@ -56,28 +56,25 @@ public final class BarRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[BAR]\n");
-        buffer.append("    .barSpace             = ")
-            .append("0x").append(HexDump.toHex(  getBarSpace ()))
-            .append(" (").append( getBarSpace() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .categorySpace        = ")
-            .append("0x").append(HexDump.toHex(  getCategorySpace ()))
-            .append(" (").append( getCategorySpace() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .formatFlags          = ")
-            .append("0x").append(HexDump.toHex(  getFormatFlags ()))
-            .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("         .horizontal               = ").append(isHorizontal()).append('\n'); 
-        buffer.append("         .stacked                  = ").append(isStacked()).append('\n'); 
-        buffer.append("         .displayAsPercentage      = ").append(isDisplayAsPercentage()).append('\n'); 
-        buffer.append("         .shadow                   = ").append(isShadow()).append('\n'); 
+        buf.append("[BAR]\n");
+        buf.append("    .barSpace             = 0x")
+            .append(HexDump.toHex(  getBarSpace ()))
+            .append(" (").append( getBarSpace() ).append(" )\n");
+        buf.append("    .categorySpace        = 0x")
+            .append(HexDump.toHex(  getCategorySpace ()))
+            .append(" (").append( getCategorySpace() ).append(" )\n");
+        buf.append("    .formatFlags          = 0x")
+            .append(HexDump.toHex(  getFormatFlags ()))
+            .append(" (").append( getFormatFlags() ).append(" )\n");
+        buf.append("         .horizontal               = ").append(isHorizontal()).append('\n'); 
+        buf.append("         .stacked                  = ").append(isStacked()).append('\n'); 
+        buf.append("         .displayAsPercentage      = ").append(isDisplayAsPercentage()).append('\n'); 
+        buf.append("         .shadow                   = ").append(isShadow()).append('\n'); 
 
-        buffer.append("[/BAR]\n");
-        return buffer.toString();
+        buf.append("[/BAR]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

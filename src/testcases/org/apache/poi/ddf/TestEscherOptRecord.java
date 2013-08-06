@@ -22,6 +22,7 @@ import junit.framework.TestCase;
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexRead;
 import org.apache.poi.util.HexDump;
+import org.apache.poi.util.StringUtil;
 
 import java.util.Arrays;
 
@@ -133,8 +134,9 @@ public final class TestEscherOptRecord extends TestCase {
     }
 
     public void testToString() {
-        final String nl = System.lineSeparator();
-        EscherOptRecord r = new EscherOptRecord();
+        final String nl = StringUtil.NEWLINE;
+
+        final EscherOptRecord r = new EscherOptRecord();
         // don't try to shoot in foot, please -- vlsergey
         // r.setOptions((short)0x000F);
         r.setRecordId(EscherOptRecord.RECORD_ID);

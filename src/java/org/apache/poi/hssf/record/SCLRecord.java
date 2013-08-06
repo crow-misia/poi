@@ -48,14 +48,12 @@ public final class SCLRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[SCL]\n");
-        buffer.append("    .numerator            = ")
-            .append("0x").append(HexDump.toHex(  getNumerator ()))
-            .append(" (").append( getNumerator() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .denominator          = ")
-            .append("0x").append(HexDump.toHex(  getDenominator ()))
-            .append(" (").append( getDenominator() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .numerator            = 0x")
+            .append(HexDump.toHex(  getNumerator ()))
+            .append(" (").append( getNumerator() ).append(" )\n");
+        buffer.append("    .denominator          = 0x")
+            .append(HexDump.toHex(  getDenominator ()))
+            .append(" (").append( getDenominator() ).append(" )\n");
 
         buffer.append("[/SCL]\n");
         return buffer.toString();

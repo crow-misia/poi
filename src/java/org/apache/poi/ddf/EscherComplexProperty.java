@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
+import org.apache.poi.util.StringUtil;
 
 /**
  * A complex property differs from a simple property in that the data can not fit inside a 32 bit
@@ -131,7 +132,7 @@ public class EscherComplexProperty extends EscherProperty {
                 + ", propName: " + EscherProperties.getPropertyName( getPropertyNumber() )
                 + ", complex: " + isComplex()
                 + ", blipId: " + isBlipId()
-                + ", data: " + System.lineSeparator() + dataStr;
+                + ", data: " + StringUtil.NEWLINE + dataStr;
     }
 
     public String toXml(String tab){

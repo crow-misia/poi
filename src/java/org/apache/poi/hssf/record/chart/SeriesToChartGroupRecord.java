@@ -46,16 +46,15 @@ public final class SeriesToChartGroupRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[SeriesToChartGroup]\n");
-        buffer.append("    .chartGroupIndex      = ")
-            .append("0x").append(HexDump.toHex(  getChartGroupIndex ()))
-            .append(" (").append( getChartGroupIndex() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buf.append("[SeriesToChartGroup]\n");
+        buf.append("    .chartGroupIndex      = 0x")
+            .append(HexDump.toHex(  getChartGroupIndex ()))
+            .append(" (").append( getChartGroupIndex() ).append(" )\n");
 
-        buffer.append("[/SeriesToChartGroup]\n");
-        return buffer.toString();
+        buf.append("[/SeriesToChartGroup]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

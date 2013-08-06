@@ -19,12 +19,12 @@ package org.apache.poi.hslf.dev;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 import java.util.Iterator;
 
 import org.apache.poi.hslf.HSLFSlideShow;
 import org.apache.poi.hslf.record.Record;
 import org.apache.poi.util.HexDump;
+import org.apache.poi.util.StringUtil;
 import org.apache.poi.ddf.DefaultEscherRecordFactory;
 import org.apache.poi.ddf.EscherRecord;
 import org.apache.poi.ddf.EscherContainerRecord;
@@ -155,8 +155,8 @@ public final class SlideShowRecordDumper {
   }
 
   public String printEscherRecord( EscherRecord er ) {
-        String nl = System.lineSeparator();
-        StringBuilder buf = new StringBuilder();
+        final String nl = StringUtil.NEWLINE;
+        final StringBuilder buf = new StringBuilder();
 
 		if (er instanceof EscherContainerRecord) {
 			buf.append(printEscherContainerRecord( (EscherContainerRecord)er ));
@@ -196,11 +196,11 @@ public final class SlideShowRecordDumper {
 
   public String printEscherContainerRecord( EscherContainerRecord ecr ) {
         final String newIndent = "   ";
-        final String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
         StringBuilder children = new StringBuilder();
         int count = 0;
-        for ( Iterator<EscherRecord> iterator = ecr.getChildIterator(); iterator.hasNext(); )
+        for (final Iterator<EscherRecord> iterator = ecr.getChildIterator(); iterator.hasNext(); )
         {
             if (count < 1) {
                 children.append( "  children: " + nl );

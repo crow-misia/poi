@@ -44,16 +44,15 @@ public final class FontIndexRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[FONTX]\n");
-        buffer.append("    .fontIndex            = ")
-            .append("0x").append(HexDump.toHex(  getFontIndex ()))
-            .append(" (").append( getFontIndex() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buf.append("[FONTX]\n");
+        buf.append("    .fontIndex            = 0x")
+            .append(HexDump.toHex(  getFontIndex ()))
+            .append(" (").append( getFontIndex() ).append(" )\n");
 
-        buffer.append("[/FONTX]\n");
-        return buffer.toString();
+        buf.append("[/FONTX]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

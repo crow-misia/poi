@@ -55,10 +55,9 @@ public final class DatRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[DAT]\n");
-        buffer.append("    .options              = ")
-            .append("0x").append(HexDump.toHex(  getOptions ()))
-            .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .options              = 0x")
+            .append(HexDump.toHex(  getOptions ()))
+            .append(" (").append( getOptions() ).append(" )\n");
         buffer.append("         .horizontalBorder         = ").append(isHorizontalBorder()).append('\n'); 
         buffer.append("         .verticalBorder           = ").append(isVerticalBorder()).append('\n'); 
         buffer.append("         .border                   = ").append(isBorder()).append('\n'); 

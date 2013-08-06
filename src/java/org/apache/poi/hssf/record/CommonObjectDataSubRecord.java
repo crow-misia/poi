@@ -98,34 +98,28 @@ public final class CommonObjectDataSubRecord extends SubRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[ftCmo]\n");
-        buffer.append("    .objectType           = ")
-            .append("0x").append(HexDump.toHex(  getObjectType ()))
-            .append(" (").append( getObjectType() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .objectId             = ")
-            .append("0x").append(HexDump.toHex(  getObjectId ()))
-            .append(" (").append( getObjectId() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .option               = ")
-            .append("0x").append(HexDump.toHex(  getOption ()))
-            .append(" (").append( getOption() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .objectType           = 0x")
+            .append(HexDump.toHex(  getObjectType ()))
+            .append(" (").append( getObjectType() ).append(" )\n");
+        buffer.append("    .objectId             = 0x")
+            .append(HexDump.toHex(  getObjectId ()))
+            .append(" (").append( getObjectId() ).append(" )\n");
+        buffer.append("    .option               = 0x")
+            .append(HexDump.toHex(  getOption ()))
+            .append(" (").append( getOption() ).append(" )\n");
         buffer.append("         .locked                   = ").append(isLocked()).append('\n'); 
         buffer.append("         .printable                = ").append(isPrintable()).append('\n'); 
         buffer.append("         .autofill                 = ").append(isAutofill()).append('\n'); 
         buffer.append("         .autoline                 = ").append(isAutoline()).append('\n'); 
-        buffer.append("    .reserved1            = ")
-            .append("0x").append(HexDump.toHex(  getReserved1 ()))
-            .append(" (").append( getReserved1() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .reserved2            = ")
-            .append("0x").append(HexDump.toHex(  getReserved2 ()))
-            .append(" (").append( getReserved2() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .reserved3            = ")
-            .append("0x").append(HexDump.toHex(  getReserved3 ()))
-            .append(" (").append( getReserved3() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .reserved1            = 0x")
+            .append(HexDump.toHex(  getReserved1 ()))
+            .append(" (").append( getReserved1() ).append(" )\n");
+        buffer.append("    .reserved2            = 0x")
+            .append(HexDump.toHex(  getReserved2 ()))
+            .append(" (").append( getReserved2() ).append(" )\n");
+        buffer.append("    .reserved3            = 0x")
+            .append(HexDump.toHex(  getReserved3 ()))
+            .append(" (").append( getReserved3() ).append(" )\n");
 
         buffer.append("[/ftCmo]\n");
         return buffer.toString();

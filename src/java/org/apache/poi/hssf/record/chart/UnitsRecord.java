@@ -45,16 +45,15 @@ public final class UnitsRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[UNITS]\n");
-        buffer.append("    .units                = ")
-            .append("0x").append(HexDump.toHex(  getUnits ()))
-            .append(" (").append( getUnits() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buf.append("[UNITS]\n");
+        buf.append("    .units                = 0x")
+            .append(HexDump.toHex(  getUnits ()))
+            .append(" (").append( getUnits() ).append(" )\n");
 
-        buffer.append("[/UNITS]\n");
-        return buffer.toString();
+        buf.append("[/UNITS]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

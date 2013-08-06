@@ -57,31 +57,27 @@ public final class CategorySeriesAxisRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[CATSERRANGE]\n");
-        buffer.append("    .crossingPoint        = ")
-            .append("0x").append(HexDump.toHex(  getCrossingPoint ()))
-            .append(" (").append( getCrossingPoint() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .labelFrequency       = ")
-            .append("0x").append(HexDump.toHex(  getLabelFrequency ()))
-            .append(" (").append( getLabelFrequency() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .tickMarkFrequency    = ")
-            .append("0x").append(HexDump.toHex(  getTickMarkFrequency ()))
-            .append(" (").append( getTickMarkFrequency() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .options              = ")
-            .append("0x").append(HexDump.toHex(  getOptions ()))
-            .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("         .valueAxisCrossing        = ").append(isValueAxisCrossing()).append('\n'); 
-        buffer.append("         .crossesFarRight          = ").append(isCrossesFarRight()).append('\n'); 
-        buffer.append("         .reversed                 = ").append(isReversed()).append('\n'); 
+        buf.append("[CATSERRANGE]\n");
+        buf.append("    .crossingPoint        = 0x")
+            .append(HexDump.toHex(  getCrossingPoint ()))
+            .append(" (").append( getCrossingPoint() ).append(" )\n");
+        buf.append("    .labelFrequency       = 0x")
+            .append(HexDump.toHex(  getLabelFrequency ()))
+            .append(" (").append( getLabelFrequency() ).append(" )\n");
+        buf.append("    .tickMarkFrequency    = 0x")
+            .append(HexDump.toHex(  getTickMarkFrequency ()))
+            .append(" (").append( getTickMarkFrequency() ).append(" )\n");
+        buf.append("    .options              = 0x")
+            .append(HexDump.toHex(  getOptions ()))
+            .append(" (").append( getOptions() ).append(" )\n");
+        buf.append("         .valueAxisCrossing        = ").append(isValueAxisCrossing()).append('\n'); 
+        buf.append("         .crossesFarRight          = ").append(isCrossesFarRight()).append('\n'); 
+        buf.append("         .reversed                 = ").append(isReversed()).append('\n'); 
 
-        buffer.append("[/CATSERRANGE]\n");
-        return buffer.toString();
+        buf.append("[/CATSERRANGE]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

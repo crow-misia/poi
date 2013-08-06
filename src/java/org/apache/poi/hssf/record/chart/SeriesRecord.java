@@ -70,30 +70,24 @@ public final class SeriesRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[SERIES]\n");
-        buffer.append("    .categoryDataType     = ")
-            .append("0x").append(HexDump.toHex(  getCategoryDataType ()))
-            .append(" (").append( getCategoryDataType() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .valuesDataType       = ")
-            .append("0x").append(HexDump.toHex(  getValuesDataType ()))
-            .append(" (").append( getValuesDataType() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .numCategories        = ")
-            .append("0x").append(HexDump.toHex(  getNumCategories ()))
-            .append(" (").append( getNumCategories() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .numValues            = ")
-            .append("0x").append(HexDump.toHex(  getNumValues ()))
-            .append(" (").append( getNumValues() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .bubbleSeriesType     = ")
-            .append("0x").append(HexDump.toHex(  getBubbleSeriesType ()))
-            .append(" (").append( getBubbleSeriesType() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .numBubbleValues      = ")
-            .append("0x").append(HexDump.toHex(  getNumBubbleValues ()))
-            .append(" (").append( getNumBubbleValues() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .categoryDataType     = 0x")
+            .append(HexDump.toHex(  getCategoryDataType ()))
+            .append(" (").append( getCategoryDataType() ).append(" )\n");
+        buffer.append("    .valuesDataType       = 0x")
+            .append(HexDump.toHex(  getValuesDataType ()))
+            .append(" (").append( getValuesDataType() ).append(" )\n");
+        buffer.append("    .numCategories        = 0x")
+            .append(HexDump.toHex(  getNumCategories ()))
+            .append(" (").append( getNumCategories() ).append(" )\n");
+        buffer.append("    .numValues            = 0x")
+            .append(HexDump.toHex(  getNumValues ()))
+            .append(" (").append( getNumValues() ).append(" )\n");
+        buffer.append("    .bubbleSeriesType     = 0x")
+            .append(HexDump.toHex(  getBubbleSeriesType ()))
+            .append(" (").append( getBubbleSeriesType() ).append(" )\n");
+        buffer.append("    .numBubbleValues      = 0x")
+            .append(HexDump.toHex(  getNumBubbleValues ()))
+            .append(" (").append( getNumBubbleValues() ).append(" )\n");
 
         buffer.append("[/SERIES]\n");
         return buffer.toString();

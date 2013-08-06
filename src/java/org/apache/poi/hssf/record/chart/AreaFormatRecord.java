@@ -66,30 +66,24 @@ public final class AreaFormatRecord extends StandardRecord {
         buffer.append("[AREAFORMAT]\n");
         buffer.append("    .foregroundColor      = ")
             .append("0x").append(HexDump.toHex(  getForegroundColor ()))
-            .append(" (").append( getForegroundColor() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+            .append(" (").append( getForegroundColor() ).append(" )\n");
         buffer.append("    .backgroundColor      = ")
             .append("0x").append(HexDump.toHex(  getBackgroundColor ()))
-            .append(" (").append( getBackgroundColor() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+            .append(" (").append( getBackgroundColor() ).append(" )\n");
         buffer.append("    .pattern              = ")
             .append("0x").append(HexDump.toHex(  getPattern ()))
-            .append(" (").append( getPattern() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+            .append(" (").append( getPattern() ).append(" )\n");
         buffer.append("    .formatFlags          = ")
             .append("0x").append(HexDump.toHex(  getFormatFlags ()))
-            .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+            .append(" (").append( getFormatFlags() ).append(" )\n");
         buffer.append("         .automatic                = ").append(isAutomatic()).append('\n'); 
         buffer.append("         .invert                   = ").append(isInvert()).append('\n'); 
-        buffer.append("    .forecolorIndex       = ")
-            .append("0x").append(HexDump.toHex(  getForecolorIndex ()))
-            .append(" (").append( getForecolorIndex() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .backcolorIndex       = ")
-            .append("0x").append(HexDump.toHex(  getBackcolorIndex ()))
-            .append(" (").append( getBackcolorIndex() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .forecolorIndex       = 0x")
+            .append(HexDump.toHex(  getForecolorIndex ()))
+            .append(" (").append( getForecolorIndex() ).append(" )\n");
+        buffer.append("    .backcolorIndex       = 0x")
+            .append(HexDump.toHex(  getBackcolorIndex ()))
+            .append(" (").append( getBackcolorIndex() ).append(" )\n");
 
         buffer.append("[/AREAFORMAT]\n");
         return buffer.toString();

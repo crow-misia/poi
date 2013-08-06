@@ -20,6 +20,7 @@ package org.apache.poi.ddf;
 import org.apache.poi.util.ArrayUtil;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
+import org.apache.poi.util.StringUtil;
 
 /**
  * The escher client anchor specifies which rows and cells the shape is bound to as well as
@@ -136,7 +137,7 @@ public class EscherClientAnchorRecord
      */
     public String toString()
     {
-        final String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
         return getClass().getName() + ":" + nl +
                 "  RecordId: 0x" + HexDump.toHex(RECORD_ID) + nl +

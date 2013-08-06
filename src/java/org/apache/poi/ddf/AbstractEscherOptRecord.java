@@ -20,6 +20,7 @@ import java.util.*;
 
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Common abstract class for {@link EscherOptRecord} and
@@ -70,7 +71,7 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
     private int getPropertiesSize()
     {
         int totalSize = 0;
-        for ( EscherProperty property : properties )
+        for (final EscherProperty property : properties )
         {
             totalSize += property.getPropertySize();
         }
@@ -87,7 +88,7 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
     @SuppressWarnings("unchecked")
     public <T extends EscherProperty> T lookup( int propId )
     {
-        for ( EscherProperty prop : properties )
+        for (final EscherProperty prop : properties )
         {
             if ( prop.getPropertyNumber() == propId )
             {
@@ -133,13 +134,13 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
      * @param value the property to set.
      */
     public void setEscherProperty(EscherProperty value){
-        for (final Iterator<EscherProperty> iterator = properties.iterator(); iterator.hasNext(); ) {
-            final EscherProperty prop = iterator.next();
+        final List<EscherProperty> p = properties;
+        for (int i = p.size() - 1; i >= 0; i--) {
+            final EscherProperty prop = p.get(i);
             if (prop.getId() == value.getId()){
-                iterator.remove();
+                p.set(i, value);
             }
         }
-        properties.add( value );
         sortProperties();
     }
 
@@ -157,7 +158,7 @@ public abstract class AbstractEscherOptRecord extends EscherRecord
      */
     public String toString()
     {
-        String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append( getClass().getName() );

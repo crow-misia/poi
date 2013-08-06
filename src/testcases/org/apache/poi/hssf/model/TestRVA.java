@@ -23,6 +23,7 @@ import junit.framework.TestCase;
 import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.ss.formula.ptg.AttrPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
+import org.apache.poi.util.StringUtil;
 import org.apache.poi.hssf.usermodel.FormulaExtractor;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -37,8 +38,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  * @author Josh Micich
  */
 public final class TestRVA extends TestCase {
-
-	private static final String NEW_LINE = System.lineSeparator();
 
 	public void testFormulas() {
 		HSSFWorkbook wb = HSSFTestDataSamples.openSampleWorkbook("testRVA.xls");
@@ -108,7 +107,7 @@ public final class TestRVA extends TestCase {
 				sb.append("  mismatch token type[" + i + "] " + getShortClassName(excelPtg) + " "
 						+ excelPtg.getRVAType() + " - " + getShortClassName(poiPtg) + " "
 						+ poiPtg.getRVAType());
-				sb.append(NEW_LINE);
+				sb.append(StringUtil.NEWLINE);
 				continue;
 			}
 			if (poiPtg.isBaseToken()) {
@@ -121,7 +120,7 @@ public final class TestRVA extends TestCase {
 				hasMismatch = true;
 				sb.append(" - was " + poiPtg.getRVAType());
 			}
-			sb.append(NEW_LINE);
+			sb.append(StringUtil.NEWLINE);
 		}
 		if (false) { // set 'true' to see trace of RVA values
 			System.out.println(formulaCell.getRowIndex() + " " + formula);

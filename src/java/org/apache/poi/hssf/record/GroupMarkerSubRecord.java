@@ -45,12 +45,11 @@ public final class GroupMarkerSubRecord extends SubRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
 
-        String nl = System.lineSeparator();
-        buffer.append("[ftGmo]" + nl);
-        buffer.append("  reserved = ").append(HexDump.toHex(reserved)).append(nl);
-        buffer.append("[/ftGmo]" + nl);
+        buffer.append("[ftGmo]\n");
+        buffer.append("  reserved = ").append(HexDump.toHex(reserved)).append('\n');
+        buffer.append("[/ftGmo]\n");
         return buffer.toString();
     }
 

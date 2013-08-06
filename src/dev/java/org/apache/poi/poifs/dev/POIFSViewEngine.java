@@ -20,8 +20,9 @@
 package org.apache.poi.poifs.dev;
 
 import java.io.*;
-
 import java.util.*;
+
+import org.apache.poi.util.StringUtil;
 
 /**
  * This class contains methods used to inspect POIFSViewable objects
@@ -31,7 +32,7 @@ import java.util.*;
 
 public class POIFSViewEngine
 {
-    private static final String _EOL = System.lineSeparator();
+    private static final String _EOL = StringUtil.NEWLINE;
 
     /**
      * Inspect an object that may be viewable, and drill down if told

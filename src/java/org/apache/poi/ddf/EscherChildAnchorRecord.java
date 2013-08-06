@@ -20,6 +20,7 @@ package org.apache.poi.ddf;
 
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
+import org.apache.poi.util.StringUtil;
 
 /**
  * The escher child achor record is used to specify the position of a shape under an
@@ -84,7 +85,7 @@ public class EscherChildAnchorRecord
      */
     public String toString()
     {
-        final String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
         return getClass().getName() + ":" + nl +
                 "  RecordId: 0x" + HexDump.toHex(RECORD_ID) + nl +

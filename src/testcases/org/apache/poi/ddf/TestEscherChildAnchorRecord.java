@@ -18,8 +18,10 @@
 package org.apache.poi.ddf;
 
 import junit.framework.TestCase;
+
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
+import org.apache.poi.util.StringUtil;
 
 public final class TestEscherChildAnchorRecord extends TestCase {
     public void testSerialize() {
@@ -59,9 +61,9 @@ public final class TestEscherChildAnchorRecord extends TestCase {
     }
 
     public void testToString(){
-        String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
-        String expected = "org.apache.poi.ddf.EscherChildAnchorRecord:" + nl +
+        final String expected = "org.apache.poi.ddf.EscherChildAnchorRecord:" + nl +
                 "  RecordId: 0xF00F" + nl +
                 "  Version: 0x0001" + nl +
                 "  Instance: 0x0000" + nl +

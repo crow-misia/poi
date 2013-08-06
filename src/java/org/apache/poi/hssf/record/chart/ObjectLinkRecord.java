@@ -54,24 +54,21 @@ public final class ObjectLinkRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[OBJECTLINK]\n");
-        buffer.append("    .anchorId             = ")
-            .append("0x").append(HexDump.toHex(  getAnchorId ()))
-            .append(" (").append( getAnchorId() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .link1                = ")
-            .append("0x").append(HexDump.toHex(  getLink1 ()))
-            .append(" (").append( getLink1() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .link2                = ")
-            .append("0x").append(HexDump.toHex(  getLink2 ()))
-            .append(" (").append( getLink2() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buf.append("[OBJECTLINK]\n");
+        buf.append("    .anchorId             = 0x")
+            .append(HexDump.toHex(  getAnchorId ()))
+            .append(" (").append( getAnchorId() ).append(" )\n");
+        buf.append("    .link1                = 0x")
+            .append(HexDump.toHex(  getLink1 ()))
+            .append(" (").append( getLink1() ).append(" )\n");
+        buf.append("    .link2                = 0x")
+            .append(HexDump.toHex(  getLink2 ()))
+            .append(" (").append( getLink2() ).append(" )\n");
 
-        buffer.append("[/OBJECTLINK]\n");
-        return buffer.toString();
+        buf.append("[/OBJECTLINK]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

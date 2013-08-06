@@ -75,46 +75,39 @@ public final class LegendRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[LEGEND]\n");
-        buffer.append("    .xAxisUpperLeft       = ")
-            .append("0x").append(HexDump.toHex(  getXAxisUpperLeft ()))
-            .append(" (").append( getXAxisUpperLeft() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .yAxisUpperLeft       = ")
-            .append("0x").append(HexDump.toHex(  getYAxisUpperLeft ()))
-            .append(" (").append( getYAxisUpperLeft() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .xSize                = ")
-            .append("0x").append(HexDump.toHex(  getXSize ()))
-            .append(" (").append( getXSize() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .ySize                = ")
-            .append("0x").append(HexDump.toHex(  getYSize ()))
-            .append(" (").append( getYSize() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .type                 = ")
-            .append("0x").append(HexDump.toHex(  getType ()))
-            .append(" (").append( getType() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .spacing              = ")
-            .append("0x").append(HexDump.toHex(  getSpacing ()))
-            .append(" (").append( getSpacing() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .options              = ")
-            .append("0x").append(HexDump.toHex(  getOptions ()))
-            .append(" (").append( getOptions() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("         .autoPosition             = ").append(isAutoPosition()).append('\n'); 
-        buffer.append("         .autoSeries               = ").append(isAutoSeries()).append('\n'); 
-        buffer.append("         .autoXPositioning         = ").append(isAutoXPositioning()).append('\n'); 
-        buffer.append("         .autoYPositioning         = ").append(isAutoYPositioning()).append('\n'); 
-        buffer.append("         .vertical                 = ").append(isVertical()).append('\n'); 
-        buffer.append("         .dataTable                = ").append(isDataTable()).append('\n'); 
+        buf.append("[LEGEND]\n");
+        buf.append("    .xAxisUpperLeft       = 0x")
+            .append(HexDump.toHex(  getXAxisUpperLeft ()))
+            .append(" (").append( getXAxisUpperLeft() ).append(" )\n");
+        buf.append("    .yAxisUpperLeft       = 0x")
+            .append(HexDump.toHex(  getYAxisUpperLeft ()))
+            .append(" (").append( getYAxisUpperLeft() ).append(" )\n");
+        buf.append("    .xSize                = 0x")
+            .append(HexDump.toHex(  getXSize ()))
+            .append(" (").append( getXSize() ).append(" )\n");
+        buf.append("    .ySize                = 0x")
+            .append(HexDump.toHex(  getYSize ()))
+            .append(" (").append( getYSize() ).append(" )\n");
+        buf.append("    .type                 = 0x")
+            .append(HexDump.toHex(  getType ()))
+            .append(" (").append( getType() ).append(" )\n");
+        buf.append("    .spacing              = 0x")
+            .append(HexDump.toHex(  getSpacing ()))
+            .append(" (").append( getSpacing() ).append(" )\n");
+        buf.append("    .options              = 0x")
+            .append(HexDump.toHex(  getOptions ()))
+            .append(" (").append( getOptions() ).append(" )\n");
+        buf.append("         .autoPosition             = ").append(isAutoPosition()).append('\n'); 
+        buf.append("         .autoSeries               = ").append(isAutoSeries()).append('\n'); 
+        buf.append("         .autoXPositioning         = ").append(isAutoXPositioning()).append('\n'); 
+        buf.append("         .autoYPositioning         = ").append(isAutoYPositioning()).append('\n'); 
+        buf.append("         .vertical                 = ").append(isVertical()).append('\n'); 
+        buf.append("         .dataTable                = ").append(isDataTable()).append('\n'); 
 
-        buffer.append("[/LEGEND]\n");
-        return buffer.toString();
+        buf.append("[/LEGEND]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

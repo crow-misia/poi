@@ -36,13 +36,15 @@ import org.apache.poi.hssf.util.LazilyConcatenatedByteArray;
  * @author Michael Zalewski (zalewski at optonline.net)
  */
 public abstract class AbstractEscherHolderRecord extends Record {
-    private static boolean DESERIALISE;
+    private static final boolean DESERIALISE;
     static {
+        boolean deserialise;
     try {
-            DESERIALISE = (System.getProperty("poi.deserialize.escher") != null);
+            deserialise = (System.getProperty("poi.deserialize.escher") != null);
         } catch (SecurityException e) {
-            DESERIALISE = false;
+            deserialise = false;
         }
+    DESERIALISE = deserialise;
     }
 
     private final List<EscherRecord> escherRecords;
@@ -58,8 +60,7 @@ public abstract class AbstractEscherHolderRecord extends Record {
         escherRecords = new ArrayList<>();
         if ( DESERIALISE )
         {
-            byte[] data = in.readRemainder();
-            convertToEscherRecords(data);
+            convertToEscherRecords(in.readRemainder());
         }
         else
         {
@@ -88,17 +89,16 @@ public abstract class AbstractEscherHolderRecord extends Record {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
 
-        final String nl = System.lineSeparator();
-        buffer.append('[' + getRecordName() + ']' + nl);
+        buffer.append('[').append(getRecordName()).append("]\n");
         if (escherRecords.isEmpty())
-            buffer.append("No Escher Records Decoded" + nl);
+            buffer.append("No Escher Records Decoded\n");
         for (final EscherRecord r : escherRecords)
         {
             buffer.append(r.toString());
         }
-        buffer.append("[/" + getRecordName() + ']' + nl);
+        buffer.append("[/").append(getRecordName()).append("]\n");
 
         return buffer.toString();
     }

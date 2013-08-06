@@ -47,20 +47,18 @@ public final class PlotGrowthRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[PLOTGROWTH]\n");
-        buffer.append("    .horizontalScale      = ")
-            .append("0x").append(HexDump.toHex(  getHorizontalScale ()))
-            .append(" (").append( getHorizontalScale() ).append(" )");
-        buffer.append(System.lineSeparator()); 
-        buffer.append("    .verticalScale        = ")
-            .append("0x").append(HexDump.toHex(  getVerticalScale ()))
-            .append(" (").append( getVerticalScale() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buf.append("[PLOTGROWTH]\n");
+        buf.append("    .horizontalScale      = 0x")
+            .append(HexDump.toHex(  getHorizontalScale ()))
+            .append(" (").append( getHorizontalScale() ).append(" )\n");
+        buf.append("    .verticalScale        = 0x")
+            .append(HexDump.toHex(  getVerticalScale ()))
+            .append(" (").append( getVerticalScale() ).append(" )\n");
 
-        buffer.append("[/PLOTGROWTH]\n");
-        return buffer.toString();
+        buf.append("[/PLOTGROWTH]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

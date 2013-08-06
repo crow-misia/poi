@@ -47,10 +47,9 @@ public final class NumberFormatIndexRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[IFMT]\n");
-        buffer.append("    .formatIndex          = ")
-            .append("0x").append(HexDump.toHex(  getFormatIndex ()))
-            .append(" (").append( getFormatIndex() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .formatIndex          = 0x")
+            .append(HexDump.toHex(  getFormatIndex ()))
+            .append(" (").append( getFormatIndex() ).append(" )\n");
 
         buffer.append("[/IFMT]\n");
         return buffer.toString();

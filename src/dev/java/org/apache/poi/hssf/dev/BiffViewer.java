@@ -37,6 +37,7 @@ import org.apache.poi.hssf.record.pivottable.*;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
+import org.apache.poi.util.StringUtil;
 
 /**
  *  Utillity for reading in BIFF8 records and displaying data from them.
@@ -46,9 +47,7 @@ import org.apache.poi.util.LittleEndian;
  *@see        #main
  */
 public final class BiffViewer {
-	static final char[] NEW_LINE_CHARS = System.lineSeparator().toCharArray();
-
-    private BiffViewer() {
+	private BiffViewer() {
 		// no instances of this class
 	}
 
@@ -101,9 +100,7 @@ public final class BiffViewer {
 			}
 			ps.println();
 		}
-		Record[] result = new Record[temp.size()];
-		temp.toArray(result);
-		return result;
+		return temp.toArray(new Record[temp.size()]);
 	}
 
 
@@ -444,7 +441,7 @@ public final class BiffViewer {
 			if (w != null) {
 				try {
 					w.write(header);
-					w.write(NEW_LINE_CHARS);
+					w.write(StringUtil.NEWLINE_CHARS);
 					hexDumpAligned(w, data, dataSize+4, globalOffset, _zeroAlignEachRecord);
 					w.flush();
 				} catch (IOException e) {
@@ -637,7 +634,7 @@ public final class BiffViewer {
 			// raw hex data
 			for (int i=0; i< DUMP_LINE_LEN; i++) {
 				if (i>0) {
-					w.write(" ");
+					w.write(' ');
 				}
 				if (i >= startDelta && i < endDelta) {
 					writeHex(w, data[lineDataOffset+i], 2);
@@ -652,10 +649,10 @@ public final class BiffViewer {
 				if (i >= startDelta && i < endDelta) {
 					w.write(getPrintableChar(data[lineDataOffset+i]));
 				} else {
-					w.write(" ");
+					w.write(' ');
 				}
 			}
-			w.write(NEW_LINE_CHARS);
+			w.write(StringUtil.NEWLINE_CHARS);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

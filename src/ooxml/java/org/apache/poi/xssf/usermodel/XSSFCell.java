@@ -248,8 +248,8 @@ public final class XSSFCell implements Cell {
      * @return the value of the cell as a string
      */
     public String getStringCellValue() {
-        XSSFRichTextString str = getRichStringCellValue();
-        return str == null ? null : str.getString();
+        final RichTextString s = getRichStringCellValue();
+        return s == null ? null : s.getString();
     }
 
     /**

@@ -27,6 +27,7 @@ import org.apache.poi.util.HexDump;
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
+import org.apache.poi.util.StringUtil;
 
 /**
  * Escher container records store other escher records as children.
@@ -247,9 +248,9 @@ public final class EscherContainerRecord extends EscherRecord {
 
     public String toString()
     {
-        String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
-        StringBuilder children = new StringBuilder();
+        final StringBuilder children = new StringBuilder();
         if ( _childRecords.size() > 0 )
         {
             children.append( "  children: " + nl );

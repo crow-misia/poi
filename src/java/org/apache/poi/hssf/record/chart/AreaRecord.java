@@ -53,10 +53,9 @@ public final class AreaRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[AREA]\n");
-        buffer.append("    .formatFlags          = ")
-            .append("0x").append(HexDump.toHex(  getFormatFlags ()))
-            .append(" (").append( getFormatFlags() ).append(" )");
-        buffer.append(System.lineSeparator()); 
+        buffer.append("    .formatFlags          = 0x")
+            .append(HexDump.toHex(  getFormatFlags ()))
+            .append(" (").append( getFormatFlags() ).append(" )\n");
         buffer.append("         .stacked                  = ").append(isStacked()).append('\n'); 
         buffer.append("         .displayAsPercentage      = ").append(isDisplayAsPercentage()).append('\n'); 
         buffer.append("         .shadow                   = ").append(isShadow()).append('\n'); 

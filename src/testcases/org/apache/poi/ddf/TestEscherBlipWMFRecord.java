@@ -18,8 +18,10 @@
 package org.apache.poi.ddf;
 
 import junit.framework.TestCase;
+
 import org.apache.poi.util.HexDump;
 import org.apache.poi.util.HexRead;
+import org.apache.poi.util.StringUtil;
 
 public final class TestEscherBlipWMFRecord extends TestCase {
     private String dataStr;
@@ -98,7 +100,7 @@ public final class TestEscherBlipWMFRecord extends TestCase {
         EscherBlipWMFRecord r = new EscherBlipWMFRecord();
         r.fillFields( data, 0, new DefaultEscherRecordFactory() );
 
-        final String nl = System.lineSeparator();
+        final String nl = StringUtil.NEWLINE;
 
         assertEquals( "org.apache.poi.ddf.EscherBlipWMFRecord:" + nl +
                 "  RecordId: 0xF018" + nl +
