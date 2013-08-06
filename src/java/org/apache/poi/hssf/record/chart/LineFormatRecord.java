@@ -73,30 +73,30 @@ public final class LineFormatRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[LINEFORMAT]\n");
-        buffer.append("    .lineColor            = 0x")
+        buf.append("[LINEFORMAT]\n");
+        buf.append("    .lineColor            = 0x")
             .append(HexDump.toHex(  getLineColor ()))
             .append(" (").append( getLineColor() ).append(" )\n");
-        buffer.append("    .linePattern          = 0x")
+        buf.append("    .linePattern          = 0x")
             .append(HexDump.toHex(  getLinePattern ()))
             .append(" (").append( getLinePattern() ).append(" )\n");
-        buffer.append("    .weight               = 0x")
+        buf.append("    .weight               = 0x")
             .append(HexDump.toHex(  getWeight ()))
             .append(" (").append( getWeight() ).append(" )\n");
-        buffer.append("    .format               = 0x")
+        buf.append("    .format               = 0x")
             .append(HexDump.toHex(  getFormat ()))
             .append(" (").append( getFormat() ).append(" )\n");
-        buffer.append("         .auto                     = ").append(isAuto()).append('\n'); 
-        buffer.append("         .drawTicks                = ").append(isDrawTicks()).append('\n'); 
-        buffer.append("         .unknown                  = ").append(isUnknown()).append('\n'); 
-        buffer.append("    .colourPaletteIndex   = 0x")
+        buf.append("         .auto                     = ").append(isAuto()).append('\n'); 
+        buf.append("         .drawTicks                = ").append(isDrawTicks()).append('\n'); 
+        buf.append("         .unknown                  = ").append(isUnknown()).append('\n'); 
+        buf.append("    .colourPaletteIndex   = 0x")
             .append(HexDump.toHex(  getColourPaletteIndex ()))
             .append(" (").append( getColourPaletteIndex() ).append(" )\n");
 
-        buffer.append("[/LINEFORMAT]\n");
-        return buffer.toString();
+        buf.append("[/LINEFORMAT]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {

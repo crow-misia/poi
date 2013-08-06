@@ -44,15 +44,15 @@ public final class NumberFormatIndexRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buf = new StringBuilder();
 
-        buffer.append("[IFMT]\n");
-        buffer.append("    .formatIndex          = 0x")
+        buf.append("[IFMT]\n");
+        buf.append("    .formatIndex          = 0x")
             .append(HexDump.toHex(  getFormatIndex ()))
             .append(" (").append( getFormatIndex() ).append(" )\n");
 
-        buffer.append("[/IFMT]\n");
-        return buffer.toString();
+        buf.append("[/IFMT]\n");
+        return buf.toString();
     }
 
     public void serialize(LittleEndianOutput out) {
