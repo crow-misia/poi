@@ -25,8 +25,6 @@ import org.apache.poi.hssf.record.EscherAggregate;
 import org.apache.poi.hssf.record.NoteRecord;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.ss.usermodel.Chart;
-import org.apache.poi.util.POILogFactory;
-import org.apache.poi.util.POILogger;
 import org.apache.poi.util.StringUtil;
 import org.apache.poi.util.Internal;
 import org.apache.poi.ss.usermodel.Drawing;
@@ -39,7 +37,6 @@ import org.apache.poi.ss.usermodel.ClientAnchor;
  * @author Glen Stampoultzis (glens at apache.org)
  */
 public final class HSSFPatriarch implements HSSFShapeContainer, Drawing {
-    private static final POILogger log = POILogFactory.getLogger(HSSFPatriarch.class);
     private final List<HSSFShape> _shapes = new ArrayList<>();
 
     private final EscherSpgrRecord _spgrRecord;
@@ -106,10 +103,8 @@ public final class HSSFPatriarch implements HSSFShapeContainer, Drawing {
         for(NoteRecord rec : tailRecords.values()){
             String noteRef = new CellReference(rec.getRow(),
                     rec.getColumn()).formatAsString(); // A1-style notation
-            if(coordinates.contains(noteRef )){
+            if(!coordinates.add(noteRef )){
                 throw new IllegalStateException("found multiple cell comments for cell " + noteRef );
-            } else {
-                coordinates.add(noteRef);
             }
         }
     }

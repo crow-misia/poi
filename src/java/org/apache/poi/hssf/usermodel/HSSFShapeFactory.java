@@ -31,12 +31,6 @@ import java.util.Map;
  */
 public class HSSFShapeFactory {
 
-    private static final short       OBJECT_TYPE_LINE               = 1;
-    private static final short       OBJECT_TYPE_RECTANGLE          = 2;
-    private static final short       OBJECT_TYPE_OVAL               = 3;
-    private static final short       OBJECT_TYPE_ARC                = 4;
-    private static final short       OBJECT_TYPE_PICTURE            = 8;
-
     /**
      * build shape tree from escher container
      * @param container root escher container from which escher records must be taken
