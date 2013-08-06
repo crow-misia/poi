@@ -48,12 +48,10 @@ import org.apache.poi.util.HexDump;
 public final class POIFSDocument implements BATManaged, BlockWritable, POIFSViewable  {
 	private DocumentProperty _property;
 	private int _size;
-	
-	private final POIFSBigBlockSize _bigBigBlockSize;
 
 	// one of these stores will be valid
-	private SmallBlockStore  _small_store;
-	private BigBlockStore	 _big_store;
+	private final SmallBlockStore  _small_store;
+	private final BigBlockStore	 _big_store;
 	
 		/**
 	 * Constructor from large blocks
@@ -64,18 +62,19 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	 */
 	public POIFSDocument(String name, RawDataBlock[] blocks, int length) throws IOException {
 		_size = length;
+		final POIFSBigBlockSize bigBlockSize;
 		if(blocks.length == 0) {
-		   _bigBigBlockSize = POIFSConstants.SMALLER_BIG_BLOCK_SIZE_DETAILS;
+		   bigBlockSize = POIFSConstants.SMALLER_BIG_BLOCK_SIZE_DETAILS;
 		} else {
-		   _bigBigBlockSize = (blocks[0].getBigBlockSize() == POIFSConstants.SMALLER_BIG_BLOCK_SIZE ?
+		   bigBlockSize = (blocks[0].getBigBlockSize() == POIFSConstants.SMALLER_BIG_BLOCK_SIZE ?
 		         POIFSConstants.SMALLER_BIG_BLOCK_SIZE_DETAILS : 
 		         POIFSConstants.LARGER_BIG_BLOCK_SIZE_DETAILS
 		   );
 		}
 		
-		_big_store = new BigBlockStore(_bigBigBlockSize, convertRawBlocksToBigBlocks(blocks));
+		_big_store = new BigBlockStore(bigBlockSize, convertRawBlocksToBigBlocks(blocks));
 		_property = new DocumentProperty(name, _size);
-		_small_store = new SmallBlockStore(_bigBigBlockSize, SmallDocumentBlock.EMPTY_ARRAY);
+		_small_store = new SmallBlockStore(bigBlockSize, SmallDocumentBlock.EMPTY_ARRAY);
 		_property.setDocument(this);
 	}
 
@@ -107,16 +106,17 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	 */
 	public POIFSDocument(String name, SmallDocumentBlock[] blocks, int length) {
 		_size = length;
+		final POIFSBigBlockSize bigBlockSize;
 		
 		if(blocks.length == 0) {
-		   _bigBigBlockSize = POIFSConstants.SMALLER_BIG_BLOCK_SIZE_DETAILS;
+		   bigBlockSize = POIFSConstants.SMALLER_BIG_BLOCK_SIZE_DETAILS;
 		} else {
-		   _bigBigBlockSize = blocks[0].getBigBlockSize();
+		   bigBlockSize = blocks[0].getBigBlockSize();
 		}
 
-		_big_store = new BigBlockStore(_bigBigBlockSize, DocumentBlock.EMPTY_ARRAY);
+		_big_store = new BigBlockStore(bigBlockSize, DocumentBlock.EMPTY_ARRAY);
 		_property = new DocumentProperty(name, _size);
-		_small_store = new SmallBlockStore(_bigBigBlockSize, blocks);
+		_small_store = new SmallBlockStore(bigBlockSize, blocks);
 		_property.setDocument(this);
 	}
 
@@ -129,7 +129,6 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	 */
 	public POIFSDocument(String name, POIFSBigBlockSize bigBlockSize, ListManagedBlock[] blocks, int length) throws IOException {
 		_size = length;
-		_bigBigBlockSize = bigBlockSize;
 		_property = new DocumentProperty(name, _size);
 		_property.setDocument(this);
 		if (Property.isSmall(_size)) {
@@ -154,7 +153,6 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 		List<DocumentBlock> blocks = new ArrayList<>();
 
 		_size = 0;
-		_bigBigBlockSize = bigBlockSize;
 		while (true) {
 			DocumentBlock block = new DocumentBlock(stream, bigBlockSize);
 			int blockSize = block.size();
@@ -169,7 +167,6 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 		}
 		DocumentBlock[] bigBlocks = blocks.toArray(new DocumentBlock[blocks.size()]);
 
-		_big_store = new BigBlockStore(bigBlockSize,bigBlocks);
 		_property = new DocumentProperty(name, _size);
 		_property.setDocument(this);
 		if (_property.shouldUseSmallBlocks()) {
@@ -177,6 +174,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 			_big_store = new BigBlockStore(bigBlockSize, DocumentBlock.EMPTY_ARRAY);
 		} else {
 			_small_store = new SmallBlockStore(bigBlockSize, SmallDocumentBlock.EMPTY_ARRAY);
+			_big_store = new BigBlockStore(bigBlockSize,bigBlocks);
 		}
 	}
 	public POIFSDocument(String name, InputStream stream) throws IOException {
@@ -193,15 +191,14 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	 */
 	public POIFSDocument(String name, int size, POIFSBigBlockSize bigBlockSize, POIFSDocumentPath path, POIFSWriterListener writer) {
 		_size = size;
-		_bigBigBlockSize = bigBlockSize;
 		_property = new DocumentProperty(name, _size);
 		_property.setDocument(this);
 		if (_property.shouldUseSmallBlocks()) {
-			_small_store = new SmallBlockStore(_bigBigBlockSize, path, name, size, writer);
-			_big_store = new BigBlockStore(_bigBigBlockSize, DocumentBlock.EMPTY_ARRAY);
+			_small_store = new SmallBlockStore(bigBlockSize, path, name, size, writer);
+			_big_store = new BigBlockStore(bigBlockSize, DocumentBlock.EMPTY_ARRAY);
 		} else {
-			_small_store = new SmallBlockStore(_bigBigBlockSize, SmallDocumentBlock.EMPTY_ARRAY);
-			_big_store = new BigBlockStore(_bigBigBlockSize, path, name, size, writer);
+			_small_store = new SmallBlockStore(bigBlockSize, SmallDocumentBlock.EMPTY_ARRAY);
+			_big_store = new BigBlockStore(bigBlockSize, path, name, size, writer);
 		}
 	}
 	public POIFSDocument(String name, int size, POIFSDocumentPath path, POIFSWriterListener writer) {
@@ -334,7 +331,6 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	 * @return an array of Object; may not be null, but may be empty
 	 */
 	public Object[] getViewableArray() {
-		Object[] results = new Object[1];
 		String result;
 
 		try {
@@ -365,8 +361,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 		} catch (IOException e) {
 			result = e.getMessage();
 		}
-		results[0] = result;
-		return results;
+		return new String[] { result, };
 	}
 
 	/**
