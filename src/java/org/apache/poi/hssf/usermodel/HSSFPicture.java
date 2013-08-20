@@ -27,6 +27,9 @@ import org.apache.poi.hssf.record.EscherAggregate;
 import org.apache.poi.hssf.record.ObjRecord;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.Picture;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.ImageUtils;
 import org.apache.poi.util.POILogFactory;
 import org.apache.poi.util.POILogger;
@@ -41,12 +44,12 @@ import org.apache.poi.hssf.model.InternalWorkbook;
 public class HSSFPicture extends HSSFSimpleShape implements Picture {
 	private static final POILogger logger = POILogFactory.getLogger(HSSFPicture.class);
 	
-    public static final int PICTURE_TYPE_EMF = HSSFWorkbook.PICTURE_TYPE_EMF;                // Windows Enhanced Metafile
-    public static final int PICTURE_TYPE_WMF = HSSFWorkbook.PICTURE_TYPE_WMF;                // Windows Metafile
-    public static final int PICTURE_TYPE_PICT = HSSFWorkbook.PICTURE_TYPE_PICT;              // Macintosh PICT
-    public static final int PICTURE_TYPE_JPEG = HSSFWorkbook.PICTURE_TYPE_JPEG;              // JFIF
-    public static final int PICTURE_TYPE_PNG = HSSFWorkbook.PICTURE_TYPE_PNG;                // PNG
-    public static final int PICTURE_TYPE_DIB = HSSFWorkbook.PICTURE_TYPE_DIB;                // Windows DIB
+    public static final int PICTURE_TYPE_EMF = Workbook.PICTURE_TYPE_EMF;                // Windows Enhanced Metafile
+    public static final int PICTURE_TYPE_WMF = Workbook.PICTURE_TYPE_WMF;                // Windows Metafile
+    public static final int PICTURE_TYPE_PICT = Workbook.PICTURE_TYPE_PICT;              // Macintosh PICT
+    public static final int PICTURE_TYPE_JPEG = Workbook.PICTURE_TYPE_JPEG;              // JFIF
+    public static final int PICTURE_TYPE_PNG = Workbook.PICTURE_TYPE_PNG;                // PNG
+    public static final int PICTURE_TYPE_DIB = Workbook.PICTURE_TYPE_DIB;                // Windows DIB
 
     /**
      * width of 1px in columns with default width in units of 1/256 of a character width
@@ -170,13 +173,18 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
     }
 
     public HSSFClientAnchor getPreferredSize(final double width, final double height, final boolean aspectLock) {
+        return getPreferredSize(width, height, aspectLock, null);
+    }
+
+    private HSSFClientAnchor getPreferredSize(final double width, final double height, final boolean aspectLock, final Dimension size) {
         final HSSFClientAnchor anchor = (HSSFClientAnchor)getAnchor();
+        final Sheet sheet = getPatriarch().getSheet();
 
         double scaledWidth;
         double scaledHeight;
         if (aspectLock) {
-            final Dimension size = getImageDimension();
-            final double aspect = size.getWidth() / size.getHeight();
+            final Dimension tmpSize = (size == null) ? getImageDimension() : size;
+            final double aspect = tmpSize.getWidth() / tmpSize.getHeight();
             if (width > height) {
                 scaledHeight = width / aspect;
                 scaledWidth = scaledHeight * aspect;
@@ -190,18 +198,18 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
         }
 
         //space in the leftmost cell
-        float w = getColumnWidthInPixels(anchor.getCol1())*(1 - (float)anchor.getDx1()/1024);
+        float w = getColumnWidthInPixels(sheet, anchor.getCol1())*(1 - (float)anchor.getDx1()/1024);
         short col2 = (short)(anchor.getCol1() + 1);
         int dx2 = 0;
 
         while(w < scaledWidth){
-            w += getColumnWidthInPixels(col2++);
+            w += getColumnWidthInPixels(sheet, col2++);
         }
 
         if(w > scaledWidth) {
             //calculate dx2, offset in the rightmost cell
             col2--;
-            final double cw = getColumnWidthInPixels(col2);
+            final double cw = getColumnWidthInPixels(sheet, col2);
             final double delta = w - scaledWidth;
             dx2 = (int)((cw - delta) / cw * 1024);
         }
@@ -209,16 +217,16 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
         anchor.setDx2(dx2);
 
         float h = 0;
-        h += (1 - (float)anchor.getDy1()/256)* getRowHeightInPixels(anchor.getRow1());
+        h += (1 - (float)anchor.getDy1()/256)* getRowHeightInPixels(sheet, anchor.getRow1());
         int row2 = anchor.getRow1() + 1;
         int dy2 = 0;
 
         while(h < scaledHeight){
-            h += getRowHeightInPixels(row2++);
+            h += getRowHeightInPixels(sheet, row2++);
         }
         if(h > scaledHeight) {
             row2--;
-            final double ch = getRowHeightInPixels(row2);
+            final double ch = getRowHeightInPixels(sheet, row2);
             final double delta = h - scaledHeight;
             dy2 = (int)((ch-delta)/ch*256);
         }
@@ -228,28 +236,28 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
         return anchor;
     }
 
-    private float getColumnWidthInPixels(int column){
+    private float getColumnWidthInPixels(final Sheet sheet, final int column){
 
-        int cw = getPatriarch().getSheet().getColumnWidth(column);
-        float px = getPixelWidth(column);
+        int cw = sheet.getColumnWidth(column);
+        float px = getPixelWidth(sheet, column);
 
         return cw/px;
     }
 
-    private float getRowHeightInPixels(int i){
+    private float getRowHeightInPixels(final Sheet sheet, final int i){
 
-        HSSFRow row = getPatriarch().getSheet().getRow(i);
+        Row row = sheet.getRow(i);
         float height;
         if(row != null) height = row.getHeight();
-        else height = getPatriarch().getSheet().getDefaultRowHeight();
+        else height = sheet.getDefaultRowHeight();
 
         return height/PX_ROW;
     }
 
-    private float getPixelWidth(int column){
+    private float getPixelWidth(final Sheet sheet, final int column){
 
-        int def = getPatriarch().getSheet().getDefaultColumnWidth()*256;
-        int cw = getPatriarch().getSheet().getColumnWidth(column);
+        int def = sheet.getDefaultColumnWidth()*256;
+        int cw = sheet.getColumnWidth(column);
 
         return cw == def ? PX_DEFAULT : PX_MODIFIED;
     }
@@ -273,8 +281,8 @@ public class HSSFPicture extends HSSFSimpleShape implements Picture {
      */
     public HSSFPictureData getPictureData(){
         InternalWorkbook iwb = getPatriarch().getSheet().getWorkbook().getWorkbook();
-    	EscherBlipRecord blipRecord = iwb.getBSERecord(getPictureIndex()).getBlipRecord();
-    	return new HSSFPictureData(blipRecord);
+        EscherBlipRecord blipRecord = iwb.getBSERecord(getPictureIndex()).getBlipRecord();
+        return new HSSFPictureData(blipRecord);
     }
 
     @Override
