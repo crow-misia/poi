@@ -70,8 +70,6 @@ import org.apache.poi.xssf.usermodel.helpers.XSSFFormulaUtils;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
-import org.openxmlformats.schemas.officeDocument.x2006.relationships.STRelationshipId;
-import org.openxmlformats.schemas.spreadsheetml.x2006.main.*;
 
 /**
  * High level representation of a SpreadsheetML workbook.  This is the first object most users
@@ -452,9 +450,17 @@ public class XSSFWorkbook extends POIXMLDocument implements Workbook, Iterable<X
             logger.log(POILogger.WARN, "Cloning sheets with comments is not yet supported.");
             ct.unsetLegacyDrawing();
         }
+
+        // Copy Print Area
         if (ct.isSetPageSetup()) {
-            logger.log(POILogger.WARN, "Cloning sheets with page setup is not yet supported.");
-            ct.unsetPageSetup();
+            final String srcPrintArea = getPrintArea(sheetNum);
+            if (srcPrintArea == null || srcPrintArea.isEmpty()) {
+                ct.unsetPageSetup();
+            } else {
+                final int clonedSheetIndex = getSheetIndex(clonedSheet);
+                // Remove Source Sheet Name
+                setPrintArea(clonedSheetIndex, srcPrintArea.substring(srcPrintArea.indexOf('!') + 1));
+            }
         }
 
         clonedSheet.setSelected(false);
