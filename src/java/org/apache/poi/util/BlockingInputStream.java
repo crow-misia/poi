@@ -19,8 +19,8 @@
 
 package org.apache.poi.util;
 
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Implementation of a BlockingInputStream to provide data to 
@@ -56,7 +56,7 @@ public class BlockingInputStream
           is.close();
       }
 
-      public void mark(int readLimit)
+      public synchronized void mark(int readLimit)
       {
           is.mark(readLimit);
       }
@@ -104,7 +104,7 @@ public class BlockingInputStream
           return is.read(bf, s, l);
       }
 
-      public void reset()
+      public synchronized void reset()
         throws IOException
       {
           is.reset();
