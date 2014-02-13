@@ -183,9 +183,9 @@ public class CopyCompare
     {
         boolean equal = true;
         /* Iterate over d1 and compare each entry with its counterpart in d2. */
-        for (final Iterator i = d1.getEntries(); equal && i.hasNext();)
+        for (final Iterator<Entry> i = d1.getEntries(); equal && i.hasNext();)
         {
-            final Entry e1 = (Entry) i.next();
+            final Entry e1 = i.next();
             final String n1 = e1.getName();
             Entry e2 = null;
             try
@@ -214,9 +214,9 @@ public class CopyCompare
 
         /* Iterate over d2 just to make sure that there are no entries in d2
          * that are not in d1. */
-        for (final Iterator i = d2.getEntries(); equal && i.hasNext();)
+        for (final Iterator<Entry> i = d2.getEntries(); equal && i.hasNext();)
         {
-            final Entry e2 = (Entry) i.next();
+            final Entry e2 = i.next();
             final String n2 = e2.getName();
             Entry e1 = null;
             try

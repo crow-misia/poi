@@ -268,8 +268,8 @@ public final class XSSFChart extends POIXMLDocumentPart implements Chart, ChartA
 		StringBuffer text = new StringBuffer();
 		XmlObject[] t = title
 			.selectPath("declare namespace a='"+XSSFDrawing.NAMESPACE_A+"' .//a:t");
-		for (int m = 0; m < t.length; m++) {
-			NodeList kids = t[m].getDomNode().getChildNodes();
+		for (XmlObject o : t) {
+			NodeList kids = o.getDomNode().getChildNodes();
 			for (int n = 0; n < kids.getLength(); n++) {
 				if (kids.item(n) instanceof Text) {
 					text.append(kids.item(n).getNodeValue());

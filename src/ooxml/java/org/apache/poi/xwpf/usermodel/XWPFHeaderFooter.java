@@ -130,10 +130,10 @@ public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBo
     public String getText() {
         StringBuffer t = new StringBuffer();
       //TODO: simplify this to get ibody elements in order
-        for(int i=0; i<paragraphs.size(); i++) {
-            if(! paragraphs.get(i).isEmpty()) {
-                String text = paragraphs.get(i).getText();
-                if(text != null && text.length() > 0) {
+        for(final XWPFParagraph paragraph : paragraphs) {
+            if(! paragraph.isEmpty()) {
+                String text = paragraph.getText();
+                if(!text.isEmpty()) {
                     t.append(text);
                     t.append('\n');
                 }
@@ -141,9 +141,9 @@ public abstract class XWPFHeaderFooter extends POIXMLDocumentPart implements IBo
         }
 
         List<XWPFTable> tables = getTables();
-        for(int i=0; i<tables.size(); i++) {
-            String text = tables.get(i).getText();
-            if(text != null && text.length() > 0) {
+        for(final XWPFTable table : tables) {
+            String text = table.getText();
+            if(!text.isEmpty()) {
                 t.append(text);
                 t.append('\n');
             }

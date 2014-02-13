@@ -107,13 +107,11 @@ public class PropertySetDescriptorRenderer extends DocumentDescriptorRenderer
      * <p>Returns a string representation of a list of {@link
      * Section}s.</p>
      */
-    protected String sectionsToString(final List sections)
+    protected String sectionsToString(final List<Section> sections)
     {
         final StringBuffer b = new StringBuffer();
         int count = 1;
-        for (Iterator i = sections.iterator(); i.hasNext();)
-        {
-            Section s = (Section) i.next();
+        for (final Section s : sections) {
             String d = toString(s, "Section " + count++);
             b.append(d);
         }

@@ -72,7 +72,7 @@ public final class TextStyleListing {
 	public static void showStyleTextPropAtom(StyleTextPropAtom stpa) {
 		System.out.println("\nFound a StyleTextPropAtom");
 
-		LinkedList paragraphStyles = stpa.getParagraphStyles();
+		LinkedList<TextPropCollection> paragraphStyles = stpa.getParagraphStyles();
 		System.out.println("Contains " + paragraphStyles.size() + " paragraph styles:");
 		for(int i=0; i<paragraphStyles.size(); i++) {
 			TextPropCollection tpc = (TextPropCollection)paragraphStyles.get(i);
@@ -81,7 +81,7 @@ public final class TextStyleListing {
 			showTextProps(tpc);
 		}
 
-		LinkedList charStyles = stpa.getCharacterStyles();
+		LinkedList<TextPropCollection> charStyles = stpa.getCharacterStyles();
 		System.out.println("Contains " + charStyles.size() + " character styles:");
 		for(int i=0; i<charStyles.size(); i++) {
 			TextPropCollection tpc = (TextPropCollection)charStyles.get(i);
@@ -92,7 +92,7 @@ public final class TextStyleListing {
 	}
 
 	public static void showTextProps(TextPropCollection tpc) {
-		LinkedList textProps = tpc.getTextPropList();
+		LinkedList<TextProp> textProps = tpc.getTextPropList();
 		System.out.println("    Contains " + textProps.size() + " TextProps");
 		for(int i=0; i<textProps.size(); i++) {
 			TextProp tp = (TextProp)textProps.get(i);

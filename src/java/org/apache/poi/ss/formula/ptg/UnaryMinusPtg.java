@@ -25,7 +25,7 @@ package org.apache.poi.ss.formula.ptg;
 public final class UnaryMinusPtg extends ValueOperatorPtg {
     public final static byte sid  = 0x13;
     
-    private final static String MINUS = "-";
+    private final static char MINUS = '-';
 
     public static final ValueOperatorPtg instance = new UnaryMinusPtg();
 

@@ -25,7 +25,7 @@ package org.apache.poi.ss.formula.ptg;
 public final class UnaryPlusPtg extends ValueOperatorPtg {
     public final static byte sid  = 0x12;
     
-    private final static String ADD = "+";
+    private final static char ADD = '+';
 
     public static final ValueOperatorPtg instance = new UnaryPlusPtg();
 

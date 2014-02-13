@@ -116,6 +116,7 @@ public class DirectoryProperty extends Property implements Parent { // TODO - fi
     }
 
     public static class PropertyComparator implements Comparator<Property> {
+        private static final String VBA_PROJECT = "_VBA_PROJECT";
 
         /**
          * Object equality, implemented as object identity
@@ -146,17 +147,16 @@ public class DirectoryProperty extends Property implements Parent { // TODO - fi
          */
         public int compare(Property o1, Property o2)
         {
-            String VBA_PROJECT = "_VBA_PROJECT";
-            String name1  = o1.getName();
-            String name2  = o2.getName();
+            final String name1  = o1.getName();
+            final String name2  = o2.getName();
             int  result = name1.length() - name2.length();
 
             if (result == 0)
             {
               // _VBA_PROJECT, it seems, will always come last
-              if (name1.compareTo(VBA_PROJECT) == 0)
+              if (VBA_PROJECT.equals(name1))
                 result = 1;
-              else if (name2.compareTo(VBA_PROJECT) == 0)
+              else if (VBA_PROJECT.equals(name2))
                 result = -1;
               else
               {

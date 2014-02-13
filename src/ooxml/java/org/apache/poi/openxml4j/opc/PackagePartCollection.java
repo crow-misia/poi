@@ -59,7 +59,7 @@ public final class PackagePartCollection extends
 				PackagingURIHelper.FORWARD_SLASH_STRING);
 		StringBuffer concatSeg = new StringBuffer();
 		for (String seg : segments) {
-			if (!seg.equals(""))
+			if (!seg.isEmpty())
 				concatSeg.append(PackagingURIHelper.FORWARD_SLASH_CHAR);
 			concatSeg.append(seg);
 			if (this.registerPartNameStr.contains(concatSeg.toString())) {
