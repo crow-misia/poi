@@ -16,7 +16,8 @@
 ==================================================================== */
 package org.apache.poi.hwpf.model;
 
-import org.apache.poi.util.ArrayUtil;
+import java.util.Arrays;
+
 import org.apache.poi.util.LittleEndian;
 import org.apache.poi.util.StringUtil;
 
@@ -64,7 +65,7 @@ public class Sttb
     {
         this._cDataLength = cDataLength;
 
-        this._data = ArrayUtil.copyOf( data, new String[data.length] );
+        this._data = Arrays.copyOf( data, data.length );
 
         this._cbExtra = 0;
         this._extraData = null;
