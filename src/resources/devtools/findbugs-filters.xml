@@ -18,7 +18,7 @@
    ====================================================================
 -->
 <FindBugsFilter>
-<Match>
-<Not><Bug pattern="CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE"/></Not>
-</Match>
+	<Match>
+		<Bug code="EI,EI2" pattern="CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE,MS_PKGPROTECT,MS_MUTABLE_ARRAY"/>
+	</Match>
 </FindBugsFilter>
