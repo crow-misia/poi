@@ -41,6 +41,7 @@ import javax.imageio.ImageIO;
 import org.apache.poi.POIDataSamples;
 import org.apache.poi.hslf.model.Slide;
 import org.apache.poi.hslf.model.TextPainter;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -49,6 +50,7 @@ import org.junit.Test;
 public class TestFontRendering {
     private static POIDataSamples slTests = POIDataSamples.getSlideShowInstance();
 
+    @Ignore("This fails on some systems because fonts are rendered slightly different")
     @Test
     public void bug55902mixedFontWithChineseCharacters() throws Exception {
         // font files need to be downloaded first via
@@ -107,6 +109,14 @@ public class TestFontRendering {
         BufferedImage imgExpected = ImageIO.read(slTests.getFile("bug55902-mixedChars.png"));
         DataBufferByte expectedDB = (DataBufferByte)imgExpected.getRaster().getDataBuffer();
         DataBufferByte actualDB = (DataBufferByte)imgActual.getRaster().getDataBuffer();
-        assertTrue(Arrays.equals(expectedDB.getData(0), actualDB.getData(0)));
+        byte[] expectedData = expectedDB.getData(0);
+        byte[] actualData = actualDB.getData(0);
+        
+        // allow to find out what the actual difference is in CI where this fails currently
+        if(!Arrays.equals(expectedData, actualData)) {
+            ImageIO.write(imgActual, "PNG", File.createTempFile("TestFontRendering", ".png"));
+        }
+        assertTrue("Expected to have matching raster-arrays, but found differences, size " + expectedData.length + " and " + actualData.length, 
+                Arrays.equals(expectedData, actualData));
     }
 }
