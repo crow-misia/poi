@@ -31,7 +31,7 @@ public final class XWPFRelation extends POIXMLRelation {
     /**
      * A map to lookup POIXMLRelation by its relation type
      */
-    protected static Map<String, XWPFRelation> _table = new HashMap<String, XWPFRelation>();
+    protected static final Map<String, XWPFRelation> _table = new HashMap<String, XWPFRelation>();
 
 
     public static final XWPFRelation DOCUMENT = new XWPFRelation(
@@ -106,6 +106,12 @@ public final class XWPFRelation extends POIXMLRelation {
             "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer",
             "/word/footer#.xml",
             XWPFFooter.class
+    );
+    public static final XWPFRelation THEME = new XWPFRelation(
+            "application/vnd.openxmlformats-officedocument.theme+xml",
+            "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme",
+            "/word/theme/theme#.xml",
+            null
     );
     public static final XWPFRelation HYPERLINK = new XWPFRelation(
             null,

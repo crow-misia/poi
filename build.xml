@@ -539,7 +539,7 @@ under the License.
 
     <target name="compile-all" depends="compile,compile-ooxml-lite"/>
 
-    <target name="compile-main">
+    <target name="compile-main" depends="init">
         <javac target="${jdk.version.class}"
                source="${jdk.version.source}"
                destdir="${main.output.dir}"
@@ -1395,7 +1395,8 @@ under the License.
 				</fileset>
 			</classpath>
 		</taskdef>
-		<findbugs home="${findbugs.home}" output="html" outputFile="build/findbugs.html">
+		<findbugs home="${findbugs.home}" output="html" outputFile="build/findbugs.html"
+			excludeFilter="src/resources/devtools/findbugs-filters.xml">
 			<fileset dir="${dist.dir}">
 				<include name="poi-${version.id}-*.jar"/>
 				<include name="poi-scratchpad-${version.id}-*.jar"/>
