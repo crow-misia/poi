@@ -223,7 +223,7 @@ public final class EscherDggRecord extends EscherRecord {
         List<FileIdCluster> clusters = new ArrayList<FileIdCluster>(Arrays.asList(field_5_fileIdClusters));
         clusters.add(new FileIdCluster(dgId, numShapedUsed));
         if(sort) Collections.sort(clusters, MY_COMP );
-        maxDgId = Math.min(maxDgId, dgId);
+        maxDgId = Math.max(maxDgId, dgId);
         field_5_fileIdClusters = clusters.toArray( new FileIdCluster[clusters.size()] );
     }
 
