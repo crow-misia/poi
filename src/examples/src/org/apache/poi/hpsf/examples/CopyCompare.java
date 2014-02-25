@@ -194,8 +194,8 @@ public class CopyCompare
             }
             catch (FileNotFoundException ex)
             {
-                msg.append("Document \"" + e1 + "\" exists, document \"" +
-                           e2 + "\" does not.\n");
+                msg.append("Document \"").append(e1).append("\" exists, document \"")
+                           .append(e2).append("\" does not.\n");
                 equal = false;
                 break;
             }
@@ -225,8 +225,8 @@ public class CopyCompare
             }
             catch (FileNotFoundException ex)
             {
-                msg.append("Document \"" + e2 + "\" exitsts, document \"" +
-                           e1 + "\" does not.\n");
+                msg.append("Document \"").append(e2).append("\" exitsts, document \"")
+                           .append(e1).append("\" does not.\n");
                 equal = false;
                 break;
             }

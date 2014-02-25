@@ -73,7 +73,7 @@ public final class BackupRecord
 
         buffer.append("[BACKUP]\n");
         buffer.append("    .backup          = ")
-            .append(Integer.toHexString(getBackup())).append("\n");
+            .append(Integer.toHexString(getBackup())).append('\n');
         buffer.append("[/BACKUP]\n");
         return buffer.toString();
     }

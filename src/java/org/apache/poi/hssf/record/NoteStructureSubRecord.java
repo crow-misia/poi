@@ -68,10 +68,10 @@ public final class NoteStructureSubRecord extends SubRecord {
     {
         StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[ftNts ]").append("\n");
-        buffer.append("  size     = ").append(getDataSize()).append("\n");
-        buffer.append("  reserved = ").append(HexDump.toHex(reserved)).append("\n");
-        buffer.append("[/ftNts ]").append("\n");
+        buffer.append("[ftNts ]\n");
+        buffer.append("  size     = ").append(getDataSize()).append('\n');
+        buffer.append("  reserved = ").append(HexDump.toHex(reserved)).append('\n');
+        buffer.append("[/ftNts ]\n");
         return buffer.toString();
     }
 

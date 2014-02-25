@@ -97,7 +97,7 @@ public class OutlookTextExtactor extends POIOLE2TextExtractor {
       }
       
       try {
-         s.append("From: " + msg.getDisplayFrom() + "\n");
+         s.append("From: ").append(msg.getDisplayFrom()).append('\n');
       } catch(ChunkNotFoundException e) {}
       
       // For To, CC and BCC, try to match the names
@@ -119,18 +119,14 @@ public class OutlookTextExtactor extends POIOLE2TextExtractor {
          // First try via the proper chunk
          SimpleDateFormat f = new SimpleDateFormat("E, d MMM yyyy HH:mm:ss Z");
          f.setTimeZone(TimeZone.getTimeZone("UTC"));
-         s.append("Date: " + f.format(msg.getMessageDate().getTime()) + "\n");
+         s.append("Date: ").append(f.format(msg.getMessageDate().getTime())).append('\n');
       } catch(ChunkNotFoundException e) {
          try {
             // Failing that try via the raw headers 
             String[] headers = msg.getHeaders();
             for(String header: headers) {
                if(header.toLowerCase().startsWith("date:")) {
-                  s.append(
-                        "Date:" + 
-                        header.substring(header.indexOf(':')+1) +
-                        "\n"
-                  );
+                  s.append("Date:").append(header.substring(header.indexOf(':')+1)).append('\n');
                   break;
                }
             }
@@ -140,22 +136,25 @@ public class OutlookTextExtactor extends POIOLE2TextExtractor {
       }
       
       try {
-         s.append("Subject: " + msg.getSubject() + "\n");
+         s.append("Subject: ").append(msg.getSubject()).append('\n');
       } catch(ChunkNotFoundException e) {}
       
       // Display attachment names
       // To get the attachments, use ExtractorFactory
       for(AttachmentChunks att : msg.getAttachmentFiles()) {
+         s.append("Attachment: ");
          String ats = att.attachLongFileName.getValue();
          if(att.attachMimeTag != null && 
                att.attachMimeTag.getValue() != null) {
-            ats = att.attachMimeTag.getValue() + " = " + ats; 
+             s.append(att.attachMimeTag.getValue()).append(" = ").append(ats); 
+         } else {
+             s.append(ats);
          }
-         s.append("Attachment: " + ats + "\n");
+         s.append('\n');
       }
       
       try {
-         s.append("\n" + msg.getTextBody() + "\n");
+         s.append('\n').append(msg.getTextBody()).append('\n');
       } catch(ChunkNotFoundException e) {}
       
       return s.toString();
@@ -188,10 +187,10 @@ public class OutlookTextExtactor extends POIOLE2TextExtractor {
             // Append the email address in <>, assuming
             //  the name wasn't already the email address
             if(! email.equals(name)) {
-               s.append( " <" + email + ">");
+               s.append( " <").append(email).append(">");
             }
          }
       }
-      s.append("\n");
+      s.append('\n');
    }
 }

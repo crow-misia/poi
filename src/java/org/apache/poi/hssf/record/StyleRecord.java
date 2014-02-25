@@ -143,14 +143,14 @@ public final class StyleRecord extends StandardRecord {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("[STYLE]\n");
-		sb.append("    .xf_index_raw =").append(HexDump.shortToHex(field_1_xf_index)).append("\n");
-		sb.append("        .type     =").append(isBuiltin() ? "built-in" : "user-defined").append("\n");
-		sb.append("        .xf_index =").append(HexDump.shortToHex(getXFIndex())).append("\n");
+		sb.append("    .xf_index_raw =").append(HexDump.shortToHex(field_1_xf_index)).append('\n');
+		sb.append("        .type     =").append(isBuiltin() ? "built-in" : "user-defined").append('\n');
+		sb.append("        .xf_index =").append(HexDump.shortToHex(getXFIndex())).append('\n');
 		if (isBuiltin()){
-			sb.append("    .builtin_style=").append(HexDump.byteToHex(field_2_builtin_style)).append("\n");
-			sb.append("    .outline_level=").append(HexDump.byteToHex(field_3_outline_style_level)).append("\n");
+			sb.append("    .builtin_style=").append(HexDump.byteToHex(field_2_builtin_style)).append('\n');
+			sb.append("    .outline_level=").append(HexDump.byteToHex(field_3_outline_style_level)).append('\n');
 		} else {
-			 sb.append("    .name        =").append(getName()).append("\n");
+			 sb.append("    .name        =").append(getName()).append('\n');
 		}
 		sb.append("[/STYLE]\n");
 		return sb.toString();

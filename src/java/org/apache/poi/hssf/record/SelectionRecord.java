@@ -131,11 +131,11 @@ public final class SelectionRecord extends StandardRecord {
         StringBuilder sb = new StringBuilder();
 
         sb.append("[SELECTION]\n");
-        sb.append("    .pane            = ").append(HexDump.byteToHex(getPane())).append("\n");
-        sb.append("    .activecellrow   = ").append(HexDump.shortToHex(getActiveCellRow())).append("\n");
-        sb.append("    .activecellcol   = ").append(HexDump.shortToHex(getActiveCellCol())).append("\n");
-        sb.append("    .activecellref   = ").append(HexDump.shortToHex(getActiveCellRef())).append("\n");
-        sb.append("    .numrefs         = ").append(HexDump.shortToHex(field_6_refs.length)).append("\n");
+        sb.append("    .pane            = ").append(HexDump.byteToHex(getPane())).append('\n');
+        sb.append("    .activecellrow   = ").append(HexDump.shortToHex(getActiveCellRow())).append('\n');
+        sb.append("    .activecellcol   = ").append(HexDump.shortToHex(getActiveCellCol())).append('\n');
+        sb.append("    .activecellref   = ").append(HexDump.shortToHex(getActiveCellRef())).append('\n');
+        sb.append("    .numrefs         = ").append(HexDump.shortToHex(field_6_refs.length)).append('\n');
         sb.append("[/SELECTION]\n");
         return sb.toString();
     }

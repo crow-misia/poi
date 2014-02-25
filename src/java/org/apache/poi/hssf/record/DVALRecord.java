@@ -136,8 +136,8 @@ public final class DVALRecord extends StandardRecord {
 		buffer.append("    .options      = ").append(getOptions()).append('\n');
 		buffer.append("    .horizPos     = ").append(getHorizontalPos()).append('\n');
 		buffer.append("    .vertPos      = ").append(getVerticalPos()).append('\n');
-		buffer.append("    .comboObjectID   = ").append(Integer.toHexString(getObjectID())).append("\n");
-		buffer.append("    .DVRecordsNumber = ").append(Integer.toHexString(getDVRecNo())).append("\n");
+		buffer.append("    .comboObjectID   = ").append(Integer.toHexString(getObjectID())).append('\n');
+		buffer.append("    .DVRecordsNumber = ").append(Integer.toHexString(getDVRecNo())).append('\n');
 		buffer.append("[/DVAL]\n");
 		return buffer.toString();
 	}

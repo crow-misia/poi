@@ -471,7 +471,7 @@ public final class BiffViewer {
 			sb.append("Offset=").append(HexDump.intToHex(globalOffset)).append('(').append(globalOffset).append(')');
 			sb.append(" recno=").append(recordCounter);
 			sb.append(  " sid=").append(HexDump.shortToHex(sid));
-			sb.append( " size=").append(HexDump.shortToHex(size)).append("(").append(size).append(")");
+			sb.append( " size=").append(HexDump.shortToHex(size)).append('(').append(size).append(')');
 			return sb.toString();
 		}
 	}

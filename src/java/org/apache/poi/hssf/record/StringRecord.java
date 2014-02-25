@@ -89,7 +89,7 @@ public final class StringRecord extends ContinuableRecord {
 
         buffer.append("[STRING]\n");
         buffer.append("    .string            = ")
-            .append(_text).append("\n");
+            .append(_text).append('\n');
         buffer.append("[/STRING]\n");
         return buffer.toString();
     }

@@ -141,12 +141,12 @@ public final class LabelRecord extends Record implements CellValueRecordInterfac
     {
         StringBuilder sb = new StringBuilder();
 		sb.append("[LABEL]\n");
-		sb.append("    .row       = ").append(HexDump.shortToHex(getRow())).append("\n");
-		sb.append("    .column    = ").append(HexDump.shortToHex(getColumn())).append("\n");
-		sb.append("    .xfindex   = ").append(HexDump.shortToHex(getXFIndex())).append("\n");
-		sb.append("    .string_len= ").append(HexDump.shortToHex(field_4_string_len)).append("\n");
-		sb.append("    .unicode_flag= ").append(HexDump.byteToHex(field_5_unicode_flag)).append("\n");
-		sb.append("    .value       = ").append(getValue()).append("\n");
+		sb.append("    .row       = ").append(HexDump.shortToHex(getRow())).append('\n');
+		sb.append("    .column    = ").append(HexDump.shortToHex(getColumn())).append('\n');
+		sb.append("    .xfindex   = ").append(HexDump.shortToHex(getXFIndex())).append('\n');
+		sb.append("    .string_len= ").append(HexDump.shortToHex(field_4_string_len)).append('\n');
+		sb.append("    .unicode_flag= ").append(HexDump.byteToHex(field_5_unicode_flag)).append('\n');
+		sb.append("    .value       = ").append(getValue()).append('\n');
 		sb.append("[/LABEL]\n");
         return sb.toString();
     }

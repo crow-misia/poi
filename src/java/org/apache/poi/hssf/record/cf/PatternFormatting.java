@@ -156,9 +156,9 @@ public final class PatternFormatting implements Cloneable {
     public String toString() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("    [Pattern Formatting]\n");
-        buffer.append("          .fillpattern= ").append(Integer.toHexString(getFillPattern())).append("\n");
-        buffer.append("          .fgcoloridx= ").append(Integer.toHexString(getFillForegroundColor())).append("\n");
-        buffer.append("          .bgcoloridx= ").append(Integer.toHexString(getFillBackgroundColor())).append("\n");
+        buffer.append("          .fillpattern= ").append(Integer.toHexString(getFillPattern())).append('\n');
+        buffer.append("          .fgcoloridx= ").append(Integer.toHexString(getFillForegroundColor())).append('\n');
+        buffer.append("          .bgcoloridx= ").append(Integer.toHexString(getFillBackgroundColor())).append('\n');
         buffer.append("    [/Pattern Formatting]\n");
         return buffer.toString();
     }

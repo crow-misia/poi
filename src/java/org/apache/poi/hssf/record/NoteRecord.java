@@ -124,11 +124,11 @@ public final class NoteRecord extends StandardRecord {
 		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("[NOTE]\n");
-		buffer.append("    .row    = ").append(field_1_row).append("\n");
-		buffer.append("    .col    = ").append(field_2_col).append("\n");
-		buffer.append("    .flags  = ").append(field_3_flags).append("\n");
-		buffer.append("    .shapeid= ").append(field_4_shapeid).append("\n");
-		buffer.append("    .author = ").append(field_6_author).append("\n");
+		buffer.append("    .row    = ").append(field_1_row).append('\n');
+		buffer.append("    .col    = ").append(field_2_col).append('\n');
+		buffer.append("    .flags  = ").append(field_3_flags).append('\n');
+		buffer.append("    .shapeid= ").append(field_4_shapeid).append('\n');
+		buffer.append("    .author = ").append(field_6_author).append('\n');
 		buffer.append("[/NOTE]\n");
 		return buffer.toString();
 	}

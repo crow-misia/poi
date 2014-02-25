@@ -81,8 +81,7 @@ final class RC4 {
 		sb.append(getClass().getName()).append(" [");
 		sb.append("i=").append(_i);
 		sb.append(" j=").append(_j);
-		sb.append("]");
-		sb.append("\n");
+		sb.append("]\n");
 		sb.append(HexDump.dump(_s, 0, 0));
 
 		return sb.toString();

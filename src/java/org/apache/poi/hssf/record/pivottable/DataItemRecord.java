@@ -78,12 +78,12 @@ public final class DataItemRecord extends StandardRecord {
 		StringBuilder buffer = new StringBuilder();
 		
 		buffer.append("[SXDI]\n");
-		buffer.append("  .isxvdData = ").append(HexDump.shortToHex(isxvdData)).append("\n");
-		buffer.append("  .iiftab = ").append(HexDump.shortToHex(iiftab)).append("\n");
-		buffer.append("  .df = ").append(HexDump.shortToHex(df)).append("\n");
-		buffer.append("  .isxvd = ").append(HexDump.shortToHex(isxvd)).append("\n");
-		buffer.append("  .isxvi = ").append(HexDump.shortToHex(isxvi)).append("\n");
-		buffer.append("  .ifmt = ").append(HexDump.shortToHex(ifmt)).append("\n");
+		buffer.append("  .isxvdData = ").append(HexDump.shortToHex(isxvdData)).append('\n');
+		buffer.append("  .iiftab = ").append(HexDump.shortToHex(iiftab)).append('\n');
+		buffer.append("  .df = ").append(HexDump.shortToHex(df)).append('\n');
+		buffer.append("  .isxvd = ").append(HexDump.shortToHex(isxvd)).append('\n');
+		buffer.append("  .isxvi = ").append(HexDump.shortToHex(isxvi)).append('\n');
+		buffer.append("  .ifmt = ").append(HexDump.shortToHex(ifmt)).append('\n');
 		buffer.append("[/SXDI]\n");
 		return buffer.toString();
 	}

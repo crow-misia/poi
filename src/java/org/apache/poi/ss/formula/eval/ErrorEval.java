@@ -105,7 +105,7 @@ public final class ErrorEval implements ValueEval {
         StringBuilder sb = new StringBuilder(64);
         sb.append(getClass().getName()).append(" [");
         sb.append(getText(_errorCode));
-        sb.append("]");
+        sb.append(']');
         return sb.toString();
     }
 }

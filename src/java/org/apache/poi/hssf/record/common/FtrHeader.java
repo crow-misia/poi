@@ -50,8 +50,8 @@ public final class FtrHeader {
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append(" [FUTURE HEADER]\n");
-		buffer.append("   Type " + recordType);
-		buffer.append("   Flags " + grbitFrt);
+		buffer.append("   Type ").append(recordType);
+		buffer.append("   Flags ").append(grbitFrt);
 		buffer.append(" [/FUTURE HEADER]\n");
 		return buffer.toString();
 	}

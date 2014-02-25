@@ -74,7 +74,7 @@ public final class AutoFilterInfoRecord
 
         buffer.append("[AUTOFILTERINFO]\n");
         buffer.append("    .numEntries          = ")
-            .append(_cEntries).append("\n");
+            .append(_cEntries).append('\n');
         buffer.append("[/AUTOFILTERINFO]\n");
         return buffer.toString();
     }

@@ -120,9 +120,9 @@ public final class BlankRecord extends StandardRecord implements CellValueRecord
         StringBuilder sb = new StringBuilder();
 
         sb.append("[BLANK]\n");
-        sb.append("    row= ").append(HexDump.shortToHex(getRow())).append("\n");
-        sb.append("    col= ").append(HexDump.shortToHex(getColumn())).append("\n");
-        sb.append("    xf = ").append(HexDump.shortToHex(getXFIndex())).append("\n");
+        sb.append("    row= ").append(HexDump.shortToHex(getRow())).append('\n');
+        sb.append("    col= ").append(HexDump.shortToHex(getColumn())).append('\n');
+        sb.append("    xf = ").append(HexDump.shortToHex(getXFIndex())).append('\n');
         sb.append("[/BLANK]\n");
         return sb.toString();
     }

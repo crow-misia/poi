@@ -78,8 +78,7 @@ public final class PrintHeadersRecord
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[PRINTHEADERS]\n");
-        buffer.append("    .printheaders   = ").append(getPrintHeaders())
-            .append("\n");
+        buffer.append("    .printheaders   = ").append(getPrintHeaders()).append('\n');
         buffer.append("[/PRINTHEADERS]\n");
         return buffer.toString();
     }

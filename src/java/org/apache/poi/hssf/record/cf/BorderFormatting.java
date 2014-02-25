@@ -432,16 +432,16 @@ public final class BorderFormatting {
     public String toString() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("    [Border Formatting]\n");
-        buffer.append("          .lftln     = ").append(Integer.toHexString(getBorderLeft())).append("\n");
-        buffer.append("          .rgtln     = ").append(Integer.toHexString(getBorderRight())).append("\n");
-        buffer.append("          .topln     = ").append(Integer.toHexString(getBorderTop())).append("\n");
-        buffer.append("          .btmln     = ").append(Integer.toHexString(getBorderBottom())).append("\n");
-        buffer.append("          .leftborder= ").append(Integer.toHexString(getLeftBorderColor())).append("\n");
-        buffer.append("          .rghtborder= ").append(Integer.toHexString(getRightBorderColor())).append("\n");
-        buffer.append("          .topborder= ").append(Integer.toHexString(getTopBorderColor())).append("\n");
-        buffer.append("          .bottomborder= ").append(Integer.toHexString(getBottomBorderColor())).append("\n");
-        buffer.append("          .fwdiag= ").append(isForwardDiagonalOn()).append("\n");
-        buffer.append("          .bwdiag= ").append(isBackwardDiagonalOn()).append("\n");
+        buffer.append("          .lftln     = ").append(Integer.toHexString(getBorderLeft())).append('\n');
+        buffer.append("          .rgtln     = ").append(Integer.toHexString(getBorderRight())).append('\n');
+        buffer.append("          .topln     = ").append(Integer.toHexString(getBorderTop())).append('\n');
+        buffer.append("          .btmln     = ").append(Integer.toHexString(getBorderBottom())).append('\n');
+        buffer.append("          .leftborder= ").append(Integer.toHexString(getLeftBorderColor())).append('\n');
+        buffer.append("          .rghtborder= ").append(Integer.toHexString(getRightBorderColor())).append('\n');
+        buffer.append("          .topborder= ").append(Integer.toHexString(getTopBorderColor())).append('\n');
+        buffer.append("          .bottomborder= ").append(Integer.toHexString(getBottomBorderColor())).append('\n');
+        buffer.append("          .fwdiag= ").append(isForwardDiagonalOn()).append('\n');
+        buffer.append("          .bwdiag= ").append(isBackwardDiagonalOn()).append('\n');
         buffer.append("    [/Border Formatting]\n");
         return buffer.toString();
     }

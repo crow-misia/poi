@@ -48,7 +48,7 @@ public final class TestBug46610 extends TestCase {
 		for (int i = 0; i < globalRange.numParagraphs(); i++) {
 			Paragraph p = globalRange.getParagraph(i);
 			out.append(p.text());
-			out.append("\n");
+			out.append('\n');
 			for (int j = 0; j < p.numCharacterRuns(); j++) {
 				CharacterRun characterRun = p.getCharacterRun(j);
 				characterRun.text();

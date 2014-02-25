@@ -60,10 +60,10 @@ public final class UserSViewEnd extends StandardRecord {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("[").append("USERSVIEWEND").append("] (0x");
+        sb.append("[USERSVIEWEND] (0x");
         sb.append(Integer.toHexString(sid).toUpperCase() + ")\n");
-        sb.append("  rawData=").append(HexDump.toHex(_rawData)).append("\n");
-        sb.append("[/").append("USERSVIEWEND").append("]\n");
+        sb.append("  rawData=").append(HexDump.toHex(_rawData)).append('\n');
+        sb.append("[/USERSVIEWEND]\n");
         return sb.toString();
     }
 

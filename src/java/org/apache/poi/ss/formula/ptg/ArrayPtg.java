@@ -109,8 +109,8 @@ public final class ArrayPtg extends Ptg {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("[ArrayPtg]\n");
 
-		sb.append("nRows = ").append(getRowCount()).append("\n");
-		sb.append("nCols = ").append(getColumnCount()).append("\n");
+		sb.append("nRows = ").append(getRowCount()).append('\n');
+		sb.append("nCols = ").append(getColumnCount()).append('\n');
 		if (_arrayValues == null) {
 			sb.append("  #values#uninitialised#\n");
 		} else {
@@ -171,36 +171,40 @@ public final class ArrayPtg extends Ptg {
 		b.append('{');
 	  	for (int y=0;y<getRowCount();y++) {
 			if (y > 0) {
-				b.append(";");
+				b.append(';');
 			}
 			for (int x=0;x<getColumnCount();x++) {
 			  	if (x > 0) {
-					b.append(",");
+					b.append(',');
 				}
 		  		Object o = _arrayValues[getValueIndex(x, y)];
-		  		b.append(getConstantText(o));
+		  		getConstantText(b, o);
 		  	}
 		  }
-		b.append("}");
+		b.append('}');
 		return b.toString();
 	}
 
-	private static String getConstantText(Object o) {
+	private static void getConstantText(final StringBuilder b, Object o) {
 
 		if (o == null) {
 			throw new RuntimeException("Array item cannot be null");
 		}
 		if (o instanceof String) {
-			return "\"" + (String)o + "\"";
+			b.append('"').append(o).append('"');
+			return;
 		}
 		if (o instanceof Double) {
-			return NumberToTextConverter.toText(((Double)o).doubleValue());
+			b.append(NumberToTextConverter.toText(((Double)o).doubleValue()));
+			return;
 		}
 		if (o instanceof Boolean) {
-			return ((Boolean)o).booleanValue() ? "TRUE" : "FALSE";
+			b.append(((Boolean)o).booleanValue() ? "TRUE" : "FALSE");
+			return;
 		}
 		if (o instanceof ErrorConstant) {
-			return ((ErrorConstant)o).getText();
+			b.append(((ErrorConstant)o).getText());
+			return;
 		}
 		throw new IllegalArgumentException("Unexpected constant class (" + o.getClass().getName() + ")");
 	}

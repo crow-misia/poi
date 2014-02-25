@@ -152,7 +152,7 @@ public class EventBasedExcelExtractor extends POIOLE2TextExtractor implements or
 
            text = tl._text.toString();
            if(! text.endsWith("\n")) {
-               text = text + "\n";
+               text = text.concat("\n");
            }
        } catch(IOException e) {
            throw new RuntimeException(e);
@@ -207,7 +207,7 @@ public class EventBasedExcelExtractor extends POIOLE2TextExtractor implements or
                    rowNum = -1;
 
                    if(_includeSheetNames) {
-                       if(_text.length() > 0) _text.append("\n");
+                       if(_text.length() > 0) _text.append('\n');
                        _text.append(sheetNames.get(sheetNum));
                    }
                }
@@ -273,9 +273,9 @@ public class EventBasedExcelExtractor extends POIOLE2TextExtractor implements or
                if(thisRow != rowNum) {
                    rowNum = thisRow;
                    if(_text.length() > 0)
-                       _text.append("\n");
+                       _text.append('\n');
                } else {
-                   _text.append("\t");
+                   _text.append('\t');
                }
                _text.append(thisText);
            }

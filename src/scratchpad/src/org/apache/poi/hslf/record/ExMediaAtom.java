@@ -158,11 +158,11 @@ public final class ExMediaAtom extends RecordAtom
     public String toString(){
         StringBuilder buf = new StringBuilder();
         buf.append("ExMediaAtom\n");
-        buf.append("\tObjectId: " + getObjectId() + "\n");
-        buf.append("\tMask    : " + getMask() + "\n");
-        buf.append("\t  fLoop        : " + getFlag(fLoop) + "\n");
-        buf.append("\t  fRewind   : " + getFlag(fRewind) + "\n");
-        buf.append("\t  fNarration    : " + getFlag(fNarration) + "\n");
+        buf.append("\tObjectId: ").append(getObjectId()).append('\n');
+        buf.append("\tMask    : ").append(getMask()).append('\n');
+        buf.append("\t  fLoop        : ").append(getFlag(fLoop)).append('\n');
+        buf.append("\t  fRewind   : ").append(getFlag(fRewind)).append('\n');
+        buf.append("\t  fNarration    : ").append(getFlag(fNarration)).append('\n');
         return buf.toString();
     }
 

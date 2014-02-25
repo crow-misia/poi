@@ -535,28 +535,28 @@ public final class NameRecord extends ContinuableRecord {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("[NAME]\n");
-		sb.append("    .option flags           = ").append(HexDump.shortToHex(field_1_option_flag)).append("\n");
-		sb.append("    .keyboard shortcut      = ").append(HexDump.byteToHex(field_2_keyboard_shortcut)).append("\n");
-		sb.append("    .length of the name     = ").append(getNameTextLength()).append("\n");
-		sb.append("    .extSheetIx(1-based, 0=Global)= ").append( field_5_externSheetIndex_plus1 ).append("\n");
-		sb.append("    .sheetTabIx             = ").append(field_6_sheetNumber ).append("\n");
-		sb.append("    .Menu text length       = ").append(field_14_custom_menu_text.length()).append("\n");
-		sb.append("    .Description text length= ").append(field_15_description_text.length()).append("\n");
-		sb.append("    .Help topic text length = ").append(field_16_help_topic_text.length()).append("\n");
-		sb.append("    .Status bar text length = ").append(field_17_status_bar_text.length()).append("\n");
-		sb.append("    .NameIsMultibyte        = ").append(field_11_nameIsMultibyte).append("\n");
-		sb.append("    .Name (Unicode text)    = ").append( getNameText() ).append("\n");
+		sb.append("    .option flags           = ").append(HexDump.shortToHex(field_1_option_flag)).append('\n');
+		sb.append("    .keyboard shortcut      = ").append(HexDump.byteToHex(field_2_keyboard_shortcut)).append('\n');
+		sb.append("    .length of the name     = ").append(getNameTextLength()).append('\n');
+		sb.append("    .extSheetIx(1-based, 0=Global)= ").append( field_5_externSheetIndex_plus1 ).append('\n');
+		sb.append("    .sheetTabIx             = ").append(field_6_sheetNumber ).append('\n');
+		sb.append("    .Menu text length       = ").append(field_14_custom_menu_text.length()).append('\n');
+		sb.append("    .Description text length= ").append(field_15_description_text.length()).append('\n');
+		sb.append("    .Help topic text length = ").append(field_16_help_topic_text.length()).append('\n');
+		sb.append("    .Status bar text length = ").append(field_17_status_bar_text.length()).append('\n');
+		sb.append("    .NameIsMultibyte        = ").append(field_11_nameIsMultibyte).append('\n');
+		sb.append("    .Name (Unicode text)    = ").append( getNameText() ).append('\n');
 		Ptg[] ptgs = field_13_name_definition.getTokens();
-		sb.append("    .Formula (nTokens=").append(ptgs.length).append("):") .append("\n");
+		sb.append("    .Formula (nTokens=").append(ptgs.length).append("):") .append('\n');
 		for (int i = 0; i < ptgs.length; i++) {
 			Ptg ptg = ptgs[i];
-			sb.append("       " + ptg.toString()).append(ptg.getRVAType()).append("\n");
+			sb.append("       " + ptg.toString()).append(ptg.getRVAType()).append('\n');
 		}
 
-		sb.append("    .Menu text       = ").append(field_14_custom_menu_text).append("\n");
-		sb.append("    .Description text= ").append(field_15_description_text).append("\n");
-		sb.append("    .Help topic text = ").append(field_16_help_topic_text).append("\n");
-		sb.append("    .Status bar text = ").append(field_17_status_bar_text).append("\n");
+		sb.append("    .Menu text       = ").append(field_14_custom_menu_text).append('\n');
+		sb.append("    .Description text= ").append(field_15_description_text).append('\n');
+		sb.append("    .Help topic text = ").append(field_16_help_topic_text).append('\n');
+		sb.append("    .Status bar text = ").append(field_17_status_bar_text).append('\n');
 		sb.append("[/NAME]\n");
 
 		return sb.toString();

@@ -58,7 +58,7 @@ public abstract class Area2DPtgBase extends AreaPtgBase {
 		sb.append(getClass().getName());
 		sb.append(" [");
 		sb.append(formatReferenceAsString());
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 }

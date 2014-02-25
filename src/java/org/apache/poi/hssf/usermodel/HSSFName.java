@@ -228,7 +228,7 @@ public final class HSSFName implements Name {
         StringBuilder sb = new StringBuilder(64);
         sb.append(getClass().getName()).append(" [");
         sb.append(_definedNameRec.getNameText());
-        sb.append("]");
+        sb.append(']');
         return sb.toString();
     }
 

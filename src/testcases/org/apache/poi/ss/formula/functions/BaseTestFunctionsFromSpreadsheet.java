@@ -254,11 +254,11 @@ public abstract class BaseTestFunctionsFromSpreadsheet extends TestCase {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("In ").append(filename).append(" ");
+        sb.append("In ").append(filename).append(' ');
 
         CellReference cr = new CellReference(sheetName, rowIndex, c.getColumnIndex(), false, false);
         sb.append(cr.formatAsString());
-        sb.append(" {=").append(c.getCellFormula()).append("}");
+        sb.append(" {=").append(c.getCellFormula()).append('}');
 
         if(currentGroupComment != null) {
             sb.append(" '");

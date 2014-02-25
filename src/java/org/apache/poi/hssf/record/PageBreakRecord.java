@@ -135,20 +135,20 @@ public abstract class PageBreakRecord extends StandardRecord {
            subLabel = "row";
         }
 
-        retval.append("["+label+"]").append("\n");
-        retval.append("     .sid        =").append(getSid()).append("\n");
-        retval.append("     .numbreaks =").append(getNumBreaks()).append("\n");
+        retval.append('[').append(label).append("]\n");
+        retval.append("     .sid        =").append(getSid()).append('\n');
+        retval.append("     .numbreaks =").append(getNumBreaks()).append('\n');
         Iterator<Break> iterator = getBreaksIterator();
         for(int k = 0; k < getNumBreaks(); k++)
         {
             Break region = iterator.next();
 
-            retval.append("     .").append(mainLabel).append(" (zero-based) =").append(region.main).append("\n");
-            retval.append("     .").append(subLabel).append("From    =").append(region.subFrom).append("\n");
-            retval.append("     .").append(subLabel).append("To      =").append(region.subTo).append("\n");
+            retval.append("     .").append(mainLabel).append(" (zero-based) =").append(region.main).append('\n');
+            retval.append("     .").append(subLabel).append("From    =").append(region.subFrom).append('\n');
+            retval.append("     .").append(subLabel).append("To      =").append(region.subTo).append('\n');
         }
 
-        retval.append("["+label+"]").append("\n");
+        retval.append('[').append(label).append("]\n");
         return retval.toString();
     }
 

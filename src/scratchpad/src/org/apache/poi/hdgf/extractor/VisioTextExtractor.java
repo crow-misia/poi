@@ -121,7 +121,7 @@ public final class VisioTextExtractor extends POIOLE2TextExtractor {
 			text.append(allText[i]);
 			if(!allText[i].endsWith("\r") &&
 					!allText[i].endsWith("\n")) {
-				text.append("\n");
+				text.append('\n');
 			}
 		}
 		return text.toString();

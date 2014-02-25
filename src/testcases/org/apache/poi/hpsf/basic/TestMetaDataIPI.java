@@ -275,7 +275,7 @@ public final class TestMetaDataIPI extends TestCase{
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 10000; i++) {
 			sb.append(s);
-			sb.append(" ");
+			sb.append(' ');
 		}
 		return sb.toString();
 	}
@@ -378,15 +378,15 @@ public final class TestMetaDataIPI extends TestCase{
 		Random rand = new Random(0); // TODO - no Random - tests should be completely deterministic
 		for (int i = 0; i < 5; i++) {
 			sb.append(s);
-			sb.append(" ");
+			sb.append(' ');
 			j = (char) rand.nextInt(220);
 			j += 33;
 			// System.out.println(j);
-			sb.append(">");
+			sb.append('>');
 			sb.append(Character.valueOf(j));
-			sb.append("=");
+			sb.append('=');
 			sb.append(umlaute[rand.nextInt(umlaute.length)]);
-			sb.append("<");
+			sb.append('<');
 		}
 
 		return sb.toString();
@@ -504,15 +504,15 @@ public final class TestMetaDataIPI extends TestCase{
 		Random rand = new Random(0); // TODO - no Random - tests should be completely deterministic
 		for (int i = 0; i < 5; i++) {
 			sb.append(s);
-			sb.append(" ");
+			sb.append(' ');
 			j = (char) rand.nextInt(220);
 			j += 33;
 			// System.out.println(j);
-			sb.append(">");
+			sb.append('>');
 			sb.append(Character.valueOf(j));
-			sb.append("=");
+			sb.append('=');
 			sb.append(umlaute[rand.nextInt(umlaute.length)]);
-			sb.append("<");
+			sb.append('<');
 		}
 		sb.append("\u00e4\u00f6\u00fc\uD840\uDC00");
 		return sb.toString();

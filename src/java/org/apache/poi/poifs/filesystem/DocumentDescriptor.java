@@ -108,7 +108,7 @@ public class DocumentDescriptor
 
         for (int j = 0; j < path.length(); j++)
         {
-            buffer.append(path.getComponent(j)).append("/");
+            buffer.append(path.getComponent(j)).append('/');
         }
         buffer.append(name);
         return buffer.toString();

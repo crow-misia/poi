@@ -364,24 +364,23 @@ public final class RowRecord extends StandardRecord {
         StringBuilder sb = new StringBuilder();
 
         sb.append("[ROW]\n");
-        sb.append("    .rownumber      = ").append(Integer.toHexString(getRowNumber()))
-                .append("\n");
-        sb.append("    .firstcol       = ").append(HexDump.shortToHex(getFirstCol())).append("\n");
-        sb.append("    .lastcol        = ").append(HexDump.shortToHex(getLastCol())).append("\n");
-        sb.append("    .height         = ").append(HexDump.shortToHex(getHeight())).append("\n");
-        sb.append("    .optimize       = ").append(HexDump.shortToHex(getOptimize())).append("\n");
-        sb.append("    .reserved       = ").append(HexDump.shortToHex(field_6_reserved)).append("\n");
-        sb.append("    .optionflags    = ").append(HexDump.shortToHex(getOptionFlags())).append("\n");
-        sb.append("        .outlinelvl = ").append(Integer.toHexString(getOutlineLevel())).append("\n");
-        sb.append("        .colapsed   = ").append(getColapsed()).append("\n");
-        sb.append("        .zeroheight = ").append(getZeroHeight()).append("\n");
-        sb.append("        .badfontheig= ").append(getBadFontHeight()).append("\n");
-        sb.append("        .formatted  = ").append(getFormatted()).append("\n");
-        sb.append("    .optionsflags2  = ").append(HexDump.shortToHex(getOptionFlags2())).append("\n");
-        sb.append("        .xfindex       = ").append(Integer.toHexString(getXFIndex())).append("\n");
-        sb.append("        .topBorder     = ").append(getTopBorder()).append("\n");
-        sb.append("        .bottomBorder  = ").append(getBottomBorder()).append("\n");
-        sb.append("        .phoeneticGuide= ").append(getPhoeneticGuide()).append("\n");
+        sb.append("    .rownumber      = ").append(Integer.toHexString(getRowNumber())).append('\n');
+        sb.append("    .firstcol       = ").append(HexDump.shortToHex(getFirstCol())).append('\n');
+        sb.append("    .lastcol        = ").append(HexDump.shortToHex(getLastCol())).append('\n');
+        sb.append("    .height         = ").append(HexDump.shortToHex(getHeight())).append('\n');
+        sb.append("    .optimize       = ").append(HexDump.shortToHex(getOptimize())).append('\n');
+        sb.append("    .reserved       = ").append(HexDump.shortToHex(field_6_reserved)).append('\n');
+        sb.append("    .optionflags    = ").append(HexDump.shortToHex(getOptionFlags())).append('\n');
+        sb.append("        .outlinelvl = ").append(Integer.toHexString(getOutlineLevel())).append('\n');
+        sb.append("        .colapsed   = ").append(getColapsed()).append('\n');
+        sb.append("        .zeroheight = ").append(getZeroHeight()).append('\n');
+        sb.append("        .badfontheig= ").append(getBadFontHeight()).append('\n');
+        sb.append("        .formatted  = ").append(getFormatted()).append('\n');
+        sb.append("    .optionsflags2  = ").append(HexDump.shortToHex(getOptionFlags2())).append('\n');
+        sb.append("        .xfindex       = ").append(Integer.toHexString(getXFIndex())).append('\n');
+        sb.append("        .topBorder     = ").append(getTopBorder()).append('\n');
+        sb.append("        .bottomBorder  = ").append(getBottomBorder()).append('\n');
+        sb.append("        .phoeneticGuide= ").append(getPhoeneticGuide()).append('\n');
         sb.append("[/ROW]\n");
         return sb.toString();
     }

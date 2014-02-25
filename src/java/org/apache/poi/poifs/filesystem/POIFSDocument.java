@@ -400,7 +400,7 @@ public final class POIFSDocument implements BATManaged, BlockWritable, POIFSView
 	public String getShortDescription() {
 		StringBuilder buffer = new StringBuilder();
 
-		buffer.append("Document: \"").append(_property.getName()).append("\"");
+		buffer.append("Document: \"").append(_property.getName()).append('"');
 		buffer.append(" size = ").append(getSize());
 		return buffer.toString();
 	}

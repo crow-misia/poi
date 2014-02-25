@@ -691,19 +691,19 @@ public class UnicodeString implements Comparable<UnicodeString> { // TODO - make
 
         buffer.append("[UNICODESTRING]\n");
         buffer.append("    .charcount       = ")
-            .append(Integer.toHexString(getCharCount())).append("\n");
+            .append(Integer.toHexString(getCharCount())).append('\n');
         buffer.append("    .optionflags     = ")
-            .append(Integer.toHexString(getOptionFlags())).append("\n");
-        buffer.append("    .string          = ").append(getString()).append("\n");
+            .append(Integer.toHexString(getOptionFlags())).append('\n');
+        buffer.append("    .string          = ").append(getString()).append('\n');
         if (field_4_format_runs != null) {
           for (int i = 0; i < field_4_format_runs.size();i++) {
             FormatRun r = field_4_format_runs.get(i);
-            buffer.append("      .format_run"+i+"          = ").append(r.toString()).append("\n");
+            buffer.append("      .format_run").append(i).append("          = ").append(r.toString()).append('\n');
           }
         }
         if (field_5_ext_rst != null) {
-          buffer.append("    .field_5_ext_rst          = ").append("\n");
-          buffer.append( field_5_ext_rst.toString() ).append("\n");
+          buffer.append("    .field_5_ext_rst          = \n");
+          buffer.append( field_5_ext_rst.toString() ).append('\n');
         }
         buffer.append("[/UNICODESTRING]\n");
         return buffer.toString();

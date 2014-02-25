@@ -59,7 +59,7 @@ public final class Ref3DPtg extends RefPtgBase implements WorkbookDependentFormu
         sb.append("sheetIx=").append(getExternSheetIndex());
         sb.append(" ! ");
         sb.append(formatReferenceAsString());
-        sb.append("]");
+        sb.append(']');
         return sb.toString();
     }
 

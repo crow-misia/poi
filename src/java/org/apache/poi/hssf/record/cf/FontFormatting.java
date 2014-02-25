@@ -470,16 +470,16 @@ public final class FontFormatting
 
 		if( isFontStyleModified() )
 		{
-			buffer.append("	.font posture = ").append(isItalic()?"Italic":"Normal").append("\n");
+			buffer.append("	.font posture = ").append(isItalic()?"Italic":"Normal").append('\n');
 		}
 		else
 		{
-			buffer.append("	.font posture = ]not modified]").append("\n");
+			buffer.append("	.font posture = ]not modified]\n");
 		}
 
 		if( isFontOutlineModified() )
 		{
-			buffer.append("	.font outline = ").append(isOutlineOn()).append("\n");
+			buffer.append("	.font outline = ").append(isOutlineOn()).append('\n');
 		}
 		else
 		{
@@ -488,7 +488,7 @@ public final class FontFormatting
 
 		if( isFontShadowModified() )
 		{
-			buffer.append("	.font shadow = ").append(isShadowOn()).append("\n");
+			buffer.append("	.font shadow = ").append(isShadowOn()).append('\n');
 		}
 		else
 		{
@@ -497,7 +497,7 @@ public final class FontFormatting
 
 		if( isFontCancellationModified() )
 		{
-			buffer.append("	.font strikeout = ").append(isStruckout()).append("\n");
+			buffer.append("	.font strikeout = ").append(isStruckout()).append('\n');
 		}
 		else
 		{
@@ -511,16 +511,16 @@ public final class FontFormatting
 				append(
 					getFontWeight() == FONT_WEIGHT_NORMAL ? "(Normal)"
 							: getFontWeight() == FONT_WEIGHT_BOLD ? "(Bold)" : "0x"+Integer.toHexString(getFontWeight())).
-				append("\n");
+				append('\n');
 		}
 		else
 		{
-			buffer.append("	.font weight = ]not modified]").append("\n");
+			buffer.append("	.font weight = ]not modified]\n");
 		}
 
 		if( isEscapementTypeModified() )
 		{
-			buffer.append("	.escapement type = ").append(getEscapementType()).append("\n");
+			buffer.append("	.escapement type = ").append(getEscapementType()).append('\n');
 		}
 		else
 		{
@@ -529,13 +529,13 @@ public final class FontFormatting
 
 		if( isUnderlineTypeModified() )
 		{
-			buffer.append("	.underline type = ").append(getUnderlineType()).append("\n");
+			buffer.append("	.underline type = ").append(getUnderlineType()).append('\n');
 		}
 		else
 		{
 			buffer.append("	.underline type is not modified\n");
 		}
-		buffer.append("	.color index = ").append("0x"+Integer.toHexString(getFontColorIndex()).toUpperCase()).append("\n");
+		buffer.append("	.color index = 0x").append(Integer.toHexString(getFontColorIndex()).toUpperCase()).append('\n');
 
 		buffer.append("	[/Font Formatting]\n");
 		return buffer.toString();

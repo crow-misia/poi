@@ -44,7 +44,7 @@ public final class PowerPtg extends ValueOperatorPtg {
 
         
         buffer.append(operands[ 0 ]);
-        buffer.append("^");
+        buffer.append('^');
         buffer.append(operands[ 1 ]);
         return buffer.toString();
     }       

@@ -122,8 +122,8 @@ public final class FtPioGrbitSubRecord extends SubRecord {
     public String toString() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("[FtPioGrbit ]\n");
-        buffer.append("  size     = ").append(length).append("\n");
-        buffer.append("  flags    = ").append(HexDump.toHex(flags)).append("\n");
+        buffer.append("  size     = ").append(length).append('\n');
+        buffer.append("  flags    = ").append(HexDump.toHex(flags)).append('\n');
         buffer.append("[/FtPioGrbit ]\n");
         return buffer.toString();
     }

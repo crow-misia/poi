@@ -192,7 +192,7 @@ final class LookupUtils {
 			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName()).append(" [");
 			sb.append(formatAsString());
-			sb.append("]");
+			sb.append(']');
 			return sb.toString();
 		}
 
@@ -244,7 +244,7 @@ final class LookupUtils {
 			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName()).append(" [");
 			sb.append(getValueAsString());
-			sb.append("]");
+			sb.append(']');
 			return sb.toString();
 		}
 		protected abstract CompareResult compareSameType(ValueEval other);

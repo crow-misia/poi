@@ -324,7 +324,7 @@ public class CellNumberFormatter extends CellFormatter {
 
             fmtBuf.append('0').append(totalWidth).append('.').append(precision);
 
-            fmtBuf.append("f");
+            fmtBuf.append('f');
             printfFmt = fmtBuf.toString();
         } else {
             StringBuffer fmtBuf = new StringBuffer();
@@ -332,7 +332,7 @@ public class CellNumberFormatter extends CellFormatter {
             List<Special> specialList = integerSpecials;
             if (integerSpecials.size() == 1) {
                 // If we don't do this, we get ".6e5" instead of "6e4"
-                fmtBuf.append("0");
+                fmtBuf.append('0');
                 first = false;
             } else
                 for (Special s : specialList) {

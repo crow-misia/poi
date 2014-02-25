@@ -666,20 +666,20 @@ public final class HyperlinkRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[HYPERLINK RECORD]\n");
-        buffer.append("    .range   = ").append(_range.formatAsString()).append("\n");
-        buffer.append("    .guid    = ").append(_guid.formatAsString()).append("\n");
-        buffer.append("    .linkOpts= ").append(HexDump.intToHex(_linkOpts)).append("\n");
-        buffer.append("    .label   = ").append(getLabel()).append("\n");
+        buffer.append("    .range   = ").append(_range.formatAsString()).append('\n');
+        buffer.append("    .guid    = ").append(_guid.formatAsString()).append('\n');
+        buffer.append("    .linkOpts= ").append(HexDump.intToHex(_linkOpts)).append('\n');
+        buffer.append("    .label   = ").append(getLabel()).append('\n');
         if ((_linkOpts & HLINK_TARGET_FRAME) != 0) {
-            buffer.append("    .targetFrame= ").append(getTargetFrame()).append("\n");
+            buffer.append("    .targetFrame= ").append(getTargetFrame()).append('\n');
         }
         if((_linkOpts & HLINK_URL) != 0 && _moniker != null) {
-            buffer.append("    .moniker   = ").append(_moniker.formatAsString()).append("\n");
+            buffer.append("    .moniker   = ").append(_moniker.formatAsString()).append('\n');
         }
         if ((_linkOpts & HLINK_PLACE) != 0) {
-            buffer.append("    .textMark= ").append(getTextMark()).append("\n");
+            buffer.append("    .textMark= ").append(getTextMark()).append('\n');
         }
-        buffer.append("    .address   = ").append(getAddress()).append("\n");
+        buffer.append("    .address   = ").append(getAddress()).append('\n');
         buffer.append("[/HYPERLINK RECORD]\n");
         return buffer.toString();
     }

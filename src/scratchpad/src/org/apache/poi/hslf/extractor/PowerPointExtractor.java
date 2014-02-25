@@ -234,7 +234,7 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
                             if (text != null){
                                 ret.append(text);
                                 if (!text.endsWith("\n")) {
-                                    ret.append("\n");
+                                    ret.append('\n');
                                 }
                             }
                         }
@@ -248,7 +248,7 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
 				// Slide header, if set
 				HeadersFooters hf = slide.getHeadersFooters();
 				if (hf != null && hf.isHeaderVisible() && hf.getHeaderText() != null) {
-					ret.append(hf.getHeaderText() + "\n");
+					ret.append(hf.getHeaderText()).append('\n');
 				}
 
 				// Slide text
@@ -314,7 +314,7 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
 		return ret.toString();
 	}
 
-    private void extractTableText(StringBuffer ret, Table table) {
+    private void extractTableText(StringBuilder ret, Table table) {
         for (int row = 0; row < table.getNumberOfRows(); row++){
             for (int col = 0; col < table.getNumberOfColumns(); col++){
                 TableCell cell = table.getCell(row, col);
@@ -324,14 +324,14 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
                     txt = (txt == null) ? "" : txt;
                     ret.append(txt);
                     if (col < table.getNumberOfColumns()-1){
-                        ret.append("\t");
+                        ret.append('\t');
                     }
                 }
             }
             ret.append('\n');
         }
     }
-    private void textRunsToText(StringBuffer ret, TextRun[] runs) {
+    private void textRunsToText(StringBuilder ret, TextRun[] runs) {
         if (runs==null) {
             return;
         }
@@ -342,7 +342,7 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
                 String text = run.getText();
                 ret.append(text);
                 if (!text.endsWith("\n")) {
-                    ret.append("\n");
+                    ret.append('\n');
                 }
             }
         }

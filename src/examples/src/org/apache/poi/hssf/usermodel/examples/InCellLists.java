@@ -245,7 +245,7 @@ public class InCellLists {
         wrapStyle.setWrapText(true);
         for(String listItem : listItems) {
             buffer.append(listItem);
-            buffer.append("\n");
+            buffer.append('\n');
         }
         // The StringBuilder's contents are the source for the contents
         // of the cell.
@@ -282,9 +282,9 @@ public class InCellLists {
         // Note that the basic method is identical to the listInCell() method
         // with one difference; a number prefixed to the items text.
         for(String listItem : listItems) {
-            buffer.append(String.valueOf(itemNumber) + ". ");
+            buffer.append(String.valueOf(itemNumber)).append(". ");
             buffer.append(listItem);
-            buffer.append("\n");
+            buffer.append('\n');
             itemNumber += increment;
         }
         // The StringBuilder's contents are the source for the contents
@@ -315,9 +315,9 @@ public class InCellLists {
         // Note that the basic method is identical to the listInCell() method
         // with one difference; the bullet character prefixed to the items text.
         for(String listItem : listItems) {
-            buffer.append(InCellLists.BULLET_CHARACTER + " ");
+            buffer.append(InCellLists.BULLET_CHARACTER).append(' ');
             buffer.append(listItem);
-            buffer.append("\n");
+            buffer.append('\n');
         }
         // The StringBuilder's contents are the source for the contents
         // of the cell.
@@ -354,7 +354,7 @@ public class InCellLists {
             // For each element in the ArrayList, get the text for the high
             // level list item......
             buffer.append(multiLevelListItem.getItemText());
-            buffer.append("\n");
+            buffer.append('\n');
             // and then an ArrayList whose elements encapsulate the text
             // for the lower level list items.
             lowerLevelItems = multiLevelListItem.getLowerLevelItems();
@@ -362,7 +362,7 @@ public class InCellLists {
                 for(String item : lowerLevelItems) {
                     buffer.append(InCellLists.TAB);
                     buffer.append(item);
-                    buffer.append("\n");
+                    buffer.append('\n');
                 }
             }
         }
@@ -420,7 +420,7 @@ public class InCellLists {
             buffer.append(String.valueOf(highLevelItemNumber));
             buffer.append(". ");
             buffer.append(multiLevelListItem.getItemText());
-            buffer.append("\n");
+            buffer.append('\n');
             // and then an ArrayList whose elements encapsulate the text
             // for the lower level list items.
             lowerLevelItems = multiLevelListItem.getLowerLevelItems();
@@ -429,11 +429,11 @@ public class InCellLists {
                 for(String item : lowerLevelItems) {
                     buffer.append(InCellLists.TAB);
                     buffer.append(String.valueOf(highLevelItemNumber));
-                    buffer.append(".");
+                    buffer.append('.');
                     buffer.append(String.valueOf(lowLevelItemNumber));
-                    buffer.append(" ");
+                    buffer.append(' ');
                     buffer.append(item);
-                    buffer.append("\n");
+                    buffer.append('\n');
                     lowLevelItemNumber += lowLevelIncrement;
                 }
             }
@@ -474,9 +474,9 @@ public class InCellLists {
             // For each element in the ArrayList, get the text for the high
             // level list item......
             buffer.append(InCellLists.BULLET_CHARACTER);
-            buffer.append(" ");
+            buffer.append(' ');
             buffer.append(multiLevelListItem.getItemText());
-            buffer.append("\n");
+            buffer.append('\n');
             // and then an ArrayList whose elements encapsulate the text
             // for the lower level list items.
             lowerLevelItems = multiLevelListItem.getLowerLevelItems();
@@ -484,9 +484,9 @@ public class InCellLists {
                 for(String item : lowerLevelItems) {
                     buffer.append(InCellLists.TAB);
                     buffer.append(InCellLists.BULLET_CHARACTER);
-                    buffer.append(" ");
+                    buffer.append(' ');
                     buffer.append(item);
-                    buffer.append("\n");
+                    buffer.append('\n');
                 }
             }
         }

@@ -158,14 +158,14 @@ public final class TableRecord extends SharedValueRecordBase {
 	public String toString() {
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("[TABLE]\n");
-		buffer.append("    .range    = ").append(getRange().toString()).append("\n");
-		buffer.append("    .flags    = ") .append(HexDump.byteToHex(field_5_flags)).append("\n");
-		buffer.append("    .alwaysClc= ").append(isAlwaysCalc()).append("\n");
-		buffer.append("    .reserved = ").append(HexDump.intToHex(field_6_res)).append("\n");
+		buffer.append("    .range    = ").append(getRange().toString()).append('\n');
+		buffer.append("    .flags    = ") .append(HexDump.byteToHex(field_5_flags)).append('\n');
+		buffer.append("    .alwaysClc= ").append(isAlwaysCalc()).append('\n');
+		buffer.append("    .reserved = ").append(HexDump.intToHex(field_6_res)).append('\n');
 		CellReference crRowInput = cr(field_7_rowInputRow, field_8_colInputRow);
 		CellReference crColInput = cr(field_9_rowInputCol, field_10_colInputCol);
-		buffer.append("    .rowInput = ").append(crRowInput.formatAsString()).append("\n");
-		buffer.append("    .colInput = ").append(crColInput.formatAsString()).append("\n");
+		buffer.append("    .rowInput = ").append(crRowInput.formatAsString()).append('\n');
+		buffer.append("    .colInput = ").append(crColInput.formatAsString()).append('\n');
 		buffer.append("[/TABLE]\n");
 		return buffer.toString();
 	}

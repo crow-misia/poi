@@ -110,7 +110,7 @@ public final class TestTextObjectRecord extends TestCase {
         for (int i = 0; i < length.length; i++) {
             StringBuilder buff = new StringBuilder(length[i]);
             for (int j = 0; j < length[i]; j++) {
-                buff.append("x");
+                buff.append('x');
             }
             HSSFRichTextString str = new HSSFRichTextString(buff.toString());
 

@@ -221,13 +221,13 @@ public final class BOFRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[BOF RECORD]\n");
-        buffer.append("    .version  = ").append(HexDump.shortToHex(getVersion())).append("\n");
+        buffer.append("    .version  = ").append(HexDump.shortToHex(getVersion())).append('\n');
         buffer.append("    .type     = ").append(HexDump.shortToHex(getType()));
-        buffer.append(" (").append(getTypeName()).append(")").append("\n");
-        buffer.append("    .build    = ").append(HexDump.shortToHex(getBuild())).append("\n");
-        buffer.append("    .buildyear= ").append(getBuildYear()).append("\n");
-        buffer.append("    .history  = ").append(HexDump.intToHex(getHistoryBitMask())).append("\n");
-        buffer.append("    .reqver   = ").append(HexDump.intToHex(getRequiredVersion())).append("\n");
+        buffer.append(" (").append(getTypeName()).append(")\n");
+        buffer.append("    .build    = ").append(HexDump.shortToHex(getBuild())).append('\n');
+        buffer.append("    .buildyear= ").append(getBuildYear()).append('\n');
+        buffer.append("    .history  = ").append(HexDump.intToHex(getHistoryBitMask())).append('\n');
+        buffer.append("    .reqver   = ").append(HexDump.intToHex(getRequiredVersion())).append('\n');
         buffer.append("[/BOF RECORD]\n");
         return buffer.toString();
     }

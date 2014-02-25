@@ -1477,9 +1477,9 @@ public final class WordDocument {
       String style = getBorderStyle(brc[0]);
       String color = getColor(brc[1] & 0x00ff);
       String thickness = getBorderThickness(brc[0]);
-      buf.append("border-" + where + "-style=\"" + style + "\"\r\n");
-      buf.append("border-" + where + "-color=\"" + color + "\"\r\n");
-      buf.append("border-" + where + "-width=\"" + width + "pt\"\r\n");
+      buf.append("border-").append(where).append("-style=\"").append(style).append("\"\r\n");
+      buf.append("border-").append(where).append("-color=\"").append(color).append("\"\r\n");
+      buf.append("border-").append(where).append("-width=\"").append(width).append("pt\"\r\n");
     }
   }
   public void closeDoc()

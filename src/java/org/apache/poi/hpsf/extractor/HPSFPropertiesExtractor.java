@@ -66,7 +66,7 @@ public class HPSFPropertiesExtractor extends POITextExtractor {
             while (keys.hasNext()) {
                 String key = keys.next();
                 String val = HelperPropertySet.getPropertyValueText( cps.get(key) );
-                text.append(key + " = " + val + "\n");
+                text.append(key).append(" = ").append(val).append('\n');
             }
         }
 
@@ -98,7 +98,7 @@ public class HPSFPropertiesExtractor extends POITextExtractor {
             }
 
             String val = HelperPropertySet.getPropertyValueText( props[i].getValue() );
-            text.append(type + " = " + val + "\n");
+            text.append(type).append(" = ").append(val).append('\n');
         }
 
         return text.toString();

@@ -83,7 +83,7 @@ public final class TestNpv extends TestCase {
                 assertFormulaResult(cv, cellB);
             } catch (Throwable e){
                 if(failures.length() > 0) failures.append('\n');
-                failures.append("Row[" + (cellB.getRowIndex() + 1)+ "]: " + cellB.getCellFormula() + " ");
+                failures.append("Row[").append(cellB.getRowIndex() + 1).append("]: ").append(cellB.getCellFormula()).append(' ');
                 failures.append(e.getMessage());
                 failureCount++;
             }

@@ -69,7 +69,7 @@ public final class Area3DPtg extends AreaPtgBase implements WorkbookDependentFor
 		sb.append("sheetIx=").append(getExternSheetIndex());
 		sb.append(" ! ");
 		sb.append(formatReferenceAsString());
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 

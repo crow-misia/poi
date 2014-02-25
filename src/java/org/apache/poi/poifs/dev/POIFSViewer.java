@@ -64,12 +64,12 @@ public class POIFSViewer
             final int length = filename.length();
             StringBuilder flowerbox = new StringBuilder(length + 2);
 
-            flowerbox.append(".");
-            for (int j = 0; j < filename.length(); j++)
+            flowerbox.append('.');
+            for (int j = 0; j < length; j++)
             {
-                flowerbox.append("-");
+                flowerbox.append('-');
             }
-            flowerbox.append(".");
+            flowerbox.append('.');
             System.out.println(flowerbox);
             System.out.println("|" + filename + "|");
             System.out.println(flowerbox);

@@ -153,7 +153,7 @@ final class FormulaUsedBlankCellSet {
 			CellReference crA = new CellReference(_firstRowIndex, _firstColumnIndex, false, false);
 			CellReference crB = new CellReference(_lastRowIndex, _lastColumnIndex, false, false);
 			sb.append(getClass().getName());
-			sb.append(" [").append(crA.formatAsString()).append(':').append(crB.formatAsString()).append("]");
+			sb.append(" [").append(crA.formatAsString()).append(':').append(crB.formatAsString()).append(']');
 			return sb.toString();
 		}
 	}

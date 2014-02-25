@@ -143,8 +143,7 @@ public final class ObjRecord extends Record {
 
 		sb.append("[OBJ]\n");
 		if(subrecords != null) {	// there are special cases where this can be, see comments in constructor above
-    		for (int i = 0; i < subrecords.size(); i++) {
-    			SubRecord record = subrecords.get(i);
+    		for (final SubRecord record : subrecords) {
     			sb.append("SUBRECORD: ").append(record.toString());
     		}
 		}

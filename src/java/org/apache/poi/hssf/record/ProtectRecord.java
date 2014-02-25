@@ -70,7 +70,7 @@ public final class ProtectRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[PROTECT]\n");
-        buffer.append("    .options = ").append(HexDump.shortToHex(_options)).append("\n");
+        buffer.append("    .options = ").append(HexDump.shortToHex(_options)).append('\n');
         buffer.append("[/PROTECT]\n");
         return buffer.toString();
     }

@@ -182,7 +182,7 @@ public final class ContentType {
 	public final String toString(boolean withParameters) {
 	    StringBuilder retVal = new StringBuilder();
 	    retVal.append(this.getType());
-	    retVal.append('/'
+	    retVal.append('/');
 	    retVal.append(this.getSubType());
 
 	    if (withParameters) {

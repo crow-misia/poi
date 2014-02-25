@@ -307,11 +307,11 @@ public final class TestHSSFCell extends BaseTestCell {
 		// 32767 is okay
 		for( int i = 0 ; i < maxlen ; i++ )
 		{
-			b.append( "X" ) ;
+			b.append( 'X' ) ;
 		}
 		cell.setCellValue(b.toString());
 
-		b.append("X");
+		b.append('X');
 		// 32768 produces an invalid XLS file
 		try {
 			cell.setCellValue(b.toString());

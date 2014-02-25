@@ -79,8 +79,7 @@ public final class PrintGridlinesRecord
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[PRINTGRIDLINES]\n");
-        buffer.append("    .printgridlines = ").append(getPrintGridlines())
-            .append("\n");
+        buffer.append("    .printgridlines = ").append(getPrintGridlines()).append('\n');
         buffer.append("[/PRINTGRIDLINES]\n");
         return buffer.toString();
     }

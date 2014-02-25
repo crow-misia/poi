@@ -40,7 +40,7 @@ public final class NameEval implements ValueEval {
 		StringBuilder sb = new StringBuilder(64);
 		sb.append(getClass().getName()).append(" [");
 		sb.append(_functionName);
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 }

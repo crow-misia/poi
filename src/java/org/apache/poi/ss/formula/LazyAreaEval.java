@@ -84,7 +84,7 @@ final class LazyAreaEval extends AreaEvalBase {
 		sb.append(crA.formatAsString());
 		sb.append(':');
 		sb.append(crB.formatAsString());
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 

@@ -53,8 +53,7 @@ public final class SeriesListRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[SERIESLIST]\n");
-        buffer.append("    .seriesNumbers= ").append(" (").append( getSeriesNumbers() ).append(" )");
-        buffer.append("\n"); 
+        buffer.append("    .seriesNumbers= ").append(" (").append( getSeriesNumbers() ).append(" )\n"); 
 
         buffer.append("[/SERIESLIST]\n");
         return buffer.toString();

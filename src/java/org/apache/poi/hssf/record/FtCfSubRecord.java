@@ -68,8 +68,8 @@ public final class FtCfSubRecord extends SubRecord {
     public String toString() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("[FtCf ]\n");
-        buffer.append("  size     = ").append(length).append("\n");
-        buffer.append("  flags    = ").append(HexDump.toHex(flags)).append("\n");
+        buffer.append("  size     = ").append(length).append('\n');
+        buffer.append("  flags    = ").append(HexDump.toHex(flags)).append('\n');
         buffer.append("[/FtCf ]\n");
         return buffer.toString();
     }

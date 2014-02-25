@@ -127,9 +127,9 @@ public final class EscherArrayProperty extends EscherComplexProperty {
         results.append("     Num Elements In Memory: ").append(getNumberOfElementsInMemory()).append('\n');
         results.append("     Size of elements: ").append(getSizeOfElements()).append('\n');
         for (int i = 0; i < getNumberOfElementsInArray(); i++) {
-            results.append("     Element " + i + ": " + HexDump.toHex(getElement(i)) + '\n');
+            results.append("     Element ").append(i).append(": ").append(HexDump.toHex(getElement(i))).append('\n');
         }
-        results.append("}" + '\n');
+        results.append("}\n");
 
         return "propNum: " + getPropertyNumber()
                 + ", propName: " + EscherProperties.getPropertyName( getPropertyNumber() )
@@ -140,11 +140,11 @@ public final class EscherArrayProperty extends EscherComplexProperty {
 
     public String toXml(String tab){
         StringBuilder builder = new StringBuilder();
-        builder.append(tab).append("<").append(getClass().getSimpleName()).append(" id=\"0x").append(HexDump.toHex(getId()))
+        builder.append(tab).append('<').append(getClass().getSimpleName()).append(" id=\"0x").append(HexDump.toHex(getId()))
                 .append("\" name=\"").append(getName()).append("\" blipId=\"")
                 .append(isBlipId()).append("\">\n");
         for (int i = 0; i < getNumberOfElementsInArray(); i++) {
-            builder.append("\t").append(tab).append("<Element>").append(HexDump.toHex(getElement(i))).append("</Element>\n");
+            builder.append('\t').append(tab).append("<Element>").append(HexDump.toHex(getElement(i))).append("</Element>\n");
         }
         builder.append(tab).append("</").append(getClass().getSimpleName()).append(">\n");
         return builder.toString();

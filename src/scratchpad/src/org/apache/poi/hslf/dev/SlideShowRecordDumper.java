@@ -161,7 +161,7 @@ public final class SlideShowRecordDumper {
 		if (er instanceof EscherContainerRecord) {
 			buf.append(printEscherContainerRecord( (EscherContainerRecord)er ));
 		} else if (er instanceof EscherTextboxRecord) {
-			buf.append("EscherTextboxRecord:" + nl);
+			buf.append("EscherTextboxRecord:").append(nl);
 
 			EscherTextboxWrapper etw = new EscherTextboxWrapper((EscherTextboxRecord)er);
 			Record children[] = etw.getChildRecords();
@@ -183,9 +183,9 @@ public final class SlideShowRecordDumper {
 						buf.append("Error! Couldn't find preceding TextAtom for style\n");
 					}
 
-					buf.append(children[j].toString() + nl );
+					buf.append(children[j].toString()).append(nl);
 				} else {
-					buf.append(children[j].toString() + nl );
+					buf.append(children[j].toString()).append(nl);
 				}
 			}
 		} else {
@@ -204,12 +204,12 @@ public final class SlideShowRecordDumper {
         for ( Iterator<EscherRecord> iterator = ecr.getChildIterator(); iterator.hasNext(); )
         {
             if (count < 1) {
-                children.append( "  children: " + nl );
+                children.append( "  children: " ).append( nl );
             }
             String newIndent = "   ";
 
             EscherRecord record = iterator.next();
-            children.append(newIndent + "Child " + count + ":" + nl);
+            children.append(newIndent).append("Child ").append(count).append(':').append(nl);
 
            	children.append( printEscherRecord(record) );
 

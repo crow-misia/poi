@@ -431,11 +431,11 @@ public final class StyleTextPropAtom extends RecordAtom
             out.append("Paragraph properties\n");
 
             for(TextPropCollection pr : getParagraphStyles()) {
-                out.append("  chars covered: " + pr.getCharactersCovered());
-                out.append("  special mask flags: 0x" + HexDump.toHex(pr.getSpecialMask()) + "\n");
+                out.append("  chars covered: ").append(pr.getCharactersCovered());
+                out.append("  special mask flags: 0x").append(HexDump.toHex(pr.getSpecialMask())).append('\n');
                 for(TextProp p : pr.getTextPropList()) {
-                    out.append("    " + p.getName() + " = " + p.getValue() );
-                    out.append(" (0x" + HexDump.toHex(p.getValue()) + ")\n");
+                    out.append("    ").append(p.getName()).append(" = ").append(p.getValue() );
+                    out.append(" (0x").append(HexDump.toHex(p.getValue())).append(")\n");
                 }
 
                 out.append("  para bytes that would be written: \n");
@@ -452,11 +452,11 @@ public final class StyleTextPropAtom extends RecordAtom
 
             out.append("Character properties\n");
             for(TextPropCollection pr : getCharacterStyles()) {
-                out.append("  chars covered: " + pr.getCharactersCovered() );
-                out.append("  special mask flags: 0x" + HexDump.toHex(pr.getSpecialMask()) + "\n");
+                out.append("  chars covered: ").append(pr.getCharactersCovered() );
+                out.append("  special mask flags: 0x").append(HexDump.toHex(pr.getSpecialMask())).append('\n');
                 for(TextProp p : pr.getTextPropList()) {
-                    out.append("    " + p.getName() + " = " + p.getValue() );
-                    out.append(" (0x" + HexDump.toHex(p.getValue()) + ")\n");
+                    out.append("    ").append(p.getName()).append(" = ").append(p.getValue() );
+                    out.append(" (0x").append(HexDump.toHex(p.getValue())).append(")\n");
                 }
 
                 out.append("  char bytes that would be written: \n");

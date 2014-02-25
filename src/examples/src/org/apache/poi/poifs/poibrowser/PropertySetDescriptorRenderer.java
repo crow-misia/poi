@@ -131,9 +131,9 @@ public class PropertySetDescriptorRenderer extends DocumentDescriptorRenderer
         final StringBuilder b = new StringBuilder();
         b.append('\n').append(name).append(" Format ID: ");
         b.append(Codec.hexEncode(s.getFormatID()));
-        b.append("\n" + name + " Offset: " + s.getOffset());
-        b.append("\n" + name + " Section size: " + s.getSize());
-        b.append("\n" + name + " Property count: " + s.getPropertyCount());
+        b.append('\n').append(name).append(" Offset: ").append(s.getOffset());
+        b.append('\n').append(name).append(" Section size: ").append(s.getSize());
+        b.append('\n').append(name).append(" Property count: ").append(s.getPropertyCount());
 
         final Property[] properties = s.getProperties();
         for (int i = 0; i < properties.length; i++)
@@ -154,9 +154,9 @@ public class PropertySetDescriptorRenderer extends DocumentDescriptorRenderer
             if (value instanceof byte[])
             {
                 byte[] b2 = (byte[]) value;
-                b.append("0x" + Codec.hexEncode(b2, 0, 4));
+                b.append("0x").append(Codec.hexEncode(b2, 0, 4));
                 b.append(' ');
-                b.append("0x" + Codec.hexEncode(b2, 4, b2.length - 4));
+                b.append("0x").append(Codec.hexEncode(b2, 4, b2.length - 4));
             }
             else if (value != null)
                 b.append(value.toString());

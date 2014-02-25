@@ -177,7 +177,7 @@ public final class AttrPtg extends ControlPtg {
         }
         if(isSpace()) {
             sb.append("space count=").append((_data >> 8) & 0x00FF);
-            sb.append(" type=").append(_data & 0x00FF).append(" ");
+            sb.append(" type=").append(_data & 0x00FF).append(' ');
         }
         // the rest seem to be mutually exclusive
         if(isOptimizedIf()) {
@@ -191,7 +191,7 @@ public final class AttrPtg extends ControlPtg {
         } else if(isBaxcel()) {
             sb.append("assign ");
         }
-        sb.append("]");
+        sb.append(']');
         return sb.toString();
     }
 

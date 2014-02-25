@@ -408,8 +408,7 @@ public class Property
     {
         final StringBuilder b = new StringBuilder();
         b.append(getClass().getName());
-        b.append('[');
-        b.append("id: ");
+        b.append("[id: ");
         b.append(getID());
         b.append(", type: ");
         b.append(getType());
@@ -434,7 +433,7 @@ public class Property
                 final String hex = HexDump.dump(bytes, 0L, 0);
                 b.append(hex);
             }
-            b.append("]");
+            b.append(']');
         }
         else if (value instanceof byte[])
         {

@@ -61,7 +61,7 @@ public final class SeriesTextRecord extends StandardRecord {
 		sb.append("  .id     =").append(HexDump.shortToHex(getId())).append('\n');
 		sb.append("  .textLen=").append(field_4_text.length()).append('\n');
 		sb.append("  .is16bit=").append(is16bit).append('\n');
-		sb.append("  .text   =").append(" (").append(getText()).append(" )").append('\n');
+		sb.append("  .text   =").append(" (").append(getText()).append(" )\n");
 		sb.append("[/SERIESTEXT]\n");
 		return sb.toString();
 	}

@@ -105,17 +105,17 @@ public final class TestRVA extends TestCase {
 			Ptg excelPtg = excelPtgs[i];
 			if (excelPtg.getClass() != poiPtg.getClass()) {
 				hasMismatch = true;
-				sb.append("  mismatch token type[" + i + "] " + getShortClassName(excelPtg) + " "
-						+ excelPtg.getRVAType() + " - " + getShortClassName(poiPtg) + " "
-						+ poiPtg.getRVAType());
+				sb.append("  mismatch token type[").append(i).append("] ").append(getShortClassName(excelPtg)).append(' ')
+						.append(excelPtg.getRVAType()).append(" - ").append(getShortClassName(poiPtg)).append(' ')
+						.append(poiPtg.getRVAType());
 				sb.append(NEW_LINE);
 				continue;
 			}
 			if (poiPtg.isBaseToken()) {
 				continue;
 			}
-			sb.append("  token[" + i + "] " + excelPtg.toString() + " "
-					+ excelPtg.getRVAType());
+			sb.append("  token[").append(i).append("] ").append(excelPtg.toString()).append(' ')
+					.append(excelPtg.getRVAType());
 
 			if (excelPtg.getPtgClass() != poiPtg.getPtgClass()) {
 				hasMismatch = true;

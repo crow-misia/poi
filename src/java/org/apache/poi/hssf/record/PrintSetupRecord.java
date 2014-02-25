@@ -283,44 +283,25 @@ public final class PrintSetupRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[PRINTSETUP]\n");
-        buffer.append("    .papersize      = ").append(getPaperSize())
-            .append("\n");
-        buffer.append("    .scale          = ").append(getScale())
-            .append("\n");
-        buffer.append("    .pagestart      = ").append(getPageStart())
-            .append("\n");
-        buffer.append("    .fitwidth       = ").append(getFitWidth())
-            .append("\n");
-        buffer.append("    .fitheight      = ").append(getFitHeight())
-            .append("\n");
-        buffer.append("    .options        = ").append(getOptions())
-            .append("\n");
-        buffer.append("        .ltor       = ").append(getLeftToRight())
-            .append("\n");
-        buffer.append("        .landscape  = ").append(getLandscape())
-            .append("\n");
-        buffer.append("        .valid      = ").append(getValidSettings())
-            .append("\n");
-        buffer.append("        .mono       = ").append(getNoColor())
-            .append("\n");
-        buffer.append("        .draft      = ").append(getDraft())
-            .append("\n");
-        buffer.append("        .notes      = ").append(getNotes())
-            .append("\n");
-        buffer.append("        .noOrientat = ").append(getNoOrientation())
-            .append("\n");
-        buffer.append("        .usepage    = ").append(getUsePage())
-            .append("\n");
-        buffer.append("    .hresolution    = ").append(getHResolution())
-            .append("\n");
-        buffer.append("    .vresolution    = ").append(getVResolution())
-            .append("\n");
-        buffer.append("    .headermargin   = ").append(getHeaderMargin())
-            .append("\n");
-        buffer.append("    .footermargin   = ").append(getFooterMargin())
-            .append("\n");
-        buffer.append("    .copies         = ").append(getCopies())
-            .append("\n");
+        buffer.append("    .papersize      = ").append(getPaperSize()).append('\n');
+        buffer.append("    .scale          = ").append(getScale()).append('\n');
+        buffer.append("    .pagestart      = ").append(getPageStart()).append('\n');
+        buffer.append("    .fitwidth       = ").append(getFitWidth()).append('\n');
+        buffer.append("    .fitheight      = ").append(getFitHeight()).append('\n');
+        buffer.append("    .options        = ").append(getOptions()).append('\n');
+        buffer.append("        .ltor       = ").append(getLeftToRight()).append('\n');
+        buffer.append("        .landscape  = ").append(getLandscape()).append('\n');
+        buffer.append("        .valid      = ").append(getValidSettings()).append('\n');
+        buffer.append("        .mono       = ").append(getNoColor()).append('\n');
+        buffer.append("        .draft      = ").append(getDraft()).append('\n');
+        buffer.append("        .notes      = ").append(getNotes()).append('\n');
+        buffer.append("        .noOrientat = ").append(getNoOrientation()).append('\n');
+        buffer.append("        .usepage    = ").append(getUsePage()).append('\n');
+        buffer.append("    .hresolution    = ").append(getHResolution()).append('\n');
+        buffer.append("    .vresolution    = ").append(getVResolution()).append('\n');
+        buffer.append("    .headermargin   = ").append(getHeaderMargin()).append('\n');
+        buffer.append("    .footermargin   = ").append(getFooterMargin()).append('\n');
+        buffer.append("    .copies         = ").append(getCopies()).append('\n');
         buffer.append("[/PRINTSETUP]\n");
         return buffer.toString();
     }

@@ -79,7 +79,7 @@ public final class PrecisionRecord
 
         buffer.append("[PRECISION]\n");
         buffer.append("    .precision       = ").append(getFullPrecision())
-            .append("\n");
+            .append('\n');
         buffer.append("[/PRECISION]\n");
         return buffer.toString();
     }

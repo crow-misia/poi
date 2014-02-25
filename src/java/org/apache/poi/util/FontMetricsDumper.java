@@ -44,28 +44,28 @@ public class FontMetricsDumper
             StringBuilder characters = new StringBuilder();
             for (char c = 'a'; c <= 'z'; c++)
             {
-                characters.append( c + ", " );
+                characters.append( c ).append( ", " );
             }
             for (char c = 'A'; c <= 'Z'; c++)
             {
-                characters.append( c + ", " );
+                characters.append( c ).append( ", " );
             }
             for (char c = '0'; c <= '9'; c++)
             {
-                characters.append( c + ", " );
+                characters.append( c ).append( ", " );
             }
-            StringBuffer widths = new StringBuffer();
+            StringBuilder widths = new StringBuilder();
             for (char c = 'a'; c <= 'z'; c++)
             {
-                widths.append( fontMetrics.getWidths()[c] + ", " );
+                widths.append( fontMetrics.getWidths()[c] ).append( ", " );
             }
             for (char c = 'A'; c <= 'Z'; c++)
             {
-                widths.append( fontMetrics.getWidths()[c] + ", " );
+                widths.append( fontMetrics.getWidths()[c] ).append( ", " );
             }
             for (char c = '0'; c <= '9'; c++)
             {
-                widths.append( fontMetrics.getWidths()[c] + ", " );
+                widths.append( fontMetrics.getWidths()[c] ).append( ", " );
             }
             props.setProperty("font." + fontName + ".characters", characters.toString());
             props.setProperty("font." + fontName + ".widths", widths.toString());

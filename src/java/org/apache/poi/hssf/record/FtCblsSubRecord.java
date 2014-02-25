@@ -60,10 +60,10 @@ public final class FtCblsSubRecord extends SubRecord {
     {
         StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[FtCbls ]").append("\n");
-        buffer.append("  size     = ").append(getDataSize()).append("\n");
-        buffer.append("  reserved = ").append(HexDump.toHex(reserved)).append("\n");
-        buffer.append("[/FtCbls ]").append("\n");
+        buffer.append("[FtCbls ]\n");
+        buffer.append("  size     = ").append(getDataSize()).append('\n');
+        buffer.append("  reserved = ").append(HexDump.toHex(reserved)).append('\n');
+        buffer.append("[/FtCbls ]\n");
         return buffer.toString();
     }
 

@@ -95,7 +95,7 @@ public class RecordLister
           s.append('0');
        }
        s.append(dec);
-       s.append(")");
+       s.append(')');
        
        return s.toString();
     }
@@ -114,7 +114,7 @@ public class RecordLister
           s.append('0');
        }
        s.append(dec);
-       s.append(")");
+       s.append(')');
        
        return s.toString();
     }
@@ -145,8 +145,8 @@ public class RecordLister
           s.append(' ');
           s.append(byteToHex(data[data.length-1]));
        } else {
-          for(int i=0; i<data.length; i++) {
-             s.append(byteToHex(data[i]));
+          for(byte d : data) {
+             s.append(byteToHex(d));
              s.append(' ');
           }
        }

@@ -596,8 +596,7 @@ public class Section
         final StringBuilder b = new StringBuilder();
         final Property[] pa = getProperties();
         b.append(getClass().getName());
-        b.append('[');
-        b.append("formatID: ");
+        b.append("[formatID: ");
         b.append(getFormatID());
         b.append(", offset: ");
         b.append(getOffset());
@@ -611,8 +610,7 @@ public class Section
             b.append(pa[i].toString());
             b.append(",\n");
         }
-        b.append(']');
-        b.append(']');
+        b.append("]]");
         return b.toString();
     }
 

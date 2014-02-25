@@ -141,7 +141,7 @@ public class TestXSLFBugs extends POITestCase {
         for(DrawingTextBody textBody : slide.getCommonSlideData().getDrawingText()) {
             for (DrawingParagraph p : textBody.getParagraphs()) {
                 text.append(p.getText());
-                text.append("\n");
+                text.append('\n');
             }
         }
         return text.toString();

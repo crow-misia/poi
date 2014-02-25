@@ -88,17 +88,17 @@ public final class MergeCellsRecord extends StandardRecord {
     public String toString() {
         StringBuilder retval = new StringBuilder();
 
-        retval.append("[MERGEDCELLS]").append("\n");
-        retval.append("     .numregions =").append(getNumAreas()).append("\n");
+        retval.append("[MERGEDCELLS]\n");
+        retval.append("     .numregions =").append(getNumAreas()).append('\n');
         for (int k = 0; k < _numberOfRegions; k++) {
             CellRangeAddress r = _regions[_startIndex + k];
 
-            retval.append("     .rowfrom =").append(r.getFirstRow()).append("\n");
-            retval.append("     .rowto   =").append(r.getLastRow()).append("\n");
-            retval.append("     .colfrom =").append(r.getFirstColumn()).append("\n");
-            retval.append("     .colto   =").append(r.getLastColumn()).append("\n");
+            retval.append("     .rowfrom =").append(r.getFirstRow()).append('\n');
+            retval.append("     .rowto   =").append(r.getLastRow()).append('\n');
+            retval.append("     .colfrom =").append(r.getFirstColumn()).append('\n');
+            retval.append("     .colto   =").append(r.getLastColumn()).append('\n');
         }
-        retval.append("[MERGEDCELLS]").append("\n");
+        retval.append("[MERGEDCELLS]\n");
         return retval.toString();
     }
 

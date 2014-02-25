@@ -97,13 +97,13 @@ public final class MulRKRecord extends StandardRecord {
 		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("[MULRK]\n");
-		buffer.append("	.row	 = ").append(HexDump.shortToHex(getRow())).append("\n");
-		buffer.append("	.firstcol= ").append(HexDump.shortToHex(getFirstColumn())).append("\n");
-		buffer.append("	.lastcol = ").append(HexDump.shortToHex(getLastColumn())).append("\n");
+		buffer.append("	.row	 = ").append(HexDump.shortToHex(getRow())).append('\n');
+		buffer.append("	.firstcol= ").append(HexDump.shortToHex(getFirstColumn())).append('\n');
+		buffer.append("	.lastcol = ").append(HexDump.shortToHex(getLastColumn())).append('\n');
 
 		for (int k = 0; k < getNumColumns(); k++) {
-			buffer.append("	xf[").append(k).append("] = ").append(HexDump.shortToHex(getXFAt(k))).append("\n");
-			buffer.append("	rk[").append(k).append("] = ").append(getRKNumberAt(k)).append("\n");
+			buffer.append("	xf[").append(k).append("] = ").append(HexDump.shortToHex(getXFAt(k))).append('\n');
+			buffer.append("	rk[").append(k).append("] = ").append(getRKNumberAt(k)).append('\n');
 		}
 		buffer.append("[/MULRK]\n");
 		return buffer.toString();

@@ -63,7 +63,7 @@ abstract class Ref2DPtgBase extends RefPtgBase {
 		sb.append(getClass().getName());
 		sb.append(" [");
 		sb.append(formatReferenceAsString());
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 }

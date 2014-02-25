@@ -59,7 +59,7 @@ final class LazyRefEval extends RefEvalBase {
 		sb.append(_evaluator.getSheetName());
 		sb.append('!');
 		sb.append(cr.formatAsString());
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 }

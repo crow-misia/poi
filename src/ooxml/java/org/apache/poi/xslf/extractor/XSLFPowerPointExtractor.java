@@ -189,7 +189,7 @@ public class XSLFPowerPointExtractor extends POIXMLTextExtractor {
 	      
 	      for (DrawingParagraph p : textBody.getParagraphs()) {
             text.append(p.getText());
-            text.append("\n");
+            text.append('\n');
 	      }
 	   }
 	}

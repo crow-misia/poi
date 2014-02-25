@@ -253,21 +253,21 @@ public final class AnimationInfoAtom extends RecordAtom {
     public String toString(){
         StringBuilder buf = new StringBuilder();
         buf.append("AnimationInfoAtom\n");
-        buf.append("\tDimColor: " + getDimColor() + "\n");
+        buf.append("\tDimColor: ").append(getDimColor()).append('\n');
         int mask = getMask();
-        buf.append("\tMask: " + mask + ", 0x"+Integer.toHexString(mask)+"\n");
-        buf.append("\t  Reverse: " + getFlag(Reverse)+"\n");
-        buf.append("\t  Automatic: " + getFlag(Automatic)+"\n");
-        buf.append("\t  Sound: " + getFlag(Sound)+"\n");
-        buf.append("\t  StopSound: " + getFlag(StopSound)+"\n");
-        buf.append("\t  Play: " + getFlag(Play)+"\n");
-        buf.append("\t  Synchronous: " + getFlag(Synchronous)+"\n");
-        buf.append("\t  Hide: " + getFlag(Hide)+"\n");
-        buf.append("\t  AnimateBg: " + getFlag(AnimateBg)+"\n");
-        buf.append("\tSoundIdRef: " + getSoundIdRef() + "\n");
-        buf.append("\tDelayTime: " + getDelayTime() + "\n");
-        buf.append("\tOrderID: " + getOrderID() + "\n");
-        buf.append("\tSlideCount: " + getSlideCount() + "\n");
+        buf.append("\tMask: ").append(mask).append(", 0x").append(Integer.toHexString(mask)).append('\n');
+        buf.append("\t  Reverse: ").append(getFlag(Reverse)).append('\n');
+        buf.append("\t  Automatic: ").append(getFlag(Automatic)).append('\n');
+        buf.append("\t  Sound: ").append(getFlag(Sound)).append('\n');
+        buf.append("\t  StopSound: ").append(getFlag(StopSound)).append('\n');
+        buf.append("\t  Play: ").append(getFlag(Play)).append('\n');
+        buf.append("\t  Synchronous: ").append(getFlag(Synchronous)).append('\n');
+        buf.append("\t  Hide: ").append(getFlag(Hide)).append('\n');
+        buf.append("\t  AnimateBg: ").append(getFlag(AnimateBg)).append('\n');
+        buf.append("\tSoundIdRef: ").append(getSoundIdRef()).append('\n');
+        buf.append("\tDelayTime: ").append(getDelayTime()).append('\n');
+        buf.append("\tOrderID: ").append(getOrderID()).append('\n');
+        buf.append("\tSlideCount: ").append(getSlideCount()).append('\n');
         return buf.toString();
     }
 

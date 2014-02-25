@@ -72,8 +72,8 @@ public final class RecalcIdRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[RECALCID]\n");
-        buffer.append("    .reserved = ").append(HexDump.shortToHex(_reserved0)).append("\n");
-        buffer.append("    .engineId = ").append(HexDump.intToHex(_engineId)).append("\n");
+        buffer.append("    .reserved = ").append(HexDump.shortToHex(_reserved0)).append('\n');
+        buffer.append("    .engineId = ").append(HexDump.intToHex(_engineId)).append('\n');
         buffer.append("[/RECALCID]\n");
         return buffer.toString();
     }

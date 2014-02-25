@@ -69,7 +69,7 @@ public final class MemFuncPtg extends OperandPtg {
 		StringBuilder sb = new StringBuilder(64);
 		sb.append(getClass().getName()).append(" [len=");
 		sb.append(field_1_len_ref_subexpression);
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 }

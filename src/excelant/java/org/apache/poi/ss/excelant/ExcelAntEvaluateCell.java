@@ -131,7 +131,7 @@ public class ExcelAntEvaluateCell extends Task {
 		sb.append( " resulted in " ) ;
 		sb.append( result.getReturnValue() ) ;
 		if( showDelta == true ) {
-			sb.append( " with a delta of " + result.getDelta() ) ;
+			sb.append( " with a delta of " ).append( result.getDelta() ) ;
 		}
 		
 		log( sb.toString(), Project.MSG_DEBUG) ;

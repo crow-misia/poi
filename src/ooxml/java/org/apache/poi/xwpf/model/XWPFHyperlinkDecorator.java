@@ -60,7 +60,7 @@ public class XWPFHyperlinkDecorator extends XWPFParagraphDecorator {
 				}
 			}
 			if(outputHyperlinkUrls && paragraph.getDocument().getHyperlinkByID(link.getId()) != null) {
-				hyperlinkText.append(" <"+paragraph.getDocument().getHyperlinkByID(link.getId()).getURL()+">");
+				hyperlinkText.append(" <").append(paragraph.getDocument().getHyperlinkByID(link.getId()).getURL()).append('>');
 			}
 		}
 	}

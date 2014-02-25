@@ -69,7 +69,7 @@ public final class IterationRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[ITERATION]\n");
-        buffer.append("    .flags      = ").append(HexDump.shortToHex(_flags)).append("\n");
+        buffer.append("    .flags      = ").append(HexDump.shortToHex(_flags)).append('\n');
         buffer.append("[/ITERATION]\n");
         return buffer.toString();
     }

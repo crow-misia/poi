@@ -285,10 +285,10 @@ public class AbstractWordUtils
         switch ( follow )
         {
         case 0:
-            bulletBuffer.append( "\t" );
+            bulletBuffer.append( '\t' );
             break;
         case 1:
-            bulletBuffer.append( " " );
+            bulletBuffer.append( ' ' );
             break;
         default:
             break;

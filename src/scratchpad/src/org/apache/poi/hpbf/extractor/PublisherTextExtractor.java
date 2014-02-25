@@ -90,7 +90,7 @@ public final class PublisherTextExtractor extends POIOLE2TextExtractor {
 				if(bits[i] != null && bits[i] instanceof Type12) {
 					Type12 hyperlinks = (Type12)bits[i];
 					for(int j=0; j<hyperlinks.getNumberOfHyperlinks(); j++) {
-						text.append("<");
+						text.append('<');
 						text.append(hyperlinks.getHyperlink(j));
 						text.append(">\n");
 					}

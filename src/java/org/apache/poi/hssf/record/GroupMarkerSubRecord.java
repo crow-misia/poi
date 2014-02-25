@@ -49,9 +49,9 @@ public final class GroupMarkerSubRecord extends SubRecord {
         StringBuilder buffer = new StringBuilder();
 
         String nl = System.getProperty("line.separator");
-        buffer.append("[ftGmo]" + nl);
+        buffer.append("[ftGmo]").append(nl);
         buffer.append("  reserved = ").append(HexDump.toHex(reserved)).append(nl);
-        buffer.append("[/ftGmo]" + nl);
+        buffer.append("[/ftGmo]").append(nl);
         return buffer.toString();
     }
 

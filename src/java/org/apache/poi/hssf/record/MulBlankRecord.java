@@ -104,12 +104,12 @@ public final class MulBlankRecord extends StandardRecord {
 		StringBuilder buffer = new StringBuilder();
 
 		buffer.append("[MULBLANK]\n");
-		buffer.append("row  = ").append(Integer.toHexString(getRow())).append("\n");
-		buffer.append("firstcol  = ").append(Integer.toHexString(getFirstColumn())).append("\n");
-		buffer.append(" lastcol  = ").append(Integer.toHexString(_lastCol)).append("\n");
+		buffer.append("row  = ").append(Integer.toHexString(getRow())).append('\n');
+		buffer.append("firstcol  = ").append(Integer.toHexString(getFirstColumn())).append('\n');
+		buffer.append(" lastcol  = ").append(Integer.toHexString(_lastCol)).append('\n');
 		for (int k = 0; k < getNumColumns(); k++) {
 			buffer.append("xf").append(k).append("		= ").append(
-					Integer.toHexString(getXFAt(k))).append("\n");
+					Integer.toHexString(getXFAt(k))).append('\n');
 		}
 		buffer.append("[/MULBLANK]\n");
 		return buffer.toString();

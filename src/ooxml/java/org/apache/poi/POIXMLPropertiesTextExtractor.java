@@ -61,7 +61,7 @@ public class POIXMLPropertiesTextExtractor extends POIXMLTextExtractor {
 	   text.append(thing);
 	   text.append(" = ");
 	   text.append(value);
-	   text.append("\n");
+	   text.append('\n');
 	}
 
 	/**
@@ -219,10 +219,7 @@ public class POIXMLPropertiesTextExtractor extends POIXMLTextExtractor {
             // TODO Decode, if possible
          }
 
-         text.append(
-               property.getName() +
-               " = " + val + "\n"
-         );
+         text.append(property.getName()).append(" = ").append(val).append('\n');
       }
 
       return text.toString();

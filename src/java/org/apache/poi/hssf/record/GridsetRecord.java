@@ -84,7 +84,7 @@ public final class GridsetRecord
 
         buffer.append("[GRIDSET]\n");
         buffer.append("    .gridset        = ").append(getGridset())
-            .append("\n");
+            .append('\n');
         buffer.append("[/GRIDSET]\n");
         return buffer.toString();
     }

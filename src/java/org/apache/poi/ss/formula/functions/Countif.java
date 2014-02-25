@@ -139,7 +139,7 @@ public final class Countif extends Fixed2ArgFunction {
 		public String toString() {
 			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName());
-			sb.append(" [").append(_representation).append("]");
+			sb.append(" [").append(_representation).append(']');
 			return sb.toString();
 		}
 		public String getRepresentation() {
@@ -168,7 +168,7 @@ public final class Countif extends Fixed2ArgFunction {
 			sb.append(getClass().getName()).append(" [");
 			sb.append(_operator.getRepresentation());
 			sb.append(getValueText());
-			sb.append("]");
+			sb.append(']');
 			return sb.toString();
 		}
 		protected abstract String getValueText();

@@ -677,8 +677,7 @@ public class PropertySet
         final StringBuilder b = new StringBuilder();
         final int sectionCount = getSectionCount();
         b.append(getClass().getName());
-        b.append('[');
-        b.append("byteOrder: ");
+        b.append("[byteOrder: ");
         b.append(getByteOrder());
         b.append(", classID: ");
         b.append(getClassID());
@@ -691,8 +690,7 @@ public class PropertySet
         b.append(", sections: [\n");
         for (Section section: getSections())
             b.append(section);
-        b.append(']');
-        b.append(']');
+        b.append("]]");
         return b.toString();
     }
 }

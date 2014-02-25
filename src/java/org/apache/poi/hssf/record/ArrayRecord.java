@@ -83,16 +83,15 @@ public final class ArrayRecord extends SharedValueRecordBase {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getName()).append(" [ARRAY]\n");
-		sb.append(" range=").append(getRange().toString()).append("\n");
-		sb.append(" options=").append(HexDump.shortToHex(_options)).append("\n");
-		sb.append(" notUsed=").append(HexDump.intToHex(_field3notUsed)).append("\n");
-		sb.append(" formula:").append("\n");
+		sb.append(" range=").append(getRange().toString()).append('\n');
+		sb.append(" options=").append(HexDump.shortToHex(_options)).append('\n');
+		sb.append(" notUsed=").append(HexDump.intToHex(_field3notUsed)).append('\n');
+		sb.append(" formula:\n");
 		Ptg[] ptgs = _formula.getTokens();
-		for (int i = 0; i < ptgs.length; i++) {
-			Ptg ptg = ptgs[i];
-			sb.append(ptg.toString()).append(ptg.getRVAType()).append("\n");
+		for (final Ptg ptg : ptgs) {
+			sb.append(ptg.toString()).append(ptg.getRVAType()).append('\n');
 		}
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 }

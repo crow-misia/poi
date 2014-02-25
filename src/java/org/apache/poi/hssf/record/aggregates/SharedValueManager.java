@@ -95,7 +95,7 @@ public final class SharedValueManager {
 			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName()).append(" [");
 			sb.append(_sfr.getRange().toString());
-			sb.append("]");
+			sb.append(']');
 			return sb.toString();
 		}
 	}

@@ -259,14 +259,14 @@ public final class EscherContainerRecord extends EscherRecord {
         StringBuilder children = new StringBuilder();
         if ( _childRecords.size() > 0 )
         {
-            children.append( "  children: " + nl );
+            children.append( "  children: " ).append( nl );
 
             int count = 0;
             for ( Iterator<EscherRecord> iterator = _childRecords.iterator(); iterator
                     .hasNext(); )
             {
                 EscherRecord record = iterator.next();
-                children.append( "   Child " + count + ":" + nl );
+                children.append( "   Child " ).append( count ).append( ':' ).append( nl );
                 String childResult = String.valueOf( record );
                 childResult = childResult.replaceAll( "\n", "\n    " );
                 children.append( "    " );

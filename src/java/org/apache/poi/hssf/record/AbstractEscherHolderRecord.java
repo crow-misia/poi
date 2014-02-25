@@ -91,15 +91,15 @@ public abstract class AbstractEscherHolderRecord extends Record {
         StringBuilder buffer = new StringBuilder();
 
         final String nl = System.getProperty("line.separator");
-        buffer.append('[' + getRecordName() + ']' + nl);
+        buffer.append('[').append(getRecordName()).append(']').append(nl);
         if (escherRecords.size() == 0)
-            buffer.append("No Escher Records Decoded" + nl);
+            buffer.append("No Escher Records Decoded").append(nl);
         for ( Iterator<EscherRecord> iterator = escherRecords.iterator(); iterator.hasNext(); )
         {
             EscherRecord r = iterator.next();
             buffer.append(r.toString());
         }
-        buffer.append("[/" + getRecordName() + ']' + nl);
+        buffer.append("[/").append(getRecordName()).append(']').append(nl);
 
         return buffer.toString();
     }

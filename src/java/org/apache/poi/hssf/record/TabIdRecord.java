@@ -57,9 +57,9 @@ public final class TabIdRecord extends StandardRecord {
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("[TABID]\n");
-        buffer.append("    .elements        = ").append(_tabids.length).append("\n");
+        buffer.append("    .elements        = ").append(_tabids.length).append('\n');
         for (int i = 0; i < _tabids.length; i++) {
-            buffer.append("    .element_").append(i).append(" = ").append(_tabids[i]).append("\n");
+            buffer.append("    .element_").append(i).append(" = ").append(_tabids[i]).append('\n');
         }
         buffer.append("[/TABID]\n");
         return buffer.toString();

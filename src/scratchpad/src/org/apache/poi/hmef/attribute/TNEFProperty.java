@@ -205,11 +205,11 @@ public final class TNEFProperty {
       str.append(name);
       str.append(" [");
       str.append(id);
-      str.append("]");
+      str.append(']');
       if(mapiProperty != null) {
          str.append(" (");
          str.append(mapiProperty);
-         str.append(")");
+         str.append(')');
       }
       return str.toString();
    }

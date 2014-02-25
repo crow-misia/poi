@@ -132,7 +132,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
               if(run instanceof XWPFHyperlinkRun && fetchHyperlinks) {
                   XWPFHyperlink link = ((XWPFHyperlinkRun)run).getHyperlink(document);
                   if(link != null)
-                      text.append(" <" + link.getURL() + ">");
+                      text.append(" <").append(link.getURL()).append('>');
               }
           }
 
@@ -146,7 +146,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
           // Do endnotes and footnotes
           String footnameText = paragraph.getFootnoteText();
           if(footnameText != null && footnameText.length() > 0) {
-              text.append(footnameText + '\n');
+              text.append(footnameText).append('\n');
           }
 
           if (ctSectPr!=null) {
@@ -168,7 +168,7 @@ public class XWPFWordExtractor extends POIXMLTextExtractor {
               XWPFTableCell cell = cells.get(i);
               text.append(cell.getTextRecursively());
               if (i < cells.size()-1){
-                  text.append("\t");
+                  text.append('\t');
               }
           }
           text.append('\n');

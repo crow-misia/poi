@@ -104,7 +104,7 @@ public final class Offset implements Function {
 			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName()).append(" [");
 			sb.append(_offset).append("...").append(getLastIndex());
-			sb.append("]");
+			sb.append(']');
 			return sb.toString();
 		}
 	}

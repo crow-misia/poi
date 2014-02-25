@@ -74,11 +74,11 @@ public final class FormulaParser {
 			sb.append(getClass().getName());
 			sb.append(" [");
 			if (_isQuoted) {
-				sb.append("'").append(_name).append("'");
+				sb.append('\'').append(_name).append('\'');
 			} else {
 				sb.append(_name);
 			}
-			sb.append("]");
+			sb.append(']');
 			return sb.toString();
 		}
 	}
@@ -102,14 +102,14 @@ public final class FormulaParser {
 			sb.append(getClass().getName());
 			sb.append(" [");
 			if (_bookName != null) {
-				sb.append(" [").append(_sheetIdentifier.getName()).append("]");
+				sb.append(" [").append(_sheetIdentifier.getName()).append(']');
 			}
 			if (_sheetIdentifier.isQuoted()) {
-				sb.append("'").append(_sheetIdentifier.getName()).append("'");
+				sb.append('\'').append(_sheetIdentifier.getName()).append('\'');
 			} else {
 				sb.append(_sheetIdentifier.getName());
 			}
-			sb.append("]");
+			sb.append(']');
 			return sb.toString();
 		}
 	}

@@ -131,7 +131,7 @@ public class XWPFRun implements ISDTContents, IRunElement{
                 for (int n = 0; n < kids.getLength(); n++) {
                     if (kids.item(n) instanceof Text) {
                         if(text.length() > 0)
-                            text.append("\n");
+                            text.append('\n');
                         text.append(kids.item(n).getNodeValue());
                     }
                 }
@@ -885,10 +885,10 @@ public class XWPFRun implements ISDTContents, IRunElement{
             }
 
             if (o instanceof CTPTab) {
-                text.append("\t");
+                text.append('\t');
             }
             if (o instanceof CTBr) {
-                text.append("\n");
+                text.append('\n');
             }
             if (o instanceof CTEmpty) {
                 // Some inline text elements get returned not as
@@ -898,21 +898,23 @@ public class XWPFRun implements ISDTContents, IRunElement{
                 //  rules for that case
                 String tagName = o.getDomNode().getNodeName();
                 if ("w:tab".equals(tagName)) {
-                    text.append("\t");
+                    text.append('\t');
                 }
                 if ("w:br".equals(tagName)) {
-                    text.append("\n");
+                    text.append('\n');
                 }
                 if ("w:cr".equals(tagName)) {
-                    text.append("\n");
+                    text.append('\n');
                 }
             }
             if (o instanceof CTFtnEdnRef) {
                 CTFtnEdnRef ftn = (CTFtnEdnRef)o;
-                String footnoteRef = ftn.getDomNode().getLocalName().equals("footnoteReference") ?
-                    "[footnoteRef:" + ftn.getId().intValue() + "]" : "[endnoteRef:" + ftn.getId().intValue() + "]";
-                text.append(footnoteRef);
-            }            
+                if (ftn.getDomNode().getLocalName().equals("footnoteReference")) {
+                    text.append("[footnoteRef:").append(ftn.getId().intValue()).append(']');
+                } else {
+                    text.append("[endnoteRef:").append(ftn.getId().intValue()).append(']');
+                }
+            }
         }
 
         c.dispose();

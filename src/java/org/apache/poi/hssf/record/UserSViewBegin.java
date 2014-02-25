@@ -75,10 +75,10 @@ public final class UserSViewBegin extends StandardRecord {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("[").append("USERSVIEWBEGIN").append("] (0x");
+        sb.append("[USERSVIEWBEGIN] (0x");
         sb.append(Integer.toHexString(sid).toUpperCase() + ")\n");
-        sb.append("  rawData=").append(HexDump.toHex(_rawData)).append("\n");
-        sb.append("[/").append("USERSVIEWBEGIN").append("]\n");
+        sb.append("  rawData=").append(HexDump.toHex(_rawData)).append('\n');
+        sb.append("[/USERSVIEWBEGIN]\n");
         return sb.toString();
     }
 

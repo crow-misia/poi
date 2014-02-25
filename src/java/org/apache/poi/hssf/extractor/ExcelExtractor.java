@@ -300,7 +300,7 @@ public class ExcelExtractor extends POIOLE2TextExtractor implements org.apache.p
 				String name = _wb.getSheetName(i);
 				if(name != null) {
 					text.append(name);
-					text.append("\n");
+					text.append('\n');
 				}
 			}
 
@@ -396,12 +396,12 @@ public class ExcelExtractor extends POIOLE2TextExtractor implements org.apache.p
 
 					// Output a tab if we're not on the last cell
 					if(outputContents && k < (lastCell-1)) {
-						text.append("\t");
+						text.append('\t');
 					}
 				}
 
 				// Finish off the row
-				text.append("\n");
+				text.append('\n');
 			}
 
 			// Finally Footer text, if there is any
@@ -421,16 +421,16 @@ public class ExcelExtractor extends POIOLE2TextExtractor implements org.apache.p
 		}
 		if(hf.getCenter() != null) {
 			if(text.length() > 0)
-				text.append("\t");
+				text.append('\t');
 			text.append(hf.getCenter());
 		}
 		if(hf.getRight() != null) {
 			if(text.length() > 0)
-				text.append("\t");
+				text.append('\t');
 			text.append(hf.getRight());
 		}
 		if(text.length() > 0)
-			text.append("\n");
+			text.append('\n');
 
 		return text.toString();
 	}

@@ -302,12 +302,12 @@ public class ExOleObjAtom extends RecordAtom {
     public String toString(){
         StringBuilder buf = new StringBuilder();
         buf.append("ExOleObjAtom\n");
-        buf.append("  drawAspect: " + getDrawAspect() + "\n");
-        buf.append("  type: " + getType() + "\n");
-        buf.append("  objID: " + getObjID() + "\n");
-        buf.append("  subType: " + getSubType() + "\n");
-        buf.append("  objStgDataRef: " + getObjStgDataRef() + "\n");
-        buf.append("  options: " + getOptions() + "\n");
+        buf.append("  drawAspect: ").append(getDrawAspect()).append('\n');
+        buf.append("  type: ").append(getType()).append('\n');
+        buf.append("  objID: ").append(getObjID()).append('\n');
+        buf.append("  subType: ").append(getSubType()).append('\n');
+        buf.append("  objStgDataRef: ").append(getObjStgDataRef()).append('\n');
+        buf.append("  options: ").append(getOptions()).append('\n');
         return buf.toString();
     }
 }

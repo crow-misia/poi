@@ -112,7 +112,7 @@ public class Complex extends Var2or3ArgFunction implements FreeRefFunction {
         if (realINum != 0) {
             if (strb.length() != 0) {
                 if (realINum > 0) {
-                    strb.append("+");
+                    strb.append('+');
                 }
             }
 

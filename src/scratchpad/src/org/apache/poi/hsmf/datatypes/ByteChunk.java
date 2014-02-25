@@ -94,7 +94,7 @@ public class ByteChunk extends Chunk {
       if (value.length > 16) {
           text.append(",....");
       }
-      text.append("]");
+      text.append(']');
       return text.toString();
    }
    

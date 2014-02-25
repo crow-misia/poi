@@ -139,7 +139,7 @@ public class XSSFExcelExtractor extends POIXMLTextExtractor
         for(int i=0; i<workbook.getNumberOfSheets(); i++) {
             XSSFSheet sheet = workbook.getSheetAt(i);
             if(includeSheetNames) {
-                text.append(workbook.getSheetName(i)).append("\n");
+                text.append(workbook.getSheetName(i)).append('\n');
             }
 
             // Header(s), if present

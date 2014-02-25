@@ -66,7 +66,7 @@ public final class EscherRecordHolder {
 		StringBuilder buffer = new StringBuilder();
 
 		if (escherRecords.size() == 0) {
-			buffer.append("No Escher Records Decoded").append("\n");
+			buffer.append("No Escher Records Decoded\n");
 		}
 		Iterator<EscherRecord> iterator = escherRecords.iterator();
 		while (iterator.hasNext()) {

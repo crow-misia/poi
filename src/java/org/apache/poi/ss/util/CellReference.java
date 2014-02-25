@@ -460,7 +460,7 @@ public class CellReference {
 		StringBuilder sb = new StringBuilder(64);
 		sb.append(getClass().getName()).append(" [");
 		sb.append(formatAsString());
-		sb.append("]");
+		sb.append(']');
 		return sb.toString();
 	}
 
@@ -484,7 +484,7 @@ public class CellReference {
 	 * Appends cell reference with '$' markers for absolute values as required.
 	 * Sheet name is not included.
 	 */
-	/* package */ void appendCellReference(StringBuffer sb) {
+	/* package */ void appendCellReference(StringBuilder sb) {
     if (_colIndex != -1) {
       if(_isColAbs) {
         sb.append(ABSOLUTE_REFERENCE_MARKER);

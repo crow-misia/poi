@@ -73,7 +73,7 @@ public final class BookBoolRecord
 
         buffer.append("[BOOKBOOL]\n");
         buffer.append("    .savelinkvalues  = ")
-            .append(Integer.toHexString(getSaveLinkValues())).append("\n");
+            .append(Integer.toHexString(getSaveLinkValues())).append('\n');
         buffer.append("[/BOOKBOOL]\n");
         return buffer.toString();
     }
