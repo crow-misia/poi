@@ -38,11 +38,11 @@ public final class FooterRecord extends HeaderFooterBase {
 	}
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
-		buffer.append("[FOOTER]\n");
-		buffer.append("    .footer = ").append(getText()).append("\n");
-		buffer.append("[/FOOTER]\n");
+		buffer.append("[FOOTER]");
+		buffer.append("\n    .footer = ").append(getText());
+		buffer.append("\n[/FOOTER]\n");
 		return buffer.toString();
 	}
 

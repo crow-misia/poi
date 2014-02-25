@@ -41,7 +41,7 @@ public class FontMetricsDumper
             int fontHeight = fontMetrics.getHeight();
 
             props.setProperty("font." + fontName + ".height", fontHeight+"");
-            StringBuffer characters = new StringBuffer();
+            StringBuilder characters = new StringBuilder();
             for (char c = 'a'; c <= 'z'; c++)
             {
                 characters.append( c + ", " );

@@ -524,7 +524,7 @@ public abstract class Property implements Child, POIFSViewable {
      */
     public String getShortDescription()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("Property: \"").append(getName()).append("\"");
         return buffer.toString();

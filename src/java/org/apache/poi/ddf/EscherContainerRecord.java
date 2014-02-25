@@ -256,7 +256,7 @@ public final class EscherContainerRecord extends EscherRecord {
     {
         String nl = System.getProperty( "line.separator" );
 
-        StringBuffer children = new StringBuffer();
+        StringBuilder children = new StringBuilder();
         if ( _childRecords.size() > 0 )
         {
             children.append( "  children: " + nl );

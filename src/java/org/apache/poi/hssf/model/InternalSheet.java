@@ -500,11 +500,7 @@ public final class InternalSheet {
         if (log.check( POILogger.DEBUG ))
         {
             log.log(POILogger.DEBUG, "Sheet.setDimensions");
-            log.log(POILogger.DEBUG,
-                    (new StringBuffer("firstrow")).append(firstrow)
-                        .append("firstcol").append(firstcol).append("lastrow")
-                        .append(lastrow).append("lastcol").append(lastcol)
-                        .toString());
+            log.log(POILogger.DEBUG, "firstrow" + firstrow + "firstcol" + firstcol + "lastrow" + lastrow + "lastcol" + lastcol);
         }
         _dimensions.setFirstCol(firstcol);
         _dimensions.setFirstRow(firstrow);

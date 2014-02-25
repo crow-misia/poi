@@ -54,17 +54,17 @@ public final class PaletteRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[PALETTE]\n");
-        buffer.append("  numcolors     = ").append(_colors.size()).append('\n');
+        buffer.append("[PALETTE]");
+        buffer.append("\n  numcolors     = ").append(_colors.size());
         for (int i = 0; i < _colors.size(); i++) {
             PColor c = _colors.get(i);
-            buffer.append("* colornum      = ").append(i).append('\n');
+            buffer.append("\n* colornum      = ").append(i).append('\n');
             buffer.append(c.toString());
-            buffer.append("/*colornum      = ").append(i).append('\n');
+            buffer.append("/*colornum      = ").append(i);
         }
-        buffer.append("[/PALETTE]\n");
+        buffer.append("\n[/PALETTE]\n");
         return buffer.toString();
     }
 
@@ -224,7 +224,7 @@ public final class PaletteRecord extends StandardRecord {
         }
 
         public String toString() {
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             buffer.append("  red   = ").append(_red & 0xff).append('\n');
             buffer.append("  green = ").append(_green & 0xff).append('\n');
             buffer.append("  blue  = ").append(_blue & 0xff).append('\n');

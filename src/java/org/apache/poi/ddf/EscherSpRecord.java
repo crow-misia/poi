@@ -131,7 +131,7 @@ public class EscherSpRecord
      */
     private String decodeFlags( int flags )
     {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         result.append( ( flags & FLAG_GROUP ) != 0 ? "|GROUP" : "" );
         result.append( ( flags & FLAG_CHILD ) != 0 ? "|CHILD" : "" );
         result.append( ( flags & FLAG_PATRIARCH ) != 0 ? "|PATRIARCH" : "" );

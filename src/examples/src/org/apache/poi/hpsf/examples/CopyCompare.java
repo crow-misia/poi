@@ -147,7 +147,7 @@ public class CopyCompare
 
         final DirectoryEntry oRoot = opfs.getRoot();
         final DirectoryEntry cRoot = cpfs.getRoot();
-        final StringBuffer messages = new StringBuffer();
+        final StringBuilder messages = new StringBuilder();
         if (equal(oRoot, cRoot, messages))
             System.out.println("Equal");
         else
@@ -177,7 +177,7 @@ public class CopyCompare
      */
     private static boolean equal(final DirectoryEntry d1,
                                  final DirectoryEntry d2,
-                                 final StringBuffer msg)
+                                 final StringBuilder msg)
     throws NoPropertySetStreamException, MarkUnsupportedException,
            UnsupportedEncodingException, IOException
     {
@@ -256,7 +256,7 @@ public class CopyCompare
      * @exception IOException if any I/O exception occurs.
      */
     private static boolean equal(final DocumentEntry d1, final DocumentEntry d2,
-                                 final StringBuffer msg)
+                                 final StringBuilder msg)
     throws NoPropertySetStreamException, MarkUnsupportedException,
            UnsupportedEncodingException, IOException
     {

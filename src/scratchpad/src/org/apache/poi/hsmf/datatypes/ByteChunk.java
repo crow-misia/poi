@@ -78,7 +78,7 @@ public class ByteChunk extends Chunk {
       if (value == null)
          return "(Null Byte Array)";
           
-      StringBuffer text = new StringBuffer();
+      StringBuilder text = new StringBuilder();
       text.append("Bytes len=").append(value.length);
       text.append(" [");
       

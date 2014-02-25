@@ -251,7 +251,7 @@ public class ClassID
      */
     public String toString()
     {
-        StringBuffer sbClassId = new StringBuffer(38);
+        StringBuilder sbClassId = new StringBuilder(38);
         sbClassId.append('{');
         for (int i = 0; i < 16; i++)
         {

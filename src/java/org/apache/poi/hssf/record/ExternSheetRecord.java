@@ -72,7 +72,7 @@ public class ExternSheetRecord extends StandardRecord {
 		
 		@Override
 		public String toString() {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append("extBook=").append(_extBookIndex);
 			buffer.append(" firstSheet=").append(_firstSheetIndex);
 			buffer.append(" lastSheet=").append(_lastSheetIndex);
@@ -129,7 +129,7 @@ public class ExternSheetRecord extends StandardRecord {
 	
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int nItems = _list.size();
 		sb.append("[EXTERNSHEET]\n");
 		sb.append("   numOfRefs     = ").append(nItems).append("\n");

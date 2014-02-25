@@ -69,7 +69,7 @@ public class XWPFParagraph implements IBodyElement, IRunBody, ISDTContents {
     protected List<XWPFRun> runs;
     protected List<IRunElement> iruns;
 
-    private StringBuffer footnoteText = new StringBuffer();
+    private StringBuilder footnoteText = new StringBuilder();
 
     public XWPFParagraph(CTP prgrph, IBody part) {
         this.paragraph = prgrph;
@@ -204,7 +204,7 @@ public class XWPFParagraph implements IBodyElement, IRunBody, ISDTContents {
      * and sdt elements in it.
      */
     public String getText() {
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         for (IRunElement run : iruns) {
             if (run instanceof XWPFSDT){
                 out.append(((XWPFSDT)run).getContent().getText());
@@ -310,7 +310,7 @@ public class XWPFParagraph implements IBodyElement, IRunBody, ISDTContents {
      * paragraph
      */
     public String getParagraphText() {
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         for(XWPFRun run : runs) {
             out.append(run.toString());
         }
@@ -321,7 +321,7 @@ public class XWPFParagraph implements IBodyElement, IRunBody, ISDTContents {
      * Returns any text from any suitable pictures in the paragraph
      */
     public String getPictureText() {
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         for(XWPFRun run : runs) {
             out.append(run.getPictureText());
         }
@@ -1282,7 +1282,7 @@ public class XWPFParagraph implements IBodyElement, IRunBody, ISDTContents {
         int runEnd = segment.getEndRun();
         int textEnd = segment.getEndText();
         int charEnd    = segment.getEndChar();
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         for(int i=runBegin; i<=runEnd;i++){
             int startText=0, endText = paragraph.getRArray(i).getTList().size()-1;
             if(i==runBegin)

@@ -48,11 +48,11 @@ public final class PasswordRev4Record extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[PROT4REVPASSWORD]\n");
-        buffer.append("    .password = ").append(HexDump.shortToHex(field_1_password)).append("\n");
-        buffer.append("[/PROT4REVPASSWORD]\n");
+        buffer.append("[PROT4REVPASSWORD]");
+        buffer.append("\n    .password = ").append(HexDump.shortToHex(field_1_password));
+        buffer.append("\n[/PROT4REVPASSWORD]\n");
         return buffer.toString();
     }
 

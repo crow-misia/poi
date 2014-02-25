@@ -64,11 +64,11 @@ public final class WordDocument {
   BTreeSet _sectionTable = new BTreeSet();
 
   /** used for XSL-FO conversion*/
-  StringBuffer _headerBuffer = new StringBuffer();
+  StringBuilder _headerBuffer = new StringBuilder();
   /** used for XSL-FO conversion*/
-  StringBuffer _bodyBuffer = new StringBuffer();
+  StringBuilder _bodyBuffer = new StringBuilder();
   /** used for XSL-FO table conversion*/
-  StringBuffer _cellBuffer;
+  StringBuilder _cellBuffer;
   /** used for XSL-FO table conversion*/
   ArrayList _cells;
   /** used for XSL-FO table conversion*/
@@ -693,7 +693,7 @@ public final class WordDocument {
       ArrayList textRuns = findProperties(parStart, parEnd, _characterTable.root);
       int charSize = textRuns.size();
 
-      //StringBuffer lineBuffer = new StringBuffer();
+      //StringBuilder lineBuffer = new StringBuilder();
       for(int y = 0; y < charSize; y++)
       {
         ChpxNode charNode = (ChpxNode)textRuns.get(y);
@@ -713,7 +713,7 @@ public final class WordDocument {
         ArrayList text = findProperties(charStart, charEnd, _text.root);
 
         int textSize = text.size();
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for(int z = 0; z < textSize; z++)
         {
 
@@ -889,7 +889,7 @@ public final class WordDocument {
   private void createParagraph(int start, int end, PapxNode currentNode,
                                BTreeSet characterTable, BTreeSet text)
   {
-    StringBuffer blockBuffer = _bodyBuffer;
+    StringBuilder blockBuffer = _bodyBuffer;
     byte[] papx = currentNode.getPapx();
     int istd = Utils.convertBytesToShort(papx, 0);
     StyleDescription std = _styleSheet.getStyleDescription(istd);
@@ -902,7 +902,7 @@ public final class WordDocument {
       {
         if(_cellBuffer == null)
         {
-          _cellBuffer = new StringBuffer();
+          _cellBuffer = new StringBuilder();
         }
         blockBuffer = _cellBuffer;
       }
@@ -937,7 +937,7 @@ public final class WordDocument {
 
   }
 
-  private void addListParagraphContent(LVL lvl, StringBuffer blockBuffer, PAP pap,
+  private void addListParagraphContent(LVL lvl, StringBuilder blockBuffer, PAP pap,
                                        PapxNode currentNode, int start, int end,
                                        StyleDescription std)
   {
@@ -1025,7 +1025,7 @@ public final class WordDocument {
     closeBlock(blockBuffer);
   }
 
-  private void addParagraphContent(StringBuffer blockBuffer, PAP pap,
+  private void addParagraphContent(StringBuilder blockBuffer, PAP pap,
                                    PapxNode currentNode, int start, int end,
                                    StyleDescription std)
   {
@@ -1067,7 +1067,7 @@ public final class WordDocument {
     }
     closeBlock(blockBuffer);
   }
-  private void addText(int start, int end, StringBuffer buf)
+  private void addText(int start, int end, StringBuilder buf)
   {
     for(int x = start; x < end; x++)
     {
@@ -1079,7 +1079,7 @@ public final class WordDocument {
       addText(ch, buf);
     }
   }
-  private void addText(char ch, StringBuffer buf)
+  private void addText(char ch, StringBuilder buf)
   {
     int num = 0xffff & ch;
     if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') ||
@@ -1111,7 +1111,7 @@ public final class WordDocument {
       buf.append(';');
     }
   }
-  private void addUnicodeText(int start, int end, StringBuffer buf)
+  private void addUnicodeText(int start, int end, StringBuilder buf)
   {
     for(int x = start; x < end; x += 2)
     {
@@ -1126,7 +1126,7 @@ public final class WordDocument {
       //}
     }
   }
-  private void addParagraphProperties(PAP pap, StringBuffer buf)
+  private void addParagraphProperties(PAP pap, StringBuilder buf)
   {
     buf.append("<fo:block ");
     buf.append("text-align=\"" + getTextAlignment(pap._jc) + "\"\r\n");
@@ -1178,7 +1178,7 @@ public final class WordDocument {
 
   }
 
-  private void addCharacterProperties(CHP chp, StringBuffer buf)
+  private void addCharacterProperties(CHP chp, StringBuilder buf)
   {
     buf.append("<fo:inline ");
     buf.append("font-family=\"" + _fonts.getFont(chp._ftcAscii) + "\" ");
@@ -1250,7 +1250,7 @@ public final class WordDocument {
   }
   private String getBulletText(LVL lvl, PAP pap)
   {
-    StringBuffer bulletBuffer = new StringBuffer();
+    StringBuilder bulletBuffer = new StringBuilder();
     for(int x = 0; x < lvl._xst.length; x++)
     {
       if(lvl._xst[x] < 9)
@@ -1350,11 +1350,11 @@ public final class WordDocument {
   {
     _bodyBuffer.append("</fo:page-sequence>\r\n");
   }
-  private void closeLine(StringBuffer buf)
+  private void closeLine(StringBuilder buf)
   {
     buf.append("</fo:inline>");
   }
-  private void closeBlock(StringBuffer buf)
+  private void closeBlock(StringBuilder buf)
   {
     buf.append("</fo:block>\r\n");
   }
@@ -1468,7 +1468,7 @@ public final class WordDocument {
     _headerBuffer.append("</fo:simple-page-master>\r\n");
     return thisPage;
   }
-  private void addBorder(StringBuffer buf, short[] brc, String where)
+  private void addBorder(StringBuilder buf, short[] brc, String where)
   {
     if((brc[0] & 0xff00) != 0 && brc[0] != -1)
     {
@@ -1742,12 +1742,12 @@ public final class WordDocument {
       int size = _table.size();
 
       //local buffers for the table
-      StringBuffer tableHeaderBuffer = new StringBuffer();
-      StringBuffer tableBodyBuffer = new StringBuffer();
+      StringBuilder tableHeaderBuffer = new StringBuilder();
+      StringBuilder tableBodyBuffer = new StringBuilder();
 
       for(int x = 0; x < size; x++)
       {
-        StringBuffer rowBuffer = tableBodyBuffer;
+        StringBuilder rowBuffer = tableBodyBuffer;
         TableRow row = (TableRow)_table.get(x);
         TAP tap = row.getTAP();
         ArrayList cells = row.getCells();
@@ -1785,7 +1785,7 @@ public final class WordDocument {
         }
         rowBuffer.append("</fo:table-row>");
       }
-      StringBuffer tableBuffer = new StringBuffer();
+      StringBuilder tableBuffer = new StringBuilder();
       tableBuffer.append("<fo:table>");
       if(tableHeaderBuffer.length() > 0)
       {

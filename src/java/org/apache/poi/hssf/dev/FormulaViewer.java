@@ -91,7 +91,7 @@ public class FormulaViewer
             	numArg = String.valueOf(-1);
             }
             
-            StringBuffer buf = new StringBuffer();
+            StringBuilder buf = new StringBuilder();
             
             if (token instanceof ExpPtg) return;
             buf.append(((OperationPtg) token).toFormulaString());
@@ -154,7 +154,7 @@ public class FormulaViewer
 
     private String formulaString(FormulaRecord record) {
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 		Ptg[] tokens = record.getParsedExpression();
 		for (int i = 0; i < tokens.length; i++) {
 			Ptg token = tokens[i];

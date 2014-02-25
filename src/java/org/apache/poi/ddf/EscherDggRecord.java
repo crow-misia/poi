@@ -121,7 +121,7 @@ public final class EscherDggRecord extends EscherRecord {
 
     public String toString() {
 
-        StringBuffer field_5_string = new StringBuffer();
+        StringBuilder field_5_string = new StringBuilder();
         if(field_5_fileIdClusters != null) for (int i = 0; i < field_5_fileIdClusters.length; i++) {
             field_5_string.append("  DrawingGroupId").append(i+1).append(": ");
             field_5_string.append(field_5_fileIdClusters[i].field_1_drawingGroupId);

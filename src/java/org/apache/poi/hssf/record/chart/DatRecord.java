@@ -52,7 +52,7 @@ public final class DatRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[DAT]\n");
         buffer.append("    .options              = ")

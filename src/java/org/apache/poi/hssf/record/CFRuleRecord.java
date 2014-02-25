@@ -471,7 +471,7 @@ public final class CFRuleRecord extends StandardRecord {
 
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("[CFRULE]\n");
         buffer.append("    .condition_type   ="+field_1_condition_type);
 		buffer.append("    OPTION FLAGS=0x"+Integer.toHexString(getOptions()));

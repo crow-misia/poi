@@ -83,7 +83,7 @@ public class RecordLister
        String hex = Integer.toHexString(sid);
        String dec = Integer.toString(sid);
        
-       StringBuffer s = new StringBuffer();
+       StringBuilder s = new StringBuilder();
        s.append("0x");
        for(int i=hex.length(); i<4; i++) {
           s.append('0');
@@ -103,7 +103,7 @@ public class RecordLister
        String hex = Integer.toHexString(size);
        String dec = Integer.toString(size);
        
-       StringBuffer s = new StringBuffer();
+       StringBuilder s = new StringBuilder();
        for(int i=hex.length(); i<3; i++) {
           s.append('0');
        }
@@ -123,7 +123,7 @@ public class RecordLister
           return "";
        
        // If possible, do first 4 and last 4 bytes
-       StringBuffer s = new StringBuffer();
+       StringBuilder s = new StringBuilder();
        if(data.length > 9) {
           s.append(byteToHex(data[0]));
           s.append(' ');

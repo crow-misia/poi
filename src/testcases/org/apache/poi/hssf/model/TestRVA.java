@@ -99,7 +99,7 @@ public final class TestRVA extends TestCase {
 			}
 		}
 		boolean hasMismatch = false;
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < nExcelTokens; i++) {
 			Ptg poiPtg = poiPtgs[i];
 			Ptg excelPtg = excelPtgs[i];

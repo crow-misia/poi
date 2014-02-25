@@ -121,11 +121,11 @@ public final class EscherArrayProperty extends EscherComplexProperty {
     }
 
     public String toString() {
-        StringBuffer results = new StringBuffer();
-        results.append("    {EscherArrayProperty:" + '\n');
-        results.append("     Num Elements: " + getNumberOfElementsInArray() + '\n');
-        results.append("     Num Elements In Memory: " + getNumberOfElementsInMemory() + '\n');
-        results.append("     Size of elements: " + getSizeOfElements() + '\n');
+        StringBuilder results = new StringBuilder();
+        results.append("    {EscherArrayProperty:\n");
+        results.append("     Num Elements: ").append(getNumberOfElementsInArray()).append('\n');
+        results.append("     Num Elements In Memory: ").append(getNumberOfElementsInMemory()).append('\n');
+        results.append("     Size of elements: ").append(getSizeOfElements()).append('\n');
         for (int i = 0; i < getNumberOfElementsInArray(); i++) {
             results.append("     Element " + i + ": " + HexDump.toHex(getElement(i)) + '\n');
         }

@@ -29,19 +29,20 @@ public class XWPFComment
 {
     protected String id;
     protected String author;
-    protected StringBuffer text;
+    protected String  text;
     
     public XWPFComment(CTComment comment, XWPFDocument document)
     {
-        text = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         id = comment.getId().toString();
         author = comment.getAuthor();
         
         for(CTP ctp : comment.getPList())
         {
             XWPFParagraph p = new XWPFParagraph(ctp, document);
-            text.append(p.getText());
+            sb.append(p.getText());
         }
+        text = sb.toString();
     }
     
     public String getId()
@@ -56,6 +57,6 @@ public class XWPFComment
     
     public String getText()
     {
-        return text.toString();
+        return text;
     }
 }

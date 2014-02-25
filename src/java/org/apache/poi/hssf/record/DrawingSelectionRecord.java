@@ -59,7 +59,7 @@ public final class DrawingSelectionRecord extends StandardRecord {
 		}
 
 		public String debugFormatAsString() {
-			StringBuffer sb = new StringBuffer(32);
+			StringBuilder sb = new StringBuilder(32);
 			sb.append("ver+inst=").append(HexDump.shortToHex(_verAndInstance));
 			sb.append(" type=").append(HexDump.shortToHex(_type));
 			sb.append(" len=").append(HexDump.intToHex(_length));
@@ -116,7 +116,7 @@ public final class DrawingSelectionRecord extends StandardRecord {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("[MSODRAWINGSELECTION]\n");
 		sb.append("    .rh       =(").append(_header.debugFormatAsString()).append(")\n");

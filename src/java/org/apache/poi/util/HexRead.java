@@ -65,7 +65,7 @@ public class HexRead
 
         try
         {
-            StringBuffer sectionText = new StringBuffer();
+            StringBuilder sectionText = new StringBuilder();
             boolean inSection = false;
             int c = stream.read();
             while ( c != -1 )
@@ -78,12 +78,12 @@ public class HexRead
                     case '\n':
                     case '\r':
                         inSection = false;
-                        sectionText = new StringBuffer();
+                        sectionText.setLength(0);
                         break;
                     case ']':
                         inSection = false;
                         if ( sectionText.toString().equals( section ) ) return readData( stream, '[' );
-                        sectionText = new StringBuffer();
+                        sectionText.setLength(0);
                         break;
                     default:
                         if ( inSection ) sectionText.append( (char) c );

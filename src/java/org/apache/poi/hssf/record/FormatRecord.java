@@ -74,13 +74,13 @@ public final class FormatRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[FORMAT]\n");
-        buffer.append("    .indexcode       = ").append(HexDump.shortToHex(getIndexCode())).append("\n");
-        buffer.append("    .isUnicode       = ").append(field_3_hasMultibyte ).append("\n");
-        buffer.append("    .formatstring    = ").append(getFormatString()).append("\n");
-        buffer.append("[/FORMAT]\n");
+        buffer.append("[FORMAT]");
+        buffer.append("\n    .indexcode       = ").append(HexDump.shortToHex(getIndexCode()));
+        buffer.append("\n    .isUnicode       = ").append(field_3_hasMultibyte );
+        buffer.append("\n    .formatstring    = ").append(getFormatString());
+        buffer.append("\n[/FORMAT]\n");
         return buffer.toString();
     }
 

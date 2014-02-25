@@ -69,7 +69,7 @@ public final class PublisherTextExtractor extends POIOLE2TextExtractor {
 
 
 	public String getText() {
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 
 		// Get the text from the Quill Contents
 		QCBit[] bits = doc.getQuillContents().getBits();

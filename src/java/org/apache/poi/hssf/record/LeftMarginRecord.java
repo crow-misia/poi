@@ -38,10 +38,10 @@ public final class LeftMarginRecord extends StandardRecord implements Margin
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append( "[LeftMargin]\n" );
-        buffer.append( "    .margin               = " ).append( " (" ).append( getMargin() ).append( " )\n" );
-        buffer.append( "[/LeftMargin]\n" );
+        StringBuilder buffer = new StringBuilder();
+        buffer.append( "[LeftMargin]" );
+        buffer.append( "\n    .margin               = " ).append( " (" ).append( getMargin() ).append( " )" );
+        buffer.append( "\n[/LeftMargin]" );
         return buffer.toString();
     }
 

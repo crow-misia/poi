@@ -386,7 +386,7 @@ public class CellReference {
 		//   AreaReference.separateAreaRefs()
 		//   SheetNameFormatter.format() (inverse)
 
-		StringBuffer sb = new StringBuffer(indexOfSheetNameDelimiter);
+		StringBuilder sb = new StringBuilder(indexOfSheetNameDelimiter);
 
 		for(int i=1; i<lastQuotePos; i++) { // Note boundaries - skip outer quotes
 			char ch = reference.charAt(i);
@@ -446,7 +446,7 @@ public class CellReference {
 	 * @return the text representation of this cell reference as it would appear in a formula.
 	 */
 	public String formatAsString() {
-		StringBuffer sb = new StringBuffer(32);
+		StringBuilder sb = new StringBuilder(32);
 		if(_sheetName != null) {
 			SheetNameFormatter.appendFormat(sb, _sheetName);
 			sb.append(SHEET_NAME_DELIMITER);
@@ -457,7 +457,7 @@ public class CellReference {
 
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer(64);
+		StringBuilder sb = new StringBuilder(64);
 		sb.append(getClass().getName()).append(" [");
 		sb.append(formatAsString());
 		sb.append("]");

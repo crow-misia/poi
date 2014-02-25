@@ -65,7 +65,7 @@ public class XSLFTextRun {
     String getRenderableText(){
         String txt = _r.getT();
         TextCap cap = getTextCap();
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for(int i = 0; i < txt.length(); i++) {
             char c = txt.charAt(i);
             if(c == '\t') {
@@ -103,7 +103,7 @@ public class XSLFTextRun {
         double tabSz = _p.getDefaultTabSize();
 
         int numSpaces = (int)Math.ceil(tabSz / wspace);
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for(int i = 0; i < numSpaces; i++) {
             buf.append(' ');
         }

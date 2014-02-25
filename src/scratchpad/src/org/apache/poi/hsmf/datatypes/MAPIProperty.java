@@ -1068,7 +1068,7 @@ public class MAPIProperty {
    }
 
    public String toString() {
-      StringBuffer str = new StringBuffer();
+      StringBuilder str = new StringBuilder();
       str.append(name);
       str.append(" [");
       str.append(id);

@@ -156,7 +156,7 @@ public final class ExMediaAtom extends RecordAtom
     }
 
     public String toString(){
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.append("ExMediaAtom\n");
         buf.append("\tObjectId: " + getObjectId() + "\n");
         buf.append("\tMask    : " + getMask() + "\n");

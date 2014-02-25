@@ -43,7 +43,7 @@ public final class BottomMarginRecord extends StandardRecord implements Margin {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append( "[BottomMargin]\n" );
         buffer.append( "    .margin               = " )
                 .append( " (" ).append( getMargin() ).append( " )\n" );

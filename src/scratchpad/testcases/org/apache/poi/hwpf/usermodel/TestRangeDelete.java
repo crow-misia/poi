@@ -165,7 +165,7 @@ public final class TestRangeDelete extends TestCase {
 		text = para.text();
 		assertEquals(expectedText2, text);
 
-		// this can lead to a StringBufferOutOfBoundsException, so we will add it
+		// this can lead to a StringBuilderOutOfBoundsException, so we will add it
 		// even though we don't have an assertion for it
 		Range daRange = daDoc.getRange();
 		daRange.sanityCheck();

@@ -120,16 +120,13 @@ public final class FileSharingRecord extends StandardRecord {
 
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[FILESHARING]\n");
-        buffer.append("    .readonly       = ")
-            .append(getReadOnly() == 1 ? "true" : "false").append("\n");
-        buffer.append("    .password       = ")
-            .append(Integer.toHexString(getPassword())).append("\n");
-        buffer.append("    .username       = ")
-            .append(getUsername()).append("\n");
-        buffer.append("[/FILESHARING]\n");
+        buffer.append("\n    .readonly       = ").append(getReadOnly() == 1 ? "true" : "false");
+        buffer.append("\n    .password       = ").append(Integer.toHexString(getPassword()));
+        buffer.append("\n    .username       = ").append(getUsername());
+        buffer.append("\n[/FILESHARING]\n");
         return buffer.toString();
     }
 

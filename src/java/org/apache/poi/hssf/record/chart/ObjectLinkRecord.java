@@ -54,7 +54,7 @@ public final class ObjectLinkRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[OBJECTLINK]\n");
         buffer.append("    .anchorId             = ")

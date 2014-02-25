@@ -37,10 +37,10 @@ public final class RightMarginRecord extends StandardRecord implements Margin {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append( "[RightMargin]\n" );
-        buffer.append( "    .margin               = " ).append( " (" ).append( getMargin() ).append( " )\n" );
-        buffer.append( "[/RightMargin]\n" );
+        StringBuilder buffer = new StringBuilder();
+        buffer.append( "[RightMargin]" );
+        buffer.append( "\n    .margin               = " ).append( " (" ).append( getMargin() ).append( " )" );
+        buffer.append( "\n[/RightMargin]\n" );
         return buffer.toString();
     }
 

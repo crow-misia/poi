@@ -61,7 +61,8 @@ public class POIFSViewer
     {
         if (printName)
         {
-            StringBuffer flowerbox = new StringBuffer();
+            final int length = filename.length();
+            StringBuilder flowerbox = new StringBuilder(length + 2);
 
             flowerbox.append(".");
             for (int j = 0; j < filename.length(); j++)

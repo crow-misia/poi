@@ -58,7 +58,7 @@ public final class UserSViewEnd extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append("[").append("USERSVIEWEND").append("] (0x");
         sb.append(Integer.toHexString(sid).toUpperCase() + ")\n");

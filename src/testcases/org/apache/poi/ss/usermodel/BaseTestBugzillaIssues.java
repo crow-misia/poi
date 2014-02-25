@@ -309,14 +309,14 @@ public abstract class BaseTestBugzillaIssues {
     }
 
     private static String createFunction(String name, int maxArgs){
-        StringBuffer fmla = new StringBuffer();
+        StringBuilder fmla = new StringBuilder();
         fmla.append(name);
-        fmla.append("(");
+        fmla.append('(');
         for(int i=0; i < maxArgs; i++){
             if(i > 0) fmla.append(',');
             fmla.append("A1");
         }
-        fmla.append(")");
+        fmla.append(')');
         return fmla.toString();
     }
 

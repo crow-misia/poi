@@ -349,11 +349,12 @@ public class DataFormatter {
 
         // Strip off the locale information, we use an instance-wide locale for everything
         Matcher m = localePatternGroup.matcher(formatStr);
+        StringBuilder sb = new StringBuilder();
         while(m.find()) {
             String match = m.group();
             String symbol = match.substring(match.indexOf('$') + 1, match.indexOf('-'));
             if (symbol.indexOf('$') > -1) {
-                StringBuffer sb = new StringBuffer();
+                sb.setLength(0);
                 sb.append(symbol.substring(0, symbol.indexOf('$')));
                 sb.append('\\');
                 sb.append(symbol.substring(symbol.indexOf('$'), symbol.length()));
@@ -451,7 +452,7 @@ public class DataFormatter {
             Excel displays the month instead of minutes."
           */
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         char[] chars = formatStr.toCharArray();
         boolean mIsMonth = true;
         List<Integer> ms = new ArrayList<Integer>();
@@ -556,7 +557,7 @@ public class DataFormatter {
     }
 
     private String cleanFormatForNumber(String formatStr) {
-        StringBuffer sb = new StringBuffer(formatStr);
+        StringBuilder sb = new StringBuilder(formatStr);
 
         if (emulateCsv) {
             // Requested spacers with "_" are replaced by a single space.
@@ -945,7 +946,7 @@ public class DataFormatter {
         /** Format a number as an SSN */
         public static String format(Number num) {
             String result = df.format(num);
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder(11);
             sb.append(result.substring(0, 3)).append('-');
             sb.append(result.substring(3, 5)).append('-');
             sb.append(result.substring(5, 9));
@@ -979,7 +980,7 @@ public class DataFormatter {
         /** Format a number as Zip + 4 */
         public static String format(Number num) {
             String result = df.format(num);
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder(10);
             sb.append(result.substring(0, 5)).append('-');
             sb.append(result.substring(5, 9));
             return sb.toString();
@@ -1012,7 +1013,7 @@ public class DataFormatter {
         /** Format a number as a phone number */
         public static String format(Number num) {
             String result = df.format(num);
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             String seg1, seg2, seg3;
             int len = result.length();
             if (len <= 4) {

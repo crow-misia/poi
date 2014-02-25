@@ -603,7 +603,7 @@ public final class PackagingURIHelper {
 	 *         characters.
 	 */
 	public static String decodeURI(URI uri) {
-		StringBuffer retVal = new StringBuffer();
+		StringBuilder retVal = new StringBuilder();
 		String uriStr = uri.toASCIIString();
 		char c;
 		for (int i = 0; i < uriStr.length(); ++i) {

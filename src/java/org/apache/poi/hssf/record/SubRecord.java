@@ -121,7 +121,7 @@ public abstract class SubRecord {
 			return this;
 		}
 		public String toString() {
-			StringBuffer sb = new StringBuffer(64);
+			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName()).append(" [");
 			sb.append("sid=").append(HexDump.shortToHex(_sid));
 			sb.append(" size=").append(_data.length);

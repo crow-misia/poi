@@ -208,7 +208,7 @@ public final class BorderCode implements Cloneable {
         if ( isEmpty() )
             return "[BRC] EMPTY";
 
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append( "[BRC]\n" );
 

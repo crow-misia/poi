@@ -54,7 +54,7 @@ public class HPSFPropertiesExtractor extends POITextExtractor {
 
     public String getDocumentSummaryInformationText() {
         DocumentSummaryInformation dsi = document.getDocumentSummaryInformation();
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
 
         // Normal properties
         text.append( getPropertiesText(dsi) );
@@ -86,7 +86,7 @@ public class HPSFPropertiesExtractor extends POITextExtractor {
             return "";
         }
 
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
 
         PropertyIDMap idMap = ps.getPropertySetIDMap();
         Property[] props = ps.getProperties();

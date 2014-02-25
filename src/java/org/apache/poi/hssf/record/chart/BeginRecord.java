@@ -45,11 +45,7 @@ public final class BeginRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
-
-        buffer.append("[BEGIN]\n");
-        buffer.append("[/BEGIN]\n");
-        return buffer.toString();
+        return "[BEGIN]\n[/BEGIN]\n";
     }
 
     public void serialize(LittleEndianOutput out) {

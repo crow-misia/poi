@@ -120,7 +120,7 @@ public final class FtPioGrbitSubRecord extends SubRecord {
      * Used by BiffViewer and other utilities.
      */
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append("[FtPioGrbit ]\n");
         buffer.append("  size     = ").append(length).append("\n");
         buffer.append("  flags    = ").append(HexDump.toHex(flags)).append("\n");

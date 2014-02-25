@@ -67,7 +67,7 @@ public final class SeriesRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[SERIES]\n");
         buffer.append("    .categoryDataType     = ")

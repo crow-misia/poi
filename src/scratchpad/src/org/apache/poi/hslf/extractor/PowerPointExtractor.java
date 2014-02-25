@@ -216,7 +216,7 @@ public final class PowerPointExtractor extends POIOLE2TextExtractor {
 	}
 
 	public String getText(boolean getSlideText, boolean getNoteText, boolean getCommentText, boolean getMasterText) {
-		StringBuffer ret = new StringBuffer();
+		StringBuilder ret = new StringBuilder();
 
 		if (getSlideText) {
             if (getMasterText) {

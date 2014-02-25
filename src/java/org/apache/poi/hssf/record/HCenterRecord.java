@@ -69,12 +69,11 @@ public final class HCenterRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[HCENTER]\n");
-        buffer.append("    .hcenter        = ").append(getHCenter())
-            .append("\n");
-        buffer.append("[/HCENTER]\n");
+        buffer.append("[HCENTER]");
+        buffer.append("\n    .hcenter        = ").append(getHCenter());
+        buffer.append("\n[/HCENTER]\n");
         return buffer.toString();
     }
 

@@ -133,16 +133,16 @@ public final class FilePassRecord extends StandardRecord {
 	}
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
-		buffer.append("[FILEPASS]\n");
-		buffer.append("    .type = ").append(HexDump.shortToHex(_encryptionType)).append("\n");
-		buffer.append("    .info = ").append(HexDump.shortToHex(_encryptionInfo)).append("\n");
-		buffer.append("    .ver  = ").append(HexDump.shortToHex(_minorVersionNo)).append("\n");
-		buffer.append("    .docId= ").append(HexDump.toHex(_docId)).append("\n");
-		buffer.append("    .salt = ").append(HexDump.toHex(_saltData)).append("\n");
-		buffer.append("    .hash = ").append(HexDump.toHex(_saltHash)).append("\n");
-		buffer.append("[/FILEPASS]\n");
+		buffer.append("[FILEPASS]");
+		buffer.append("\n    .type = ").append(HexDump.shortToHex(_encryptionType));
+		buffer.append("\n    .info = ").append(HexDump.shortToHex(_encryptionInfo));
+		buffer.append("\n    .ver  = ").append(HexDump.shortToHex(_minorVersionNo));
+		buffer.append("\n    .docId= ").append(HexDump.toHex(_docId));
+		buffer.append("\n    .salt = ").append(HexDump.toHex(_saltData));
+		buffer.append("\n    .hash = ").append(HexDump.toHex(_saltHash));
+		buffer.append("\n[/FILEPASS]\n");
 		return buffer.toString();
 	}
 }

@@ -272,7 +272,7 @@ public final class TestMetaDataIPI extends TestCase{
 	 * @return the multiplied String
 	 */
 	private static String elongate(String s) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 10000; i++) {
 			sb.append(s);
 			sb.append(" ");
@@ -371,7 +371,7 @@ public final class TestMetaDataIPI extends TestCase{
 	 * @return  the multiplied String
 	 */
 	private static String strangize(String s) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		String[] umlaute = { "\u00e4", "\u00fc", "\u00f6", "\u00dc", "$", "\u00d6", "\u00dc",
 				"\u00c9", "\u00d6", "@", "\u00e7", "&" };
 		char j = 0;
@@ -497,7 +497,7 @@ public final class TestMetaDataIPI extends TestCase{
     */
 	private static String strangizeU(String s) {
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		String[] umlaute = { "\u00e4", "\u00fc", "\u00f6", "\u00dc", "$", "\u00d6", "\u00dc",
 				"\u00c9", "\u00d6", "@", "\u00e7", "&" };
 		char j = 0;

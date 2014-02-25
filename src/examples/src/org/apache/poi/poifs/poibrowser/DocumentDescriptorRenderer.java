@@ -58,7 +58,7 @@ public class DocumentDescriptorRenderer extends DefaultTreeCellRenderer
      */
     protected String renderAsString(final DocumentDescriptor d)
     {
-        final StringBuffer b = new StringBuffer();
+        final StringBuilder b = new StringBuilder();
         b.append("Name: ");
         b.append(d.name);
         b.append(" (");

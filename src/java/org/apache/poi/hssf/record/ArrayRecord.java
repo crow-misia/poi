@@ -81,7 +81,7 @@ public final class ArrayRecord extends SharedValueRecordBase {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(getClass().getName()).append(" [ARRAY]\n");
 		sb.append(" range=").append(getRange().toString()).append("\n");
 		sb.append(" options=").append(HexDump.shortToHex(_options)).append("\n");

@@ -46,10 +46,7 @@ public final class FeatSmartTag implements SharedFeature {
 	}
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(" [FEATURE SMART TAGS]\n");
-		buffer.append(" [/FEATURE SMART TAGS]\n");
-		return buffer.toString();
+		return "[FEATURE SMART TAGS]\n[/FEATURE SMART TAGS]\n";
 	}
 
 	public int getDataSize() {

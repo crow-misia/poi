@@ -74,12 +74,11 @@ public final class RefModeRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[REFMODE]\n");
-        buffer.append("    .mode           = ")
-            .append(Integer.toHexString(getMode())).append("\n");
-        buffer.append("[/REFMODE]\n");
+        buffer.append("[REFMODE]");
+        buffer.append("\n    .mode           = ").append(Integer.toHexString(getMode()));
+        buffer.append("\n[/REFMODE]\n");
         return buffer.toString();
     }
 

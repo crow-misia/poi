@@ -360,23 +360,23 @@ public final class FontRecord extends StandardRecord {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
-		sb.append("[FONT]\n");
-		sb.append("    .fontheight    = ").append(HexDump.shortToHex(getFontHeight())).append("\n");
-		sb.append("    .attributes    = ").append(HexDump.shortToHex(getAttributes())).append("\n");
-		sb.append("       .italic     = ").append(isItalic()).append("\n");
-		sb.append("       .strikout   = ").append(isStruckout()).append("\n");
-		sb.append("       .macoutlined= ").append(isMacoutlined()).append("\n");
-		sb.append("       .macshadowed= ").append(isMacshadowed()).append("\n");
-		sb.append("    .colorpalette  = ").append(HexDump.shortToHex(getColorPaletteIndex())).append("\n");
-		sb.append("    .boldweight    = ").append(HexDump.shortToHex(getBoldWeight())).append("\n");
-		sb.append("    .supersubscript= ").append(HexDump.shortToHex(getSuperSubScript())).append("\n");
-		sb.append("    .underline     = ").append(HexDump.byteToHex(getUnderline())).append("\n");
-		sb.append("    .family        = ").append(HexDump.byteToHex(getFamily())).append("\n");
-		sb.append("    .charset       = ").append(HexDump.byteToHex(getCharset())).append("\n");
-		sb.append("    .fontname      = ").append(getFontName()).append("\n");
-		sb.append("[/FONT]\n");
+		sb.append("[FONT]");
+		sb.append("\n    .fontheight    = ").append(HexDump.shortToHex(getFontHeight()));
+		sb.append("\n    .attributes    = ").append(HexDump.shortToHex(getAttributes()));
+		sb.append("\n       .italic     = ").append(isItalic());
+		sb.append("\n       .strikout   = ").append(isStruckout());
+		sb.append("\n       .macoutlined= ").append(isMacoutlined());
+		sb.append("\n       .macshadowed= ").append(isMacshadowed());
+		sb.append("\n    .colorpalette  = ").append(HexDump.shortToHex(getColorPaletteIndex()));
+		sb.append("\n    .boldweight    = ").append(HexDump.shortToHex(getBoldWeight()));
+		sb.append("\n    .supersubscript= ").append(HexDump.shortToHex(getSuperSubScript()));
+		sb.append("\n    .underline     = ").append(HexDump.byteToHex(getUnderline()));
+		sb.append("\n    .family        = ").append(HexDump.byteToHex(getFamily()));
+		sb.append("\n    .charset       = ").append(HexDump.byteToHex(getCharset()));
+		sb.append("\n    .fontname      = ").append(getFontName());
+		sb.append("\n[/FONT]\n");
 		return sb.toString();
 	}
 

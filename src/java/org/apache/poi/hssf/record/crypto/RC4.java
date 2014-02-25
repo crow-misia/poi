@@ -76,7 +76,7 @@ final class RC4 {
 	}
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append(getClass().getName()).append(" [");
 		sb.append("i=").append(_i);

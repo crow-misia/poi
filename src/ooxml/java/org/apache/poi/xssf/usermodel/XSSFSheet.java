@@ -3383,8 +3383,7 @@ public class XSSFSheet extends POIXMLDocumentPart implements Sheet {
                  + ":$" + rowRef2.getCellRefParts()[1];
         }
 
-        StringBuffer rng = new StringBuffer();
-        rng.append(c);
+        StringBuilder rng = new StringBuilder(c);
         if(rng.length() > 0 && r.length() > 0) {
           rng.append(',');
         }

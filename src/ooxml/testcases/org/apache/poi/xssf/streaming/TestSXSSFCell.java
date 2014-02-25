@@ -102,7 +102,7 @@ public class TestSXSSFCell extends BaseTestCell {
         Workbook swb = SXSSFITestDataProvider.instance.createWorkbook();
         Cell sCell = swb.createSheet().createRow(0).createCell(0);
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         // test all possible characters
         for(int i = 0; i < Character.MAX_VALUE; i++) sb.append((char)i) ;
 

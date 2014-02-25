@@ -46,11 +46,7 @@ public final class EndRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
-
-        buffer.append("[END]\n");
-        buffer.append("[/END]\n");
-        return buffer.toString();
+        return "[END]\n[/END]\n";
     }
 
     public void serialize(LittleEndianOutput out) {

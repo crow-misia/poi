@@ -296,7 +296,7 @@ public class XSSFRichTextString implements RichTextString {
         if(st.sizeOfRArray() == 0) {
             return utfDecode(st.getT());
         }
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for(CTRElt r : st.getRArray()){
             buf.append(r.getT());
         }
@@ -477,7 +477,7 @@ public class XSSFRichTextString implements RichTextString {
     static String utfDecode(String value){
         if(value == null) return null;
         
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         Matcher m = utfPtrn.matcher(value);
         int idx = 0;
         while(m.find()) {

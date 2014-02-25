@@ -478,7 +478,7 @@ public final class WindowTwoRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[WINDOW2]\n");
         buffer.append("    .options        = ")

@@ -68,12 +68,11 @@ public final class SaveRecalcRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[SAVERECALC]\n");
-        buffer.append("    .recalc         = ").append(getRecalc())
-            .append("\n");
-        buffer.append("[/SAVERECALC]\n");
+        buffer.append("[SAVERECALC]");
+        buffer.append("\n    .recalc         = ").append(getRecalc());
+        buffer.append("\n[/SAVERECALC]\n");
         return buffer.toString();
     }
 

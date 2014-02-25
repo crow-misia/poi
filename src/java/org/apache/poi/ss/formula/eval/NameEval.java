@@ -37,7 +37,7 @@ public final class NameEval implements ValueEval {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer(64);
+		StringBuilder sb = new StringBuilder(64);
 		sb.append(getClass().getName()).append(" [");
 		sb.append(_functionName);
 		sb.append("]");

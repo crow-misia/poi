@@ -123,7 +123,7 @@ public final class UnknownEscherRecord extends EscherRecord {
     }
 
     public String toString() {
-        StringBuffer children = new StringBuffer();
+        StringBuilder children = new StringBuilder();
         if (getChildRecords().size() > 0) {
             children.append( "  children: " + '\n' );
             for (EscherRecord record : _childRecords) {

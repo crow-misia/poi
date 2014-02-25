@@ -236,7 +236,7 @@ public class AbstractWordUtils
     public static String getBulletText( NumberingState numberingState,
             HWPFList list, char level )
     {
-        StringBuffer bulletBuffer = new StringBuffer();
+        StringBuilder bulletBuffer = new StringBuilder();
         char[] xst = list.getNumberText( level ).toCharArray();
         for ( char element : xst )
         {

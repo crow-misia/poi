@@ -51,7 +51,7 @@ public final class DeltaRecord extends StandardRecord {
     }
 
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[DELTA]\n");
         buffer.append("    .maxchange = ").append(getMaxChange()).append("\n");

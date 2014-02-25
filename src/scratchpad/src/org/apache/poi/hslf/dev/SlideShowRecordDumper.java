@@ -121,7 +121,7 @@ public final class SlideShowRecordDumper {
   }
 
   public String reverseHex(String s) {
-	StringBuffer ret = new StringBuffer();
+	StringBuilder ret = new StringBuilder();
 
 	// Get to a multiple of two
 	if((s.length() / 2) * 2 != s.length()) { s = "0" + s; }
@@ -156,7 +156,7 @@ public final class SlideShowRecordDumper {
 
   public String printEscherRecord( EscherRecord er ) {
         String nl = System.getProperty( "line.separator" );
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
 		if (er instanceof EscherContainerRecord) {
 			buf.append(printEscherContainerRecord( (EscherContainerRecord)er ));
@@ -199,7 +199,7 @@ public final class SlideShowRecordDumper {
 
         String nl = System.getProperty( "line.separator" );
 
-        StringBuffer children = new StringBuffer();
+        StringBuilder children = new StringBuilder();
         int count = 0;
         for ( Iterator<EscherRecord> iterator = ecr.getChildIterator(); iterator.hasNext(); )
         {

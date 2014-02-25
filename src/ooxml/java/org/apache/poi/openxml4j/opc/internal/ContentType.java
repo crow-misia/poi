@@ -180,16 +180,16 @@ public final class ContentType {
 	}
 
 	public final String toString(boolean withParameters) {
-	    StringBuffer retVal = new StringBuffer();
+	    StringBuilder retVal = new StringBuilder();
 	    retVal.append(this.getType());
-	    retVal.append("/");
+	    retVal.append('/'
 	    retVal.append(this.getSubType());
 
 	    if (withParameters) {
 	        for (String key : parameters.keySet()) {
-	            retVal.append(";");
+	            retVal.append(';');
 	            retVal.append(key);
-	            retVal.append("=");
+	            retVal.append('=');
 	            retVal.append(parameters.get(key));
 	        }
 	    }

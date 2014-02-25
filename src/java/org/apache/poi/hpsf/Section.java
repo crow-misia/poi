@@ -320,7 +320,7 @@ public class Section
 
         public String toString()
         {
-            final StringBuffer b = new StringBuffer();
+            final StringBuilder b = new StringBuilder();
             b.append(getClass().getName());
             b.append("[id=");
             b.append(id);
@@ -593,7 +593,7 @@ public class Section
      */
     public String toString()
     {
-        final StringBuffer b = new StringBuffer();
+        final StringBuilder b = new StringBuilder();
         final Property[] pa = getProperties();
         b.append(getClass().getName());
         b.append('[');

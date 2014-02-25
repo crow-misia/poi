@@ -72,7 +72,7 @@ public class Codec
     public static String hexEncode(final byte[] s, final int offset,
                                    final int length)
     {
-        StringBuffer b = new StringBuffer(length * 2);
+        StringBuilder b = new StringBuilder(length * 2);
         for (int i = offset; i < offset + length; i++)
         {
             int c = s[i];
@@ -89,7 +89,7 @@ public class Codec
      */
     public static String hexEncode(final byte b)
     {
-        StringBuffer sb = new StringBuffer(2);
+        StringBuilder sb = new StringBuilder(2);
         sb.append((char) hexval[(b & 0xF0) >> 4]);
         sb.append((char) hexval[(b & 0x0F) >> 0]);
         return sb.toString();
@@ -103,7 +103,7 @@ public class Codec
      */
     public static String hexEncode(final short s)
     {
-        StringBuffer sb = new StringBuffer(4);
+        StringBuilder sb = new StringBuilder(4);
         sb.append((char) hexval[(s & 0xF000) >> 12]);
         sb.append((char) hexval[(s & 0x0F00) >>  8]);
         sb.append((char) hexval[(s & 0x00F0) >>  4]);
@@ -119,7 +119,7 @@ public class Codec
      */
     public static String hexEncode(final int i)
     {
-        StringBuffer sb = new StringBuffer(8);
+        StringBuilder sb = new StringBuilder(8);
         sb.append((char) hexval[(i & 0xF0000000) >> 28]);
         sb.append((char) hexval[(i & 0x0F000000) >> 24]);
         sb.append((char) hexval[(i & 0x00F00000) >> 20]);
@@ -139,7 +139,7 @@ public class Codec
      */
     public static String hexEncode(final long l)
     {
-        StringBuffer sb = new StringBuffer(16);
+        StringBuilder sb = new StringBuilder(16);
         sb.append(hexEncode((int) (l & 0xFFFFFFFF00000000L) >> 32));
         sb.append(hexEncode((int) (l & 0x00000000FFFFFFFFL) >>  0));
         return sb.toString();

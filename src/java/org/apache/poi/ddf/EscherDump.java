@@ -73,14 +73,14 @@ public final class EscherDump {
         short options;      // 4 bits for the version and 12 bits for the instance
         short recordId;
         int recordBytesRemaining;       // including enclosing records
-        StringBuffer stringBuf = new StringBuffer();
+        StringBuilder stringBuf = new StringBuilder();
         short nDumpSize;
         String recordName;
 
         boolean atEOF = false;
 
         while (!atEOF && (remainingBytes > 0)) {
-            stringBuf = new StringBuffer();
+            stringBuf.setLength(0);
             options = LittleEndian.readShort( in );
             recordId = LittleEndian.readShort( in );
             recordBytesRemaining = LittleEndian.readInt( in );
@@ -213,7 +213,8 @@ public final class EscherDump {
                 //                short n16;
                 //                int n32;
 
-                stringBuf = new StringBuffer( "    btWin32: " );
+                stringBuf.setLength(0);
+                stringBuf.append( "    btWin32: " );
                 n8 = (byte) in.read();
                 stringBuf.append( HexDump.toHex( n8 ) );
                 stringBuf.append( getBlipType( n8 ) );

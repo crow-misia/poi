@@ -107,18 +107,15 @@ public class IndexRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[INDEX]\n");
-        buffer.append("    .firstrow       = ")
-            .append(Integer.toHexString(getFirstRow())).append("\n");
-        buffer.append("    .lastrowadd1    = ")
-            .append(Integer.toHexString(getLastRowAdd1())).append("\n");
+        buffer.append("[INDEX]");
+        buffer.append("\n    .firstrow       = ").append(Integer.toHexString(getFirstRow()));
+        buffer.append("\n    .lastrowadd1    = ").append(Integer.toHexString(getLastRowAdd1()));
         for (int k = 0; k < getNumDbcells(); k++) {
-            buffer.append("    .dbcell_").append(k).append(" = ")
-                .append(Integer.toHexString(getDbcellAt(k))).append("\n");
+            buffer.append("\n    .dbcell_").append(k).append(" = ").append(Integer.toHexString(getDbcellAt(k)));
         }
-        buffer.append("[/INDEX]\n");
+        buffer.append("\n[/INDEX]\n");
         return buffer.toString();
     }
 

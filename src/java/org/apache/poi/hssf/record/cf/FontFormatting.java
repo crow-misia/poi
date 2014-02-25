@@ -463,7 +463,7 @@ public final class FontFormatting
 
 	public String toString()
 	{
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("	[Font Formatting]\n");
 
 		buffer.append("	.font height = ").append(getFontHeight()).append(" twips\n");

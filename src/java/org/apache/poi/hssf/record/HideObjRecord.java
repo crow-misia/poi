@@ -77,12 +77,11 @@ public final class HideObjRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[HIDEOBJ]\n");
-        buffer.append("    .hideobj         = ")
-            .append(Integer.toHexString(getHideObj())).append("\n");
-        buffer.append("[/HIDEOBJ]\n");
+        buffer.append("[HIDEOBJ]");
+        buffer.append("\n    .hideobj         = ").append(Integer.toHexString(getHideObj()));
+        buffer.append("\n[/HIDEOBJ]\n");
         return buffer.toString();
     }
 

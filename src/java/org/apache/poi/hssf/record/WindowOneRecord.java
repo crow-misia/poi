@@ -387,7 +387,7 @@ public final class WindowOneRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[WINDOW1]\n");
         buffer.append("    .h_hold          = ")

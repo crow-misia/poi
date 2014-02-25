@@ -187,11 +187,11 @@ public class XSSFColor implements Color {
      * Works for both regular and indexed colours. 
      */
 	public String getARGBHex() {
-	   StringBuffer sb = new StringBuffer();
 	   byte[] rgb = getARgb();
 	   if(rgb == null) {
 	      return null;
 	   }
+       StringBuilder sb = new StringBuilder();
 	   for(byte c : rgb) {
 	      int i = (int)c;
 	      if(i < 0) {

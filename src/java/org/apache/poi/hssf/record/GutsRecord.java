@@ -141,18 +141,14 @@ public final class GutsRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[GUTS]\n");
-        buffer.append("    .leftgutter     = ")
-            .append(Integer.toHexString(getLeftRowGutter())).append("\n");
-        buffer.append("    .topgutter      = ")
-            .append(Integer.toHexString(getTopColGutter())).append("\n");
-        buffer.append("    .rowlevelmax    = ")
-            .append(Integer.toHexString(getRowLevelMax())).append("\n");
-        buffer.append("    .collevelmax    = ")
-            .append(Integer.toHexString(getColLevelMax())).append("\n");
-        buffer.append("[/GUTS]\n");
+        buffer.append("[GUTS]");
+        buffer.append("\n    .leftgutter     = ").append(Integer.toHexString(getLeftRowGutter()));
+        buffer.append("\n    .topgutter      = ").append(Integer.toHexString(getTopColGutter()));
+        buffer.append("\n    .rowlevelmax    = ").append(Integer.toHexString(getRowLevelMax()));
+        buffer.append("\n    .collevelmax    = ").append(Integer.toHexString(getColLevelMax()));
+        buffer.append("\n[/GUTS]\n");
         return buffer.toString();
     }
 

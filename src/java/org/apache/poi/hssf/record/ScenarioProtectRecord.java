@@ -76,12 +76,11 @@ public final class ScenarioProtectRecord
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append("[SCENARIOPROTECT]\n");
-	    buffer.append("    .protect         = ").append(getProtect())
-            .append("\n");
-        buffer.append("[/SCENARIOPROTECT]\n");
+        buffer.append("[SCENARIOPROTECT]");
+	    buffer.append("\n    .protect         = ").append(getProtect());
+        buffer.append("\n[/SCENARIOPROTECT]\n");
         return buffer.toString();
     }
 

@@ -345,9 +345,8 @@ public class Util
         }
         catch (IOException e)
         {
-            final StringBuffer b = new StringBuffer(t.getMessage());
-            b.append("\n");
-            b.append("Could not create a stacktrace. Reason: ");
+            final StringBuilder b = new StringBuilder(t.getMessage());
+            b.append("\nCould not create a stacktrace. Reason: ");
             b.append(e.getMessage());
             return b.toString();
         }

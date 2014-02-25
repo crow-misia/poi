@@ -75,7 +75,7 @@ class TextFragment {
         if(_str == null) return "";
 
         AttributedCharacterIterator it = _str.getIterator();
-         StringBuffer buf = new StringBuffer();
+         StringBuilder buf = new StringBuilder();
          for (char c = it.first(); c != it.DONE; c = it.next()) {
              buf.append(c);
          }

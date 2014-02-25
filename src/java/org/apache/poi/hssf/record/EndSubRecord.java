@@ -53,12 +53,7 @@ public final class EndSubRecord extends SubRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
-
-        buffer.append("[ftEnd]\n");
-
-        buffer.append("[/ftEnd]\n");
-        return buffer.toString();
+        return "[ftEnd]\n[/ftEnd]\n";
     }
 
     public void serialize(LittleEndianOutput out) {

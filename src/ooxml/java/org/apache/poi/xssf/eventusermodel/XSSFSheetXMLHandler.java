@@ -78,9 +78,9 @@ public class XSSFSheetXMLHandler extends DefaultHandler {
    private boolean formulasNotResults;
 
    // Gathers characters as they are seen.
-   private StringBuffer value = new StringBuffer();
-   private StringBuffer formula = new StringBuffer();
-   private StringBuffer headerFooter = new StringBuffer();
+   private StringBuilder value = new StringBuilder();
+   private StringBuilder formula = new StringBuilder();
+   private StringBuilder headerFooter = new StringBuilder();
 
    /**
     * Accepts objects needed while parsing.

@@ -214,7 +214,7 @@ public final class HSSFPalette {
         @Override
         public String getHexString()
         {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append(getGnumericPart(_red));
             sb.append(':');
             sb.append(getGnumericPart(_green));

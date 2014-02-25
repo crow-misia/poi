@@ -137,20 +137,17 @@ public final class SSTRecord extends ContinuableRecord {
      * @return string representation
      */
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        buffer.append( "[SST]\n" );
-        buffer.append( "    .numstrings     = " )
-                .append( Integer.toHexString( getNumStrings() ) ).append( "\n" );
-        buffer.append( "    .uniquestrings  = " )
-                .append( Integer.toHexString( getNumUniqueStrings() ) ).append( "\n" );
+        buffer.append( "[SST]" );
+        buffer.append( "\n    .numstrings     = " ).append( Integer.toHexString( getNumStrings() ) );
+        buffer.append( "\n    .uniquestrings  = " ).append( Integer.toHexString( getNumUniqueStrings() ) );
         for ( int k = 0; k < field_3_strings.size(); k++ )
         {
-          UnicodeString s = field_3_strings.get( k );
-            buffer.append( "    .string_" + k + "      = " )
-                    .append( s.getDebugInfo() ).append( "\n" );
+            UnicodeString s = field_3_strings.get( k );
+            buffer.append( "\n    .string_" + k + "      = " ).append( s.getDebugInfo() );
         }
-        buffer.append( "[/SST]\n" );
+        buffer.append( "\n[/SST]\n" );
         return buffer.toString();
     }
 

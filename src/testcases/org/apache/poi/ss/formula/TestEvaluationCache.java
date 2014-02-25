@@ -153,7 +153,7 @@ public class TestEvaluationCache extends TestCase {
 			}
 		}
 		private void log(String tag, int rowIndex, int columnIndex, Object value) {
-			StringBuffer sb = new StringBuffer(64);
+			StringBuilder sb = new StringBuilder(64);
 			sb.append(tag).append(' ');
 			sb.append(new CellReference(rowIndex, columnIndex, false, false).formatAsString());
 			if (value != null) {

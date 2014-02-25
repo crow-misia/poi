@@ -48,11 +48,7 @@ public final class EOFRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
-
-        buffer.append("[EOF]\n");
-        buffer.append("[/EOF]\n");
-        return buffer.toString();
+        return "[EOF]\n[/EOF]\n";
     }
 
     public void serialize(LittleEndianOutput out) {

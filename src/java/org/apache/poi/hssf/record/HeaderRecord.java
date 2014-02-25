@@ -37,11 +37,11 @@ public final class HeaderRecord extends HeaderFooterBase {
 	}
 
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
-		buffer.append("[HEADER]\n");
-		buffer.append("    .header = ").append(getText()).append("\n");
-		buffer.append("[/HEADER]\n");
+		buffer.append("[HEADER]");
+		buffer.append("\n    .header = ").append(getText());
+		buffer.append("\n[/HEADER]\n");
 		return buffer.toString();
 	}
 

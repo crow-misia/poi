@@ -193,7 +193,7 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor
           StylesTable styles = xssfReader.getStylesTable();
           XSSFReader.SheetIterator iter = (XSSFReader.SheetIterator) xssfReader.getSheetsData();
    
-          StringBuffer text = new StringBuffer();
+          StringBuilder text = new StringBuilder();
           SheetTextExtractor sheetExtractor = new SheetTextExtractor();
           
           while (iter.hasNext()) {
@@ -230,7 +230,7 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor
        }
    }
    
-    private void processShapes(List<XSSFShape> shapes, StringBuffer text) {
+    private void processShapes(List<XSSFShape> shapes, StringBuilder text) {
         if (shapes == null){
             return;
         }
@@ -253,12 +253,12 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor
 	}
 
    protected class SheetTextExtractor implements SheetContentsHandler {
-      private final StringBuffer output;
+      private final StringBuilder output;
       private boolean firstCellOfRow;
       private final Map<String, String> headerFooterMap;
       
       protected SheetTextExtractor() {
-         this.output = new StringBuffer();
+         this.output = new StringBuilder();
          this.firstCellOfRow = true;
          this.headerFooterMap = includeHeadersFooters ? new HashMap<String, String>() : null;
       }
@@ -290,7 +290,7 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor
       /**
        * Append the text for the named header or footer if found.
        */
-      private void appendHeaderFooterText(StringBuffer buffer, String name) {
+      private void appendHeaderFooterText(StringBuilder buffer, String name) {
           String text = headerFooterMap.get(name);
           if (text != null && text.length() > 0) {
               // this is a naive way of handling the left, center, and right
@@ -323,7 +323,7 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor
        * @see XSSFExcelExtractor#getText()
        * @see org.apache.poi.hssf.extractor.ExcelExtractor#_extractHeaderFooter(org.apache.poi.ss.usermodel.HeaderFooter)
        */
-      private void appendHeaderText(StringBuffer buffer) {
+      private void appendHeaderText(StringBuilder buffer) {
           appendHeaderFooterText(buffer, "firstHeader");
           appendHeaderFooterText(buffer, "oddHeader");
           appendHeaderFooterText(buffer, "evenHeader");
@@ -335,7 +335,7 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor
        * @see XSSFExcelExtractor#getText()
        * @see org.apache.poi.hssf.extractor.ExcelExtractor#_extractHeaderFooter(org.apache.poi.ss.usermodel.HeaderFooter)
        */
-      private void appendFooterText(StringBuffer buffer) {
+      private void appendFooterText(StringBuilder buffer) {
           // append the text for each footer type in the same order
           // they are appended in XSSFExcelExtractor
           appendHeaderFooterText(buffer, "firstFooter");
@@ -346,7 +346,7 @@ public class XSSFEventBasedExcelExtractor extends POIXMLTextExtractor
       /**
        * Append the cell contents we have collected.
        */
-      private void appendCellText(StringBuffer buffer) {
+      private void appendCellText(StringBuilder buffer) {
           buffer.append(output);
       }
       

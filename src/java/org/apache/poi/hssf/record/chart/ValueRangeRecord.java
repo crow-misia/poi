@@ -68,7 +68,7 @@ public final class ValueRangeRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[VALUERANGE]\n");
         buffer.append("    .minimumAxisValue     = ")

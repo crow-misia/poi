@@ -137,7 +137,7 @@ public final class FormulaRecord extends CellRecord {
 			return new SpecialCachedValue(vd);
 		}
 		public String toString() {
-			StringBuffer sb = new StringBuffer(64);
+			StringBuilder sb = new StringBuilder(64);
 			sb.append(getClass().getName());
 			sb.append('[').append(formatValue()).append(']');
 			return sb.toString();

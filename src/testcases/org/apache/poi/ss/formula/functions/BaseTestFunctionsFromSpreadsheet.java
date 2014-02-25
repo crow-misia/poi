@@ -252,7 +252,7 @@ public abstract class BaseTestFunctionsFromSpreadsheet extends TestCase {
     private static String formatTestCaseDetails(String filename, String sheetName, int rowIndex, HSSFCell c, String currentGroupComment,
                                                 String rowComment) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         sb.append("In ").append(filename).append(" ");
 

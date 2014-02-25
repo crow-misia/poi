@@ -431,7 +431,7 @@ public final class TextRun
 		// Build up the new text
 		// As we go through, update the start position for all subsequent runs
 		// The building relies on the old text still being present
-		StringBuffer newText = new StringBuffer();
+		StringBuilder newText = new StringBuilder();
 		for(int i=0; i<_rtRuns.length; i++) {
 			int newStartPos = newText.length();
 

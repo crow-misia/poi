@@ -44,7 +44,7 @@ public final class AxisUsedRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
         buffer.append("[AXISUSED]\n");
         buffer.append("    .numAxis              = ")

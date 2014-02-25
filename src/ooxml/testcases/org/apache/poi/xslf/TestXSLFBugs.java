@@ -137,7 +137,7 @@ public class TestXSLFBugs extends POITestCase {
     }
     
     protected String getSlideText(XSLFSlide slide) {
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
         for(DrawingTextBody textBody : slide.getCommonSlideData().getDrawingText()) {
             for (DrawingParagraph p : textBody.getParagraphs()) {
                 text.append(p.getText());

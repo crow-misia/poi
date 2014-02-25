@@ -45,12 +45,7 @@ public final class PlotAreaRecord extends StandardRecord {
 
     public String toString()
     {
-        StringBuffer buffer = new StringBuffer();
-
-        buffer.append("[PLOTAREA]\n");
-
-        buffer.append("[/PLOTAREA]\n");
-        return buffer.toString();
+        return "[PLOTAREA]\n[/PLOTAREA]\n";
     }
 
     public void serialize(LittleEndianOutput out) {
