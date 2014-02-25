@@ -17,7 +17,6 @@
 
 package org.apache.poi.openxml4j.opc.internal;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,9 +65,18 @@ public final class ContentType {
 	private Hashtable<String, String> parameters;
 
 	/**
-	 * Media type compiled pattern for parameters.
+	 * Media type compiled pattern, without parameters
 	 */
-	private final static Pattern patternMediaType;
+	private final static Pattern patternTypeSubType;
+    /**
+     * Media type compiled pattern, with parameters.
+     */
+    private final static Pattern patternTypeSubTypeParams;
+    /**
+     * Pattern to match on just the parameters part, to work
+     * around the Java Regexp group capture behaviour
+     */
+    private final static Pattern patternParams;
 
 	static {
 		/*
@@ -90,8 +98,7 @@ public final class ContentType {
 		 *
 		 * value = token | quoted-string
 		 */
-		// Keep for future use with parameter:
-		// String parameter = "(" + token + "+)=(\"?" + token + "+\"?)";
+		String parameter = "(" + token + "+)=(\"?" + token + "+\"?)";
 		/*
 		 * Pattern for media type.
 		 *
@@ -118,11 +125,11 @@ public final class ContentType {
 		 * quoted-pair = "\" CHAR
 		 */
 
-		// Keep for future use with parameter:
-		// patternMediaType = Pattern.compile("^(" + token + "+)/(" + token
-		// + "+)(;" + parameter + ")*$");
-		patternMediaType = Pattern.compile("^(" + token + "+)/(" + token
-				+ "+)$");
+		patternTypeSubType       = Pattern.compile("^(" + token + "+)/(" + 
+		                                           token + "+)$");
+		patternTypeSubTypeParams = Pattern.compile("^(" + token + "+)/(" + 
+		                                           token + "+)(;" + parameter + ")*$");
+		patternParams            = Pattern.compile(";" + parameter);
 	}
 
 	/**
@@ -134,41 +141,59 @@ public final class ContentType {
 	 *             If the specified content type is not valid with RFC 2616.
 	 */
 	public ContentType(String contentType) throws InvalidFormatException {
-		Matcher mMediaType = patternMediaType.matcher(contentType);
-		if (!mMediaType.matches())
+		Matcher mMediaType = patternTypeSubType.matcher(contentType);
+		if (!mMediaType.matches()) {
+		    // How about with parameters?
+		    mMediaType = patternTypeSubTypeParams.matcher(contentType);
+		}
+        if (!mMediaType.matches()) {
 			throw new InvalidFormatException(
 					"The specified content type '"
-							+ contentType
-							+ "' is not compliant with RFC 2616: malformed content type.");
+					+ contentType
+					+ "' is not compliant with RFC 2616: malformed content type.");
+        }
 
 		// Type/subtype
 		if (mMediaType.groupCount() >= 2) {
 			this.type = mMediaType.group(1);
 			this.subType = mMediaType.group(2);
+			
 			// Parameters
 			this.parameters = new Hashtable<String, String>(1);
-			for (int i = 4; i <= mMediaType.groupCount()
-					&& (mMediaType.group(i) != null); i += 2) {
-				this.parameters.put(mMediaType.group(i), mMediaType
-						.group(i + 1));
+			// Java RegExps are unhelpful, and won't do multiple group captures
+			// See http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#cg
+			if (mMediaType.groupCount() >= 5) {
+			    Matcher mParams = patternParams.matcher(contentType.substring(mMediaType.end(2)));
+			    while (mParams.find()) {
+			        this.parameters.put(mParams.group(1), mParams.group(2));
+			    }
 			}
 		}
 	}
 
+    /**
+     * Returns the content type as a string, including parameters
+     */
 	@Override
 	public final String toString() {
-		StringBuffer retVal = new StringBuffer();
-		retVal.append(this.getType());
-		retVal.append("/");
-		retVal.append(this.getSubType());
-		// Keep for future implementation if needed
-		// for (String key : parameters.keySet()) {
-		// retVal.append(";");
-		// retVal.append(key);
-		// retVal.append("=");
-		// retVal.append(parameters.get(key));
-		// }
-		return retVal.toString();
+	    return toString(true);
+	}
+
+	public final String toString(boolean withParameters) {
+	    StringBuffer retVal = new StringBuffer();
+	    retVal.append(this.getType());
+	    retVal.append("/");
+	    retVal.append(this.getSubType());
+
+	    if (withParameters) {
+	        for (String key : parameters.keySet()) {
+	            retVal.append(";");
+	            retVal.append(key);
+	            retVal.append("=");
+	            retVal.append(parameters.get(key));
+	        }
+	    }
+	    return retVal.toString();
 	}
 
 	@Override
@@ -201,6 +226,22 @@ public final class ContentType {
 	public String getType() {
 		return this.type;
 	}
+	
+	/**
+	 * Does this content type have any parameters associated with it?
+	 */
+	public boolean hasParameters() {
+	    return (parameters != null) && !parameters.isEmpty();
+	}
+	
+	/**
+	 * Return the parameter keys
+	 */
+	public String[] getParameterKeys() {
+	    if (parameters == null)
+	        return new String[0];
+	    return parameters.keySet().toArray(new String[parameters.size()]);
+	}
 
 	/**
 	 * Gets the value associated to the specified key.
@@ -209,7 +250,13 @@ public final class ContentType {
 	 *            The key of the key/value pair.
 	 * @return The value associated to the specified key.
 	 */
-	public String getParameters(String key) {
+	public String getParameter(String key) {
 		return parameters.get(key);
 	}
+	/**
+	 * @deprecated Use {@link #getParameter(String)} instead
+	 */
+    public String getParameters(String key) {
+        return getParameter(key);
+    }
 }
