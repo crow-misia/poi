@@ -17,8 +17,8 @@
 
 package org.apache.poi.xssf.usermodel;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.poi.POIXMLDocumentPart;
 import org.apache.poi.util.Internal;
@@ -42,9 +42,9 @@ import org.w3c.dom.Node;
 
 public class XSSFMap {
 
-    private CTMap ctMap;
+    private final CTMap ctMap;
 
-    private MapInfo mapInfo;
+    private final MapInfo mapInfo;
 
 
     public XSSFMap(CTMap ctMap, MapInfo mapInfo) {
@@ -78,11 +78,12 @@ public class XSSFMap {
      * @return the list of Single Xml Cells that provide a map rule to this mapping.
      */
     public List<XSSFSingleXmlCell> getRelatedSingleXMLCell() {
-        List<XSSFSingleXmlCell> relatedSimpleXmlCells = new Vector<XSSFSingleXmlCell>();
+        List<XSSFSingleXmlCell> relatedSimpleXmlCells = new ArrayList<XSSFSingleXmlCell>();
 
-        int sheetNumber = mapInfo.getWorkbook().getNumberOfSheets();
+        XSSFWorkbook workbook = mapInfo.getWorkbook();
+        int sheetNumber = workbook.getNumberOfSheets();
         for (int i = 0; i < sheetNumber; i++) {
-            XSSFSheet sheet = mapInfo.getWorkbook().getSheetAt(i);
+            XSSFSheet sheet = workbook.getSheetAt(i);
             for (POIXMLDocumentPart p : sheet.getRelations()) {
                 if (p instanceof SingleXmlCells) {
                     SingleXmlCells singleXMLCells = (SingleXmlCells) p;
@@ -102,11 +103,12 @@ public class XSSFMap {
      */
     public List<XSSFTable> getRelatedTables() {
 
-        List<XSSFTable> tables = new Vector<XSSFTable>();
-        int sheetNumber = mapInfo.getWorkbook().getNumberOfSheets();
+        List<XSSFTable> tables = new ArrayList<XSSFTable>();
+        XSSFWorkbook workbook = mapInfo.getWorkbook();
+        int sheetNumber = workbook.getNumberOfSheets();
 
         for (int i = 0; i < sheetNumber; i++) {
-            XSSFSheet sheet = mapInfo.getWorkbook().getSheetAt(i);
+            XSSFSheet sheet = workbook.getSheetAt(i);
             for (POIXMLDocumentPart p : sheet.getRelations()) {
                 if (p.getPackageRelationship().getRelationshipType().equals(XSSFRelation.TABLE.getRelation())) {
                     XSSFTable table = (XSSFTable) p;

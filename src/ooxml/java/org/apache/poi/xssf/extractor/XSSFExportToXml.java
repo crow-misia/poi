@@ -21,12 +21,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -143,7 +143,7 @@ public class XSSFExportToXml implements Comparator<String>{
         doc.appendChild(root);
 
 
-        List<String> xpaths = new Vector<String>();
+        List<String> xpaths = new ArrayList<String>();
         Map<String,XSSFSingleXmlCell> singleXmlCellsMappings = new HashMap<String,XSSFSingleXmlCell>();
         Map<String,XSSFTable> tableMappings = new HashMap<String,XSSFTable>();
 

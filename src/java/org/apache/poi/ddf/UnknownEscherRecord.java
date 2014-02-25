@@ -18,7 +18,6 @@
 package org.apache.poi.ddf;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.util.HexDump;
@@ -151,10 +150,8 @@ public final class UnknownEscherRecord extends EscherRecord {
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()), HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
                 .append(tab).append("\t<IsContainer>").append(isContainerRecord()).append("</IsContainer>\n")
                 .append(tab).append("\t<Numchildren>").append(HexDump.toHex(_childRecords.size())).append("</Numchildren>\n");
-        for ( Iterator<EscherRecord> iterator = _childRecords.iterator(); iterator
-                .hasNext(); )
+        for ( EscherRecord record : _childRecords )
         {
-            EscherRecord record = iterator.next();
             builder.append(record.toXml(tab+"\t"));
         }
         builder.append(theDumpHex).append('\n');

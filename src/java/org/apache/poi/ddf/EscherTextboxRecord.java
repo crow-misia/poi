@@ -155,7 +155,7 @@ public class EscherTextboxRecord extends EscherRecord
         }
         StringBuilder builder = new StringBuilder();
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()), HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
-                .append(tab).append("\t").append("<ExtraData>").append(theDumpHex).append("</ExtraData>\n");
+                .append(tab).append("\t<ExtraData>").append(theDumpHex).append("</ExtraData>\n");
         builder.append(tab).append("</").append(getClass().getSimpleName()).append(">\n");
         return builder.toString();
     }

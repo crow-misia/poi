@@ -302,8 +302,8 @@ public abstract class EscherRecord {
     public String toXml(String tab){
         StringBuilder builder = new StringBuilder();
         builder.append(tab).append("<").append(getClass().getSimpleName()).append(">\n")
-                .append(tab).append("\t").append("<RecordId>0x").append(HexDump.toHex(_recordId)).append("</RecordId>\n")
-                .append(tab).append("\t").append("<Options>").append(_options).append("</Options>\n")
+                .append(tab).append("\t<RecordId>0x").append(HexDump.toHex(_recordId)).append("</RecordId>\n")
+                .append(tab).append("\t<Options>").append(_options).append("</Options>\n")
                 .append(tab).append("</").append(getClass().getSimpleName()).append(">\n");
         return builder.toString();
     }

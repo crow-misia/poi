@@ -130,9 +130,9 @@ public class EscherBitmapBlip extends EscherBlipRecord {
         }
         StringBuilder builder = new StringBuilder();
         builder.append(tab).append(formatXmlRecordHeader(getClass().getSimpleName(), HexDump.toHex(getRecordId()), HexDump.toHex(getVersion()), HexDump.toHex(getInstance())))
-                .append(tab).append("\t").append("<UID>0x").append(HexDump.toHex(field_1_UID)).append("</UID>\n")
-                .append(tab).append("\t").append("<Marker>0x").append(HexDump.toHex(field_2_marker)).append("</Marker>\n")
-                .append(tab).append("\t").append("<ExtraData>").append(extraData).append("</ExtraData>\n");
+                .append(tab).append("\t<UID>0x").append(HexDump.toHex(field_1_UID)).append("</UID>\n")
+                .append(tab).append("\t<Marker>0x").append(HexDump.toHex(field_2_marker)).append("</Marker>\n")
+                .append(tab).append("\t<ExtraData>").append(extraData).append("</ExtraData>\n");
         builder.append(tab).append("</").append(getClass().getSimpleName()).append(">\n");
         return builder.toString();
     }

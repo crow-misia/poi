@@ -60,8 +60,8 @@ public class XSSFFont implements Font {
      */
     public static final short DEFAULT_FONT_COLOR = IndexedColors.BLACK.getIndex();
 
+    private final CTFont _ctFont;
     private ThemesTable _themes;
-    private CTFont _ctFont;
     private short _index;
 
     /**

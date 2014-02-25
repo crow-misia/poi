@@ -25,10 +25,11 @@ import org.apache.poi.hslf.model.ShapeTypes;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
-import java.util.Iterator;
+
 
 /**
  * These are actually wrappers onto Escher drawings. Make use of
@@ -84,7 +85,7 @@ public final class PPDrawing extends RecordAtom {
 
 		// Build up a tree of Escher records contained within
 		final DefaultEscherRecordFactory erf = new DefaultEscherRecordFactory();
-		final Vector<EscherRecord> escherChildren = new Vector<EscherRecord>();
+		final List<EscherRecord> escherChildren = new ArrayList<EscherRecord>();
 		findEscherChildren(erf, contents, 8, len-8, escherChildren);
 		this.childRecords = (EscherRecord[]) escherChildren.toArray(new EscherRecord[escherChildren.size()]);
 
@@ -92,7 +93,7 @@ public final class PPDrawing extends RecordAtom {
 			this.textboxWrappers = findInDgContainer((EscherContainerRecord) this.childRecords[0]);
 		} else {
 			// Find and EscherTextboxRecord's, and wrap them up
-			final Vector<EscherTextboxWrapper> textboxes = new Vector<EscherTextboxWrapper>();
+			final List<EscherTextboxWrapper> textboxes = new ArrayList<EscherTextboxWrapper>();
 			findEscherTextboxRecord(childRecords, textboxes);
 			this.textboxWrappers = (EscherTextboxWrapper[]) textboxes.toArray(new EscherTextboxWrapper[textboxes.size()]);
 		}
@@ -159,7 +160,7 @@ public final class PPDrawing extends RecordAtom {
 	/**
 	 * Tree walking way of finding Escher Child Records
 	 */
-	private void findEscherChildren(DefaultEscherRecordFactory erf, byte[] source, int startPos, int lenToGo, Vector<EscherRecord> found) {
+	private void findEscherChildren(DefaultEscherRecordFactory erf, byte[] source, int startPos, int lenToGo, List<EscherRecord> found) {
 
 		int escherBytes = LittleEndian.getInt( source, startPos + 4 ) + 8;
 
@@ -196,7 +197,7 @@ public final class PPDrawing extends RecordAtom {
 	/**
 	 * Look for EscherTextboxRecords
 	 */
-	private void findEscherTextboxRecord(EscherRecord[] toSearch, Vector<EscherTextboxWrapper> found) {
+	private void findEscherTextboxRecord(EscherRecord[] toSearch, List<EscherTextboxWrapper> found) {
 		for(int i=0; i<toSearch.length; i++) {
 			if(toSearch[i] instanceof EscherTextboxRecord) {
 				EscherTextboxRecord tbr = (EscherTextboxRecord)toSearch[i];

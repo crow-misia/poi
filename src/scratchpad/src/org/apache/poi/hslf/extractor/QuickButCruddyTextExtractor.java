@@ -18,11 +18,11 @@
 package org.apache.poi.hslf.extractor;
 
 import java.io.*;
-import java.util.Vector;
-
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.util.LittleEndian;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.hslf.record.CString;
 import org.apache.poi.hslf.record.Record;
@@ -122,7 +122,7 @@ public final class QuickButCruddyTextExtractor {
 	 */
 	public String getTextAsString() {
 		StringBuilder ret = new StringBuilder();
-		Vector<String> textV = getTextAsVector();
+		List<String> textV = getTextAsVector();
 		for(String text : textV) {
 			ret.append(text);
 			if(! text.endsWith("\n")) {
@@ -136,8 +136,8 @@ public final class QuickButCruddyTextExtractor {
 	 * Fetches the ALL the text of the powerpoint file, in a vector of
 	 *  strings, one per text record
 	 */
-	public Vector<String> getTextAsVector() {
-		Vector<String> textV = new Vector<String>();
+	public List<String> getTextAsVector() {
+		List<String> textV = new ArrayList<String>();
 
 		// Set to the start of the file
 		int walkPos = 0;
@@ -158,7 +158,7 @@ public final class QuickButCruddyTextExtractor {
 	 * If it is a text record, grabs out the text. Whatever happens, returns
 	 *  the position of the next record, or -1 if no more.
 	 */
-	public int findTextRecords(int startPos, Vector<String> textV) {
+	public int findTextRecords(int startPos, List<String> textV) {
 		// Grab the length, and the first option byte
 		// Note that the length doesn't include the 8 byte atom header
 		int len = (int)LittleEndian.getUInt(pptContents,startPos+4);
