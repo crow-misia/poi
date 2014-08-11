@@ -17,6 +17,7 @@
 
 package org.apache.poi.ss.formula.functions;
 
+import org.apache.poi.ss.formula.OperationEvaluationContext;
 import org.apache.poi.ss.formula.ThreeDEval;
 import org.apache.poi.ss.formula.TwoDEval;
 import org.apache.poi.ss.formula.eval.BlankEval;
@@ -35,14 +36,16 @@ import org.apache.poi.ss.formula.eval.ValueEval;
  * classes that take variable number of operands, and
  * where the order of operands does not matter
  */
-public abstract class MultiOperandNumericFunction implements Function {
+public abstract class MultiOperandNumericFunction implements FreeRefFunction, Function {
 
 	private final boolean _isReferenceBoolCounted;
 	private final boolean _isBlankCounted;
+	private final boolean _isStringCounted;
 
-    protected MultiOperandNumericFunction(boolean isReferenceBoolCounted, boolean isBlankCounted) {
+    protected MultiOperandNumericFunction(boolean isReferenceBoolCounted, boolean isBlankCounted, boolean isStringCounted) {
         _isReferenceBoolCounted = isReferenceBoolCounted;
         _isBlankCounted = isBlankCounted;
+        _isStringCounted = isStringCounted;
     }
 
 	static final double[] EMPTY_DOUBLE_ARRAY = { };
@@ -84,7 +87,10 @@ public abstract class MultiOperandNumericFunction implements Function {
 	private static final int DEFAULT_MAX_NUM_OPERANDS = 30;
 
 	public final ValueEval evaluate(ValueEval[] args, int srcCellRow, int srcCellCol) {
+		return this.evaluate(args, null);
+	}
 
+    public final ValueEval evaluate(final ValueEval[] args, final OperationEvaluationContext ec) {
 		double d;
 		try {
 			double[] values = getNumberArray(args);
@@ -197,6 +203,9 @@ public abstract class MultiOperandNumericFunction implements Function {
 		if (ve instanceof StringValueEval) {
 			if (isViaReference) {
 				// ignore all ref strings
+                if (_isStringCounted) {
+                    temp.add(0.0);
+                }
 				return;
 			}
 			String s = ((StringValueEval) ve).getStringValue();

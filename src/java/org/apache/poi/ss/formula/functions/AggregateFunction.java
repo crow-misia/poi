@@ -136,7 +136,7 @@ public abstract class AggregateFunction extends MultiOperandNumericFunction {
 	static final class ValueCollector extends MultiOperandNumericFunction {
 		private static final ValueCollector instance = new ValueCollector();
 		public ValueCollector() {
-			super(false, false);
+			super(false, false, false);
 		}
 		public static double[] collectValues(ValueEval...operands) throws EvaluationException {
 			return instance.getNumberArray(operands);
@@ -147,7 +147,7 @@ public abstract class AggregateFunction extends MultiOperandNumericFunction {
 	}
 
     protected AggregateFunction() {
-        super(false, false);
+        super(false, false, false);
     }
 
     /**
@@ -223,7 +223,7 @@ public abstract class AggregateFunction extends MultiOperandNumericFunction {
 		}
 	};
 	public static final Function SMALL = new LargeSmall(false);
-	public static final Function STDEV = new AggregateFunction() {
+	public static final MultiOperandNumericFunction STDEV = new AggregateFunction() {
 		protected double evaluate(double[] values) throws EvaluationException {
 			if (values.length < 1) {
 				throw new EvaluationException(ErrorEval.DIV_ZERO);
@@ -231,6 +231,30 @@ public abstract class AggregateFunction extends MultiOperandNumericFunction {
 			return StatsLib.stdev(values);
 		}
 	};
+    public static final MultiOperandNumericFunction STDEVA = new MultiOperandNumericFunction(true, false, true) {
+        protected double evaluate(double[] values) throws EvaluationException {
+            if (values.length < 1) {
+                throw new EvaluationException(ErrorEval.DIV_ZERO);
+            }
+            return StatsLib.stdev(values);
+        }
+    };
+	public static final MultiOperandNumericFunction STDEVP = new AggregateFunction() {
+		protected double evaluate(double[] values) throws EvaluationException {
+			if (values.length < 0) {
+				throw new EvaluationException(ErrorEval.DIV_ZERO);
+			}
+			return StatsLib.stdevp(values);
+		}
+	};
+    public static final MultiOperandNumericFunction STDEVPA = new MultiOperandNumericFunction(true, false, true) {
+        protected double evaluate(double[] values) throws EvaluationException {
+            if (values.length < 0) {
+                throw new EvaluationException(ErrorEval.DIV_ZERO);
+            }
+            return StatsLib.stdevp(values);
+        }
+    };
 	public static final Function SUM = new AggregateFunction() {
 		protected double evaluate(double[] values) {
 			return MathX.sum(values);

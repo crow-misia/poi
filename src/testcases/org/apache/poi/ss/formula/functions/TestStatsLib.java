@@ -269,6 +269,41 @@ public class TestStatsLib extends AbstractNumericTestCase {
         assertEquals("stdev ", x, d);
     }
 
+    public void testStddevp() {
+        double[] v = null;
+        double d, x = 0;
+        
+        v = new double[] {1,2,3,4,5,6,7,8,9,10};
+        d = StatsLib.stdevp(v);
+        x = 2.872281323;
+        assertEquals("stdevp ", x, d);
+        
+        v = new double[] {1,1,1,1,1,1,1,1,1,1};
+        d = StatsLib.stdevp(v);
+        x = 0;
+        assertEquals("stdevp ", x, d);
+        
+        v = new double[] {0,0,0,0,0,0,0,0,0,0};
+        d = StatsLib.stdevp(v);
+        x = 0;
+        assertEquals("stdevp ", x, d);
+        
+        v = new double[] {1,2,1,2,1,2,1,2,1,2};
+        d = StatsLib.stdevp(v);
+        x = 0.5;
+        assertEquals("stdevp ", x, d);
+        
+        v = new double[] {123.12,33.3333,2d/3d,5.37828,0.999};
+        d = StatsLib.stdevp(v);
+        x = 46.80543066;
+        assertEquals("stdevp ", x, d);
+        
+        v = new double[] {-1,-2,-3,-4,-5,-6,-7,-8,-9,-10};
+        d = StatsLib.stdevp(v);
+        x = 2.872281323;
+        assertEquals("stdevp ", x, d);
+    }
+
     public void testVar() {
         double[] v = null;
         double d, x = 0;

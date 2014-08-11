@@ -17,15 +17,19 @@
 
 package org.apache.poi.ss.formula.functions;
 
+import junit.framework.TestCase;
+
 import org.apache.poi.hssf.HSSFTestDataSamples;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.formula.eval.AreaEval;
 import org.apache.poi.ss.formula.eval.NumberEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-
-import junit.framework.TestCase;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellValue;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * Tests for {@link Subtotal}
@@ -275,6 +279,93 @@ public final class TestSubtotal extends TestCase {
         assertEquals(1.41421, a3.getNumericCellValue(), 0.0001);
         assertEquals(7.65685, a6.getNumericCellValue(), 0.0001);
         assertEquals(2.82842, a7.getNumericCellValue(), 0.0001);
+    }
+
+    public void testStdevp(){
+
+        Workbook wb = new HSSFWorkbook();
+
+        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+
+        Sheet sh = wb.createSheet();
+        Cell a1 = sh.createRow(1).createCell(1);
+        a1.setCellValue(1);
+        Cell a2 = sh.createRow(2).createCell(1);
+        a2.setCellValue(3);
+        Cell a3 = sh.createRow(3).createCell(1);
+        a3.setCellFormula("SUBTOTAL(8,B2:B3)");
+        Cell a4 = sh.createRow(4).createCell(1);
+        a4.setCellValue(1);
+        Cell a5 = sh.createRow(5).createCell(1);
+        a5.setCellValue(7);
+        Cell a6 = sh.createRow(6).createCell(1);
+        a6.setCellFormula("SUBTOTAL(8,B2:B6)*2 + 2");
+        Cell a7 = sh.createRow(7).createCell(1);
+        a7.setCellFormula("SUBTOTAL(8,B2:B7)");
+
+        fe.evaluateAll();
+
+        assertEquals(1.0, a3.getNumericCellValue(), 0.0001);
+        assertEquals(6.899, a6.getNumericCellValue(), 0.0001);
+        assertEquals(2.4495, a7.getNumericCellValue(), 0.0001);
+    }
+
+    public void testVar(){
+
+        Workbook wb = new HSSFWorkbook();
+
+        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+
+        Sheet sh = wb.createSheet();
+        Cell a1 = sh.createRow(1).createCell(1);
+        a1.setCellValue(1);
+        Cell a2 = sh.createRow(2).createCell(1);
+        a2.setCellValue(3);
+        Cell a3 = sh.createRow(3).createCell(1);
+        a3.setCellFormula("SUBTOTAL(10,B2:B3)");
+        Cell a4 = sh.createRow(4).createCell(1);
+        a4.setCellValue(1);
+        Cell a5 = sh.createRow(5).createCell(1);
+        a5.setCellValue(7);
+        Cell a6 = sh.createRow(6).createCell(1);
+        a6.setCellFormula("SUBTOTAL(10,B2:B6)*2 + 2");
+        Cell a7 = sh.createRow(7).createCell(1);
+        a7.setCellFormula("SUBTOTAL(10,B2:B7)");
+
+        fe.evaluateAll();
+
+        assertEquals(2.0, a3.getNumericCellValue(), 0.0001);
+        assertEquals(18.0, a6.getNumericCellValue(), 0.0001);
+        assertEquals(8.0, a7.getNumericCellValue(), 0.0001);
+    }
+
+    public void testVarp(){
+
+        Workbook wb = new HSSFWorkbook();
+
+        FormulaEvaluator fe = wb.getCreationHelper().createFormulaEvaluator();
+
+        Sheet sh = wb.createSheet();
+        Cell a1 = sh.createRow(1).createCell(1);
+        a1.setCellValue(1);
+        Cell a2 = sh.createRow(2).createCell(1);
+        a2.setCellValue(3);
+        Cell a3 = sh.createRow(3).createCell(1);
+        a3.setCellFormula("SUBTOTAL(11,B2:B3)");
+        Cell a4 = sh.createRow(4).createCell(1);
+        a4.setCellValue(1);
+        Cell a5 = sh.createRow(5).createCell(1);
+        a5.setCellValue(7);
+        Cell a6 = sh.createRow(6).createCell(1);
+        a6.setCellFormula("SUBTOTAL(11,B2:B6)*2 + 2");
+        Cell a7 = sh.createRow(7).createCell(1);
+        a7.setCellFormula("SUBTOTAL(11,B2:B7)");
+
+        fe.evaluateAll();
+
+        assertEquals(1.0, a3.getNumericCellValue(), 0.0001);
+        assertEquals(14.0, a6.getNumericCellValue(), 0.0001);
+        assertEquals(6.0, a7.getNumericCellValue(), 0.0001);
     }
 
     public void test50209(){

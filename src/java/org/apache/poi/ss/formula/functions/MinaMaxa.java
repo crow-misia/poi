@@ -24,7 +24,7 @@ package org.apache.poi.ss.formula.functions;
 public abstract class MinaMaxa extends MultiOperandNumericFunction {
 
 	protected MinaMaxa() {
-		super(true, true);
+		super(true, true, false);
 	}
 
 	public static final Function MAXA = new MinaMaxa() {

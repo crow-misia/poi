@@ -22,7 +22,6 @@ import static org.apache.poi.ss.formula.functions.AggregateFunction.subtotalInst
 import org.apache.poi.ss.formula.eval.ErrorEval;
 import org.apache.poi.ss.formula.eval.EvaluationException;
 import org.apache.poi.ss.formula.eval.NotImplementedException;
-import org.apache.poi.ss.formula.eval.NotImplementedFunctionException;
 import org.apache.poi.ss.formula.eval.OperandResolver;
 import org.apache.poi.ss.formula.eval.ValueEval;
 
@@ -45,11 +44,11 @@ import org.apache.poi.ss.formula.eval.ValueEval;
  *      <tr align='center'><td>4</td><td>MAX</td></tr>
  *      <tr align='center'><td>5</td><td>MIN</td></tr>
  *      <tr align='center'><td>6</td><td>PRODUCT</td></tr>
- *      <tr align='center'><td>7</td><td>STDEV</td></tr>
- *      <tr align='center'><td>8</td><td>STDEVP *</td></tr>
+ *      <tr align='center'><td>7</td><td>STDEV.S</td></tr>
+ *      <tr align='center'><td>8</td><td>STDEV.P</td></tr>
  *      <tr align='center'><td>9</td><td>SUM</td></tr>
- *      <tr align='center'><td>10</td><td>VAR *</td></tr>
- *      <tr align='center'><td>11</td><td>VARP *</td></tr>
+ *      <tr align='center'><td>10</td><td>VAR.S</td></tr>
+ *      <tr align='center'><td>11</td><td>VAR.P</td></tr>
  *      <tr align='center'><td>101-111</td><td>*</td></tr>
  *  </table><br/>
  * * Not implemented in POI yet. Functions 101-111 are the same as functions 1-11 but with
@@ -61,7 +60,6 @@ import org.apache.poi.ss.formula.eval.ValueEval;
 public class Subtotal implements Function {
 
 	private static Function findFunction(int functionCode) throws EvaluationException {
-		Function func;
         switch (functionCode) {
 			case 1: return subtotalInstance(AggregateFunction.AVERAGE);
 			case 2: return Count.subtotalInstance();
@@ -70,10 +68,10 @@ public class Subtotal implements Function {
 			case 5: return subtotalInstance(AggregateFunction.MIN);
 			case 6: return subtotalInstance(AggregateFunction.PRODUCT);
 			case 7: return subtotalInstance(AggregateFunction.STDEV);
-			case 8: throw new NotImplementedFunctionException("STDEVP");
+			case 8: return subtotalInstance(AggregateFunction.STDEVP);
 			case 9: return subtotalInstance(AggregateFunction.SUM);
-			case 10: throw new NotImplementedFunctionException("VAR");
-			case 11: throw new NotImplementedFunctionException("VARP");
+			case 10: return subtotalInstance(AggregateFunction.VAR);
+			case 11: return subtotalInstance(AggregateFunction.VARP);
 		}
 		if (functionCode > 100 && functionCode < 112) {
 			throw new NotImplementedException("SUBTOTAL - with 'exclude hidden values' option");

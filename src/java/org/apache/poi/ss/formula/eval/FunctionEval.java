@@ -171,6 +171,7 @@ public final class FunctionEval {
         retval[184] = NumericFunction.FACT;
 
         retval[190] = LogicalFunction.ISNONTEXT;
+        retval[193] = AggregateFunction.STDEVP;
         retval[194] = AggregateFunction.VARP;
         retval[197] = NumericFunction.TRUNC;
         retval[198] = LogicalFunction.ISLOGICAL;
@@ -253,6 +254,10 @@ public final class FunctionEval {
 
         retval[362] = MinaMaxa.MAXA;
         retval[363] = MinaMaxa.MINA;
+
+        retval[364] = AggregateFunction.STDEVPA;
+
+        retval[366] = AggregateFunction.STDEVA;
 
         for (int i = 0; i < retval.length; i++) {
             Function f = retval[i];

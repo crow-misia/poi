@@ -46,7 +46,7 @@ import org.apache.poi.ss.formula.eval.EvaluationException;
 public class Mirr extends MultiOperandNumericFunction {
 
     public Mirr() {
-        super(false, false);
+        super(false, false, false);
     }
 
     @Override
