@@ -130,9 +130,9 @@ under the License.
     <property name="excelant.testokfile" location="build/excelant-testokfile.txt"/>
 
     <!-- jars in the /lib directory, see the fetch-jars target-->
-    <property name="main.commons-logging.jar" location="${main.lib}/commons-logging-1.1.3.jar"/>
+    <property name="main.commons-logging.jar" location="${main.lib}/commons-logging-1.2.jar"/>
     <property name="main.commons-logging.url"
-              value="${repository.m2}/maven2/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar"/>
+              value="${repository.m2}/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
     <property name="main.commons-codec.jar" location="${main.lib}/commons-codec-1.9.jar"/>
     <property name="main.commons-codec.url"
               value="${repository.m2}/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.jar"/>
@@ -1453,7 +1453,7 @@ under the License.
 			<auxClasspath path="ooxml-lib/ooxml-encryption-1.1.jar" />
 			<auxClasspath path="ooxml-lib/xmlbeans-2.6.0.jar" />
 			<auxClasspath path="lib/commons-codec-1.9.jar" />
-			<auxClasspath path="lib/commons-logging-1.1.3.jar" />
+			<auxClasspath path="lib/commons-logging-1.2.jar" />
 			<auxClasspath path="lib/junit-4.11.jar" />
 			<sourcePath path="src/java" />
 			<sourcePath path="src/ooxml/java" />
