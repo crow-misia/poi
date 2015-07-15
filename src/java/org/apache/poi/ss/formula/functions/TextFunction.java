@@ -398,4 +398,302 @@ public abstract class TextFunction implements Function {
 	 * SEARCH is a case-insensitive version of FIND()
 	 */
 	public static final Function SEARCH = new SearchFind(false);
+
+    /**
+     * An implementation of the MIDB function<br/>
+     * MIDB returns a specific number of
+     * bytes from a text string, starting at the specified position.<p/>
+     *
+     * <b>Syntax<b>:<br/> <b>MIDB</b>(<b>text</b>, <b>start_num</b>, <b>num_bytes</b>)
+     */
+    public static final Function MIDB = new Fixed3ArgFunction() {
+        public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0, ValueEval arg1, ValueEval arg2) {
+            String text;
+            int startIx;
+            int numBytes;
+            try {
+                text = evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+                startIx = evaluateIntArg(arg1, srcRowIndex, srcColumnIndex);
+                numBytes = evaluateIntArg(arg2, srcRowIndex, srcColumnIndex);
+            } catch (final EvaluationException e) {
+                return e.getErrorEval();
+            }
+
+            // Note - for start_num arg, blank/zero causes error(#VALUE!),
+            // but for num_bytes causes empty string to be returned.
+            if (startIx <= 0) {
+                return ErrorEval.VALUE_INVALID;
+            }
+            if (numBytes < 0) {
+                return ErrorEval.VALUE_INVALID;
+            }
+
+            final int endIx = startIx + numBytes;
+            final int n = text.length();
+            int idx = 0;
+            boolean padLeft = false;
+            boolean padRight = false;
+            int s = -1;
+            int e = n;
+            for (int i = 0; i < n; i++) {
+                final char c = text.charAt(i);
+                if (c >= 0x00 && c <= 0xff) {
+                    // single-byte character
+                    idx++;
+                    if (s < 0 && idx >= startIx) {
+                        s = i;
+                    }
+                    // end.
+                    if (idx >= endIx) {
+                        e = i;
+                        break;
+                    }
+                } else {
+                    // double-byte character
+                    idx += 2;
+                    if (s < 0 && idx >= startIx) {
+                        if (idx == startIx) {
+                            padLeft = true;
+                            s = i + 1;
+                        } else {
+                            s = i;
+                        }
+                    }
+                    // end.
+                    if (idx >= endIx) {
+                        padRight = (idx == endIx);
+                        e = i;
+                        break;
+                    }
+                }
+            }
+
+            String result;
+            if (e == 0) {
+                result = (padLeft ? " " : EMPTY_STRING);
+            } else if (s < 0 || e < 0) {
+                result = (padLeft ? " " : EMPTY_STRING) + (padRight ? " " : EMPTY_STRING);
+            } else {
+                result = (padLeft ? " " : EMPTY_STRING) + text.substring(s, e) + (padRight ? " " : EMPTY_STRING);
+            }
+            return new StringEval(result);
+        }
+    };
+    /**
+     * Implementation of the LENB() function.<p/>
+     *
+     * <b>Syntax</b>:<br/>
+     * <b>LENB</b>(<b>text</b>)<p/>
+     *
+     * LENB is byte count version of LEN()
+     */
+    public static final Function LENB = new SingleArgTextFunc() {
+        protected ValueEval evaluate(String arg) {
+            final int n = arg.length();
+            int l = 0;
+            for (int i = 0; i < n; i++) {
+                final char c = arg.charAt(i);
+                if (c >= 0x00 && c <= 0xff) {
+                    l++;
+                } else {
+                    l += 2;
+                }
+            }
+            return new NumberEval(l);
+        }
+    };
+    /**
+     * Implementation of the LEFTB() function.<p/>
+     *
+     * <b>Syntax</b>:<br/>
+     * <b>LEFTB</b>(<b>text</b>, <b>bytes</b>)<p/>
+     *
+     * LEFTB is byte count version of LEFT()
+     */
+    public static final Function LEFTB = new Var1or2ArgFunction() {
+        public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0) {
+            return evaluate(srcRowIndex, srcColumnIndex, arg0, NumberEval.ONE);
+        }
+
+        @Override
+        public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0, ValueEval arg1) {
+            String text;
+            int numBytes;
+            try {
+                text = evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+                numBytes = evaluateIntArg(arg1, srcRowIndex, srcColumnIndex);
+            } catch (final EvaluationException e) {
+                return e.getErrorEval();
+            }
+            final int endIx = 1 + numBytes;
+
+            if (numBytes < 0) {
+                return ErrorEval.VALUE_INVALID;
+            }
+            if (numBytes == 0) {
+                return new StringEval("");
+            }
+
+            final int n = text.length();
+            int idx = 0;
+            boolean padRight = false;
+            int e = n;
+            for (int i = 0; i < n; i++) {
+                final char c = text.charAt(i);
+                if (c >= 0x00 && c <= 0xff) {
+                    // single-byte character
+                    idx++;
+                    // end.
+                    if (idx >= endIx) {
+                        e = i;
+                        break;
+                    }
+                } else {
+                    // double-byte character
+                    idx += 2;
+                    // end.
+                    if (idx >= endIx) {
+                        padRight = (idx == endIx);
+                        e = i;
+                        break;
+                    }
+                }
+            }
+
+            return new StringEval(text.substring(0, e) + (padRight ? " " : EMPTY_STRING));
+        }
+    };
+
+    /**
+     * Implementation of the RIGHTB() function.<p/>
+     *
+     * <b>Syntax</b>:<br/>
+     * <b>RIGHTB</b>(<b>text</b>, <b>bytes</b>)<p/>
+     *
+     * RIGHTB is byte count version of RIGHT()
+     */
+    public static final Function RIGHTB = new Var1or2ArgFunction() {
+        public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0) {
+            return evaluate(srcRowIndex, srcColumnIndex, arg0, NumberEval.ONE);
+        }
+
+        @Override
+        public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0, ValueEval arg1) {
+            String text;
+            int numBytes;
+            try {
+                text = evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+                numBytes = evaluateIntArg(arg1, srcRowIndex, srcColumnIndex);
+            } catch (final EvaluationException e) {
+                return e.getErrorEval();
+            }
+            final int endIx = 1 + numBytes;
+
+            if (numBytes < 0) {
+                return ErrorEval.VALUE_INVALID;
+            }
+            if (numBytes == 0) {
+                return new StringEval("");
+            }
+
+            final int n = text.length();
+            int idx = 0;
+            boolean padLeft = false;
+            int s = 0;
+            for (int i = n - 1; i > 0; i--) {
+                final char c = text.charAt(i);
+                if (c >= 0x00 && c <= 0xff) {
+                    // single-byte character
+                    idx++;
+                    // end.
+                    if (idx >= endIx) {
+                        s = i + 1;
+                        break;
+                    }
+                } else {
+                    // double-byte character
+                    idx += 2;
+                    // end.
+                    if (idx >= endIx) {
+                        padLeft = (idx == endIx);
+                        s = i + 1;
+                        break;
+                    }
+                }
+            }
+
+            return new StringEval((padLeft ? " " : EMPTY_STRING) + text.substring(s, n));
+        }
+    };
+    private static final class SearchFindB extends Var2or3ArgFunction {
+        private final boolean _isCaseSensitive;
+
+        public SearchFindB(boolean isCaseSensitive) {
+            _isCaseSensitive = isCaseSensitive;
+        }
+        public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0, ValueEval arg1) {
+            try {
+                String needle = TextFunction.evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+                String haystack = TextFunction.evaluateStringArg(arg1, srcRowIndex, srcColumnIndex);
+                return eval(haystack, needle, 0);
+            } catch (final EvaluationException e) {
+                return e.getErrorEval();
+            }
+        }
+        public ValueEval evaluate(int srcRowIndex, int srcColumnIndex, ValueEval arg0, ValueEval arg1, ValueEval arg2) {
+            try {
+                String needle = TextFunction.evaluateStringArg(arg0, srcRowIndex, srcColumnIndex);
+                String haystack = TextFunction.evaluateStringArg(arg1, srcRowIndex, srcColumnIndex);
+                // evaluate third arg and convert from 1-based to 0-based index
+                int startpos = TextFunction.evaluateIntArg(arg2, srcRowIndex, srcColumnIndex) - 1;
+                if (startpos < 0) {
+                    return ErrorEval.VALUE_INVALID;
+                }
+                return eval(haystack, needle, startpos);
+            } catch (final EvaluationException e) {
+                return e.getErrorEval();
+            }
+        }
+        private ValueEval eval(String haystack, String needle, int startIndex) {
+            int result;
+            if (_isCaseSensitive) {
+                result = haystack.indexOf(needle, startIndex);
+            } else {
+                result = haystack.toUpperCase().indexOf(needle.toUpperCase(), startIndex);
+            }
+            if (result == -1) {
+                return ErrorEval.VALUE_INVALID;
+            }
+
+            int idx = 1;
+            for (int i = 0; i < result; i++) {
+                final char c = haystack.charAt(i);
+                if (c >= 0x00 && c <= 0xff) {
+                    idx++;
+                } else {
+                    idx += 2;
+                }
+            }
+
+            return new NumberEval(idx);
+        }
+    }
+    /**
+     * Implementation of the FINDB() function.<p/>
+     *
+     * <b>Syntax</b>:<br/>
+     * <b>FINDB</b>(<b>find_text</b>, <b>within_text</b>, start_num)<p/>
+     * 
+     * FINDB is byte count version of FIND()
+     */
+    public static final Function FINDB = new SearchFindB(true);
+    /**
+     * Implementation of the FINDB() function.<p/>
+     *
+     * <b>Syntax</b>:<br/>
+     * <b>SEARCHB</b>(<b>find_text</b>, <b>within_text</b>, start_num)<p/>
+     *
+     * SEARCHB is a case-insensitive version of FINDB()
+     */
+    public static final Function SEARCHB = new SearchFindB(false);
 }
